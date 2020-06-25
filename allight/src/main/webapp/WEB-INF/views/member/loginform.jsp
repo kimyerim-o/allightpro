@@ -40,7 +40,13 @@
     	 Kakao.API.request({
     	        url: '/v2/user/me',
     	        success: function(res) {
-    	          alert(JSON.stringify(res)),
+    	          //alert(JSON.stringify(res)),
+    	          console.log(res);
+    	          var id=res.id;
+    	          var nickname=res.properties.nickname;
+    	          var email=res.kakao_account.email;
+					
+    	          
     	          Kakao.Auth.authorize({
 				   redirectUri: 'http://localhost:9000/light/login'
 				 })
@@ -98,9 +104,10 @@
      	 Kakao.API.request({
  	        url: '/v2/user/me',
  	        success: function(res) {
- 	          alert(JSON.stringify(res))},
- 	          Kakao.Auth.authorize({
- 				   redirectUri: 'http://localhost:9000/light/log'})
+ 	          alert(JSON.stringify(res)),
+ 	        	Kakao.Auth.authorize({
+ 				   redirectUri: 'http://localhost:9000/light/log'})  
+ 	        },
  	        fail: function(error) {
  	          alert('login success, but failed to request user information: 'JSON.stringify(error))
  	        },

@@ -13,7 +13,7 @@
 	<!-- 컨넥션 풀 설정   -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	   <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-	   <property name="url"             value="jdbc:oracle:thin:@localhost:1521/orcl"/><!-- 192.168.56.66 -->
+	   <property name="url"             value="jdbc:oracle:thin:@192.168.56.66:1521/orcl"/><!-- 192.168.56.66 -->
 	   <property name="username"        value="allight"/>
 	   <property name="password"        value="allight"/>
 	</bean>  

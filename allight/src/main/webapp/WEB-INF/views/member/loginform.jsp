@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script>
-</script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
 <form action="./login" method="post">
@@ -23,7 +22,122 @@
 		<tr>
 			<td><input type="submit" value="로그인"></td>
 		</tr>
+		<tr>
+			<td></td>
+		</tr>
 	</table>
 </form>
+
+<form>
+<a id="kakao-login-btn"></a>
+<input type="hidden" name="id" >
+  <script type='text/javascript'>
+   Kakao.init('52ee84c11b882c5898d68b339bf4f9d0');  
+   // 카카오 로그인 버튼을 생성합니다.
+   Kakao.Auth.createLoginButton({
+     container: '#kakao-login-btn',
+     success: function(authObj) {
+    	 Kakao.API.request({
+    	        url: '/v2/user/me',
+    	        success: function(res) {
+    	          alert(JSON.stringify(res)),
+    	          Kakao.Auth.authorize({
+				   redirectUri: 'http://localhost:9000/light/login'
+				 })
+    	        },
+    	        fail: function(error) {
+    	          /*alert(
+    	            'login success, but failed to request user information: ' +
+    	              JSON.stringify(error)
+    	          )*/
+    	          Kakao.Auth.authorize({
+   				   redirectUri: 'http://localhost:9000/light/log'
+   				 })
+    	        },
+    	      })
+     },
+     fail: function(err) {
+    	 console.log(JSON.stringify(err));
+     }
+   });
+   </script>
+   
+
+<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
+
+<script type="text/javascript">
+  // input your appkey
+  Kakao.init('52ee84c11b882c5898d68b339bf4f9d0')
+  function kakaoLogout() {
+    if (!Kakao.Auth.getAccessToken()) {
+      alert('Not logged in.')
+      return
+    }
+    Kakao.Auth.logout(function() {
+      alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
+    })
+  }
+</script>
+</form>
+
+
+
+<a id="login-form-btn" href="javascript:loginFormWithKakao()">
+  <img
+    src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+    width="222"
+  />
+</a>
+<script type="text/javascript">
+  // input your appkey
+  Kakao.init('52ee84c11b882c5898d68b339bf4f9d0')
+  function loginFormWithKakao() {
+	  
+    Kakao.Auth.loginForm({
+      success: function(authObj) {
+     	 Kakao.API.request({
+ 	        url: '/v2/user/me',
+ 	        success: function(res) {
+ 	          alert(JSON.stringify(res))},
+ 	          Kakao.Auth.authorize({
+ 				   redirectUri: 'http://localhost:9000/light/log'})
+ 	        fail: function(error) {
+ 	          alert('login success, but failed to request user information: 'JSON.stringify(error))
+ 	        },
+ 	      })
+      },
+      fail: function(err) {
+        alert(JSON.stringify(err))
+      },
+    }),
+    
+    Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function(authObj) {
+       	 Kakao.API.request({
+       	        url: '/v2/user/me',
+       	        success: function(res) {
+       	          alert(JSON.stringify(res)),
+       	          Kakao.Auth.authorize({
+   				   redirectUri: 'http://localhost:9000/light/login'
+   				 })
+       	        },
+       	        fail: function(error) {
+       	          /*alert(
+       	            'login success, but failed to request user information: ' +
+       	              JSON.stringify(error)
+       	          )*/
+       	          Kakao.Auth.authorize({
+      				   redirectUri: 'http://localhost:9000/light/log'
+      				 })
+       	        },
+       	      })
+        },
+        fail: function(err) {
+       	 console.log(JSON.stringify(err));
+        }
+      });
+  }
+</script>
 </body>
 </html>

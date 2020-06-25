@@ -12,7 +12,7 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	SqlSessionTemplate session;
 	
 	public HashMap login(HashMap map) {
-		System.out.println("MemberDAO");
+		System.out.println("MemberDAO : "+map.toString());
 		HashMap result=session.selectOne("member.login", map);
 		return result;
 	}

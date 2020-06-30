@@ -225,7 +225,7 @@
 		width: 900px;
 		background-color: #FFFFFF;
 	  	border-radius: 6px;
-        border:3px solid #ffa7a7;
+        border:3px solid #ffc545;
 		}
 
 </style>

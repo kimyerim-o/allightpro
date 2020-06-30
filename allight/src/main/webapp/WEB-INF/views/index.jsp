@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -237,10 +236,8 @@
 </head>
 
 <body>
-${sessionScope.ID}
-
 <div id="wrap">
-	<h1 style="margin:0 100px 20px;">다이어리</h1>
+	<h1 style="margin:0 100px 20px;">다이어리 <%=session.getAttribute("MID") %></h1>
 	<div id="calendar" class="fc fc-ltr">
 		<table class="fc-header" style="width:100%">
 			<tbody>

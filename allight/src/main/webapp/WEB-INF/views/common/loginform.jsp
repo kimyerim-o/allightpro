@@ -9,25 +9,47 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
-<form action="./login" method="post">
+<div>
+<form action="./log.com" method="post">
 	<table>
 		<tr>
-			<td><input type="text" id="id" name="id" placeholder="아이디" required="required"/></td>
+			<td>일반회원</td>
+		</tr>
+		<tr>
+			<td><input type="text" id="mid" name="mid" placeholder="아이디" required="required"/></td>
 		</tr>
 		<tr></tr>
 		<tr>
-			<td><input type="password" id="pw" name="pw" placeholder="비밀번호" required="required"/></td>
+			<td><input type="password" id="mpw" name="mpw" placeholder="비밀번호" required="required"/></td>
 		</tr>
-		<!-- <tr>비밀번호를 입력하세요</tr> -->
 		<tr>
 			<td><input type="submit" value="로그인"></td>
 		</tr>
+	</table>
+</form>
+</div>
+
+<div>
+<form action="./corlog.com" method="post">
+	<table>
 		<tr>
-			<td></td>
+			<td>기업회원</td>
+		</tr>
+		<tr>
+			<td><input type="text" id="coid" name="coid" placeholder="아이디" required="required"/></td>
+		</tr>
+		<tr></tr>
+		<tr>
+			<td><input type="password" id="copw" name="copw" placeholder="비밀번호" required="required"/></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="로그인"></td>
 		</tr>
 	</table>
 </form>
+</div>
 
+<div>
 <form>
 <a id="kakao-login-btn"></a>
 <input type="hidden" name="id" >
@@ -109,7 +131,7 @@
  				   redirectUri: 'http://localhost:9000/light/log'})  
  	        },
  	        fail: function(error) {
- 	          alert('login success, but failed to request user information: 'JSON.stringify(error))
+ 	          alert('login success, but failed to request user information:'JSON.stringify(error))
  	        },
  	      })
       },
@@ -146,5 +168,6 @@
       });
   }
 </script>
+</div>
 </body>
 </html>

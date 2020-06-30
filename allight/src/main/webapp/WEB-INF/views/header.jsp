@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style2.css">
     </head>
     
     
@@ -31,7 +30,9 @@
     
     <!-- logo -->
   	<div class="container">
-		<img src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg" class="logo"/>
+  		<a href="#" target="_blank">
+			<img src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg" class="logo" onclick=""/>
+		</a>
 	</div>
 	
 	<!-- navigation bar -->
@@ -44,9 +45,19 @@
 	        	<li class="nav-item"><a href="#" class="nav-link">칼로리 사전</a></li>
 	        	<li class="nav-item"><a href="#" class="nav-link">칼로리 처방</a></li>
 	        	<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a></li>
-	        	<li class="nav-item"><a href="#" class="nav-link">쇼핑</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link">쇼핑</a>
+	        		<ul class="dropdown">
+                        <li><a href="#">식단</a></li>
+                        <li><a href="#">간식</a></li>
+                        <li><a href="#">운동기구</a></li>
+                        <li><a href="#">운동복</a></li>
+                        <li><a href="#">브랜드관</a></li>
+                    </ul>
+	        	</li>
 	        	<li class="nav-item"><a href="#" class="nav-link">마이페이지</a></li>
-	          	<li class="nav-item"><a href="#" class="nav-link">관리자</a></li>
+	        	<c:if test="">
+	          		<li class="nav-item"><a href="#" class="nav-link">관리자</a></li>
+	          	</c:if>
 	        </ul>
 	      </div>
 	    </div>

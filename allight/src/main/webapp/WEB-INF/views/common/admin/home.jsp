@@ -9,5 +9,7 @@
 </head>
 <body>
 	<h1>관리자페이지</h1>
+	<h3><a href="./member/admin.com">회원 상세</a></h3>
+	<h3><a href="./corporation/admin.com">기업 상세</a></h3>
 </body>
 </html>

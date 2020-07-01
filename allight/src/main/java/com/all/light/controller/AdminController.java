@@ -32,7 +32,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping("/corp/admin")
+	@RequestMapping("/corporation/admin")
 	public ModelAndView adminCorp(HttpSession session,ModelAndView mv,RedirectView rv) {
 		System.out.println("AdminController.adminCorp");
 		mv.setViewName("common/admin/corporation");

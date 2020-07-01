@@ -11,7 +11,7 @@ import com.all.light.dto.MemberDTO;
 
 public class MemberService {
 	@Autowired
-	private MemberDAO memdao;
+	private MemberDAO memDAO;
 	
 	public void login(MemberDTO memdto, HttpSession session) {
 		System.out.println("MemberService");
@@ -19,7 +19,7 @@ public class MemberService {
 		HashMap map=new HashMap();
 			map.put("id",memdto.getId());
 			map.put("pw",memdto.getPw());
-			HashMap result=memdao.login(map);
+			HashMap result=memDAO.login(map);
 			if(result==null || result.size()==0) {
 				//로그인실패
 				System.out.println("로그인실패");

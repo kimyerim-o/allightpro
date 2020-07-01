@@ -14,7 +14,7 @@ import com.all.light.service.MemberService;
 @Controller
 public class MemberController {
 	@Autowired
-	MemberService memser;
+	MemberService memSCV;
 	
 	@RequestMapping("/log")
 	public String log() {
@@ -24,7 +24,7 @@ public class MemberController {
 	@RequestMapping("/login")
 	public ModelAndView login(MemberDTO memdto,HttpSession session,ModelAndView mv,RedirectView rv) {
 		System.out.println("login");
-		memser.login(memdto,session);
+		memSCV.login(memdto,session);
 		rv.setUrl("./");
 		mv.setView(rv);
 		return mv;

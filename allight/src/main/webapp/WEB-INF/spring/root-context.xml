@@ -32,9 +32,14 @@
 	    <constructor-arg index="0" ref="sqlSessionFactory" /> 
 	</bean>
 	
-	<bean id="memdao" class="com.all.light.dao.MemberDAO">
+	<bean id="memDAO" class="com.all.light.dao.MemberDAO">
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
-	<bean id="memser" class="com.all.light.service.MemberService"/>
+	<bean id="memSVC" class="com.all.light.service.MemberService"/>
+	
+		<bean id="corDAO" class="com.all.light.dao.CorporationDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
+	<bean id="corSVC" class="com.all.light.service.CorporationService"/>
 		
 </beans>

@@ -18,7 +18,7 @@ public class MemberController {
 	
 	@RequestMapping("/log")
 	public String log() {
-		return "member/loginform";
+		return "common/loginform";
 	}
 	
 	@RequestMapping("/login")

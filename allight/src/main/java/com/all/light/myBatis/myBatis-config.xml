@@ -20,6 +20,7 @@
    <mappers>
    		<!-- sql 설정 -->
    		<mapper resource="/com/all/light/sql/MemberSQL.xml"/>
+   		<mapper resource="/com/all/light/sql/CorporationSQL.xml"/>
    </mappers>
    
 </configuration>

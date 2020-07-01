@@ -17,15 +17,15 @@ public class CorporationService {
 		System.out.println("CorporationService");
 		//일반로그인
 		HashMap map=new HashMap();
-			map.put("coid",cordto.getCoid());
-			map.put("copw",cordto.getCopw());
-			HashMap result=corDAO.login(map);
-			if(result==null || result.size()==0) {
-				System.out.println("로그인실패");
-			}else{
-				//로그인성공
-				System.out.println("로그인성공");
-				session.setAttribute("COID",result.get("COID"));
+		map.put("coid",cordto.getCoid());
+		map.put("copw",cordto.getCopw());
+		HashMap result=corDAO.login(map);
+		if(result==null || result.size()==0) {
+			System.out.println("로그인실패");
+		}else{
+			//로그인성공
+			System.out.println("로그인성공");
+			session.setAttribute("COID",result.get("COID"));
 		}
 		
 	}

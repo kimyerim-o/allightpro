@@ -30,4 +30,10 @@ public class MemberController {
 		return mv;
 	}
 	
+	@RequestMapping("/main")
+	public String main() {
+		return "index";
+	}
+	
+	
 }

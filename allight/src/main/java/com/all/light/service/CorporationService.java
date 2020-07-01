@@ -21,7 +21,6 @@ public class CorporationService {
 			map.put("copw",cordto.getCopw());
 			HashMap result=corDAO.login(map);
 			if(result==null || result.size()==0) {
-				//로그인실패
 				System.out.println("로그인실패");
 			}else{
 				//로그인성공

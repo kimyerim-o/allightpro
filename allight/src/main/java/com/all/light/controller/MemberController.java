@@ -14,26 +14,20 @@ import com.all.light.service.MemberService;
 @Controller
 public class MemberController {
 	@Autowired
-	private MemberService memSVC;
+	MemberService memser;
 	
-	@RequestMapping("/main")
-	public String index() {
-		return "index";
+	@RequestMapping("/log")
+	public String log() {
+		return "member/loginform";
 	}
 	
 	@RequestMapping("/login")
-	public String log() {
-		return "common/loginform";
-	}
-	
-	@RequestMapping("/log")
 	public ModelAndView login(MemberDTO memdto,HttpSession session,ModelAndView mv,RedirectView rv) {
-		System.out.println("MemberController login");
-		memSVC.login(memdto,session);
-		rv.setUrl("./main.com");
+		System.out.println("login");
+		memser.login(memdto,session);
+		rv.setUrl("./");
 		mv.setView(rv);
 		return mv;
 	}
-	
 	
 }

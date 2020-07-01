@@ -5,7 +5,7 @@
 <mapper namespace="member">
 	<!-- 로그인 처리 -->
 	<select id="login" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-	select * from member where mid=#{mid} and mpw=#{mpw}
+	select * from member where  id=#{id} and pw=#{pw}
 	</select>
 </mapper>
 

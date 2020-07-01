@@ -11,22 +11,30 @@ import com.all.light.dto.MemberDTO;
 
 public class MemberService {
 	@Autowired
-	private MemberDAO memDAO;
+	private MemberDAO memdao;
 	
 	public void login(MemberDTO memdto, HttpSession session) {
 		System.out.println("MemberService");
 		//일반로그인
 		HashMap map=new HashMap();
-			map.put("mid",memdto.getMid());
-			map.put("mpw",memdto.getMpw());
-			HashMap result=memDAO.login(map);
+			map.put("id",memdto.getId());
+			map.put("pw",memdto.getPw());
+			HashMap result=memdao.login(map);
 			if(result==null || result.size()==0) {
 				//로그인실패
 				System.out.println("로그인실패");
 			}else{
 				//로그인성공
 				System.out.println("로그인성공");
-				session.setAttribute("MID",result.get("MID"));
+				session.setAttribute("ID",result.get("ID"));
+				session.setAttribute("PW", result.get("PW"));
+				session.setAttribute("EMAIL", result.get("EMAIL"));
+				session.setAttribute("NAME", result.get("NAME"));
+				session.setAttribute("BIRTH", result.get("BIRTH"));
+				session.setAttribute("TEL", result.get("TEL"));
+				session.setAttribute("ADDNO", result.get("ADDNO"));
+				session.setAttribute("ADDRESS", result.get("ADDRESS"));
+				session.setAttribute("TYPE", result.get("TYPE"));
 		}
 		
 		//카카오로그인

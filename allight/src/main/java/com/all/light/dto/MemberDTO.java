@@ -1,8 +1,8 @@
 package com.all.light.dto;
 
 public class MemberDTO {
-	private String mid;
-	private String mpw;
+	private String id;
+	private String pw;
 	private String email;
 	private String name;
 	private String birth;
@@ -10,18 +10,17 @@ public class MemberDTO {
 	private String addno;
 	private String address;
 	private int type;
-	
-	public String getMid() {
-		return mid;
+	public String getId() {
+		return id;
 	}
-	public void setMid(String mid) {
-		this.mid = mid;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getMpw() {
-		return mpw;
+	public String getPw() {
+		return pw;
 	}
-	public void setMpw(String mpw) {
-		this.mpw = mpw;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 	public String getEmail() {
 		return email;

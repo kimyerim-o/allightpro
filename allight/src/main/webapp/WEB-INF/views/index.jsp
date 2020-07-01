@@ -177,10 +177,6 @@
 		background:url(http://www.digiphotohub.com/wp-content/uploads/2015/09/bigstock-Abstract-Blurred-Background-Of-92820527.jpg);
 		}
 	*/
-	#wrap {
-		width: 1100px;
-		margin: 40px auto;
-		}
 		
 	#external-events {
 		float: left;
@@ -237,7 +233,7 @@
 
 <body>
 <div id="wrap">
-	<h1 style="margin:0 100px 20px;">다이어리 <%=session.getAttribute("MID") %></h1>
+	<a class="title">다이어리 <%=session.getAttribute("MID") %></a>
 	<div id="calendar" class="fc fc-ltr">
 		<table class="fc-header" style="width:100%">
 			<tbody>

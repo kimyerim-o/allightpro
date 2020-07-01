@@ -22,15 +22,24 @@
 	<div class="header-top">
         <div class="container">
             <div class="ht-right">
-                <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
-                <a href="#" class="join-panel">join</a>
+	        	<c:if test="${empty sessionScope.MID}">
+	                <a href="./login.com" class="login-panel"><i class="fa fa-user"></i>Login</a>
+	                <a href="#" class="join-panel">join</a>
+	            </c:if>
+            	<c:if test="${!empty sessionScope.MID}">
+            		<a href="#" class="logined-panel">로그아웃</a>
+            		<a href="#" class="logined-panel">장바구니()</a>
+            		<a href="#" class="logined-panel">주문/배송조회</a>
+            		<a href="#" class="logined-panel">마이페이지</a>
+            		<a href="#" class="logined-nick-panel">${sessionScope.MNICK} 님</a>
+            	</c:if>
             </div>
         </div>
     </div>
     
     <!-- logo -->
   	<div class="container">
-  		<a href="#" target="_blank">
+  		<a href="/allight/main.com">
 			<img src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg" class="logo" onclick=""/>
 		</a>
 	</div>
@@ -41,10 +50,22 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav m-auto">
 	        	<li class="nav-item active">
-	        	<li class="nav-item"><a href="#" class="nav-link">다이어리</a></li>
-	        	<li class="nav-item"><a href="#" class="nav-link">칼로리 사전</a></li>
+	        	<li class="nav-item"><a href="/allight/main.com" class="nav-link">다이어리</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link">칼로리 사전</a>
+	        		<ul class="dropdown">
+                        <li><a href="#">음식 사전</a></li>
+                        <li><a href="#">운동 사전</a></li>
+                    </ul>
+	        	</li>
 	        	<li class="nav-item"><a href="#" class="nav-link">칼로리 처방</a></li>
-	        	<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a></li>
+	        	<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a>
+	        		<ul class="dropdown">
+                        <li><a href="#">자유게시판</a></li>
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">문의사항</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+	        	</li>
 	        	<li class="nav-item"><a href="#" class="nav-link">쇼핑</a>
 	        		<ul class="dropdown">
                         <li><a href="#">식단</a></li>
@@ -54,10 +75,42 @@
                         <li><a href="#">브랜드관</a></li>
                     </ul>
 	        	</li>
-	        	<li class="nav-item"><a href="#" class="nav-link">마이페이지</a></li>
-	        	<c:if test="">
-	          		<li class="nav-item"><a href="#" class="nav-link">관리자</a></li>
-	          	</c:if>
+	        	<!-- 회원 로그인시  -->
+				<c:if test="${sessionScope.ADMIN eq 0 }"></c:if>
+		        	<li class="nav-item"><a href="#" class="nav-link">마이페이지</a>
+		        		<ul class="dropdown">
+	                        <li><a href="#">주문/배송조회</a></li>
+	                        <li><a href="#">취소/반품조회</a></li>
+	                        <li><a href="#">장바구니</a></li>
+	                        <li><a href="#">배송지 관리</a></li>
+	                        <li><a href="#">상품 문의</a></li>
+	                        <li><a href="#">내 정보</a></li>
+	                    </ul>
+		        	</li>
+	        	
+	        	<!-- 기업 로그인시   -->
+	        	<c:if test="${sessionScope.ADMIN eq 1 }"></c:if>
+	          		<li class="nav-item"><a href="#" class="nav-link">기업</a>
+	          			<ul class="dropdown">
+	                        <li><a href="#">주문 관리</a></li>
+	                        <li><a href="#">상품 관리</a></li>
+	                        <li><a href="#">상품리뷰/문의</a></li>
+	                        <li><a href="#">기업 정보 관리</a></li>
+	                        <li><a href="#">문의사항</a></li>
+	                    </ul>
+	          		</li>
+	          	
+	          	<!-- 관리자 로그인시   -->
+				<c:if test="${sessionScope.ADMIN eq null }"></c:if>
+					<li class="nav-item"><a href="#" class="nav-link">관리자</a>
+						<ul class="dropdown">
+	                        <li><a href="#">기업/회원 관리</a></li>
+	                        <li><a href="#">기업 문의 관리</a></li>
+	                        <li><a href="#">커뮤니티 관리</a></li>
+	                        <li><a href="#">칼로리 사전 관리</a></li>
+	                    </ul>
+					</li>
+				
 	        </ul>
 	      </div>
 	    </div>

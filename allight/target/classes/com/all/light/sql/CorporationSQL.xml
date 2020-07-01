@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- xml선언부 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="corporation">
+	<!-- 로그인 처리 -->
+	<select id="login" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	select * from corporation where coid=#{coid} and copw=#{copw}
+	</select>
+</mapper>
+

@@ -22,7 +22,7 @@
 	<div class="header-top">
         <div class="container">
             <div class="ht-right">
-                <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                <a href="./login.com" class="login-panel"><i class="fa fa-user"></i>Login</a>
                 <a href="#" class="join-panel">join</a>
             </div>
         </div>

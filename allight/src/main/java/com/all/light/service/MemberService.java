@@ -1,6 +1,7 @@
 package com.all.light.service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,8 +18,8 @@ public class MemberService {
 		System.out.println("MemberService");
 		//일반로그인
 		HashMap map=new HashMap();
-			map.put("id",memdto.getId());
-			map.put("pw",memdto.getPw());
+			map.put("id",memdto.getMid());
+			map.put("pw",memdto.getMpw());
 			HashMap result=memDAO.login(map);
 			if(result==null || result.size()==0) {
 				//로그인실패
@@ -26,8 +27,8 @@ public class MemberService {
 			}else{
 				//로그인성공
 				System.out.println("로그인성공");
-				session.setAttribute("ID",result.get("ID"));
-				session.setAttribute("PW", result.get("PW"));
+				session.setAttribute("MID",result.get("MID"));
+				session.setAttribute("MPW", result.get("MPW"));
 				session.setAttribute("EMAIL", result.get("EMAIL"));
 				session.setAttribute("NAME", result.get("NAME"));
 				session.setAttribute("BIRTH", result.get("BIRTH"));
@@ -37,7 +38,30 @@ public class MemberService {
 				session.setAttribute("TYPE", result.get("TYPE"));
 		}
 		
-		//카카오로그인
+	
+	}
+
+	public HashMap kakao(Map<String, Object> param, MemberDTO memdto, HttpSession session) {
+		memdto.setMid((String) param.get("id"));
+		System.out.println("UserService"+memdto.getMid());
+		HashMap result=memDAO.kakao(memdto);
+		if(result==null || result.size()==0) {
+			//로그인실패
+			System.out.println("로그인실패");
+			HashMap res=memDAO.join(memdto);
+			if(res!=null) {
+				System.out.println("res.get(\"MID\")"+res.get("MID"));
+				session.setAttribute("ID",res.get("MID"));
+				System.out.println("res"+res.get("MID"));
+			}
+			return res;
+		}else{
+			//로그인성공
+			System.out.println("로그인성공");
+			session.setAttribute("MID",result.get("MID"));
+			System.out.println("result"+result.get("MID"));
+	}
+		return result;
 	}
 
 }

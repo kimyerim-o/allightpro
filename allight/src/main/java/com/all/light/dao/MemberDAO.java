@@ -40,4 +40,9 @@ public class MemberDAO extends SqlSessionDaoSupport{
 		return res;
 	}
 
+	//유태우7.2작성
+	public HashMap list() {
+		System.out.println("MemberDAO.list");
+		return (HashMap) session.selectList("member.list");
+	}
 }

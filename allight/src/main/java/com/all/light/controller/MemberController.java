@@ -31,7 +31,7 @@ public class MemberController {
 	public ModelAndView login(MemberDTO memdto,HttpSession session,ModelAndView mv,RedirectView rv) {
 		System.out.println("login");
 		memSCV.login(memdto,session);
-		rv.setUrl("./");
+		rv.setUrl("./main.com");
 		mv.setView(rv);
 		return mv;
 	}

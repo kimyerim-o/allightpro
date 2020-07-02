@@ -18,8 +18,8 @@ public class MemberService {
 		System.out.println("MemberService");
 		//일반로그인
 		HashMap map=new HashMap();
-			map.put("id",memdto.getMid());
-			map.put("pw",memdto.getMpw());
+			map.put("mid",memdto.getMid());
+			map.put("mpw",memdto.getMpw());
 			HashMap result=memDAO.login(map);
 			if(result==null || result.size()==0) {
 				//로그인실패

@@ -196,8 +196,9 @@
 		
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-mapper-asl</artifactId>
-		    <version>1.9.13</version>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+			<scope>compile</scope>
 		</dependency>
 		       
 	</dependencies>

@@ -20,7 +20,7 @@ import com.all.light.service.MemberService;
 @Controller
 public class MemberController {
 	@Autowired
-	MemberService memSCV;
+	MemberService memSVC;
 	
 	@RequestMapping("/login")
 	public String log() {
@@ -30,7 +30,7 @@ public class MemberController {
 	@RequestMapping("/log")
 	public ModelAndView login(MemberDTO memdto,HttpSession session,ModelAndView mv,RedirectView rv) {
 		System.out.println("login");
-		memSCV.login(memdto,session);
+		memSVC.login(memdto,session);
 		rv.setUrl("./main.com");
 		mv.setView(rv);
 		return mv;
@@ -47,7 +47,7 @@ public class MemberController {
 		System.out.println("kakak");
 		System.out.println(param.get("id"));
 		System.out.println("udto"+memdto.getMid());
-		HashMap re=memSCV.kakao(param,memdto,session);
+		HashMap re=memSVC.kakao(param,memdto,session);
 		System.out.println("kakao re"+re);
 		System.out.println(re.get("mpw"));
 		HashMap check=new HashMap();

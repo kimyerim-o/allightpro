@@ -240,7 +240,11 @@
 ${sessionScope.ID}
 
 <div id="wrap">
+<<<<<<< Updated upstream
 	<h1 style="margin:0 100px 20px;">다이어리</h1>
+=======
+	<a class="title">다이어리 <%=session.getAttribute("MID") %> / <%=session.getAttribute("COID") %></a>
+>>>>>>> Stashed changes
 	<div id="calendar" class="fc fc-ltr">
 		<table class="fc-header" style="width:100%">
 			<tbody>

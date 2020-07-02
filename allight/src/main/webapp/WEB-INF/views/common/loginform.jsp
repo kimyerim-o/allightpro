@@ -93,10 +93,10 @@
 <form action="./corlog.com" method="post">
 	<table>
 		<tr>
-			<td><input type="text" id="mid" name="mid" placeholder="아이디" required="required"/></td>
+			<td><input type="text" id="coid" name="coid" placeholder="아이디" required="required"/></td>
 		</tr>
 		<tr>
-			<td><input type="password" id="mpw" name="mpw" placeholder="비밀번호" required="required"/></td>
+			<td><input type="password" id="copw" name="copw" placeholder="비밀번호" required="required"/></td>
 		</tr>
 		<tr>
 			<td><input type="submit" value="로그인"></td>

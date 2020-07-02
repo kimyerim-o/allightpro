@@ -29,13 +29,11 @@ public class MemberService {
 				System.out.println("로그인성공");
 				session.setAttribute("MID",result.get("MID"));
 				session.setAttribute("MPW", result.get("MPW"));
-				session.setAttribute("EMAIL", result.get("EMAIL"));
-				session.setAttribute("NAME", result.get("NAME"));
-				session.setAttribute("BIRTH", result.get("BIRTH"));
-				session.setAttribute("TEL", result.get("TEL"));
-				session.setAttribute("ADDNO", result.get("ADDNO"));
-				session.setAttribute("ADDRESS", result.get("ADDRESS"));
-				session.setAttribute("TYPE", result.get("TYPE"));
+				session.setAttribute("MEMAIL", result.get("MEMAIL"));
+				session.setAttribute("MNAME", result.get("MNAME"));
+				session.setAttribute("MBIRTH", result.get("MBIRTH"));
+				session.setAttribute("MTEL", result.get("MTEL"));
+				session.setAttribute("MTYPE", result.get("MTYPE"));
 		}
 		
 	

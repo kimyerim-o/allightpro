@@ -10,13 +10,13 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
-<form action="./login" method="post">
+<form action="./log.com" method="post">
 	<table>
 		<tr>
-			<td><input type="text" id="id" name="id" placeholder="아이디" required="required"/></td>
+			<td><input type="text" id="mid" name="mid" placeholder="아이디" required="required"/></td>
 		</tr>
 		<tr>
-			<td><input type="password" id="pw" name="pw" placeholder="비밀번호" required="required"/></td>
+			<td><input type="password" id="mpw" name="mpw" placeholder="비밀번호" required="required"/></td>
 		</tr>
 		<tr>
 			<td><input type="submit" value="로그인"></td>
@@ -49,7 +49,7 @@
 	          console.log(id);
  			  $.ajax({
 				  url:'./kakao.com',
-				  type:'POST',
+				  type:'post',
 				  dataType:'json',
 				  data:res,
 				  success:function(check){
@@ -57,11 +57,8 @@
 					  if(check.code == "join"){
 					  	location.href = "http://localhost:9000/allight/main.com";
 					  }else{
-						  location.href = "http://localhost:9000/allight/join.com";
+						  location.href = "http://localhost:9000/allight/login.com";
 					  }
-				  },
-				  fail:function(error){
-					  console.log("error")
 				  }
 			  });
 	        },
@@ -93,5 +90,21 @@
   }
 </script>
 
+<form action="./corlog.com" method="post">
+	<table>
+		<tr>
+			<td><input type="text" id="mid" name="mid" placeholder="아이디" required="required"/></td>
+		</tr>
+		<tr>
+			<td><input type="password" id="mpw" name="mpw" placeholder="비밀번호" required="required"/></td>
+		</tr>
+		<tr>
+			<td><input type="submit" value="로그인"></td>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
+</form>
 </body>
 </html>

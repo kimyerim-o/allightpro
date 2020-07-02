@@ -22,8 +22,17 @@
 	<div class="header-top">
         <div class="container">
             <div class="ht-right">
-                <a href="./login.com" class="login-panel"><i class="fa fa-user"></i>Login</a>
-                <a href="#" class="join-panel">join</a>
+                <c:if test="${empty sessionScope.MID}">
+	                <a href="./login.com" class="login-panel"><i class="fa fa-user"></i>Login</a>
+	                <a href="#" class="join-panel">join</a>
+	            </c:if>
+            	<c:if test="${!empty sessionScope.MID}">
+            		<a href="#" class="logined-panel">로그아웃</a>
+            		<a href="#" class="logined-panel">장바구니()</a>
+            		<a href="#" class="logined-panel">주문/배송조회</a>
+            		<a href="#" class="logined-panel">마이페이지</a>
+            		<a href="#" class="logined-nick-panel">${sessionScope.MNICK} 님</a>
+            	</c:if>
             </div>
         </div>
     </div>

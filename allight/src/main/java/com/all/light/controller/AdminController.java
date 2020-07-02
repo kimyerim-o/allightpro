@@ -13,7 +13,7 @@ public class AdminController {
 	//권한이 없을 시 접속 실패
 	@RequestMapping("/fail")
 	public ModelAndView connectFail(HttpSession session,ModelAndView mv,RedirectView rv) {
-		System.out.println("AdminController.connectFail");
+		System.out.println("AdminController.connectFail\n -- non-authority access");
 		mv.setViewName("common/admin/connectfail");
 		return mv;
 	}
@@ -25,12 +25,7 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping("/member/admin")
-	public ModelAndView adminMember(HttpSession session,ModelAndView mv,RedirectView rv) {
-		System.out.println("AdminController.adminMember");
-		mv.setViewName("common/admin/member");
-		return mv;
-	}
+
 	
 	@RequestMapping("/corporation/admin")
 	public ModelAndView adminCorp(HttpSession session,ModelAndView mv,RedirectView rv) {

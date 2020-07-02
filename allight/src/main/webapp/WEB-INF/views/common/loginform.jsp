@@ -10,7 +10,7 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
-<form action="./login" method="post">
+<form action="./log.com" method="post">
 	<table>
 		<tr>
 			<td><input type="text" id="id" name="id" placeholder="아이디" required="required"/></td>

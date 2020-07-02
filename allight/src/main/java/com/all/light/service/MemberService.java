@@ -62,4 +62,13 @@ public class MemberService {
 		return result;
 	}
 
+	public void logout(HttpSession session) {
+		if(session.getAttribute("MID")!=null) {
+			System.out.println("logout!!!");
+			session.invalidate();
+		}else {
+			System.out.println("null logout");
+		}
+	}
+
 }

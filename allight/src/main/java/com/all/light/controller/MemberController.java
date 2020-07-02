@@ -27,6 +27,20 @@ public class MemberController {
 		return "common/loginform";
 	}
 	
+	@RequestMapping("/logout")
+	public ModelAndView logout(HttpSession session,ModelAndView mv,RedirectView rv) {
+		System.out.println(" MemberController logout");
+		if(session.getAttribute("MID")==null) {
+			rv.setUrl("./login.com");
+			mv.setView(rv);
+			return mv;
+		}
+		memSVC.logout(session);
+		rv.setUrl("./main.com");
+		mv.setView(rv);
+		return mv;
+	}
+	
 	@RequestMapping("/log")
 	public ModelAndView login(MemberDTO memdto,HttpSession session,ModelAndView mv,RedirectView rv) {
 		System.out.println("login");

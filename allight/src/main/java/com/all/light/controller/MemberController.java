@@ -23,9 +23,6 @@ import com.all.light.util.PageUtil;
 public class MemberController {
 	@Autowired
 	MemberService memSVC;
-<<<<<<< HEAD
-
-=======
 	
 	//메인화면
 	@RequestMapping("/main")
@@ -34,18 +31,10 @@ public class MemberController {
 	}
 	
 	//로그인폼
->>>>>>> yerim
 	@RequestMapping("/login")
 	public String log() {
 		return "common/loginform";
 	}
-<<<<<<< HEAD
-
-	@RequestMapping("/log")
-	public ModelAndView login(MemberDTO memdto, HttpSession session, ModelAndView mv, RedirectView rv) {
-		System.out.println("login");
-		memSVC.login(memdto, session);
-=======
 	
 	//로그아웃
 	@RequestMapping("/logout")
@@ -56,34 +45,10 @@ public class MemberController {
 			return mv;
 		}
 		memSVC.logout(session);
->>>>>>> yerim
 		rv.setUrl("./main.com");
 		mv.setView(rv);
 		return mv;
 	}
-<<<<<<< HEAD
-
-	@RequestMapping("/main")
-	public String main() {
-		return "index";
-	}
-
-	@RequestMapping(value = "/kakao", method = RequestMethod.POST)
-	@ResponseBody
-	public Object kakao(@RequestParam Map<String, Object> param, HttpSession session, MemberDTO memdto) {
-		System.out.println("kakak");
-		System.out.println(param.get("id"));
-		System.out.println("udto" + memdto.getMid());
-		HashMap re = memSVC.kakao(param, memdto, session);
-		System.out.println("kakao re" + re);
-		System.out.println(re.get("mpw"));
-		HashMap check = new HashMap();
-		if (re.get("mpw") == null) {
-			System.out.println("join");
-			check.put("code", "join");
-			System.out.println(check.get("code"));
-			return check;
-=======
 	
 	//로그인
 	@RequestMapping("/log")
@@ -99,24 +64,33 @@ public class MemberController {
 		return mv;
 	}
 	
-	// 카카오 로그인
-	@RequestMapping(value="/kakao", method=RequestMethod.POST)
+	//카카오로그인
+	@RequestMapping(value = "/kakao", method = RequestMethod.POST)
 	@ResponseBody
-	public String kakao(@RequestParam Map<String, Object> param, HttpSession session,MemberDTO memdto) {
+	public String kakao(@RequestParam Map<String, Object> param, HttpSession session, MemberDTO memdto) {
 		System.out.println("kakak");
-		System.out.println(param.get("mid"));
-		System.out.println("udto"+memdto.getMid());
-		HashMap re=memSVC.kakao(param,memdto,session);
-		System.out.println("kakao re"+re);
+		System.out.println(param.get("id"));
+		System.out.println("udto" + memdto.getMid());
+		HashMap re = memSVC.kakao(param, memdto, session);
+		System.out.println("kakao re" + re);
 		System.out.println(re.get("mpw"));
-		if(re.get("mpw")==null) {
+		if (re.get("mpw") == null) {
 			return "check";
->>>>>>> yerim
 		}
-		System.out.println("index");
 		return null;
 	}
-<<<<<<< HEAD
+	
+	
+	// 카카오 로그아웃
+	@RequestMapping(value="/kakaout", method=RequestMethod.POST)
+	@ResponseBody
+	public String kakaout(@RequestParam Map<String, Object> param, HttpSession session,MemberDTO memdto) {
+		if(session.getAttribute("MID")==null) {
+			return null;
+		}
+		memSVC.logout(session);
+		return "out";
+	}
 
 	// 7.2유태우 작성
 	@RequestMapping("/member/admin")
@@ -137,18 +111,6 @@ public class MemberController {
 		System.out.println("MemberController.adminMember().viewName:"+mv.getViewName());
 		return mv;
 	}
-=======
 	
-	// 카카오 로그아웃
-	@RequestMapping(value="/kakaout", method=RequestMethod.POST)
-	@ResponseBody
-	public String kakaout(@RequestParam Map<String, Object> param, HttpSession session,MemberDTO memdto) {
-		if(session.getAttribute("MID")==null) {
-			return null;
-		}
-		memSVC.logout(session);
-		return "out";
-	}
 	
->>>>>>> yerim
 }

@@ -16,4 +16,8 @@
 	<decorator name="admin" page="admin_decorator.jsp">
 		<pattern>*/admin.com</pattern>
 	</decorator>
+	
+	<decorator name="others" page="others_decorator.jsp">
+		<pattern>*.com</pattern>
+	</decorator>
 </decorators>

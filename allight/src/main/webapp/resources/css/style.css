@@ -62,13 +62,14 @@ table {
 	width: 100%;
 	max-width: 100%;
 	background-color: transparent;
+	border-collapse: collapse;
 }
 
 th {
 	padding: 8px;
 	line-height: 1.42857143;
 	vertical-align: top;
-	border-bottom:2px solid #ef5777;
+	border-bottom: 2px solid #444;
 	text-align: center;
 }
 
@@ -506,12 +507,16 @@ li {
 	border: 1px solid #ef5777;
 }
 
-.selectCss {vertical-align: bottom;height:32px;line-height:32px;}
+.selectCss {
+	vertical-align: bottom;
+	height: 32px;
+	line-height: 32px;
+}
 
 .insertFavorite {
-	float:right;
+	float: right;
 }
 
 input {
-	height:32px;
+	height: 32px;
 }

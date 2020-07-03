@@ -41,5 +41,15 @@
 	<update id="logDate" parameterType="java.util.HashMap">
 		UPDATE member SET mlogdate=sysdate where mno=#{mno}
 	</update>
+	
+	<update id="memUpdate" parameterType="memDTO">
+		UPDATE member 
+		SET mid='${mid}', mpw='${mpw}', memail='${memail}', mname='${mname}', mnick='${mnick}', mbirth='${mbirth}', mtel='${mtel}', mtel2='${mtel2}', mtype=${mtype}
+		where mno=#{mno}
+	</update>
+	
+	<delete id="memDelete" parameterType="Integer">
+		delete member where mno=#{mno}
+	</delete>
 </mapper>
 	

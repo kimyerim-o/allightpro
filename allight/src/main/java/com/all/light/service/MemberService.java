@@ -96,4 +96,12 @@ public class MemberService {
 		return memDAO.mInfo(mno);
 	}
 
+	public void memModify(MemberDTO memDTO) {
+		memDAO.memModify(memDTO);
+	}
+
+	public void memDelete(int mno) {
+		memDAO.memDelete(mno);
+	}
+
 }

@@ -57,10 +57,7 @@ public class MemberDAO extends SqlSessionDaoSupport {
 	}
 
 	public int getTotalCnt() {
-		System.out.println("MemberDAO.getTotalCnt");
-		System.out.println("totalCnt = " + session.selectOne("member.totalCnt"));
 		int totalCnt = session.selectOne("member.totalCnt");
-		System.out.println("totalCnt = " + totalCnt);
 		return totalCnt;
 	}
 
@@ -74,6 +71,14 @@ public class MemberDAO extends SqlSessionDaoSupport {
 	public MemberDTO mInfo(int mno) {
 		System.out.println("MemberDAO.mInfoList.mno = " + mno);
 		return session.selectOne("member.memInfo", mno);
+	}
+
+	public void memModify(MemberDTO memDTO) {
+		session.update("member.memUpdate", memDTO);
+	}
+
+	public void memDelete(int mno) {
+		session.delete("member.memDelete", mno);
 	}
 
 }

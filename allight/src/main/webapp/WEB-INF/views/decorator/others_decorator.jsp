@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko">
@@ -18,10 +19,12 @@
     <!-- 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     -->
+    <decorator:head/>
     </head>
     
     
   <body>
+ 	<!-------------------- header -------------------->
   	<!-- login/join -->
 	<div class="header-top">
         <div class="container">
@@ -43,7 +46,7 @@
     
     <!-- logo -->
   	<div class="container">
-  		<a href="#" target="_blank">
+  		<a href="${pageContext.request.contextPath}/main.com">
 			<img src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg" class="logo" onclick=""/>
 		</a>
 	</div>
@@ -102,11 +105,22 @@
 	                        <li><a href="#">칼로리 사전 관리</a></li>
 	                    </ul>
 					</li>
-				
 	        </ul>
 	      </div>
 	    </div>
     </nav>
     <hr/>
+    
+    <!-------------------- body -------------------->
+    <decorator:body/>
+    
+    <!-------------------- footer -------------------->
+    <div style="text-align:center;padding:30px;background-color:#f5f5f5;">
+		footer<br/>
+		~~<br/>
+		~~<br/>
+		~~
+	</div>
+	
   </body>
 </html>

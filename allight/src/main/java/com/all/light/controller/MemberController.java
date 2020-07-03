@@ -81,6 +81,7 @@ public class MemberController {
 		mv.addObject("PINFO", PInfo); //페이징 정보
 		
 		mv.setViewName("common/admin/member");
+		System.out.println("MemberController.adminMember().viewName:"+mv.getViewName());
 		return mv;
 	}
 }

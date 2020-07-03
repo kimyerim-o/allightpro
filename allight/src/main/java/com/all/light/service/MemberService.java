@@ -15,33 +15,6 @@ import com.all.light.util.PageUtil;
 public class MemberService {
 	@Autowired
 	private MemberDAO memDAO;
-<<<<<<< HEAD
-
-	public void login(MemberDTO memdto, HttpSession session) {
-		System.out.println("MemberService");
-		// 일반로그인
-		HashMap map = new HashMap();
-		map.put("mid", memdto.getMid());
-		map.put("mpw", memdto.getMpw());
-		HashMap result = memDAO.login(map);
-		if (result == null || result.size() == 0) {
-			// 로그인실패
-			System.out.println("로그인실패");
-		} else {
-			// 로그인성공
-			System.out.println("로그인성공");
-			session.setAttribute("MID", result.get("MID"));
-			session.setAttribute("MPW", result.get("MPW"));
-			session.setAttribute("EMAIL", result.get("EMAIL"));
-			session.setAttribute("NAME", result.get("NAME"));
-			session.setAttribute("BIRTH", result.get("BIRTH"));
-			session.setAttribute("TEL", result.get("TEL"));
-			session.setAttribute("ADDNO", result.get("ADDNO"));
-			session.setAttribute("ADDRESS", result.get("ADDRESS"));
-			session.setAttribute("TYPE", result.get("TYPE"));
-		}
-
-=======
 	
 	public HashMap login(MemberDTO memdto, HttpSession session) {
 		System.out.println("MemberService");
@@ -66,7 +39,6 @@ public class MemberService {
 				session.setAttribute("MTYPE", result.get("MTYPE"));
 		}
 			return result;
->>>>>>> yerim
 	}
 
 	public HashMap kakao(Map<String, Object> param, MemberDTO memdto, HttpSession session) {
@@ -92,7 +64,6 @@ public class MemberService {
 		return result;
 	}
 
-<<<<<<< HEAD
 	public ArrayList<MemberDTO> list(PageUtil pInfo) {
 		return memDAO.list(pInfo);
 	}
@@ -102,14 +73,14 @@ public class MemberService {
 		// PageUtil(보고싶은페이지, 전체게시물수);
 		PageUtil pInfo = new PageUtil(nowPage, totalCount);
 		return pInfo;
-=======
+	}
+	
 	public void logout(HttpSession session) {
 		if(session.getAttribute("MID")!=null) {
 			session.invalidate();
 		}else {
 			System.out.println("null logout");
 		}
->>>>>>> yerim
 	}
 
 }

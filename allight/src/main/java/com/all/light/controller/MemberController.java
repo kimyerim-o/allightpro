@@ -74,7 +74,7 @@ public class MemberController {
 
 		PageUtil PInfo = memSVC.getPageInfo(nowPage);
 		ArrayList<MemberDTO> map = memSVC.list(PInfo);
-
+  
 		System.out.println("list = "+map.toString());
 		System.out.println("pinfo = "+PInfo.toString());
 		mv.addObject("LIST", map); //회원 상세 정보

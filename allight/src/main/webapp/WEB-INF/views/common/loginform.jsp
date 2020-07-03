@@ -36,7 +36,7 @@
 <script type="text/javascript">
   // input your appkey
   Kakao.init('52ee84c11b882c5898d68b339bf4f9d0')
-  function loginWithKakao() {
+ function loginWithKakao() {
     Kakao.Auth.login({
       success: function(authObj) {
         //alert(JSON.stringify(authObj)),
@@ -46,19 +46,24 @@
 	          //alert(JSON.stringify(res)),
 	          console.log(res);
 	          var id=res.id;
+	          var nickname=res.properties.nickname;
+	          var email=res.kakao_account.email;
 	          console.log(id);
  			  $.ajax({
 				  url:'./kakao.com',
 				  type:'post',
-				  dataType:'json',
+				  dataType:'text',//받을때
 				  data:res,
 				  success:function(check){
-					  console.log(check.code);
-					  if(check.code == "join"){
-					  	location.href = "http://localhost:9000/allight/main.com";
+					  alert(check);
+					  if(check=="check"){
+					  	location.href = "http://localhost:9000/allight/join.com";
 					  }else{
-						  location.href = "http://localhost:9000/allight/login.com";
+						  location.href = "http://localhost:9000/allight/main.com";
 					  }
+				  },
+				  fail:function(error){
+					  console.log("error")
 				  }
 			  });
 	        },
@@ -85,7 +90,24 @@
       return
     }
     Kakao.Auth.logout(function() {
-      alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
+    	$.ajax({
+			  url:'./kakaout.com',
+			  dataType:'text',//받을때
+			  type:'post',
+			  success:function(check){
+				  alert(check);
+				  if(check=="out"){
+				  	location.href = "http://localhost:9000/allight/main.com";
+				  }else{
+					  alert("카카오 로그아웃 실패")
+					  location.href = "http://localhost:9000/allight/main.com";
+				  }
+			  },
+			  fail:function(error){
+				  console.log("error")
+			  }
+		  });
+      	alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
     })
   }
 </script>
@@ -93,10 +115,10 @@
 <form action="./corlog.com" method="post">
 	<table>
 		<tr>
-			<td><input type="text" id="mid" name="mid" placeholder="아이디" required="required"/></td>
+			<td><input type="text" id="coid" name="coid" placeholder="아이디" required="required"/></td>
 		</tr>
 		<tr>
-			<td><input type="password" id="mpw" name="mpw" placeholder="비밀번호" required="required"/></td>
+			<td><input type="password" id="copw" name="copw" placeholder="비밀번호" required="required"/></td>
 		</tr>
 		<tr>
 			<td><input type="submit" value="로그인"></td>

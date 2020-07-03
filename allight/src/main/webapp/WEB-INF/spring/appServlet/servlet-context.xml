@@ -39,6 +39,7 @@
 	</beans:bean>
 	<beans:bean id="download" class="com.all.light.util.DownloadUtil" />
 	
+<<<<<<< HEAD
 	<!-- 임시 비활성화 -->
 <!-- 	
 	인터셉터 설정 부분  
@@ -48,6 +49,17 @@
 			<mapping path="/**/admin.com" />
 			<beans:bean class="com.all.light.intercept.AdminAuthorizedCheckInterceptor" />
 		</interceptor>
+=======
+	
+	
+	<!-- 인터셉터 설정 부분  --> 
+ 	<interceptors>
+ 		<interceptor>
+	 		<!-- 인터셉터가 언제 처리될지 지정 --> 
+		  	<mapping path="/q/ins.co" /> 
+		 	<beans:bean class="com.all.light.util.LoginCheck" /> 
+	  	</interceptor>
+>>>>>>> yerim
 	</interceptors>
 	 -->
 	 

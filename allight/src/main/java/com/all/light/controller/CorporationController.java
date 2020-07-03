@@ -24,4 +24,18 @@ public class CorporationController {
 		mv.setView(rv);
 		return mv;
 	}
+	
+	//로그아웃
+	@RequestMapping("/corlogout")
+	public ModelAndView logout(HttpSession session,ModelAndView mv,RedirectView rv) {
+		if(session.getAttribute("COID")==null) {
+			rv.setUrl("./login.com");
+			mv.setView(rv);
+			return mv;
+		}
+		corSVC.logout(session);
+		rv.setUrl("./main.com");
+		mv.setView(rv);
+		return mv;
+	}
 }

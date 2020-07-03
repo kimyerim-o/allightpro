@@ -191,7 +191,7 @@
 .sort > li {
 	display:inline;
 	float:right;
-	padding:0 10px 30px;
+	padding:0 10px 20px;
 	color:#ccc;
 	
 }
@@ -199,4 +199,38 @@
 .sort > li > a:hover {
 	text-decoration:none;
 	font-weight:bold;
+}
+
+.shopSearchDiv {
+	height: 40px;
+	width: 300px;
+	border: 1px solid #ccc;
+	background: white;
+	float: right;
+	margin:0 10px;
+}
+
+.shopTxt {
+	font-size: 16px;
+	width: 80%;
+	padding: 10px;
+	border: 0px;
+	outline: none;
+	float: left;
+}
+
+.shopBtn {
+	width: 20%;
+	height: 100%;
+	border: 0px;
+	background: #fff;
+	color: white;
+	outline: none;
+	float: right;
+}
+
+.shopSearchImg {
+	max-height: 28px;
+	padding: 3px 0 0 0;
+	color: white;
 }

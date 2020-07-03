@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div style="text-align:center;padding:30px;background-color:#f5f5f5;">
+<div style="text-align:center;padding:30px;background-color:#f5f5f5;width:100%">
 footer<br/>
 ~~<br/>
 ~~<br/>
-~~</div>
+icons by Icons8</div>
 </body>
 </html>

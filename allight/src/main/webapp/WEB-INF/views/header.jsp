@@ -55,8 +55,8 @@
 
 	<!-- logo -->
 	<div class="container">
-		<a href="${pageContext.request.contextPath}/main.com"> <img
-			src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg"
+		<a href="${pageContext.request.contextPath}/main.com"> 
+			<img src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg"
 			class="logo" onclick="" />
 		</a>
 	</div>
@@ -77,10 +77,10 @@
 						href="${pageContext.request.contextPath}/shopping/list.com"
 						class="nav-link">쇼핑</a>
 						<ul class="dropdown">
-							<li><a href="#">식단</a></li>
-							<li><a href="#">간식</a></li>
-							<li><a href="#">운동기구</a></li>
-							<li><a href="#">운동복</a></li>
+							<li><a href="${pageContext.request.contextPath}/shopping/list.com?category=diet">식단</a></li>
+							<li><a href="${pageContext.request.contextPath}/shopping/list.com?category=snack">간식</a></li>
+							<li><a href="${pageContext.request.contextPath}/shopping/list.com?category=sportswear">운동복</a></li>
+							<li><a href="${pageContext.request.contextPath}/shopping/list.com?category=other">기타</a></li>
 							<li><a href="#">브랜드관</a></li>
 						</ul></li>
 					<!-- 회원 로그인시  -->

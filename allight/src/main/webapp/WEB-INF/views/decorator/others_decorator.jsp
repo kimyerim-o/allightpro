@@ -17,6 +17,7 @@
 	<decorator:body />
 
 	<jsp:include page="/WEB-INF/views/footer.jsp" />
-
 </body>
+
+
 </html>

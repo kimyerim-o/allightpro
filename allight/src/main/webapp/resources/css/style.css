@@ -75,7 +75,7 @@ th {
 
 td {
 	padding: 8px;
-	text-align:left;
+	text-align: left;
 	line-height: 1.42857143;
 	vertical-align: top;
 	border-bottom: 1px solid #ddd;
@@ -128,9 +128,11 @@ td {
 	padding-top: 3px;
 	padding-bottom: 3px;
 }
+
 .join-panel, .login-panel, .logined-panel, .logined-nick-panel {
 	text-decoration: none;
 }
+
 .header-top .ht-right .logined-panel:hover {
 	color: #ff7289;
 	text-decoration: none;
@@ -521,85 +523,91 @@ input {
 	height: 32px;
 }
 
-
-
-
-.boardContent-buttons{
-	text-align:right;
-	padding:10px;
+.boardContent-buttons {
+	text-align: right;
+	padding: 10px;
 }
 
-.board-title{
-	font-size:1.2rem;
-	font-weight:500;
-	border-top:2px solid #486587;
-	border-bottom:none; 
-	padding:40px 40px 20px 40px;
-}
-.board-info{
-	border-bottom:none; 
-	padding:0 40px;
-}
-.board-info-nick{
-	font-weight:bold;
-}
-.board-info-others{
-	color:gray;
-}
-.board-content{
-	padding:40px; 
-	vertical-align:text-top;
-}
-.board-content-div{
-	min-height:130px;
+.board-title {
+	font-size: 1.2rem;
+	font-weight: 500;
+	border-top: 2px solid #486587;
+	border-bottom: none;
+	padding: 40px 40px 20px 40px;
 }
 
+.board-info {
+	border-bottom: none;
+	padding: 0 40px;
+}
+
+.board-info-nick {
+	font-weight: bold;
+}
+
+.board-info-others {
+	color: gray;
+}
+
+.board-content {
+	padding: 40px;
+	vertical-align: text-top;
+}
+
+.board-content-div {
+	min-height: 130px;
+}
 
 .boardContent-Comment {
-	padding:20px 40px;
-}
-.boardContent-Comment .boardContent-Comment-comment{
-	float : left;
-	display : inline-block;
-
+	padding: 20px 40px;
 }
 
-.boardContent-Comment .boardContent-Comment-input{
-	align:center;
+.boardContent-Comment .boardContent-Comment-comment {
+	float: left;
+	display: inline-block;
+}
+
+.boardContent-Comment .boardContent-Comment-input {
+	align: center;
 	height: 50px;
-	margin:20px 0;
+	margin: 20px 0;
 }
-.boardContent-Comment .boardContent-Comment-input .input{
+
+.boardContent-Comment .boardContent-Comment-input .input {
 	width: 85%;
-    float:left;
-    height: 50px;
-    padding:10px;
-}
-.boardContent-Comment .boardContent-Comment-input .button{
-	width:15%;
-	float : right;
+	float: left;
 	height: 50px;
-	padding:10px;
+	padding: 10px;
 }
 
-.boardContent-Comment-Table{
-}
-.board-comment-info{
-	border:none; 
-	padding:10px 10px 0 10px;
-}
-.boardWrite{
-	width:1000px;
-	margin:0 auto;
-	align:center;
-	padding:10px;
+.boardContent-Comment .boardContent-Comment-input .button {
+	width: 15%;
+	float: right;
+	height: 50px;
+	padding: 10px;
 }
 
-.boardModify{
-	width:1000px;
-	margin:0 auto;
-	align:center;
-	padding:10px;
+.boardContent-Comment-Table {
+	
+}
+
+.board-comment-info {
+	border: none;
+	padding: 10px 10px 0 10px;
+}
+
+.boardWrite {
+	width: 1000px;
+	margin: 0 auto;
+	align: center;
+	padding: 10px;
+}
+
+.boardModify {
+	width: 1000px;
+	margin: 0 auto;
+	align: center;
+	padding: 10px;
 }
 
 .aNone {

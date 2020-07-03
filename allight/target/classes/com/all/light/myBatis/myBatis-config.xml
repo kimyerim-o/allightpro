@@ -25,8 +25,11 @@
    		<!-- sql 설정 -->
    		<mapper resource="/com/all/light/sql/MemberSQL.xml"/>
    		<mapper resource="/com/all/light/sql/CorporationSQL.xml"/>
+<<<<<<< HEAD
    		<mapper resource="/com/all/light/sql/ShoppingSQL.xml"/>
+=======
    		<mapper resource="/com/all/light/sql/QuestionSQL.xml"/>
+>>>>>>> yerim
    </mappers>
    
 </configuration>

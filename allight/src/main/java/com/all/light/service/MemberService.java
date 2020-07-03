@@ -30,6 +30,7 @@ public class MemberService {
 			}else{
 				//로그인성공
 				System.out.println("로그인성공");
+				session.setAttribute("MNO",result.get("MNO"));
 				session.setAttribute("MID",result.get("MID"));
 				session.setAttribute("MPW", result.get("MPW"));
 				session.setAttribute("MEMAIL", result.get("MEMAIL"));
@@ -37,6 +38,7 @@ public class MemberService {
 				session.setAttribute("MBIRTH", result.get("MBIRTH"));
 				session.setAttribute("MTEL", result.get("MTEL"));
 				session.setAttribute("MTYPE", result.get("MTYPE"));
+				memDAO.logDate(result);
 		}
 			return result;
 	}
@@ -85,5 +87,13 @@ public class MemberService {
 		return pInfo;
 	}
 	
+	//검색 메소드
+	public ArrayList<MemberDTO> searchList(PageUtil pInfo, String searchWord){
+		return memDAO.searchList(pInfo, searchWord);
+	}
+	
+	public MemberDTO mInfo(int mno) {
+		return memDAO.mInfo(mno);
+	}
 
 }

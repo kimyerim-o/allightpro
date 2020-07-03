@@ -86,6 +86,8 @@ public class MemberService {
 		PageUtil pInfo = new PageUtil(nowPage, totalCount);
 		return pInfo;
 	}
+	
+	//검색 메소드
 	public ArrayList<MemberDTO> searchList(PageUtil pInfo, String searchWord){
 		return memDAO.searchList(pInfo, searchWord);
 	}

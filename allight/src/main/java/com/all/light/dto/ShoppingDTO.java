@@ -1,6 +1,6 @@
 package com.all.light.dto;
 
-public class ItemDTO {
+public class ShoppingDTO {
 	private int ino;
 	private String iname;//상품이름
 	private String icategory;//상품카테고리

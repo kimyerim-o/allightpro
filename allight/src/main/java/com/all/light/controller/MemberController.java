@@ -22,7 +22,7 @@ import com.all.light.util.PageUtil;
 @Controller
 public class MemberController {
 	@Autowired
-	MemberService memSVC;
+	private MemberService memSVC;
 	
 	//메인화면
 	@RequestMapping("/main")

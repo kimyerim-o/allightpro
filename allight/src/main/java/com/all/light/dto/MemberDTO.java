@@ -6,6 +6,7 @@ public class MemberDTO {
 	private int mno;
 	private String mid;
 	private String mpw;
+<<<<<<< HEAD
 	private String email;
 	private String name;
 	private String nick;
@@ -38,16 +39,31 @@ public class MemberDTO {
 	}
 	public String getEmail() {
 		return email;
+=======
+	private String memail;
+	private String mname;
+	private String mbirth;
+	private String mtel;
+	private String mtel2;
+	private String mjoindate;
+	private String mlogdate;
+	private String msex;
+	private int mtype;
+	
+	public String getMemail() {
+		return memail;
+>>>>>>> yerim
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMemail(String memail) {
+		this.memail = memail;
 	}
-	public String getName() {
-		return name;
+	public String getMname() {
+		return mname;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
+<<<<<<< HEAD
 	public String getNick() {
 		return nick;
 	}
@@ -56,16 +72,21 @@ public class MemberDTO {
 	}
 	public String getBirth() {
 		return birth;
+=======
+	public String getMbirth() {
+		return mbirth;
+>>>>>>> yerim
 	}
-	public void setBirth(String birth) {
-		this.birth = birth;
+	public void setMbirth(String mbirth) {
+		this.mbirth = mbirth;
 	}
-	public String getTel() {
-		return tel;
+	public String getMtel() {
+		return mtel;
 	}
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setMtel(String mtel) {
+		this.mtel = mtel;
 	}
+<<<<<<< HEAD
 	public String getTel2() {
 		return tel2;
 	}
@@ -99,21 +120,57 @@ public class MemberDTO {
 	}
 	public String getAddno() {
 		return addno;
+=======
+	public String getMtel2() {
+		return mtel2;
+>>>>>>> yerim
 	}
-	public void setAddno(String addno) {
-		this.addno = addno;
+	public void setMtel2(String mtel2) {
+		this.mtel2 = mtel2;
 	}
-	public String getAddress() {
-		return address;
+	public String getMjoindate() {
+		return mjoindate;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setMjoindate(String mjoindate) {
+		this.mjoindate = mjoindate;
 	}
+<<<<<<< HEAD
 	@Override
 	public String toString() {
 		return "MemberDTO [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", email=" + email + ", name=" + name
 				+ ", nick=" + nick + ", birth=" + birth + ", tel=" + tel + ", tel2=" + tel2 + ", type=" + type
 				+ ", joinDate=" + joinDate + ", logDate=" + logDate + ", sex=" + sex + ", addno=" + addno + ", address="
 				+ address + "]";
+=======
+	public String getMlogdate() {
+		return mlogdate;
+	}
+	public void setMlogdate(String mlogdate) {
+		this.mlogdate = mlogdate;
+	}
+	public String getMsex() {
+		return msex;
+	}
+	public void setMsex(String msex) {
+		this.msex = msex;
+	}
+	public int getMtype() {
+		return mtype;
+	}
+	public void setMtype(int mtype) {
+		this.mtype = mtype;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+	public String getMpw() {
+		return mpw;
+	}
+	public void setMpw(String mpw) {
+		this.mpw = mpw;
+>>>>>>> yerim
 	}
 }

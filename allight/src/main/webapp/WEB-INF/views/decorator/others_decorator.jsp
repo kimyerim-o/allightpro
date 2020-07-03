@@ -61,7 +61,7 @@
 	        	<li class="nav-item"><a href="#" class="nav-link">칼로리 사전</a></li>
 	        	<li class="nav-item"><a href="#" class="nav-link">칼로리 처방</a></li>
 	        	<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a></li>
-	        	<li class="nav-item"><a href="#" class="nav-link">쇼핑</a>
+	        	<li class="nav-item"><a href="${pageContext.request.contextPath}/shopping/list.com" class="nav-link">쇼핑</a>
 	        		<ul class="dropdown">
                         <li><a href="#">식단</a></li>
                         <li><a href="#">간식</a></li>

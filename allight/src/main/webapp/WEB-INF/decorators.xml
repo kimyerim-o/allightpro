@@ -17,6 +17,7 @@
 		<pattern>*/admin.com</pattern>
 	</decorator>
 	
+	<!-- .com으로 들어오는 모든 페이지에 대해 적용시키는 레이아웃 선언(헤더/푸터) -->
 	<decorator name="others" page="others_decorator.jsp">
 		<pattern>*.com</pattern>
 	</decorator>

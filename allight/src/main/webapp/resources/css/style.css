@@ -75,6 +75,7 @@ th {
 
 td {
 	padding: 8px;
+	text-align:left;
 	line-height: 1.42857143;
 	vertical-align: top;
 	border-bottom: 1px solid #ddd;
@@ -504,7 +505,7 @@ li {
 
 .btn:hover {
 	text-decoration: none;
-	border: 1px solid #ef5777;
+	border: 1px solid #212529;
 }
 
 .selectCss {

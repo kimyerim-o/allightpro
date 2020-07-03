@@ -16,8 +16,11 @@ public class PageUtil {
 	private	int	startPage;		//	페이지 이동 기능이 몇페이지 부터 만들지를 지정한다.
 	private	int	endPage;		//	페이지 이동 기능을 몇페이지까지 만들지를 지정한다.
 	
+	private int startNo; //한 페이지에 출력할 리스트 중 첫번째 no
+	private int endNo; //한 페이지에 출력할 리스트 중 마지막 no
+	
 	public PageUtil(int nowPage, int totalCount) {
-		this(nowPage, totalCount, 3, 3);
+		this(nowPage, totalCount, 10, 10);
 	}
 	
 	public PageUtil(int nowPage, int totalCount, int lineCount, int pageGroup) {
@@ -28,9 +31,22 @@ public class PageUtil {
 		calcTotalPage();
 		calcStartPage();
 		calcEndPage();
+		calcStartNo();
+		calcEndNo();
 	}
 	
-	
+	//7.2유태우
+	//시작 글번호 계산
+	//{총 게시글 수 - (한 페이지 게시글 수*현재 페이지 번호)}+1
+	private void calcStartNo() {
+		startNo = totalCount-(lineCount*nowPage)+1;
+	}
+	//끝 글번호 계산
+	//총 게시글수 - ((현재 페이지 -1) * 한 페이지 게시글수)
+	private void calcEndNo() {
+		endNo = totalCount-((nowPage-1)*lineCount);
+	}
+
 	//1.총 페이지수 계산
 	private	void calcTotalPage() {
 		//	총 페이지 수는 전체 게시물 개수를 한페이지당 보여줄 게수로 나눈 결과이다.
@@ -62,6 +78,22 @@ public class PageUtil {
 		}
 	}
 
+
+	public int getStartNo() {
+		return startNo;
+	}
+
+	public void setStartNo(int startNo) {
+		this.startNo = startNo;
+	}
+
+	public int getEndNo() {
+		return endNo;
+	}
+
+	public void setEndNo(int endNo) {
+		this.endNo = endNo;
+	}
 
 	public int getNowPage() {
 		return nowPage;
@@ -106,9 +138,12 @@ public class PageUtil {
 		this.endPage = endPage;
 	}
 
-	
-
-
+	@Override
+	public String toString() {
+		return "PageUtil [nowPage=" + nowPage + ", totalCount=" + totalCount + ", lineCount=" + lineCount
+				+ ", pageGroup=" + pageGroup + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage="
+				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + "]";
+	}
 }
 
 

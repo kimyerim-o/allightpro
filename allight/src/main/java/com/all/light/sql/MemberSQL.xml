@@ -16,5 +16,16 @@
 	<insert id="kinsert" parameterType="memDTO">
 	insert into member(mno,mid) values(mno_seq.nextval,#{mid})
 	</insert>
+	
+	<!-- 전체게시물 수 조회 -->
+	<select id="totalCnt" resultType="Integer">
+		select  count(*) from member
+	</select>
+	
+	<!-- 회원 리스트 출력 -->
+	<select id="list" resultType="java.util.HashMap" parameterType="memDTO">
+	select * from member where mno between #{startNo} and #{endNo} order by mno desc
+	</select>
+	
 </mapper>
-
+	

@@ -42,5 +42,17 @@ public class MemberDAO extends SqlSessionDaoSupport{
 		return res;
 	}
 
+	//유태우7.2작성
+	public ArrayList list(PageUtil pInfo) {
+		System.out.println("MemberDAO.list = "+pInfo.toString());
+		return (ArrayList) session.selectList("member.list", pInfo);
+	}
 
+	public int getTotalCnt() {
+		System.out.println("MemberDAO.getTotalCnt");
+		System.out.println("totalCnt = " + session.selectOne("member.totalCnt"));
+		int totalCnt = session.selectOne("member.totalCnt");
+		System.out.println("totalCnt = " + totalCnt);
+		return totalCnt;
+	}
 }

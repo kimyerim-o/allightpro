@@ -64,22 +64,23 @@ public class MemberController {
 		return mv;
 	}
 	
-	// 카카오 로그인
-	@RequestMapping(value="/kakao", method=RequestMethod.POST)
+	//카카오로그인
+	@RequestMapping(value = "/kakao", method = RequestMethod.POST)
 	@ResponseBody
-	public String kakao(@RequestParam Map<String, Object> param, HttpSession session,MemberDTO memdto) {
+	public String kakao(@RequestParam Map<String, Object> param, HttpSession session, MemberDTO memdto) {
 		System.out.println("kakak");
-		System.out.println(param.get("mid"));
-		System.out.println("udto"+memdto.getMid());
-		HashMap re=memSVC.kakao(param,memdto,session);
-		System.out.println("kakao re"+re);
+		System.out.println(param.get("id"));
+		System.out.println("udto" + memdto.getMid());
+		HashMap re = memSVC.kakao(param, memdto, session);
+		System.out.println("kakao re" + re);
 		System.out.println(re.get("mpw"));
-		if(re.get("mpw")==null) {
+		if (re.get("mpw") == null) {
 			return "check";
 		}
-		System.out.println("index");
 		return null;
 	}
+	
+	
 	// 카카오 로그아웃
 	@RequestMapping(value="/kakaout", method=RequestMethod.POST)
 	@ResponseBody
@@ -90,17 +91,17 @@ public class MemberController {
 		memSVC.logout(session);
 		return "out";
 	}
-	
+
 	// 7.2유태우 작성
 	@RequestMapping("/member/admin")
 	public ModelAndView adminMember(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			HttpSession session, ModelAndView mv, RedirectView rv) {
 		System.out.println("memberController.adminMember");
 		System.out.println("nowPage = "+nowPage);
-		
+
 		PageUtil PInfo = memSVC.getPageInfo(nowPage);
 		ArrayList<MemberDTO> map = memSVC.list(PInfo);
-		
+
 		System.out.println("list = "+map.toString());
 		System.out.println("pinfo = "+PInfo.toString());
 		mv.addObject("LIST", map); //회원 상세 정보
@@ -110,4 +111,6 @@ public class MemberController {
 		System.out.println("MemberController.adminMember().viewName:"+mv.getViewName());
 		return mv;
 	}
+	
+	
 }

@@ -1,6 +1,9 @@
 package com.all.light.dto;
 
+import java.util.Date;
+
 public class MemberDTO {
+	private int mno;
 	private String mid;
 	private String mpw;
 	private String memail;
@@ -36,9 +39,6 @@ public class MemberDTO {
 	}
 	public void setMtel(String mtel) {
 		this.mtel = mtel;
-	}
-	public String getMtel2() {
-		return mtel2;
 	}
 	public void setMtel2(String mtel2) {
 		this.mtel2 = mtel2;
@@ -79,7 +79,4 @@ public class MemberDTO {
 	public void setMpw(String mpw) {
 		this.mpw = mpw;
 	}
-	
-	
-	
 }

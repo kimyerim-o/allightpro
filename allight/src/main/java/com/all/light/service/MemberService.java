@@ -43,24 +43,24 @@ public class MemberService {
 
 	public HashMap kakao(Map<String, Object> param, MemberDTO memdto, HttpSession session) {
 		memdto.setMid((String) param.get("id"));
-		System.out.println("UserService"+memdto.getMid());
-		HashMap result=memDAO.kakao(memdto);
-		if(result==null || result.size()==0) {
-			//로그인실패
+		System.out.println("UserService" + memdto.getMid());
+		HashMap result = memDAO.kakao(memdto);
+		if (result == null || result.size() == 0) {
+			// 로그인실패
 			System.out.println("로그인실패");
-			HashMap res=memDAO.join(memdto);
-			if(res!=null) {
-				System.out.println("res.get(\"MID\")"+res.get("MID"));
-				session.setAttribute("ID",res.get("MID"));
-				System.out.println("res"+res.get("MID"));
+			HashMap res = memDAO.join(memdto);
+			if (res != null) {
+				System.out.println("res.get(\"MID\")" + res.get("MID"));
+				session.setAttribute("ID", res.get("MID"));
+				System.out.println("res" + res.get("MID"));
 			}
 			return res;
-		}else{
-			//로그인성공
+		} else {
+			// 로그인성공
 			System.out.println("로그인성공");
-			session.setAttribute("MID",result.get("MID"));
-			System.out.println("result"+result.get("MID"));
-	}
+			session.setAttribute("MID", result.get("MID"));
+			System.out.println("result" + result.get("MID"));
+		}
 		return result;
 	}
 
@@ -72,8 +72,9 @@ public class MemberService {
 		int totalCount = memDAO.getTotalCnt();
 		// PageUtil(보고싶은페이지, 전체게시물수);
 		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;}
-		
+		return pInfo;
+	}
+	
 	public void logout(HttpSession session) {
 		if(session.getAttribute("MID")!=null) {
 			session.invalidate();

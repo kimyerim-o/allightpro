@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,13 @@ import com.all.light.util.PageUtil;
 @Controller
 public class MemberController {
 	@Autowired
+<<<<<<< HEAD
 	private MemberService memSVC;
 	
+=======
+	MemberService memSVC;
+
+>>>>>>> dbxodn
 	//메인화면
 	@RequestMapping("/main")
 	public String main() {
@@ -92,25 +98,42 @@ public class MemberController {
 		return "out";
 	}
 
-	// 7.2유태우 작성
+	// 7.2유태우 작성, 7.3검색 메소드 추가
+	//회원 검색 메소드
 	@RequestMapping("/member/admin")
 	public ModelAndView adminMember(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value = "search", required = false) String searchWord,
 			HttpSession session, ModelAndView mv, RedirectView rv) {
+
 		System.out.println("memberController.adminMember");
 		System.out.println("nowPage = "+nowPage);
 
-		PageUtil PInfo = memSVC.getPageInfo(nowPage);
-		ArrayList<MemberDTO> map = memSVC.list(PInfo);
-
+		PageUtil pInfo = memSVC.getPageInfo(nowPage);
+		ArrayList<MemberDTO> map = memSVC.searchList(pInfo, searchWord);
+		
 		System.out.println("list = "+map.toString());
-		System.out.println("pinfo = "+PInfo.toString());
-		mv.addObject("LIST", map); //회원 상세 정보
-		mv.addObject("PINFO", PInfo); //페이징 정보
+		System.out.println("pinfo = "+pInfo.toString());
+		mv.addObject("LIST", map); //회원 상세 정보 리스트
+		mv.addObject("PINFO", pInfo); //페이징 정보
 		
 		mv.setViewName("common/admin/member");
-		System.out.println("MemberController.adminMember().viewName:"+mv.getViewName());
 		return mv;
 	}
 	
-	
+	//7.3 관리자 회원 수정 메소드
+	@RequestMapping("/member/modify/admin")
+	public ModelAndView adminModifyMember(@RequestParam(value = "mno") int mno,
+			@RequestParam(value = "memInfo", required=false) MemberDTO memDTO,
+			HttpSession session, ModelAndView mv, RedirectView rv) {
+		System.out.println("memberController.modify.Member");
+		
+		//파라미터 받기, 비즈니스로직
+		memDTO = memSVC.mInfo(mno);
+		System.out.println("memInfo = "+memDTO.toString());
+		//모델지정
+		mv.addObject("MEMINFO", memDTO); //회원 상세 정보
+		//뷰지정
+		mv.setViewName("common/admin/memberModify");
+		return mv;
+	}
 }

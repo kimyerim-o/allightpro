@@ -19,6 +19,9 @@ public class PageUtil {
 	private int startNo; //한 페이지에 출력할 리스트 중 첫번째 no
 	private int endNo; //한 페이지에 출력할 리스트 중 마지막 no
 	
+	// 검색 시 필요한 파라미터
+	private String searchWord; //
+	
 	public PageUtil(int nowPage, int totalCount) {
 		this(nowPage, totalCount, 10, 10);
 	}
@@ -78,6 +81,14 @@ public class PageUtil {
 		}
 	}
 
+
+	public String getSearchWord() {
+		return searchWord;
+	}
+
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
+	}
 
 	public int getStartNo() {
 		return startNo;
@@ -142,7 +153,7 @@ public class PageUtil {
 	public String toString() {
 		return "PageUtil [nowPage=" + nowPage + ", totalCount=" + totalCount + ", lineCount=" + lineCount
 				+ ", pageGroup=" + pageGroup + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage="
-				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + "]";
+				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", searchWord=" + searchWord + "]";
 	}
 }
 

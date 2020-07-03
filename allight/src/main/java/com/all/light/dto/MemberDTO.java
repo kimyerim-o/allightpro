@@ -8,6 +8,7 @@ public class MemberDTO {
 	private String mpw;
 	private String memail;
 	private String mname;
+	private String mnick;
 	private String mbirth;
 	private String mtel;
 	private String mtel2;
@@ -15,7 +16,24 @@ public class MemberDTO {
 	private String mlogdate;
 	private String msex;
 	private int mtype;
-	
+	public int getMno() {
+		return mno;
+	}
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+	public String getMpw() {
+		return mpw;
+	}
+	public void setMpw(String mpw) {
+		this.mpw = mpw;
+	}
 	public String getMemail() {
 		return memail;
 	}
@@ -28,6 +46,12 @@ public class MemberDTO {
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
+	public String getMnick() {
+		return mnick;
+	}
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
+	}
 	public String getMbirth() {
 		return mbirth;
 	}
@@ -39,6 +63,9 @@ public class MemberDTO {
 	}
 	public void setMtel(String mtel) {
 		this.mtel = mtel;
+	}
+	public String getMtel2() {
+		return mtel2;
 	}
 	public void setMtel2(String mtel2) {
 		this.mtel2 = mtel2;
@@ -67,16 +94,11 @@ public class MemberDTO {
 	public void setMtype(int mtype) {
 		this.mtype = mtype;
 	}
-	public String getMid() {
-		return mid;
+	@Override
+	public String toString() {
+		return "MemberDTO [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", memail=" + memail + ", mname=" + mname
+				+ ", mnick=" + mnick + ", mbirth=" + mbirth + ", mtel=" + mtel + ", mtel2=" + mtel2 + ", mjoindate="
+				+ mjoindate + ", mlogdate=" + mlogdate + ", msex=" + msex + ", mtype=" + mtype + "]";
 	}
-	public void setMid(String mid) {
-		this.mid = mid;
-	}
-	public String getMpw() {
-		return mpw;
-	}
-	public void setMpw(String mpw) {
-		this.mpw = mpw;
-	}
+	
 }

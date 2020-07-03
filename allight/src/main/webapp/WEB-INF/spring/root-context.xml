@@ -30,21 +30,20 @@
 	    <constructor-arg index="0" ref="sqlSessionFactory" /> 
 	</bean>
 	
-	<!-- member -->
 	<bean id="memDAO" class="com.all.light.dao.MemberDAO">
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
 	<bean id="memSVC" class="com.all.light.service.MemberService"/>
 	
-	<!-- corporation -->
 	<bean id="corDAO" class="com.all.light.dao.CorporationDAO">
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
 	<bean id="corSVC" class="com.all.light.service.CorporationService"/>
 	
-	<!-- shopping -->
-	<bean id="shopDAO" class="com.all.light.dao.ShoppingDAO">
+	<!-- Question -->
+	<bean id="queDAO" class="com.all.light.dao.QuestionDAO">
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
-	<bean id="shopSVC" class="com.all.light.service.ShoppingService"/>
+	<bean id="queSVC" class="com.all.light.service.QuestionService"/>
+		
 </beans>

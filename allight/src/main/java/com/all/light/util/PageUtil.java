@@ -23,7 +23,7 @@ public class PageUtil {
 	private String searchWord; //
 	
 	public PageUtil(int nowPage, int totalCount) {
-		this(nowPage, totalCount, 10, 10);
+		this(nowPage, totalCount, 2, 5);
 	}
 	
 	public PageUtil(int nowPage, int totalCount, int lineCount, int pageGroup) {

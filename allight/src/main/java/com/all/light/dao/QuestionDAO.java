@@ -13,7 +13,7 @@ public class QuestionDAO extends SqlSessionDaoSupport {
 	SqlSessionTemplate session;
 	
 	public ArrayList list(PageUtil pInfo) {
-		System.out.println("question.list"+pInfo);
+		System.out.println("question.list!!!!!!!!!!"+pInfo);
 		return (ArrayList) session.selectList("question.list", pInfo);
 	}
 

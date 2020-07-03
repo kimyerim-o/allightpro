@@ -1,5 +1,6 @@
 package com.all.light.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.MemberDAO;
 import com.all.light.dto.MemberDTO;
+import com.all.light.util.PageUtil;
 
 public class MemberService {
 	@Autowired
@@ -62,6 +64,16 @@ public class MemberService {
 		return result;
 	}
 
+	public ArrayList<MemberDTO> list(PageUtil pInfo) {
+		return memDAO.list(pInfo);
+	}
+
+	public PageUtil getPageInfo(int nowPage) {
+		int totalCount = memDAO.getTotalCnt();
+		// PageUtil(보고싶은페이지, 전체게시물수);
+		PageUtil pInfo = new PageUtil(nowPage, totalCount);
+		return pInfo;}
+		
 	public void logout(HttpSession session) {
 		if(session.getAttribute("MID")!=null) {
 			session.invalidate();

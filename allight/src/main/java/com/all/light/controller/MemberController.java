@@ -1,5 +1,6 @@
 package com.all.light.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.MemberDTO;
 import com.all.light.service.MemberService;
+import com.all.light.util.PageUtil;
 
 @Controller
 public class MemberController {
@@ -78,7 +80,6 @@ public class MemberController {
 		System.out.println("index");
 		return null;
 	}
-	
 	// 카카오 로그아웃
 	@RequestMapping(value="/kakaout", method=RequestMethod.POST)
 	@ResponseBody
@@ -90,4 +91,23 @@ public class MemberController {
 		return "out";
 	}
 	
+	// 7.2유태우 작성
+	@RequestMapping("/member/admin")
+	public ModelAndView adminMember(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			HttpSession session, ModelAndView mv, RedirectView rv) {
+		System.out.println("memberController.adminMember");
+		System.out.println("nowPage = "+nowPage);
+		
+		PageUtil PInfo = memSVC.getPageInfo(nowPage);
+		ArrayList<MemberDTO> map = memSVC.list(PInfo);
+		
+		System.out.println("list = "+map.toString());
+		System.out.println("pinfo = "+PInfo.toString());
+		mv.addObject("LIST", map); //회원 상세 정보
+		mv.addObject("PINFO", PInfo); //페이징 정보
+		
+		mv.setViewName("common/admin/member");
+		System.out.println("MemberController.adminMember().viewName:"+mv.getViewName());
+		return mv;
+	}
 }

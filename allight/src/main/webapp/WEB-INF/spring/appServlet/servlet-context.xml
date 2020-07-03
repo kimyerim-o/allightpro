@@ -38,8 +38,7 @@
 		<beans:property name="order" value="0"/>
 	</beans:bean>
 	<beans:bean id="download" class="com.all.light.util.DownloadUtil" />
-	
-	
+
 	
 	<!-- 인터셉터 설정 부분  --> 
  	<interceptors>
@@ -49,6 +48,5 @@
 		 	<beans:bean class="com.all.light.util.LoginCheck" /> 
 	  	</interceptor>
 	</interceptors>
-	
 	
 </beans:beans>

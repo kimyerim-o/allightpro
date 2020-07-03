@@ -1,5 +1,6 @@
 package com.all.light.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.MemberDTO;
+import com.all.light.util.PageUtil;
 
 
 public class MemberDAO extends SqlSessionDaoSupport{
@@ -39,5 +41,6 @@ public class MemberDAO extends SqlSessionDaoSupport{
 		}
 		return res;
 	}
+
 
 }

@@ -27,10 +27,10 @@ public class QuestionController {
 			HttpSession session, ModelAndView mv) {
 		System.out.println("nowPage = "+nowPage);
 		PageUtil PInfo = queSVC.getPageInfo(nowPage);
-		ArrayList<QuestionDTO> map = queSVC.list(PInfo);
-		mv.addObject("LIST", map); //회원 상세 정보
+		ArrayList<QuestionDTO> list = queSVC.list(PInfo);
+		mv.addObject("LIST", list); //회원 상세 정보
 		mv.addObject("PINFO", PInfo); //페이징 정보
-		System.out.println(map);
+		System.out.println(list.toString());
 		mv.setViewName("/shopping/corp/question/list");
 		return mv;
 	}

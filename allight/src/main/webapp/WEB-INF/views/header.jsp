@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/owl.theme.default.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/shopping.css">
+    <!-- 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    -->
     </head>
     
     

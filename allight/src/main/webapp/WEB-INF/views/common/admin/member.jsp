@@ -30,12 +30,12 @@ System.out.println("member.jsp");
 	<h3>회원 상세 페이지</h3>
 
 	<hr />
-	<form id="sFrm" method="get" action="#">
+	<form id="sFrm" method="get" action="<%=request.getContextPath()%>/member/admin.com">
 		<table border="1" width="800" class="center">
 			<tbody>
 				<tr class="center">
 					<td style="text-align: right"><input type="text"
-						id="searchWord" placeholder="회원 아이디 검색" /> <input type="submit"
+						id="search" name="search" placeholder="회원 아이디 검색" /> <input type="submit"
 						value="검 색" onclick="return checkForm();" /></td>
 				</tr>
 			</tbody>
@@ -59,9 +59,9 @@ System.out.println("member.jsp");
 					<td>${mem.MNAME}</td>
 					<td>${mem.MADDRESS}</td>
 					<td>${mem.MJOINDATE}</td>
-					<td><a href="<%=request.getContextPath()%>&mno=${mem.MNO}">
+					<td><a href="<%=request.getContextPath()%>/member/modify/admin.com?mno=${mem.MNO}">
 							<input type="button" id="modMem" value="수정">
-					</a> <a href="<%=request.getContextPath()%>&mno=${mem.MNO}"> <input
+					</a> <a href="<%=request.getContextPath()%>/member/delete/admin.com?mno=${mem.MNO}"> <input
 							type="button" value="삭제" id="delMem"
 							onclick="return checkDelete();"></a></td>
 				</tr>

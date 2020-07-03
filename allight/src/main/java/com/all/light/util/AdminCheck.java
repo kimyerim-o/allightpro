@@ -15,7 +15,7 @@ public class AdminCheck extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		String id=(String)session.getAttribute("MID");
 		String uri = request.getServletPath();
-		System.out.println("관리자 권한 체크 \nsession.(id)= "+session.getAttribute("MID")+
+		System.out.println("관리자 권한 체크 session.(id)= "+session.getAttribute("MID")+
 				"\nuri = " + uri);
 		
 		/*
@@ -25,7 +25,7 @@ public class AdminCheck extends HandlerInterceptorAdapter {
 		*/
 
 		// 인터셉트 불통 / 통과
-				if (id!="admin") {
+				if (!id.equals("admin")) {
 					String CP = request.getContextPath();
 					response.sendRedirect(CP+"/fail.com");
 					return false;

@@ -98,7 +98,7 @@ public class MemberController {
 	@RequestMapping("/member/admin")
 	public ModelAndView adminMember(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			@RequestParam(value = "search", required = false) String searchWord,
-			HttpSession session, ModelAndView mv, RedirectView rv) {
+			ModelAndView mv, RedirectView rv) {
 
 		System.out.println("memberController.adminMember");
 		System.out.println("nowPage = "+nowPage);
@@ -116,12 +116,10 @@ public class MemberController {
 	}
 	
 	//7.3 관리자 회원 수정 메소드
-	@RequestMapping("/member/modify/admin")
-	public ModelAndView adminModifyMember(@RequestParam(value = "mno") int mno,
-			@RequestParam(value = "memInfo", required=false) MemberDTO memDTO,
-			HttpSession session, ModelAndView mv, RedirectView rv) {
-		System.out.println("memberController.modify.Member");
-		
+	@RequestMapping(value="/member/modify/admin", method= RequestMethod.GET)
+	public ModelAndView adminModifyMemberGet(@RequestParam(value = "mno") int mno,
+			MemberDTO memDTO,	ModelAndView mv, RedirectView rv) {
+		System.out.println("memberController.modify.Member, GET method");
 		//파라미터 받기, 비즈니스로직
 		memDTO = memSVC.mInfo(mno);
 		System.out.println("memInfo = "+memDTO.toString());
@@ -129,6 +127,32 @@ public class MemberController {
 		mv.addObject("MEMINFO", memDTO); //회원 상세 정보
 		//뷰지정
 		mv.setViewName("common/admin/memberModify");
+		return mv;
+	}
+	
+	@RequestMapping(value="/member/modify/admin", method= RequestMethod.POST)
+	public ModelAndView adminModifyMemberPost(@RequestParam(value = "mno") int mno,
+			MemberDTO memDTO,	ModelAndView mv, RedirectView rv,HttpServletRequest request) {
+		System.out.println("memberController.modify.Member, Post method");
+		//파라미터 받기, 비즈니스로직
+		System.out.println("memInfo = "+memDTO.toString());
+		memSVC.memModify(memDTO);
+		//뷰지정
+		rv.setUrl(request.getContextPath()+"/member/admin.com");
+		mv.setView(rv);
+		return mv;
+	}
+	
+	@RequestMapping("/member/delete/admin")
+	public ModelAndView adminDeleteMember(@RequestParam(value = "mno") int mno,
+			ModelAndView mv, RedirectView rv,HttpServletRequest request) {
+		System.out.println("memberController.delete.Member");
+		//파라미터 받기, 비즈니스로직
+		System.out.println("mno = "+mno);
+		memSVC.memDelete(mno);
+		//뷰지정
+		rv.setUrl(request.getContextPath()+"/member/admin.com");
+		mv.setView(rv);
 		return mv;
 	}
 }

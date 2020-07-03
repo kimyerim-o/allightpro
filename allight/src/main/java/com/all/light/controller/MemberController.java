@@ -23,13 +23,8 @@ import com.all.light.util.PageUtil;
 @Controller
 public class MemberController {
 	@Autowired
-<<<<<<< HEAD
 	private MemberService memSVC;
-	
-=======
-	MemberService memSVC;
 
->>>>>>> dbxodn
 	//메인화면
 	@RequestMapping("/main")
 	public String main() {

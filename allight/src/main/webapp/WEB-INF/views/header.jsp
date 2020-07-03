@@ -30,11 +30,11 @@
 		<div class="container">
 			<div class="ht-right">
 				<c:if test="${empty sessionScope.COID and empty sessionScope.MID}">
-					<a href="./login.com" class="login-panel"><i class="fa fa-user"></i>Login</a>
+					<a href="${pageContext.request.contextPath}/login.com" class="login-panel"><i class="fa fa-user"></i>Login</a>
 					<a href="#" class="join-panel">join</a>
 				</c:if>
 				<c:if test="${!empty sessionScope.MID}">
-					<a href="./logout.com" class="logined-panel">로그아웃</a>
+					<a href="${pageContext.request.contextPath}/logout.com" class="logined-panel">로그아웃</a>
 					<a href="#" class="logined-panel">장바구니()</a>
 					<a href="#" class="logined-panel">주문/배송조회</a>
 					<a href="#" class="logined-panel">마이페이지</a>

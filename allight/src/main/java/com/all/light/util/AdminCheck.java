@@ -25,7 +25,7 @@ public class AdminCheck extends HandlerInterceptorAdapter {
 		*/
 
 		// 인터셉트 불통 / 통과
-				if (id==null || id.length()==0) {
+				if (id!="admin") {
 					String CP = request.getContextPath();
 					response.sendRedirect(CP+"/fail.com");
 					return false;

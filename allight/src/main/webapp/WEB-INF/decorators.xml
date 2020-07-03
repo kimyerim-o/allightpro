@@ -21,4 +21,5 @@
 	<decorator name="others" page="others_decorator.jsp">
 		<pattern>*.com</pattern>
 	</decorator>
+	
 </decorators>

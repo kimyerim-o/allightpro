@@ -17,8 +17,8 @@
 			</tr>
 			<c:forEach items="${LIST}" var="list">
 				<tr>
-					<td>${list.QNO}</td>
-					<td>${list.QTITLE}</td>
+					<td>${list.qno}</td>
+					<td>${list.qtitle}</td>
 					<td>20200703</td>
 				</tr>
 			</c:forEach>
@@ -37,7 +37,7 @@
 					</c:if>
 				</li>
 				<!-- 현재 페이지일때 active --> 
-				<c:forEach begin="${PINFO.startPage}" end="${PAGEINFO.endPage}" var="i">
+				<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
 					<li id="li${i}"><!-- 스크립트 적용해야 할것같아요 -->
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${i}">${i}</a>
 					</li>

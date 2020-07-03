@@ -14,7 +14,7 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memDAO;
 	
-	public void login(MemberDTO memdto, HttpSession session) {
+	public HashMap login(MemberDTO memdto, HttpSession session) {
 		System.out.println("MemberService");
 		//일반로그인
 		HashMap map=new HashMap();
@@ -24,6 +24,7 @@ public class MemberService {
 			if(result==null || result.size()==0) {
 				//로그인실패
 				System.out.println("로그인실패");
+				return result;
 			}else{
 				//로그인성공
 				System.out.println("로그인성공");
@@ -35,8 +36,7 @@ public class MemberService {
 				session.setAttribute("MTEL", result.get("MTEL"));
 				session.setAttribute("MTYPE", result.get("MTYPE"));
 		}
-		
-	
+			return result;
 	}
 
 	public HashMap kakao(Map<String, Object> param, MemberDTO memdto, HttpSession session) {
@@ -64,7 +64,6 @@ public class MemberService {
 
 	public void logout(HttpSession session) {
 		if(session.getAttribute("MID")!=null) {
-			System.out.println("logout!!!");
 			session.invalidate();
 		}else {
 			System.out.println("null logout");

@@ -39,6 +39,8 @@
 	</beans:bean>
 	<beans:bean id="download" class="com.all.light.util.DownloadUtil" />
 	
+	
+	
 	<!-- 인터셉터 설정 부분  --> 
  	<interceptors>
  		<interceptor>

@@ -30,4 +30,12 @@ public class CorporationService {
 		
 	}
 
+	public void logout(HttpSession session) {
+		if(session.getAttribute("COID")!=null) {
+			session.invalidate();
+		}else {
+			System.out.println("null logout");
+		}
+	}
+
 }

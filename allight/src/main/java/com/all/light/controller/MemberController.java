@@ -1,5 +1,6 @@
 package com.all.light.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,42 +17,43 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.MemberDTO;
 import com.all.light.service.MemberService;
+import com.all.light.util.PageUtil;
 
 @Controller
 public class MemberController {
 	@Autowired
-	MemberService memSCV;
-	
+	MemberService memSVC;
+
 	@RequestMapping("/login")
 	public String log() {
 		return "common/loginform";
 	}
-	
+
 	@RequestMapping("/log")
-	public ModelAndView login(MemberDTO memdto,HttpSession session,ModelAndView mv,RedirectView rv) {
+	public ModelAndView login(MemberDTO memdto, HttpSession session, ModelAndView mv, RedirectView rv) {
 		System.out.println("login");
-		memSCV.login(memdto,session);
+		memSVC.login(memdto, session);
 		rv.setUrl("./main.com");
 		mv.setView(rv);
 		return mv;
 	}
-	
+
 	@RequestMapping("/main")
 	public String main() {
 		return "index";
 	}
-	
-	@RequestMapping(value="/kakao", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/kakao", method = RequestMethod.POST)
 	@ResponseBody
-	public Object kakao(@RequestParam Map<String, Object> param, HttpSession session,MemberDTO memdto) {
+	public Object kakao(@RequestParam Map<String, Object> param, HttpSession session, MemberDTO memdto) {
 		System.out.println("kakak");
 		System.out.println(param.get("id"));
-		System.out.println("udto"+memdto.getMid());
-		HashMap re=memSCV.kakao(param,memdto,session);
-		System.out.println("kakao re"+re);
+		System.out.println("udto" + memdto.getMid());
+		HashMap re = memSVC.kakao(param, memdto, session);
+		System.out.println("kakao re" + re);
 		System.out.println(re.get("mpw"));
-		HashMap check=new HashMap();
-		if(re.get("mpw")==null) {
+		HashMap check = new HashMap();
+		if (re.get("mpw") == null) {
 			System.out.println("join");
 			check.put("code", "join");
 			System.out.println(check.get("code"));
@@ -62,6 +64,23 @@ public class MemberController {
 		System.out.println(check.get("code"));
 		return check;
 	}
-	
-	
+
+	// 7.2유태우 작성
+	@RequestMapping("/member/admin")
+	public ModelAndView adminMember(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			HttpSession session, ModelAndView mv, RedirectView rv) {
+		System.out.println("memberController.adminMember");
+		System.out.println("nowPage = "+nowPage);
+
+		PageUtil PInfo = memSVC.getPageInfo(nowPage);
+		ArrayList<MemberDTO> map = memSVC.list(PInfo);
+
+		System.out.println("list = "+map.toString());
+		System.out.println("pinfo = "+PInfo.toString());
+		mv.addObject("LIST", map); //회원 상세 정보
+		mv.addObject("PINFO", PInfo); //페이징 정보
+		
+		mv.setViewName("common/admin/member");
+		return mv;
+	}
 }

@@ -1,5 +1,6 @@
 package com.all.light.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.MemberDTO;
+import com.all.light.util.PageUtil;
 
 
 public class MemberDAO extends SqlSessionDaoSupport{
@@ -41,8 +43,16 @@ public class MemberDAO extends SqlSessionDaoSupport{
 	}
 
 	//유태우7.2작성
-	public HashMap list() {
-		System.out.println("MemberDAO.list");
-		return (HashMap) session.selectList("member.list");
+	public ArrayList list(PageUtil pInfo) {
+		System.out.println("MemberDAO.list = "+pInfo.toString());
+		return (ArrayList) session.selectList("member.list", pInfo);
+	}
+
+	public int getTotalCnt() {
+		System.out.println("MemberDAO.getTotalCnt");
+		System.out.println("totalCnt = " + session.selectOne("member.totalCnt"));
+		int totalCnt = session.selectOne("member.totalCnt");
+		System.out.println("totalCnt = " + totalCnt);
+		return totalCnt;
 	}
 }

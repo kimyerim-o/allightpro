@@ -104,11 +104,11 @@ public class MemberController {
 		System.out.println("nowPage = "+nowPage);
 
 		PageUtil pInfo = memSVC.getPageInfo(nowPage);
-		ArrayList<MemberDTO> map = memSVC.searchList(pInfo, searchWord);
+		//ArrayList<MemberDTO> map = memSVC.searchList(pInfo, searchWord);
 		
-		System.out.println("list = "+map.toString());
+		//System.out.println("list = "+map.toString());
 		System.out.println("pinfo = "+pInfo.toString());
-		mv.addObject("LIST", map); //회원 상세 정보 리스트
+		//mv.addObject("LIST", map); //회원 상세 정보 리스트
 		mv.addObject("PINFO", pInfo); //페이징 정보
 		
 		mv.setViewName("common/admin/member");
@@ -123,7 +123,7 @@ public class MemberController {
 		System.out.println("memberController.modify.Member");
 		
 		//파라미터 받기, 비즈니스로직
-		memDTO = memSVC.mInfo(mno);
+		//memDTO = memSVC.mInfo(mno);
 		System.out.println("memInfo = "+memDTO.toString());
 		//모델지정
 		mv.addObject("MEMINFO", memDTO); //회원 상세 정보

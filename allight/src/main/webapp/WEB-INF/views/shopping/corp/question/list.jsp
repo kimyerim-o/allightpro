@@ -42,6 +42,9 @@
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${i}">${i}</a>
 					</li>
 				</c:forEach>
+				
+				<c:set var="now" value="${PINFO.nowPage}"/>
+				
 				<li>
 					<c:if test="${PINFO.nowPage < PAGEINFO.endPage-3}">
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.nowPage+3}">»</a>

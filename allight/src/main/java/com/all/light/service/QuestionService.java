@@ -13,7 +13,6 @@ public class QuestionService {
 	private QuestionDAO qesDAO;
 	
 	public ArrayList<QuestionDTO> list(PageUtil pInfo) {
-		System.out.println(qesDAO.list(pInfo));
 		return qesDAO.list(pInfo);
 	}
 

@@ -18,13 +18,18 @@
    <typeAliases>
    		<typeAlias type="com.all.light.dto.MemberDTO" alias="memDTO"/>
    		<typeAlias type="com.all.light.util.PageUtil" alias="PageUtil"/>
+   		<typeAlias type="com.all.light.dto.QuestionDTO" alias="queDTO"/>
    </typeAliases>   
    
    <mappers>
    		<!-- sql 설정 -->
    		<mapper resource="/com/all/light/sql/MemberSQL.xml"/>
    		<mapper resource="/com/all/light/sql/CorporationSQL.xml"/>
+<<<<<<< HEAD
    		<mapper resource="/com/all/light/sql/ShoppingSQL.xml"/>
+=======
+   		<mapper resource="/com/all/light/sql/QuestionSQL.xml"/>
+>>>>>>> yerim
    </mappers>
    
 </configuration>

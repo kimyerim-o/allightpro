@@ -16,15 +16,30 @@
 	insert into member(mno,mid) values(mno_seq.nextval,#{mid})
 	</insert>
 	
-	<!-- 전체게시물 수 조회 -->
+	<!-- 회원 수 조회 -->
 	<select id="totalCnt" resultType="Integer">
 		select  count(*) from member
 	</select>
 	
 	<!-- 회원 리스트 출력 -->
-	<select id="list" resultType="java.util.HashMap" parameterType="memDTO">
+	<select id="list" resultType="java.util.HashMap" parameterType="PageUtil">
 	select * from member where mno between #{startNo} and #{endNo} order by mno desc
 	</select>
 	
+	<!-- 회원 검색 -->
+	<select id="searchList" resultType="java.util.HashMap" parameterType="PageUtil">
+	select * from (select * from member where mid like '%${searchWord}%') 
+		where mno between #{startNo} and #{endNo} order by mno desc
+	</select>
+	
+	<!-- 회원 정보 출력 -->
+	<select id="memInfo" resultType="memDTO" parameterType="memDTO">
+	select * from member where mno = #{mno}
+	</select>
+	
+	<!-- 최근 접속일 갱신 -->
+	<update id="logDate" parameterType="java.util.HashMap">
+		UPDATE member SET mlogdate=sysdate where mno=#{mno}
+	</update>
 </mapper>
 	

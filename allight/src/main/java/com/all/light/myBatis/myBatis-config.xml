@@ -16,12 +16,15 @@
    <!-- sql에서 사용하는 별칭 -->
    <typeAliases>
    		<typeAlias type="com.all.light.dto.MemberDTO" alias="memDTO"/>
+   		<typeAlias type="com.all.light.dto.CorporationDTO" alias="corDTO"/>
+   		<typeAlias type="com.all.light.dto.QuestionDTO" alias="queDTO"/>
    </typeAliases>   
    
    <mappers>
    		<!-- sql 설정 -->
    		<mapper resource="/com/all/light/sql/MemberSQL.xml"/>
    		<mapper resource="/com/all/light/sql/CorporationSQL.xml"/>
+   		<mapper resource="/com/all/light/sql/QuestionSQL.xml"/>
    </mappers>
    
 </configuration>

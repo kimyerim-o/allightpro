@@ -20,7 +20,7 @@ public class PageUtil {
 	private int endNo; //한 페이지에 출력할 리스트 중 마지막 no
 	
 	public PageUtil(int nowPage, int totalCount) {
-		this(nowPage, totalCount, 10, 10);
+		this(nowPage, totalCount, 2, 5);
 	}
 	
 	public PageUtil(int nowPage, int totalCount, int lineCount, int pageGroup) {

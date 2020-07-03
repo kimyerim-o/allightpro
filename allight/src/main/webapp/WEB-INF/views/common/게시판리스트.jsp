@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -17,21 +18,15 @@
 		</div>
 		<table class="table">
 			<tr>
-				<th>John</th>
-				<th>Doe</th>
-				<th>john@example.com</th>
+				<th>???</th>
+				<th>???</th>
+				<th>???</th>
 			</tr>
 			<tr>
-				<td>Mary</td>
-				<td>Moe</td>
-				<td>mary@example.com</td>
+				<td>???</td>
+				<td>???</td>
+				<td>???</td>
 			</tr>
-			<tr>
-				<td>July</td>
-				<td>Dooley</td>
-				<td>july@example.com</td>
-			</tr>
-
 		</table>
 		<div class="right">
 			<a class="btn">글쓰기</a>
@@ -40,26 +35,26 @@
 		<div class="center">
 			<ul class="pagination">
 				<li>
-					<a href="#">«</a>
+					<c:if test="${PAGEINFO.nowPage ne 1}">
+						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PAGEINFO.nowPage-1}">«</a>
+					</c:if>
+					<c:if test="${PAGEINFO.nowPage eq 1}">
+						<a>«</a>
+					</c:if>
 				</li>
-				<!-- 현재 페이지일때 active -->
-				<li class="active"> 
-					<a href="#">1</a>
-				</li>
+				<!-- 현재 페이지일때 active --> 
+				<c:forEach begin="${PAGEINFO.startPage}" end="${PAGEINFO.endPage}" var="i">
+					<li class="active"><!-- 스크립트 적용해야 할것같아요 -->
+						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${i}">${i}</a>
+					</li>
+				</c:forEach>
 				<li>
-					<a href="#">2</a>
-				</li>
-				<li>
-					<a href="#">3</a>
-				</li>
-				<li>
-					<a href="#">4</a>
-				</li>
-				<li>
-					<a href="#">5</a>
-				</li>
-				<li>
-					<a href="#">»</a>
+					<c:if test="${PAGEINFO.nowPage ne PAGEINFO.endPage}">
+						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PAGEINFO.nowPage+1}">»</a>
+					</c:if>
+					<c:if test="${PAGEINFO.nowPage eq PAGEINFO.endPage}">
+						<a>»</a>
+					</c:if>
 				</li>
 			</ul>
 		</div>

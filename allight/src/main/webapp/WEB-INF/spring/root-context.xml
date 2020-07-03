@@ -39,5 +39,11 @@
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
 	<bean id="corSVC" class="com.all.light.service.CorporationService"/>
+	
+	<!-- Question -->
+	<bean id="queDAO" class="com.all.light.dao.QuestionDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
+	<bean id="queSVC" class="com.all.light.service.QuestionService"/>
 		
 </beans>

@@ -16,9 +16,9 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memDAO;
 	
+	//일반로그인
 	public HashMap login(MemberDTO memdto, HttpSession session) {
 		System.out.println("MemberService");
-		//일반로그인
 		HashMap map=new HashMap();
 			map.put("mid",memdto.getMid());
 			map.put("mpw",memdto.getMpw());
@@ -40,7 +40,8 @@ public class MemberService {
 		}
 			return result;
 	}
-
+	
+	//카카오로그인
 	public HashMap kakao(Map<String, Object> param, MemberDTO memdto, HttpSession session) {
 		memdto.setMid((String) param.get("id"));
 		System.out.println("UserService" + memdto.getMid());
@@ -63,6 +64,15 @@ public class MemberService {
 		}
 		return result;
 	}
+	
+	//공통로그아웃
+	public void logout(HttpSession session) {
+		if(session.getAttribute("MID")!=null) {
+			session.invalidate();
+		}else {
+			System.out.println("null logout");
+		}
+	}
 
 	public ArrayList<MemberDTO> list(PageUtil pInfo) {
 		return memDAO.list(pInfo);
@@ -75,12 +85,5 @@ public class MemberService {
 		return pInfo;
 	}
 	
-	public void logout(HttpSession session) {
-		if(session.getAttribute("MID")!=null) {
-			session.invalidate();
-		}else {
-			System.out.println("null logout");
-		}
-	}
 
 }

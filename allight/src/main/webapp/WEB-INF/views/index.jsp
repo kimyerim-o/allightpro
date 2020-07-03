@@ -233,11 +233,8 @@
 
 <body>
 <div id="wrap">
-<<<<<<< HEAD
-	<a class="title">다이어리 <%=session.getAttribute("MID") %></a>
-=======
 	<a class="title">다이어리 <%=session.getAttribute("MID") %> / <%=session.getAttribute("COID") %></a>
->>>>>>> yerim
+
 	<div id="calendar" class="fc fc-ltr">
 		<table class="fc-header" style="width:100%">
 			<tbody>

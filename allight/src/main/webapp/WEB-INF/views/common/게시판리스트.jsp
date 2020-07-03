@@ -39,18 +39,28 @@
 
 		<div class="center">
 			<ul class="pagination">
-				<!-- disabled가 있으면 마우스 커서가 금지표시로 바뀐다. -->
-				<li class=disabled><a href="#" aria-label="Previous"> <span
-						aria-hidden="true">«</span>
-				</a></li>
-				<!-- 현재 페이지 -->
-				<li class="active"><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#" aria-label="Next"> <span aria-hidden="true">»</span>
-				</a></li>
+				<li>
+					<a href="#">«</a>
+				</li>
+				<!-- 현재 페이지일때 active -->
+				<li class="active"> 
+					<a href="#">1</a>
+				</li>
+				<li>
+					<a href="#">2</a>
+				</li>
+				<li>
+					<a href="#">3</a>
+				</li>
+				<li>
+					<a href="#">4</a>
+				</li>
+				<li>
+					<a href="#">5</a>
+				</li>
+				<li>
+					<a href="#">»</a>
+				</li>
 			</ul>
 		</div>
 	</div>

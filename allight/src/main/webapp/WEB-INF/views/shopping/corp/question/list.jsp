@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+$(function(){
+     $('#id').click(function(){
+         $('#id').addClass('active');
+     })
+})
+</script>
 </head>
 <body>
 	<div class="container">
@@ -38,8 +45,8 @@
 				</li>
 				<!-- 현재 페이지일때 active --> 
 				<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
-					<li id="li${i}"><!-- 스크립트 적용해야 할것같아요 -->
-						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${i}">${i}</a>
+					<li id="li"><!-- 스크립트 적용해야 할것같아요 -->
+					     <a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${i}">${i}</a>
 					</li>
 				</c:forEach>
 				

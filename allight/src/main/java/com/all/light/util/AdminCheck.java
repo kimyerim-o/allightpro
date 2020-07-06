@@ -13,24 +13,25 @@ public class AdminCheck extends HandlerInterceptorAdapter {
 			throws Exception {
 
 		HttpSession session = request.getSession();
-		String id=(String)session.getAttribute("MID");
+		String id = (String) session.getAttribute("MID");
 		String uri = request.getServletPath();
-		System.out.println("관리자 권한 체크 session.(id)= "+session.getAttribute("MID")+
-				"\nuri = " + uri);
-		
+		System.out.println("관리자 권한 체크 session.(id) = " + session.getAttribute("MID") + "\nuri = " + uri);
+
 		/*
-		// 사용자가 요청한 uri알아내기
-		String module = uri.substring(1, uri.indexOf("/", 1));
-		System.out.println("module = " + module);
-		*/
+		 * // 사용자가 요청한 uri알아내기 String module = uri.substring(1, uri.indexOf("/", 1));
+		 * System.out.println("module = " + module);
+		 */
 
 		// 인터셉트 불통 / 통과
-				if (!id.equals("admin")) {
-					String CP = request.getContextPath();
-					response.sendRedirect(CP+"/fail.com");
-					return false;
-				} else {
-					return super.preHandle(request, response, handler);
-				}
+		/* NullPointerException을 방지하기 위해
+		id.equals("") => "".equals(id) 
+		형태로 바꿈*/
+		if (id == null || !"admin".equals(id)) {
+			String CP = request.getContextPath();
+			response.sendRedirect(CP + "/fail.com");
+			return false;
+		} else {
+			return super.preHandle(request, response, handler);
+		}
 	}
 }

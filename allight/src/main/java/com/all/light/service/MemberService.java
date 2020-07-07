@@ -76,25 +76,23 @@ public class MemberService {
 		}
 	}
 
-	public ArrayList<MemberDTO> list(PageUtil pInfo) {
-		return memDAO.list(pInfo);
-	}
-
+	//검색 및 회원수 가져오기 메소드
 	public PageUtil getPageInfo(int nowPage, String searchWord) {
 		int totalCount = memDAO.getTotalCnt(searchWord);
-		
 		// PageUtil(보고싶은페이지, 전체게시물수);
+		// 검색어에 따른 총 게시물 수를 구하고 페이지 정보를 리턴함
 		PageUtil pInfo = new PageUtil(nowPage, totalCount);
 		return pInfo;
 	}
 	
-	//검색 메소드
+	//검색 및 리스트 출력 메소드
 	public ArrayList<MemberDTO> searchList(PageUtil pInfo, String searchWord){
-		return memDAO.searchList(pInfo, searchWord);
+		pInfo.setSearchWord(searchWord);
+		return memDAO.searchList(pInfo);
 	}
 	
-	public MemberDTO mInfo(int mno) {
-		return memDAO.mInfo(mno);
+	public MemberDTO getMInfo(int mno) {
+		return memDAO.getMInfo(mno);
 	}
 
 	public void memModify(MemberDTO memDTO) {

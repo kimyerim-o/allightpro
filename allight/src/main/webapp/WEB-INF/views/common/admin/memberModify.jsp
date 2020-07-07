@@ -8,32 +8,39 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${param.mno}"
-		method="post">
+	<form
+		action="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${param.mno}"
+		method="POST">
 		<table>
 			<tr>
 				<td>아이디 :</td>
-				<td>${MEMINFO.mid}<input type="hidden" id="mid" name="mid" value="${MEMINFO.mid}"/></td>
+				<td>${MEMINFO.mid}<input type="hidden" id="mid" name="mid"
+					value="${MEMINFO.mid}" /></td>
 			</tr>
 			<tr>
 				<td>닉네임 :</td>
-				<td>${MEMINFO.mnick}<input type="hidden" id="mnick" name="mnick" value="${MEMINFO.mnick}"/></td>
+				<td>${MEMINFO.mnick}<input type="hidden" id="mnick"
+					name="mnick" value="${MEMINFO.mnick}" /></td>
 			</tr>
 			<tr>
 				<td>가입일 :</td>
-				<td>${MEMINFO.mjoindate}<input type="hidden" id="mjoindate" name="mjoindate" value="${MEMINFO.mjoindate}"/></td>
+				<td>${MEMINFO.mjoindate}<input type="hidden" id="mjoindate"
+					name="mjoindate" value="${MEMINFO.mjoindate}" /></td>
 			</tr>
 			<tr>
 				<td>최근접속일 :</td>
-				<td>${MEMINFO.mlogdate}<input type="hidden" id="mlogdate" name="mlogdate" value="${MEMINFO.mlogdate}"/></td>
+				<td>${MEMINFO.mlogdate}<input type="hidden" id="mlogdate"
+					name="mlogdate" value="${MEMINFO.mlogdate}" /></td>
 			</tr>
 			<tr>
 				<td>성별 :</td>
-				<td>${MEMINFO.msex}<input type="hidden" id="msex" name="msex" value="${MEMINFO.msex}"/></td>
+				<td>${MEMINFO.msex}<input type="hidden" id="msex" name="msex"
+					value="${MEMINFO.msex}" /></td>
 			</tr>
 			<tr>
 				<td>생년월일 :</td>
-				<td>${MEMINFO.mbirth}<input type="hidden" id="mbirth" name="mbirth" value="${MEMINFO.mbirth}"/></td>
+				<td>${MEMINFO.mbirth}<input type="hidden" id="mbirth"
+					name="mbirth" value="${MEMINFO.mbirth}" /></td>
 			</tr>
 			<tr>
 				<td>비밀번호 :</td>
@@ -66,8 +73,9 @@
 					value="${MEMINFO.mtype}" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" style="text-align: center"><input type="submit" value="수정"> <a
-					href="<%=request.getContextPath()%>/member/admin.com?search=${param.search}&nowPage=${param.nowPage}&"><input
+				<td colspan="2" style="text-align: center"><input type="submit"
+					value="수정"> <a
+					href="<%=request.getContextPath()%>/member/admin.com?search=${param.search}&nowPage=${param.nowPage}"><input
 						type="button" value="취소"></a></td>
 			</tr>
 			<tr>

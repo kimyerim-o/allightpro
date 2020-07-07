@@ -1,6 +1,10 @@
 package com.all.light.dto;
 
-import java.util.Date;
+import java.sql.Date;
+// java.util.date => view단에서 post방식으로 처리할 시 인식되지 않음
+// 에러내용, 400에러 
+/*400에러, 클라이언트 오류로서 인지된 어떤 문제로 인하여, 서버가 해당 요청을 처리할 수 없거나, 처리하지 않을 것입니다. 
+(예: 잘못된 요청 문법, 유효하지 않은 요청 메시지 framing, 또는 신뢰할 수 없는 요청 라우팅).*/
 
 public class MemberDTO {
 	private int mno;

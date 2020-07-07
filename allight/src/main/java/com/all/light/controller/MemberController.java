@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -103,12 +105,13 @@ public class MemberController {
 
 		System.out.println("\nmemberController.adminMember");
 
+		//페이지 객체에 검색어와 현재 페이지를 넘기고 회원 리스트를 반환
 		PageUtil pInfo = memSVC.getPageInfo(nowPage, searchWord);
 		ArrayList<MemberDTO> map = memSVC.searchList(pInfo, searchWord);
 		
 		System.out.println("list = "+map.toString());
 		System.out.println("pinfo = "+pInfo.toString());
-		mv.addObject("LIST", map); //회원 상세 정보 리스트
+		mv.addObject("LIST", map); //회원 정보 리스트
 		mv.addObject("PINFO", pInfo); //페이징 정보
 		
 		mv.setViewName("common/admin/member");
@@ -118,13 +121,13 @@ public class MemberController {
 	//7.3 관리자 회원 수정 메소드
 	@RequestMapping(value="/member/modify/admin", method= RequestMethod.GET)
 	public ModelAndView adminModifyMemberGet(
-			@RequestParam(value = "mno") int mno,
+			// @RequestParam(value = "mno") int mno,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			@RequestParam(value = "search", required = false) String searchWord,
-			MemberDTO memDTO,	ModelAndView mv, RedirectView rv) {
-		System.out.println("memberController.modify.Member, GET method");
+			MemberDTO memDTO,	ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("memberController.modify.Member,"+request.getMethod()+"method");
 		//파라미터 받기, 비즈니스로직
-		memDTO = memSVC.mInfo(mno);
+		memDTO = memSVC.getMInfo(memDTO.getMno());
 		System.out.println("memInfo = "+memDTO.toString());
 		//모델지정
 		mv.addObject("MEMINFO", memDTO); //회원 상세 정보
@@ -137,11 +140,10 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/modify/admin", method= RequestMethod.POST)
 	public ModelAndView adminModifyMemberPost(
-			@RequestParam(value = "mno") int mno,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			@RequestParam(value = "search", required = false) String searchWord,
-			MemberDTO memDTO,	ModelAndView mv, RedirectView rv,HttpServletRequest request) {
-		System.out.println("memberController.modify.Member, Post method");
+			MemberDTO memDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("memberController.modify.Member, "+request.getMethod()+"method");
 		//파라미터 받기, 비즈니스로직
 		System.out.println("memInfo = "+memDTO.toString());
 		memSVC.memModify(memDTO);

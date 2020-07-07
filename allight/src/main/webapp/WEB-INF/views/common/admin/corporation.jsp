@@ -61,10 +61,10 @@
 					<td>${corp.COTEL}</td>
 					<td>${corp.COJOINDATE}</td>
 					<td><a
-						href="<%=request.getContextPath()%>/corporation/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.MNO}">
+						href="<%=request.getContextPath()%>/corporation/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.CONO}">
 							<input type="button" id="modMem" value="수정">
 					</a> <a
-						href="<%=request.getContextPath()%>/corporation/delete/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.MNO}">
+						href="<%=request.getContextPath()%>/corporation/delete/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.CONO}">
 							<input type="button" value="삭제" id="delMem"
 							onclick="return checkDelete();">
 					</a></td>

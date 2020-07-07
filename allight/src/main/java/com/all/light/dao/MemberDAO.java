@@ -50,31 +50,26 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		return res;
 	}
 
-	// 유태우7.2작성
-	public ArrayList list(PageUtil pInfo) {
-		System.out.println("MemberDAO.list = " + pInfo.toString());
-		return (ArrayList) session.selectList("member.list", pInfo);
-	}
-
+	//7.7 검색 시, 검색 없을 시 회원 수 가져오기
 	public int getTotalCnt(String searchWord) {
-		int totalCnt = session.selectOne("member.totalCnt", searchWord);
+		int totalCnt = session.selectOne("member.totalCntWithSearch", searchWord);
 		return totalCnt;
 	}
 
 	// 유태우7.3작성
-	public ArrayList searchList(PageUtil pInfo, String searchWord) {
-		pInfo.setSearchWord(searchWord);
+	public ArrayList<MemberDTO> searchList(PageUtil pInfo) {
 		System.out.println("MemberDAO.searchList = " + pInfo.toString());
 		return (ArrayList) session.selectList("member.searchList", pInfo);
 	}
 
-	public MemberDTO mInfo(int mno) {
+	public MemberDTO getMInfo(int mno) {
 		System.out.println("MemberDAO.mInfoList.mno = " + mno);
 		return session.selectOne("member.memInfo", mno);
 	}
 
 	public void memModify(MemberDTO memDTO) {
 		session.update("member.memUpdate", memDTO);
+		System.out.println("수정 성공, ModifyInfo = "+memDTO);
 	}
 
 	public void memDelete(int mno) {

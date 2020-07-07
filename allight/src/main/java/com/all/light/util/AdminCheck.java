@@ -15,7 +15,7 @@ public class AdminCheck extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("MID");
 		String uri = request.getServletPath();
-		System.out.println("관리자 권한 체크 session.(id) = " + session.getAttribute("MID") + "\nuri = " + uri);
+		System.out.println("\n관리자 권한 체크 session.(id) = " + session.getAttribute("MID") + "\nuri = " + uri+"\n");
 
 		/*
 		 * // 사용자가 요청한 uri알아내기 String module = uri.substring(1, uri.indexOf("/", 1));

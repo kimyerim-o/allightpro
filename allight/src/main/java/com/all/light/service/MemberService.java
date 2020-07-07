@@ -80,8 +80,9 @@ public class MemberService {
 		return memDAO.list(pInfo);
 	}
 
-	public PageUtil getPageInfo(int nowPage) {
-		int totalCount = memDAO.getTotalCnt();
+	public PageUtil getPageInfo(int nowPage, String searchWord) {
+		int totalCount = memDAO.getTotalCnt(searchWord);
+		
 		// PageUtil(보고싶은페이지, 전체게시물수);
 		PageUtil pInfo = new PageUtil(nowPage, totalCount);
 		return pInfo;

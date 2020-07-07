@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/member/modify/admin.com?mno=${param.mno}"
+	<form action="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${param.mno}"
 		method="post">
 		<table>
 			<tr>
@@ -67,7 +67,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center"><input type="submit" value="수정"> <a
-					href="<%=request.getContextPath()%>/member/admin.com"><input
+					href="<%=request.getContextPath()%>/member/admin.com?search=${param.search}&nowPage=${param.nowPage}&"><input
 						type="button" value="취소"></a></td>
 			</tr>
 			<tr>

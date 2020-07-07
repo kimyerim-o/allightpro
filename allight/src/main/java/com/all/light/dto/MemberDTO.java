@@ -12,8 +12,8 @@ public class MemberDTO {
 	private String mbirth;
 	private String mtel;
 	private String mtel2;
-	private String mjoindate;
-	private String mlogdate;
+	private Date mjoindate;
+	private Date mlogdate;
 	private String msex;
 	private int mtype;
 	public int getMno() {
@@ -70,16 +70,16 @@ public class MemberDTO {
 	public void setMtel2(String mtel2) {
 		this.mtel2 = mtel2;
 	}
-	public String getMjoindate() {
+	public Date getMjoindate() {
 		return mjoindate;
 	}
-	public void setMjoindate(String mjoindate) {
+	public void setMjoindate(Date mjoindate) {
 		this.mjoindate = mjoindate;
 	}
-	public String getMlogdate() {
+	public Date getMlogdate() {
 		return mlogdate;
 	}
-	public void setMlogdate(String mlogdate) {
+	public void setMlogdate(Date mlogdate) {
 		this.mlogdate = mlogdate;
 	}
 	public String getMsex() {

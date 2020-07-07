@@ -12,7 +12,7 @@ System.out.println("member.jsp");
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 	function checkForm() {
-		if (document.getElementById("searchWord").value == "") {
+		if (document.getElementById("search").value == "") {
 			alert("검색어를 입력해주세요")
 			return false;
 		}
@@ -55,13 +55,13 @@ System.out.println("member.jsp");
 			<%-- 반복문을 이용하여 줄출력 예정 --%>
 			<c:forEach items="${LIST}" var="mem">
 				<tr>
-					<td><a href="#">${mem.MID}</a></td>
+					<td>${mem.MID}</td>
 					<td>${mem.MNAME}</td>
 					<td>${mem.MADDRESS}</td>
 					<td>${mem.MJOINDATE}</td>
-					<td><a href="<%=request.getContextPath()%>/member/modify/admin.com?mno=${mem.MNO}">
+					<td><a href="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
 							<input type="button" id="modMem" value="수정">
-					</a> <a href="<%=request.getContextPath()%>/member/delete/admin.com?mno=${mem.MNO}"> <input
+					</a> <a href="<%=request.getContextPath()%>/member/delete/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}"> <input
 							type="button" value="삭제" id="delMem"
 							onclick="return checkDelete();"></a></td>
 				</tr>
@@ -75,13 +75,13 @@ System.out.println("member.jsp");
 			<tr class="center">
 				<td><c:if test="${PINFO.nowPage eq 1}">
 					</c:if> <c:if test="${PINFO.nowPage ne 1}">
-						<a href="../member/admin.com?nowPage=${PINFO.nowPage-1}">[prev]</a>
+						<a href="../member/admin.com?search=${param.search}&nowPage=${PINFO.nowPage-1}">[prev]</a>
 					</c:if> <c:forEach var="pg" begin="${PINFO.startPage}"
 						end="${PINFO.endPage}">
-						<a href="../member/admin.com?nowPage=${pg}">[${pg}]</a>
+						<a href="../member/admin.com?search=${param.search}&nowPage=${pg}">[${pg}]</a>
 					</c:forEach> <c:if test="${PINFO.nowPage eq PINFO.totalPage}">
 					</c:if> <c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-						<a href="../member/admin.com?nowPage=${PINFO.nowPage+1}">[next]</a>
+						<a href="../member/admin.com?search=${param.search}&nowPage=${PINFO.nowPage+1}">[next]</a>
 					</c:if></td>
 			</tr>
 		</tbody>

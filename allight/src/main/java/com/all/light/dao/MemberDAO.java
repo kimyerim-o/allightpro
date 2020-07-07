@@ -56,8 +56,8 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		return (ArrayList) session.selectList("member.list", pInfo);
 	}
 
-	public int getTotalCnt() {
-		int totalCnt = session.selectOne("member.totalCnt");
+	public int getTotalCnt(String searchWord) {
+		int totalCnt = session.selectOne("member.totalCnt", searchWord);
 		return totalCnt;
 	}
 

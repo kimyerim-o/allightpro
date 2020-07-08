@@ -1,4 +1,4 @@
-package com.all.light.service;
+﻿package com.all.light.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,6 +42,7 @@ public class MemberService {
 				session.setAttribute("MTEL", result.get("MTEL"));
 				session.setAttribute("MTYPE", result.get("MTYPE"));
 				session.setAttribute("DATE", date);
+				session.setAttribute("MNICK", result.get("MNICK"));
 				memDAO.logDate(result);
 		}
 			return result;

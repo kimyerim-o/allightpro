@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,7 +70,10 @@ $(function(){
 						<div class="product-image">
 							<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}"> <img class="pic"
 								src="${list.imgimage}">
-							</a> <span class="product-new-label">품절</span>
+							</a> 
+							<c:if test="${list.istock == 0}">
+								<span class="product-new-label">품절</span>
+							</c:if>
 						</div>
 						<div class="product-content">
 							<div class="title">${list.iname}</div>
@@ -105,10 +109,10 @@ $(function(){
 		               </li>
 		            </c:forEach>            
 		            <li>
-		               <c:if test="${PINFO.nowPage < PAGEINFO.endPage-3}">
+		               <c:if test="${PINFO.nowPage < PINFO.endPage-3}">
 		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=${PINFO.nowPage+3}">»</a>
 		               </c:if>
-		               <c:if test="${PINFO.nowPage >= PAGEINFO.endPage-2}">
+		               <c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
 		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=${PINFO.endPage}">»</a>
 		               </c:if>
 		            </li>

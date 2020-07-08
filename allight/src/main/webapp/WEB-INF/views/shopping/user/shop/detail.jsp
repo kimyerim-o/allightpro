@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +34,13 @@ $(function(){
 				<table>
 					<tr>
 						<td class="card-info-td">판매가격</td>
-						<td class="card-info-td0">${DETAIL.iprice}원</td>
+						<td class="card-info-td0">
+							<fmt:formatNumber value="${DETAIL.iprice}" pattern="#,###"/>원
+						</td>
+					</tr>
+					<tr>
+						<td class="card-info-td">브랜드</td>
+						<td class="card-info-td1">${DETAIL.icorp}</td>
 					</tr>
 					<tr>
 						<td class="card-info-td">배송방법</td>
@@ -171,7 +179,9 @@ $(function(){
 			<div class="shop-mini-title">
 				상품문의(10)
 			</div>
-			
+			<div class="right">
+				<a class="btn">문의하기</a>
+			</div>
 			<table>
 				<tr>
 					<th width="10%">번호</th>

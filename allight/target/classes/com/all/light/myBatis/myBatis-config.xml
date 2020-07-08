@@ -16,7 +16,9 @@
    
    <!-- sql에서 사용하는 별칭 -->
    <typeAliases>
+   		<typeAlias type="com.all.light.dto.ShoppingDTO" alias="shopDTO"/>
    		<typeAlias type="com.all.light.dto.MemberDTO" alias="memDTO"/>
+   		<typeAlias type="com.all.light.dto.CorporationDTO" alias="CorpDTO"/>
    		<typeAlias type="com.all.light.util.PageUtil" alias="PageUtil"/>
    </typeAliases>   
    
@@ -24,6 +26,7 @@
    		<!-- sql 설정 -->
    		<mapper resource="/com/all/light/sql/MemberSQL.xml"/>
    		<mapper resource="/com/all/light/sql/CorporationSQL.xml"/>
+   		<mapper resource="/com/all/light/sql/ShoppingSQL.xml"/>
    </mappers>
    
 </configuration>

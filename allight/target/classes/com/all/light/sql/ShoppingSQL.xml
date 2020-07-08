@@ -2,5 +2,130 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Shopping">
+
+	<sql id="rnum">
+		rnum between ${startNo} and ${endNo} 
+		order by rnum desc
+	</sql>
+	
+	
+	<!-- ============================= 리스트   ================================== -->
+	<!-- 게시물 수 가져오기 -->
+	<!-- 카테고리별 -->
+	<select id="totalCnt" resultType="int" parameterType="java.lang.String">
+	select count(*) from item 
+	where icategory = #{icategory}
+	</select>
+	<!-- 모든  -->
+	<select id="totalCntAll" resultType="int">
+	select count(*) from item
+	</select>
+	
+	<!-- 인기순으로 -->
+	<!-- 카테고리별 게시물 가져오기 -->
+	<select id="listItem" resultType="shopDTO" parameterType="java.util.HashMap">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by ISELLAMOUNT) as rnum,
+    		 	i.* from item i
+   		 	 where icategory=#{icategory})
+		where <include refid="rnum"/>	
+	</select>
+	<!-- 모든 게시물 가져오기 -->
+	<select id="listItemAll" resultType="shopDTO" parameterType="PageUtil">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by ISELLAMOUNT) as rnum,
+    		 	i.* from item i)
+		where <include refid="rnum"/>
+	</select>
+	
+	<!-- 낮은 가격순으로 -->
+	<!-- 카테고리별 게시물 가져오기 -->
+	<select id="listItemRow" resultType="shopDTO" parameterType="java.util.HashMap">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by IPRICE desc) as rnum,
+    		 	i.* from item i
+   		 	 where icategory=#{icategory})
+		where <include refid="rnum"/>
+	</select>
+	<!-- 모든 게시물 가져오기 -->
+	<select id="listItemRowAll" resultType="shopDTO" parameterType="PageUtil">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by IPRICE desc) as rnum,
+    		 	i.* from item i)
+		where <include refid="rnum"/>
+	</select>
+	
+	<!-- 높은 가격순으로 -->
+	<!-- 카테고리별 게시물 가져오기 -->
+	<select id="listItemHigh" resultType="shopDTO" parameterType="java.util.HashMap">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by IPRICE) as rnum,
+    		 	i.* from item i
+   		 	 where icategory=#{icategory})
+		where <include refid="rnum"/>
+	</select>
+	<!-- 모든 게시물 가져오기 -->
+	<select id="listItemHighAll" resultType="shopDTO" parameterType="PageUtil">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by IPRICE) as rnum,
+    		 	i.* from item i)
+		where <include refid="rnum"/>
+	</select>
+	
+	
+	<!-- 대표 이미지 가져오기 -->
+	<select id="getRepreImage" resultType="String" parameterType="java.util.HashMap">
+		select imgimage from image 
+		where ino=${ino} and imgrepresent=1
+	</select>
+	
+	<!-- 검색된 게시물 가져오기 -->
+	<select id="searchList" resultType="shopDTO" parameterType="java.lang.String">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by ISELLAMOUNT) as rnum,
+    		 	i.* from item i)
+		where INAME like '%' || #{searchWord} || '%'
+		order by rnum desc
+	</select>
+	
+	
+	<!-- ============================= 브랜드관   ================================== -->
+	<!-- 해당 브랜드 상품목록 가져오기  -->
+	<!-- 인기순  -->
+	<select id="brandContent" resultType="shopDTO" parameterType="java.lang.String">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by ISELLAMOUNT) as rnum,
+    		 	i.* from item i
+    		 	where i.icorp = #{brand})
+		order by rnum desc
+	</select>
+	<!-- 낮은 가격순  -->
+	<select id="brandContentRow" resultType="shopDTO" parameterType="java.lang.String">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by IPRICE desc) as rnum,
+    		 	i.* from item i
+    		 	where i.icorp = #{brand})
+		order by rnum desc
+	</select>
+	<!-- 높은 가격순  -->
+	<select id="brandContentHigh" resultType="shopDTO" parameterType="java.lang.String">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by IPRICE) as rnum,
+    		 	i.* from item i
+    		 	where i.icorp = #{brand})
+		order by rnum desc
+	</select>
+	
+	
 </mapper>
 	

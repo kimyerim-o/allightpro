@@ -21,6 +21,8 @@
 	href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/style.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/shopping.css">
 </head>
 
 
@@ -30,18 +32,18 @@
 		<div class="container">
 			<div class="ht-right">
 				<c:if test="${empty sessionScope.COID and empty sessionScope.MID}">
-					<a href="./login.com" class="login-panel"><i class="fa fa-user"></i>Login</a>
+					<a href="${pageContext.request.contextPath}/login.com" class="login-panel"><i class="fa fa-user"></i>Login</a>
 					<a href="#" class="join-panel">join</a>
 				</c:if>
 				<c:if test="${!empty sessionScope.MID}">
-					<a href="./logout.com" class="logined-panel">로그아웃</a>
+					<a href="${pageContext.request.contextPath}/logout.com" class="logined-panel">로그아웃</a>
 					<a href="#" class="logined-panel">장바구니()</a>
 					<a href="#" class="logined-panel">주문/배송조회</a>
 					<a href="#" class="logined-panel">마이페이지</a>
 					<a href="#" class="logined-nick-panel">${sessionScope.MNICK} 님</a>
 				</c:if>
 				<c:if test="${!empty sessionScope.COID}">
-					<a href="./corlogout.com" class="logined-panel">로그아웃</a>
+					<a href="${pageContext.request.contextPath}/corlogout.com" class="logined-panel">로그아웃</a>
 					<a href="#" class="logined-nick-panel">${sessionScope.MNICK} 님</a>
 				</c:if>
 			</div>
@@ -50,7 +52,7 @@
 
 	<!-- logo -->
 	<div class="container">
-		<a href="http://localhost:9000/allight/main.com" target="_blank">
+		<a href="${pageContext.request.contextPath}/main.com">
 			<img
 			src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg"
 			class="logo" onclick="" />
@@ -64,17 +66,17 @@
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav m-auto">
 	        	<li class="nav-item active">
-	        	<li class="nav-item"><a href="#" class="nav-link">다이어리</a></li>
+	        	<li class="nav-item"><a href="${pageContext.request.contextPath}/main.com" class="nav-link">다이어리</a></li>
 	        	<li class="nav-item"><a href="#" class="nav-link">칼로리 사전</a></li>
 	        	<li class="nav-item"><a href="#" class="nav-link">칼로리 처방</a></li>
 	        	<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a></li>
-	        	<li class="nav-item"><a href="#" class="nav-link">쇼핑</a>
+	        	<li class="nav-item"><a href="${pageContext.request.contextPath}/shopping/list.com" class="nav-link">쇼핑</a>
 	        		<ul class="dropdown">
-                        <li><a href="#">식단</a></li>
-                        <li><a href="#">간식</a></li>
-                        <li><a href="#">운동기구</a></li>
-                        <li><a href="#">운동복</a></li>
-                        <li><a href="#">브랜드관</a></li>
+                        <li><a href="${pageContext.request.contextPath}/shopping/list.com?icategory=식단">식단</a></li>
+                        <li><a href="${pageContext.request.contextPath}/shopping/list.com?icategory=간식">간식</a></li>
+                        <li><a href="${pageContext.request.contextPath}/shopping/list.com?icategory=운동복">운동복</a></li>
+                        <li><a href="${pageContext.request.contextPath}/shopping/list.com?icategory=기타">기타</a></li>
+                        <li><a href="${pageContext.request.contextPath}/shopping/brand.com">브랜드관</a></li>
                     </ul>
 	        	</li>
 	        	<!-- 회원 로그인시  -->

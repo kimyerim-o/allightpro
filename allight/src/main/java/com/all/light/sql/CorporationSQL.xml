@@ -6,5 +6,12 @@
 	<select id="login" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 	select * from corporation where coid=#{coid} and copw=#{copw}
 	</select>
+	
+	<select id="brandList" resultType="CorpDTO">
+		select cono,coname,cotel,coemail,coid 
+		from corporation 
+		order by cono
+	</select>
+	
 </mapper>
 

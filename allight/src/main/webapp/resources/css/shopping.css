@@ -223,7 +223,7 @@
 	margin: 0 20px;
 	float: left;
 	position: relative;
-	border: 1px solid black;
+	overflow:hidden;
 }
 
 .card-img>img {

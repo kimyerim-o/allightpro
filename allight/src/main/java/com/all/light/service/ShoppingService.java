@@ -76,4 +76,14 @@ public class ShoppingService {
 		return pInfo;
 	}
 
+	public ShoppingDTO getDetail(int ino) {
+		ShoppingDTO shopDTO = shopDAO.getDetail(ino);
+		return shopDTO;
+	}
+
+	public ArrayList<String> getImgs(int ino) {
+		ArrayList<String> list = shopDAO.getImgs(ino);
+		return list;
+	}
+
 }

@@ -51,7 +51,7 @@ a {
 }
 
 a:hover {
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 li {
@@ -113,6 +113,10 @@ td {
 	color: #ff7272;
 }
 
+.login-panel:hover, .join-panel:hover {
+	text-decoration:underline;
+}
+
 .header-top .ht-right .login-panel i {
 	margin-right: 8px;
 }
@@ -129,13 +133,8 @@ td {
 	padding-bottom: 3px;
 }
 
-.join-panel, .login-panel, .logined-panel, .logined-nick-panel {
-	text-decoration: none;
-}
-
 .header-top .ht-right .logined-panel:hover {
 	color: #ff7289;
-	text-decoration: none;
 }
 
 /* Media Styles */
@@ -237,10 +236,6 @@ td {
 	padding: 0.5rem 1rem;
 }
 
-.nav-link:hover, .nav-link:focus {
-	text-decoration: none;
-}
-
 .nav-link.disabled {
 	color: #6c757d;
 	pointer-events: none;
@@ -304,7 +299,6 @@ li {
 }
 
 .dropdown>li>a {
-	text-decoration: none;
 	font-size: 13px;
 	font-family: "Lora", serif;
 	padding: 10px 0;
@@ -335,20 +329,18 @@ li {
 	font-size: 30px;
 	font-weight: bold;
 	color: #333333;
+	font-family:"Lora", serif;
 }
 
 .title2 {
-	margin: 60px 0 15px;
+	margin: 70px 0 15px 15px;
 	display: block;
-	font-size: 30px;
-	font-weight: bold;
+	font-size: 35px;
 	color: #333333;
 	text-align: left;
+	font-family:"Lora", serif;
 }
 
-.title, .title2:hover {
-	text-decoration: none;
-}
 
 #wrap {
 	width: 1100px;
@@ -379,7 +371,7 @@ li {
 
 .wrap-right::after {
 	content: '';
-	display: bolck;
+	display: block;
 	clear: both;
 }
 
@@ -450,7 +442,6 @@ li {
 	margin-left: -1px;
 	line-height: 1.42857143;
 	color: #000000;
-	text-decoration: none;
 	background-color: #fff;
 	border: 1px solid #ddd;
 }

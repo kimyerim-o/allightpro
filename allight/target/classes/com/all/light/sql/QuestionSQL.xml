@@ -9,7 +9,7 @@
 	
 	<!-- question리스트 출력 -->
 	<select id="list" resultType="queDTO" parameterType="PageUtil">
-	select * from question where qno between #{startNo} and #{endNo} order by qno desc
+	select * from (select row_number() over( order by question.qid desc) as rno,question.* from question) where rno between ${startNo} and ${endNo} order by rno desc
 	</select>
 	
 	<!-- 글쓰기 -->

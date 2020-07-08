@@ -39,7 +39,7 @@
 
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">관리자에게</li>
-				<li><a href="#">문의사항</a></li>
+				<li><a href="${pageContext.request.contextPath}/question/list/corp.com">문의사항</a></li>
 			</ul>
 
 			<ul class="left_menu_box last">

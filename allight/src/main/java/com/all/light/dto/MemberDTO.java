@@ -1,11 +1,13 @@
 package com.all.light.dto;
 
-import java.sql.Date;
-// java.util.date => view단에서 post방식으로 처리할 시 인식되지 않음
+import java.time.LocalDate;
+// java.util.date => sql.date => view단에서 post방식으로 처리할 시 인식되지 않음
+// sql.date어제는 됐는데 왜 오늘은 안됨.. (?)
 // 에러내용, 400에러 
 /*400에러, 클라이언트 오류로서 인지된 어떤 문제로 인하여, 서버가 해당 요청을 처리할 수 없거나, 처리하지 않을 것입니다. 
 (예: 잘못된 요청 문법, 유효하지 않은 요청 메시지 framing, 또는 신뢰할 수 없는 요청 라우팅).*/
-
+//sql.timestamp
+//time.LocalDate, time.LocalDateTime
 public class MemberDTO {
 	private int mno;
 	private String mid;
@@ -16,8 +18,8 @@ public class MemberDTO {
 	private String mbirth;
 	private String mtel;
 	private String mtel2;
-	private Date mjoindate;
-	private Date mlogdate;
+	private LocalDate mjoindate;
+	private LocalDate mlogdate;
 	private String msex;
 	private int mtype;
 	public int getMno() {
@@ -74,16 +76,16 @@ public class MemberDTO {
 	public void setMtel2(String mtel2) {
 		this.mtel2 = mtel2;
 	}
-	public Date getMjoindate() {
+	public LocalDate getMjoindate() {
 		return mjoindate;
 	}
-	public void setMjoindate(Date mjoindate) {
+	public void setMjoindate(LocalDate mjoindate) {
 		this.mjoindate = mjoindate;
 	}
-	public Date getMlogdate() {
+	public LocalDate getMlogdate() {
 		return mlogdate;
 	}
-	public void setMlogdate(Date mlogdate) {
+	public void setMlogdate(LocalDate mlogdate) {
 		this.mlogdate = mlogdate;
 	}
 	public String getMsex() {

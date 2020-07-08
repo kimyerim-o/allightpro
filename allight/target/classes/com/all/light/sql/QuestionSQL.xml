@@ -4,7 +4,7 @@
 <mapper namespace="question">
 	<!-- 전체게시물 수 조회 -->
 	<select id="totalCnt" resultType="Integer">
-		select count(*) from question where qid=#{id} and qtype=1
+	select count(*) from question where qid=#{id} and qtype=1
 	</select>
 	
 	<!-- question리스트 출력 -->
@@ -19,7 +19,22 @@
 	
 	<!-- 상세보기 -->
 	<select id="detail" resultType="queDTO" parameterType="queDTO">
-	select * from question where qno=${qno}
+	select * from question,(select count(*) as qcount from questioncomment where qno=${qno}) where qno=${qno}
 	</select>
+	
+	<!-- 댓글 -->
+	<select id="detailcomm" resultType="queDTO" parameterType="queDTO">
+	select * from question q,questioncomment c where q.qno=#{qno} and q.qno=c.qno
+	</select>
+	
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="queDTO">
+	delete from question where qno=#{qno}
+	</delete>
+	
+	<!-- 수정 -->
+	<update id="update" parameterType="queDTO">
+	update question set qtitle=#{qtitle},qdate=#{qdate},qcontent=#{qcontent} where qno=#{qno} and qid=#{qid}
+	</update>
 </mapper>
 	

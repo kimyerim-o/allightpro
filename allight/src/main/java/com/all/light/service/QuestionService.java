@@ -29,21 +29,26 @@ public class QuestionService {
 
 	public void insertWrite(QuestionDTO qdto, HttpSession session) {
 		qdto.setQid((String) session.getAttribute("MID"));
-		String date=(String) session.getAttribute("DATE");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
-		try {
-			Date today = format.parse(date);
-			qdto.setQdate(today);
-			System.out.println(qdto);
-			qesDAO.insertWrite(qdto);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
+		qdto.setQdate((java.sql.Date) session.getAttribute("DATE"));
+		qesDAO.insertWrite(qdto);		
 	}
 
 	public QuestionDTO detail(QuestionDTO qdto) {
 		return qesDAO.datail(qdto);
+	}
+
+	public ArrayList<QuestionDTO> detailcomm(QuestionDTO qdto) {
+		return qesDAO.detailcomm(qdto);
+	}
+
+	public void delete(QuestionDTO qdto) {
+		qesDAO.delete(qdto);
+	}
+
+	public void update(QuestionDTO qdto, HttpSession session) {
+		qdto.setQdate((java.sql.Date) session.getAttribute("DATE"));
+		System.out.println("ser   "+qdto);
+		qesDAO.update(qdto);
 	}
 
 }

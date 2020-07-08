@@ -25,7 +25,7 @@
 			<c:forEach items="${LIST}" var="list">
 				<tr>
 					<td>${list.qno}</td>
-					<td><a href="${pageContext.request.contextPath}/question/detail/corp.com?no=${list.qno}">${list.qtitle}</a></td>
+					<td><a href="${pageContext.request.contextPath}/question/detail/corp.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
 					<td>${list.qdate}</td>
 				</tr>
 			</c:forEach>
@@ -50,10 +50,10 @@
 					</li>
 				</c:forEach>				
 				<li>
-					<c:if test="${PINFO.nowPage < PAGEINFO.endPage-3}">
+					<c:if test="${PINFO.nowPage < PINFO.endPage-3}">
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.nowPage+3}">»</a>
 					</c:if>
-					<c:if test="${PINFO.nowPage >= PAGEINFO.endPage-2}">
+					<c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.endPage}">»</a>
 					</c:if>
 				</li>

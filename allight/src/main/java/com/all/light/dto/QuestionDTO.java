@@ -1,6 +1,6 @@
 package com.all.light.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class QuestionDTO {
 	private int qno;
@@ -10,9 +10,10 @@ public class QuestionDTO {
 	private String qcontent;
 	private int qtype;
 	private int qcno;
-	private String acid;
+	private String qcid;
 	private String qccontent;
 	private Date qcdate;
+	private int qcount;
 	
 	public int getQno() {
 		return qno;
@@ -56,11 +57,11 @@ public class QuestionDTO {
 	public void setQcno(int qcno) {
 		this.qcno = qcno;
 	}
-	public String getAcid() {
-		return acid;
+	public String getQcid() {
+		return qcid;
 	}
-	public void setAcid(String acid) {
-		this.acid = acid;
+	public void setQcid(String acid) {
+		this.qcid = acid;
 	}
 	public String getQccontent() {
 		return qccontent;
@@ -74,12 +75,17 @@ public class QuestionDTO {
 	public void setQcdate(Date qcdate) {
 		this.qcdate = qcdate;
 	}
-	
+	public int getQcount() {
+		return qcount;
+	}
+	public void setQcount(int qcount) {
+		this.qcount = qcount;
+	}
 	@Override
 	public String toString() {
 		return "QuestionDTO [qno=" + qno + ", qtitle=" + qtitle + ", qid=" + qid + ", qdate=" + qdate + ", qcontent="
-				+ qcontent + ", qtype=" + qtype + ", qcno=" + qcno + ", acid=" + acid + ", qccontent=" + qccontent
-				+ ", qcdate=" + qcdate + "]";
+				+ qcontent + ", qtype=" + qtype + ", qcno=" + qcno + ", qcid=" + qcid + ", qccontent=" + qccontent
+				+ ", qcdate=" + qcdate + ", qcount=" + qcount + "]";
 	}
 	
 	

@@ -57,11 +57,46 @@ public class QuestionController {
 	public ModelAndView detail(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
 		qdto.setQno(qno);
 		System.out.println(qdto);
-		QuestionDTO de=queSVC.detail(qdto);
+		QuestionDTO de=queSVC.detail(qdto);//게시글
+		ArrayList<QuestionDTO> decomm=queSVC.detailcomm(qdto);//댓글
 		mv.addObject("DETAIL",de);//게시글
-		
+		mv.addObject("COMM",decomm);//댓글
+		System.out.println(de);
+		System.out.println(decomm);
 		mv.setViewName("/shopping/corp/question/detail");
 		return mv;
+	}
+	
+	//수정폼
+	@RequestMapping("/up/corp")
+	public ModelAndView up(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
+		qdto.setQno(qno);
+		QuestionDTO de=queSVC.detail(qdto);//게시글
+		ArrayList<QuestionDTO> decomm=queSVC.detailcomm(qdto);//댓글
+		mv.addObject("DETAIL",de);//게시글
+		mv.addObject("COMM",decomm);//댓글
+		System.out.println(de);
+		System.out.println(decomm);
+		mv.setViewName("/shopping/corp/question/update");
+		return mv;
+		
+	}
+	
+	//수정
+	@RequestMapping("/update/corp")
+	public String update(QuestionDTO qdto,HttpSession session) {
+		System.out.println(qdto);
+		queSVC.update(qdto,session);
+		return "shopping/corp/question/check";
+	}
+	
+	//삭제
+	@RequestMapping("/delete/corp")
+	public String delete(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto) {
+		System.out.println(qdto);
+		qdto.setQno(qno);
+		queSVC.delete(qdto);
+		return "shopping/corp/question/check";
 	}
 	
 }

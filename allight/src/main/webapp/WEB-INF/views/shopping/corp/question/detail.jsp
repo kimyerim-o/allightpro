@@ -10,10 +10,11 @@
 	$(function(){
 		//수정 버튼 클릭 시
 		$("#up").click(function(){
-			$(location).attr("href","../fileboard/modifyFrm.co?bno=${FBDTO.no}&nowPage=${nowPage}");
+			$(location).attr("href","${pageContext.request.contextPath}/question/up/corp.com?no=${DETAIL.qno}");
 		});
 		//삭제 버튼 클릭 시
 		$("#del").click(function(){
+			$("#form").attr("action","${pageContext.request.contextPath}/question/delete/corp.com");
 			$("#form").submit();
 		});
 		//목록 버튼 클릭 시
@@ -28,9 +29,12 @@
 		<!-- 검색창  -->
 		<div class="boardContent">
 			<div class="boardContent-buttons">
-				<form id="form" method="POST">
+				<form id="form">
 					<input type="button" value="목록" class="btn" id="list">
+					<input type="hidden" value="${DETAIL.qno}" name="no">
+					<c:if test="${DETAIL.qid eq sessionScope.MID}">
 					<input type="button" value="수정" class="btn" id="up">
+					</c:if>
 					<input type="button" value="삭제" class="btn" id="del">
 				</form>
 			</div>
@@ -57,7 +61,9 @@
 			<!-- 댓글  -->
 			<div class="boardContent-Comment">
 				<div class="boardContent-Comment-input">
-					<form action="#" method="post">
+					<form action="#" method="post" style="text-align: left">
+						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자${sessionScope.MID}</a>&nbsp;&nbsp; 
+								<a class="board-info-others">작성일 ${sessionScope.DATE}</a></a>
 						<input type="textarea" class="input" placeholder="댓글을 입력하세요" /> 
 						<input type="submit" class="button" value="등록" />
 					</form>
@@ -65,29 +71,25 @@
 		
 				<div class="boardContent-Comment-comment"
 					style="padding: 10px; font-size: 1.5rem;">
-					댓글(<a style="color: #ff5656;">댓글수(수정필요)</a>)
+					댓글(<a style="color: #ff5656;">${DETAIL.qcount}개</a>)
 				</div>
 		
 				<div class="boardContent-Comment-Table">
 					<table width="100%" style="border-top: 1px solid gray;">
-						<!-- for문으로 댓글 가져오기 -->
+						<c:forEach items="${COMM}" var="c">
 						<tr>
-							<td colspan="100%" class="board-comment-info"><a
-								class="board-info-nick">닉네임(수정필요)</a>&nbsp;&nbsp; <a
-								class="board-info-others">업데이트날짜(수정필요)</a></td>
+							<td colspan="100%" class="board-comment-info"><a class="board-info-nick">${c.qcid}</a>&nbsp;&nbsp; 
+								<a class="board-info-others">작성일 ${c.qcdate}</a></td>
 						</tr>
 						<tr>
-							<td width="80%">댓글내용(수정필요)</td>
+							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
-								<a href="#"> 
-									<img class="likeandhate" src="#" />
-								</a>
-								<a class="aNone">좋아요수(수정필요)</a>
-							</td>
-							<td style="padding: 0; text-align: center;">
-								<a href="#" style="color: #ff5656;">삭제</a>
+								<c:if test="${c.qcid eq sessionScope.MID}"></c:if>
+									<a href="#" style="color: #ff5656;">수정</a>
+									<a href="#" style="color: #ff5656;">삭제</a>
 							</td>
 						</tr>
+						</c:forEach>
 					</table>
 				</div>
 			</div>

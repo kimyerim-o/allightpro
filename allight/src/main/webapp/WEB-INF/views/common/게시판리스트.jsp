@@ -35,25 +35,25 @@
 		<div class="center">
 			<ul class="pagination">
 				<li>
-					<c:if test="${PAGEINFO.nowPage ne 1}">
-						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PAGEINFO.nowPage-1}">«</a>
+					<c:if test="${PINFO.nowPage > 3}">
+						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.nowPage-3}">«</a>
 					</c:if>
-					<c:if test="${PAGEINFO.nowPage eq 1}">
-						<a>«</a>
+					<c:if test="${PINFO.nowPage <= 3}">
+						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=1">«</a>
 					</c:if>
 				</li>
 				<!-- 현재 페이지일때 active --> 
-				<c:forEach begin="${PAGEINFO.startPage}" end="${PAGEINFO.endPage}" var="i">
-					<li class="active"><!-- 스크립트 적용해야 할것같아요 -->
+				<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
+					<li id="li"><!-- 스크립트 적용해야 할것같아요 -->
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${i}">${i}</a>
 					</li>
-				</c:forEach>
+				</c:forEach>				
 				<li>
-					<c:if test="${PAGEINFO.nowPage ne PAGEINFO.endPage}">
-						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PAGEINFO.nowPage+1}">»</a>
+					<c:if test="${PINFO.nowPage < PAGEINFO.endPage-3}">
+						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.nowPage+3}">»</a>
 					</c:if>
-					<c:if test="${PAGEINFO.nowPage eq PAGEINFO.endPage}">
-						<a>»</a>
+					<c:if test="${PINFO.nowPage >= PAGEINFO.endPage-2}">
+						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.endPage}">»</a>
 					</c:if>
 				</li>
 			</ul>

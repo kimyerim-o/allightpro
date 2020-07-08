@@ -20,7 +20,8 @@
    		<typeAlias type="com.all.light.util.PageUtil" alias="PageUtil"/>
    		<typeAlias type="com.all.light.dto.QuestionDTO" alias="queDTO"/>
    		<typeAlias type="com.all.light.dto.CorporationDTO" alias="corDTO"/>
-   </typeAliases>   
+   		<typeAlias type="com.all.light.dto.ShoppingDTO" alias="shopDTO"/>
+   </typeAliases>
    
    <mappers>
    		<!-- sql 설정 -->

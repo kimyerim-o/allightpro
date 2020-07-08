@@ -69,20 +69,19 @@
          <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav m-auto">
                <li class="nav-item active">
-               <li class="nav-item"><a href="#" class="nav-link">다이어리</a></li>
+               <li class="nav-item"><a href="${pageContext.request.contextPath}/main.com" class="nav-link">다이어리</a></li>
                <li class="nav-item"><a href="#" class="nav-link">칼로리 사전</a></li>
                <li class="nav-item"><a href="#" class="nav-link">칼로리 처방</a></li>
                <li class="nav-item"><a href="#" class="nav-link">커뮤니티</a></li>
-               <li class="nav-item"><a
-                  href="${pageContext.request.contextPath}/shopping/list.com"
-                  class="nav-link">쇼핑</a>
-                  <ul class="dropdown">
-                     <li><a href="${pageContext.request.contextPath}/shopping/list.com?category=diet">식단</a></li>
-                     <li><a href="${pageContext.request.contextPath}/shopping/list.com?category=snack">간식</a></li>
-                     <li><a href="${pageContext.request.contextPath}/shopping/list.com?category=sportswear">운동복</a></li>
-                     <li><a href="${pageContext.request.contextPath}/shopping/list.com?category=other">기타</a></li>
-                     <li><a href="#">브랜드관</a></li>
-                  </ul></li>
+               <li class="nav-item"><a href="${pageContext.request.contextPath}/shopping/list.com" class="nav-link">쇼핑</a>
+	        		<ul class="dropdown">
+                        <li><a href="${pageContext.request.contextPath}/shopping/list.com?icategory=식단">식단</a></li>
+                        <li><a href="${pageContext.request.contextPath}/shopping/list.com?icategory=간식">간식</a></li>
+                        <li><a href="${pageContext.request.contextPath}/shopping/list.com?icategory=운동복">운동복</a></li>
+                        <li><a href="${pageContext.request.contextPath}/shopping/list.com?icategory=기타">기타</a></li>
+                        <li><a href="${pageContext.request.contextPath}/shopping/brand.com">브랜드관</a></li>
+                    </ul>
+	        	</li>
                <!-- 회원 로그인시  -->
                <c:if test="${sessionScope.MTYPE eq 0 }"></c:if>
                <li class="nav-item"><a href="#" class="nav-link">마이페이지</a>

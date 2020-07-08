@@ -16,6 +16,11 @@
 	   <property name="url"             value="jdbc:oracle:thin:@192.168.56.66:1521/orcl"/><!-- 192.168.56.66 -->
 	   <property name="username"        value="allight"/>
 	   <property name="password"        value="allight"/>
+	   <property name="connectionProperties">
+		   	<props>
+	            <prop key="oracle.net.READ_TIMEOUT">600000</prop>
+	        </props>
+	   </property>
 	</bean>  
 	
 	<!-- myBatis 등록 -->

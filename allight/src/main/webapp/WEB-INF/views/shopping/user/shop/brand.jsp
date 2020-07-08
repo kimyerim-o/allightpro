@@ -66,7 +66,31 @@
 				</div>
 			</c:forEach>
 		</div>
-
+		
+        <ul class="pagination">
+            <li>
+               <c:if test="${PINFO.nowPage > 3}">
+                  <a href="${pageContext.request.contextPath}/shopping/brand.com?brand=${BRAND}&sort=${SORT}&nowPage=${PINFO.nowPage-3}">«</a>
+               </c:if>
+               <c:if test="${PINFO.nowPage <= 3}">
+                  <a href="${pageContext.request.contextPath}/shopping/brand.com?brand=${BRAND}&sort=${SORT}&nowPage=1">«</a>
+               </c:if>
+            </li>
+            <!-- 현재 페이지일때 active --> 
+            <c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
+               <li id="li"><!-- 스크립트 적용해야 할것같아요 -->
+                  <a href="${pageContext.request.contextPath}/shopping/brand.com?brand=${BRAND}&sort=${SORT}&nowPage=${i}">${i}</a>
+               </li>
+            </c:forEach>            
+            <li>
+               <c:if test="${PINFO.nowPage < PAGEINFO.endPage-3}">
+                  <a href="${pageContext.request.contextPath}/shopping/brand.com?brand=${BRAND}&sort=${SORT}&nowPage=${PINFO.nowPage+3}">»</a>
+               </c:if>
+               <c:if test="${PINFO.nowPage >= PAGEINFO.endPage-2}">
+                  <a href="${pageContext.request.contextPath}/shopping/brand.com?brand=${BRAND}&sort=${SORT}&nowPage=${PINFO.endPage}">»</a>
+               </c:if>
+            </li>
+        </ul>
 	</div>
 </body>
 </html>

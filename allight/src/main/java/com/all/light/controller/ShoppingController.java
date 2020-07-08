@@ -87,13 +87,17 @@ public class ShoppingController {
 			ModelAndView mv,
 			@RequestParam(value="brand", 
 						  required=false,
-						  defaultValue="뮬라웨어") String brand,
+						  defaultValue="뮬라웨어") String brand, // 브랜드명
+			@RequestParam(value="nowPage", 
+			  			  required=false, 
+			  			  defaultValue="1") int nowPage, 	  // 현재 페이지
 			@RequestParam(value="sort", 
 						  required=false,
-						  defaultValue="0") int sort
+						  defaultValue="0") int sort		  // 정렬
 			) {
 		System.out.println("ShoppingController-brandList()");
 		
+		PageUtil pInfo = null;
 		ArrayList<String> brandNames = null;
 		ArrayList<ShoppingDTO> list = null;
 
@@ -101,7 +105,8 @@ public class ShoppingController {
 		brandNames = shopSVC.brandNames();
 
 		//해당 브랜드 상품 가져오기
-		list = shopSVC.brandContent(brand,sort);
+		pInfo=shopSVC.getBrandPageInfo(nowPage,brand);
+		list = shopSVC.brandContent(brand,sort,pInfo);
 
 		// 가져온 상품들의 대표 이미지 가져오기
 		for(int i=0;i<list.size();i++) {
@@ -113,6 +118,7 @@ public class ShoppingController {
 		mv.addObject("BRANDS",brandNames); //모든브랜드목록
 		mv.addObject("LIST",list);   //실제조회목록
 		mv.addObject("SORT",sort);   //정렬방식
+		mv.addObject("PINFO",pInfo); //페이징관련 정보
 		
 		// View
 		mv.setViewName("shopping/user/shop/brand");

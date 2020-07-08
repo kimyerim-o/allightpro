@@ -40,5 +40,12 @@
 		delete corporation where cono=#{cono}
 	</delete>
 	
+	<!-- 지영  -->
+	<!-- 기업번호,이름,아이디 전부 가져오기  -->
+	<select id="brandList" resultType="CorDTO">
+		select cono,coname,coid 
+		from corporation 
+		order by cono
+	</select>
 </mapper>
 

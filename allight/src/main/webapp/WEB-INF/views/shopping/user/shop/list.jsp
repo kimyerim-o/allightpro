@@ -90,29 +90,29 @@ $(function(){
 		<c:if test="${empty SEARCHWORD}">
 			<div class="center">
 				<ul class="pagination">
-					<li>
-						<a href="#">«</a>
-					</li>
-					<!-- 현재 페이지일때 active -->
-					<li class="active"> 
-						<a href="#">1</a>
-					</li>
-					<li>
-						<a href="#">2</a>
-					</li>
-					<li>
-						<a href="#">3</a>
-					</li>
-					<li>
-						<a href="#">4</a>
-					</li>
-					<li>
-						<a href="#">5</a>
-					</li>
-					<li>
-						<a href="#">»</a>
-					</li>
-				</ul>
+		            <li>
+		               <c:if test="${PINFO.nowPage > 3}">
+		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=${PINFO.nowPage-3}">«</a>
+		               </c:if>
+		               <c:if test="${PINFO.nowPage <= 3}">
+		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=1">«</a>
+		               </c:if>
+		            </li>
+		            <!-- 현재 페이지일때 active --> 
+		            <c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
+		               <li id="li"><!-- 스크립트 적용해야 할것같아요 -->
+		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=${i}">${i}</a>
+		               </li>
+		            </c:forEach>            
+		            <li>
+		               <c:if test="${PINFO.nowPage < PAGEINFO.endPage-3}">
+		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=${PINFO.nowPage+3}">»</a>
+		               </c:if>
+		               <c:if test="${PINFO.nowPage >= PAGEINFO.endPage-2}">
+		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=${PINFO.endPage}">»</a>
+		               </c:if>
+		            </li>
+		        </ul>
 			</div>
 		</c:if>
 	</div>

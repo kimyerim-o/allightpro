@@ -13,6 +13,8 @@ public class ShoppingService {
 	@Autowired
 	private ShoppingDAO shopDAO;
 	
+	// ------------상품 목록-----------------------------------------------------
+	// 페이지정보
 	public PageUtil getPageInfo(int nowPage, String icategory) {
 		int totalCount = 0;
 		
@@ -51,15 +53,27 @@ public class ShoppingService {
 		return list;
 	}
 	
+	
+	// ------------브랜드관-----------------------------------------------------
 	// 브랜드관 브랜드 목록 가져오기
 	public ArrayList<String> brandNames() {
 		ArrayList<String> brandNames = shopDAO.brandNames();
 		return brandNames;
 	}
 
-	public ArrayList<ShoppingDTO> brandContent(String brand,int sort) {
-		ArrayList<ShoppingDTO> list = shopDAO.brandContent(brand,sort);
+	public ArrayList<ShoppingDTO> brandContent(String brand,int sort,PageUtil pInfo) {
+		ArrayList<ShoppingDTO> list = shopDAO.brandContent(brand,sort,pInfo);
 		return list;
+	}
+
+	public PageUtil getBrandPageInfo(int nowPage, String brand) {
+		int totalCount = 0;
+		totalCount = shopDAO.getBrandTotalCnt(brand);
+		
+		// PageUtil(보고싶은페이지, 전체게시물수, 보여줄 게시물수, 페이징);
+		PageUtil pInfo = new PageUtil(nowPage, totalCount,40,5);
+		
+		return pInfo;
 	}
 
 }

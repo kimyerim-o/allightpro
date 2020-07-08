@@ -15,13 +15,15 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 	
 	@Autowired
 	SqlSessionTemplate session;
-
+	
+	// 쇼핑 해당 카테고리 상품 개수 가져오기
 	public int getTotalCnt(String icategory) {
 		int cnt = session.selectOne("Shopping.totalCnt", icategory);
 		System.out.println("getTotalCnt()-cnt="+cnt);
 		return cnt;
 	}
 
+	// 쇼핑 전체 상품 개수 가져오기
 	public int getAllTotalCnt() {
 		int cnt = session.selectOne("Shopping.totalCntAll");
 		return cnt;
@@ -63,8 +65,9 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 	
 	// 대표 이미지 가져오기
 	public String getRepreImage(int ino) {
-		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		HashMap<String,Object> map = new HashMap<String,Object>(); 	// 파라미터 보낼 맵
 		map.put("ino", ino);
+		
 		String repreImg = (String)session.selectOne("Shopping.getRepreImage",map);
 		return repreImg;
 	}
@@ -75,7 +78,8 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		list=(ArrayList)session.selectList("Shopping.searchList",searchWord);
 		return list;
 	}
-
+	
+	// ---------브랜드관--------------------------------------------------------
 	// 브랜드관 브랜드 목록 가져오기
 	public ArrayList<String> brandNames() {
 		ArrayList<CorporationDTO> brandList = new ArrayList<CorporationDTO>();
@@ -87,16 +91,27 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		return brandNames;
 	}
 	
+	// 브랜드관 해당 브랜드 상품 개수 가져오기
+	public int getBrandTotalCnt(String brand) {
+		int cnt = session.selectOne("Shopping.totalCntBrand",brand);
+		return cnt;
+	}
+	
 	// 브랜드관 해당 브랜드 상품 리스트 가져오기
-	public ArrayList<ShoppingDTO> brandContent(String brand,int sort) {
+	public ArrayList<ShoppingDTO> brandContent(String brand,int sort,PageUtil pInfo) {
 		ArrayList<ShoppingDTO> list = new ArrayList<ShoppingDTO>();
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("brand", brand);
+		map.put("startNo", pInfo.getStartNo());
+		map.put("endNo", pInfo.getEndNo());
+		
 		// sort 0:인기순, 1:낮은가격순, 2:높은가격순
 		if(sort==0) {
-			list = (ArrayList)session.selectList("Shopping.brandContent",brand);
+			list = (ArrayList)session.selectList("Shopping.brandContent",map);
 		}else if(sort==1) {
-			list = (ArrayList)session.selectList("Shopping.brandContentRow",brand);
+			list = (ArrayList)session.selectList("Shopping.brandContentRow",map);
 		}else if(sort==2) {
-			list = (ArrayList)session.selectList("Shopping.brandContentHigh",brand);
+			list = (ArrayList)session.selectList("Shopping.brandContentHigh",map);
 		}
 		return list;
 	}

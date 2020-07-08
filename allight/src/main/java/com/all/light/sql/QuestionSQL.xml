@@ -4,12 +4,22 @@
 <mapper namespace="question">
 	<!-- 전체게시물 수 조회 -->
 	<select id="totalCnt" resultType="Integer">
-		select count(*) from question
+		select count(*) from question where qid=#{id} and qtype=1
 	</select>
 	
 	<!-- question리스트 출력 -->
 	<select id="list" resultType="queDTO" parameterType="PageUtil">
 	select * from question where qno between #{startNo} and #{endNo} order by qno desc
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="insert" parameterType="queDTO">
+	insert into question values(qno_seq.nextval,#{qtitle},#{qid},#{qdate},#{qcontent},1)
+	</insert>
+	
+	<!-- 상세보기 -->
+	<select id="detail" resultType="queDTO" parameterType="queDTO">
+	select * from question where qno=${qno}
 	</select>
 </mapper>
 	

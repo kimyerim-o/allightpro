@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){//안되요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
+		$('#li').click(function(){
+			$('#li').addClass("active");
+		});
+	})
+</script>
 </head>
 <body>
 	<div class="container">
@@ -18,33 +25,30 @@
 			<c:forEach items="${LIST}" var="list">
 				<tr>
 					<td>${list.qno}</td>
-					<td>${list.qtitle}</td>
-					<td>20200703</td>
+					<td><a href="${pageContext.request.contextPath}/question/detail/corp.com?no=${list.qno}">${list.qtitle}</a></td>
+					<td>${list.qdate}</td>
 				</tr>
 			</c:forEach>
 		</table>
 		<div class="right">
-			<a class="btn">글쓰기</a>
+			<a class="btn" href="${pageContext.request.contextPath}/question/write/corp.com">글쓰기</a>
 		</div>
 		<div class="center">
 			<ul class="pagination">
 				<li>
-					<c:if test="${PINFO.nowPage >= 3}">
+					<c:if test="${PINFO.nowPage > 3}">
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.nowPage-3}">«</a>
 					</c:if>
-					<c:if test="${PINFO.nowPage < 3}">
+					<c:if test="${PINFO.nowPage <= 3}">
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=1">«</a>
 					</c:if>
 				</li>
 				<!-- 현재 페이지일때 active --> 
 				<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
-					<li id="li${i}"><!-- 스크립트 적용해야 할것같아요 -->
+					<li id="li"><!-- 스크립트 적용해야 할것같아요 -->
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${i}">${i}</a>
 					</li>
-				</c:forEach>
-				
-				<c:set var="now" value="${PINFO.nowPage}"/>
-				
+				</c:forEach>				
 				<li>
 					<c:if test="${PINFO.nowPage < PAGEINFO.endPage-3}">
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.nowPage+3}">»</a>

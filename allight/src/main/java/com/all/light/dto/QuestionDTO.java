@@ -75,5 +75,12 @@ public class QuestionDTO {
 		this.qcdate = qcdate;
 	}
 	
+	@Override
+	public String toString() {
+		return "QuestionDTO [qno=" + qno + ", qtitle=" + qtitle + ", qid=" + qid + ", qdate=" + qdate + ", qcontent="
+				+ qcontent + ", qtype=" + qtype + ", qcno=" + qcno + ", acid=" + acid + ", qccontent=" + qccontent
+				+ ", qcdate=" + qcdate + "]";
+	}
+	
 	
 }

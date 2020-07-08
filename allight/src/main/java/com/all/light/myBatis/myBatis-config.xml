@@ -16,8 +16,10 @@
    
    <!-- sql에서 사용하는 별칭 -->
    <typeAliases>
-   		<typeAlias type="com.all.light.dto.MemberDTO" alias="memDTO"/>
+	   	<typeAlias type="java.lang.Integer" alias="int"/>
+	   	<typeAlias type="java.lang.String" alias="string"/>
    		<typeAlias type="com.all.light.util.PageUtil" alias="PageUtil"/>
+   		<typeAlias type="com.all.light.dto.MemberDTO" alias="memDTO"/>
    		<typeAlias type="com.all.light.dto.QuestionDTO" alias="queDTO"/>
    </typeAliases>   
    

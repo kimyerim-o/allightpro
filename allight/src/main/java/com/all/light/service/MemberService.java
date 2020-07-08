@@ -43,6 +43,7 @@ public class MemberService {
 				session.setAttribute("MBIRTH", result.get("MBIRTH"));
 				session.setAttribute("MTEL", result.get("MTEL"));
 				session.setAttribute("MTYPE", result.get("MTYPE"));
+				session.setAttribute("MNICK", result.get("MNICK"));
 				//session.setAttribute("DATE", time);
 				memDAO.logDate(result);
 		}

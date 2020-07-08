@@ -24,12 +24,12 @@
 	</select>
 	
 	<!-- 기업 수정 시 정보 가져오기 -->
-	<select id="corpInfo" resultType="CorDTO" parameterType="Integer">
+	<select id="corpInfo" resultType="corDTO" parameterType="Integer">
 		select * from corporation where cono = #{cono}
 	</select>
 	
 	<!-- 기업 정보 수정 -->
-		<update id="corpUpdate" parameterType="CorDTO">
+		<update id="corpUpdate" parameterType="corDTO">
 		UPDATE corporation
 		SET coname='${coname}', cotel='${cotel}', coemail='${coemail}',coid='${coid}', copw='${copw}'
 		where cono=#{cono}
@@ -42,7 +42,7 @@
 	
 	<!-- 지영  -->
 	<!-- 기업번호,이름,아이디 전부 가져오기  -->
-	<select id="brandList" resultType="CorDTO">
+	<select id="brandList" resultType="corDTO">
 		select cono,coname,coid 
 		from corporation 
 		order by cono

@@ -2,7 +2,6 @@ package com.all.light.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +25,7 @@ public class MemberService {
 			map.put("mpw",memdto.getMpw());
 			HashMap result=memDAO.login(map);
 			//날짜
-			SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
-			//String time = format.format(date);
+			java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
 			if(result==null || result.size()==0) {
 				//로그인실패
 				System.out.println("로그인실패");
@@ -43,7 +41,7 @@ public class MemberService {
 				session.setAttribute("MBIRTH", result.get("MBIRTH"));
 				session.setAttribute("MTEL", result.get("MTEL"));
 				session.setAttribute("MTYPE", result.get("MTYPE"));
-				//session.setAttribute("DATE", time);
+				session.setAttribute("DATE", date);
 				memDAO.logDate(result);
 		}
 			return result;

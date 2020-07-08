@@ -31,4 +31,18 @@ public class QuestionDAO extends SqlSessionDaoSupport {
 	public QuestionDTO datail(QuestionDTO qdto) {
 		return session.selectOne("question.detail", qdto);
 	}
+
+	public ArrayList<QuestionDTO> detailcomm(QuestionDTO qdto) {
+		ArrayList<QuestionDTO> comm=(ArrayList)session.selectList("question.detailcomm", qdto);
+		return comm;
+	}
+
+	public void delete(QuestionDTO qdto) {
+		session.delete("question.delete", qdto);
+	}
+
+	public void update(QuestionDTO qdto) {
+		System.out.println(qdto);
+		session.update("question.update", qdto);
+	}
 }

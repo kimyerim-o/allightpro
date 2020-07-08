@@ -21,18 +21,18 @@ $(function(){
 </head>
 <body>
 	<div class="container">
-		<div class="shop-head-title">식단 > </div>
+		<div class="shop-head-title">${DETAIL.icategory} > </div>
 		<div class="card">
 			<div class="card-img">
-				<img src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg"/>
+				<img src="${REPREIMG}"/>
 			</div>
 			<div class="card-txt">
-				<h1 class="info-name">name</h1>
-				<p class="info-detail">상품 설명~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+				<h1 class="info-name">${DETAIL.iname}</h1>
+				<p class="info-detail">${DETAIL.idetail}</p>
 				<table>
 					<tr>
 						<td class="card-info-td">판매가격</td>
-						<td class="card-info-td0">20,000원</td>
+						<td class="card-info-td0">${DETAIL.iprice}원</td>
 					</tr>
 					<tr>
 						<td class="card-info-td">배송방법</td>
@@ -69,10 +69,10 @@ $(function(){
 		
 		<div class="details">
 			<div class="detail-imgs">
-				<img src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg"/>
-				<img src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg"/>
-				<img src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg"/>
-				
+				<c:forEach var="img" items="${IMGS}">
+					<img src="${img}"/>
+					<br/>
+				</c:forEach>
 			</div>
 		</div>
 		

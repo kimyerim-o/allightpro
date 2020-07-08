@@ -65,7 +65,7 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 	
 	// 대표 이미지 가져오기
 	public String getRepreImage(int ino) {
-		HashMap<String,Object> map = new HashMap<String,Object>(); 	// 파라미터 보낼 맵
+		HashMap<String,Object> map = new HashMap<String,Object>(); 
 		map.put("ino", ino);
 		
 		String repreImg = (String)session.selectOne("Shopping.getRepreImage",map);
@@ -113,6 +113,27 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		}else if(sort==2) {
 			list = (ArrayList)session.selectList("Shopping.brandContentHigh",map);
 		}
+		return list;
+	}
+
+	public ShoppingDTO getDetail(int ino) {
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("ino", ino);
+		ShoppingDTO shopDTO = (ShoppingDTO)session.selectOne("Shopping.detailByIno",map);
+		return shopDTO;
+	}
+
+	public ArrayList<String> getImgs(int ino) {
+		ArrayList<ShoppingDTO> imgList = new ArrayList<ShoppingDTO>();
+		ArrayList<String> list = new ArrayList<String>();
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("ino", ino);
+		
+		imgList = (ArrayList)session.selectList("Shopping.detailImgs",map);
+		for(int i=0;i<imgList.size();i++) {
+			list.add(imgList.get(i).getImgimage());
+		}
+		
 		return list;
 	}
 

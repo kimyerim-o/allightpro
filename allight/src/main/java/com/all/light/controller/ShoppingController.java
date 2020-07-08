@@ -143,8 +143,22 @@ public class ShoppingController {
 			return mv;
 		}
 		
+		ShoppingDTO detail = null;
+		String repreImg = null;
+		ArrayList<String> imgs = new ArrayList<String>();
+		
+		detail = shopSVC.getDetail(ino); 	   //상세내용
+		repreImg = shopSVC.getRepreImage(ino); //대표이미지
+		imgs = shopSVC.getImgs(ino);		   //상세이미지
+		
+		System.out.println("detail: "+detail.toString());
+		System.out.println("repreImg: "+repreImg);
+		System.out.println("imgs: "+imgs.toString());
+		
 		// Model
-		//mv.addObject("NOWPAGE",nowPage);
+		mv.addObject("DETAIL",detail);
+		mv.addObject("REPREIMG",repreImg);
+		mv.addObject("IMGS",imgs);
 		
 		// View
 		mv.setViewName("shopping/user/shop/detail");

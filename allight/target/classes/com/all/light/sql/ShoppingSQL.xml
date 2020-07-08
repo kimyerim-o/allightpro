@@ -132,5 +132,17 @@
 	</select>
 	
 	
+	<!-- ============================= 상세페이지   ================================== -->
+	<!-- 상세내용 가져오기(from ITEM)  -->
+	<select id="detailByIno" resultType="shopDTO" parameterType="java.util.HashMap">
+		select * from item where ino = #{ino}
+	</select>
+	
+	<!-- 상세이미지 리스트 가져오기  -->
+	<select id="detailImgs" resultType="shopDTO" parameterType="java.util.HashMap">
+		select imgimage from image 
+		where ino = #{ino} and imgrepresent = 0 
+		order by imgno
+	</select>
 </mapper>
 	

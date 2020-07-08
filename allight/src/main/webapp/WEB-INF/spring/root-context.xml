@@ -56,4 +56,9 @@
 	</bean>
 	<bean id="queSVC" class="com.all.light.service.QuestionService"/>
 		
+	<!-- Notice -->
+	<bean id="notDAO" class="com.all.light.dao.NoticeDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
+	<bean id="notSVC" class="com.all.light.service.NoticeService"/>
 </beans>

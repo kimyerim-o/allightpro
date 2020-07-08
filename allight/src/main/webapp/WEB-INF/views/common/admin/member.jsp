@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-System.out.println("member.jsp");
+	System.out.println("member.jsp");
 %>
 <!DOCTYPE html>
 <html>
@@ -30,12 +30,13 @@ System.out.println("member.jsp");
 	<h3>회원 상세 페이지</h3>
 
 	<hr />
-	<form id="sFrm" method="get" action="<%=request.getContextPath()%>/member/admin.com">
+	<form id="sFrm" method="get"
+		action="<%=request.getContextPath()%>/member/admin.com">
 		<table border="1" width="800" class="center">
 			<tbody>
 				<tr class="center">
-					<td style="text-align: right"><input type="text"
-						id="search" name="search" placeholder="회원 아이디 검색" /> <input type="submit"
+					<td style="text-align: right"><input type="text" id="search"
+						name="search" placeholder="회원 아이디 검색" /> <input type="submit"
 						value="검 색" onclick="return checkForm();" /></td>
 				</tr>
 			</tbody>
@@ -59,11 +60,14 @@ System.out.println("member.jsp");
 					<td>${mem.MNAME}</td>
 					<td>${mem.MADDRESS}</td>
 					<td>${mem.MJOINDATE}</td>
-					<td><a href="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
+					<td><a
+						href="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
 							<input type="button" id="modMem" value="수정">
-					</a> <a href="<%=request.getContextPath()%>/member/delete/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}"> <input
-							type="button" value="삭제" id="delMem"
-							onclick="return checkDelete();"></a></td>
+					</a> <a
+						href="<%=request.getContextPath()%>/member/delete/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
+							<input type="button" value="삭제" id="delMem"
+							onclick="return checkDelete();">
+					</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -73,16 +77,33 @@ System.out.println("member.jsp");
 	<table border="1" width="800" class="center">
 		<tbody>
 			<tr class="center">
-				<td><c:if test="${PINFO.nowPage eq 1}">
-					</c:if> <c:if test="${PINFO.nowPage ne 1}">
-						<a href="../member/admin.com?search=${param.search}&nowPage=${PINFO.nowPage-1}">[prev]</a>
-					</c:if> <c:forEach var="pg" begin="${PINFO.startPage}"
-						end="${PINFO.endPage}">
-						<a href="../member/admin.com?search=${param.search}&nowPage=${pg}">[${pg}]</a>
-					</c:forEach> <c:if test="${PINFO.nowPage eq PINFO.totalPage}">
-					</c:if> <c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-						<a href="../member/admin.com?search=${param.search}&nowPage=${PINFO.nowPage+1}">[next]</a>
-					</c:if></td>
+				<td>
+					<div class="center">
+						<ul class="pagination">
+							<li><c:if test="${PINFO.nowPage > 3}">
+									<a
+										href="${pageContext.request.contextPath}/member/admin.com?search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>
+								</c:if> <c:if test="${PINFO.nowPage <= 3}">
+									<a
+										href="${pageContext.request.contextPath}/member/admin.com?search=${param.search}&nowPage=1">«</a>
+								</c:if></li>
+							<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}"
+								var="pg">
+								<li id="li">
+									<!-- 스크립트 적용해야 할것같아요 --> <a
+									href="${pageContext.request.contextPath}/member/admin.com?search=${param.search}&nowPage=${pg}">${pg}</a>
+								</li>
+							</c:forEach>
+							<li><c:if test="${PINFO.nowPage < PAGEINFO.endPage-3}">
+									<a
+										href="${pageContext.request.contextPath}/member/admin.com?search=${param.search}&nowPage=${PINFO.nowPage+3}">»</a>
+								</c:if> <c:if test="${PINFO.nowPage >= PAGEINFO.endPage-2}">
+									<a
+										href="${pageContext.request.contextPath}/member/admin.com?search=${param.search}&nowPage=${PINFO.endPage}">»</a>
+								</c:if></li>
+						</ul>
+					</div>
+				</td>
 			</tr>
 		</tbody>
 	</table>

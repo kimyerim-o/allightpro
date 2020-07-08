@@ -77,19 +77,33 @@
 	<table border="1" width="800" class="center">
 		<tbody>
 			<tr class="center">
-				<td><c:if test="${PINFO.nowPage eq 1}">
-					</c:if> <c:if test="${PINFO.nowPage ne 1}">
-						<a
-							href="<%=request.getContextPath() %>/corporation/admin.com?search=${param.search}&nowPage=${PINFO.nowPage-1}">[prev]</a>
-					</c:if> <c:forEach var="pg" begin="${PINFO.startPage}"
-						end="${PINFO.endPage}">
-						<a
-							href="<%=request.getContextPath() %>/corporation/admin.com?search=${param.search}&nowPage=${pg}">[${pg}]</a>
-					</c:forEach> <c:if test="${PINFO.nowPage eq PINFO.totalPage}">
-					</c:if> <c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-						<a
-							href="<%=request.getContextPath() %>/corporation/admin.com?search=${param.search}&nowPage=${PINFO.nowPage+1}">[next]</a>
-					</c:if></td>
+				<td>
+					<div class="center">
+						<ul class="pagination">
+							<li><c:if test="${PINFO.nowPage > 3}">
+									<a
+										href="${pageContext.request.contextPath}/corporation/admin.com?search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>
+								</c:if> <c:if test="${PINFO.nowPage <= 3}">
+									<a
+										href="${pageContext.request.contextPath}/corporation/admin.com?search=${param.search}&nowPage=1">«</a>
+								</c:if></li>
+							<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}"
+								var="pg">
+								<li id="li">
+									<!-- 스크립트 적용해야 할것같아요 --> <a
+									href="${pageContext.request.contextPath}/corporation/admin.com?search=${param.search}&nowPage=${pg}">${pg}</a>
+								</li>
+							</c:forEach>
+							<li><c:if test="${PINFO.nowPage < PAGEINFO.endPage-3}">
+									<a
+										href="${pageContext.request.contextPath}/corporation/admin.com?search=${param.search}&nowPage=${PINFO.nowPage+3}">»</a>
+								</c:if> <c:if test="${PINFO.nowPage >= PAGEINFO.endPage-2}">
+									<a
+										href="${pageContext.request.contextPath}/corporation/admin.com?search=${param.search}&nowPage=${PINFO.endPage}">»</a>
+								</c:if></li>
+						</ul>
+					</div>
+				</td>
 			</tr>
 		</tbody>
 	</table>

@@ -27,12 +27,13 @@ public class NoticeController {
 	public ModelAndView noticeList(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			@RequestParam(value = "search", required = false) String searchWord,
+			@RequestParam(value = "type", required = false, defaultValue = "nall") String searchType,
 			ModelAndView mv, RedirectView rv) {
 		System.out.println("\nNoticeController.noticeList");
 		
 		//페이지 객체에 검색어와 현재 페이지를 넘기고 공지 리스트를 반환
-		PageUtil pInfo = notSVC.getPageInfo(nowPage, searchWord);
-		ArrayList<NoticeDTO> map = notSVC.searchList(pInfo, searchWord);
+		PageUtil pInfo = notSVC.getPageInfo(nowPage, searchWord, searchType);
+		ArrayList<NoticeDTO> map = notSVC.searchList(pInfo, searchWord, searchType);
 		
 		System.out.println("list = "+map.toString());
 		System.out.println("pinfo = "+pInfo.toString());
@@ -40,6 +41,18 @@ public class NoticeController {
 		mv.addObject("PINFO", pInfo); //페이징 정보
 		
 		mv.setViewName("diary/user/notice/noticeList");
+		return mv;
+	}
+	@RequestMapping(value="/noticedetail")
+	public ModelAndView noticeDetail(
+			@RequestParam("nno") int nno,
+			NoticeDTO notDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("\nNoticeController.noticeDetail");
+		notDTO = notSVC.getNotInfo(nno);
+		System.out.println("LIST = "+notDTO.toString());
+		//공지 상세 내용 모델 지정
+		mv.addObject("LIST", notDTO); 
+		mv.setViewName("diary/user/notice/noticeDetail");
 		return mv;
 	}
 	
@@ -55,7 +68,8 @@ public class NoticeController {
 	public ModelAndView noticeWritePost(
 			NoticeDTO notDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("\nNoticeController.noticeWrite,"+request.getMethod()+"method");
-
+		System.out.println("NoticeDTO = "+notDTO);
+		notSVC.notWrite(notDTO);
 		rv.setUrl(request.getContextPath()+"/notice.com");
 		mv.setView(rv);
 		return mv;
@@ -63,12 +77,13 @@ public class NoticeController {
 	
 	@RequestMapping(value="/notice/modify/admin", method= RequestMethod.GET)
 	public ModelAndView noticeModifyGet(
-			@RequestParam(value = "nno") int nno,
 			NoticeDTO notDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("\nNoticeController.noticeModify,"+request.getMethod()+"method");
-		System.out.println("글번호 : "+nno);
+		System.out.println("글번호 : "+notDTO.getNno());
 		//비즈니스로직, 모델지정
-		notSVC.getNotInfo(nno);
+		notDTO = notSVC.getNotInfo(notDTO.getNno());
+		mv.addObject("LIST",notDTO);
+		
 		mv.setViewName("diary/admin/noticeModify");
 		return mv;
 	}
@@ -77,10 +92,23 @@ public class NoticeController {
 	public ModelAndView noticeModifyPOST(
 			NoticeDTO notDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("\nNoticeController.noticeModify,"+request.getMethod()+"method");
-		System.out.println("전달받은 수정 DTO : "+notDTO);
+		System.out.println("수정 DTO : "+notDTO);
+
 		//비즈니스로직
-		
 		notSVC.notModify(notDTO);
+		
+		rv.setUrl(request.getContextPath()+"/noticedetail.com?nno="+notDTO.getNno());
+		mv.setView(rv);
+		return mv;
+	}
+	
+	@RequestMapping(value="/notice/delete/admin")
+	public ModelAndView noticeDelete(
+			NoticeDTO notDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("\nNoticeController.noticeDelete");
+		System.out.println("글번호 : "+notDTO.getNno());
+		//비즈니스로직, 모델지정
+		notSVC.notDelete(notDTO.getNno());
 		
 		rv.setUrl(request.getContextPath()+"/notice.com");
 		mv.setView(rv);

@@ -27,7 +27,7 @@
 </script>
 </head>
 <body>
-	<h3>회원 상세 페이지</h3>
+	<h3>회원 페이지</h3>
 
 	<hr />
 	<form id="sFrm" method="get"

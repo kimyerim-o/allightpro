@@ -23,11 +23,11 @@
 			</tr>
 			<tr>
 				<td>제목 :</td>
-				<td><input type="text" id="ntitle" name="ntitle"/></td>
+				<td><input type="text" id="ntitle" name="ntitle" placeholder="제목을 입력하세요"/></td>
 			</tr>
 			<tr>
 				<td>내용 :</td>
-				<td><input type="text" id="ncontent" name="ncontent"/></td>
+				<td><textarea width="80%" height="50%" id="ncontent" name="ncontent" placeholder="내용을 입력하세요"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center"><input type="submit"

@@ -12,14 +12,35 @@ import com.all.light.util.PageUtil;
 public class NoticeDAO extends SqlSessionDaoSupport{
 	@Autowired
 	SqlSessionTemplate session;
-	
-	public int getTotalCnt(String searchWord) {
-		return session.selectOne("notice.totalCntWithSearch",searchWord);
-	}
 
 
 	public ArrayList<NoticeDTO> searchList(PageUtil pInfo) {
 		return (ArrayList)session.selectList("notice.searchList",pInfo);
+	}
+
+
+	public int getTotalCnt(PageUtil pInfo) {
+		return session.selectOne("notice.totalCntWithSearch",pInfo);
+	}
+
+
+	public NoticeDTO getNotInfo(int nno) {
+		return session.selectOne("notice.notInfo",nno);
+	}
+
+
+	public void notWrite(NoticeDTO notDTO) {
+		session.insert("notice.notWrite",notDTO);
+	}
+
+
+	public void notModify(NoticeDTO notDTO) {
+		session.update("notice.notUpdate",notDTO);
+	}
+
+
+	public void notDelete(int nno) {
+		session.delete("notice.notDelete",nno);
 	}
 
 }

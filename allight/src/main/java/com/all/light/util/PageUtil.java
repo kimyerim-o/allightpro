@@ -21,6 +21,7 @@ public class PageUtil {
 	
 	// 검색 시 필요한 파라미터
 	private String searchWord; //
+	private String searchType; //
 	
 	public PageUtil(int nowPage, int totalCount) {
 		this(nowPage, totalCount, 2, 5);
@@ -38,6 +39,12 @@ public class PageUtil {
 		calcEndNo();
 	}
 	
+	//notice검색 - totalCnt에 쓰이는 생성자
+	public PageUtil(String searchWord, String searchType) {
+		this.searchType=searchType;
+		this.searchWord=searchWord;
+	}
+
 	//7.2유태우
 	//시작 글번호 계산
 	//{총 게시글 수 - (한 페이지 게시글 수*현재 페이지 번호)}+1
@@ -81,6 +88,14 @@ public class PageUtil {
 		}
 	}
 
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
 
 	public String getSearchWord() {
 		return searchWord;
@@ -153,8 +168,10 @@ public class PageUtil {
 	public String toString() {
 		return "PageUtil [nowPage=" + nowPage + ", totalCount=" + totalCount + ", lineCount=" + lineCount
 				+ ", pageGroup=" + pageGroup + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage="
-				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", searchWord=" + searchWord + "]";
+				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", searchWord=" + searchWord + ", searchType="
+				+ searchType + "]";
 	}
+
 
 }
 

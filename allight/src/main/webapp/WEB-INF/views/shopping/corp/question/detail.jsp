@@ -10,12 +10,14 @@
 	$(function(){
 		//수정 버튼 클릭 시
 		$("#up").click(function(){
-			$(location).attr("href","${pageContext.request.contextPath}/question/up/corp.com?no=${DETAIL.qno}");
+			$(location).attr("href","${pageContext.request.contextPath}/question/update/corp.com?no=${DETAIL.qno}");
 		});
 		//삭제 버튼 클릭 시
 		$("#del").click(function(){
-			$("#form").attr("action","${pageContext.request.contextPath}/question/delete/corp.com");
-			$("#form").submit();
+			if(confirm("삭제 하시겠습니까?")){
+				$("#form").attr("action","${pageContext.request.contextPath}/question/delete/corp.com");
+				$("#form").submit();
+			}
 		});
 		//목록 버튼 클릭 시
 		$("#list").click(function(){

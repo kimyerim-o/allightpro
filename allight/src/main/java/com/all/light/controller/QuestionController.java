@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.QuestionDTO;
 import com.all.light.service.QuestionService;
@@ -50,10 +51,12 @@ public class QuestionController {
 	
 	//글쓰기처리
 	@RequestMapping("/writepro/corp")
-	public String writepro(QuestionDTO qdto,HttpSession session) {
+	public ModelAndView writepro(QuestionDTO qdto,HttpSession session,ModelAndView mv) {
 		System.out.println(qdto);
 		queSVC.insertWrite(qdto,session);
-		return "shopping/corp/question/check";//상세보기로
+		RedirectView rv=new RedirectView("../list/corp.com");//목록보기로
+		mv.setView(rv);
+		return mv;
 	}
 	
 	//상세보기
@@ -72,8 +75,8 @@ public class QuestionController {
 	}
 	
 	//수정폼
-	@RequestMapping("/up/corp")
-	public ModelAndView up(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
+	@RequestMapping("/update/corp")
+	public ModelAndView update(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
 		qdto.setQno(qno);
 		QuestionDTO de=queSVC.detail(qdto);//게시글
 		ArrayList<QuestionDTO> decomm=queSVC.detailcomm(qdto);//댓글
@@ -87,20 +90,24 @@ public class QuestionController {
 	}
 	
 	//수정
-	@RequestMapping("/update/corp")
-	public String update(QuestionDTO qdto,HttpSession session) {
+	@RequestMapping("/up/corp")
+	public ModelAndView up(QuestionDTO qdto,HttpSession session,ModelAndView mv) {
 		System.out.println(qdto);
 		queSVC.update(qdto,session);
-		return "shopping/corp/question/check";//상세보기로
+		RedirectView rv=new RedirectView("../detail/corp.com?no="+qdto.getQno());//상세보기로
+		mv.setView(rv);
+		return mv;
 	}
 	
 	//삭제
 	@RequestMapping("/delete/corp")
-	public String delete(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto) {
+	public ModelAndView delete(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
 		System.out.println(qdto);
 		qdto.setQno(qno);
 		queSVC.delete(qdto);
-		return "ok";
+		RedirectView rv=new RedirectView("../list/corp.com");//목록보기로
+		mv.setView(rv);
+		return mv;
 	}
 	
 	//댓글쓰기
@@ -180,10 +187,12 @@ public class QuestionController {
 	
 	//삭제
 	@RequestMapping("/delete/admin")
-	public String deleteAdmin(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto) {
+	public ModelAndView deleteAdmin(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
 		System.out.println(qdto);
 		qdto.setQno(qno);
 		queSVC.delete(qdto);
-		return "shopping/admin/question/check";
+		RedirectView rv=new RedirectView("../list/admin.com");//목록보기로
+		mv.setView(rv);
+		return mv;
 	}
 }

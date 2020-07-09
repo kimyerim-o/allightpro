@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="question">
-	<!-- 전체게시물 수 조회 -->
-	<select id="totalCnt" resultType="Integer">
+<!-- 기업 -->
+	<!-- 해당 아이디 게시물 수 조회 -->
+	<select id="totalCntById" resultType="Integer">
 	select count(*) from question where qid=#{id} and qtype=1
 	</select>
 	
@@ -22,9 +23,9 @@
 	select * from question,(select count(*) as qcount from questioncomment where qno=${qno}) where qno=${qno}
 	</select>
 	
-	<!-- 댓글 -->
+	<!-- 댓글 리스트 -->
 	<select id="detailcomm" resultType="queDTO" parameterType="queDTO">
-	select * from question q,questioncomment c where q.qno=#{qno} and q.qno=c.qno
+	select * from question q,questioncomment c where q.qno=#{qno} and q.qno=c.qno order by qcno desc
 	</select>
 	
 	<!-- 삭제 -->
@@ -36,5 +37,42 @@
 	<update id="update" parameterType="queDTO">
 	update question set qtitle=#{qtitle},qdate=#{qdate},qcontent=#{qcontent} where qno=#{qno} and qid=#{qid}
 	</update>
+	
+	<!-- 댓글작성 -->
+	<insert id="insertComm" parameterType="queDTO">
+	insert into questioncomment values(qcno_seq.nextval,#{qno},#{qcid},#{qccontent},#{qcdate})
+	</insert>
+	
+	<!-- 댓글삭제 -->
+	<delete id="deleteComm" parameterType="queDTO">
+	delete from questioncomment where qcno=#{qcno}
+	</delete>
+
+<!-- 관리자 -->	
+	<!-- 전체게시물 수 조회 -->
+	<select id="totalCnt" resultType="Integer">
+	select count(*) from question where qtype=1
+	</select>
+	
+	<!-- 제목 수 찾기 -->
+	<select id="totalCntByTitle" resultType="Integer">
+	select count(*) from question where qtitle like '%' || #{word} || '%' and qtype=1
+	</select>
+	
+	<!-- 제목 게시물 -->
+	<select id="listByTitle" resultType="queDTO" parameterType="PageUtil">
+	select * from (select row_number() over( order by question.qid desc) as rno,question.* from question where qtitle like '%' || #{searchWord} || '%' and qtype=1) where rno between ${startNo} and ${endNo} order by rno desc
+	</select> 
+	
+	<!-- id 수 찾기 -->
+	<select id="totalCntByIdSearch" resultType="Integer">
+	select count(*) from question where qid like '%' || #{word} || '%' and qtype=1
+	</select>
+	
+	<!-- id 게시물 -->
+	<select id="listById" resultType="queDTO" parameterType="PageUtil">
+	select * from (select row_number() over( order by question.qid desc) as rno,question.* from question where qid like '%' || #{searchWord} || '%' and qtype=1) where rno between ${startNo} and ${endNo} order by rno desc
+	</select> 
+	
 </mapper>
 	

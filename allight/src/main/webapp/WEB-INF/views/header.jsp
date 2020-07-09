@@ -43,11 +43,11 @@
                <a href="#" class="logined-panel">장바구니()</a>
                <a href="#" class="logined-panel">주문/배송조회</a>
                <a href="#" class="logined-panel">마이페이지</a>
-               <a href="#" class="logined-nick-panel">${sessionScope.MNICK} 님</a>
+               <a href="#" class="logined-nick-panel">${sessionScope.MID} 님</a>
             </c:if>
             <c:if test="${!empty sessionScope.COID}">
                <a href="${pageContext.request.contextPath}/corlogout.com" class="logined-panel">로그아웃</a>
-               <a href="#" class="logined-nick-panel">${sessionScope.MNICK} 님</a>
+               <a href="#" class="logined-nick-panel">${sessionScope.COID} 님</a>
             </c:if>
          </div>
       </div>
@@ -110,7 +110,7 @@
                <li class="nav-item"><a href="${pageContext.request.contextPath}/admin.com" class="nav-link">관리자</a>
                   <ul class="dropdown">
                      <li><a href="#">기업/회원 관리</a></li>
-                     <li><a href="#">기업 문의 관리</a></li>
+                     <li><a href="${pageContext.request.contextPath}/question/list/admin.com">기업 문의 관리</a></li>
                      <li><a href="#">커뮤니티 관리</a></li>
                      <li><a href="#">칼로리 사전 관리</a></li>
                   </ul></li>

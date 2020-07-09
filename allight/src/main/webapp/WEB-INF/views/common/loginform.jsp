@@ -43,12 +43,7 @@
    	 Kakao.API.request({
 	        url: '/v2/user/me',
 	        success: function(res) {
-	          //alert(JSON.stringify(res)),
 	          console.log(res);
-	          var id=res.id;
-	          var nickname=res.properties.nickname;
-	          var email=res.kakao_account.email;
-	          console.log(id);
  			  $.ajax({
 				  url:'./kakao.com',
 				  type:'post',

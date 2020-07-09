@@ -32,7 +32,7 @@
 			<div class="boardContent-buttons">
 					<input type="button" value="목록" class="btn" id="list">
 					<input type="hidden" value="${DETAIL.qno}" name="qno">
-					<c:if test="${DETAIL.qid eq sessionScope.MID}">
+					<c:if test="${DETAIL.qid eq sessionScope.COID}">
 					<input type="button" value="확인" class="btn" id="update">
 					</c:if>
 					<input type="button" value="취소" class="btn" id="back">
@@ -62,7 +62,7 @@
 			<div class="boardContent-Comment">
 				<div class="boardContent-Comment-input">
 					<form action="#" method="post" style="text-align: left">
-						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자${sessionScope.MID}</a>&nbsp;&nbsp; 
+						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자${sessionScope.COID}</a>&nbsp;&nbsp; 
 								<a class="board-info-others">작성일 ${sessionScope.DATE}</a></a>
 						<input type="textarea" class="input" placeholder="댓글을 입력하세요" /> 
 						<input type="submit" class="button" value="등록" />
@@ -84,7 +84,7 @@
 						<tr>
 							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
-								<c:if test="${c.qcid eq sessionScope.MID}"></c:if>
+								<c:if test="${c.qcid eq sessionScope.COID}"></c:if>
 									<a href="#" style="color: #ff5656;">수정</a>
 									<a href="#" style="color: #ff5656;">삭제</a>
 							</td>

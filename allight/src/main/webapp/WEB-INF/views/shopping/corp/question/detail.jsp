@@ -21,21 +21,65 @@
 		$("#list").click(function(){
 			$(location).attr("href","${pageContext.request.contextPath}/question/list/corp.com")
 		});
+		    
+		//댓글쓰기 
+		$("#wcomm").click(function(){
+			var qno = "${DETAIL.qno}";
+			var qcid =  "${sessionScope.COID}";
+			var qccontent = $("#qccontent").val();
+			var qcdate = "${sessionScope.DATE}";
+			var param = {"qno" : qno, "qcid" : qcid , "qccontent" : qccontent, "qcdate" : qcdate};
+			alert(JSON.stringify(param))
+		$.ajax({
+			type: "post", //데이터를 보낼 방식
+			url: "${pageContext.request.contextPath}/question/wcomment.com", //데이터를 보낼 url
+			data: param, //보낼 데이터
+			dataType: 'text',//받는데이터타입
+			success: function(data){
+		            alert("댓글이 등록되었습니다.");
+		            location.href = "${pageContext.request.contextPath}/question/detail/corp.com?no=${DETAIL.qno}";},
+		    error:function(request,status,error){
+		    	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		             }
+			});
+		});
+		
+		//댓글 삭제
+		$("#dcomm").click(function(){
+			 if(confirm("삭제 하시겠습니까?")){
+				 var qcno = $("#qcno").val();
+				 var param = {"qcno" : qcno}
+			$.ajax({
+				type: "post", //데이터를 보낼 방식
+				url: "${pageContext.request.contextPath}/question/dcomment.com", //데이터를 보낼 url
+				data: param, //보낼 데이터
+				dataType: 'text',
+				success: function(data){
+			            alert("댓글이 삭제되었습니다.");
+			            location.href = "${pageContext.request.contextPath}/question/detail/corp.com?no=${DETAIL.qno}";},
+			    error:function(request,status,error){
+			    	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			             }
+				});
+			}
+		});    
+		
+		
+	        
 	})
 </script>
 </head>
 <body>
 	<div class="container">
-		<!-- 검색창  -->
 		<div class="boardContent">
 			<div class="boardContent-buttons">
 				<form id="form">
 					<input type="button" value="목록" class="btn" id="list">
 					<input type="hidden" value="${DETAIL.qno}" name="no">
-					<c:if test="${DETAIL.qid eq sessionScope.MID}">
+					<c:if test="${DETAIL.qid eq sessionScope.COID}">
 					<input type="button" value="수정" class="btn" id="up">
-					</c:if>
 					<input type="button" value="삭제" class="btn" id="del">
+					</c:if>
 				</form>
 			</div>
 			
@@ -61,11 +105,11 @@
 			<!-- 댓글  -->
 			<div class="boardContent-Comment">
 				<div class="boardContent-Comment-input">
-					<form action="#" method="post" style="text-align: left">
-						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자${sessionScope.MID}</a>&nbsp;&nbsp; 
+					<form style="text-align: left">
+						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자 ${sessionScope.COID}</a>&nbsp;&nbsp; 
 								<a class="board-info-others">작성일 ${sessionScope.DATE}</a></a>
-						<input type="textarea" class="input" placeholder="댓글을 입력하세요" /> 
-						<input type="submit" class="button" value="등록" />
+						<input type="textarea" class="input" id="qccontent" placeholder="댓글을 입력하세요" /> 
+						<input type="button" class="button" id="wcomm" value="등록" />
 					</form>
 				</div>
 		
@@ -76,7 +120,13 @@
 		
 				<div class="boardContent-Comment-Table">
 					<table width="100%" style="border-top: 1px solid gray;">
+						<c:if test="${DETAIL.qcount==0}">
+						<tr>
+							<td>등록된 댓글이 없습니다.</td>
+						</tr>
+						</c:if>
 						<c:forEach items="${COMM}" var="c">
+						<input type="hidden" id="qcno" value="${c.qcno}"/>
 						<tr>
 							<td colspan="100%" class="board-comment-info"><a class="board-info-nick">${c.qcid}</a>&nbsp;&nbsp; 
 								<a class="board-info-others">작성일 ${c.qcdate}</a></td>
@@ -84,9 +134,13 @@
 						<tr>
 							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
-								<c:if test="${c.qcid eq sessionScope.MID}"></c:if>
-									<a href="#" style="color: #ff5656;">수정</a>
-									<a href="#" style="color: #ff5656;">삭제</a>
+								<c:if test="${c.qcid eq sessionScope.COID}">
+									<a id="ucomm" style="color: #ff5656;">수정</a>
+									<a id="dcomm" style="color: #ff5656;">삭제</a>
+								</c:if>
+								<c:if test="${sessionScope.MTYPE == 1 }">
+									<a id="dcomm" style="color: #ff5656;">삭제</a>
+								</c:if>
 							</td>
 						</tr>
 						</c:forEach>

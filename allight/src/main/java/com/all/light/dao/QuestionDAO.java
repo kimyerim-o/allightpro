@@ -12,14 +12,14 @@ import com.all.light.util.PageUtil;
 public class QuestionDAO extends SqlSessionDaoSupport {
 	@Autowired
 	SqlSessionTemplate session;
-	
+	//기업
 	public ArrayList list(PageUtil pinfo) {
 		System.out.println("question.list!!!!!!!!!!"+pinfo);
 		return (ArrayList) session.selectList("question.list", pinfo);
 	}
 
-	public int getTotalCnt(String id) {
-		int totalCnt = session.selectOne("question.totalCnt",id);
+	public int getTotalCntById(String id) {
+		int totalCnt = session.selectOne("question.totalCntById",id);
 		System.out.println(totalCnt);
 		return totalCnt;
 	}
@@ -45,4 +45,42 @@ public class QuestionDAO extends SqlSessionDaoSupport {
 		System.out.println(qdto);
 		session.update("question.update", qdto);
 	}
+
+	//관리자
+	public int getTotalCnt() {
+		int totalCnt = session.selectOne("question.totalCnt");
+		System.out.println(totalCnt);
+		return totalCnt;
+	}
+
+	public int getTotalCntByTitle(String word) {
+		int totalCnt = session.selectOne("question.totalCntByTitle",word);
+		System.out.println(totalCnt);
+		return totalCnt;
+	}
+	public ArrayList<QuestionDTO> listByTitle(PageUtil pinfo) {
+		System.out.println("question.listByTitle"+pinfo);
+		return (ArrayList) session.selectList("question.listByTitle", pinfo);
+	}
+	
+	public int searchPageInfoById(String word) {
+		int totalCnt = session.selectOne("question.totalCntByIdSearch",word);
+		System.out.println(totalCnt);
+		return totalCnt;
+	}
+	public ArrayList<QuestionDTO> listById(PageUtil pinfo) {
+		System.out.println("question.listById"+pinfo);
+		return (ArrayList) session.selectList("question.listById", pinfo);
+	}
+
+	//댓글
+	public void insertComm(QuestionDTO qdto) {
+		session.insert("question.insertComm", qdto);
+	}
+
+	public void deleteComm(QuestionDTO qdto) {
+		session.delete("question.deleteComm", qdto);
+	}
+
+
 }

@@ -11,39 +11,9 @@ public class OrderDTO {
 	private String oaddress2;//상세주소
 	private String otel;
 	private String oreceiver;
-	private String ocouriercompany;//택배회사
 	private String orequirethings;//요구사항
-	private String ostatus;
-	private String oinvoicenumber;//송장번호
-	private int odno;//주문상세번호
-	private int ino;//상품번호
-	private int odamount;//수량
-	private int odprice;//가격
+	private Date searchdate;//찾는 날짜
 	
-	public int getOdno() {
-		return odno;
-	}
-	public void setOdno(int odno) {
-		this.odno = odno;
-	}
-	public int getIno() {
-		return ino;
-	}
-	public void setIno(int ino) {
-		this.ino = ino;
-	}
-	public int getOdamount() {
-		return odamount;
-	}
-	public void setOdamount(int odamount) {
-		this.odamount = odamount;
-	}
-	public int getOdprice() {
-		return odprice;
-	}
-	public void setOdprice(int odprice) {
-		this.odprice = odprice;
-	}
 	public int getOno() {
 		return ono;
 	}
@@ -92,30 +62,26 @@ public class OrderDTO {
 	public void setOreceiver(String oreceiver) {
 		this.oreceiver = oreceiver;
 	}
-	public String getOcouriercompany() {
-		return ocouriercompany;
-	}
-	public void setOcouriercompany(String ocouriercompany) {
-		this.ocouriercompany = ocouriercompany;
-	}
 	public String getOrequirethings() {
 		return orequirethings;
 	}
 	public void setOrequirethings(String orequirethings) {
 		this.orequirethings = orequirethings;
 	}
-	public String getOstatus() {
-		return ostatus;
+	public Date getSearchdate() {
+		return searchdate;
 	}
-	public void setOstatus(String ostatus) {
-		this.ostatus = ostatus;
+	public void setSearchdate(Date searchdate) {
+		this.searchdate = searchdate;
 	}
-	public String getOinvoicenumber() {
-		return oinvoicenumber;
+	
+	@Override
+	public String toString() {
+		return "OrderDTO [ono=" + ono + ", mid=" + mid + ", odate=" + odate + ", oaddno=" + oaddno + ", oaddress1="
+				+ oaddress1 + ", oaddress2=" + oaddress2 + ", otel=" + otel + ", oreceiver=" + oreceiver
+				+ ", orequirethings=" + orequirethings + ", searchdate=" + searchdate + "]";
 	}
-	public void setOinvoicenumber(String oinvoicenumber) {
-		this.oinvoicenumber = oinvoicenumber;
-	}
+	
 	
 	
 }

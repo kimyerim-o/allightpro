@@ -47,7 +47,7 @@
 		});
 		
 		//댓글 삭제
-		$("#dcomm").click(function(){
+		$(".dcomm").click(function(){
 			 if(confirm("삭제 하시겠습니까?")){
 				 var qcno = $("#qcno").val();
 				 var param = {"qcno" : qcno}
@@ -137,11 +137,11 @@
 							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
 								<c:if test="${c.qcid eq sessionScope.COID}">
-									<a id="ucomm" style="color: #ff5656;">수정</a>
-									<a id="dcomm" style="color: #ff5656;">삭제</a>
+									<a class="ucomm" style="color: #ff5656;">수정</a>
+									<a class="dcomm" style="color: #ff5656;">삭제</a>
 								</c:if>
 								<c:if test="${sessionScope.MTYPE == 1 }">
-									<a id="dcomm" style="color: #ff5656;">삭제</a>
+									<a class="dcomm" style="color: #ff5656;">삭제</a>
 								</c:if>
 							</td>
 						</tr>

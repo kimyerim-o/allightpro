@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.CorporationDTO;
+import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.util.PageUtil;
 
@@ -19,7 +20,6 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 	// 쇼핑 해당 카테고리 상품 개수 가져오기
 	public int getTotalCnt(String icategory) {
 		int cnt = session.selectOne("Shopping.totalCnt", icategory);
-		System.out.println("getTotalCnt()-cnt="+cnt);
 		return cnt;
 	}
 
@@ -115,14 +115,17 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		}
 		return list;
 	}
-
+	
+	// ---------상세 페이지--------------------------------------------------------
+	// 상품 상세 정보 가져오기
 	public ShoppingDTO getDetail(int ino) {
 		HashMap<String,Integer> map = new HashMap<String,Integer>();
 		map.put("ino", ino);
 		ShoppingDTO shopDTO = (ShoppingDTO)session.selectOne("Shopping.detailByIno",map);
 		return shopDTO;
 	}
-
+	
+	// 상품 상세 이미지 가져오기
 	public ArrayList<String> getImgs(int ino) {
 		ArrayList<ShoppingDTO> imgList = new ArrayList<ShoppingDTO>();
 		ArrayList<String> list = new ArrayList<String>();
@@ -136,5 +139,64 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		
 		return list;
 	}
+	
+	// 상품 후기 전체 개수 가져오기
+	public int getRTotalCnt(int ino) {
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("ino", ino);
+		int cnt = session.selectOne("Shopping.rTotalCnt", map);
+		return cnt;
+	}
+	
+	// 상품 후기(좋아요 수)가져오기
+	public ArrayList<ReviewDTO> getReview(int ino, PageUtil rPInfo) {
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("ino", ino);
+		map.put("startNo", rPInfo.getStartNo());
+		map.put("endNo", rPInfo.getEndNo());
+		
+		ArrayList<ReviewDTO> list = 
+				(ArrayList)session.selectList("Shopping.rList", map);
+		
+		for(int i=0;i<list.size();i++) {
+			int likeCnt = session.selectOne("Shopping.rLikeCnt",list.get(i).getRno());
+			list.get(i).setRlamount(likeCnt);
+		}
+		
+		return list;
+	}
+	
+	// 해당 아이디의 해당 리뷰에 대한 좋아요 정보 가져오기
+	public int getIsLike(int rno, String mid) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("rno", rno);
+		map.put("mid", mid);
+		
+		int isLike = session.selectOne("Shopping.isLike",map);
+		return isLike;
+	}
+	
+	// 리뷰 좋아요 insert
+	public void rLikeIns(int rno, String mid) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("rno", rno);
+		map.put("mid", mid);
+		
+		int isOk = session.insert("Shopping.reviewIns",map); //1이면 성공/0이면 실패
+		if(isOk==1)System.out.println(rno+"리뷰에 "+mid+"의 좋아요 insert 성공");
+		if(isOk==0)System.out.println("리뷰 좋아요 insert 실패");
+	}
+	
+	// 리뷰 좋아요 delete
+	public void rLikeDel(int rno, String mid) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("rno", rno);
+		map.put("mid", mid);
+		
+		int isOk = session.delete("Shopping.reviewDel",map); //1이면 성공/0이면 실패
+		if(isOk==1)System.out.println(rno+"리뷰에 "+mid+"의 좋아요 delete 성공");
+		if(isOk==0)System.out.println("리뷰 좋아요 delete 실패");
+	}
 
+	
 }

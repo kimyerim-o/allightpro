@@ -86,7 +86,7 @@
                <c:if test="${PINFO.nowPage < PINFO.endPage-3}">
                   <a href="${pageContext.request.contextPath}/shopping/brand.com?brand=${BRAND}&sort=${SORT}&nowPage=${PINFO.nowPage+3}">»</a>
                </c:if>
-               <c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
+               <c:if test="${PINFO.nowPage >= PINFO.endPage-3}">
                   <a href="${pageContext.request.contextPath}/shopping/brand.com?brand=${BRAND}&sort=${SORT}&nowPage=${PINFO.endPage}">»</a>
                </c:if>
             </li>

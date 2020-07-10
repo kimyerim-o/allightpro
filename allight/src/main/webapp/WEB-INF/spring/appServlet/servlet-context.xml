@@ -44,7 +44,9 @@
   	 	<interceptor>
   	 		<!-- 인터셉터가 언제 처리될지 지정 --> 
 		  	<mapping path="/**/admin.com" /> 
-		 	<beans:bean class="com.all.light.util.AdminCheck" /> 
+		 	<beans:bean class="com.all.light.util.AdminCheck" />
+		 	
+		 	<!-- 로그인 인터셉터 http://localhost:9000/allight/shopping/reviewLike.com -->
 	  	</interceptor>
 	</interceptors>
 	 

@@ -23,6 +23,7 @@
    		<typeAlias type="com.all.light.dto.QuestionDTO" alias="queDTO"/>
    		<typeAlias type="com.all.light.dto.CorporationDTO" alias="corDTO"/>
    		<typeAlias type="com.all.light.dto.ShoppingDTO" alias="shopDTO"/>
+   		<typeAlias type="com.all.light.dto.ReviewDTO" alias="reviewDTO"/>
    </typeAliases>
    
    <mappers>

@@ -30,9 +30,15 @@ public class QuestionService {
 	public void insertWrite(QuestionDTO qdto, HttpSession session) {
 		qdto.setQid((String) session.getAttribute("COID"));
 		qdto.setQdate((java.sql.Date) session.getAttribute("DATE"));
-		qesDAO.insertWrite(qdto);		
+		qesDAO.insertWrite(qdto);
 	}
 
+	public void userInsertWrite(QuestionDTO qdto, HttpSession session) {
+		qdto.setQid((String) session.getAttribute("MID"));
+		qdto.setQdate((java.sql.Date) session.getAttribute("DATE"));
+		qesDAO.insertWrite(qdto);
+	}
+	
 	public QuestionDTO detail(QuestionDTO qdto) {
 		return qesDAO.datail(qdto);
 	}
@@ -83,6 +89,22 @@ public class QuestionService {
 
 	public void deleteComm(QuestionDTO qdto) {
 		qesDAO.deleteComm(qdto);
+	}
+
+	//회원 관련 메소드 작성
+	public PageUtil getPageInfoBySearch(int nowPage, String searchWord, String searchType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<QuestionDTO> searchList(PageUtil pinfo, String searchWord, String searchType) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void update(QuestionDTO qdto) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

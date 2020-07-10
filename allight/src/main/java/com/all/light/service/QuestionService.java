@@ -57,6 +57,10 @@ public class QuestionService {
 		PageUtil pinfo = new PageUtil(nowPage, totalCount);
 		return pinfo;
 	}
+	
+	public ArrayList<QuestionDTO> totalList(PageUtil pinfo) {
+		return qesDAO.totalList(pinfo);
+	}
 
 	public PageUtil getPageInfoByTitle(int nowPage, String word) {
 		int totalCount = qesDAO.getTotalCntByTitle(word);
@@ -84,6 +88,7 @@ public class QuestionService {
 	public void deleteComm(QuestionDTO qdto) {
 		qesDAO.deleteComm(qdto);
 	}
+
 
 
 

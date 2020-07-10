@@ -35,6 +35,7 @@ public class QuestionController {
 		String id=(String) session.getAttribute("COID");
 		System.out.println("QuestionController list"+id);
 		PageUtil pinfo = queSVC.getPageInfoById(nowPage,id);
+		pinfo.setSearchWord(id);
 		ArrayList<QuestionDTO> list = queSVC.list(pinfo);
 		mv.addObject("PINFO", pinfo); //페이징 정보
 		mv.addObject("LIST", list); //문의사항 상세 정보
@@ -94,6 +95,7 @@ public class QuestionController {
 	public ModelAndView up(QuestionDTO qdto,HttpSession session,ModelAndView mv) {
 		System.out.println(qdto);
 		queSVC.update(qdto,session);
+		System.out.println(qdto.getQno());
 		RedirectView rv=new RedirectView("../detail/corp.com?no="+qdto.getQno());//상세보기로
 		mv.setView(rv);
 		return mv;
@@ -129,12 +131,12 @@ public class QuestionController {
 	}
 	
 	//관리자
-	//목록
+	//목록 totalList
 	@RequestMapping("/list/admin")
 	public ModelAndView listAdmin(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			HttpSession session, ModelAndView mv) {	
 		PageUtil pinfo = queSVC.getPageInfo(nowPage);
-		ArrayList<QuestionDTO> list = queSVC.list(pinfo);
+		ArrayList<QuestionDTO> list = queSVC.totalList(pinfo);
 		mv.addObject("PINFO", pinfo); //페이징 정보
 		mv.addObject("LIST", list); //문의사항 상세 정보
 		System.out.println(list.toString());
@@ -155,8 +157,6 @@ public class QuestionController {
 			ArrayList<QuestionDTO> list = queSVC.listByTitle(pinfo);
 			mv.addObject("PINFO", pinfo); //페이징 정보
 			mv.addObject("LIST", list); //문의사항 상세 정보
-			System.out.println(list.toString());
-			mv.setViewName("/shopping/admin/question/list");
 		}else if(type.equals("id")) {
 			System.out.println("id");
 			PageUtil pinfo = queSVC.searchPageInfoById(nowPage,word);
@@ -164,9 +164,8 @@ public class QuestionController {
 			ArrayList<QuestionDTO> list = queSVC.listById(pinfo);
 			mv.addObject("PINFO", pinfo); //페이징 정보
 			mv.addObject("LIST", list); //문의사항 상세 정보
-			System.out.println(list.toString());
-			mv.setViewName("/shopping/admin/question/list");
 		}
+		mv.setViewName("/shopping/admin/question/list");
 		return mv;
 	}
 	

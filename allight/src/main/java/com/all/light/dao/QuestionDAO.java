@@ -14,7 +14,6 @@ public class QuestionDAO extends SqlSessionDaoSupport {
 	SqlSessionTemplate session;
 	//기업
 	public ArrayList list(PageUtil pinfo) {
-		System.out.println("question.list!!!!!!!!!!"+pinfo);
 		return (ArrayList) session.selectList("question.list", pinfo);
 	}
 
@@ -52,6 +51,10 @@ public class QuestionDAO extends SqlSessionDaoSupport {
 		System.out.println(totalCnt);
 		return totalCnt;
 	}
+	
+	public ArrayList<QuestionDTO> totalList(PageUtil pinfo) {
+		return (ArrayList) session.selectList("question.totalList", pinfo);
+	}
 
 	public int getTotalCntByTitle(String word) {
 		int totalCnt = session.selectOne("question.totalCntByTitle",word);
@@ -81,6 +84,7 @@ public class QuestionDAO extends SqlSessionDaoSupport {
 	public void deleteComm(QuestionDTO qdto) {
 		session.delete("question.deleteComm", qdto);
 	}
+
 
 
 }

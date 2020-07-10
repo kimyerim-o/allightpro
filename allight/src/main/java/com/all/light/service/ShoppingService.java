@@ -83,6 +83,7 @@ public class ShoppingService {
 	// ------------상세 페이지-----------------------------------------------------
 	// 상품 상세 정보 가져오기
 	public ShoppingDTO getDetail(int ino) {
+		System.out.println("getDetail"+ino);
 		ShoppingDTO shopDTO = shopDAO.getDetail(ino);
 		return shopDTO;
 	}

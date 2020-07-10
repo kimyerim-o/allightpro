@@ -3,8 +3,9 @@ package com.all.light.dto;
 import java.util.Date;
 
 public class OrderDTO {
-	private int ono;//주문번호
+	private int ono;//주문번호seq
 	private String mid;
+	private int mno;
 	private Date odate;//주문날짜
 	private String oaddno;//우편번호
 	private String oaddress1;//주소
@@ -13,6 +14,7 @@ public class OrderDTO {
 	private String oreceiver;
 	private String orequirethings;//요구사항
 	private Date searchdate;//찾는 날짜
+	private String ordernum;
 	
 	public int getOno() {
 		return ono;
@@ -75,13 +77,25 @@ public class OrderDTO {
 		this.searchdate = searchdate;
 	}
 	
+	public int getMno() {
+		return mno;
+	}
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+	public String getOrdernum() {
+		return ordernum;
+	}
+	public void setOrdernum(String ordernum) {
+		this.ordernum = ordernum;
+	}
+	
 	@Override
 	public String toString() {
 		return "OrderDTO [ono=" + ono + ", mid=" + mid + ", odate=" + odate + ", oaddno=" + oaddno + ", oaddress1="
 				+ oaddress1 + ", oaddress2=" + oaddress2 + ", otel=" + otel + ", oreceiver=" + oreceiver
-				+ ", orequirethings=" + orequirethings + ", searchdate=" + searchdate + "]";
+				+ ", orequirethings=" + orequirethings + ", searchdate=" + searchdate + ", ordernum=" + ordernum + "]";
 	}
-	
 	
 	
 }

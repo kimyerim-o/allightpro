@@ -20,7 +20,7 @@
 			<a href="<%=request.getContextPath()%>/notice.com?type=${param.type}&search=${param.search}&nowPage=${param.nowPage}">
 				<input type="button" value="목록" class="btn"></a>
 				
-				<c:if test = "${sessionScope.MID == 'admin'}">
+				<c:if test = "${sessionScope.MTYPE eq 1}">
 					<a href="<%=request.getContextPath()%>/notice/modify/admin.com?nno=${LIST.nno}">
 						<input type="button" value="수정" class="btn" >
 					</a>
@@ -44,7 +44,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="board-content"><div class="board-content-div">${LIST.ncontent }</div></td>
+					<td class="board-content"><div class="board-content-div"><textarea cols="100%" rows="30">${LIST.ncontent }</textarea></div></td>
 				</tr>
 			</table>
 			

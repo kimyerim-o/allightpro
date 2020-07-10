@@ -14,6 +14,7 @@ public class AdminCheck extends HandlerInterceptorAdapter {
 
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("MID");
+		String type = String.valueOf(session.getAttribute("MTYPE"));
 		String uri = request.getServletPath();
 		System.out.println("\n관리자 권한 체크 session.(id) = " + session.getAttribute("MID") + "\nuri = " + uri+"\n");
 
@@ -26,7 +27,7 @@ public class AdminCheck extends HandlerInterceptorAdapter {
 		/* NullPointerException을 방지하기 위해
 		id.equals("") => "".equals(id) 
 		형태로 바꿈*/
-		if (id == null || !"admin".equals(id)) {
+		if (type == null || !"1".equals(type)) {
 			String CP = request.getContextPath();
 			response.sendRedirect(CP + "/fail.com");
 			return false;

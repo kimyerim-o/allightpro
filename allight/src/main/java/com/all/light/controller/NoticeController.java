@@ -3,6 +3,7 @@ package com.all.light.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.all.light.dto.MemberDTO;
 import com.all.light.dto.NoticeDTO;
 import com.all.light.service.NoticeService;
 import com.all.light.util.PageUtil;
 
 @Controller
+@RequestMapping("/notice")
 public class NoticeController {
 
 	@Autowired
 	private NoticeService notSVC;
 	
-	@RequestMapping("/notice")
+	@RequestMapping("")
 	public ModelAndView noticeList(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			@RequestParam(value = "search", required = false) String searchWord,
@@ -43,20 +44,27 @@ public class NoticeController {
 		mv.setViewName("diary/user/notice/noticeList");
 		return mv;
 	}
-	@RequestMapping(value="/noticedetail")
+	
+	//글 상세보기
+	@RequestMapping(value="/detail")
 	public ModelAndView noticeDetail(
 			@RequestParam("nno") int nno,
 			NoticeDTO notDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("\nNoticeController.noticeDetail");
+
+
+		//비즈니스 로직(정보 가져오기, 조회수 증가)
 		notDTO = notSVC.getNotInfo(nno);
+		notSVC.increaseHit(nno,request.getSession());
 		System.out.println("LIST = "+notDTO.toString());
+		
 		//공지 상세 내용 모델 지정
 		mv.addObject("LIST", notDTO); 
 		mv.setViewName("diary/user/notice/noticeDetail");
 		return mv;
 	}
 	
-	@RequestMapping(value="/notice/write/admin", method= RequestMethod.GET)
+	@RequestMapping(value="/write/admin", method= RequestMethod.GET)
 	public ModelAndView noticeWriteGet(
 			ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("\nNoticeController.noticeWrite,"+request.getMethod()+"method");
@@ -64,7 +72,7 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/notice/write/admin", method= RequestMethod.POST)
+	@RequestMapping(value="/write/admin", method= RequestMethod.POST)
 	public ModelAndView noticeWritePost(
 			NoticeDTO notDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("\nNoticeController.noticeWrite,"+request.getMethod()+"method");
@@ -75,7 +83,7 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/notice/modify/admin", method= RequestMethod.GET)
+	@RequestMapping(value="/modify/admin", method= RequestMethod.GET)
 	public ModelAndView noticeModifyGet(
 			NoticeDTO notDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("\nNoticeController.noticeModify,"+request.getMethod()+"method");
@@ -88,7 +96,7 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/notice/modify/admin", method= RequestMethod.POST)
+	@RequestMapping(value="/modify/admin", method= RequestMethod.POST)
 	public ModelAndView noticeModifyPOST(
 			NoticeDTO notDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("\nNoticeController.noticeModify,"+request.getMethod()+"method");
@@ -102,7 +110,7 @@ public class NoticeController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/notice/delete/admin")
+	@RequestMapping(value="/delete/admin")
 	public ModelAndView noticeDelete(
 			NoticeDTO notDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("\nNoticeController.noticeDelete");

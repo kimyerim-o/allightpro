@@ -15,7 +15,7 @@ public class NoticeDAO extends SqlSessionDaoSupport{
 
 
 	public ArrayList<NoticeDTO> searchList(PageUtil pInfo) {
-		return (ArrayList)session.selectList("notice.searchList",pInfo);
+		return (ArrayList)session.selectList("notice.searchList", pInfo);
 	}
 
 
@@ -41,6 +41,11 @@ public class NoticeDAO extends SqlSessionDaoSupport{
 
 	public void notDelete(int nno) {
 		session.delete("notice.notDelete",nno);
+	}
+
+
+	public void increaseHit(int nno) {
+		session.update("notice.hitIncrease", nno);
 	}
 
 }

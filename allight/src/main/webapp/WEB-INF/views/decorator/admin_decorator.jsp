@@ -34,7 +34,7 @@
 				<li class="left_menu_m1">커뮤니티 관리</li>
 				<li><a href="#">자유게시판</a></li>
 				<li><a href="#">문의사항</a></li>
-				<li><a href="#">공지사항</a></li>
+				<li><a href="<%=request.getContextPath()%>/notice.com">공지사항</a></li>
 				<li><a href="#">FAQ</a></li>
 			</ul>
 

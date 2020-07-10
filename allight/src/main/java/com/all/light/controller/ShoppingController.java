@@ -1,14 +1,23 @@
 package com.all.light.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.service.ShoppingService;
 import com.all.light.util.PageUtil;
@@ -127,15 +136,23 @@ public class ShoppingController {
 	
 	
 	//상세페이지 - 한 상품의 상세페이지
-	@RequestMapping("/detail")
+	@RequestMapping(value="/detail", method = RequestMethod.GET)
 	public ModelAndView detail(
 			ModelAndView mv,
 			@RequestParam(value="ino", 
 						  required=false,
-						  defaultValue="0") int ino
+						  defaultValue="0") int ino, 	  //상품번호
+			@RequestParam(value="rNowPage", 
+			  			  required=false,
+			  			  defaultValue="1") int rNowPage, //상품후기 현재 페이지
+			@RequestParam(value="qNowPage", 
+			  			  required=false,
+			  			  defaultValue="1") int qNowPage,  //상품문의 현재 페이지
+			HttpServletRequest request
 			) {
 		System.out.println("ShoppingController-detail()");
 		
+		String mid = (String)request.getSession().getAttribute("MID");
 		//상품번호가 없으면 쇼핑리스트로 돌려보내기
 		if(ino==0) {
 			RedirectView rv = new RedirectView("./list.com");
@@ -143,25 +160,92 @@ public class ShoppingController {
 			return mv;
 		}
 		
+		// 1. 상품 상세 내용
 		ShoppingDTO detail = null;
 		String repreImg = null;
-		ArrayList<String> imgs = new ArrayList<String>();
+		ArrayList<String> imgs = null;
 		
 		detail = shopSVC.getDetail(ino); 	   //상세내용
 		repreImg = shopSVC.getRepreImage(ino); //대표이미지
 		imgs = shopSVC.getImgs(ino);		   //상세이미지
 		
-		System.out.println("detail: "+detail.toString());
-		System.out.println("repreImg: "+repreImg);
-		System.out.println("imgs: "+imgs.toString());
+		// 2. 상품후기
+		ArrayList<ReviewDTO> rList = null;
+		PageUtil rPInfo = shopSVC.getRPageInfo(ino,rNowPage); //상품후기 페이지 정보
+		rList = shopSVC.getReview(ino,rPInfo,mid);	   		  //상품후기 리스트
+		int rTotalCnt = shopSVC.getRTotalCnt(ino); 			  //상품후기 개수
+		
+		
+		// 3. 상품문의
+		
 		
 		// Model
-		mv.addObject("DETAIL",detail);
-		mv.addObject("REPREIMG",repreImg);
-		mv.addObject("IMGS",imgs);
+		mv.addObject("DETAIL",detail);		//상세정보
+		mv.addObject("REPREIMG",repreImg);	//대표이미지
+		mv.addObject("IMGS",imgs);			//상세이미지
+		mv.addObject("RLIST",rList); 		//상품후기 리스트
+		mv.addObject("RSIZE",rTotalCnt); //상품후기 개수
+		mv.addObject("RPINFO",rPInfo);		//상품후기 페이지 정보
 		
 		// View
 		mv.setViewName("shopping/user/shop/detail");
 		return mv;
 	}
+	
+	//상세페이지 리뷰 좋아요 처리
+	@RequestMapping(value="/reviewLike")
+	public ModelAndView reviewLike(
+			ModelAndView mv,
+			@RequestParam(value="ino", 
+						  required=false,
+						  defaultValue="0") int ino, 	  //상품번호
+			@RequestParam(value="rNowPage", 
+			  			  required=false,
+			  			  defaultValue="1") int rNowPage, //상품후기 현재 페이지
+			@RequestParam(value="qNowPage", 
+			  			  required=false,
+			  			  defaultValue="1") int qNowPage,  //상품문의 현재 페이지
+			@RequestParam(value="rno", 
+			  			  required=false,
+			  			  defaultValue="0") int rno,  	    //리뷰글번호
+			HttpServletRequest request
+			) {
+		System.out.println("ShoppingController-reviewLike()");
+		
+		String mid = (String)request.getSession().getAttribute("MID");
+		
+		// 뷰 먼저 설정... 미로그인시 다시 보내려고 
+		String view = Integer.toString(ino);
+		
+		if(rNowPage!=1) {
+			view+="&rNowPage="+Integer.toString(rNowPage);
+		}
+		if(qNowPage!=1) {
+			view+="&qNowPage="+Integer.toString(qNowPage);
+		}
+		
+		if(mid==null) {
+			System.out.println("mid널");
+			RedirectView rv = new RedirectView("./detail.com?ino="+view+"#review");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		//리뷰번호가 없으면 쇼핑리스트로 돌려보내기
+		if(rno==0) {
+			System.out.println("rno 0");
+			RedirectView rv = new RedirectView("./list.com");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		//해당 리뷰넘버에 이 아이디 사람의 좋아요가 있으면 좋아요를 없애고, 해당 리뷰 넘버에 이 아이디 좋아요가 없으면 좋아요 생성
+		shopSVC.reviewLike(rno,mid);
+		
+		// View
+		RedirectView rv = new RedirectView("./detail.com?ino="+view+"#review");
+		mv.setView(rv);
+		return mv;
+	} 
+	
 }

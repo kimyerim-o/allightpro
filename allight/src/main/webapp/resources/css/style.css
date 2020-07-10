@@ -604,3 +604,8 @@ input {
 .aNone {
 	text-decoration: none;
 }
+
+.like {
+	height:20px;
+	vertical-align:top;
+}

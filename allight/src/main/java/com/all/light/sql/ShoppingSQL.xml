@@ -144,5 +144,47 @@
 		where ino = #{ino} and imgrepresent = 0 
 		order by imgno
 	</select>
+	
+	<!-- 상품 리뷰 총 개수 가져오기  -->
+	<select id="rTotalCnt" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from review 
+		where ino = #{ino}
+	</select>
+	
+	<!-- 상품 리뷰 가져오기  -->
+	<select id="rList" resultType="reviewDTO" parameterType="java.util.HashMap">
+		select * from 
+			(select 
+				ROW_NUMBER() OVER (order by rno) as rnum,
+    		 	r.* from review r
+    		 	where r.ino = #{ino})
+		where <include refid="rnum"/>
+	</select>
+	
+	<!-- 상품 리뷰 좋아요 총 카운트 가져오기  -->
+	<select id="rLikeId" resultType="java.lang.String" parameterType="int">
+		select rlid from reviewlike where rno = #{rno}
+	</select>
+	
+	<!-- 상품 리뷰 좋아요 총 카운트 가져오기  -->
+	<select id="rLikeCnt" resultType="int" parameterType="int">
+		select count(*) from reviewlike 
+		where rno=#{rno}
+	</select>
+	
+	<!-- 해당 아이디의 리뷰 좋아요 정보(1아니면0) 가져오기  -->
+	<select id="isLike" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from reviewlike 
+		where rno=#{rno} and rlid = #{mid}
+	</select>
+	
+	<insert id="reviewIns" parameterType="java.util.HashMap">
+		insert into reviewlike
+		values (RLNO_SEQ.nextval,#{mid},#{rno})
+	</insert>
+	
+	<delete id="reviewDel" parameterType="java.util.HashMap">
+		delete from reviewlike where rno=#{rno} and rlid=#{mid}
+	</delete>
 </mapper>
 	

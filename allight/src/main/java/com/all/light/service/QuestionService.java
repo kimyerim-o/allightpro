@@ -1,9 +1,6 @@
 package com.all.light.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -29,7 +26,6 @@ public class QuestionService {
 
 	public void insertWrite(QuestionDTO qdto, HttpSession session) {
 		qdto.setQid((String) session.getAttribute("COID"));
-		qdto.setQdate((java.sql.Date) session.getAttribute("DATE"));
 		qesDAO.insertWrite(qdto);		
 	}
 
@@ -46,8 +42,6 @@ public class QuestionService {
 	}
 
 	public void update(QuestionDTO qdto, HttpSession session) {
-		qdto.setQdate((java.sql.Date) session.getAttribute("DATE"));
-		System.out.println("ser   "+qdto);
 		qesDAO.update(qdto);
 	}
 	

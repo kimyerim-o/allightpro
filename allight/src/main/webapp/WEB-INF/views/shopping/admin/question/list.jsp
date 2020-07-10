@@ -30,6 +30,8 @@
 <body>
 	<div class="container">
 		<div class="searchDiv">
+			<!-- 검색전 -->
+			<c:if test="${empty param.type}">
 			<form id="searchF">
 				<select name="type" class="selectCss">
 					<option value="title">제목</option>
@@ -42,6 +44,30 @@
 			    	</button>
 		    	</div>
 	    	</form>
+	    	</c:if>
+	    	<!-- 검색후 -->
+	    	<c:if test="${!empty param.type}">
+			<form id="searchF">
+				<c:if test="${param.type eq 'title'}">
+				<select name="type" class="selectCss">
+					<option value="title" selected="selected">제목</option>
+					<option value="id">작성자</option>
+				</select>
+				</c:if>
+				<c:if test="${param.type eq 'id'}">
+				<select name="type" class="selectCss">
+					<option value="title">제목</option>
+					<option value="id" selected="selected">작성자</option>
+				</select>
+				</c:if>
+				<div class="shopSearchDiv">
+				    <input type="text" name="word" class="shopTxt" value="${param.word}" required="required"/>
+				    <button type="button" id="searb" class="shopBtn">
+				    	<img src="${pageContext.request.contextPath}/resources/img/search.png" class="shopSearchImg"/>
+			    	</button>
+		    	</div>
+	    	</form>
+	    	</c:if>
 		</div>
 		<table class="table">
 			<tr>

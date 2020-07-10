@@ -77,6 +77,7 @@ public class ShoppingService {
 	}
 
 	public ShoppingDTO getDetail(int ino) {
+		System.out.println("getDetail"+ino);
 		ShoppingDTO shopDTO = shopDAO.getDetail(ino);
 		return shopDTO;
 	}

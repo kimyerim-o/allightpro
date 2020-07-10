@@ -40,7 +40,7 @@
 
 			<ul class="left_menu_box last">
 				<li class="left_menu_m1">기업 문의 관리</li>
-				<li><a href="#">기업 문의</a></li>
+				<li><a href="${pageContext.request.contextPath}/question/list/admin.com">기업 문의</a></li>
 			</ul>
 		</div>
 	</div>

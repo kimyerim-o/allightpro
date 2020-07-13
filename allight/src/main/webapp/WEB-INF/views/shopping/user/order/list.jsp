@@ -9,16 +9,21 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 	$(function(){
+		var no = $("#no").val();
 		//취소 버튼 클릭 시
 		$(".cancel").click(function(){
 			if(confirm("해당 상품을 주문 취소 하시겠습니까?")){
-				$('.canfrm').submit();
+				$('#type').attr('value','cancel');
+				$('#frm').attr('action','./change.com');
+				$('#frm').submit();
 			}
 		});
 		//반품 버튼 클릭 시
 		$(".confirm").click(function(){
-			if(confirm("해당 상품을 구매확정 하시겠습니까?")){
-				$('#confrm').submit();
+			if(confirm("해당 상품을 구매확정 하시겠습니까? 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")){
+				$('#type').attr('value','confirm');
+				$('#frm').attr('action','./change.com');
+				$('#frm').submit();
 			}
 		});
 	        
@@ -26,7 +31,6 @@
 </script>
 </head>
 <body>
-<form>
 	<div class="mem_right">
 		<!--마이페이지 내용 영역-->
 		<!--타이틀-->
@@ -86,7 +90,7 @@
 								<strong>주문번호&nbsp;<a href="....?orderno=${odto.ono}"
 									class="order_num"><em class="order_fcT1">${odto.ordernum}${odto.mno}${odto.ono}</em></a></strong><em
 									class="fc999 fs12 ml13">(${odto.ordernum})</em> <span
-									class="order_r"><a href="....?orderno=${odto.ono}"
+									class="order_r"><a href="./detail.com?no=${odto.ono}"
 									class="order_btn_view">주문상세보기 &gt;</a></span>
 							</div>
 						</th>
@@ -94,7 +98,6 @@
 				</thead>
 			<tbody>
 				<c:forEach items="${ORDER.oddto}" var="oddto">
-				<c:set value="${oddto.ono}" var="ono" />
 				<c:if test="${odto.ono eq oddto.ono}">
 						<tr class="last">
 						<c:set var="done" value="false"/>
@@ -102,7 +105,7 @@
 							<c:if test="${not done}">
 							<c:if test="${sdto.ino eq oddto.ino}">
 							<td class="order_thmb"><a href="#?"
-								onclick="hitRecentLog('12189');"> <img alt="temp thmb"
+								onclick="hitRecentLog('12189');"> <img alt="temp_thmb"
 									src="${sdto.imgimage}" class="product-image"></a></td>
 								<td class="order_info" colspan="3"><a class="order_deal"
 									href="/goods/view.asp?g=12189" onclick="hitRecentLog('12189');">${sdto.iname}</a>
@@ -115,6 +118,10 @@
 										</span></li>
 
 									</ul> <!-- //옵션명 노출--></td>
+									<form id="frm">
+										<input type="text" name="no" value="${oddto.odno}"/>
+										<input type="text" name="type" id="type"/>
+									</form>
 								<!-- 결제완료, 배송준비중 -->
 									<td class="order_amount">
 										<c:if test="${oddto.ostatus eq '배송준비중' or oddto.ostatus eq '결제완료'}">
@@ -122,7 +129,6 @@
 											<li class="order_pay_info qq-9">${oddto.ostatus}</li>
 											<li class="mb5"><a class="cancel"
 												class="order_btn_write" style="cursor: pointer;">주문취소</a></li>
-												<form class="canfrm" action="./change.com?no=${oddto.ono}&type=cancel"/>
 											</ul>
 										</c:if>
 									<!-- 배송시작, 배송완료 -->
@@ -136,7 +142,6 @@
 		
 												<li class="mb5"><a class="confirm"
 													class="order_btn_write" style="cursor: pointer;">구매확정</a></li>
-													<form class="confrm" action="./change.com?no=${oddto.ono}&type=confirm"/>
 											</ul>
 									</c:if>	
 									<!-- 구매확정 -->							
@@ -165,6 +170,5 @@
 			</c:forEach>
 		</table>
 	</div>
-</form>
 </body>
 </html>

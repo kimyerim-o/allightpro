@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.MemberDTO;
 import com.all.light.dto.OrderDTO;
+import com.all.light.dto.OrderData;
 import com.all.light.dto.OrderdetailDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.util.PageUtil;
@@ -26,7 +27,7 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	}
 
 	public ArrayList<ShoppingDTO> iteminfo(int ino) {
-		return (ArrayList)session.selectOne("order.iteminfo",ino);
+		return (ArrayList)session.selectList("order.iteminfo",ino);
 	}
 	/*public String getRepreImage(int ino) {
 		HashMap<String,Object> map = new HashMap<String,Object>(); 
@@ -50,8 +51,8 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		session.update("order.check",mdto);
 	}
 
-	public int getTotalCntById(String cono) {
-		int totalCnt = session.selectOne("order.totalCntById",cono);
+	public int pageMemberId(String cono) {
+		int totalCnt = session.selectOne("order.pageMemberId",cono);
 		System.out.println(totalCnt);
 		return totalCnt;
 	}
@@ -61,6 +62,21 @@ public class OrderDAO extends SqlSessionDaoSupport {
 
 	public void stock(ShoppingDTO sdto) {
 		session.update("order.stock",sdto);
+	}
+
+	public int pageOrderCono(String cono) {
+		int totalCnt = session.selectOne("order.pageOrderCono",cono);
+		System.out.println(totalCnt);
+		return totalCnt;
+	}
+
+	public int pageOrderConoTerm(String cono, String term) {
+		HashMap map=new HashMap();
+		map.put("cono", cono);
+		map.put("term", term);
+		int totalCnt = session.selectOne("order.pageOrderCono",map);
+		System.out.println(totalCnt);
+		return totalCnt;
 	}
 
 	

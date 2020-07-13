@@ -33,28 +33,7 @@ public class OrderController {
 		OrderData data=ordSVC.list(session,odata,odto,oddto,sdto,term);
 		System.out.println("OrderController"+data);
 		mv.addObject("ORDER", data);
-		
-		
-/*		ArrayList<OrderDTO> list=ordSVC.list(session,odto,term);
-		System.out.println(list);
-		mv.addObject("LIST", list);//주문
-		for(int i=0;i<list.size();i++) {
-			//System.out.println("LIST"+i+"///"+list.get(i));
-			oddto.setOno(list.get(i).getOno());
-			ArrayList<OrderdetailDTO> listde=ordSVC.listde(session,oddto,term);
-			System.out.println(listde);
-			mv.addObject("LISTDE", listde);//상세주문
-			for(int j=0;j<listde.size();j++) {
-				//System.out.println("LISTDE"+j+"///"+listde.get(j));
-				int ino=listde.get(j).getIno();
-				ShoppingDTO detail = ordSVC.getDetail(ino); //상세내용
-				String img = ordSVC.getRepreImage(ino); //대표이미지
-				detail.setImgimage(img);
-				System.out.println(detail);
-				mv.addObject("DETAIL",detail);
-				//System.out.println("DETAIL"+j+"///"+detail);
-			}
-		}*/
+		System.out.println("OrderController"+data);
 		mv.setViewName("shopping/user/order/list");
 		return mv;
 	}
@@ -109,26 +88,11 @@ public class OrderController {
 	}
 	
 	//기업
-	//주문관리 리스트 페이징, 기간(년월일)  - select * from orderdetail where ino in (select ino from item where cono=?)
-	
-	
-	//주문관리 상세 - select * from orders where ono=(select ono from orderdatail where odno=?)
-	
-	
-	//주문관리 현황 변경
-	
-	
-	//취소 반품 리스트 페이징,기간(년월일) ,type o,x- select * from orderdetail where ino in (select ino from item where cono=?) and ostatus in ('취소','반품')
-
-	
-	//취소 반품리스트
-	
-	
 	//재고관리 리스트
 	@RequestMapping("/stocklist")
 	public ModelAndView stocklist(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,HttpSession session, ModelAndView mv) {
 		String cono=(String) session.getAttribute("CONO");
-		PageUtil pinfo = ordSVC.getPageInfoById(nowPage,cono);
+		PageUtil pinfo = ordSVC.pageMemberId(nowPage,cono);
 		ArrayList<ShoppingDTO> list =ordSVC.stocklist(cono,pinfo);
 		mv.addObject("PINFO",pinfo);
 		mv.addObject("LIST",list);
@@ -145,5 +109,30 @@ public class OrderController {
 		mv.setView(rv);
 		return mv;
 	}
+	
+	//아직미완성!!!!!!!!!!
+	//주문관리 리스트 페이징, 기간(년월일)  - select * from orderdetail where ino in (select ino from item where cono=?)
+	@RequestMapping("/list/corp")
+	public ModelAndView listcorp(@RequestParam(value = "term", required = false) String term,
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			HttpSession session, ModelAndView mv) {
+		String cono=(String) session.getAttribute("CONO");
+		PageUtil pinfo = ordSVC.pageOrderCono(nowPage,cono,term);
+		//ordSVC.listcorp(session);
+		//System.out.println("OrderController"+data);
+		//mv.addObject("ORDER", data);
+		return mv;
+	}
+	
+	//주문관리 상세 - select * from orders where ono=(select ono from orderdatail where odno=?)
+	
+	
+	//주문관리 현황 변경
+	
+	
+	//취소 반품 리스트 페이징,기간(년월일) ,type o,x- select * from orderdetail where ino in (select ino from item where cono=?) and ostatus in ('취소','반품')
+
+	
+	
 	
 }

@@ -9,6 +9,7 @@ public class OrderdetailDTO {
 	private String ostatus;//현황
 	private int odamount;//수량
 	private int odprice;//가격
+	
 	public int getOno() {
 		return ono;
 	}

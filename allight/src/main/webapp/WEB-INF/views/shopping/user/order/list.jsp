@@ -17,8 +17,8 @@
 		});
 		//반품 버튼 클릭 시
 		$(".confirm").click(function(){
-			if(confirm("해당 상품을 구매확정 하시겠습니까?")){
-				$('#confrm').submit();
+			if(confirm("해당 상품을 구매확정 하시겠습니까? 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")){
+				$('.confrm').submit();
 			}
 		});
 	        
@@ -122,7 +122,9 @@
 											<li class="order_pay_info qq-9">${oddto.ostatus}</li>
 											<li class="mb5"><a class="cancel"
 												class="order_btn_write" style="cursor: pointer;">주문취소</a></li>
-												<form class="canfrm" action="./change.com?no=${oddto.ono}&type=cancel"/>
+												<form id="canfrm" action="./change.com?no=${oddto.ono}&type=cancel">
+													<input name="no" value="${oddto.ono}">
+												</form>
 											</ul>
 										</c:if>
 									<!-- 배송시작, 배송완료 -->
@@ -136,7 +138,9 @@
 		
 												<li class="mb5"><a class="confirm"
 													class="order_btn_write" style="cursor: pointer;">구매확정</a></li>
-													<form class="confrm" action="./change.com?no=${oddto.ono}&type=confirm"/>
+													<form class="confrm" action="./change.com?no=${oddto.ono}&type=confirm">
+														<input type="hidden" name="no" value="${oddto.ono}">
+													</form>
 											</ul>
 									</c:if>	
 									<!-- 구매확정 -->							

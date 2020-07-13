@@ -7,6 +7,11 @@ public class OrderData {
 	private ArrayList<OrderdetailDTO> oddto;
 	private ArrayList<ShoppingDTO> sdto;
 		
+	public OrderData(ArrayList<OrderDTO> list, ArrayList<OrderdetailDTO> listde, ArrayList<ShoppingDTO> shop) {
+		this.odto=list;
+		this.oddto=listde;
+		this.sdto=sdto;
+	}
 	public ArrayList<OrderDTO> getOdto() {
 		return odto;
 	}
@@ -24,6 +29,10 @@ public class OrderData {
 	}
 	public void setSdto(ArrayList<ShoppingDTO> sdto) {
 		this.sdto = sdto;
+	}
+	@Override
+	public String toString() {
+		return "OrderData [odto=" + odto + "\n, oddto=" + oddto + ",\n sdto=" + sdto + "]";
 	}
 	
 	

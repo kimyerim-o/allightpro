@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,15 +10,15 @@
 <script>
 	$(function(){
 		//취소 버튼 클릭 시
-		$("#cancel").click(function(){
+		$(".cancel").click(function(){
 			if(confirm("해당 상품을 주문 취소 하시겠습니까?")){
-				$(location).attr("action","${pageContext.request.contextPath}/order/change.com?no=${listde.ostatus}&type=cancel");
+				$('.canfrm').submit();
 			}
 		});
 		//반품 버튼 클릭 시
-		$("#return").click(function(){
-			if(confirm("해당 상품을 반품 하시겠습니까?")){
-				$(location).attr("action","${pageContext.request.contextPath}/order/check.com?no=${listde.ostatus}&type=return");
+		$(".confirm").click(function(){
+			if(confirm("해당 상품을 구매확정 하시겠습니까?")){
+				$('#confrm').submit();
 			}
 		});
 	        
@@ -77,84 +78,90 @@
 				<col width="140">
 				<col width="200">
 			</colgroup>
-			<c:forEach items="${LIST}" var="list">
+			<c:forEach items="${ORDER.odto}" var="odto">
 				<thead>
 					<tr>
 						<th colspan="5" scope="col">
 							<div>
-								<strong>주문번호&nbsp;<a href="....?orderno=${list.ono}"
-									class="order_num"><em class="order_fcT1">${list.odate}${list.mno}${list.ono}</em></a></strong><em
-									class="fc999 fs12 ml13">(${list.odate})</em> <span
-									class="order_r"><a href="....?orderno=${list.ono}"
+								<strong>주문번호&nbsp;<a href="....?orderno=${odto.ono}"
+									class="order_num"><em class="order_fcT1">${odto.ordernum}${odto.mno}${odto.ono}</em></a></strong><em
+									class="fc999 fs12 ml13">(${odto.ordernum})</em> <span
+									class="order_r"><a href="....?orderno=${odto.ono}"
 									class="order_btn_view">주문상세보기 &gt;</a></span>
 							</div>
 						</th>
 					</tr>
 				</thead>
-				<c:forEach items="${LISTDE}" var="listde">
-					<tbody>
+			<tbody>
+				<c:forEach items="${ORDER.oddto}" var="oddto">
+				<c:set value="${oddto.ono}" var="ono" />
+				<c:if test="${odto.ono eq oddto.ono}">
 						<tr class="last">
-							<c:forEach items="${DETAIL}" var="detail">
+						<c:set var="done" value="false"/>
+							<c:forEach items="${ORDER.sdto}" var="sdto">
+							<c:if test="${not done}">
+							<c:if test="${sdto.ino eq oddto.ino}">
 							<td class="order_thmb"><a href="#?"
 								onclick="hitRecentLog('12189');"> <img alt="temp thmb"
-									src="${detail.imgimage}">
-							</a></td>
+									src="${sdto.imgimage}" class="product-image"></a></td>
 								<td class="order_info" colspan="3"><a class="order_deal"
-									href="/goods/view.asp?g=12189" onclick="hitRecentLog('12189');">${detail.iname}</a>
-									<p class="order_deal_info">${detail.idetail}</p> <!-- 옵션명 노출-->
+									href="/goods/view.asp?g=12189" onclick="hitRecentLog('12189');">${sdto.iname}</a>
+									<p class="order_deal_info">${sdto.idetail}</p> <!-- 옵션명 노출-->
 									<ul class="order_option_area">
 
-										<li><span class="order_option">${detail.iprice}</span>
-										<span class="order_option_cnt"> <span class="order_option_input">${listde.odamount}</span>
-										</span> <span class="order_option_amounts"> <em>${detail.iprice}*${listde.odamount}</em>원
+										<li><span class="order_option">${sdto.iprice} X </span>
+										<span class="order_option_cnt"> <span class="order_option_input">${oddto.odamount} = </span>
+										</span> <span class="order_option_amounts"> <em>${oddto.odprice}</em>원
 										</span></li>
 
 									</ul> <!-- //옵션명 노출--></td>
 								<!-- 결제완료, 배송준비중 -->
-								<c:if test="${listde.ostatus}">
 									<td class="order_amount">
-										<ul>
-											<li class="order_pay_info qq-9">${listde.ostatus}</li>
-											<li class="mb5"><a id="cancle"
+										<c:if test="${oddto.ostatus eq '배송준비중' or oddto.ostatus eq '결제완료'}">
+											<ul>
+											<li class="order_pay_info qq-9">${oddto.ostatus}</li>
+											<li class="mb5"><a class="cancel"
 												class="order_btn_write" style="cursor: pointer;">주문취소</a></li>
-										</ul>
+												<form class="canfrm" action="./change.com?no=${oddto.ono}&type=cancel"/>
+											</ul>
+										</c:if>
+									<!-- 배송시작, 배송완료 -->
+									<c:if test="${oddto.ostatus eq '배송시작' or oddto.ostatus eq '배송완료'}">
+											<ul>
+												<li class="order_pay_info qq-9">${oddto.ostatus}</li>
+		
+												<li class="mb5"><a
+													onclick="delivery_view('택배회사','송장번호');"
+													class="order_btn_delcheck" style="cursor: pointer;">배송조회</a></li>
+		
+												<li class="mb5"><a class="confirm"
+													class="order_btn_write" style="cursor: pointer;">구매확정</a></li>
+													<form class="confrm" action="./change.com?no=${oddto.ono}&type=confirm"/>
+											</ul>
+									</c:if>	
+									<!-- 구매확정 -->							
+									<c:if test="${oddto.ostatus eq '구매확정'}">
+											<ul>
+												<li class="order_pay_info qq-9">${oddto.ostatus}</li>
+		
+												<li class="mb5"><a
+													onclick="delivery_view('택배회사','송장번호');"
+													class="order_btn_delcheck" style="cursor: pointer;">배송조회</a></li>
+		
+												<li class="mb5"><a
+													href="mem_goods_review_write.asp?orderno=202004052091881&amp;g=12189&amp;vtab=O"
+													class="order_btn_write" style="cursor: pointer;">상품 리뷰 쓰기</a></li>
+											</ul>
+									</c:if>
 									</td>
-								</c:if>
-								<!-- 배송시작, 배송완료 -->
-								<c:if test="${listde.ostatus}">
-									<td class="order_amount">
-										<ul>
-											<li class="order_pay_info qq-9">${listde.ostatus}</li>
-	
-											<li class="mb5"><a
-												onclick="delivery_view('택배회사','송장번호');"
-												class="order_btn_delcheck" style="cursor: pointer;">배송조회</a></li>
-	
-											<li class="mb5"><a id="return"
-												class="order_btn_write" style="cursor: pointer;">반품</a></li>
-										</ul>
-									</td>
-								</c:if>	
-								<!-- 구매확정 -->							
-								<c:if test="${listde.ostatus}">
-									<td class="order_amount">
-										<ul>
-											<li class="order_pay_info qq-9">${detail.ostatus}</li>
-	
-											<li class="mb5"><a
-												onclick="delivery_view('택배회사','송장번호');"
-												class="order_btn_delcheck" style="cursor: pointer;">배송조회</a></li>
-	
-											<li class="mb5"><a
-												href="mem_goods_review_write.asp?orderno=202004052091881&amp;g=12189&amp;vtab=O"
-												class="order_btn_write" style="cursor: pointer;">상품 리뷰 쓰기</a></li>
-										</ul>
-									</td>
-								</c:if>
+									<c:set var="done" value="true"/>
+									</c:if>
+							</c:if>
 							</c:forEach>	
 						</tr>
+					</c:if>
+					</c:forEach>
 					</tbody>
-				</c:forEach>
 			</c:forEach>
 		</table>
 	</div>

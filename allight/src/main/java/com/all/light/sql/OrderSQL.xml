@@ -13,8 +13,8 @@
 	select * from orderdetail where ono=${ono}
 	</select>
 	
-	<select id="iteminfo">
-	select * from item,image where item.ino=image.ino and item.ino=#{ino} and image.imgrepresent=1; 
+	<select id="iteminfo" resultType="shopDTO">
+	select * from item,image where item.ino=image.ino and item.ino=#{ino} and image.imgrepresent=1
 	</select>
 	
 	<update id="change" parameterType="java.util.HashMap">
@@ -25,8 +25,8 @@
 	update member set 
 	</update>
 	
-	<select id="totalCntById" parameterType="string" resultType="shopDTO">
-	select count(*) from item where cono=#{cono}
+	<select id="pageMemberId" resultType="shopDTO">
+	select count(*) from item where cono='#{cono}'
 	</select>
 	
 	<select id="stocklist" parameterType="PageUtil" resultType="shopDTO">
@@ -37,6 +37,10 @@
 	update item set istock=#{istock} where ino=#{ino}
 	</update>
 	
-<!-- 기업 -->	
+<!-- 기업 -->
+	<select id="pageOrderCono" resultType="shopDTO">
+	select count(*) from orderdetail where ino in (select ino from item where cono=#{cono})
+	</select>
+	
 </mapper>
 	

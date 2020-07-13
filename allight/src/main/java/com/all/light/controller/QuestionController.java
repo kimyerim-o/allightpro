@@ -34,10 +34,12 @@ public class QuestionController {
 		return mv;
 	}
 	@RequestMapping(value="/write", method= RequestMethod.POST)
-	public ModelAndView userWritePost(QuestionDTO qdto, ModelAndView mv, HttpServletRequest request) {
+	public ModelAndView userWritePost(QuestionDTO qdto, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("USER/question/write, "+request.getMethod()+"method");
+		System.out.println(qdto);
 		queSVC.userInsertWrite(qdto, request.getSession());
-		mv.setViewName("diary/user/question/questionList");
+		rv.setUrl(request.getContextPath()+"/question/list.com");
+		mv.setView(rv);
 		return mv;
 	}
 	//목록보기
@@ -62,7 +64,8 @@ public class QuestionController {
 	public ModelAndView detail(
 			@RequestParam("no") int qno,
 			QuestionDTO qdto, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
-		System.out.println("\nNoticeController.noticeDetail");
+		qdto.setQno(qno);
+		System.out.println("\nNoticeController.noticeDetail.QuestionDTO = "+qdto);
 		QuestionDTO de=queSVC.detail(qdto);//게시글
 		ArrayList<QuestionDTO> decomm=queSVC.detailcomm(qdto);//댓글
 		mv.addObject("DETAIL",de);//게시글
@@ -72,13 +75,12 @@ public class QuestionController {
 		mv.setViewName("diary/user/question/questionDetail");
 		return mv;
 	}
-	
 	//수정
-	@RequestMapping(value="/modify", method= RequestMethod.GET)
+	@RequestMapping(value="/update", method= RequestMethod.GET)
 	public ModelAndView modifyGET(
 			@RequestParam(value = "no", required = true) int qno,
 			QuestionDTO qdto,ModelAndView mv, HttpServletRequest request) {
-		System.out.println("USER/question/modify, "+request.getMethod()+"method");
+		System.out.println("USER/question/update, "+request.getMethod()+"method");
 		qdto.setQno(qno);
 		QuestionDTO de=queSVC.detail(qdto);//게시글
 		mv.addObject("DETAIL",de);//게시글
@@ -86,13 +88,26 @@ public class QuestionController {
 		mv.setViewName("diary/user/question/questionModify");
 		return mv;
 	}
-	
-	@RequestMapping(value="/modify", method= RequestMethod.POST)
+	@RequestMapping(value="/update", method= RequestMethod.POST)
 	public ModelAndView modifyPOST(
 			@RequestParam(value = "no", required = true) int qno,
-			QuestionDTO qdto,ModelAndView mv, HttpServletRequest request) {
-		System.out.println("USER/question/modify, "+request.getMethod()+"method");
+			QuestionDTO qdto,ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("USER/question/update, "+request.getMethod()+"method");
+		System.out.println(qno+" "+qdto);
 		queSVC.update(qdto);
+		rv.setUrl(request.getContextPath()+"/question/list.com");
+		mv.setView(rv);
+		return mv;
+	}
+	//삭제
+	@RequestMapping("/delete")
+	public ModelAndView delete(
+			@RequestParam(value = "no", required = true) int qno,
+			ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("USER/question/delete");
+		queSVC.delete(qno);
+		rv.setUrl(request.getContextPath()+"/question/list.com");
+		mv.setView(rv);
 		return mv;
 	}
 	
@@ -199,7 +214,45 @@ public class QuestionController {
 		return "shopping/corp/question/check";
 	}
 	
-	//관리자
+	//관리자(유저 단 7.13추가)
+	//목록보기(유저)
+	@RequestMapping("/list/user/admin")
+	public ModelAndView listUserAdmin(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			HttpSession session, ModelAndView mv) {	
+		PageUtil pinfo = queSVC.getPageInfoUser(nowPage);
+		ArrayList<QuestionDTO> list = queSVC.totalListUser(pinfo);
+		mv.addObject("PINFO", pinfo); //페이징 정보
+		mv.addObject("LIST", list); //문의사항 상세 정보
+		System.out.println(list.toString());
+		mv.setViewName("diary/admin/question/questionList");
+		return mv;
+	}
+	//상세보기
+	@RequestMapping("/detail/user/admin")
+	public ModelAndView detailUserAdmin(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
+		qdto.setQno(qno);
+		System.out.println(qdto);
+		QuestionDTO de=queSVC.detail(qdto);//게시글
+		ArrayList<QuestionDTO> decomm=queSVC.detailcomm(qdto);//댓글
+		mv.addObject("DETAIL",de);//게시글
+		mv.addObject("COMM",decomm);//댓글
+		System.out.println(de);
+		System.out.println(decomm);
+		mv.setViewName("diary/admin/question/questionDetail");
+		return mv;
+	}
+	//삭제
+	@RequestMapping("/delete/user/admin")
+	public ModelAndView deleteUserAdmin(@RequestParam(value = "no", required = true) int qno,
+			QuestionDTO qdto,ModelAndView mv, RedirectView rv, HttpServletRequest request ) {
+		System.out.println(qdto);
+		qdto.setQno(qno);
+		queSVC.delete(qdto);
+		rv.setUrl(request.getContextPath()+"/question/list/user/admin.com");
+		mv.setView(rv);
+		return mv;
+	}
+	
 	//목록 totalList
 	@RequestMapping("/list/admin")
 	public ModelAndView listAdmin(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,

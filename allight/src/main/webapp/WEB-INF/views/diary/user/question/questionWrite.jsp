@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<% Date now = new Date(); 
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +43,7 @@
 					<td class="board-info"><a class="board-info-nick">작성자</a></td>
 					<td class="board-info"><a class="board-info-nick">${sessionScope.MID}</a></td>
 					<td class="board-info"><a class="board-info-others">작성일 </a></td>
-					<td class="board-info"><a class="board-info-others">${sessionScope.DATE}</a></td>
+					<td class="board-info"><a class="board-info-others"><%=sf.format(now) %></a></td>
 				</tr>
 				<tr>
 					<td class="board-content" colspan="4">

@@ -9,6 +9,7 @@ public class OrderdetailDTO {
 	private String ostatus;//현황
 	private int odamount;//수량
 	private int odprice;//가격
+	private String type;
 	
 	public int getOno() {
 		return ono;
@@ -63,6 +64,12 @@ public class OrderdetailDTO {
 		return "OrderdetailDTO [ono=" + ono + ", odno=" + odno + ", ino=" + ino + ", ocouriercompany=" + ocouriercompany
 				+ ", oinvoicenumber=" + oinvoicenumber + ", ostatus=" + ostatus + ", odamount=" + odamount
 				+ ", odprice=" + odprice + "]";
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	

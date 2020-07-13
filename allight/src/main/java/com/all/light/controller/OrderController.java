@@ -40,20 +40,20 @@ public class OrderController {
 	
 	//주문상세조회
 	@RequestMapping("/detail")
-	public ModelAndView detail(@RequestParam(value = "term", required = false, defaultValue = "m1") int term,
-			HttpSession session, ModelAndView mv) {
-		String id=(String) session.getAttribute("MID");
-		//ordSVC.list();
+	public ModelAndView detail(@RequestParam(value = "no", required = true) String ono,
+			OrderDTO odto,OrderdetailDTO oddto,OrderData odata,HttpSession session, ModelAndView mv) {
+		OrderData data=ordSVC.detail(odata,odto,oddto,ono);
+		mv.addObject("ORDER", data);
 		mv.setViewName("shopping/user/order/detail");
 		return mv;
 	}
 	
 	//주문취소및반품조회 
 	@RequestMapping("/back") //type o,x
-	public ModelAndView back(@RequestParam(value = "type", required = false) int type,
-			HttpSession session, ModelAndView mv) {
-		String id=(String) session.getAttribute("MID");
-		//ordSVC.back(type);
+	public ModelAndView back(@RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "term", required = false, defaultValue = "m1") String term,
+			OrderDTO odto,OrderdetailDTO oddto,ShoppingDTO sdto,OrderData odata,HttpSession session, ModelAndView mv) {
+		ordSVC.back(session,odata,odto,oddto,sdto,type,term);
 		mv.setViewName("shopping/user/order/backlist");
 		return mv;
 	}
@@ -61,8 +61,9 @@ public class OrderController {
 	//상태 변경
 	@RequestMapping("/change")
 	public ModelAndView change(@RequestParam(value = "no", required = true) int no,
-			@RequestParam(value = "type", required = true) int type,
+			@RequestParam(value = "type", required = true) String type,
 			HttpSession session, ModelAndView mv) {
+		System.out.println("change "+no+" change "+type);
 		ordSVC.change(no,type,session);
 		RedirectView rv =new RedirectView("./list.com");
 		return mv;
@@ -78,7 +79,7 @@ public class OrderController {
 	//취소반품시 계좌확인
 	@RequestMapping("/check")
 	public ModelAndView check(@RequestParam(value = "no", required = true) int no,
-			@RequestParam(value = "type", required = true) int type,MemberDTO mdto,
+			@RequestParam(value = "type", required = true) String type,MemberDTO mdto,
 			HttpSession session, ModelAndView mv) {
 		int mno=(Integer) session.getAttribute("MNO");
 		ordSVC.check(mno,mdto);//

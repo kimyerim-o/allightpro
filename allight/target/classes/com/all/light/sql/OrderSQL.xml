@@ -9,16 +9,24 @@
 	</select>
 	
 	<!-- 목록보기orderde -->
-	<select id="listde" resultType="orddeDTO" parameterType="orddeDTO">
-	select * from orderdetail where ono=${ono}
+	<select id="listde" resultType="orddeDTO">
+	select * from orderdetail where ono=#{ono} and OSTATUS not in ('주문취소','반품')
 	</select>
 	
 	<select id="iteminfo" resultType="shopDTO">
 	select * from item,image where item.ino=image.ino and item.ino=#{ino} and image.imgrepresent=1
 	</select>
 	
+	<select id="detail" resultType="ordDTO">
+	select * from orders where ono=#{ono}
+	</select>
+	
+	<select id="listde" resultType="orddeDTO">
+	select * from orderdetail where ono=#{ono} and OSTATUS not in #{type}
+	</select>
+	
 	<update id="change" parameterType="java.util.HashMap">
-	update orderdetail set ostatus=#{type} where odno=#{no}
+	update orderdetail set ostatus='#{type}' where odno=#{no}
 	</update>
 	
 	<update id="check" parameterType="memDTO">

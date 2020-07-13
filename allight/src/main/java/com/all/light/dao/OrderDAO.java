@@ -29,18 +29,8 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	public ArrayList<ShoppingDTO> iteminfo(int ino) {
 		return (ArrayList)session.selectList("order.iteminfo",ino);
 	}
-	/*public String getRepreImage(int ino) {
-		HashMap<String,Object> map = new HashMap<String,Object>(); 
-		map.put("ino", ino);
-		return (String)session.selectOne("Shopping.getRepreImage",map);
-	}
-	public ArrayList<ShoppingDTO> getDetail(int ino) {
-		HashMap<String,Object> map = new HashMap<String,Object>(); 
-		map.put("ino", ino);
-		return (ArrayList)session.selectOne("Shopping.detailByIno",map);
-	}*/
 
-	public void change(int no, int type) {
+	public void change(int no, String type) {
 		HashMap map=new HashMap();
 		map.put("no", no);
 		map.put("type", type);
@@ -49,6 +39,10 @@ public class OrderDAO extends SqlSessionDaoSupport {
 
 	public void check(int mno, MemberDTO mdto) {
 		session.update("order.check",mdto);
+	}
+	
+	public ArrayList<OrderdetailDTO> back(OrderdetailDTO oddto) {
+		return (ArrayList)session.selectList("order.back", oddto);
 	}
 
 	public int pageMemberId(String cono) {
@@ -77,6 +71,14 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		int totalCnt = session.selectOne("order.pageOrderCono",map);
 		System.out.println(totalCnt);
 		return totalCnt;
+	}
+
+	public ArrayList<OrderDTO> detail(String ono) {
+		return (ArrayList)session.selectList("order.detail", ono);
+	}
+
+	public ArrayList<OrderdetailDTO> detailde(String ono) {
+		return (ArrayList)session.selectList("order.listde", ono);
 	}
 
 	

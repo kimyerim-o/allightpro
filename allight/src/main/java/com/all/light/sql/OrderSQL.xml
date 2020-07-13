@@ -12,5 +12,31 @@
 	<select id="listde" resultType="orddeDTO" parameterType="orddeDTO">
 	select * from orderdetail where ono=${ono}
 	</select>
+	
+	<select id="iteminfo">
+	select * from item,image where item.ino=image.ino and item.ino=#{ino} and image.imgrepresent=1; 
+	</select>
+	
+	<update id="change" parameterType="java.util.HashMap">
+	update orderdetail set ostatus=#{type} where odno=#{no}
+	</update>
+	
+	<update id="check" parameterType="memDTO">
+	update member set 
+	</update>
+	
+	<select id="totalCntById" parameterType="string" resultType="shopDTO">
+	select count(*) from item where cono=#{cono}
+	</select>
+	
+	<select id="stocklist" parameterType="PageUtil" resultType="shopDTO">
+	select * from (select row_number() over(order by item.ino ) as rno,item.* from item where cono='${searchWord}') where rno between ${startNo} and ${endNo} order by rno desc
+	</select>
+	
+	<update id="stock" parameterType="shopDTO">
+	update item set istock=#{istock} where ino=#{ino}
+	</update>
+	
+<!-- 기업 -->	
 </mapper>
 	

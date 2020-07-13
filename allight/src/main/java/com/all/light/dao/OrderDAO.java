@@ -7,9 +7,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.all.light.dto.MemberDTO;
 import com.all.light.dto.OrderDTO;
 import com.all.light.dto.OrderdetailDTO;
 import com.all.light.dto.ShoppingDTO;
+import com.all.light.util.PageUtil;
 
 public class OrderDAO extends SqlSessionDaoSupport {
 	@Autowired
@@ -23,14 +25,44 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		return (ArrayList)session.selectList("order.listde", oddto);
 	}
 
-	public String getRepreImage(int ino) {
+	public ArrayList<ShoppingDTO> iteminfo(int ino) {
+		return (ArrayList)session.selectOne("order.iteminfo",ino);
+	}
+	/*public String getRepreImage(int ino) {
 		HashMap<String,Object> map = new HashMap<String,Object>(); 
 		map.put("ino", ino);
 		return (String)session.selectOne("Shopping.getRepreImage",map);
 	}
-	public ShoppingDTO getDetail(int ino) {
+	public ArrayList<ShoppingDTO> getDetail(int ino) {
 		HashMap<String,Object> map = new HashMap<String,Object>(); 
 		map.put("ino", ino);
-		return (ShoppingDTO)session.selectOne("Shopping.detailByIno",map);
+		return (ArrayList)session.selectOne("Shopping.detailByIno",map);
+	}*/
+
+	public void change(int no, int type) {
+		HashMap map=new HashMap();
+		map.put("no", no);
+		map.put("type", type);
+		session.update("order.change",map);
 	}
+
+	public void check(int mno, MemberDTO mdto) {
+		session.update("order.check",mdto);
+	}
+
+	public int getTotalCntById(String cono) {
+		int totalCnt = session.selectOne("order.totalCntById",cono);
+		System.out.println(totalCnt);
+		return totalCnt;
+	}
+	public ArrayList<ShoppingDTO> stocklist(PageUtil pinfo) {
+		return (ArrayList)session.selectList("order.stocklist", pinfo);
+	}
+
+	public void stock(ShoppingDTO sdto) {
+		session.update("order.stock",sdto);
+	}
+
+	
+
 }

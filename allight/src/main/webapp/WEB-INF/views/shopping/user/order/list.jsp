@@ -5,8 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$(function(){
+		//취소 버튼 클릭 시
+		$("#cancel").click(function(){
+			if(confirm("해당 상품을 주문 취소 하시겠습니까?")){
+				$(location).attr("action","${pageContext.request.contextPath}/order/change.com?no=${listde.ostatus}&type=cancel");
+			}
+		});
+		//반품 버튼 클릭 시
+		$("#return").click(function(){
+			if(confirm("해당 상품을 반품 하시겠습니까?")){
+				$(location).attr("action","${pageContext.request.contextPath}/order/check.com?no=${listde.ostatus}&type=return");
+			}
+		});
+	        
+	})
+</script>
 </head>
 <body>
+<form>
 	<div class="mem_right">
 		<!--마이페이지 내용 영역-->
 		<!--타이틀-->
@@ -91,18 +110,44 @@
 										</span></li>
 
 									</ul> <!-- //옵션명 노출--></td>
-								<c:if test="${detail.ostatus}">
+								<!-- 결제완료, 배송준비중 -->
+								<c:if test="${listde.ostatus}">
 									<td class="order_amount">
 										<ul>
-											<li class="order_pay_info qq-9">구매확정</li>
+											<li class="order_pay_info qq-9">${listde.ostatus}</li>
+											<li class="mb5"><a id="cancle"
+												class="order_btn_write" style="cursor: pointer;">주문취소</a></li>
+										</ul>
+									</td>
+								</c:if>
+								<!-- 배송시작, 배송완료 -->
+								<c:if test="${listde.ostatus}">
+									<td class="order_amount">
+										<ul>
+											<li class="order_pay_info qq-9">${listde.ostatus}</li>
 	
 											<li class="mb5"><a
-												onclick="delivery_view('202004052091881','4004656');"
+												onclick="delivery_view('택배회사','송장번호');"
+												class="order_btn_delcheck" style="cursor: pointer;">배송조회</a></li>
+	
+											<li class="mb5"><a id="return"
+												class="order_btn_write" style="cursor: pointer;">반품</a></li>
+										</ul>
+									</td>
+								</c:if>	
+								<!-- 구매확정 -->							
+								<c:if test="${listde.ostatus}">
+									<td class="order_amount">
+										<ul>
+											<li class="order_pay_info qq-9">${detail.ostatus}</li>
+	
+											<li class="mb5"><a
+												onclick="delivery_view('택배회사','송장번호');"
 												class="order_btn_delcheck" style="cursor: pointer;">배송조회</a></li>
 	
 											<li class="mb5"><a
 												href="mem_goods_review_write.asp?orderno=202004052091881&amp;g=12189&amp;vtab=O"
-												class="order_btn_write" style="cursor: pointer;">상품후기 쓰기</a></li>
+												class="order_btn_write" style="cursor: pointer;">상품 리뷰 쓰기</a></li>
 										</ul>
 									</td>
 								</c:if>
@@ -113,5 +158,6 @@
 			</c:forEach>
 		</table>
 	</div>
+</form>
 </body>
 </html>

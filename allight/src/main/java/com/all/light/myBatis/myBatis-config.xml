@@ -26,6 +26,7 @@
    		<typeAlias type="com.all.light.dto.NoticeDTO" alias="notDTO"/>
    		<typeAlias type="com.all.light.dto.OrderDTO" alias="ordDTO"/>
    		<typeAlias type="com.all.light.dto.OrderdetailDTO" alias="orddeDTO"/>
+   		<typeAlias type="com.all.light.dto.ReviewDTO" alias="reviewDTO"/>
    </typeAliases>
    
    <mappers>

@@ -14,7 +14,7 @@
 						function() {
 							$("#form")
 									.attr("action",
-											"${pageContext.request.contextPath}/question/modify.com");
+											"${pageContext.request.contextPath}/question/update.com?no=${DETAIL.qno}");
 							$("#form").submit();
 						});
 		//목록 버튼 클릭 시

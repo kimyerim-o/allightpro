@@ -39,7 +39,7 @@ public class PageUtil {
 		calcEndNo();
 	}
 	
-	//notice검색 - totalCnt에 쓰이는 생성자
+	//notice, question(user)검색 - totalCnt에 쓰이는 생성자
 	public PageUtil(String searchWord, String searchType) {
 		this.searchType=searchType;
 		this.searchWord=searchWord;

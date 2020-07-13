@@ -53,10 +53,16 @@
 	<select id="totalCnt" resultType="Integer">
 	select count(*) from question where qtype=1
 	</select>
+	<select id="totalCntUser" resultType="Integer">
+	select count(*) from question where qtype=0
+	</select>
 	
 	<!-- 전체게시물 -->
 	<select id="totalList" resultType="queDTO" parameterType="PageUtil">
-	select * from (select row_number() over( order by question.qno ) as rno,question.* from question) where rno between ${startNo} and ${endNo} order by rno desc
+	select * from (select row_number() over( order by question.qno ) as rno,question.* from question where qtype=1) where rno between ${startNo} and ${endNo} order by rno desc
+	</select>
+	<select id="totalListUser" resultType="queDTO" parameterType="PageUtil">
+	select * from (select row_number() over( order by question.qno ) as rno,question.* from question where qtype=0) where rno between ${startNo} and ${endNo} order by rno desc
 	</select>
 	
 	<!-- 제목 수 찾기 -->
@@ -78,6 +84,49 @@
 	<select id="listById" resultType="queDTO" parameterType="PageUtil">
 	select * from (select row_number() over( order by question.qno ) as rno,question.* from question where qid like '%' || #{searchWord} || '%' and qtype=1) where rno between ${startNo} and ${endNo} order by rno desc
 	</select> 
+	
+<!-- 유저 -->
+<!-- 글쓰기 -->
+	<insert id="userInsert" parameterType="queDTO">
+		insert into question values(qno_seq.nextval,#{qtitle},#{qid},sysdate,#{qcontent},#{qtype})
+	</insert>
+	
+<!-- 게시물 수 찾기 -->	
+	<select id="totalCntWithSearch" resultType="Integer"	parameterType="PageUtil">
+			select count(*) from question
+		<choose>
+			<when test="searchType=='nall'">
+				where (qtitle like '%${searchWord}%'
+				or qcontent like '%${searchWord}%')
+				and qtype=0
+			</when>
+			<otherwise>
+				where ${searchType} like '%${searchWord}%'
+				and qtype=0
+			</otherwise>
+		</choose>
+	</select>
+	
+<!-- 게시글 리스트 가져오기 -->
+	<select id="searchList" resultType="queDTO" parameterType="PageUtil">
+			select * from(
+		select row_number() over (order by qno) num,
+		A.* from question A
+		<choose>
+			<when test="searchType=='nall'">
+				where (qtitle like '%${searchWord}%'
+				or qcontent like '%${searchWord}%')
+				and qtype = 0
+			</when>
+			<otherwise>
+				where ${searchType} like '%${searchWord}%'
+				and qtype = 0
+			</otherwise>
+			</choose>
+			order by qno desc
+			)
+			where num between #{startNo} and #{endNo}
+	</select>
 	
 </mapper>
 	

@@ -63,7 +63,7 @@ public class OrderdetailDTO {
 	public String toString() {
 		return "OrderdetailDTO [ono=" + ono + ", odno=" + odno + ", ino=" + ino + ", ocouriercompany=" + ocouriercompany
 				+ ", oinvoicenumber=" + oinvoicenumber + ", ostatus=" + ostatus + ", odamount=" + odamount
-				+ ", odprice=" + odprice + "]";
+				+ ", odprice=" + odprice + ", type=" + type + "]";
 	}
 	public String getType() {
 		return type;

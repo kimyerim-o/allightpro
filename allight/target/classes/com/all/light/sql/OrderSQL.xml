@@ -10,44 +10,59 @@
 	
 	<!-- 목록보기orderde -->
 	<select id="listde" resultType="orddeDTO">
-	select * from orderdetail where ono=#{ono} and OSTATUS not in ('주문취소','반품')
+	select * from orderdetail where ono=#{ono}
 	</select>
 	
+	<!-- 목록/상세보기item -->
 	<select id="iteminfo" resultType="shopDTO">
 	select * from item,image where item.ino=image.ino and item.ino=#{ino} and image.imgrepresent=1
 	</select>
 	
+	<!-- 상세보기 order-->
 	<select id="detail" resultType="ordDTO">
-	select * from orders where ono=#{ono}
+	select * from orders where ono=${ono} and mid='${mid}'
 	</select>
 	
-	<select id="listde" resultType="orddeDTO">
-	select * from orderdetail where ono=#{ono} and OSTATUS not in #{type}
+	<!-- 취소반품 리스트 -->
+	<select id="back" resultType="orddeDTO" parameterType="orddeDTO">
+	select * from orderdetail where ono=#{ono} and OSTATUS in ('주문취소','반품')
 	</select>
 	
+	<!-- 취소 or 반품 -->
+	<select id="back2" resultType="orddeDTO" parameterType="orddeDTO">
+	select * from orderdetail where ono=#{ono} and OSTATUS in (#{type})
+	</select>
+	
+	<!-- 상태변화 -->
 	<update id="change" parameterType="java.util.HashMap">
-	update orderdetail set ostatus='#{type}' where odno=#{no}
+	update orderdetail set ostatus=#{type} where odno=#{no}
 	</update>
 	
-	<update id="check" parameterType="memDTO">
-	update member set 
-	</update>
 	
-	<select id="pageMemberId" resultType="shopDTO">
+<!-- 기업 -->
+	<!--  -->
+	<select id="pageMemberId" resultType="int">
 	select count(*) from item where cono='#{cono}'
 	</select>
 	
-	<select id="stocklist" parameterType="PageUtil" resultType="shopDTO">
-	select * from (select row_number() over(order by item.ino ) as rno,item.* from item where cono='${searchWord}') where rno between ${startNo} and ${endNo} order by rno desc
+	<!-- 회사번호로 전체 -->
+	<select id="pageOrderCono" resultType="int">
+	select count(*) from orderdetail where ino in (select ino from item where cono=#{cono})
 	</select>
 	
-	<update id="stock" parameterType="shopDTO">
-	update item set istock=#{istock} where ino=#{ino}
-	</update>
+	<!-- 회사번호로 기간 -->
+	<select id="pageOrderConoTerm" resultType="int" parameterType="java.util.HashMap">
+	select count(*) from orderdetail where ino in (select ino from item where cono=#{cono}) and ono in (select ono from orders where odate between #{start} and #{last})
+	</select>
 	
-<!-- 기업 -->
-	<select id="pageOrderCono" resultType="shopDTO">
-	select count(*) from orderdetail where ino in (select ino from item where cono=#{cono})
+	<!-- 회사페이징후 -->
+	<select id="listdeCorp" resultType="orddeDTO" parameterType="PageUtil">
+	select * from (select row_number() over(order by orderdetail.odno ) as rno,orderdetail.* from orderdetail) where rno between ${startNo} and ${endNo} order by rno desc
+	</select>
+	
+	<!-- 회사페이징후 -->
+	<select id="listCorp" resultType="ordDTO">
+	select * from orders where ono=#{ono}
 	</select>
 	
 </mapper>

@@ -1,7 +1,9 @@
 package com.all.light.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +42,10 @@ public class OrderController {
 	
 	//주문상세조회
 	@RequestMapping("/detail")
-	public ModelAndView detail(@RequestParam(value = "no", required = true) String ono,
-			OrderDTO odto,OrderdetailDTO oddto,OrderData odata,HttpSession session, ModelAndView mv) {
-		OrderData data=ordSVC.detail(odata,odto,oddto,ono);
+	public ModelAndView detail(@RequestParam(value = "no", required = true) int ono,
+			OrderDTO odto,OrderdetailDTO oddto,OrderData odata,ModelAndView mv,HttpSession session) {
+		System.out.println("detail");
+		OrderData data=ordSVC.detail(session,odata,odto,oddto,ono);
 		mv.addObject("ORDER", data);
 		mv.setViewName("shopping/user/order/detail");
 		return mv;
@@ -53,7 +56,9 @@ public class OrderController {
 	public ModelAndView back(@RequestParam(value = "type", required = false) String type,
 			@RequestParam(value = "term", required = false, defaultValue = "m1") String term,
 			OrderDTO odto,OrderdetailDTO oddto,ShoppingDTO sdto,OrderData odata,HttpSession session, ModelAndView mv) {
-		ordSVC.back(session,odata,odto,oddto,sdto,type,term);
+		OrderData data=ordSVC.back(session,odata,odto,oddto,sdto,type,term);
+		System.out.println(data);
+		mv.addObject("ORDER", data);
 		mv.setViewName("shopping/user/order/backlist");
 		return mv;
 	}
@@ -62,21 +67,22 @@ public class OrderController {
 	@RequestMapping("/change")
 	public ModelAndView change(@RequestParam(value = "no", required = true) int no,
 			@RequestParam(value = "type", required = true) String type,
-			HttpSession session, ModelAndView mv) {
+			HttpSession session, ModelAndView mv,RedirectView rv, HttpServletRequest request) {
 		System.out.println("change "+no+" change "+type);
 		ordSVC.change(no,type,session);
-		RedirectView rv =new RedirectView("./list.com");
+		rv.setUrl(request.getContextPath()+"/order/list.com");
+		mv.setView(rv);
 		return mv;
 	}
 	
-	//취소 반품 페이지이동
+	//취소 반품 페이지이동-주문관리 ajax 후
 	@RequestMapping("/confirm")
 	public String confirm(MemberDTO mdto) {
 		//ordSVC.confirm(mdto);
 		return "shopping/user/order/check";
 	}
 	
-	//취소반품시 계좌확인
+	//취소반품시 계좌확인-주문관리 ajax 후
 	@RequestMapping("/check")
 	public ModelAndView check(@RequestParam(value = "no", required = true) int no,
 			@RequestParam(value = "type", required = true) String type,MemberDTO mdto,
@@ -89,39 +95,30 @@ public class OrderController {
 	}
 	
 	//기업
-	//재고관리 리스트
-	@RequestMapping("/stocklist")
-	public ModelAndView stocklist(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,HttpSession session, ModelAndView mv) {
-		String cono=(String) session.getAttribute("CONO");
-		PageUtil pinfo = ordSVC.pageMemberId(nowPage,cono);
-		ArrayList<ShoppingDTO> list =ordSVC.stocklist(cono,pinfo);
-		mv.addObject("PINFO",pinfo);
-		mv.addObject("LIST",list);
-		mv.setViewName("shopping/corp/order/stocklist");
-		return mv;
-	}
+
+	/*<!-- 해당 아이디 게시물 수 조회 -->
+	<select id="totalCntById" resultType="Integer">
+	select count(*) from question where qid=#{id} and qtype=1
+	</select>
 	
-	//재고관리
-	@RequestMapping("/stock")
-	public ModelAndView stock(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ShoppingDTO sdto,HttpSession session, ModelAndView mv) {
-		ordSVC.stock(sdto);
-		RedirectView rv=new RedirectView("./stocklist.com?nowPgae="+nowPage);
-		mv.setView(rv);
-		return mv;
-	}
-	
-	//아직미완성!!!!!!!!!!
+	<!-- question리스트 출력 -->
+	<select id="list" resultType="queDTO" parameterType="PageUtil">
+	select * from (select row_number() over(order by question.qno ) as rno,question.* from question where qid='${searchWord}') where rno between ${startNo} and ${endNo} order by rno desc
+	</select>*/
 	//주문관리 리스트 페이징, 기간(년월일)  - select * from orderdetail where ino in (select ino from item where cono=?)
 	@RequestMapping("/list/corp")
-	public ModelAndView listcorp(@RequestParam(value = "term", required = false) String term,
+	public ModelAndView listcorp(@RequestParam(value = "start", required = false) String start,
+			@RequestParam(value = "last", required = false) String last,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			OrderDTO odto,OrderdetailDTO oddto,ShoppingDTO sdto,OrderData odata,
 			HttpSession session, ModelAndView mv) {
-		String cono=(String) session.getAttribute("CONO");
-		PageUtil pinfo = ordSVC.pageOrderCono(nowPage,cono,term);
-		//ordSVC.listcorp(session);
-		//System.out.println("OrderController"+data);
-		//mv.addObject("ORDER", data);
+		int cono=Integer.parseInt(String.valueOf(session.getAttribute("CONO")));
+		PageUtil pinfo = ordSVC.pageOrderCono(nowPage,cono,start,last);
+		OrderData data=ordSVC.listCorp(session,odata,odto,oddto,pinfo);
+		mv.addObject("PINFO", pinfo);
+		mv.addObject("ORDER", data);
+		System.out.println("OrderController"+data);
+		mv.setViewName("shopping/corp/order/list");
 		return mv;
 	}
 	

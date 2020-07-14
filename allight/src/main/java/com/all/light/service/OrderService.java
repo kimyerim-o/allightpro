@@ -50,12 +50,15 @@ public class OrderService {
 		ArrayList<ShoppingDTO> shop=null;
 		for(int i=0;i<list.size();i++) {
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			list.get(i).setOrdernum(format.format(list.get(i).getOdate()));
+			SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+			list.get(i).setOrdernum(format.format(list.get(i).getOdate())+
+					list.get(i).getMno()+list.get(i).getOno());
+			list.get(i).setSodate(format2.format(list.get(i).getOdate()));		
+			
 			odata.setOdto(list);
 			System.out.println("LIST"+i+"///"+list.get(i));
 			
-			oddto.setOno(list.get(i).getOno());
-			listde=ordDAO.listde(oddto);
+			listde=ordDAO.listde(list.get(i).getOno());
 			System.out.println(listde);
 			if(odata.getOddto()==null) {
 				odata.setOddto(listde);
@@ -88,12 +91,34 @@ public class OrderService {
 		return odata;
 	}
 	//상세
-	public OrderData detail(OrderData odata, OrderDTO odto, OrderdetailDTO oddto, String ono) {
-		ArrayList<OrderDTO> detail=ordDAO.detail(ono);	
-		ArrayList<OrderdetailDTO> detailde=ordDAO.detailde(ono);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
-		odata.setOdto(detail);
-		odata.setOddto(detailde);
+	public OrderData detail(HttpSession session, OrderData odata, OrderDTO odto, OrderdetailDTO oddto, int ono) {
+		odto.setMid((String) session.getAttribute("MID"));
+		odto.setOno(ono);
+		OrderDTO list=ordDAO.detail(odto);
+		System.out.println("+++++++"+list);
+		odata.setOdto1(list);
+		System.out.println("+++++++"+odata.getOdto1());
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+		list.setOrdernum(format.format(list.getOdate())+list.getMno()+list.getOno());
+		list.setSodate(format2.format(list.getOdate()));		
+		oddto.setOno(list.getOno());
+		ArrayList<OrderdetailDTO> listde=ordDAO.listde(ono);
+		odata.setOddto(listde);			
+		ArrayList<ShoppingDTO> shop=null;
+		int sum=0;
+		for(int j=0;j<listde.size();j++) {	
+			int price=listde.get(j).getOdprice();
+			sum=sum+price;
+			int ino=listde.get(j).getIno();
+			shop= ordDAO.iteminfo(ino);
+			if(odata.getSdto()==null) {
+				odata.setSdto(shop);
+			}else if(odata.getSdto()!=null) {
+				odata.getSdto().addAll(shop);
+			}
+		}
+		list.setSum(sum);
 		System.out.println(odata);
 		return odata;
 	}
@@ -124,13 +149,12 @@ public class OrderService {
 		}
 		java.sql.Date date = new java.sql.Date(cal.getTimeInMillis());
 		odto.setSearchdate(date);
-		
 		if(type==null) {
-			oddto.setType("'주문취소','반품'");
-		}else if(type.equals("주문취소")) {
-			oddto.setType("'주문취소'");
-		}else if(type.equals("반품")) {
-			oddto.setType("'반품'");
+			oddto.setType(null);
+		}else if(type.equals("cancel")) {
+			oddto.setType("주문취소");
+		}else if(type.equals("back")) {
+			oddto.setType("반품");
 		}
 		
 		ArrayList<OrderDTO> list=ordDAO.list(odto);
@@ -138,9 +162,12 @@ public class OrderService {
 		ArrayList<ShoppingDTO> shop=null;
 		for(int i=0;i<list.size();i++) {
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-			list.get(i).setOrdernum(format.format(list.get(i).getOdate()));
-			odata.setOdto(list);
+			SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+			list.get(i).setOrdernum(format.format(list.get(i).getOdate())+
+					list.get(i).getMno()+list.get(i).getOno());
+			list.get(i).setSodate(format2.format(list.get(i).getOdate()));		
 			
+			odata.setOdto(list);
 			oddto.setOno(list.get(i).getOno());
 			listde=ordDAO.back(oddto);
 			if(odata.getOddto()==null) {
@@ -148,8 +175,8 @@ public class OrderService {
 			}else if(odata.getOddto()!=null) {
 				odata.getOddto().addAll(listde);
 			}
-						
 			for(int j=0;j<listde.size();j++) {
+				
 				int ino=listde.get(j).getIno();
 				shop= ordDAO.iteminfo(ino);
 				if(odata.getSdto()==null) {
@@ -170,30 +197,46 @@ public class OrderService {
 
 
 	//기업
-	//재고관리 리스트
-	public PageUtil pageMemberId(int nowPage, String cono) {
-		int totalCount = ordDAO.pageMemberId(cono);
-		PageUtil pinfo = new PageUtil(nowPage, totalCount);
-		return pinfo;
-	}
-	public ArrayList<ShoppingDTO> stocklist(String cono, PageUtil pinfo) {
-		pinfo.setSearchWord(cono);
-		return ordDAO.stocklist(pinfo);
-	}
-
-	//재고
-	public void stock(ShoppingDTO sdto) {
-		ordDAO.stock(sdto);
-	}
-
-	public PageUtil pageOrderCono(int nowPage, String cono, String term) {
+	public PageUtil pageOrderCono(int nowPage, int cono, String star, String las) {
 		int totalCount=0;
-		if (term==null)
+		if (star==null || las==null) {
+			System.out.println(cono);
 			totalCount = ordDAO.pageOrderCono(cono);
-		else 
-			totalCount = ordDAO.pageOrderConoTerm(cono,term);
-		PageUtil pinfo = new PageUtil(nowPage, totalCount);
+		}else if(star!=null && las!=null) {
+			java.sql.Date start=java.sql.Date.valueOf(star);
+			java.sql.Date last=java.sql.Date.valueOf(las);
+			totalCount = ordDAO.pageOrderConoTerm(cono,start,last);
+		}	
+		PageUtil pinfo = new PageUtil(nowPage, totalCount,2,5);
 		return pinfo;
+	}
+	
+	//select * from (select row_number() over(order by question.qno ) as rno,question.* from question where qid='${searchWord}') where rno between ${startNo} and ${endNo} order by rno desc
+	public OrderData listCorp(HttpSession session, OrderData odata, OrderDTO odto, OrderdetailDTO oddto, PageUtil pinfo) {
+		ArrayList<OrderdetailDTO> listde=ordDAO.listdeCorp(pinfo);
+		OrderDTO list=null;
+		ArrayList<ShoppingDTO> shop=null;
+		for(int i=0;i<listde.size();i++) {
+			odata.setOddto(listde);
+			list=ordDAO.listCorp(listde.get(i).getOno());
+			System.out.println(listde.get(i).getOno()+"/////"+list.getOno());
+			if(odata.getOdto1()==null) {
+				System.out.println("nullll");
+				odata.setOdto1(list);
+			}else if(odata.getOdto1()!=null && listde.get(i).getOno()!=list.getOno()) {
+				System.out.println("not nullll");
+				odata.getOdto().add(list);
+			}
+			int ino=listde.get(i).getIno();
+			shop= ordDAO.iteminfo(ino);
+			if(odata.getSdto()==null) {
+				odata.setSdto(shop);
+			}else if(odata.getSdto()!=null) {
+				odata.getSdto().addAll(shop);
+			}
+		}
+		System.out.println(odata);
+		return odata;
 	}
 
 

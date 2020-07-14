@@ -1,6 +1,6 @@
 package com.all.light.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class OrderDTO {
 	private int ono;//주문번호seq
@@ -15,6 +15,8 @@ public class OrderDTO {
 	private String orequirethings;//요구사항
 	private Date searchdate;//찾는 날짜
 	private String ordernum;
+	private String sodate;//주문날짜
+	private int sum;//총합
 	
 	public int getOno() {
 		return ono;
@@ -95,6 +97,18 @@ public class OrderDTO {
 		return "OrderDTO [ono=" + ono + ", mid=" + mid + ", odate=" + odate + ", oaddno=" + oaddno + ", oaddress1="
 				+ oaddress1 + ", oaddress2=" + oaddress2 + ", otel=" + otel + ", oreceiver=" + oreceiver
 				+ ", orequirethings=" + orequirethings + ", searchdate=" + searchdate + ", ordernum=" + ordernum + "]";
+	}
+	public String getSodate() {
+		return sodate;
+	}
+	public void setSodate(String string) {
+		this.sodate = string;
+	}
+	public int getSum() {
+		return sum;
+	}
+	public void setSum(int sum) {
+		this.sum = sum;
 	}
 	
 	

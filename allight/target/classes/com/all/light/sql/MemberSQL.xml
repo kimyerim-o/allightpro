@@ -55,5 +55,16 @@
 	<delete id="memDelete" parameterType="Integer">
 		delete member where mno=#{mno}
 	</delete>
+	
+	<!-- 마이페이지용 -->
+	<!-- 회원이 구매한 모든 상품 -->
+	<select id="getItem" resultType="memDTO" parameterType="memDTO">
+	select * from item 
+    where ino in (select ino from orderdetail 
+        where ono in (select ono from orders 
+            where mid=#{mid}));
+	</select>
+	
+            
 </mapper>
 	

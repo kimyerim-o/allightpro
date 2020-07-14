@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+
+	<select id="getTotalCnt" resultType="Integer"
+		parameterType="PageUtil">
+		select count(*) from item
+			where ino in (select ino from orderdetail
+			where ono in (select ono from orders
+			where mid=#{rid}))
+	</select>
+	
+	<select id="getList" resultType="java.util.HashMap"
+		parameterType="PageUtil">
+		select item.*, OD.*, r.*
+		    from item,
+		        (select OD.ino, num
+		        from(select row_number() over (order by od.odno desc) 
+		            num,
+		            od.*
+		            from orderdetail od
+		            where od.ono in (select o.ono 
+		                             from orders o
+		                             where mid=#{rid})
+		                             order by od.odno desc
+		            ) 
+		            OD
+		        where num between #{startNo} and #{endNo}) OD
+		    left outer join review r
+		    on OD.ino=r.ino
+		    where item.ino = OD.ino
+		    and item.iname like '%${searchWord}%'
+		    order by num
+	</select>
+	
+	<insert id="reviewWrite" parameterType="reviewDTO">
+		insert into review values(RNO_SEQ.nextval, #{ino}, #{rid},#{rnick},sysdate,#{rgrade},#{rcontent})
+	</insert>
+		
+		<delete id="reviewDelete" parameterType="reviewDTO">
+		delete from review where ino=${ino} and rid=#{rid}
+		</delete>
+		
+		<select id="getReviewInfo" parameterType="reviewDTO" resultType="reviewDTO">
+			select * from review where ino=${ino} and rid=#{rid}		
+		</select>
+		
+		<update id="reviewUpdate" parameterType="reviewDTO"> 
+			update review set rdate=sysdate, rgrade=${rgrade}, rcontent=#{rcontent}
+			where ino=${ino} and rid=#{rid}
+		</update>
+</mapper>
+	

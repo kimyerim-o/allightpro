@@ -23,6 +23,9 @@ public class PageUtil {
 	private String searchWord; //
 	private String searchType; //
 	
+	//리뷰컨트롤러에서 필요한 파라미터
+	private String rid;
+	
 	public PageUtil(int nowPage, int totalCount) {
 		this(nowPage, totalCount, 2, 5);
 	}
@@ -42,6 +45,11 @@ public class PageUtil {
 	//notice, question(user)검색 - totalCnt에 쓰이는 생성자
 	public PageUtil(String searchWord, String searchType) {
 		this.searchType=searchType;
+		this.searchWord=searchWord;
+	}
+
+	//mypage review. getList메서드에 쓰이는 생성자
+	public PageUtil(String searchWord) {
 		this.searchWord=searchWord;
 	}
 
@@ -88,6 +96,14 @@ public class PageUtil {
 		}
 	}
 
+
+	public String getRid() {
+		return rid;
+	}
+
+	public void setRid(String rid) {
+		this.rid = rid;
+	}
 
 	public String getSearchType() {
 		return searchType;
@@ -169,8 +185,9 @@ public class PageUtil {
 		return "PageUtil [nowPage=" + nowPage + ", totalCount=" + totalCount + ", lineCount=" + lineCount
 				+ ", pageGroup=" + pageGroup + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", searchWord=" + searchWord + ", searchType="
-				+ searchType + "]";
+				+ searchType + ", rid=" + rid + "]";
 	}
+
 
 
 }

@@ -20,6 +20,12 @@ public class ReviewDTO {
 	int rlamount;	//리뷰에 대한 좋아요수
 	Boolean isLiked;//로그인한 아이디의 해당 리뷰 좋아요 여부
 	
+	public ReviewDTO(){}
+	//ReviewService.getReviewInfo메소드에서 쓰이는 생성자
+	public ReviewDTO(int ino, String id) {
+		this.ino=ino;
+		this.rid=id;
+	}
 	public Boolean getIsLiked() {
 		return isLiked;
 	}

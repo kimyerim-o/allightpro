@@ -152,7 +152,7 @@
 					</tr>
 					<tr class="last">
 						<th>연락처</th>
-						<td>${sessionScope.MTEL1}-${sessionScope.MTEL2}-${sessionScope.MTEL3}</td>
+						<td>${sessionScope.MTEL}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -181,7 +181,7 @@
 
 					<tr>
 						<th><span>연락처</span></th>
-						<td>?-?-?</td>
+						<td>${ORDER.odto1.otel}</td>
 					</tr>
 					<tr class="last">
 						<th><span>배송요청사항</span></th>

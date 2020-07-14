@@ -65,5 +65,21 @@
 	select * from orders where ono=#{ono}
 	</select>
 	
+	<select id="detailCorp" resultType="orddeDTO">
+	select * from orderdetail where odno=#{odno}
+	</select>
+	
+	<select id="detailByNo" resultType="ordDTO">
+	select * from orders where ono=#{ono}
+	</select>
+	
+	<select id="memIdNo" resultType="memDTO">
+	select * from member where mno=#{mno} and mid=#{mid}
+	</select>
+	
+	<!-- 배송 -->
+	<update id="delivery">
+	update orderdetail set ocouriercompany=#{ocouriercompany},ocouriercompany=#{oinvoicenumber} where odno=#{odno}
+	</update>
 </mapper>
 	

@@ -6,13 +6,11 @@ public class OrderData {
 	private ArrayList<OrderDTO> odto;
 	private OrderDTO odto1;
 	private ArrayList<OrderdetailDTO> oddto;
+	private OrderdetailDTO oddto1;
 	private ArrayList<ShoppingDTO> sdto;
+	private ShoppingDTO sdto1;
+	private MemberDTO mdto1;
 		
-	public OrderData(ArrayList<OrderDTO> list, ArrayList<OrderdetailDTO> listde, ArrayList<ShoppingDTO> shop, ArrayList<ShoppingDTO> sdto) {
-		this.odto=list;
-		this.oddto=listde;
-		this.sdto=sdto;
-	}
 	public ArrayList<OrderDTO> getOdto() {
 		return odto;
 	}
@@ -31,15 +29,34 @@ public class OrderData {
 	public void setSdto(ArrayList<ShoppingDTO> sdto) {
 		this.sdto = sdto;
 	}
-	@Override
-	public String toString() {
-		return "OrderData [odto=" + odto + "\n, oddto=" + oddto + ",\n sdto=" + sdto +"\n, odto1=" + odto1 + "]";
-	}
 	public OrderDTO getOdto1() {
 		return odto1;
 	}
 	public void setOdto1(OrderDTO odto1) {
 		this.odto1 = odto1;
+	}
+	public OrderdetailDTO getOddto1() {
+		return oddto1;
+	}
+	public void setOddto1(OrderdetailDTO oddto1) {
+		this.oddto1 = oddto1;
+	}
+	public ShoppingDTO getSdto1() {
+		return sdto1;
+	}
+	public void setSdto1(ShoppingDTO sdto1) {
+		this.sdto1 = sdto1;
+	}
+	@Override
+	public String toString() {
+		return "OrderData [odto=" + odto + ", odto1=" + odto1 + ", oddto=" + oddto + ", oddto1=" + oddto1 + ", sdto="
+				+ sdto + ", sdto1=" + sdto1 +", mdto1=" + mdto1 + "]";
+	}
+	public MemberDTO getMdto1() {
+		return mdto1;
+	}
+	public void setMdto1(MemberDTO mdto1) {
+		this.mdto1 = mdto1;
 	}
 
 	

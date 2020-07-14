@@ -37,6 +37,7 @@
    		<mapper resource="/com/all/light/sql/QuestionSQL.xml"/>
    		<mapper resource="/com/all/light/sql/NoticeSQL.xml"/>
    		<mapper resource="/com/all/light/sql/OrderSQL.xml"/>
+   		<mapper resource="/com/all/light/sql/ReviewSQL.xml"/>
    </mappers>
    
 </configuration>

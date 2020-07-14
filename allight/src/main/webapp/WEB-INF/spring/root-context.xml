@@ -71,4 +71,10 @@
 	</bean>
 	<bean id="ordSVC" class="com.all.light.service.OrderService"/>
 	
+	<!-- Review -->
+	<bean id="revDAO" class="com.all.light.dao.ReviewDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
+	<bean id="revSVC" class="com.all.light.service.ReviewService"/>
+	
 </beans>

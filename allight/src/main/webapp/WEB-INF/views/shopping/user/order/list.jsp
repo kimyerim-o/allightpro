@@ -82,14 +82,17 @@
 				<col width="140">
 				<col width="200">
 			</colgroup>
+			<c:if test="${empty ORDER}">
+				<div class="listno_tab noto_sans">주문내역이 없습니다.</div>
+			</c:if>
 			<c:forEach items="${ORDER.odto}" var="odto">
 				<thead>
 					<tr>
 						<th colspan="5" scope="col">
 							<div>
-								<strong>주문번호&nbsp;<a href="....?orderno=${odto.ono}"
-									class="order_num"><em class="order_fcT1">${odto.ordernum}${odto.mno}${odto.ono}</em></a></strong><em
-									class="fc999 fs12 ml13">(${odto.ordernum})</em> <span
+								<strong>주문번호&nbsp;<a href="./detail.com?no=${odto.ono}"
+									class="order_num"><em class="order_fcT1">${odto.ordernum}</em></a></strong><em
+									class="fc999 fs12 ml13">(${odto.sodate})</em> <span
 									class="order_r"><a href="./detail.com?no=${odto.ono}"
 									class="order_btn_view">주문상세보기 &gt;</a></span>
 							</div>
@@ -119,15 +122,19 @@
 
 									</ul> <!-- //옵션명 노출--></td>
 									<form id="frm">
-										<input type="text" name="no" value="${oddto.odno}"/>
-										<input type="text" name="type" id="type"/>
+										<input type="hidden" name="no" value="${oddto.odno}"/>
+										<input type="hidden" name="type" id="type"/>
 									</form>
-								<!-- 결제완료, 배송준비중 -->
+				
 									<td class="order_amount">
+									<c:if test="${oddto.ostatus eq '주문취소' or oddto.ostatus eq '반품'}">
+										<li class="order_pay_info qq-9">${oddto.ostatus}</li>
+									</c:if>
+									<!-- 결제완료, 배송준비중 -->
 										<c:if test="${oddto.ostatus eq '배송준비중' or oddto.ostatus eq '결제완료'}">
 											<ul>
 											<li class="order_pay_info qq-9">${oddto.ostatus}</li>
-											<li class="mb5"><a class="cancel"
+											<li class="mb5"><a id="cancel"
 												class="order_btn_write" style="cursor: pointer;">주문취소</a></li>
 											</ul>
 										</c:if>
@@ -140,7 +147,7 @@
 													onclick="delivery_view('택배회사','송장번호');"
 													class="order_btn_delcheck" style="cursor: pointer;">배송조회</a></li>
 		
-												<li class="mb5"><a class="confirm"
+												<li class="mb5"><a id="confirm"
 													class="order_btn_write" style="cursor: pointer;">구매확정</a></li>
 											</ul>
 									</c:if>	

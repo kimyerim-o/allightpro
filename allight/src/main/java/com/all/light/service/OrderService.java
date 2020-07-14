@@ -95,9 +95,7 @@ public class OrderService {
 		odto.setMid((String) session.getAttribute("MID"));
 		odto.setOno(ono);
 		OrderDTO list=ordDAO.detail(odto);
-		System.out.println("+++++++"+list);
 		odata.setOdto1(list);
-		System.out.println("+++++++"+odata.getOdto1());
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
 		list.setOrdernum(format.format(list.getOdate())+list.getMno()+list.getOno());
@@ -197,21 +195,21 @@ public class OrderService {
 
 
 	//기업
-	public PageUtil pageOrderCono(int nowPage, int cono, String star, String las) {
+	//페이징
+	public PageUtil pageOrderCono(int nowPage, int cono, String star, String las, String type) {
 		int totalCount=0;
-		if (star==null || las==null) {
+		if (star==null || las==null ) {
 			System.out.println(cono);
 			totalCount = ordDAO.pageOrderCono(cono);
 		}else if(star!=null && las!=null) {
 			java.sql.Date start=java.sql.Date.valueOf(star);
 			java.sql.Date last=java.sql.Date.valueOf(las);
 			totalCount = ordDAO.pageOrderConoTerm(cono,start,last);
-		}	
+		}
 		PageUtil pinfo = new PageUtil(nowPage, totalCount,2,5);
 		return pinfo;
 	}
 	
-	//select * from (select row_number() over(order by question.qno ) as rno,question.* from question where qid='${searchWord}') where rno between ${startNo} and ${endNo} order by rno desc
 	public OrderData listCorp(HttpSession session, OrderData odata, OrderDTO odto, OrderdetailDTO oddto, PageUtil pinfo) {
 		ArrayList<OrderdetailDTO> listde=ordDAO.listdeCorp(pinfo);
 		OrderDTO list=null;
@@ -238,14 +236,31 @@ public class OrderService {
 		System.out.println(odata);
 		return odata;
 	}
-
-
-
-	/*public PageUtil getPageInfoByIdTerm(int nowPage, String cono, String term) {
-		int totalCount = ordDAO.getPageInfoByIdTerm(cono);
-		PageUtil pinfo = new PageUtil(nowPage, totalCount);
-		return pinfo;
-	}*/
+	
+	public OrderData detailCorp(HttpSession session, OrderData odata, OrderDTO odto, OrderdetailDTO oddto,
+			MemberDTO mdto, int odno) {
+		OrderdetailDTO listde=ordDAO.detailCorp(odno);
+		odata.setOddto1(listde);
+		OrderDTO list=ordDAO.detailByNo(listde.getOno());
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		list.setOrdernum(format.format(list.getOdate())+list.getMno()+list.getOno());
+		odata.setOdto1(list);
+		ShoppingDTO shop=ordDAO.iteminfoCorp(listde.getIno());
+		odata.setSdto1(shop);
+		mdto.setMid(list.getMid());
+		mdto.setMno(list.getMno());
+		MemberDTO mlist=ordDAO.memIdNo(mdto);
+		odata.setMdto1(mlist);
+		return odata;
+	}
+	
+	public void changeCorp(int no, String type) {
+		ordDAO.change(no,type);
+	}
+	
+	public void delivery(OrderDTO odto) {
+		ordDAO.delivery(odto);
+	}
 
 
 }

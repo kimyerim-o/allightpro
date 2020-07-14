@@ -95,25 +95,16 @@ public class OrderController {
 	}
 	
 	//기업
-
-	/*<!-- 해당 아이디 게시물 수 조회 -->
-	<select id="totalCntById" resultType="Integer">
-	select count(*) from question where qid=#{id} and qtype=1
-	</select>
-	
-	<!-- question리스트 출력 -->
-	<select id="list" resultType="queDTO" parameterType="PageUtil">
-	select * from (select row_number() over(order by question.qno ) as rno,question.* from question where qid='${searchWord}') where rno between ${startNo} and ${endNo} order by rno desc
-	</select>*/
-	//주문관리 리스트 페이징, 기간(년월일)  - select * from orderdetail where ino in (select ino from item where cono=?)
+	//주문관리 리스트 페이징, 기간(년월일)
 	@RequestMapping("/list/corp")
-	public ModelAndView listcorp(@RequestParam(value = "start", required = false) String start,
+	public ModelAndView listCorp(@RequestParam(value = "start", required = false) String start,
 			@RequestParam(value = "last", required = false) String last,
+			@RequestParam(value = "type", required = false) String type,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			OrderDTO odto,OrderdetailDTO oddto,ShoppingDTO sdto,OrderData odata,
 			HttpSession session, ModelAndView mv) {
 		int cono=Integer.parseInt(String.valueOf(session.getAttribute("CONO")));
-		PageUtil pinfo = ordSVC.pageOrderCono(nowPage,cono,start,last);
+		PageUtil pinfo = ordSVC.pageOrderCono(nowPage,cono,start,last,type);
 		OrderData data=ordSVC.listCorp(session,odata,odto,oddto,pinfo);
 		mv.addObject("PINFO", pinfo);
 		mv.addObject("ORDER", data);
@@ -123,12 +114,41 @@ public class OrderController {
 	}
 	
 	//주문관리 상세 - select * from orders where ono=(select ono from orderdatail where odno=?)
-	
+	@RequestMapping("/detail/corp")
+	public ModelAndView detailCorp(@RequestParam(value = "no", required = false) int odno,
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			OrderDTO odto,OrderdetailDTO oddto,ShoppingDTO sdto,MemberDTO mdto,OrderData odata,
+			HttpSession session, ModelAndView mv) {
+		OrderData data=ordSVC.detailCorp(session,odata,odto,oddto,mdto,odno);
+		mv.addObject("ORDER", data);
+		mv.addObject("NOW", nowPage);
+		System.out.println("OrderController"+data);
+		mv.setViewName("shopping/corp/order/detail");
+		return mv;
+	}
 	
 	//주문관리 현황 변경
+	@RequestMapping("/change/corp")
+	public ModelAndView changeCorp(@RequestParam(value = "no", required = true) int no,
+			@RequestParam(value = "type", required = true) String type,
+			ModelAndView mv) {
+		System.out.println("change "+no+" change "+type);
+		ordSVC.changeCorp(no,type);
+		RedirectView rv=new RedirectView("../detail/corp.com?no="+no);
+		mv.setView(rv);
+		return mv;
+	}
 	
+	@RequestMapping("/delivery/corp")
+	public ModelAndView delivery(OrderDTO odto,ModelAndView mv) {
+		System.out.println(odto);
+		ordSVC.delivery(odto);
+		//RedirectView rv=new RedirectView("../detail/corp.com?no="+no);
+		//mv.setView(rv);
+		return mv;
+	}
 	
-	//취소 반품 리스트 페이징,기간(년월일) ,type o,x- select * from orderdetail where ino in (select ino from item where cono=?) and ostatus in ('취소','반품')
+
 
 	
 	

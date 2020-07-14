@@ -87,6 +87,26 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		return (OrderDTO)session.selectOne("order.listCorp", ono);
 	}
 
+	public OrderdetailDTO detailCorp(int odno) {
+		return (OrderdetailDTO)session.selectOne("order.detailCorp", odno);
+	}
+
+	public ShoppingDTO iteminfoCorp(int ino) {
+		return (ShoppingDTO)session.selectOne("order.iteminfo",ino);
+	}
+
+	public OrderDTO detailByNo(int ono) {
+		return (OrderDTO)session.selectOne("order.detailByNo", ono);
+	}
+
+	public MemberDTO memIdNo(MemberDTO mdto) {
+		return (MemberDTO)session.selectOne("order.memIdNo", mdto);
+	}
+
+	public void delivery(OrderDTO odto) {
+		session.update("order.delivery", odto);
+	}
+
 
 
 }

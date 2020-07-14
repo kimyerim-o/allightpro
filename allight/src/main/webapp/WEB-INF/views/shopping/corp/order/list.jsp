@@ -8,6 +8,10 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 $(function() {
+	//목록 버튼 클릭 시
+	$("#list").click(function(){
+		$(location).attr("href","${pageContext.request.contextPath}/order/list/corp.com")
+	});
 	//검색
 	$("#searb").click(function() {
 		var form = $("#searchF").serialize();
@@ -28,23 +32,24 @@ $(function() {
 </script>
 </head>
 <body>
-	${ORDER}
 	<div class="container">
 		<div class="searchDiv">
 			<!-- 검색전 -->
-			<c:if test="${empty param.start }">
+			<c:if test="${empty param.start && empty param.last}">
 				<form id="searchF">
 					<input type="date" name="start" /> ~ <input type="date"
 						name="last" />
 					<input type="button" id="searb" value="검색"/>
+					<input type="button" id="list" value="전체보기"/>
 				</form>
 			</c:if>
 			<!-- 검색후 -->
-			<c:if test="${!empty param.type}">
+			<c:if test="${!empty param.start || !empty param.last}">
 				<form id="searchF">
-				<input type="date" name="start" value=""/> ~ <input type="date"
-						name="last" />
+				<input type="date" name="start" value="${param.start}"/> ~ <input type="date"
+						name="last" value="${param.last}"/>
 				<input type="button" id="searb" value="검색"/>
+				<input type="button" id="list" value="전체보기"/>
 				</form>
 			</c:if>
 		</div>
@@ -53,10 +58,16 @@ $(function() {
 			<tr>
 				<th>주문상세번호</th>
 				<th>상품카테고리</th>
-				<th width="50%">상품명</th>
+				<th width="35%">상품명</th>
+				<th>주문현황</th>
 				<th>고객 ID</th>
 				<th>주문날짜</th>
 			</tr>
+			<c:if test="${ empty ORDER.oddto}">
+			<tr>
+				<td colspan="6" style="text-align: center;">주문이 없습니다.</td>
+			</tr>
+			</c:if>
 			<c:forEach items="${ORDER.oddto}" var="oddto">
 				<c:forEach items="${ORDER.sdto}" var="sdto">
 					<tr>
@@ -66,6 +77,7 @@ $(function() {
 							<td><a
 								href="${pageContext.request.contextPath}/order/detail/corp.com?no=${oddto.odno}&nowPage=${PINFO.nowPage}">${sdto.iname}</a>
 							</td>
+							<td>${oddto.ostatus}</td>
 							<c:if test="${oddto.ono eq ORDER.odto1.ono}">
 								<td>${ORDER.odto1.mid}</td>
 								<td>${ORDER.odto1.odate}</td>

@@ -24,7 +24,7 @@ public class PageUtil {
 	private String searchType; //
 	
 	public PageUtil(int nowPage, int totalCount) {
-		this(nowPage, totalCount, 2, 5);
+		this(nowPage, totalCount, 5, 5);
 	}
 	
 	public PageUtil(int nowPage, int totalCount, int lineCount, int pageGroup) {

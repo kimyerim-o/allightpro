@@ -1,5 +1,6 @@
 package com.all.light.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,8 +23,8 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		return (ArrayList)session.selectList("order.list", odto);
 	}
 
-	public ArrayList<OrderdetailDTO> listde(OrderdetailDTO oddto) {
-		return (ArrayList)session.selectList("order.listde", oddto);
+	public ArrayList<OrderdetailDTO> listde(int ono) {
+		return (ArrayList)session.selectList("order.listde", ono);
 	}
 
 	public ArrayList<ShoppingDTO> iteminfo(int ino) {
@@ -42,7 +43,13 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	}
 	
 	public ArrayList<OrderdetailDTO> back(OrderdetailDTO oddto) {
-		return (ArrayList)session.selectList("order.back", oddto);
+		ArrayList<OrderdetailDTO> list=null;
+		if(oddto.getType()==null) {
+			list=(ArrayList)session.selectList("order.back", oddto);
+		}else if(oddto.getType()!=null) {
+			list=(ArrayList)session.selectList("order.back2", oddto);
+		}
+		return list;
 	}
 
 	public int pageMemberId(String cono) {
@@ -50,37 +57,36 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		System.out.println(totalCnt);
 		return totalCnt;
 	}
-	public ArrayList<ShoppingDTO> stocklist(PageUtil pinfo) {
-		return (ArrayList)session.selectList("order.stocklist", pinfo);
-	}
-
-	public void stock(ShoppingDTO sdto) {
-		session.update("order.stock",sdto);
-	}
-
-	public int pageOrderCono(String cono) {
+	
+	public int pageOrderCono(int cono) {
 		int totalCnt = session.selectOne("order.pageOrderCono",cono);
 		System.out.println(totalCnt);
 		return totalCnt;
 	}
 
-	public int pageOrderConoTerm(String cono, String term) {
+	public int pageOrderConoTerm(int cono, java.sql.Date start, java.sql.Date last) {
 		HashMap map=new HashMap();
 		map.put("cono", cono);
-		map.put("term", term);
-		int totalCnt = session.selectOne("order.pageOrderCono",map);
+		map.put("start", start);
+		map.put("last", last);
+		System.out.println(map);
+		int totalCnt = session.selectOne("order.pageOrderConoTerm",map);
 		System.out.println(totalCnt);
 		return totalCnt;
 	}
 
-	public ArrayList<OrderDTO> detail(String ono) {
-		return (ArrayList)session.selectList("order.detail", ono);
+	public OrderDTO detail(OrderDTO odto) {
+		return (OrderDTO)session.selectOne("order.detail", odto);
 	}
 
-	public ArrayList<OrderdetailDTO> detailde(String ono) {
-		return (ArrayList)session.selectList("order.listde", ono);
+	public ArrayList<OrderdetailDTO> listdeCorp(PageUtil pinfo) {
+		return (ArrayList)session.selectList("order.listdeCorp", pinfo);
 	}
 
-	
+	public OrderDTO listCorp(int ono) {
+		return (OrderDTO)session.selectOne("order.listCorp", ono);
+	}
+
+
 
 }

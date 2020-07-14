@@ -1,62 +1,104 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	$(function(){//안되요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-		$('#li').click(function(){
-			$('#li').addClass("active");
+$(function() {
+	//검색
+	$("#searb").click(function() {
+		var form = $("#searchF").serialize();
+		$.ajax({
+			url : "${pageContext.request.contextPath}/order/list/corp.com",
+			type : 'post',
+			data : form,
+			success : function(data) {
+				alert(form);
+				location.href = "${pageContext.request.contextPath}/order/list/corp.com?"+ form;
+			},
+			error : function(request,status,error) {
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
 		});
-	})
+	});
 </script>
 </head>
 <body>
+	${ORDER}
 	<div class="container">
+		<div class="searchDiv">
+			<!-- 검색전 -->
+			<c:if test="${empty param.start }">
+				<form id="searchF">
+					<input type="date" name="start" /> ~ <input type="date"
+						name="last" />
+					<input type="button" id="searb" value="검색"/>
+				</form>
+			</c:if>
+			<!-- 검색후 -->
+			<c:if test="${!empty param.type}">
+				<form id="searchF">
+				<input type="date" name="start" value=""/> ~ <input type="date"
+						name="last" />
+				<input type="button" id="searb" value="검색"/>
+				</form>
+			</c:if>
+		</div>
+
 		<table class="table">
 			<tr>
-				<th>NO</th>
-				<th width="70%">제목</th>
-				<th>작성일</th>
+				<th>주문상세번호</th>
+				<th>상품카테고리</th>
+				<th width="50%">상품명</th>
+				<th>고객 ID</th>
+				<th>주문날짜</th>
 			</tr>
-			<c:forEach items="${LIST}" var="list">
-				<tr>
-					<td>${list.qno}</td>
-					<td><a href="${pageContext.request.contextPath}/question/detail/corp.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
-					<td>${list.qdate}</td>
-				</tr>
+			<c:forEach items="${ORDER.oddto}" var="oddto">
+				<c:forEach items="${ORDER.sdto}" var="sdto">
+					<tr>
+						<c:if test="${oddto.ino eq sdto.ino}">
+							<td>${oddto.odno}</td>
+							<td>${sdto.icategory}</td>
+							<td><a
+								href="${pageContext.request.contextPath}/order/detail/corp.com?no=${oddto.odno}&nowPage=${PINFO.nowPage}">${sdto.iname}</a>
+							</td>
+							<c:if test="${oddto.ono eq ORDER.odto1.ono}">
+								<td>${ORDER.odto1.mid}</td>
+								<td>${ORDER.odto1.odate}</td>
+							</c:if>
+						</c:if>
+					</tr>
+				</c:forEach>
 			</c:forEach>
 		</table>
-		<div class="right">
-			<a class="btn" href="${pageContext.request.contextPath}/question/write/corp.com">글쓰기</a>
-		</div>
+
 		<div class="center">
 			<ul class="pagination">
-				<li>
-					<c:if test="${PINFO.nowPage > 3}">
-						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.nowPage-3}">«</a>
-					</c:if>
-					<c:if test="${PINFO.nowPage <= 3}">
-						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=1">«</a>
-					</c:if>
-				</li>
-				<!-- 현재 페이지일때 active --> 
+				<li><c:if test="${PINFO.nowPage > 3}">
+						<a
+							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${PINFO.nowPage-3}">«</a>
+					</c:if> <c:if test="${PINFO.nowPage <= 3}">
+						<a
+							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=1">«</a>
+					</c:if></li>
+				<!-- 현재 페이지일때 active -->
 				<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
-					<li id="li"><!-- 스크립트 적용해야 할것같아요 -->
-						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${i}">${i}</a>
+					<li id="li">
+						<!-- 스크립트 적용해야 할것같아요 --> <a
+						href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${i}">${i}</a>
 					</li>
-				</c:forEach>				
-				<li>
-					<c:if test="${PINFO.nowPage < PINFO.endPage-3}">
-						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.nowPage+3}">»</a>
-					</c:if>
-					<c:if test="${PINFO.nowPage >= PINFO.endPage-3}">
-						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.endPage}">»</a>
-					</c:if>
-				</li>
+				</c:forEach>
+				<li><c:if test="${PINFO.endPage-PINFO.nowPage>=2}">
+						<a
+							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${PINFO.endPage+1}">»</a>
+					</c:if> <c:if test="${PINFO.endPage-PINFO.nowPage<2}">
+						<a
+							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${PINFO.endPage}">»</a>
+					</c:if></li>
 			</ul>
 		</div>
 	</div>

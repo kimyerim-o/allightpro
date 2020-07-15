@@ -70,8 +70,8 @@
 					</select>
 					<input type="date" name="start" value="${param.start}" /> ~ <input
 						type="date" name="last" value="${param.last}" /> <input
-						type="button" id="searb" value="검색" /> <input type="button"
-						id="list" value="전체보기" />
+						type="button" id="searb" value="검색"/> <input type="button"
+						id="list" value="전체보기"/>
 				</form>
 			</c:if>
 		</div>

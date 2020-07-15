@@ -26,9 +26,13 @@ public class ItemService {
 	// 상품추가하기
 	public void insertItem(ItemDTO iDTO, HttpSession session, ArrayList list) {
 		System.out.println("Itemservice의 insertItem() 진입");
-
+		int cono = Integer.parseInt(String.valueOf(session.getAttribute("CONO")));
+		iDTO.setCono(cono);
+		System.out.println(cono);
+		
 		itemDAO.insertItem(iDTO, "item");
 		System.out.println("Itemservice의 insertItem() iDto =" + iDTO);
+		
 		for(int i=0; i<list.size() ;i++) {
 			HashMap map = (HashMap)list.get(i);
 
@@ -44,7 +48,7 @@ public class ItemService {
 			itemDAO.insertItem(iDTO,"iInfo");
 		}
 	}
-	
+
 
 	
 	// 상품리스트 페이징관련 정보

@@ -38,8 +38,8 @@
 	<selectKey keyProperty="ino" resultType="int" order="BEFORE">
 			select   NVL(MAX(ino),0)+1   from  item
 	</selectKey>	
-		INSERT INTO ITEM(ino, iname, icategory, iprice, icorp, istock, idetail)
-		VALUES(#{ino}, #{iname}, #{icategory}, #{iprice}, #{icorp}, #{istock}, #{idetail})
+		INSERT INTO ITEM(ino, iname, icategory, iprice, icorp, istock, idetail, cono)
+		VALUES(#{ino}, #{iname}, #{icategory}, #{iprice}, #{icorp}, #{istock}, #{idetail}, #{cono})
 	</insert>
 	
 	<!-- fileInfo에 입력 -->

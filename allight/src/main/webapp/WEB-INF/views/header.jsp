@@ -99,7 +99,7 @@
                <li class="nav-item"><a href="#" class="nav-link">기업</a>
                   <ul class="dropdown">
                      <li><a href="${pageContext.request.contextPath}/order/list/corp.com">주문 관리</a></li>
-                     <li><a href="#">상품 관리</a></li>
+                     <li><a href="${pageContext.request.contextPath}/item/list/corp.com">상품 관리</a></li>
                      <li><a href="#">상품리뷰/문의</a></li>
                      <li><a href="#">기업 정보 관리</a></li>
                      <li><a href="${pageContext.request.contextPath}/question/list/corp.com">문의사항</a></li>

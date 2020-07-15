@@ -7,7 +7,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.type.IntegerTypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +42,7 @@ public class ItemController {
 		ArrayList<ItemDTO> list = itemSVC.getListView(pInfo);
 		mv.addObject("LIST", list);		// 실제 조회 목록
 		mv.addObject("PINFO", pInfo);	// 페이징 관련 정보
-		mv.setViewName("/item/admin/list");
+		mv.setViewName("/shopping/admin/item/list");
 		System.out.println("컨트롤러 상품 목록보기 - list = " + list);
 		System.out.println("컨트롤러 상품 목록보기 - pInfo = " + pInfo);
 		System.out.println("컨트롤러 상품 목록보기 - mv = " + mv);
@@ -62,7 +61,7 @@ public class ItemController {
 		System.out.println("iDTO2=" + iDTO2);
 		mv.addObject("IDTO", iDTO);
 		mv.addObject("IDTO2", iDTO2);
-		mv.setViewName("/item/admin/view");
+		mv.setViewName("/shopping/admin/item/view");
 		System.out.println("컨트롤러 상품 상세보기 - iDTO "+ iDTO);
 		System.out.println("컨트롤러 상품 상세보기 - iDTO2 "+ iDTO2);
 		System.out.println("컨트롤러 상품 상세보기 - mv "+ mv);	
@@ -73,7 +72,7 @@ public class ItemController {
 	@GetMapping("/insert/admin")
 	public String itemInsertPage() {
 		System.out.println("insert.com 폼 진입");
-		return "item/admin/insert";
+		return "/shopping/admin/item/insert";
 	}
 	
 	// #상품 추가 처리
@@ -131,7 +130,7 @@ public class ItemController {
 		int ino  =  Integer.parseInt(request.getParameter("ino"));//글번호
 		ItemDTO itemDTO = itemSVC.detailView(ino);
 		request.setAttribute("IDTO", itemDTO);//상세내용
-		return "item/admin/update";
+		return "/shopping/admin/item/update";
 	}
 	
 	// #상품 수정 처리
@@ -282,7 +281,7 @@ public class ItemController {
 		
 		mv.addObject("LIST", list);		// 실제 조회 목록
 		mv.addObject("PINFO", pInfo);	// 페이징 관련 정보
-		mv.setViewName("/item/corp/list");
+		mv.setViewName("/shopping/corp/item/list");
 		System.out.println("컨트롤러 상품 목록보기 - list = " + list);
 		System.out.println("컨트롤러 상품 목록보기 - pInfo = " + pInfo);
 		System.out.println("컨트롤러 상품 목록보기 - mv = " + mv);
@@ -301,7 +300,7 @@ public class ItemController {
 		System.out.println("iDTO2=" + iDTO2);
 		mv.addObject("IDTO", iDTO);
 		mv.addObject("IDTO2", iDTO2);
-		mv.setViewName("/item/corp/view");
+		mv.setViewName("/shopping/corp/item/view");
 		System.out.println("컨트롤러 상품 상세보기 - iDTO "+ iDTO);
 		System.out.println("컨트롤러 상품 상세보기 - iDTO2 "+ iDTO2);
 		System.out.println("컨트롤러 상품 상세보기 - mv "+ mv);	
@@ -312,7 +311,7 @@ public class ItemController {
 	@GetMapping("/insert/corp")
 	public String itemInsertPageCo() {
 		System.out.println("insert.com 폼 진입");
-		return "item/corp/insert";
+		return "shopping/corp/item/insert";
 	}
 	
 	// #상품 추가 처리
@@ -370,7 +369,7 @@ public class ItemController {
 		int ino  =  Integer.parseInt(request.getParameter("ino"));//글번호
 		ItemDTO itemDTO = itemSVC.detailView(ino);
 		request.setAttribute("IDTO", itemDTO);//상세내용
-		return "item/corp/update";
+		return "/shopping/corp/item/update";
 	}
 	
 	// #상품 수정 처리

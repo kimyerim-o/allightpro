@@ -9,8 +9,8 @@
 </head>
 <body>
 	<form
-		action="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${param.mno}"
-		method="POST">
+		action="<%=request.getContextPath()%>/member/modify/admin.com?mno=${param.mno}"
+		method="post">
 		<table>
 			<tr>
 				<td>아이디 :</td>
@@ -24,13 +24,11 @@
 			</tr>
 			<tr>
 				<td>가입일 :</td>
-				<td>${MEMINFO.mjoindate}<input type="hidden" id="mjoindate"
-					name="mjoindate" value="${MEMINFO.mjoindate}" /></td>
+				<td>${MEMINFO.mjoindate}</td>
 			</tr>
 			<tr>
 				<td>최근접속일 :</td>
-				<td>${MEMINFO.mlogdate}<input type="hidden" id="mlogdate"
-					name="mlogdate" value="${MEMINFO.mlogdate}" /></td>
+				<td>${MEMINFO.mlogdate}</td>
 			</tr>
 			<tr>
 				<td>성별 :</td>

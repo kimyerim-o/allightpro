@@ -230,10 +230,10 @@ public class MemberController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/member/modify/admin", method= RequestMethod.POST)
+	@RequestMapping(value="/member/modify/admin", method = RequestMethod.POST)
 	public ModelAndView adminModifyMemberPost(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			@RequestParam(value = "search", required = false) String searchWord,
+			@RequestParam(value = "search", required = false, defaultValue = "") String searchWord,
 			MemberDTO memDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("memberController.modify.Member, "+request.getMethod()+"method");
 		//파라미터 받기, 비즈니스로직
@@ -241,7 +241,7 @@ public class MemberController {
 		memSVC.memModify(memDTO);
 		//뷰지정
 		rv.setUrl(request.getContextPath()+"/member/admin.com?search="+searchWord+"&nowPage="+nowPage);
-		//post메소드는 Requestparam의 정보를 경로에 설정해서 넘겨줘야함
+		//post메소드는 Requestparam의 정보를 뷰 경로에 설정해서 넘겨줘야함
 		//rv.setUrl(request.getContextPath()+"/member/admin.com");
 		mv.setView(rv);
 		return mv;

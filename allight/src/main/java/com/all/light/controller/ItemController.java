@@ -269,6 +269,7 @@ public class ItemController {
 		System.out.println("컨트롤러 상품 목록보기 - listView() 요청 session=" + session);
 		System.out.println(session.getAttribute("COID"));
 		System.out.println(session.getAttribute("CONO"));
+		System.out.println(session.getAttribute("CONAME"));
 		//Object cono2 = session.getAttribute("CONO");
 		//String cono = String.valueOf(cono2);
 		//int cono = (Integer)session.getAttribute("CONO");
@@ -309,7 +310,10 @@ public class ItemController {
 	
 	// #상품 추가 폼
 	@GetMapping("/insert/corp")
-	public String itemInsertPageCo() {
+	public String itemInsertPageCo(HttpSession session) {
+		System.out.println(session.getAttribute("COID"));
+		System.out.println(session.getAttribute("CONO"));
+		System.out.println(session.getAttribute("CONAME"));
 		System.out.println("insert.com 폼 진입");
 		return "shopping/corp/item/insert";
 	}

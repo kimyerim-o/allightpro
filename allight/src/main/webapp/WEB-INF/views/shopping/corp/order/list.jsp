@@ -111,26 +111,26 @@
 
 		<div class="center">
 			<ul class="pagination">
-				<li><c:if test="${PINFO.nowPage > 3}">
+				<li><c:if test="${PINFO.nowPage > 3}">param.start && empty param.last && empty param.type
 						<a
-							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${PINFO.nowPage-3}">«</a>
+							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${PINFO.nowPage-3}&type=${param.type}&start=${param.start}&last=${param.last}">«</a>
 					</c:if> <c:if test="${PINFO.nowPage <= 3}">
 						<a
-							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=1">«</a>
+							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=1&type=${param.type}&start=${param.start}&last=${param.last}">«</a>
 					</c:if></li>
 				<!-- 현재 페이지일때 active -->
 				<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
 					<li id="li">
 						<!-- 스크립트 적용해야 할것같아요 --> <a
-						href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${i}">${i}</a>
+						href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${i}&type=${param.type}&start=${param.start}&last=${param.last}">${i}</a>
 					</li>
 				</c:forEach>
 				<li><c:if test="${PINFO.endPage-PINFO.nowPage>=2}">
 						<a
-							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${PINFO.endPage+1}">»</a>
+							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${PINFO.endPage+1}&type=${param.type}&start=${param.start}&last=${param.last}">»</a>
 					</c:if> <c:if test="${PINFO.endPage-PINFO.nowPage<2}">
 						<a
-							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${PINFO.endPage}">»</a>
+							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${PINFO.endPage}&type=${param.type}&start=${param.start}&last=${param.last}">»</a>
 					</c:if></li>
 			</ul>
 		</div>

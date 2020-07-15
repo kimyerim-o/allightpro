@@ -24,8 +24,7 @@
 			var qno = "${DETAIL.qno}";
 			var qcid =  "${sessionScope.MID}";
 			var qccontent = $("#qccontent").val();
-			var qcdate = "${sessionScope.DATE}";
-			var param = {"qno" : qno, "qcid" : qcid , "qccontent" : qccontent, "qcdate" : qcdate};
+			var param = {"qno" : qno, "qcid" : qcid , "qccontent" : qccontent};
 			alert(JSON.stringify(param));
 		$.ajax({
 			type: "post", //데이터를 보낼 방식

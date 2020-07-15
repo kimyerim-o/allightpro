@@ -201,6 +201,7 @@ public class OrderService {
 			if(type==null) {
 				totalCount = ordDAO.pageOrderCono(cono);
 			}else {
+				System.out.println("pageOrderCono"+type);
 				totalCount = ordDAO.pageOrderConoType(cono,type);
 			}
 		}else if(star!=null && las!=null) {

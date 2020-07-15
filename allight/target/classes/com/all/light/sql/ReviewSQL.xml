@@ -9,6 +9,7 @@
 			where ino in (select ino from orderdetail
 			where ono in (select ono from orders
 			where mid=#{rid}))
+			and item.iname like '%${searchWord}%'
 	</select>
 	
 	<select id="getList" resultType="java.util.HashMap"

@@ -29,10 +29,11 @@ public class ReviewController {
 			HttpServletRequest request) {
 		// 파라미터 받기
 		String id = (String) request.getSession().getAttribute("MID");
-		System.out.println("\nReviewController.itemList, 접속ID = " + id);
-
+		System.out.println("\nReviewController.itemList, 접속ID = " + id+searchWord);
+		
 		// 페이지 객체에 검색어와 현재 페이지를 넘기고 공지 리스트를 반환
 		PageUtil pInfo = revSVC.getPageInfo(id, nowPage, searchWord);
+		pInfo.setSearchWord(searchWord);
 		pInfo.setRid(id);
 		ArrayList<ReviewDTO> map = revSVC.getList(pInfo);
 
@@ -120,5 +121,26 @@ public class ReviewController {
 	}
 	
 	//기업
-	
+	@RequestMapping("/review/list/corp")
+	public ModelAndView itemListCorp(
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value = "search", required = false) String searchWord, 
+			ModelAndView mv, RedirectView rv,	HttpServletRequest request) {
+		// 파라미터 받기
+		String id = (String) request.getSession().getAttribute("MID");
+		System.out.println("\nReviewController.itemList, 접속ID = " + id);
+
+		// 페이지 객체에 검색어와 현재 페이지를 넘기고 공지 리스트를 반환
+		PageUtil pInfo = revSVC.getPageInfo(id, nowPage, searchWord);
+		pInfo.setRid(id);
+		ArrayList<ReviewDTO> map = revSVC.getList(pInfo);
+
+		System.out.println("list = " + map.toString());
+		System.out.println("pinfo = " + pInfo.toString());
+		mv.addObject("LIST", map); // 리뷰 리스트
+		mv.addObject("PINFO", pInfo); // 페이징 정보
+
+		mv.setViewName("shopping/user/mypageReview/itemList");
+		return mv;
+	}
 }

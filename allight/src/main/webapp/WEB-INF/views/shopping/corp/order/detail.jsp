@@ -11,13 +11,9 @@
 	$(
 			function() {
 				//목록 버튼 클릭 시
-				$("#list")
-						.click(
-								function() {
-									$(location)
-											.attr("href",
-													"${pageContext.request.contextPath}/order/list/corp.com?nowPage=${NOW}");
-								});
+				$("#list").click(function() {
+					$(location).attr("href","${pageContext.request.contextPath}/order/list/corp.com?nowPage=${NOW}");
+				 });
 				//변경
 				$("#serb").click(function() {
 					$("#statfrm").submit();
@@ -81,8 +77,7 @@
 					<td class="order_amount">
 						<ul>
 							<li class="order_pay_info qq-9">${ORDER.oddto1.ostatus}</li>
-							<li><form id="statfrm"
-									action="${pageContext.request.contextPath}/order/change.com">
+							<li><form id="statfrm" action="${pageContext.request.contextPath}/order/change/corp.com">
 									<input type="hidden" name="odno" value="${ORDER.oddto1.odno}">
 									<select name="ostatus" class="selectCss">
 										<option selected="selected">상태변경</option>

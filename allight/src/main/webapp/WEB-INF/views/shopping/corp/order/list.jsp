@@ -21,7 +21,6 @@
 				type : 'get',
 				data : form,
 				success : function(data) {
-					alert(form);
 					location.href = "${pageContext.request.contextPath}/order/list/corp.com?"+ form;
 				},
 				error : function(request, status, error) {

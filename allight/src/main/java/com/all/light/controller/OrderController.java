@@ -68,6 +68,7 @@ public class OrderController {
 		ordSVC.change(oddto);
 		return "ok";
 	}
+
 	
 	//취소 반품 페이지이동-주문관리 ajax 후?????
 	@RequestMapping("/confirm")

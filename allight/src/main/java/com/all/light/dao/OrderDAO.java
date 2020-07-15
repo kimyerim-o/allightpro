@@ -31,11 +31,8 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		return (ArrayList)session.selectList("order.iteminfo",ino);
 	}
 
-	public void change(int no, String type) {
-		HashMap map=new HashMap();
-		map.put("no", no);
-		map.put("type", type);
-		session.update("order.change",map);
+	public void change(OrderdetailDTO oddto) {
+		session.update("order.change",oddto);
 	}
 
 	public void check(int mno, MemberDTO mdto) {
@@ -103,8 +100,8 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		return (MemberDTO)session.selectOne("order.memIdNo", mdto);
 	}
 
-	public void delivery(OrderDTO odto) {
-		session.update("order.delivery", odto);
+	public void delivery(OrderdetailDTO oddto) {
+		session.update("order.delivery", oddto);
 	}
 
 

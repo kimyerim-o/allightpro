@@ -122,13 +122,8 @@ public class OrderService {
 	}
 	
 	//상태 변경
-	public void change(int no, String type, HttpSession session) {
-		if(type.equals("cancel")) {
-			type="주문취소";
-		}else if(type.equals("confirm")) {
-			type="구매확정";
-		}
-		ordDAO.change(no,type);
+	public void change(OrderdetailDTO oddto) {
+		ordDAO.change(oddto);
 	}
 	//취소반품조회
 	public OrderData back(HttpSession session, OrderData odata, OrderDTO odto, OrderdetailDTO oddto, ShoppingDTO sdto, String type, String term) {
@@ -254,12 +249,9 @@ public class OrderService {
 		return odata;
 	}
 	
-	public void changeCorp(int no, String type) {
-		ordDAO.change(no,type);
-	}
 	
-	public void delivery(OrderDTO odto) {
-		ordDAO.delivery(odto);
+	public void delivery(OrderdetailDTO oddto) {
+		ordDAO.delivery(oddto);
 	}
 
 

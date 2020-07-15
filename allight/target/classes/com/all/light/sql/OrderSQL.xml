@@ -34,8 +34,8 @@
 	</select>
 	
 	<!-- 상태변화 -->
-	<update id="change" parameterType="java.util.HashMap">
-	update orderdetail set ostatus=#{type} where odno=#{no}
+	<update id="change" parameterType="orddeDTO">
+	update orderdetail set ostatus=#{ostatus} where odno=#{odno}
 	</update>
 	
 	
@@ -79,7 +79,7 @@
 	
 	<!-- 배송 -->
 	<update id="delivery">
-	update orderdetail set ocouriercompany=#{ocouriercompany},ocouriercompany=#{oinvoicenumber} where odno=#{odno}
+	update orderdetail set ocouriercompany=#{ocouriercompany},oinvoicenumber=#{oinvoicenumber} where odno=#{odno}
 	</update>
 </mapper>
 	

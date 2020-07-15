@@ -1,15 +1,12 @@
 package com.all.light.controller;
 
-import java.sql.Date;
-import java.util.ArrayList;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -65,14 +62,11 @@ public class OrderController {
 	
 	//상태 변경
 	@RequestMapping("/change")
-	public ModelAndView change(@RequestParam(value = "no", required = true) int no,
-			@RequestParam(value = "type", required = true) String type,
-			HttpSession session, ModelAndView mv,RedirectView rv, HttpServletRequest request) {
-		System.out.println("change "+no+" change "+type);
-		ordSVC.change(no,type,session);
-		rv.setUrl(request.getContextPath()+"/order/list.com");
-		mv.setView(rv);
-		return mv;
+	@ResponseBody
+	public String change(OrderdetailDTO oddto) {
+		System.out.println(oddto);
+		ordSVC.change(oddto);
+		return "ok";
 	}
 	
 	//취소 반품 페이지이동-주문관리 ajax 후
@@ -129,22 +123,19 @@ public class OrderController {
 	
 	//주문관리 현황 변경
 	@RequestMapping("/change/corp")
-	public ModelAndView changeCorp(@RequestParam(value = "no", required = true) int no,
-			@RequestParam(value = "type", required = true) String type,
-			ModelAndView mv) {
-		System.out.println("change "+no+" change "+type);
-		ordSVC.changeCorp(no,type);
-		RedirectView rv=new RedirectView("../detail/corp.com?no="+no);
+	public ModelAndView changeCorp(OrderdetailDTO oddto,ModelAndView mv) {
+		ordSVC.change(oddto);
+		RedirectView rv=new RedirectView("../detail/corp.com?no="+oddto.getOdno());
 		mv.setView(rv);
 		return mv;
 	}
 	
 	@RequestMapping("/delivery/corp")
-	public ModelAndView delivery(OrderDTO odto,ModelAndView mv) {
-		System.out.println(odto);
-		ordSVC.delivery(odto);
-		//RedirectView rv=new RedirectView("../detail/corp.com?no="+no);
-		//mv.setView(rv);
+	public ModelAndView delivery(OrderdetailDTO oddto,ModelAndView mv) {
+		System.out.println(oddto);
+		ordSVC.delivery(oddto);
+		RedirectView rv=new RedirectView("../detail/corp.com?no="+oddto.getOdno());
+		mv.setView(rv);
 		return mv;
 	}
 	

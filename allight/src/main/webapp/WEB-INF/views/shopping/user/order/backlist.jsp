@@ -98,6 +98,11 @@
 				</tr>
 			</thead>
 			<tbody>
+			<c:if test="${ORDER.odto == null}">
+			<tr>
+				<td colspan="5" style="text-align: center;"><div class="listno_tab noto_sans">주문내역이 없습니다.</div></td>
+			</tr>
+			</c:if>
 			</tbody>
 		</table>
 
@@ -111,9 +116,6 @@
 				<col width="140">
 				<col width="200">
 			</colgroup>
-			<c:if test="${empty ORDER}">
-				<div class="listno_tab noto_sans">주문내역이 없습니다.</div>
-			</c:if>
 			<c:forEach items="${ORDER.odto}" var="odto">
 				<thead>
 					<tr>

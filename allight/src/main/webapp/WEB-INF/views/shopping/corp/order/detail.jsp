@@ -82,9 +82,9 @@
 						<ul>
 							<li class="order_pay_info qq-9">${ORDER.oddto1.ostatus}</li>
 							<li><form id="statfrm"
-									action="${pageContext.request.contextPath}/order/change/corp.com">
-									<input type="hidden" name="no" value="${ORDER.oddto1.odno}">
-									<select name="type" class="selectCss">
+									action="${pageContext.request.contextPath}/order/change.com">
+									<input type="hidden" name="odno" value="${ORDER.oddto1.odno}">
+									<select name="ostatus" class="selectCss">
 										<option selected="selected">상태변경</option>
 										<option value="배송준비중">배송준비중</option>
 										<option value="배송시작">배송시작</option>
@@ -100,7 +100,6 @@
 
 		<!-- 주문자정보 -->
 		<div class="order_detail mt60">
-			<h2>정보</h2>
 			<h3 class="order_detail_tit">주문자 정보</h3>
 			<table class="tbl" cellspacing="0" border="1" summary="정보">
 				<caption>정보</caption>
@@ -127,7 +126,6 @@
 
 		<!-- 배송지정보 -->
 		<div class="order_detail mt60">
-			<h2>정보</h2>
 			<h3 class="order_detail_tit">배송지 정보</h3>
 			<table class="tbl" cellspacing="0" border="1" summary="정보">
 				<caption>정보</caption>
@@ -154,24 +152,25 @@
 						<th><span>배송요청사항</span></th>
 						<td>${ORDER.odto1.orequirethings}</td>
 					</tr>
-					<from id="delifrm" action="${pageContext.request.contextPath}/order/delivery/corp.com">
-					<tr><input type="hidden" name="odno" value="${ORDER.oddto1.odno}">
-						<td><span>택배회사</span></td>
-						<td><input type="text" name="ocouriercompany"></td>
-					</tr>
-					<tr>
-						<td><span>송장번호</span></td>
-						<td><input type="text" name="oinvoicenumber"> <input
-							type="button" id="delib" value="확인"></td>
-					</tr>
-					</from>
+					<form id="delifrm"
+						action="${pageContext.request.contextPath}/order/delivery/corp.com">
+						<tr>
+							<input type="hidden" name="odno" value="${ORDER.oddto1.odno}">
+							<td><span>택배회사</span></td>
+							<td><input type="text" name="ocouriercompany" value="${ORDER.oddto1.ocouriercompany}"></td>
+						</tr>
+						<tr>
+							<td><span>송장번호</span></td>
+							<td><input type="text" name="oinvoicenumber" value="${ORDER.oddto1.oinvoicenumber}"> <input
+								type="button" id="delib" value="확인"></td>
+						</tr>
+					</form>
 				</tbody>
 			</table>
 		</div>
 
 		<!-- 결제정보 -->
 		<div class="order_detail mt60" id="div_cost_info">
-			<h2>정보</h2>
 			<h3 class="order_detail_tit">결제 정보</h3>
 			<table class="tbl" cellspacing="0" border="1" summary="정보">
 				<caption>정보</caption>

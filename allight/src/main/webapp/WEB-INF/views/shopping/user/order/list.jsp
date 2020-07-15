@@ -9,21 +9,44 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 	$(function(){
-		var no = $("#no").val();
 		//취소 버튼 클릭 시
-		$(".cancel").click(function(){
-			if(confirm("해당 상품을 주문 취소 하시겠습니까?")){
-				$('#type').attr('value','cancel');
-				$('#frm').attr('action','./change.com');
-				$('#frm').submit();
+		$(".cancel").click(function() {
+			if (confirm("해당 상품을 주문 취소 하시겠습니까?")) {
+				var odno = $(event.target).attr('data-no');
+				var ostatus = "주문취소";
+				var param = { "odno" : odno , "ostatus" : ostatus };
+				alert(JSON.stringify(param));
+				$.ajax({
+					url : "${pageContext.request.contextPath}/order/change.com",
+					type : 'post',
+					data : param,
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/order/list.com";
+					},
+					error : function(request,status,error) {
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}
+					});
 			}
 		});
 		//반품 버튼 클릭 시
-		$(".confirm").click(function(){
-			if(confirm("해당 상품을 구매확정 하시겠습니까? 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")){
-				$('#type').attr('value','confirm');
-				$('#frm').attr('action','./change.com');
-				$('#frm').submit();
+		$(".confirm").click(function() {
+			if (confirm("해당 상품을 구매확정 하시겠습니까? 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")) {
+				var odno =  $(event.target).attr('data-no');
+				var ostatus = "구매확정";
+				var param = { "odno" : odno , "ostatus" : ostatus };
+				alert(JSON.stringify(param));
+				$.ajax({
+					url : "${pageContext.request.contextPath}/order/change.com",
+					type : 'post',
+					data : param,
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/order/list.com";
+					},
+					error : function(request,status,error) {
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}
+					});
 			}
 		});
 	        
@@ -120,12 +143,7 @@
 										</span> <span class="order_option_amounts"> <em>${oddto.odprice}</em>원
 										</span></li>
 
-									</ul> <!-- //옵션명 노출--></td>
-									<form id="frm">
-										<input type="hidden" name="no" value="${oddto.odno}"/>
-										<input type="hidden" name="type" id="type"/>
-									</form>
-				
+									</ul></td>
 									<td class="order_amount">
 									<c:if test="${oddto.ostatus eq '주문취소' or oddto.ostatus eq '반품'}">
 										<li class="order_pay_info qq-9">${oddto.ostatus}</li>
@@ -134,8 +152,8 @@
 										<c:if test="${oddto.ostatus eq '배송준비중' or oddto.ostatus eq '결제완료'}">
 											<ul>
 											<li class="order_pay_info qq-9">${oddto.ostatus}</li>
-											<li class="mb5"><a id="cancel"
-												class="order_btn_write" style="cursor: pointer;">주문취소</a></li>
+											<li class="mb5"><a class="cancel"
+												class="order_btn_write" style="cursor: pointer;" data-no="${oddto.odno}">주문취소</a></li>
 											</ul>
 										</c:if>
 									<!-- 배송시작, 배송완료 -->
@@ -147,8 +165,8 @@
 													onclick="delivery_view('택배회사','송장번호');"
 													class="order_btn_delcheck" style="cursor: pointer;">배송조회</a></li>
 		
-												<li class="mb5"><a id="confirm"
-													class="order_btn_write" style="cursor: pointer;">구매확정</a></li>
+												<li class="mb5"><a class="confirm"
+													class="order_btn_write" style="cursor: pointer;" data-no="${oddto.odno}">구매확정</a></li>
 											</ul>
 									</c:if>	
 									<!-- 구매확정 -->							

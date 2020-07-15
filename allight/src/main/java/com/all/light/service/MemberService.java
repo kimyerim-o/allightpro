@@ -24,7 +24,7 @@ public class MemberService {
 			map.put("mpw",memdto.getMpw());
 			HashMap result=memDAO.login(map);
 			//날짜
-//			java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
+			java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
 			if(result==null || result.size()==0) {
 				//로그인실패
 				System.out.println("로그인실패");
@@ -40,6 +40,7 @@ public class MemberService {
 				session.setAttribute("MBIRTH", result.get("MBIRTH"));
 				session.setAttribute("MTEL", result.get("MTEL"));
 				session.setAttribute("MTYPE", result.get("MTYPE"));
+				session.setAttribute("DATE", date);
 				session.setAttribute("MNICK", result.get("MNICK"));
 				memDAO.logDate(result);
 		}

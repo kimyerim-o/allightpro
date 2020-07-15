@@ -122,7 +122,6 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 	public ShoppingDTO getDetail(int ino) {
 		HashMap<String,Integer> map = new HashMap<String,Integer>();
 		map.put("ino", ino);
-		System.out.println(ino);
 		ShoppingDTO shopDTO = (ShoppingDTO)session.selectOne("Shopping.detailByIno",map);
 		return shopDTO;
 	}

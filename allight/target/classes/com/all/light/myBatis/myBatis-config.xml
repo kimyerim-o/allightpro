@@ -25,8 +25,6 @@
    		<typeAlias type="com.all.light.dto.CorporationDTO" alias="corDTO"/>
    		<typeAlias type="com.all.light.dto.ShoppingDTO" alias="shopDTO"/>
    		<typeAlias type="com.all.light.dto.NoticeDTO" alias="notDTO"/>
-   		<typeAlias type="com.all.light.dto.OrderDTO" alias="ordDTO"/>
-   		<typeAlias type="com.all.light.dto.OrderdetailDTO" alias="orddeDTO"/>
    		<typeAlias type="com.all.light.dto.ReviewDTO" alias="reviewDTO"/>
    </typeAliases>
    
@@ -37,8 +35,6 @@
    		<mapper resource="/com/all/light/sql/ShoppingSQL.xml"/>
    		<mapper resource="/com/all/light/sql/QuestionSQL.xml"/>
    		<mapper resource="/com/all/light/sql/NoticeSQL.xml"/>
-   		<mapper resource="/com/all/light/sql/OrderSQL.xml"/>
-   		<mapper resource="/com/all/light/sql/ReviewSQL.xml"/>
    </mappers>
    
 </configuration>

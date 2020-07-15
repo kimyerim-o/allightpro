@@ -1,24 +1,49 @@
 package com.all.light.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class OrderDTO {
-	private int ono;//주문번호seq
+	private int ono;//주문번호
 	private String mid;
-	private int mno;
 	private Date odate;//주문날짜
 	private String oaddno;//우편번호
 	private String oaddress1;//주소
 	private String oaddress2;//상세주소
 	private String otel;
 	private String oreceiver;
+	private String ocouriercompany;//택배회사
 	private String orequirethings;//요구사항
-	private Date searchdate;//찾는 날짜
-	private String ordernum;
-	private String sodate;//주문날짜
-	private int sum;//총합
-	private String type;
+	private String ostatus;
+	private String oinvoicenumber;//송장번호
+	private int odno;//주문상세번호
+	private int ino;//상품번호
+	private int odamount;//수량
+	private int odprice;//가격
 	
+	public int getOdno() {
+		return odno;
+	}
+	public void setOdno(int odno) {
+		this.odno = odno;
+	}
+	public int getIno() {
+		return ino;
+	}
+	public void setIno(int ino) {
+		this.ino = ino;
+	}
+	public int getOdamount() {
+		return odamount;
+	}
+	public void setOdamount(int odamount) {
+		this.odamount = odamount;
+	}
+	public int getOdprice() {
+		return odprice;
+	}
+	public void setOdprice(int odprice) {
+		this.odprice = odprice;
+	}
 	public int getOno() {
 		return ono;
 	}
@@ -67,55 +92,29 @@ public class OrderDTO {
 	public void setOreceiver(String oreceiver) {
 		this.oreceiver = oreceiver;
 	}
+	public String getOcouriercompany() {
+		return ocouriercompany;
+	}
+	public void setOcouriercompany(String ocouriercompany) {
+		this.ocouriercompany = ocouriercompany;
+	}
 	public String getOrequirethings() {
 		return orequirethings;
 	}
 	public void setOrequirethings(String orequirethings) {
 		this.orequirethings = orequirethings;
 	}
-	public Date getSearchdate() {
-		return searchdate;
+	public String getOstatus() {
+		return ostatus;
 	}
-	public void setSearchdate(Date searchdate) {
-		this.searchdate = searchdate;
+	public void setOstatus(String ostatus) {
+		this.ostatus = ostatus;
 	}
-	
-	public int getMno() {
-		return mno;
+	public String getOinvoicenumber() {
+		return oinvoicenumber;
 	}
-	public void setMno(int mno) {
-		this.mno = mno;
-	}
-	public String getOrdernum() {
-		return ordernum;
-	}
-	public void setOrdernum(String ordernum) {
-		this.ordernum = ordernum;
-	}
-	
-	@Override
-	public String toString() {
-		return "OrderDTO [ono=" + ono + ", mid=" + mid + ", odate=" + odate + ", oaddno=" + oaddno + ", oaddress1="
-				+ oaddress1 + ", oaddress2=" + oaddress2 + ", otel=" + otel + ", oreceiver=" + oreceiver
-				+ ", orequirethings=" + orequirethings + ", searchdate=" + searchdate + ", ordernum=" + ordernum + "]";
-	}
-	public String getSodate() {
-		return sodate;
-	}
-	public void setSodate(String string) {
-		this.sodate = string;
-	}
-	public int getSum() {
-		return sum;
-	}
-	public void setSum(int sum) {
-		this.sum = sum;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
+	public void setOinvoicenumber(String oinvoicenumber) {
+		this.oinvoicenumber = oinvoicenumber;
 	}
 	
 	

@@ -43,7 +43,7 @@
 		});
 		
 		//댓글 삭제
-		$(".dcomm").click(function(){
+		$("#dcomm").click(function(){
 			 if(confirm("삭제 하시겠습니까?")){
 				 var qcno = $("#qcno").val();
 				 var param = {"qcno" : qcno}
@@ -54,7 +54,7 @@
 				dataType: 'text',
 				success: function(data){
 			            alert("댓글이 삭제되었습니다.");
-			            location.href = "${pageContext.request.contextPath}/question/detail/admin.com?no=${DETAIL.qno}";},
+			            location.href = "${pageContext.request.contextPath}/question/detail/corp.com?no=${DETAIL.qno}";},
 			    error:function(request,status,error){
 			    	alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			             }
@@ -124,8 +124,8 @@
 							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
 								<c:if test="${c.qcid eq sessionScope.MID}">
-									<a class="ucomm" style="color: #ff5656;">수정</a>
-									<a class="dcomm" style="color: #ff5656;">삭제</a>
+									<a id="ucomm" style="color: #ff5656;">수정</a>
+									<a id="dcomm" style="color: #ff5656;">삭제</a>
 								</c:if>
 							</td>
 						</tr>

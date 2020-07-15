@@ -22,13 +22,14 @@ public class CorporationService {
 		map.put("coid",cordto.getCoid());
 		map.put("copw",cordto.getCopw());
 		HashMap result=corDAO.login(map);
+		java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
 		if(result==null || result.size()==0) {
 			System.out.println("로그인실패");
 		}else{
 			//로그인성공
 			System.out.println("로그인성공");
-			session.setAttribute("CONO",result.get("CONO"));
 			session.setAttribute("COID",result.get("COID"));
+			session.setAttribute("DATE", date);
 		}
 		
 	}

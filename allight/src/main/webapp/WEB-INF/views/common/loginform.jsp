@@ -118,8 +118,12 @@
 		<tr>
 			<td><input type="submit" value="로그인"></td>
 		</tr>
-		<tr>
-			<td></td>
+		<tr class="center">
+			<td colspan="2">
+				<a href="${pageContext.request.contextPath}/findIdFrm.com">아이디 찾기 |</a>&nbsp;
+				<a href="${pageContext.request.contextPath}/findPwFrm.com">비밀번호 찾기 |</a>&nbsp;
+				<a href="${pageContext.request.contextPath}/joinFrm.com">회원가입</a>
+			</td>
 		</tr>
 	</table>
 </form>

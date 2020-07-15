@@ -16,6 +16,26 @@
 	insert into member(mno,mid) values(mno_seq.nextval,#{mid})
 	</insert>
 	
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="memDTO">
+		insert into member
+		values ((select NVL(MAX(mno),1)+1 from member),#{mid}, #{mpw},
+		#{memail},#{mname}, #{mnick}, #{mbirth},#{mtel},#{mtel2},
+		#{mtype},sysdate,#{mlogdate},#{msex})
+	</insert>
+	
+	<!-- 아이디 중복 확인 -->
+	<select id="getMemberID" parameterType="memDTO" resultType="memDTO">
+		select * from member
+		where mid=#{mid}
+	</select>
+	
+	<!-- 아이디찾기  -->
+	<select id="findId" resultType="memDTO" parameterType="java.util.HashMap">
+		select * from member
+		where (mname=#{mname} AND memail=#{memail})
+	</select>
+	
 	<!-- 회원 수 조회, 검색 기능 포함 -->
 	<select id="totalCntWithSearch" resultType="Integer" parameterType="String">
 		select  count(*) from member where mid like '%${value}%' 

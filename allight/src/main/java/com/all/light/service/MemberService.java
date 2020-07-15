@@ -54,7 +54,7 @@ public class MemberService {
 		if (result == null || result.size() == 0) {
 			// 로그인실패
 			System.out.println("로그인실패");
-			HashMap res = memDAO.join(memdto);
+			HashMap res = memDAO.kjoin(memdto);
 			if (res != null) {
 				System.out.println("res.get(\"MID\")" + res.get("MID"));
 				session.setAttribute("ID", res.get("MID"));
@@ -79,6 +79,29 @@ public class MemberService {
 		}
 	}
 
+	// 회원가입
+	public void join(MemberDTO memdto) {
+		//email하나로 합치기
+		memdto.setMemail(memdto.getMemail()+"@"+memdto.getMemail2());
+		//핸드폰번호 합치기
+		memdto.setMtel(memdto.getMtel()+"-"+memdto.getMtel1()+"-"+memdto.getMtel2());
+		memDAO.join(memdto);
+	}
+	
+	//아이디찾기
+	public MemberDTO findId(MemberDTO memdto) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("mname", memdto.getMname());
+		map.put("memail", memdto.getMemail());
+		MemberDTO mem=memDAO.findId(map);
+		return mem;
+	}
+	
+	//아이디 중복확인
+	public MemberDTO getMemberID(MemberDTO memdto) {
+		return memDAO.getMemberID(memdto);
+	}
+		
 	//검색 및 회원수 가져오기 메소드
 	public PageUtil getPageInfo(int nowPage, String searchWord) {
 		int totalCount = memDAO.getTotalCnt(searchWord);

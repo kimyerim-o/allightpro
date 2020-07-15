@@ -14,6 +14,25 @@ public class MemberDAO extends SqlSessionDaoSupport {
 	@Autowired
 	SqlSessionTemplate session;
 
+	//회원가입
+	public void join(MemberDTO memdto) {
+		System.out.println("MemberDAO - join");
+		session.insert("member.join", memdto);
+	}
+	
+	//아이디찾기
+	public MemberDTO findId(HashMap map) {
+		System.out.println("findId DAO 진입");	
+		MemberDTO result = (MemberDTO)session.selectOne("member.findId",map);
+		System.out.println(result);
+		return result;
+	}
+	
+	//아이디 중복확인
+	public MemberDTO getMemberID(MemberDTO memdto) {
+		return session.selectOne("member.getMemberID", memdto);
+	}
+
 	public HashMap login(HashMap map) {
 		System.out.println("MemberDAO : " + map.toString());
 		HashMap result = session.selectOne("member.login", map);
@@ -37,8 +56,8 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		return result;
 	}
 
-	public HashMap join(MemberDTO memdto) {
-		System.out.println("UserDAO join");
+	public HashMap kjoin(MemberDTO memdto) {
+		System.out.println("UserDAO kjoin");
 		System.out.println(memdto);
 		// 수정삭제가 만들어진후에 변경
 		int i = session.insert("member.kinsert", memdto);

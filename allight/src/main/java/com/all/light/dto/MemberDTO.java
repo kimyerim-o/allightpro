@@ -13,10 +13,12 @@ public class MemberDTO {
 	private String mid;
 	private String mpw;
 	private String memail;
+	private String memail2;
 	private String mname;
 	private String mnick;
 	private String mbirth;
 	private String mtel;
+	private String mtel1;
 	private String mtel2;
 	private LocalDate mjoindate;
 	private LocalDate mlogdate;
@@ -100,11 +102,31 @@ public class MemberDTO {
 	public void setMtype(int mtype) {
 		this.mtype = mtype;
 	}
+	
+	public String getMemail2() {
+		return memail2;
+	}
+	public void setMemail2(String memail2) {
+		this.memail2 = memail2;
+	}
+	public String getMtel1() {
+		return mtel1;
+	}
+	public void setMtel1(String mtel1) {
+		this.mtel1 = mtel1;
+	}
 	@Override
 	public String toString() {
-		return "MemberDTO [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", memail=" + memail + ", mname=" + mname
-				+ ", mnick=" + mnick + ", mbirth=" + mbirth + ", mtel=" + mtel + ", mtel2=" + mtel2 + ", mjoindate="
-				+ mjoindate + ", mlogdate=" + mlogdate + ", msex=" + msex + ", mtype=" + mtype + "]";
+		return "MemberDTO [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", memail=" + memail + ", memail2=" + memail2
+				+ ", mname=" + mname + ", mnick=" + mnick + ", mbirth=" + mbirth + ", mtel=" + mtel + ", mtel1=" + mtel1
+				+ ", mtel2=" + mtel2 + ", mjoindate=" + mjoindate + ", mlogdate=" + mlogdate + ", msex=" + msex
+				+ ", mtype=" + mtype + ", getMno()=" + getMno() + ", getMid()=" + getMid() + ", getMpw()=" + getMpw()
+				+ ", getMemail()=" + getMemail() + ", getMname()=" + getMname() + ", getMnick()=" + getMnick()
+				+ ", getMbirth()=" + getMbirth() + ", getMtel()=" + getMtel() + ", getMtel2()=" + getMtel2()
+				+ ", getMjoindate()=" + getMjoindate() + ", getMlogdate()=" + getMlogdate() + ", getMsex()=" + getMsex()
+				+ ", getMtype()=" + getMtype() + ", getMemail2()=" + getMemail2() + ", getMtel1()=" + getMtel1()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
 	
 }

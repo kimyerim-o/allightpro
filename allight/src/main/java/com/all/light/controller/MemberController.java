@@ -31,7 +31,89 @@ public class MemberController {
 	public String main() {
 		return "index";
 	}
+	//회원가입폼
+	@RequestMapping("/joinFrm")
+	public String join() {
+		return "common/user/join";
+	}
 	
+	//회원가입
+	@RequestMapping("/join")
+	public ModelAndView join(MemberDTO memdto,ModelAndView mv) {
+		memSVC.join(memdto);
+		RedirectView rv=new RedirectView("./joinSuccess.com");
+		mv.setView(rv);
+		return mv;
+	}
+	
+	//아이디 중복확인
+	@RequestMapping("/idChk")
+	public String idChk(MemberDTO memdto) {
+		Map<String, Object> checkResult = new HashMap<String, Object>();
+
+		String data=null;
+		MemberDTO mem=memSVC.getMemberID(memdto);
+		if (mem != null) {
+			data="fail";
+		} else {
+			data="success";
+		}
+			return data;
+	}
+	
+	//회원가입완료
+	@RequestMapping("/joinSuccess")
+	public String joinSuccess() {
+		return "common/user/joinSuccess";
+	}
+		
+	//아이디찾기 폼
+	@RequestMapping("/findIdFrm")	
+	public String findIdFrm(){
+		System.out.println("요청 함수 findIdFrm()!"); 
+		return "common/user/findId";
+	}
+		
+	//아이디찾기
+	@RequestMapping("/findId")
+	public ModelAndView findId(MemberDTO memdto,ModelAndView mv) {
+		MemberDTO mem = memSVC.findId(memdto);
+		mv.addObject("MEM",mem);
+		mv.setViewName("common/user/findIdResult");
+		return mv;
+	}
+	
+	//비밀번호찾기 폼
+	@RequestMapping("/findPwFrm")	
+	public String findPwFrm(){
+		System.out.println("요청 함수 findPwFrm!"); 
+		return "common/user/findPw";
+	}
+	
+	//비밀번호찾기
+	@RequestMapping("/findPw")
+	public ModelAndView findPw(MemberDTO memdto,ModelAndView mv) {
+		MemberDTO mem = memSVC.findId(memdto);
+		mv.addObject("MEM",mem);
+		mv.setViewName("common/user/findPwEmail");
+		return mv;
+	}
+	
+	//비밀번호 찾기 이메일인증 페이지
+	@RequestMapping("/findPwEmail")
+	public ModelAndView findPwEmail(MemberDTO memdto,ModelAndView mv) {
+		MemberDTO mem = memSVC.findId(memdto);
+		mv.addObject("MEM",mem);
+		mv.setViewName("common/user/findPwResult");
+		return mv;
+	}
+	
+	//비밀번호찾기 완료
+	@RequestMapping("/findPwResult")
+	public String findPwSuccess() {
+		return "common/user/findPwSuccess";
+	}
+		
 	//로그인폼
 	@RequestMapping("/login")
 	public ModelAndView log(ModelAndView mv,

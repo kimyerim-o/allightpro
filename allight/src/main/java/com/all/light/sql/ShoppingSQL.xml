@@ -161,7 +161,7 @@
 		where <include refid="rnum"/>
 	</select>
 	
-	<!-- 상품 리뷰 좋아요 총 카운트 가져오기  -->
+	<!-- 상품 리뷰 좋아요한 아이디 가져오기  -->
 	<select id="rLikeId" resultType="java.lang.String" parameterType="int">
 		select rlid from reviewlike where rno = #{rno}
 	</select>
@@ -178,13 +178,72 @@
 		where rno=#{rno} and rlid = #{mid}
 	</select>
 	
+	<!-- 리뷰 좋아요 삽입   -->
 	<insert id="reviewIns" parameterType="java.util.HashMap">
 		insert into reviewlike
 		values (RLNO_SEQ.nextval,#{mid},#{rno})
 	</insert>
 	
+	<!-- 리뷰 좋아요 삭제   -->
 	<delete id="reviewDel" parameterType="java.util.HashMap">
 		delete from reviewlike where rno=#{rno} and rlid=#{mid}
 	</delete>
+	
+	<!-- 상품 문의 총 개수 가져오기  -->
+	<select id="qTotalCnt" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from itemquestion 
+		where ino = #{ino}
+	</select>
+	
+	<!-- 전체 공개 문의내용 가져오기  -->
+	<select id="qAllView" resultType="iqueDTO" parameterType="java.util.HashMap">
+		select * from (select ROW_NUMBER() OVER (order by iqno) as rnum,
+			iqno,iqid,iqnick,iqtitle,iqdate,iqsecret from itemquestion 
+			where ino = #{ino})
+		where <include refid="rnum"/>
+	</select>
+	
+	<!-- 상품 문의 내용 가져오기  -->
+	<select id="qContent" resultType="java.lang.String" parameterType="java.util.HashMap">
+		select iqcontent from itemquestion
+		where iqno = #{iqno}
+	</select>
+	
+	<!-- 상품 문의 댓글 여부 확인  -->
+	<select id="hasqComment" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from itemquestioncomment 
+		where iqno = #{iqno}
+	</select>
+	
+	<!-- 상품 문의 댓글 내용 가져오기  -->
+	<select id="qComment" resultType="iqueDTO" parameterType="java.util.HashMap">
+		select iqcnick, iqccontent, iqcdate 
+		from itemquestioncomment
+		where iqno = #{iqno}
+	</select>
+	
+	<!-- 상품 문의 작성   -->
+	<insert id="iqWrite" parameterType="java.util.HashMap">
+		insert into itemquestion
+		values (IQNO_SEQ.nextval,#{ino},#{iqid},#{iqnick},#{iqtitle},#{iqcontent},#{iqsecret},#{iqdate})
+	</insert>
+	
+	<!-- 상품 문의 삭제   -->
+	<delete id="iqDelete" parameterType="java.util.HashMap">
+		delete from itemquestion where iqno=#{iqno}
+	</delete>
+	
+	<!-- 상품 문의 수정 -->
+	<update id="iqModify" parameterType="java.util.HashMap">
+		update itemquestion 
+		set iqtitle=#{iqtitle}, iqcontent=#{iqcontent}, iqsecret=#{iqsecret} 
+		where iqno=${iqno}
+	</update>
+
+	<!-- 상품 문의 댓글 삭제   -->
+	<delete id="iqcDelete" parameterType="java.util.HashMap">
+		delete from itemquestioncomment where iqno=#{iqno}
+	</delete>
+	
 </mapper>
 	

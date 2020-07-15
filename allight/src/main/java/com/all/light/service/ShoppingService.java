@@ -1,10 +1,12 @@
 package com.all.light.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.ShoppingDAO;
+import com.all.light.dto.ItemQuestionDTO;
 import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.util.PageUtil;
@@ -121,7 +123,8 @@ public class ShoppingService {
 		}
 		return list;
 	}
-
+	
+	// 상품 후기 좋아요 여부 체크
 	public int isLike(int rno, String mid) {
 		//isLike 이 아이디 사람이 이미 좋아요 했으면 1, 안했으면 0
 		int isLike = shopDAO.getIsLike(rno,mid);
@@ -129,9 +132,10 @@ public class ShoppingService {
 		return isLike;
 	}
 	
+	// 상품 후기 추가/삭제
 	public void reviewLike(int rno, String mid) {
 		//isLike 이 아이디 사람이 이미 좋아요 했으면 1, 안했으면 0
-		int isLike = shopDAO.getIsLike(rno,mid);
+		int isLike = this.isLike(rno,mid);
 		
 		switch (isLike) {
 		case 0: //좋아요 추가
@@ -141,4 +145,87 @@ public class ShoppingService {
 			shopDAO.rLikeDel(rno,mid);
 		}
 	}
+	
+	// 상품 문의 전체 개수
+	public int getQTotalCnt(int ino) {
+		int totalCount = shopDAO.getQTotalCnt(ino);
+		return totalCount;
+	}
+
+	// 상품 문의 페이지 정보
+	public PageUtil getQPageInfo(int ino, int qNowPage) {
+		int totalCount = this.getQTotalCnt(ino);
+		
+		// PageUtil(보고싶은페이지, 전체게시물수, 보여줄 게시물수, 페이징);
+		PageUtil pInfo = new PageUtil(qNowPage, totalCount,5,5);
+		return pInfo;
+	}
+	
+	// 상품 문의 리스트 가져오기
+	public ArrayList<ItemQuestionDTO> getQuestion(int ino, PageUtil qPInfo, String mid) {
+		// 전체 공개 내용 가져오기
+		ArrayList<ItemQuestionDTO> list = shopDAO.getQuestion(ino,qPInfo);
+		for(int i=0; i<list.size();i++) {
+			int secret = (int)list.get(i).getIqsecret();
+			ItemQuestionDTO qDto;
+			// 1. 비밀여부 1일때 (비밀) 작성자가 내 아이디랑 같거나 
+			// 2. 비밀여부 0일때 (공개)
+			if((secret==1 && list.get(i).getIqid().equals(mid))
+					|| secret==0 ) {
+				// 내용 가져오기
+				int iqno = list.get(i).getIqno();
+				list.get(i).setIqcontent(shopDAO.getQContent(iqno));
+				// 답글 있으면 - 작성자 닉네임/내용/작성일 가져오기
+				if(shopDAO.hasQComment(iqno)==1) {
+					qDto = shopDAO.getQClist(list.get(i).getIqno());
+					list.get(i).setIqcnick(qDto.getIqcnick());
+					list.get(i).setIqccontent(qDto.getIqccontent());
+					list.get(i).setIqcdate(qDto.getIqcdate());
+				}
+			} 
+		}
+		return list;
+	}
+	
+	// 상품 문의 작성
+	public void iqWrite(ItemQuestionDTO dto) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("ino", dto.getIno());
+		map.put("iqid", dto.getIqid());
+		map.put("iqnick", dto.getIqnick());
+		map.put("iqtitle", dto.getIqtitle());
+		map.put("iqcontent", dto.getIqcontent());
+		map.put("iqsecret", dto.getIqsecret());
+		map.put("iqdate", dto.getIqdate());
+		
+		shopDAO.iqWrite(map);
+	}
+
+	// 상품 문의 삭제
+	public void iqDelete(int iqno) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("iqno", iqno);
+		shopDAO.iqDelete(map);
+	}
+
+	// 상품 문의 수정
+	public void iqModify(ItemQuestionDTO dto) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("iqno", dto.getIqno());
+		map.put("iqtitle", dto.getIqtitle());
+		map.put("iqcontent", dto.getIqcontent());
+		map.put("iqsecret", dto.getIqsecret());
+		
+		shopDAO.iqModify(map);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
 }

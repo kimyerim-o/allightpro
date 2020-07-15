@@ -21,6 +21,7 @@
    		<typeAlias type="com.all.light.util.PageUtil" alias="PageUtil"/>
    		<typeAlias type="com.all.light.dto.MemberDTO" alias="memDTO"/>
    		<typeAlias type="com.all.light.dto.QuestionDTO" alias="queDTO"/>
+   		<typeAlias type="com.all.light.dto.ItemQuestionDTO" alias="iqueDTO"/>
    		<typeAlias type="com.all.light.dto.CorporationDTO" alias="corDTO"/>
    		<typeAlias type="com.all.light.dto.ShoppingDTO" alias="shopDTO"/>
    		<typeAlias type="com.all.light.dto.NoticeDTO" alias="notDTO"/>

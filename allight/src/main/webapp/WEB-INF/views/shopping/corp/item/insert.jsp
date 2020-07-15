@@ -56,6 +56,12 @@
 
 </head>
 <body>
+
+세션 ID : <%= session.getId() %><br> 
+세션 coid : <%= session.getAttribute("COID") %>
+세션 coname: <%= session.getAttribute("CONAME") %>
+
+
 <div class="container">
 <h1>상품추가 페이지</h1>
 <form id="iteminsert" action="../insert/corp.com" method="post" encType="multipart/form-data">
@@ -82,7 +88,7 @@
 		</tr>
 		<tr>
 			<th><label for="icorp">기업명: </label></th>
-			<th><input type="text" id="icorp" name="icorp" placeholder="기업명을 입력해주세요" style="width:300px;" required="required"></td>
+			<th><input type="text" id="icorp" name="icorp" value="<%= session.getAttribute("CONAME") %>" style="width:300px;" required="required" readonly ></td>
 		</tr>
 		<tr>
 			<th><label for="istock">재고: </label></th>

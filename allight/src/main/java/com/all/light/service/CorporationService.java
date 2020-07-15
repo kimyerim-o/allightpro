@@ -29,6 +29,7 @@ public class CorporationService {
 			System.out.println("로그인성공");
 			session.setAttribute("CONO",result.get("CONO"));
 			session.setAttribute("COID",result.get("COID"));
+			session.setAttribute("CONAME",result.get("CONAME"));	
 		}
 		
 	}

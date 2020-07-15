@@ -109,7 +109,7 @@
                <c:if test="${sessionScope.MTYPE eq null}"></c:if>
                <li class="nav-item"><a href="${pageContext.request.contextPath}/admin.com" class="nav-link">관리자</a>
                   <ul class="dropdown">
-                     <li><a href="#">기업/회원 관리</a></li>
+                     <li><a href="${pageContext.request.contextPath}/admin.com">기업/회원 관리</a></li>
                      <li><a href="${pageContext.request.contextPath}/question/list/admin.com">기업 문의 관리</a></li>
                      <li><a href="#">커뮤니티 관리</a></li>
                      <li><a href="#">칼로리 사전 관리</a></li>

@@ -41,7 +41,8 @@ $(function(){
 			<input type="submit" value="검색" class="btn" />
 		</div>
 		<div align="left">
-			<input type="button" value="상품추가" onClick="location.href='../insert/admin.com'">
+			<%-- 상품추가 미사용 --%>
+			<%-- <input type="button" value="상품추가" onClick="location.href='../insert/admin.com'">  --%>
 		</div>
 	
 

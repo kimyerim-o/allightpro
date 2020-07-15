@@ -32,7 +32,7 @@ $(function(){
 
 
 <div class="container">
-<h1>상품 등록 리스트</h1>
+<h1>상품 등록 리스트222</h1>
 		<div class="searchDiv">
 			<select name="search" class="selectCss">
 				<option>제목</option>

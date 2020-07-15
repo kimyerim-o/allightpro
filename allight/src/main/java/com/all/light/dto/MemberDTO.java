@@ -1,5 +1,6 @@
 package com.all.light.dto;
 
+//import java.sql.Date;
 import java.time.LocalDate;
 // java.util.date => sql.date => view단에서 post방식으로 처리할 시 인식되지 않음
 // sql.date어제는 됐는데 왜 오늘은 안됨.. (?)

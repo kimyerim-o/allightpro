@@ -57,11 +57,6 @@
 </head>
 <body>
 
-세션 ID : <%= session.getId() %><br> 
-세션 coid : <%= session.getAttribute("COID") %>
-세션 coname: <%= session.getAttribute("CONAME") %>
-
-
 <div class="container">
 <h1>상품추가 페이지</h1>
 <form id="iteminsert" action="../insert/corp.com" method="post" encType="multipart/form-data">

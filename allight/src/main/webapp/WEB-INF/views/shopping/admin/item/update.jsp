@@ -60,7 +60,7 @@
 <h1>상품 수정 페이지</h1>
 
 
-<form id="itemupdate" action="../update/admin.com" method="post" encType="multipart/form-data">
+<form id="itemupdate" action="../update/corp.com" method="post" encType="multipart/form-data">
 	<input type="hidden" id="ino" name="ino" value="${IDTO.ino}"/>
 	<table border="1" width="200">
 		<tbody>
@@ -84,7 +84,7 @@
 		</tr>
 		<tr>
 			<th><label for="icorp">기업명: </label></th>
-			<th><input type="text" id="icorp" name="icorp" value="${IDTO.icorp}" placeholder="기업명을 입력해주세요" style="width:300px; required="required"></td>
+			<th><input type="text" id="icorp" name="icorp" value="${IDTO.icorp}" placeholder="기업명을 입력해주세요" style="width:300px; required="required" readonly ></td>
 		</tr>
 		<tr>
 			<th><label for="istock">재고: </label></th>

@@ -67,8 +67,9 @@
 					<th colspan="10">${IDTO.idetail}</th>
 					</tr>
 				<th colspan="10" class="center">
-						<input type="button" value="리스트보기" onClick="history.back()">
-					<input type="button" id="mBtn" value="상품수정">
+					<input type="button" value="리스트보기" onClick="history.back()">
+					<%-- 상품수정 미사용 --%>
+					<%-- <input type="button" id="mBtn" value="상품수정"> --%>
 					<input type="button" id="dBtn" value="상품삭제">
 				</th>
 				

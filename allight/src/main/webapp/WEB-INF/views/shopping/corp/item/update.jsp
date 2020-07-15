@@ -84,7 +84,7 @@
 		</tr>
 		<tr>
 			<th><label for="icorp">기업명: </label></th>
-			<th><input type="text" id="icorp" name="icorp" value="${IDTO.icorp}" placeholder="기업명을 입력해주세요" style="width:300px; required="required"></td>
+			<th><input type="text" id="icorp" name="icorp" value="${IDTO.icorp}" placeholder="기업명을 입력해주세요" style="width:300px; required="required" readonly ></td>
 		</tr>
 		<tr>
 			<th><label for="istock">재고: </label></th>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.all.light.dto.ItemQuestionDTO;
 import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.service.ShoppingService;
@@ -136,7 +137,7 @@ public class ShoppingController {
 	
 	
 	//상세페이지 - 한 상품의 상세페이지
-	@RequestMapping(value="/detail", method = RequestMethod.GET)
+	@RequestMapping("/detail")
 	public ModelAndView detail(
 			ModelAndView mv,
 			@RequestParam(value="ino", 
@@ -177,15 +178,21 @@ public class ShoppingController {
 		
 		
 		// 3. 상품문의
-		
+		ArrayList<ItemQuestionDTO> qList = null;
+		PageUtil qPInfo = shopSVC.getQPageInfo(ino,qNowPage); //상품문의 페이지 정보
+		qList = shopSVC.getQuestion(ino,qPInfo,mid);	   	  //상품문의 리스트
+		int qTotalCnt = shopSVC.getQTotalCnt(ino); 			  //상품문의 개수
 		
 		// Model
 		mv.addObject("DETAIL",detail);		//상세정보
 		mv.addObject("REPREIMG",repreImg);	//대표이미지
 		mv.addObject("IMGS",imgs);			//상세이미지
+		mv.addObject("RSIZE",rTotalCnt); 	//상품후기 개수
 		mv.addObject("RLIST",rList); 		//상품후기 리스트
-		mv.addObject("RSIZE",rTotalCnt); //상품후기 개수
 		mv.addObject("RPINFO",rPInfo);		//상품후기 페이지 정보
+		mv.addObject("QSIZE",qTotalCnt);	//상품문의 개수
+		mv.addObject("QLIST",qList);		//상품문의 개수
+		mv.addObject("QPINFO",qPInfo);		//상품문의 페이징 정보
 		
 		// View
 		mv.setViewName("shopping/user/shop/detail");
@@ -193,7 +200,7 @@ public class ShoppingController {
 	}
 	
 	//상세페이지 리뷰 좋아요 처리
-	@RequestMapping(value="/reviewLike")
+	@RequestMapping("/reviewLike")
 	public ModelAndView reviewLike(
 			ModelAndView mv,
 			@RequestParam(value="ino", 
@@ -239,7 +246,8 @@ public class ShoppingController {
 			return mv;
 		}
 		
-		//해당 리뷰넘버에 이 아이디 사람의 좋아요가 있으면 좋아요를 없애고, 해당 리뷰 넘버에 이 아이디 좋아요가 없으면 좋아요 생성
+		//해당 리뷰넘버에 이 아이디의 좋아요가 있으면 좋아요 삭제
+		//해당 리뷰넘버에 이 아이디의 좋아요가 없으면 좋아요 생성
 		shopSVC.reviewLike(rno,mid);
 		
 		// View
@@ -248,4 +256,47 @@ public class ShoppingController {
 		return mv;
 	} 
 	
+	// 상품 문의 작성
+	@RequestMapping(value="/iqWrite", method = RequestMethod.POST)
+	public ModelAndView iqWrite(
+			ModelAndView mv,
+			ItemQuestionDTO dto
+			) {
+		System.out.println("ShoppingController-iqWrite()");
+		System.out.println(dto.toString());
+		
+		int ino = dto.getIno();
+		
+		shopSVC.iqWrite(dto);
+		
+		// View
+		RedirectView rv = new RedirectView("./detail.com?ino="+ino+"#question");
+		mv.setView(rv);
+		return mv;
+	} 
+	
+	// 상품 문의 삭제
+	@RequestMapping("/iqDelete")
+	@ResponseBody
+	public void iqDelete(String iqno) {
+		System.out.println("ShoppingController-iqDelete() iqno="+iqno);
+		
+		shopSVC.iqDelete(Integer.parseInt(iqno));
+		
+	} 
+	
+	// 상품 문의 수정
+	@RequestMapping("/iqModify")
+	public ModelAndView iqModify(
+			ModelAndView mv,
+			ItemQuestionDTO dto) {
+		System.out.println("ShoppingController-iqModify() dto="+dto.toString());
+		
+		shopSVC.iqModify(dto);
+		
+		// View
+		RedirectView rv = new RedirectView("./detail.com?ino="+dto.getIno()+"#question");
+		mv.setView(rv);
+		return mv;
+	}
 }

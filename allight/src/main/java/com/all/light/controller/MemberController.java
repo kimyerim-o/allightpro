@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,8 +34,11 @@ public class MemberController {
 	
 	//로그인폼
 	@RequestMapping("/login")
-	public String log() {
-		return "common/loginform";
+	public ModelAndView log(ModelAndView mv,
+			@RequestParam(value="reUrl", required=false)String reUrl) {
+		mv.addObject("reUrl", reUrl);
+		mv.setViewName("common/loginform");
+		return mv;
 	}
 	
 	//로그아웃
@@ -53,14 +57,22 @@ public class MemberController {
 	
 	//로그인
 	@RequestMapping("/log")
-	public ModelAndView login(MemberDTO memdto,HttpSession session,ModelAndView mv,RedirectView rv) {
+	public ModelAndView login(MemberDTO memdto,HttpSession session,ModelAndView mv,RedirectView rv,
+			@RequestParam(value="reUrl", required=false)String reUrl) {
+		
 		HashMap result=memSVC.login(memdto,session);
 		if(result==null || result.size()==0) {
 			rv.setUrl("./login.com");
 			mv.setView(rv);
 			return mv;
 		}
-		rv.setUrl("./main.com");
+		
+		System.out.println(reUrl);
+		if(reUrl==null || reUrl.equals("")) {
+			rv.setUrl("./main.com");
+		}else {
+			rv.setUrl(reUrl);
+		}
 		mv.setView(rv);
 		return mv;
 	}

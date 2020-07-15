@@ -114,7 +114,7 @@ td {
 }
 
 .login-panel:hover, .join-panel:hover {
-	text-decoration:underline;
+	text-decoration: underline;
 }
 
 .header-top .ht-right .login-panel i {
@@ -329,7 +329,7 @@ li {
 	font-size: 30px;
 	font-weight: bold;
 	color: #333333;
-	font-family:"Lora", serif;
+	font-family: "Lora", serif;
 }
 
 .title2 {
@@ -338,9 +338,8 @@ li {
 	font-size: 35px;
 	color: #333333;
 	text-align: left;
-	font-family:"Lora", serif;
+	font-family: "Lora", serif;
 }
-
 
 #wrap {
 	width: 1100px;
@@ -497,7 +496,7 @@ li {
 
 .btn:hover {
 	text-decoration: none;
-	border: 1px solid #212529;
+	border: 1px solid gray;
 }
 
 .selectCss {
@@ -606,6 +605,22 @@ input {
 }
 
 .like {
-	height:20px;
-	vertical-align:top;
+	height: 20px;
+	vertical-align: top;
+}
+
+.hidden {
+	display: none;
+}
+
+.hidden2 {
+	display: none;
+}
+
+.show {
+	display: "";
+}
+
+.show2 {
+	display: "";
 }

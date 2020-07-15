@@ -19,7 +19,15 @@
 		}else if(${SORT}==0){
 			$('.sort li:nth-child(5)').addClass('sort-on');
 		}
+	
+		// 현재 페이지일 경우 li에 active 클래스 적용
+		$('.pagination').children().each(function(){
+			if($(this).children('a').text()==${PINFO.nowPage}){
+				$(this).attr('class','active');
+			}
+		})
 	})
+	
 </script>
 </head>
 <body>
@@ -78,7 +86,7 @@
             </li>
             <!-- 현재 페이지일때 active --> 
             <c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
-               <li id="li"><!-- 스크립트 적용해야 할것같아요 -->
+               <li><!-- 스크립트 적용해야 할것같아요 -->
                   <a href="${pageContext.request.contextPath}/shopping/brand.com?brand=${BRAND}&sort=${SORT}&nowPage=${i}">${i}</a>
                </li>
             </c:forEach>            
@@ -91,6 +99,7 @@
                </c:if>
             </li>
         </ul>
+        
 	</div>
 </body>
 </html>

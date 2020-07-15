@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.CorporationDTO;
+import com.all.light.dto.ItemQuestionDTO;
 import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.util.PageUtil;
@@ -141,7 +142,7 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		return list;
 	}
 	
-	// 상품 후기 전체 개수 가져오기
+	// 상품 후기 - 상품 후기 전체 개수 가져오기
 	public int getRTotalCnt(int ino) {
 		HashMap<String,Integer> map = new HashMap<String,Integer>();
 		map.put("ino", ino);
@@ -149,7 +150,7 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		return cnt;
 	}
 	
-	// 상품 후기(좋아요 수)가져오기
+	// 상품 후기 - 상품 후기(좋아요 수)가져오기
 	public ArrayList<ReviewDTO> getReview(int ino, PageUtil rPInfo) {
 		HashMap<String,Integer> map = new HashMap<String,Integer>();
 		map.put("ino", ino);
@@ -167,7 +168,7 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		return list;
 	}
 	
-	// 해당 아이디의 해당 리뷰에 대한 좋아요 정보 가져오기
+	// 상품 후기 - 해당 아이디의 해당 리뷰에 대한 좋아요 정보 가져오기
 	public int getIsLike(int rno, String mid) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("rno", rno);
@@ -177,7 +178,7 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		return isLike;
 	}
 	
-	// 리뷰 좋아요 insert
+	// 상품 후기 - 리뷰 좋아요 insert
 	public void rLikeIns(int rno, String mid) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("rno", rno);
@@ -188,7 +189,7 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		if(isOk==0)System.out.println("리뷰 좋아요 insert 실패");
 	}
 	
-	// 리뷰 좋아요 delete
+	// 상품 후기 - 리뷰 좋아요 delete
 	public void rLikeDel(int rno, String mid) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("rno", rno);
@@ -199,5 +200,72 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		if(isOk==0)System.out.println("리뷰 좋아요 delete 실패");
 	}
 
+	// 상품 문의 - 해당 상품의 상품 문의글 총개수 가져오기
+	public int getQTotalCnt(int ino) {
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("ino", ino);
+		int cnt = session.selectOne("Shopping.qTotalCnt", map);
+		return cnt;
+	}
+
+	// 상품 문의 - 전체 공개 문의내용 가져오기 
+	public ArrayList<ItemQuestionDTO> getQuestion(int ino, PageUtil qPInfo) {
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("ino", ino);
+		map.put("startNo", qPInfo.getStartNo());
+		map.put("endNo", qPInfo.getEndNo());
+		ArrayList<ItemQuestionDTO> list = 
+				(ArrayList)session.selectList("Shopping.qAllView", map);
+		return list;
+	}
+
+	// 상품 문의 - 문의 내용 가져오기
+	public String getQContent(int iqno) {
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("iqno", iqno);
+		return session.selectOne("Shopping.qContent", map);
+	}
+	
+	// 상품 문의 - 댓글 여부 확인하기
+	public int hasQComment(int iqno) {
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("iqno", iqno);
+		return session.selectOne("Shopping.hasqComment", map);
+	}
+	
+	// 상품 문의 - 댓글 내용 가져오기
+	public ItemQuestionDTO getQClist(int iqno) {
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("iqno", iqno);
+		ItemQuestionDTO dto = session.selectOne("Shopping.qComment", map);
+		return dto;
+	}
+
+	// 상품 문의 - 작성
+	public void iqWrite(HashMap<String, Object> map) {
+		int isOk = session.insert("Shopping.iqWrite", map);
+		//1이면 성공/0이면 실패
+		if(isOk==1)System.out.println("상품문의 작성 성공");
+		if(isOk==0)System.out.println("상품문의 작성 실패");
+	}
+
+	// 상품 문의 - 댓글 삭제 후 문의글 삭제 
+	public void iqDelete(HashMap<String, Object> map) {
+		int isOk2 = session.insert("Shopping.iqcDelete", map);
+		int isOk = session.insert("Shopping.iqDelete", map);
+		//1이면 성공/0이면 실패
+		if(isOk2==1)System.out.println("상품문의 댓글 삭제 성공");
+		if(isOk2==0)System.out.println("상품문의 댓글 삭제 실패");
+		if(isOk==1)System.out.println("상품문의 삭제 성공");
+		if(isOk==0)System.out.println("상품문의 삭제 실패");
+	}
+
+	// 상품 문의 - 문의글 수정
+	public void iqModify(HashMap<String, Object> map) {
+		int isOk = session.insert("Shopping.iqModify", map);
+		if(isOk==1)System.out.println("상품문의 수정 성공");
+		if(isOk==0)System.out.println("상품문의 수정 실패");
+	}
+	
 	
 }

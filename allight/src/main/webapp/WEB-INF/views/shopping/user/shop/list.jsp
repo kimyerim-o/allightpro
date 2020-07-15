@@ -23,7 +23,15 @@ $(function(){
 	}else if(${SORT}==0){ //인기순
 		$('.sort li:nth-child(5)').addClass('sort-on');
 	}
+	
+	// 현재 페이지일 경우 li에 active 클래스 적용
+	$('.pagination').children().each(function(){
+		if($(this).children('a').text()==${PINFO.nowPage}){
+			$(this).attr('class','active');
+		}
+	})
 })
+
 </script>
 </head>
 <body>
@@ -68,8 +76,8 @@ $(function(){
 				<div class="col-md-3">
 					<div class="product-grid">
 						<div class="product-image">
-							<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}"> <img class="pic"
-								src="${list.imgimage}">
+							<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}"> 
+							<img class="pic" src="${list.imgimage}" onerror="this.src='${pageContext.request.contextPath}/resources/img/no-img.png'">
 							</a> 
 							<c:if test="${list.istock == 0}">
 								<span class="product-new-label">품절</span>
@@ -96,24 +104,24 @@ $(function(){
 				<ul class="pagination">
 		            <li>
 		               <c:if test="${PINFO.nowPage > 3}">
-		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=${PINFO.nowPage-3}">«</a>
+		                  <a href="${pageContext.request.contextPath}/shopping/list.com?icategory=${ICATEGORY}&nowPage=${PINFO.nowPage-3}&sort=${SORT}">«</a>
 		               </c:if>
 		               <c:if test="${PINFO.nowPage <= 3}">
-		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=1">«</a>
+		                  <a href="${pageContext.request.contextPath}/shopping/list.com?icategory=${ICATEGORY}&nowPage=1&sort=${SORT}">«</a>
 		               </c:if>
 		            </li>
 		            <!-- 현재 페이지일때 active --> 
 		            <c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
-		               <li id="li"><!-- 스크립트 적용해야 할것같아요 -->
-		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=${i}">${i}</a>
+		               <li>
+		                  <a href="${pageContext.request.contextPath}/shopping/list.com?icategory=${ICATEGORY}&nowPage=${i}&sort=${SORT}">${i}</a>
 		               </li>
 		            </c:forEach>            
 		            <li>
 		               <c:if test="${PINFO.nowPage < PINFO.endPage-3}">
-		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=${PINFO.nowPage+3}">»</a>
+		                  <a href="${pageContext.request.contextPath}/shopping/list.com?icategory=${ICATEGORY}&nowPage=${PINFO.nowPage+3}&sort=${SORT}">»</a>
 		               </c:if>
 		               <c:if test="${PINFO.nowPage >= PINFO.endPage-3}">
-		                  <a href="${pageContext.request.contextPath}/shopping/list.com?sort=${SORT}&category=${CATEGORY}&nowPage=${PINFO.endPage}">»</a>
+		                  <a href="${pageContext.request.contextPath}/shopping/list.com?icategory=${ICATEGORY}&nowPage=${PINFO.endPage}&sort=${SORT}">»</a>
 		               </c:if>
 		            </li>
 		        </ul>

@@ -96,7 +96,7 @@
 	z-index: 1;
 }
 
-.product-grid .product-image {
+.product-image {
 	position: relative;
 	height: 250px;
 	vertical-align: middle;
@@ -195,13 +195,12 @@
 }
 
 /* detail ======================================================================== */
-
 .shop-head-title {
-	padding: 40px 10px 10px; 
+	padding: 40px 10px 10px;
 	font-size: 20px;
-	text-align:left;
-	color:#5a5a5a;
-	font-weight:bold;
+	text-align: left;
+	color: #5a5a5a;
+	font-weight: bold;
 }
 
 .card {
@@ -221,7 +220,7 @@
 	line-height: 500px;
 	float: left;
 	position: relative;
-	overflow:hidden;
+	overflow: hidden;
 }
 
 .card-img>img {
@@ -320,8 +319,8 @@ input[type="number"]::-webkit-inner-spin-button {
 	height: 48px;
 	line-height: 48px;
 	background: #ffffff;
-	border: 1px solid #d7266d;
-	color: #d7266d;
+	border: 1px solid #ff7289;
+	color: #ff7289;
 	margin: 20px 10px 0 0;
 	font-size: 15px;
 	font-weight: bold;
@@ -331,8 +330,8 @@ input[type="number"]::-webkit-inner-spin-button {
 	width: 170px;
 	height: 48px;
 	line-height: 48px;
-	background: #d7266d;
-	border: 1px solid #d7266d;
+	background: #ff7289;
+	border: 1px solid #ff7289;
 	color: #fff;
 	font-size: 15px;
 	font-weight: bold;
@@ -342,7 +341,7 @@ input[type="number"]::-webkit-inner-spin-button {
 	position: relative;
 	width: 100%;
 	z-index: 10;
-	background:white;
+	background: white;
 	border-top: 1px solid #e5e5e5;
 	border-bottom: 1px solid #e5e5e5;
 }
@@ -350,15 +349,16 @@ input[type="number"]::-webkit-inner-spin-button {
 .pdt_detai_tabinner_vn2 {
 	position: fixed;
 	width: 1170px;
-	margin:0 auto;
+	margin: 0 auto;
 	z-index: 10;
-	background:white;
+	background: white;
 	border-top: 1px solid #e5e5e5;
 	border-bottom: 1px solid #e5e5e5;
-    top: 0;
-    left: 0;
-    right: 0;
+	top: 0;
+	left: 0;
+	right: 0;
 }
+
 .pdt_detai_tabinner_vn::after {
 	content: "";
 	display: block;
@@ -396,33 +396,163 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .details {
-	margin:50px 0;
+	margin: 50px 0;
 }
 
 .detail-imgs {
-	position:relative;
-	margin:0 auto;
-	width:70%;
+	position: relative;
+	margin: 0 auto;
+	width: 70%;
 }
 
-.detail-imgs > img {
-	height:auto;
-	width:100%;
+.detail-imgs>img {
+	height: auto;
+	width: 100%;
 }
 
 .shop-mini-title {
-	padding: 20px 10px; 
-	font-size: 1.5rem;
-	text-align:left;
-	border-bottom: 2px solid #444;
+	padding: 20px 10px;
+	font-size: 24px;
+	text-align: left;
 }
 
 .review-qustion-div {
-	width:100%;
-	margin:0 auto 60px;
+	width: 100%;
+	margin: 0 auto 60px;
 }
 
 .float-right {
-	float:right;
-	padding:20px 10px;
+	float: right;
+	padding: 20px 10px;
+}
+
+.iqtitle {
+	cursor: pointer;
+}
+
+.top_wrap {
+	position: absolute;
+	top: 600px;
+	z-index: 10;
+}
+
+.top_box_wrap {
+	float: right;
+	margin: 0 80px;
+}
+
+.top_box {
+	position: fixed;
+	width: 39px;
+	height: 39px;
+	border: 0px solid #c0c0c0;
+	border-radius: 3px;
+}
+
+.top_txt {
+	display: block;
+	height: 39px;
+	width: 39px;
+	background: rgba(255, 255, 255, 0.9);
+	border-radius: 3px;
+	border: 1px solid #bdbdbd;
+}
+
+.top_txt img {
+	border: none;
+	padding: 3px;
+	vertical-align: middle;
+}
+
+.float-right-box {
+	float: right;
+	color: gray;
+}
+
+.float-right-box a {
+	color: gray;
+	cursor: pointer;
+}
+
+.modifyFrm {
+	width: 90%;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.table {
+	width: 100%;
+	margin: 30px 0;
+}
+
+.table td {
+	border: none;
+	vertical-align: middle;
+}
+
+.iqModititle {
+	width: 100%;
+	border-radius: 0;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 1px solid gray;
+}
+
+.iqModititle:focus {
+	outline: none;
+	border-bottom: 1px solid black;
+}
+
+.iqModicontent {
+	margin: 0 0 10px;
+	padding: 10px;
+	width: 100%;
+	height: 120px;
+	border-radius: 3px;
+	border: 1px solid gray;
+}
+
+.iqModicontent:focus {
+	outline: none;
+	border-radius: 3px;
+	border: 1px solid black;
+}
+
+.iqsecret {
+	padding: 0;
+	margin: 5px 0 0;
+}
+
+.modifySubmit {
+	background: #ff7289;
+	padding: 30px 60px;
+	line-height: 0px;
+	margin: 0 10px;
+	border: none;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	border-radius: 3px;
+}
+
+.modifyCancel {
+	padding: 30px 60px;
+	line-height: 0px;
+	margin: 0 10px;
+	border: none;
+	color: #4a4a4a;
+	font-size: 15px;
+	font-weight: bold;
+	border-radius: 3px;
+}
+
+.modifySubmit:hover {
+	background: #ff6384;
+	cursor: pointer;
+}
+
+.modifyCancel:hover {
+	background: #e5e5e5;
+	cursor: pointer;
 }

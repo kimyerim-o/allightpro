@@ -69,14 +69,14 @@ public class OrderController {
 		return "ok";
 	}
 	
-	//취소 반품 페이지이동-주문관리 ajax 후
+	//취소 반품 페이지이동-주문관리 ajax 후?????
 	@RequestMapping("/confirm")
 	public String confirm(MemberDTO mdto) {
 		//ordSVC.confirm(mdto);
 		return "shopping/user/order/check";
 	}
 	
-	//취소반품시 계좌확인-주문관리 ajax 후
+	//취소반품시 계좌확인-주문관리 ajax 후?????
 	@RequestMapping("/check")
 	public ModelAndView check(@RequestParam(value = "no", required = true) int no,
 			@RequestParam(value = "type", required = true) String type,MemberDTO mdto,
@@ -98,6 +98,9 @@ public class OrderController {
 			OrderDTO odto,OrderdetailDTO oddto,ShoppingDTO sdto,OrderData odata,
 			HttpSession session, ModelAndView mv) {
 		int cono=Integer.parseInt(String.valueOf(session.getAttribute("CONO")));
+		System.out.println("start"+start);
+		System.out.println("last"+last);
+		System.out.println("type"+type);
 		PageUtil pinfo = ordSVC.pageOrderCono(nowPage,cono,start,last,type);
 		OrderData data=ordSVC.listCorp(session,odata,odto,oddto,pinfo);
 		mv.addObject("PINFO", pinfo);

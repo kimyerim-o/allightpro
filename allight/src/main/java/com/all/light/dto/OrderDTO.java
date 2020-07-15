@@ -17,6 +17,7 @@ public class OrderDTO {
 	private String ordernum;
 	private String sodate;//주문날짜
 	private int sum;//총합
+	private String type;
 	
 	public int getOno() {
 		return ono;
@@ -109,6 +110,12 @@ public class OrderDTO {
 	}
 	public void setSum(int sum) {
 		this.sum = sum;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	

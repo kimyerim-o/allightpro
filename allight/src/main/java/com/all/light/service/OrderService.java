@@ -144,13 +144,16 @@ public class OrderService {
 		odto.setSearchdate(date);
 		if(type==null) {
 			oddto.setType(null);
+			odto.setType(null);
 		}else if(type.equals("cancel")) {
 			oddto.setType("주문취소");
+			odto.setType("주문취소");
 		}else if(type.equals("back")) {
 			oddto.setType("반품");
+			odto.setType("반품");
 		}
-		
-		ArrayList<OrderDTO> list=ordDAO.list(odto);
+		ArrayList<OrderDTO> list=ordDAO.backlist(odto);
+		System.out.println(list);
 		ArrayList<OrderdetailDTO> listde=null;
 		ArrayList<ShoppingDTO> shop=null;
 		for(int i=0;i<list.size();i++) {
@@ -193,13 +196,21 @@ public class OrderService {
 	//페이징
 	public PageUtil pageOrderCono(int nowPage, int cono, String star, String las, String type) {
 		int totalCount=0;
-		if (star==null || las==null ) {
+		if (star==null || star.isEmpty() || las==null || las.isEmpty() ) {
 			System.out.println(cono);
-			totalCount = ordDAO.pageOrderCono(cono);
+			if(type==null) {
+				totalCount = ordDAO.pageOrderCono(cono);
+			}else {
+				totalCount = ordDAO.pageOrderConoType(cono,type);
+			}
 		}else if(star!=null && las!=null) {
 			java.sql.Date start=java.sql.Date.valueOf(star);
 			java.sql.Date last=java.sql.Date.valueOf(las);
-			totalCount = ordDAO.pageOrderConoTerm(cono,start,last);
+			if(type==null) {
+				totalCount = ordDAO.pageOrderConoTerm(cono,start,last);
+			}else {
+				totalCount = ordDAO.pageOrderConoTermType(cono,start,last,type);
+			}
 		}
 		PageUtil pinfo = new PageUtil(nowPage, totalCount,2,5);
 		return pinfo;

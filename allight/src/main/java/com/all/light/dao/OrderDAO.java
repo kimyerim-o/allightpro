@@ -39,14 +39,26 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		session.update("order.check",mdto);
 	}
 	
-	public ArrayList<OrderdetailDTO> back(OrderdetailDTO oddto) {
-		ArrayList<OrderdetailDTO> list=null;
-		if(oddto.getType()==null) {
-			list=(ArrayList)session.selectList("order.back", oddto);
-		}else if(oddto.getType()!=null) {
-			list=(ArrayList)session.selectList("order.back2", oddto);
+	public ArrayList<OrderDTO> backlist(OrderDTO odto) {
+		ArrayList<OrderDTO> list=null;
+		System.out.println(odto.getType());
+		if(odto.getType()==null) {
+			list=(ArrayList)session.selectList("order.backlist", odto);
+		}else if(odto.getType()!=null) {
+			list=(ArrayList)session.selectList("order.backlist2", odto);
 		}
+		System.out.println("sgsgagagsas"+list);
 		return list;
+	}
+	
+	public ArrayList<OrderdetailDTO> back(OrderdetailDTO oddto) {
+		ArrayList<OrderdetailDTO> listde=null;
+		if(oddto.getType()==null) {
+			listde=(ArrayList)session.selectList("order.back", oddto);
+		}else if(oddto.getType()!=null) {
+			listde=(ArrayList)session.selectList("order.back2", oddto);
+		}
+		return listde;
 	}
 
 	public int pageMemberId(String cono) {
@@ -103,6 +115,29 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	public void delivery(OrderdetailDTO oddto) {
 		session.update("order.delivery", oddto);
 	}
+
+	public int pageOrderConoType(int cono, String type) {
+		HashMap map=new HashMap();
+		map.put("cono", cono);
+		map.put("type", type);
+		int totalCnt = session.selectOne("order.pageOrderConoType",map);
+		System.out.println(totalCnt);
+		return totalCnt;
+	}
+
+	public int pageOrderConoTermType(int cono, Date start, Date last, String type) {
+		HashMap map=new HashMap();
+		map.put("cono", cono);
+		map.put("start", start);
+		map.put("last", last);
+		map.put("type", type);
+		System.out.println(map);
+		int totalCnt = session.selectOne("order.pageOrderConoTermType",map);
+		System.out.println(totalCnt);
+		return totalCnt;
+	}
+
+	
 
 
 

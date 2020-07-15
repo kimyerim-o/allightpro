@@ -8,24 +8,29 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-	$(function() {
-		//검색
-		$("#searb").click(function(){
-			var form = $("#searchF").serialize();
-			  $.ajax({
-		            url : "${pageContext.request.contextPath}/order/back.com",
-		            type : 'get', 
-		            data : form, 
-		            success : function(data) {
-		            	alert(form);
-		            	location.href = "${pageContext.request.contextPath}/order/back.com?"+form;
-		            },
-		            error : function(xhr, status) {
-		                alert(xhr + " : " + status);
-		            }
-		        }); 
-			});
-	})
+	$(
+			function() {
+				//검색
+				$("#searb")
+						.click(
+								function() {
+									var form = $("#searchF").serialize();
+									$
+											.ajax({
+												url : "${pageContext.request.contextPath}/order/back.com?term=${param.term}",
+												type : 'get',
+												data : form,
+												success : function(data) {
+													alert(form);
+													location.href = "${pageContext.request.contextPath}/order/back.com?term=${param.term}&"
+															+ form;
+												},
+												error : function(xhr, status) {
+													alert(xhr + " : " + status);
+												}
+											});
+								});
+			})
 </script>
 </head>
 <body>
@@ -44,8 +49,7 @@
 						<select name="type" class="selectCss">
 							<option value="cancel">주문 취소</option>
 							<option value="back">반품</option>
-						</select>
-						<input type="button" id="searb" value="검색">
+						</select> <input type="button" id="searb" value="검색">
 					</form>
 				</c:if>
 				<!-- 검색후 -->
@@ -98,11 +102,12 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:if test="${ORDER.odto == null}">
-			<tr>
-				<td colspan="5" style="text-align: center;"><div class="listno_tab noto_sans">주문내역이 없습니다.</div></td>
-			</tr>
-			</c:if>
+				<c:if test="${ORDER.odto == null}">
+					<tr>
+						<td colspan="5" style="text-align: center;"><div
+								class="listno_tab noto_sans">주문내역이 없습니다.</div></td>
+					</tr>
+				</c:if>
 			</tbody>
 		</table>
 

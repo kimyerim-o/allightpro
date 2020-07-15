@@ -7,24 +7,25 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-$(function() {
-	//목록 버튼 클릭 시
-	$("#list").click(function(){
-		$(location).attr("href","${pageContext.request.contextPath}/order/list/corp.com")
-	});
-	//검색
-	$("#searb").click(function() {
-		var form = $("#searchF").serialize();
-		$.ajax({
-			url : "${pageContext.request.contextPath}/order/list/corp.com",
-			type : 'post',
-			data : form,
-			success : function(data) {
-				alert(form);
-				location.href = "${pageContext.request.contextPath}/order/list/corp.com?"+ form;
-			},
-			error : function(request,status,error) {
-				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	$(function() {
+		//목록 버튼 클릭 시
+		$("#list")
+				.click(function() {
+					$(location).attr("href","${pageContext.request.contextPath}/order/list/corp.com")
+						});
+		//기간검색
+		$("#searb").click(function() {
+			var form = $("#searchF").serialize();
+			$.ajax({
+				url : "${pageContext.request.contextPath}/order/list/corp.com",
+				type : 'get',
+				data : form,
+				success : function(data) {
+					alert(form);
+					location.href = "${pageContext.request.contextPath}/order/list/corp.com?"+ form;
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status+ "\n" + "message:"+ request.responseText+ "\n" + "error:" + error);
 				}
 			});
 		});
@@ -35,21 +36,42 @@ $(function() {
 	<div class="container">
 		<div class="searchDiv">
 			<!-- 검색전 -->
-			<c:if test="${empty param.start && empty param.last}">
+			<c:if
+				test="${empty param.start && empty param.last && empty param.type}">
 				<form id="searchF">
-					<input type="date" name="start" /> ~ <input type="date"
-						name="last" />
-					<input type="button" id="searb" value="검색"/>
-					<input type="button" id="list" value="전체보기"/>
+					<select name="type" class="selectCss">
+						<option selected="selected">주문현황</option>
+						<option value="결제완료">결제완료</option>
+						<option value="배송준비중">배송준비중</option>
+						<option value="배송시작">배송시작</option>
+						<option value="배송완료">배송완료</option>
+						<option value="구매확정">구매확정</option>
+						<option value="주문취소">주문취소</option>
+						<option value="반품">반품</option>
+					</select>
+					<input
+						type="date" name="start" /> ~ <input type="date" name="last" />
+					<input type="button" id="searb" value="검색" /> <input type="button"
+						id="list" value="전체보기" />
 				</form>
 			</c:if>
 			<!-- 검색후 -->
 			<c:if test="${!empty param.start || !empty param.last}">
 				<form id="searchF">
-				<input type="date" name="start" value="${param.start}"/> ~ <input type="date"
-						name="last" value="${param.last}"/>
-				<input type="button" id="searb" value="검색"/>
-				<input type="button" id="list" value="전체보기"/>
+					<select name="type" class="selectCss">
+						<option selected="selected">주문현황</option>
+						<option value="결제완료">결제완료</option>
+						<option value="배송준비중">배송준비중</option>
+						<option value="배송시작">배송시작</option>
+						<option value="배송완료">배송완료</option>
+						<option value="구매확정">구매확정</option>
+						<option value="주문취소">주문취소</option>
+						<option value="반품">반품</option>
+					</select>
+					<input type="date" name="start" value="${param.start}" /> ~ <input
+						type="date" name="last" value="${param.last}" /> <input
+						type="button" id="searb" value="검색" /> <input type="button"
+						id="list" value="전체보기" />
 				</form>
 			</c:if>
 		</div>
@@ -64,9 +86,9 @@ $(function() {
 				<th>주문날짜</th>
 			</tr>
 			<c:if test="${ empty ORDER.oddto}">
-			<tr>
-				<td colspan="6" style="text-align: center;">주문이 없습니다.</td>
-			</tr>
+				<tr>
+					<td colspan="6" style="text-align: center;">주문이 없습니다.</td>
+				</tr>
 			</c:if>
 			<c:forEach items="${ORDER.oddto}" var="oddto">
 				<c:forEach items="${ORDER.sdto}" var="sdto">

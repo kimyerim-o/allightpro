@@ -33,6 +33,16 @@
 	select * from orderdetail where ono=#{ono} and OSTATUS in (#{type})
 	</select>
 	
+	<!-- 취소반품 리스트 -->
+	<select id="backlist" resultType="ordDTO" parameterType="ordDTO">
+	select * from orders where mid='${mid}' and odate between '${searchdate}' and sysdate and ono in (select ono from orderdetail where OSTATUS in ('주문취소','반품'))
+	</select>
+	
+	<!-- 취소 or 반품 -->
+	<select id="backlist2" resultType="ordDTO" parameterType="ordDTO">
+	select * from orders where mid='${mid}' and odate between '${searchdate}' and sysdate and ono in (select ono from orderdetail where OSTATUS in (#{type}))
+	</select>
+	
 	<!-- 상태변화 -->
 	<update id="change" parameterType="orddeDTO">
 	update orderdetail set ostatus=#{ostatus} where odno=#{odno}
@@ -81,5 +91,13 @@
 	<update id="delivery">
 	update orderdetail set ocouriercompany=#{ocouriercompany},oinvoicenumber=#{oinvoicenumber} where odno=#{odno}
 	</update>
+	
+	<select id="pageOrderConoType" resultType="int" parameterType="java.util.HashMap">
+	select count(*) from orderdetail where ino in (select ino from item where cono=#{cono}) and OSTATUS=#{type}
+	</select>
+	
+	<select id="pageOrderConoTermType" resultType="int" parameterType="java.util.HashMap">
+	select count(*) from orderdetail where ino in (select ino from item where cono=#{cono}) and ono in (select ono from orders where odate between #{start} and #{last}) and OSTATUS=#{type}
+	</select>
 </mapper>
 	

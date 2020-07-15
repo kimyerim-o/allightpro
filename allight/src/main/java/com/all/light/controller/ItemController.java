@@ -7,6 +7,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.type.IntegerTypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -269,14 +270,14 @@ public class ItemController {
 		System.out.println("컨트롤러 상품 목록보기 - listView() 요청 session=" + session);
 		System.out.println(session.getAttribute("COID"));
 		System.out.println(session.getAttribute("CONO"));
-		Object cono = session.getAttribute("CONO");
-		// index = ((Integer)(session.getAttribute("CONO"))).intValue();
-		//System.out.println("index"+index);
-		
-		System.out.println("컨트롤러 cono = " + cono);
+		//Object cono2 = session.getAttribute("CONO");
+		//String cono = String.valueOf(cono2);
+		//int cono = (Integer)session.getAttribute("CONO");
+//		int cono = Integer.valueOf((String)session.getAttribute("CONO"));
+		//int cono=Integer.parseInt(String.valueOf(session.getAttribute("CONO")));
 		PageUtil pInfo = itemSVC.getPageInfo(nowPage);
 		System.out.println("컨트롤러 상품 목록보기 - pInfo : " + pInfo);
-		ArrayList<ItemDTO> list = itemSVC.getListView(pInfo, cono);
+		ArrayList<ItemDTO> list = itemSVC.getListView(pInfo, session);
 		
 		
 		mv.addObject("LIST", list);		// 실제 조회 목록

@@ -135,18 +135,21 @@ public class ItemService {
 
 
 	// 상품 리스트 페이지에 출력할 상품 목록 조회 - 기업
-	public ArrayList<ItemDTO> getListView(PageUtil pInfo, Object cono) {
+	public ArrayList<ItemDTO> getListView(PageUtil pInfo, HttpSession session) {
 		System.out.println("서비스 상품리스트 페이징 관련 - getListView() 진입");
 		int start = (pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
 		int end  = start + pInfo.getLineCount()-1;
 		//int cono = (Integer)session.getAttribute("CONO");
 		//object cono2 = (Integer)cono;
 		//System.out.println("cono2 =" + cono2);
+		int cono = Integer.parseInt(String.valueOf(session.getAttribute("CONO")));
+		System.out.println("서비스 cono=" + cono);
 		
 		ItemDTO itemDTO = new ItemDTO();
 		itemDTO.setStart(start);
 		itemDTO.setEnd(end);
-		//itemDTO.setCono(cono2);
+		itemDTO.setCono(cono);
+		
 		
 		ArrayList<ItemDTO> list = itemDAO.getListViewCo(itemDTO);
 		System.out.println("서비스 상품리스트 페이징 관련 - getListView() list " + list);

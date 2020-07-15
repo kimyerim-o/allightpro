@@ -79,5 +79,12 @@ public class ShoppingDTO {
 	public void setCono(int cono) {
 		this.cono = cono;
 	}
+	@Override
+	public String toString() {
+		return "ShoppingDTO [ino=" + ino + ", iname=" + iname + ", icategory=" + icategory + ", iprice=" + iprice
+				+ ", icorp=" + icorp + ", istock=" + istock + ", idetail=" + idetail + ", cono=" + cono + ", imgno="
+				+ imgno + ", imgrepresent=" + imgrepresent + ", imgimage=" + imgimage + "]";
+	}
+	
 	
 }

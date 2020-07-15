@@ -1,15 +1,13 @@
 package com.all.light.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.QuestionDAO;
+import com.all.light.dto.NoticeDTO;
 import com.all.light.dto.QuestionDTO;
 import com.all.light.util.PageUtil;
 
@@ -29,7 +27,6 @@ public class QuestionService {
 
 	public void insertWrite(QuestionDTO qdto, HttpSession session) {
 		qdto.setQid((String) session.getAttribute("COID"));
-		qdto.setQdate((java.sql.Date) session.getAttribute("DATE"));
 		qesDAO.insertWrite(qdto);		
 	}
 
@@ -46,8 +43,6 @@ public class QuestionService {
 	}
 
 	public void update(QuestionDTO qdto, HttpSession session) {
-		qdto.setQdate((java.sql.Date) session.getAttribute("DATE"));
-		System.out.println("ser   "+qdto);
 		qesDAO.update(qdto);
 	}
 	
@@ -56,6 +51,16 @@ public class QuestionService {
 		int totalCount = qesDAO.getTotalCnt();
 		PageUtil pinfo = new PageUtil(nowPage, totalCount);
 		return pinfo;
+	}
+	
+	public PageUtil getPageInfoUser(int nowPage) {
+		int totalCount = qesDAO.getTotalCntUser();
+		PageUtil pinfo = new PageUtil(nowPage, totalCount);
+		return pinfo;
+	}
+	
+	public ArrayList<QuestionDTO> totalList(PageUtil pinfo) {
+		return qesDAO.totalList(pinfo);
 	}
 
 	public PageUtil getPageInfoByTitle(int nowPage, String word) {
@@ -84,6 +89,39 @@ public class QuestionService {
 	public void deleteComm(QuestionDTO qdto) {
 		qesDAO.deleteComm(qdto);
 	}
+
+	//유저
+	public void userInsertWrite(QuestionDTO qdto, HttpSession session) {
+		qdto.setQid((String)session.getAttribute("MID"));
+		qesDAO.userInsert(qdto);
+	}
+
+	public PageUtil getPageInfoBySearch(int nowPage, String searchWord, String searchType) {
+		PageUtil pInfo = new PageUtil(searchWord, searchType);
+		int totalCount = qesDAO.getTotalCnt(pInfo); // 검색어에 따른 게시물 수를 구함
+		pInfo = new PageUtil(nowPage, totalCount);
+		return pInfo;
+	}
+
+	public ArrayList<QuestionDTO> searchList(PageUtil pInfo, String searchWord, String searchType) {
+		pInfo.setSearchWord(searchWord);
+		pInfo.setSearchType(searchType);
+		return qesDAO.searchList(pInfo);
+	}
+
+	public void update(QuestionDTO qdto) {
+		qesDAO.update(qdto);
+	}
+
+	public void delete(int qno) {
+		qesDAO.delete(qno);
+	}
+
+	public ArrayList<QuestionDTO> totalListUser(PageUtil pinfo) {
+		return qesDAO.totalListUser(pinfo);
+	}
+
+
 
 
 

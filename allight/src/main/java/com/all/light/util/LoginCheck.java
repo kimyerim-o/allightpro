@@ -19,15 +19,11 @@ public class LoginCheck extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		//true 리턴하는 경우 - 컨트롤러가 실행되게 한다
-		//false 리턴하는 경우 - 컨트롤러가 실행하지 않게 하겠다
-		//로그인했으면 글입력(수정,삭제)컨트롤러가 실행호출 - 로그인한 유저정보 저장 UID,UNAME,NICK
 		HttpSession session=request.getSession();
-		String id=(String) session.getAttribute("UID");
+		String id=(String) session.getAttribute("MID");
 		if(id==null||id.length()==0){//로그인X
 			System.out.println("LoginCheck 로그인폼으로 이동요청");
-			//강제로 또다른 요청을 실행하도록 조치를 취한다
-			response.sendRedirect("../member/loginFrm.co");
+			response.sendRedirect("http://localhost:9000/allight/login.com");
 			return false;
 		}else {//로그인O
 			return true;

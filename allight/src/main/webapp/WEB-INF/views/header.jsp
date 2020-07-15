@@ -41,7 +41,7 @@
             <c:if test="${!empty sessionScope.MID}">
                <a href="${pageContext.request.contextPath}/logout.com" class="logined-panel">로그아웃</a>
                <a href="#" class="logined-panel">장바구니()</a>
-               <a href="#" class="logined-panel">주문/배송조회</a>
+               <a href="${pageContext.request.contextPath}/order/list.com" class="logined-panel">주문/배송조회</a>
                <a href="#" class="logined-panel">마이페이지</a>
                <a href="#" class="logined-nick-panel">${sessionScope.MID} 님</a>
             </c:if>
@@ -86,8 +86,8 @@
                <c:if test="${sessionScope.MTYPE eq 0 }"></c:if>
                <li class="nav-item"><a href="#" class="nav-link">마이페이지</a>
                   <ul class="dropdown">
-                     <li><a href="#">주문/배송조회</a></li>
-                     <li><a href="#">취소/반품조회</a></li>
+                     <li><a href="${pageContext.request.contextPath}/order/list.com">주문/배송조회</a></li>
+                     <li><a href="${pageContext.request.contextPath}/order/back.com">취소/반품조회</a></li>
                      <li><a href="#">장바구니</a></li>
                      <li><a href="#">배송지 관리</a></li>
                      <li><a href="#">상품 문의</a></li>
@@ -98,7 +98,7 @@
                <c:if test="${sessionScope.MTYPE eq 1 }"></c:if>
                <li class="nav-item"><a href="#" class="nav-link">기업</a>
                   <ul class="dropdown">
-                     <li><a href="#">주문 관리</a></li>
+                     <li><a href="${pageContext.request.contextPath}/order/list/corp.com">주문 관리</a></li>
                      <li><a href="#">상품 관리</a></li>
                      <li><a href="#">상품리뷰/문의</a></li>
                      <li><a href="#">기업 정보 관리</a></li>

@@ -89,7 +89,13 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	}
 
 	public ArrayList<OrderdetailDTO> listdeCorp(PageUtil pinfo) {
-		return (ArrayList)session.selectList("order.listdeCorp", pinfo);
+		ArrayList<OrderdetailDTO> listde=null;
+		if(pinfo.getSearchType()==null) {
+			listde=(ArrayList)session.selectList("order.listdeCorp", pinfo);
+		}else {
+			listde=(ArrayList)session.selectList("order.listdeCorpType", pinfo);
+		}
+		return listde;
 	}
 
 	public OrderDTO listCorp(int ono) {
@@ -120,6 +126,7 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		HashMap map=new HashMap();
 		map.put("cono", cono);
 		map.put("type", type);
+		System.out.println("MMMAP"+map);
 		int totalCnt = session.selectOne("order.pageOrderConoType",map);
 		System.out.println(totalCnt);
 		return totalCnt;

@@ -103,6 +103,7 @@ public class OrderController {
 		System.out.println("last"+last);
 		System.out.println("type"+type);
 		PageUtil pinfo = ordSVC.pageOrderCono(nowPage,cono,start,last,type);
+		pinfo.setSearchType(type);
 		OrderData data=ordSVC.listCorp(session,odata,odto,oddto,pinfo);
 		mv.addObject("PINFO", pinfo);
 		mv.addObject("ORDER", data);

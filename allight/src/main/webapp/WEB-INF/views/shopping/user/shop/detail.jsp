@@ -480,7 +480,7 @@ $(function(){
 								<img class="like" src="${pageContext.request.contextPath}/resources/img/secret.png" />
 							</c:if>
 							<c:if test="${list.iqsecret==1}">
-								<a class="iqtitle" onclick="isWriter(${list.iqid});">
+								<a class="iqtitle" onclick="isWriter('${list.iqid}')">
 									&nbsp;${list.iqtitle}&nbsp;
 									<c:if test="${!empty list.iqccontent}">[답변완료]</c:if>
 								</a>
@@ -522,7 +522,7 @@ $(function(){
 														<td><input type="checkbox" name="iqsecret" value="1" /></td>
 													</tr>
 													<tr>
-														<td colspan="2">
+														<td colspan="2" style="text-align:center;">
 															<textarea name="iqcontent" class="iqModicontent" rows="5" cols="200"
 															>${list.iqcontent}</textarea>
 															<input type="button" value="수정" class="modifySubmit"/>

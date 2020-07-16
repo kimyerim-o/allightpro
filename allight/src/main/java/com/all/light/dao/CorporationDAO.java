@@ -45,4 +45,8 @@ public class CorporationDAO extends SqlSessionDaoSupport {
 		session.delete("corporation.corpDelete",cono);
 	}
 
+	public void corpInsert(CorporationDTO corDTO) {
+		session.insert("corporation.corpInsert",corDTO);
+	}
+
 }

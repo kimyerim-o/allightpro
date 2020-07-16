@@ -51,23 +51,11 @@ function frmChk(join){
     //alert(document.getElementById('mhp').value);
     //alert(document.getElementById('mhp').selectedIndex);
     //alert(frm.mhp.value);
-    if(frm.mtel.selectedIndex<1){
-    alert("핸드폰번호를 선택하세요")
-    return false;
-    }
-    if(frm.mtel1.value.length<1){
-    alert("중간 핸드폰번호 4자리를 입력하세요")
-    return false;
-    }
-    if(frm.mtel2.value.length<1){
-    alert("마지막 핸드폰번호 4자리를 입력하세요")
-    return false;
-    }
     if(confirm("가입하시겠습니까?")){
     frm.submit(join)
     }
     var o = document.getElementById("joinFrm");
-    o.src = "join.com?";
+    o.src = "corporation/join/admin.com?";
 }
 
 function frmChk1(myinfo){

@@ -117,5 +117,13 @@ public class QuestionDAO extends SqlSessionDaoSupport {
 	public ArrayList<QuestionDTO> totalListUser(PageUtil pinfo) {
 		return (ArrayList) session.selectList("question.totalListUser", pinfo);
 	}
+	
+	//마이페이지(유저)
+	public int totalCntUserMyPage(PageUtil pInfo) {
+		return session.selectOne("question.totalCntUserMyPage",pInfo);
+	}
 
+	public ArrayList<QuestionDTO> searchListMyPageUser(PageUtil pInfo) {
+		return (ArrayList) session.selectList("question.searchListUserMyPage",pInfo);
+	}
 }

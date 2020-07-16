@@ -72,7 +72,12 @@
                <li class="nav-item"><a href="${pageContext.request.contextPath}/main.com" class="nav-link">다이어리</a></li>
                <li class="nav-item"><a href="#" class="nav-link">칼로리 사전</a></li>
                <li class="nav-item"><a href="#" class="nav-link">칼로리 처방</a></li>
-               <li class="nav-item"><a href="#" class="nav-link">커뮤니티</a></li>
+               <li class="nav-item"><a href="#" class="nav-link">커뮤니티</a>
+               <ul class="dropdown">
+                        <li><a href="#">자유게시판</a></li>
+                        <li><a href="${pageContext.request.contextPath}/notice.com">공지사항</a></li>
+                        <li><a href="${pageContext.request.contextPath}/question/list.com">문의사항</a></li>
+                    </ul></li>
                <li class="nav-item"><a href="${pageContext.request.contextPath}/shopping/list.com" class="nav-link">쇼핑</a>
 	        		<ul class="dropdown">
                         <li><a href="${pageContext.request.contextPath}/shopping/list.com?icategory=식단">식단</a></li>

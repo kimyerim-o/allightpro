@@ -22,7 +22,7 @@ public class QuestionService {
 	public PageUtil getPageInfoById(int nowPage, String id) {
 		int totalCount = qesDAO.getTotalCntById(id);
 		PageUtil pinfo = new PageUtil(nowPage, totalCount);
-		return pinfo;
+		return pinfo; 
 	}
 
 	public void insertWrite(QuestionDTO qdto, HttpSession session) {
@@ -119,6 +119,21 @@ public class QuestionService {
 
 	public ArrayList<QuestionDTO> totalListUser(PageUtil pinfo) {
 		return qesDAO.totalListUser(pinfo);
+	}
+
+
+	public PageUtil getPageInfoMyPageUser(PageUtil pInfo) {
+		int totalCount = qesDAO.totalCntUserMyPage(pInfo);
+		int nowPage = pInfo.getNowPage();
+		pInfo = new PageUtil(nowPage, totalCount);
+		return pInfo;
+	}
+
+	public ArrayList<QuestionDTO> searchListMyPageUser(PageUtil pInfo, String searchWord, String searchType, String qid) {
+		pInfo.setSearchType(searchType);
+		pInfo.setSearchWord(searchWord);
+		pInfo.setQid(qid);
+		return qesDAO.searchListMyPageUser(pInfo);
 	}
 
 

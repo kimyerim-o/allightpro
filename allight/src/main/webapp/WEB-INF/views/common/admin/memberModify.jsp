@@ -31,7 +31,7 @@
 				<td>최근접속일 :</td>
 				<td>${MEMINFO.mlogdate}</td>
 			</tr>
-			<tr>
+			<tr> 
 				<td>성별 :</td>
 				<td>${MEMINFO.msex}<input type="hidden" id="msex" name="msex"
 					value="${MEMINFO.msex}" /></td>

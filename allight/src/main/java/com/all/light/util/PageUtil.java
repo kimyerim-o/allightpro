@@ -25,7 +25,8 @@ public class PageUtil {
 	
 	//리뷰컨트롤러에서 필요한 파라미터
 	private String rid;
-	
+	//QuestionSQL에서 사용(마이페이지 리스트출력하기용)
+	private String qid;
 	public PageUtil(int nowPage, int totalCount) {
 		this(nowPage, totalCount, 5, 5);
 	}
@@ -96,6 +97,14 @@ public class PageUtil {
 		}
 	}
 
+
+	public String getQid() {
+		return qid;
+	}
+
+	public void setQid(String qid) {
+		this.qid = qid;
+	}
 
 	public String getRid() {
 		return rid;
@@ -185,7 +194,7 @@ public class PageUtil {
 		return "PageUtil [nowPage=" + nowPage + ", totalCount=" + totalCount + ", lineCount=" + lineCount
 				+ ", pageGroup=" + pageGroup + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", searchWord=" + searchWord + ", searchType="
-				+ searchType + ", rid=" + rid + "]";
+				+ searchType;
 	}
 
 

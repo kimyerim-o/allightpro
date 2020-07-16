@@ -23,6 +23,11 @@ public class ReviewController {
 	@Autowired
 	private ReviewService revSVC;
 
+	@RequestMapping("/home")
+	public String home() {
+		return "common/user/mypage/home";
+	}
+	
 	@RequestMapping("/review/list")
 	public ModelAndView itemList(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			@RequestParam(value = "search", required = false) String searchWord, ModelAndView mv, RedirectView rv,

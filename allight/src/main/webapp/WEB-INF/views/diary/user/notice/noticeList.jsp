@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	<% response.setContentType("text/html"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +43,7 @@
 					<td class="center">${notice.NNO}</td>
 					<td class="center">${notice.NNICK}</td>
 					<td class="center"><a
-						href="${pageContext.request.contextPath}/noticedetail.com?type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage}&nno=${notice.NNO}">
+						href="${pageContext.request.contextPath}/notice/detail.com?type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage}&nno=${notice.NNO}">
 							${notice.NTITLE}</a></td>
 					<td class="center"><fmt:formatDate value="${notice.NDATE}" pattern="yyyy-MM-dd HH시 mm분"/></td>
 					<td class="center">${notice.NHIT}</td>

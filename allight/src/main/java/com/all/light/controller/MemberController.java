@@ -224,7 +224,7 @@ public class MemberController {
 		//모델지정
 		mv.addObject("MEMINFO", memDTO); //회원 상세 정보
 		//뷰지정
-		//get메소드는 Requestparam의 정보가 그대로 넘어감
+		//get메소드의 Requestparam의 정보가 그대로 넘어감
 		//mv.setViewName("common/admin/memberModify?search="+searchWord+"&nowPage="+nowPage+"&mno="+mno);
 		mv.setViewName("common/admin/memberModify");
 		return mv;
@@ -241,7 +241,7 @@ public class MemberController {
 		memSVC.memModify(memDTO);
 		//뷰지정
 		rv.setUrl(request.getContextPath()+"/member/admin.com?search="+searchWord+"&nowPage="+nowPage);
-		//post메소드는 Requestparam의 정보를 뷰 경로에 설정해서 넘겨줘야함
+		//리다이렉트시 Requestparam의 정보를 뷰 경로에 설정해서 넘겨줘야함
 		//rv.setUrl(request.getContextPath()+"/member/admin.com");
 		mv.setView(rv);
 		return mv;

@@ -30,9 +30,9 @@
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">활동관리</li>
 				<li><a href="#">상품 문의</a></li>
-				<li><a href="#">상품 리뷰</a></li>
+				<li><a href="${pageContext.request.contextPath}/mypage/review/list.com">상품 리뷰</a></li>
 				<li><a href="#">자유게시판</a></li>
-				<li><a href="#">문의사항</a></li>
+				<li><a href="${pageContext.request.contextPath}/mypage/question/list.com">문의사항</a></li>
 			</ul>
 
 			<ul class="left_menu_box last">

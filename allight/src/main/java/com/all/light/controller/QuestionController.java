@@ -19,7 +19,6 @@ import com.all.light.service.QuestionService;
 import com.all.light.util.PageUtil;
 
 @Controller
-@RequestMapping("/question")
 public class QuestionController {
 	
 	@Autowired
@@ -27,13 +26,13 @@ public class QuestionController {
 	
 	//유저
 	//글쓰기처리
-	@RequestMapping(value="/write", method= RequestMethod.GET)
+	@RequestMapping(value="/question/write", method= RequestMethod.GET)
 	public ModelAndView userWriteGet(HttpServletRequest request, ModelAndView mv) {
 		System.out.println("USER/question/write, "+request.getMethod()+"method");
 		mv.setViewName("diary/user/question/questionWrite");
 		return mv;
 	}
-	@RequestMapping(value="/write", method= RequestMethod.POST)
+	@RequestMapping(value="/question/write", method= RequestMethod.POST)
 	public ModelAndView userWritePost(QuestionDTO qdto, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("USER/question/write, "+request.getMethod()+"method");
 		System.out.println(qdto);
@@ -43,7 +42,7 @@ public class QuestionController {
 		return mv;
 	}
 	//목록보기
-	@RequestMapping("/list")
+	@RequestMapping("/question/list")
 	public ModelAndView list(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			@RequestParam(value = "search", required = false) String searchWord,
@@ -60,7 +59,7 @@ public class QuestionController {
 	
 	//상세보기
 	//글 상세보기
-	@RequestMapping(value="/detail")
+	@RequestMapping(value="/question/detail")
 	public ModelAndView detail(
 			@RequestParam("no") int qno,
 			QuestionDTO qdto, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
@@ -76,7 +75,7 @@ public class QuestionController {
 		return mv;
 	}
 	//수정
-	@RequestMapping(value="/update", method= RequestMethod.GET)
+	@RequestMapping(value="/question/update", method= RequestMethod.GET)
 	public ModelAndView modifyGET(
 			@RequestParam(value = "no", required = true) int qno,
 			QuestionDTO qdto,ModelAndView mv, HttpServletRequest request) {
@@ -88,7 +87,7 @@ public class QuestionController {
 		mv.setViewName("diary/user/question/questionModify");
 		return mv;
 	}
-	@RequestMapping(value="/update", method= RequestMethod.POST)
+	@RequestMapping(value="/question/update", method= RequestMethod.POST)
 	public ModelAndView modifyPOST(
 			@RequestParam(value = "no", required = true) int qno,
 			QuestionDTO qdto,ModelAndView mv, RedirectView rv, HttpServletRequest request) {
@@ -100,7 +99,7 @@ public class QuestionController {
 		return mv;
 	}
 	//삭제
-	@RequestMapping("/delete")
+	@RequestMapping("/question/delete")
 	public ModelAndView delete(
 			@RequestParam(value = "no", required = true) int qno,
 			ModelAndView mv, RedirectView rv, HttpServletRequest request) {
@@ -111,9 +110,33 @@ public class QuestionController {
 		return mv;
 	}
 	
+	//유저 마이페이지 7.16추가
+	@RequestMapping("/mypage/question/list")
+	public ModelAndView listMyPageUser(
+			@RequestParam(value = "nowPage", required = false, defaultValue="1") int nowPage,
+			@RequestParam(value = "type", required = false, defaultValue="nall") String searchType,
+			@RequestParam(value = "search", required = false, defaultValue="") String searchWord,
+			ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("USER/Mypage/Question/list.mypageList");
+		String qid = (String)request.getSession().getAttribute("MID");
+		PageUtil pInfo = new PageUtil(searchWord,searchType);
+		pInfo.setNowPage(nowPage);
+		pInfo.setQid(qid);
+		pInfo = queSVC.getPageInfoMyPageUser(pInfo);
+		ArrayList<QuestionDTO> list = queSVC.searchListMyPageUser(pInfo, searchWord, searchType, qid);
+		mv.addObject("PINFO", pInfo); //페이징 정보
+		mv.addObject("LIST", list); //문의사항 상세 정보
+		System.out.println(pInfo);
+		System.out.println(list);
+		
+		mv.setViewName("common/user/mypage/questionList");
+		return mv;
+	}
+	
+	
 	//기업
 	//목록보기
-	@RequestMapping("/list/corp")
+	@RequestMapping("/question/list/corp")
 	public ModelAndView list(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			HttpSession session, ModelAndView mv) {
 		String id=(String) session.getAttribute("COID");
@@ -129,13 +152,13 @@ public class QuestionController {
 	}
 	
 	//글쓰기폼
-	@RequestMapping("/write/corp")
+	@RequestMapping("/question/write/corp")
 	public String write() {
 		return "shopping/corp/question/write";
 	}
 	
 	//글쓰기처리
-	@RequestMapping("/writepro/corp")
+	@RequestMapping("/question/writepro/corp")
 	public ModelAndView writepro(QuestionDTO qdto,HttpSession session,ModelAndView mv) {
 		System.out.println(qdto);
 		queSVC.insertWrite(qdto,session);
@@ -145,7 +168,7 @@ public class QuestionController {
 	}
 	
 	//상세보기
-	@RequestMapping("/detail/corp")
+	@RequestMapping("/question/detail/corp")
 	public ModelAndView detail(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
 		qdto.setQno(qno);
 		System.out.println(qdto);
@@ -160,7 +183,7 @@ public class QuestionController {
 	}
 	
 	//수정폼
-	@RequestMapping("/update/corp")
+	@RequestMapping("/question/update/corp")
 	public ModelAndView update(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
 		qdto.setQno(qno);
 		QuestionDTO de=queSVC.detail(qdto);//게시글
@@ -175,7 +198,7 @@ public class QuestionController {
 	}
 	
 	//수정
-	@RequestMapping("/up/corp")
+	@RequestMapping("/question/up/corp")
 	public ModelAndView up(QuestionDTO qdto,HttpSession session,ModelAndView mv) {
 		System.out.println(qdto);
 		queSVC.update(qdto,session);
@@ -186,7 +209,7 @@ public class QuestionController {
 	}
 	
 	//삭제
-	@RequestMapping("/delete/corp")
+	@RequestMapping("/question/delete/corp")
 	public ModelAndView delete(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
 		System.out.println(qdto);
 		qdto.setQno(qno);
@@ -197,7 +220,7 @@ public class QuestionController {
 	}
 	
 	//댓글쓰기
-	@RequestMapping("/wcomment")
+	@RequestMapping("/question/wcomment")
 	@ResponseBody
 	public String writeComm(QuestionDTO qdto,HttpSession session) {
 		System.out.println("000"+qdto);
@@ -206,7 +229,7 @@ public class QuestionController {
 	}
 	
 	//삭제
-	@RequestMapping("/dcomment")
+	@RequestMapping("/question/dcomment")
 	@ResponseBody
 	public String deleteComm(QuestionDTO qdto) {
 		System.out.println("del"+qdto);
@@ -216,7 +239,7 @@ public class QuestionController {
 	
 	//관리자(유저 단 7.13추가)
 	//목록보기(유저)
-	@RequestMapping("/list/user/admin")
+	@RequestMapping("/question/list/user/admin")
 	public ModelAndView listUserAdmin(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			HttpSession session, ModelAndView mv) {	
 		PageUtil pinfo = queSVC.getPageInfoUser(nowPage);
@@ -228,7 +251,7 @@ public class QuestionController {
 		return mv;
 	}
 	//상세보기
-	@RequestMapping("/detail/user/admin")
+	@RequestMapping("/question/detail/user/admin")
 	public ModelAndView detailUserAdmin(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
 		qdto.setQno(qno);
 		System.out.println(qdto);
@@ -242,7 +265,7 @@ public class QuestionController {
 		return mv;
 	}
 	//삭제
-	@RequestMapping("/delete/user/admin")
+	@RequestMapping("/question/delete/user/admin")
 	public ModelAndView deleteUserAdmin(@RequestParam(value = "no", required = true) int qno,
 			QuestionDTO qdto,ModelAndView mv, RedirectView rv, HttpServletRequest request ) {
 		System.out.println(qdto);
@@ -254,7 +277,7 @@ public class QuestionController {
 	}
 	
 	//목록 totalList
-	@RequestMapping("/list/admin")
+	@RequestMapping("/question/list/admin")
 	public ModelAndView listAdmin(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			HttpSession session, ModelAndView mv) {	
 		PageUtil pinfo = queSVC.getPageInfo(nowPage);
@@ -267,7 +290,7 @@ public class QuestionController {
 	}
 	
 	//검색
-	@RequestMapping("/search/admin")
+	@RequestMapping("/question/search/admin")
 	public ModelAndView search(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,ModelAndView mv,HttpServletRequest request) {	
 		String type=request.getParameter("type");
 		String word=request.getParameter("word");
@@ -292,7 +315,7 @@ public class QuestionController {
 	}
 	
 	//상세보기
-	@RequestMapping("/detail/admin")
+	@RequestMapping("/question/detail/admin")
 	public ModelAndView detailAdmin(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
 		qdto.setQno(qno);
 		System.out.println(qdto);
@@ -307,7 +330,7 @@ public class QuestionController {
 	}
 	
 	//삭제
-	@RequestMapping("/delete/admin")
+	@RequestMapping("/question/delete/admin")
 	public ModelAndView deleteAdmin(@RequestParam(value = "no", required = true) int qno,QuestionDTO qdto,ModelAndView mv) {
 		System.out.println(qdto);
 		qdto.setQno(qno);

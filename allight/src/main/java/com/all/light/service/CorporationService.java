@@ -68,4 +68,8 @@ public class CorporationService {
 		corDAO.corpDelete(cono);
 	}
 
+	public void corpInsert(CorporationDTO corDTO) {
+		corDAO.corpInsert(corDTO);
+	}
+
 }

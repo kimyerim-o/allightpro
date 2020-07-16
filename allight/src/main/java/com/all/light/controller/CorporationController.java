@@ -104,17 +104,39 @@ public class CorporationController {
 		
 		
 		@RequestMapping("/corporation/delete/admin")
-		public ModelAndView adminDeleteMember(
+		public ModelAndView adminDeleteCorp(
 				@RequestParam(value = "cono") int cono,
 				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 				@RequestParam(value = "search", required = false) String searchWord,
 				ModelAndView mv, RedirectView rv,HttpServletRequest request) {
-			System.out.println("memberController.delete.Member");
+			System.out.println("CorpController.delete.Corp");
 			//파라미터 받기, 비즈니스로직
 			System.out.println("cono = "+cono);
 			corSVC.corpDelete(cono);
 			//뷰지정
 			rv.setUrl(request.getContextPath()+"/corporation/admin.com?search="+searchWord+"&nowPage="+nowPage);
+			mv.setView(rv);
+			return mv;
+		}
+		
+		@RequestMapping(value="/corporation/join/admin", method=RequestMethod.GET)
+		public ModelAndView adminJoinCorporationGet(
+				ModelAndView mv, RedirectView rv,HttpServletRequest request) {
+			System.out.println("CorpController.join.Corp "+request.getMethod()+"method");
+			//뷰지정
+			mv.setViewName("common/admin/corporationJoin");
+			return mv;
+		}
+		
+		@RequestMapping(value="/corporation/join/admin", method=RequestMethod.POST)
+		public ModelAndView adminJoinCorporationPost(
+				CorporationDTO corDTO, ModelAndView mv, RedirectView rv,HttpServletRequest request) {
+			System.out.println("CorpController.join.Corp "+request.getMethod()+"method");
+			System.out.println("전달 파라미터 = "+corDTO);
+			//비즈니스 로직
+			corSVC.corpInsert(corDTO);
+			//뷰지정
+			rv.setUrl(request.getContextPath()+"/corporation/admin.com");
 			mv.setView(rv);
 			return mv;
 		}

@@ -24,7 +24,8 @@
 			</tr>
 			<tr>
 				<td>가입일 :</td>
-				<td>${MEMINFO.mjoindate}</td>
+				<td>${MEMINFO.mjoindate}<input type="hidden" id="mjoindate" name="mjoindate"
+					value="${MEMINFO.mjoindate}" /></td>
 			</tr>
 			<tr>
 				<td>최근접속일 :</td>

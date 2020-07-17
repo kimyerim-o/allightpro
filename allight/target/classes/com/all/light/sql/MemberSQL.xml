@@ -85,6 +85,25 @@
             where mid=#{mid}));
 	</select>
 	
+	
+	<!-- 회원 배송지 확인 -->
+	<select id="memAddress" resultType="addressDTO" parameterType="addressDTO">
+	select * from address
+	where mid = #{mid}
+	order by ano desc
+	</select>
+	
+	<!-- 회원 배송지 추가 -->
+	<insert id="memaddressinsert" parameterType="addressDTO">
+	insert into address(ano, aaddno, aaddress1, aaddress2, mid, aname, aphone)
+	values((SELECT NVL(MAX(ano)+1,0) FROM address), #{aaddno}, #{aaddress1}, #{aaddress2} || #{aaddress3}, #{mid}, #{aname}, #{aphone})
+	</insert>
+	
+	
+	<!-- 회원 배송지 삭제 -->
+	<delete id="memaddressdelete" parameterType="addressDTO">
+		DELETE address WHERE ano=#{ano}
+	</delete>
             
 </mapper>
 	

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.MemberDAO;
+import com.all.light.dto.AddressDTO;
+import com.all.light.dto.ItemDTO;
 import com.all.light.dto.MemberDTO;
 import com.all.light.util.PageUtil;
 
@@ -127,6 +129,34 @@ public class MemberService {
 
 	public void memDelete(int mno) {
 		memDAO.memDelete(mno);
+	}
+
+	
+	
+	
+	// 배송지 검색하기
+	public ArrayList<AddressDTO> address(HttpSession session) {
+		System.out.println("서비스 address() 진입");
+		String mid = (String) session.getAttribute("MID");
+		
+		ArrayList<AddressDTO> list = memDAO.addresslist(mid);
+		System.out.println("서비스 리스트 확인 list =" + list);
+		return list;
+	}
+	
+	// 배송지 추가하기
+	public void addressinsert(AddressDTO aDTO, HttpSession session, ArrayList list) {
+		System.out.println("서비스 addressinsert() 진입");
+		aDTO.setMid((String)session.getAttribute("MID"));
+		memDAO.addressinsert(aDTO);
+		
+		System.out.println("서비스 addressinsert aDTO" + aDTO);
+	}
+
+	// 배송지 삭제하기
+	public void addressdelete(AddressDTO aDTO) {
+		System.out.println("서비스 addressdelete() 진입");
+		memDAO.addressdelete(aDTO);
 	}
 
 }

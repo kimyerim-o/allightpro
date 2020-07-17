@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.all.light.dto.AddressDTO;
 import com.all.light.dto.MemberDTO;
 import com.all.light.util.PageUtil;
 
@@ -93,6 +94,27 @@ public class MemberDAO extends SqlSessionDaoSupport {
 
 	public void memDelete(int mno) {
 		session.delete("member.memDelete", mno);
+	}
+
+	
+	// 배송지 불러오기
+	public ArrayList<AddressDTO> addresslist(String mid) {
+		System.out.println("배송지 불러오기");
+		return (ArrayList) session.selectList("member.memAddress", mid);
+	}
+
+	// 배송지 추가하기
+	public void addressinsert(AddressDTO aDTO) {
+		System.out.println("배송지 추가하기");
+		System.out.println("배송지 aDTO = " + aDTO);
+		session.insert("member.memaddressinsert", aDTO);
+		System.out.println("배송지 aDTO SQL 완료 = " + aDTO);
+	}
+
+	// 배송지 삭제하기
+	public void addressdelete(AddressDTO aDTO) {
+		System.out.println("배송지 삭제하기");
+		session.delete("member.memaddressdelete", aDTO);
 	}
 
 }

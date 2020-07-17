@@ -30,6 +30,7 @@
    		<typeAlias type="com.all.light.dto.ReviewDTO" alias="reviewDTO"/>
    		<typeAlias type="com.all.light.dto.ItemDTO" alias="itemDTO"/>
    		<typeAlias type="com.all.light.dto.DiaryDTO" alias="diaryDTO"/>
+   		<typeAlias type="com.all.light.dto.AddressDTO" alias="addressDTO"/>
    </typeAliases>
    
    <mappers>

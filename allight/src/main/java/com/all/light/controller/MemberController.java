@@ -7,9 +7,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.all.light.dto.AddressDTO;
 import com.all.light.dto.MemberDTO;
 import com.all.light.service.MemberService;
 import com.all.light.util.PageUtil;
@@ -257,4 +258,47 @@ public class MemberController {
 		mv.setView(rv);
 		return mv;
 	}
+	
+	
+	// 류지혁 작성
+	// 회원 배송지 리스트, 추가 폼
+	@GetMapping("/member/user/address")
+	public ModelAndView address(HttpSession session, ModelAndView mv) {
+		System.out.println("컨트롤러 회원 배송지 목록보기 - address() 요청");
+		System.out.println(session.getAttribute("MID"));
+		
+		ArrayList<AddressDTO> list = memSVC.address(session);
+		mv.addObject("LIST", list);
+		mv.setViewName("common/user/address");
+		System.out.println("컨트롤러 회원 배송지 보기 - list = " + list);
+		return mv;	
+	}
+	
+	// 회원 배송지 추가
+	@RequestMapping("/member/user/addressinsert")
+	public ModelAndView addressinsert(AddressDTO aDTO, HttpSession session, ModelAndView mv) {
+		System.out.println("컨트롤러 배송지 추가 - addressinsert() 요청");
+		ArrayList list = new ArrayList();
+		memSVC.addressinsert(aDTO, session, list);
+		System.out.println(aDTO);
+		System.out.println(list);
+		RedirectView rv = new RedirectView("../user/address.com");
+		mv.setView(rv);	
+		return mv;
+	}
+	
+	// 회원 배송지 삭제
+	@RequestMapping("/member/user/addressdelete")
+	public ModelAndView addressdelete(
+			@RequestParam(value="no") int no,
+			AddressDTO aDTO, ModelAndView mv) {
+		System.out.println("컨트롤러 배송지 삭제 - addressdelete() 요청");
+		aDTO.setAno(no);
+		memSVC.addressdelete(aDTO);
+		RedirectView rv = new RedirectView("../user/address.com");
+		mv.setView(rv);
+		return mv;
+	}
+	
+	
 }

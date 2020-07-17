@@ -133,7 +133,7 @@
 	SELECT * FROM(
 		SELECT ROWNUM RN, A.* FROM (
 			SELECT * FROM ITEM
-			WHERE CONO = #{cono}
+			WHERE CONO = #{cono} and iname like '%${word}%'
 			ORDER BY INO DESC) A
 				)
 	WHERE RN BETWEEN #{start} AND #{end}

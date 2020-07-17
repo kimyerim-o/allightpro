@@ -23,22 +23,29 @@ $(function(){
 		var no = $(this).find(".no").text();
 		location="../detailview/admin.com?no=" + no;
 	});
+	
+	$("#search").click(function(){
+		var search = $(this).find("#searchWord").value;
+		location="../list/admin.com?searchWord=" + search;
+	})
 });
 </script>
 </head>
 <body>
 
 
-${LIST}
 
 <div class="container">
 <h1>상품 등록 리스트</h1>
 		<div class="searchDiv">
-			<select name="search" class="selectCss">
+<!-- 			<select name="search" class="selectCss">
 				<option>제목</option>
 				<option>내용</option>
-			</select> <input type="text" name="content" /> 
-			<input type="submit" value="검색" class="btn" />
+			</select>
+--> 		<form>
+			<input type="text" id="searchWord" name="searchWord" /> 
+			<input type="button" id="search" name="search" value="검색" class="btn" />
+			</form>
 		</div>
 		<div align="left">
 			<%-- 상품추가 미사용 --%>
@@ -87,7 +94,7 @@ ${LIST}
          <ul class="pagination">
             <li>
                <c:if test="${PINFO.nowPage > 3}">
-                  <a href="${pageContext.request.contextPath}/item/list/admin.com?nowPage=${PINFO.nowPage-3}">«</a>
+                  <a href="${pageContext.request.contextPath}/item/list/admin.com?nowPage=${PINFO.nowPage-3}&searchWord=${searchWord}">«</a>
                </c:if>
                <c:if test="${PINFO.nowPage <= 3}">
                   <a href="${pageContext.request.contextPath}/item/list/admin.com?nowPage=1">«</a>
@@ -96,15 +103,15 @@ ${LIST}
             <!-- 현재 페이지일때 active --> 
             <c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
                <li id="li"><!-- 스크립트 적용해야 할것같아요 -->
-                  <a href="${pageContext.request.contextPath}/item/list/admin.com?nowPage=${i}">${i}</a>
+                  <a href="${pageContext.request.contextPath}/item/list/admin.com?nowPage=${i}&searchWord=${searchWord}">${i}</a>
                </li>
             </c:forEach>            
             <li>
                <c:if test="${PINFO.nowPage < PINFO.endPage-3}">
-                  <a href="${pageContext.request.contextPath}/item/list/admin.com?nowPage=${PINFO.nowPage+3}">»</a>
+                  <a href="${pageContext.request.contextPath}/item/list/admin.com?nowPage=${PINFO.nowPage+3}&searchWord=${searchWord}">»</a>
                </c:if>
                <c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
-                  <a href="${pageContext.request.contextPath}/item/list/admin.com?nowPage=${PINFO.endPage}">»</a>
+                  <a href="${pageContext.request.contextPath}/item/list/admin.com?nowPage=${PINFO.endPage}&searchWord=${searchWord}">»</a>
                </c:if>
             </li>
          </ul>

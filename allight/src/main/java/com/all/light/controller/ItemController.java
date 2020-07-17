@@ -33,7 +33,7 @@ public class ItemController {
 	@GetMapping("/list/admin")
 	public ModelAndView listView(
 		@RequestParam(value="nowPage", required=false, defaultValue="1") int nowPage,
-		@RequestParam(value = "search", required = false) String searchWord,
+		@RequestParam(value = "searchWord", required = false, defaultValue="") String searchWord,
 		ModelAndView mv){
 
 		System.out.println("컨트롤러 상품 목록보기 - listView() 요청");
@@ -43,9 +43,11 @@ public class ItemController {
 		ArrayList<ItemDTO> list = itemSVC.getListView(pInfo, searchWord);
 		mv.addObject("LIST", list);		// 실제 조회 목록
 		mv.addObject("PINFO", pInfo);	// 페이징 관련 정보
+		mv.addObject("searchWord", searchWord);	// 페이징 관련 정보
 		mv.setViewName("/shopping/admin/item/list");
 		System.out.println("컨트롤러 상품 목록보기 - list = " + list);
 		System.out.println("컨트롤러 상품 목록보기 - pInfo = " + pInfo);
+		System.out.println("컨트롤러 상품 목록보기 - searchWord = " + searchWord);
 		System.out.println("컨트롤러 상품 목록보기 - mv = " + mv);
 		System.out.println("위치확인");
 		return mv;
@@ -265,27 +267,24 @@ public class ItemController {
 	// #상품 목록보기
 	@GetMapping("/list/corp")
 	public ModelAndView listViewCo(
-		@RequestParam(value="nowPage", required=false, defaultValue="1")
-		int nowPage, ModelAndView mv, HttpSession session){
+		@RequestParam(value="nowPage", required=false, defaultValue="1") int nowPage,
+		@RequestParam(value = "searchWord", required = false, defaultValue="") String searchWord,
+		 ModelAndView mv, HttpSession session){
 
 		System.out.println("컨트롤러 상품 목록보기 - listView() 요청");
 		System.out.println("컨트롤러 상품 목록보기 - listView() 요청 session=" + session);
 		System.out.println(session.getAttribute("COID"));
 		System.out.println(session.getAttribute("CONO"));
 		System.out.println(session.getAttribute("CONAME"));
-		//Object cono2 = session.getAttribute("CONO");
-		//String cono = String.valueOf(cono2);
-		//int cono = (Integer)session.getAttribute("CONO");
-//		int cono = Integer.valueOf((String)session.getAttribute("CONO"));
-		//int cono=Integer.parseInt(String.valueOf(session.getAttribute("CONO")));
-		PageUtil pInfo = itemSVC.getPageInfo(nowPage);
+		
+		PageUtil pInfo = itemSVC.getPageInfo(nowPage, searchWord);
 		System.out.println("컨트롤러 상품 목록보기 - pInfo : " + pInfo);
-		ArrayList<ItemDTO> list = itemSVC.getListView(pInfo, session);
-		
-		
+		ArrayList<ItemDTO> list = itemSVC.getListView(pInfo, session, searchWord);
 		mv.addObject("LIST", list);		// 실제 조회 목록
 		mv.addObject("PINFO", pInfo);	// 페이징 관련 정보
+		mv.addObject("searchWord", searchWord); //검색정보
 		mv.setViewName("/shopping/corp/item/list");
+		
 		System.out.println("컨트롤러 상품 목록보기 - list = " + list);
 		System.out.println("컨트롤러 상품 목록보기 - pInfo = " + pInfo);
 		System.out.println("컨트롤러 상품 목록보기 - mv = " + mv);

@@ -30,6 +30,9 @@ public class MemberController {
 	@RequestMapping("/main")
 	public String main() {
 		return "index";
+		
+		
+		
 	}
 	//회원가입폼
 	@RequestMapping("/joinFrm")

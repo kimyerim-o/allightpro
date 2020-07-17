@@ -149,7 +149,7 @@ $(function(){
 	// 수량 선택시 총 상품가격 변동
 	$('#number').change(function(){
 		$('.right-total-price').text(
-				numberWithCommas($(this).val()*${DETAIL.iprice}))
+			numberWithCommas($(this).val()*${DETAIL.iprice}))
 	})
 	
 	// 상품문의 제목 클릭시 내용 보이기
@@ -431,7 +431,7 @@ $(function(){
 				상품문의(${QSIZE})
 			</div>
 			
-			<form action="./iqWrite.com" method="post" id="iqWriteFrm" class="hidden">
+			<form action="${pageContext.request.contextPath}/shopping/iqWrite.com" method="post" id="iqWriteFrm" class="hidden">
 				<div class="shop-mini-title">
 					상품문의 작성
 				</div>
@@ -451,7 +451,8 @@ $(function(){
 						</tr>
 						<tr>								
 							<td colspan="2">
-								<textarea name="iqcontent" id="iqcontent" rows="10" cols="200" style="margin:10px 0;padding:10px;width:100%;height:300px;"></textarea>
+								<textarea name="iqcontent" id="iqcontent" rows="10" cols="200" 
+									style="margin:10px 0;padding:10px;width:100%;height:300px;"></textarea>
 							</td>
 						</tr>					
 					</tbody>
@@ -459,7 +460,6 @@ $(function(){
 				<input type="hidden" name="ino" value="${param.ino}"/>
 				<input type="hidden" name="iqid" value="${sessionScope.MID}"/>
 				<input type="hidden" name="iqnick" value="${sessionScope.MNICK}"/>
-				<input type="hidden" name="iqdate" value="${sessionScope.DATE}"/>
 				<input type="button" value="등록" id="writeSubmit"/>
 				<input type="button" value="취소" id="writeCancel"/>
 			</form>
@@ -519,7 +519,14 @@ $(function(){
 													</tr>
 													<tr>
 														<td class="modi-table-th">비밀글 설정</td>
-														<td><input type="checkbox" name="iqsecret" value="1" /></td>
+														<td>
+															<c:if test="${list.iqsecret==1}">
+																<input type="checkbox" name="iqsecret" value="1" checked="checked"/>
+															</c:if>
+															<c:if test="${list.iqsecret!=1}">
+																<input type="checkbox" name="iqsecret" value="1" />
+															</c:if>
+														</td>
 													</tr>
 													<tr>
 														<td colspan="2" style="text-align:center;">

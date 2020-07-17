@@ -257,7 +257,7 @@ public class ShoppingController {
 	} 
 	
 	// 상품 문의 작성
-	@RequestMapping(value="/iqWrite", method = RequestMethod.POST)
+	@RequestMapping("/iqWrite")
 	public ModelAndView iqWrite(
 			ModelAndView mv,
 			ItemQuestionDTO dto

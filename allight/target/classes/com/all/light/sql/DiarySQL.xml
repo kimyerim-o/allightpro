@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="diary">
+	
+	<!-- 메인화면에서 보일 그 달의 일별 음식칼로리,운동칼로리,체중 정보  -->
+	<select id="main" resultType="diaryDTO" parameterType="java.util.HashMap">
+		select * from 
+			(select EXTRACT(YEAR FROM ddate) year
+        		,EXTRACT(MONTH FROM ddate) month, EXTRACT(DAY FROM ddate) day, 
+        		dexercal, dfoodcal, dweight, ddiary
+       		 from diary where mid=#{mid}) 
+		where year=#{year} and month=#{month}
+	</select>
+	
+	
+</mapper>
+	

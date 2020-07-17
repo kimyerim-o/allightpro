@@ -504,6 +504,7 @@ input[type="number"]::-webkit-inner-spin-button {
 	border-left: 0;
 	border-right: 0;
 	border-bottom: 1px solid gray;
+	font-size: 15px;
 }
 
 .iqModititle:focus {
@@ -518,6 +519,7 @@ input[type="number"]::-webkit-inner-spin-button {
 	height: 120px;
 	border-radius: 3px;
 	border: 1px solid gray;
+	font-size: 15px;
 }
 
 .iqModicontent:focus {
@@ -562,4 +564,8 @@ input[type="number"]::-webkit-inner-spin-button {
 .modifyCancel:hover {
 	background: #e5e5e5;
 	cursor: pointer;
+}
+
+pre {
+	font-size:16px;
 }

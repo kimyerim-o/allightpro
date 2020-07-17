@@ -197,7 +197,6 @@ public class ShoppingService {
 		map.put("iqtitle", dto.getIqtitle());
 		map.put("iqcontent", dto.getIqcontent());
 		map.put("iqsecret", dto.getIqsecret());
-		map.put("iqdate", dto.getIqdate());
 		
 		shopDAO.iqWrite(map);
 	}

@@ -225,7 +225,7 @@
 	<!-- 상품 문의 작성   -->
 	<insert id="iqWrite" parameterType="java.util.HashMap">
 		insert into itemquestion
-		values (IQNO_SEQ.nextval,#{ino},#{iqid},#{iqnick},#{iqtitle},#{iqcontent},#{iqsecret},#{iqdate})
+		values (IQNO_SEQ.nextval,#{ino},#{iqid},#{iqnick},#{iqtitle},#{iqcontent},#{iqsecret},sysdate)
 	</insert>
 	
 	<!-- 상품 문의 삭제   -->

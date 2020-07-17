@@ -188,9 +188,22 @@ public class OrderService {
 	}
 	
 	//계좌번호,은행
-	public void check(int mno, MemberDTO mdto) {
-		ordDAO.check(mno,mdto);
+	public MemberDTO check(HttpSession session, MemberDTO mdto) {
+		int mno=Integer.parseInt(String.valueOf(session.getAttribute("MNO")));
+		String mid=(String) session.getAttribute("MID");
+		mdto.setMno(mno);
+		mdto.setMid(mid);
+		return ordDAO.check(mdto);
 	}
+	
+	public void confirm(HttpSession session, MemberDTO mdto) {
+		int mno=Integer.parseInt(String.valueOf(session.getAttribute("MNO")));
+		String mid=(String) session.getAttribute("MID");
+		mdto.setMno(mno);
+		mdto.setMid(mid);
+		ordDAO.confirm(mdto);
+	}
+
 
 
 	//기업
@@ -266,6 +279,6 @@ public class OrderService {
 	public void delivery(OrderdetailDTO oddto) {
 		ordDAO.delivery(oddto);
 	}
-
+	
 
 }

@@ -40,9 +40,14 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		}
 	}
 
-	public void check(int mno, MemberDTO mdto) {
-		session.update("order.check",mdto);
+	public MemberDTO check(MemberDTO mdto) {
+		return session.selectOne("order.check",mdto);
 	}
+	
+	public void confirm(MemberDTO mdto) {
+		session.update("order.confirm", mdto);
+	}
+
 	
 	public ArrayList<OrderDTO> backlist(OrderDTO odto) {
 		ArrayList<OrderDTO> list=null;
@@ -148,6 +153,7 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		System.out.println(totalCnt);
 		return totalCnt;
 	}
+
 
 	
 

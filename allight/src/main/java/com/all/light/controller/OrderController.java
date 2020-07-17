@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,28 +65,32 @@ public class OrderController {
 	@RequestMapping("/change")
 	@ResponseBody
 	public String change(OrderdetailDTO oddto) {
-		System.out.println(oddto);
+		System.out.println("change"+oddto);
 		ordSVC.change(oddto);
 		return "ok";
 	}
-
 	
 	//취소 반품 페이지이동-주문관리 ajax 후?????
-	@RequestMapping("/confirm")
-	public String confirm(MemberDTO mdto) {
-		//ordSVC.confirm(mdto);
-		return "shopping/user/order/check";
+	@RequestMapping("/check")
+	public ModelAndView check(OrderdetailDTO oddto,MemberDTO mdto,HttpSession session, ModelAndView mv) {
+		System.out.println("check"+oddto);
+		MemberDTO medto=ordSVC.check(session,mdto);
+		mv.addObject("MDTO", medto);
+		System.out.println("check22222"+oddto);
+		mv.addObject("oddto", oddto);
+		mv.setViewName("shopping/user/order/check");
+		return mv;
 	}
 	
-	//취소반품시 계좌확인-주문관리 ajax 후?????
-	@RequestMapping("/check")
-	public ModelAndView check(@RequestParam(value = "no", required = true) int no,
-			@RequestParam(value = "type", required = true) String type,MemberDTO mdto,
-			HttpSession session, ModelAndView mv) {
-		int mno=(Integer) session.getAttribute("MNO");
-		ordSVC.check(mno,mdto);//
-		RedirectView rv=new RedirectView("./change.com?no="+no+"&type="+type);
-		mv.setView(rv);
+	@RequestMapping("/confirm")
+	public ModelAndView confirm(OrderdetailDTO oddto,MemberDTO mdto,HttpSession session, ModelAndView mv) {
+		System.out.println("confirm"+oddto);
+		System.out.println("confirm"+mdto);
+		ordSVC.confirm(session,mdto);
+		MemberDTO medto=ordSVC.check(session,mdto);
+		mv.addObject("oddto", oddto);
+		mv.addObject("MDTO", medto);
+		mv.setViewName("shopping/user/order/confirm");
 		return mv;
 	}
 	

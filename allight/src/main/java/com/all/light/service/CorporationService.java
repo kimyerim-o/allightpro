@@ -15,7 +15,7 @@ public class CorporationService {
 	@Autowired
 	private CorporationDAO corDAO;
 	
-	public void login(CorporationDTO cordto, HttpSession session) {
+	public HashMap login(CorporationDTO cordto, HttpSession session, int cnt) {
 		System.out.println("CorporationService");
 		//일반로그인
 		HashMap map=new HashMap();
@@ -23,6 +23,8 @@ public class CorporationService {
 		map.put("copw",cordto.getCopw());
 		HashMap result=corDAO.login(map);
 		if(result==null || result.size()==0) {
+			cnt=cnt+1;
+			session.setAttribute("cnt", cnt);
 			System.out.println("로그인실패");
 		}else{
 			//로그인성공
@@ -31,6 +33,7 @@ public class CorporationService {
 			session.setAttribute("COID",result.get("COID"));
 			session.setAttribute("CONAME",result.get("CONAME"));	
 		}
+		return result;
 		
 	}
 

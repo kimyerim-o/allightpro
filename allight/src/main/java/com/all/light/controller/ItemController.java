@@ -29,25 +29,28 @@ public class ItemController {
 	
 	// #관리자
 	
-	// #상품 목록보기
+	// # 상품 목록보기 및 검색
 	@GetMapping("/list/admin")
 	public ModelAndView listView(
-		@RequestParam(value="nowPage", required=false, defaultValue="1")
-		int nowPage, ModelAndView mv){
+		@RequestParam(value="nowPage", required=false, defaultValue="1") int nowPage,
+		@RequestParam(value = "search", required = false) String searchWord,
+		ModelAndView mv){
 
 		System.out.println("컨트롤러 상품 목록보기 - listView() 요청");
 		
-		PageUtil pInfo = itemSVC.getPageInfo(nowPage);
+		PageUtil pInfo = itemSVC.getPageInfo(nowPage, searchWord);
 		System.out.println("컨트롤러 상품 목록보기 - pInfo : " + pInfo);
-		ArrayList<ItemDTO> list = itemSVC.getListView(pInfo);
+		ArrayList<ItemDTO> list = itemSVC.getListView(pInfo, searchWord);
 		mv.addObject("LIST", list);		// 실제 조회 목록
 		mv.addObject("PINFO", pInfo);	// 페이징 관련 정보
 		mv.setViewName("/shopping/admin/item/list");
 		System.out.println("컨트롤러 상품 목록보기 - list = " + list);
 		System.out.println("컨트롤러 상품 목록보기 - pInfo = " + pInfo);
 		System.out.println("컨트롤러 상품 목록보기 - mv = " + mv);
+		System.out.println("위치확인");
 		return mv;
 	}
+	
 	
 	// #상품 상세보기
 	@GetMapping("/detailview/admin")

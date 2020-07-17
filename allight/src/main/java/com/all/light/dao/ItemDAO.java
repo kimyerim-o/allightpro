@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.ItemDTO;
+import com.all.light.util.PageUtil;
 
 //DB연동하는 클래스
 //fileBoard - 누가, 언제, 제목, 내용...
@@ -51,6 +52,21 @@ public class ItemDAO extends SqlSessionDaoSupport{
 		System.out.println("DAO 전체 게시물 수 조회 - getTotalCnt() 진입");
 		return (Integer)session.selectOne("item.totalCnt");
 	}
+	
+	// 전체 게시물 수 조회
+	public int getTotalCnt(String searchWord) {
+		System.out.println("DAO 전체 게시물 수 조회 - getTotalCnt() 진입");
+		int totalCnt = session.selectOne("item.totalCntWithSearch", searchWord);
+		return totalCnt;
+		
+	}
+	
+	
+	public ArrayList searchList(PageUtil pInfo) {
+		System.out.println("DAO 상품 목록 조회 - searchList(pInfo) 진입 = " + pInfo);
+		return (ArrayList)session.selectList("item.searchList", pInfo);
+	}
+	
 
 	// 상품 목록 조회
 	public ArrayList getListView(ItemDTO itemDTO) {
@@ -103,6 +119,8 @@ public class ItemDAO extends SqlSessionDaoSupport{
 		session.delete("item.deleteFileInfo", no);
 		
 	}
+
+
 
 
 

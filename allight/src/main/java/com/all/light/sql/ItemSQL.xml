@@ -8,24 +8,45 @@
 		SELECT COUNT(*) FROM ITEM
 	</select>
 	
+	<!-- 상품 수 조회, 검색 기능 포함 -->
+	<select id="totalCntWithSearch" resultType="Integer" parameterType="String">
+		select  count(*) from item where iname like '%${value}%' 
+	</select>
+	
 	<!-- 상품 리스트 출력 --> <!-- 상품 번호가 아닌 ROWNUM()순서로 정렬하여 출력한다 -->
 	<select id="listview" resultType="itemDTO" parameterType="itemDTO">
 	SELECT * FROM(
-		SELECT ROWNUM RN, A.* FROM (
+		SELECT ROWNUM RN, A.* FROM 
+			(
 			SELECT * FROM ITEM
 			ORDER BY INO DESC) A
 				)
 	WHERE RN BETWEEN #{start} AND #{end}
 	</select>
 	
+
+	
 	<!-- 상품 검색 및 리스트 출력--> <!-- 상품 번호가 아닌 ROWNUM()순서로 정렬하여 출력한다 -->
-	<select id="searchList" resultType="java.util.HashMap" parameterType="PageUtil">
-		select * from(
-			select row_number() over (order by mno) num,
-			A.* from member A 
-				where mid like '%${searchWord}%' 
-				order by mno desc)
-		where num between #{start} and #{end}
+	<!-- <select id="searchList" resultType="java.util.HashMap" parameterType="PageUtil"> -->
+	<select id="searchList" resultType="itemDTO" parameterType="itemDTO">
+	 
+	
+	select * from(
+				select row_number() over (order by ino) num,
+			A.* from item A 
+				where iname like '%${searchWord}%' 
+				order by ino desc)
+			where num between #{startNo} and #{endNo}
+		<!--	 
+      SELECT * FROM(
+		SELECT ROWNUM RN, A.* FROM 
+			(
+			SELECT * FROM ITEM
+            WHERE iname LIKE '%${searchWord}%'
+			ORDER BY INO DESC) A
+				)
+	WHERE RN BETWEEN #{startNo} and #{endNo}
+			-->
 	</select>
 	
 	<!-- 상품 정보 출력 -->

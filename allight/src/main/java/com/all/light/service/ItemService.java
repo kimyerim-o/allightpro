@@ -59,18 +59,37 @@ public class ItemService {
 		return pInfo;
 	}
 	
-	// 상품 리스트 페이지에 출력할 상품 목록 조회
-	public ArrayList<ItemDTO> getListView(PageUtil pInfo) {
-		System.out.println("서비스 상품리스트 페이징 관련 - getListView() 진입");
-		int start = (pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
-		int end  = start + pInfo.getLineCount()-1;
-		ItemDTO itemDTO = new ItemDTO();
-		itemDTO.setStart(start);
-		itemDTO.setEnd(end);
-		ArrayList<ItemDTO> list = itemDAO.getListView(itemDTO);
-		System.out.println("서비스 상품리스트 페이징 관련 - getListView() list " + list);
-		return list;
+	// 상품리스트, 검색 페이징관련 정보
+	public PageUtil getPageInfo(int nowPage, String searchWord) {
+		System.out.println("서비스 상품리스트 페이징 관련 - getPageInfo() 진입");
+		
+		int totalCount = itemDAO.getTotalCnt(searchWord);
+
+		PageUtil pInfo = new PageUtil(nowPage, totalCount);
+		// PageUtil(보고싶은페이지, 전체게시물수);
+		// 검색어에 따른 총 게시물 수를 구하고 페이지 정보를 리턴함
+		return pInfo;
 	}
+	
+	// 상품 리스트 페이지에 출력할 상품 목록 조회
+	public ArrayList<ItemDTO> getListView(PageUtil pInfo, String searchWord) {
+		System.out.println("서비스 상품리스트 페이징 관련 - getListView() 진입");
+		pInfo.setSearchWord(searchWord);
+		
+		/*
+		System.out.println("서비스 상품리스트 페이징 관련 - getListView() pInfo=" + pInfo);
+		return itemDAO.searchList(pInfo);
+		*/
+		
+		// /*
+		ArrayList<ItemDTO> list = itemDAO.searchList(pInfo);
+		System.out.println("서비스 상품리스트 페이징 관련 - getListView() list " + list);
+	
+		return list;
+		// */
+	}
+	
+
 	
 	public ItemDTO itemInfo(int ino) {
 		return itemDAO.itemInfo(ino);
@@ -154,7 +173,7 @@ public class ItemService {
 		itemDTO.setEnd(end);
 		itemDTO.setCono(cono);
 		
-		
+		System.out.println("서비스 상품 리스트 itemDTO = " + itemDTO);
 		ArrayList<ItemDTO> list = itemDAO.getListViewCo(itemDTO);
 		System.out.println("서비스 상품리스트 페이징 관련 - getListView() list " + list);
 		

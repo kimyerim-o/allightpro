@@ -1,6 +1,7 @@
 package com.all.light.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CorporationDTO;
-import com.all.light.dto.MemberDTO;
 import com.all.light.service.CorporationService;
 import com.all.light.util.PageUtil;
 
@@ -23,11 +23,30 @@ public class CorporationController {
 	@Autowired
 	private CorporationService corSVC;
 	
+	//로그인
 	@RequestMapping("/corlog")
-	public ModelAndView corlog(CorporationDTO cordto,HttpSession session,ModelAndView mv,RedirectView rv) {
+	public ModelAndView corlog(@RequestParam(value = "cnt", required = false, defaultValue = "0") int cnt,
+			@RequestParam(value = "auto", required = false) int auto,
+			CorporationDTO cordto,HttpSession session,ModelAndView mv,RedirectView rv) {
 		System.out.println("CorporationController corlog");
-		corSVC.login(cordto,session);
-		rv.setUrl("./main.com");
+		if(cnt<4) {
+			HashMap result=corSVC.login(cordto,session,cnt);
+			if(result==null || result.size()==0) {
+				rv.setUrl("./login.com");
+			}else {
+				rv.setUrl("./main.com");
+			}
+		}else {
+			//자동입력방지값 동일한지 확인하기
+			System.out.println(auto);
+			
+			HashMap result=corSVC.login(cordto,session,cnt);
+			if(result==null || result.size()==0) {
+				rv.setUrl("./login.com");
+			}else {
+				rv.setUrl("./main.com");
+			}
+		}
 		mv.setView(rv);
 		return mv;
 	}

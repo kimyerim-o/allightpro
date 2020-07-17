@@ -123,6 +123,7 @@ public class OrderService {
 	
 	//상태 변경
 	public void change(OrderdetailDTO oddto) {
+		System.out.println(oddto);
 		ordDAO.change(oddto);
 	}
 	//취소반품조회

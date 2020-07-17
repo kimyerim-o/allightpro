@@ -79,6 +79,7 @@
 							<li class="order_pay_info qq-9">${ORDER.oddto1.ostatus}</li>
 							<li><form id="statfrm" action="${pageContext.request.contextPath}/order/change/corp.com">
 									<input type="hidden" name="odno" value="${ORDER.oddto1.odno}">
+									<input type="hidden" name="ino" value="${ORDER.oddto1.ino}">
 									<select name="ostatus" class="selectCss">
 										<option selected="selected">상태변경</option>
 										<option value="배송준비중">배송준비중</option>

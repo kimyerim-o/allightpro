@@ -106,8 +106,9 @@
     })
   }
 </script>
-
 <form action="./corlog.com" method="post">
+<input type="hidden" name="cnt" value="${sessionScope.cnt}"/>
+${sessionScope.cnt}
 	<table>
 		<tr>
 			<td><input type="text" id="coid" name="coid" placeholder="아이디" required="required"/></td>
@@ -115,6 +116,14 @@
 		<tr>
 			<td><input type="password" id="copw" name="copw" placeholder="비밀번호" required="required"/></td>
 		</tr>
+		<c:if test="${sessionScope.cnt > 3}">
+			<tr>
+				<td>자동방지</td>
+			</tr>
+			<tr>
+				<td><input type="text" id="auto" name="auto" placeholder="자동입력 방지문자"/></td>
+			</tr>
+		</c:if>
 		<tr>
 			<td><input type="submit" value="로그인"></td>
 		</tr>

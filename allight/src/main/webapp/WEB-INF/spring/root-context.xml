@@ -77,4 +77,10 @@
 	</bean>
 	<bean id="revSVC" class="com.all.light.service.ReviewService"/>
 	
+	<!-- Diary -->
+	<bean id="diaDAO" class="com.all.light.dao.DiaryDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
+	<bean id="diaSVC" class="com.all.light.service.DiaryService"/>
+	
 </beans>

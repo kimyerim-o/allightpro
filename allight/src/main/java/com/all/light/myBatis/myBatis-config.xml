@@ -28,6 +28,7 @@
    		<typeAlias type="com.all.light.dto.OrderDTO" alias="ordDTO"/>
    		<typeAlias type="com.all.light.dto.OrderdetailDTO" alias="orddeDTO"/>
    		<typeAlias type="com.all.light.dto.ReviewDTO" alias="reviewDTO"/>
+   		<typeAlias type="com.all.light.dto.DiaryDTO" alias="diaryDTO"/>
    </typeAliases>
    
    <mappers>
@@ -39,6 +40,7 @@
    		<mapper resource="/com/all/light/sql/NoticeSQL.xml"/>
    		<mapper resource="/com/all/light/sql/OrderSQL.xml"/>
    		<mapper resource="/com/all/light/sql/ReviewSQL.xml"/>
+   		<mapper resource="/com/all/light/sql/DiarySQL.xml"/>
    </mappers>
    
 </configuration>

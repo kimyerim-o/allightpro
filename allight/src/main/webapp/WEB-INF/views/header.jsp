@@ -23,9 +23,7 @@
    href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
    href="${pageContext.request.contextPath}/resources/css/shopping.css">
-<!-- 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    -->
+
 </head>
 
 <body>

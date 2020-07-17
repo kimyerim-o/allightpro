@@ -15,13 +15,14 @@
 				var odno = $(event.target).attr('data-no');
 				var ostatus = "주문취소";
 				var param = { "odno" : odno , "ostatus" : ostatus };
-				alert(JSON.stringify(param));
+				//alert(JSON.stringify(param));
 				$.ajax({
-					url : "${pageContext.request.contextPath}/order/change.com",
+					url : "${pageContext.request.contextPath}/order/check.com",
 					type : 'post',
 					data : param,
 					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/order/detail.com?no="+ ${ORDER.odto1.ono};
+						alert(JSON.stringify(param));
+						location.href = "${pageContext.request.contextPath}/order/check.com?odno="+odno+"&ostatus="+ostatus;
 					},
 					error : function(request,status,error) {
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -30,6 +31,27 @@
 			}
 		});
 		//반품 버튼 클릭 시
+		$(".back").click(function() {
+			if (confirm("해당 상품을 반품 하시겠습니까?")) {
+				var odno = $(event.target).attr('data-no');
+				var ostatus = "반품";
+				var param = { "odno" : odno , "ostatus" : ostatus };
+				//alert(JSON.stringify(param));
+				$.ajax({
+					url : "${pageContext.request.contextPath}/order/check.com",
+					type : 'post',
+					data : param,
+					success : function(data) {
+						alert(JSON.stringify(param));
+						location.href = "${pageContext.request.contextPath}/order/check.com?odno="+odno+"&ostatus="+ostatus;
+					},
+					error : function(request,status,error) {
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+						}
+					});
+			}
+		});
+		//구매확정 버튼 클릭 시
 		$(".confirm").click(function() {
 			if (confirm("해당 상품을 구매확정 하시겠습니까? 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")) {
 				var odno =  $(event.target).attr('data-no');
@@ -41,7 +63,7 @@
 					type : 'post',
 					data : param,
 					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/order/detail.com?no="+ ${ORDER.odto1.ono};
+						location.href = "${pageContext.request.contextPath}/order/detail.com?no=${ORDER.odto1.ono}";
 					},
 					error : function(request,status,error) {
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -51,9 +73,106 @@
 		});
 
 	})
+	function delivery_view(com,tel) {
+		var $target = $(event.target);
+		var com = com;
+		var tel = tel;
+		alert("com"+com+"tel"+tel);
+		$('#order_pop_wrap').css('display', 'block');
+		$('#com').text(com);
+		$('#tel').text(tel);
+	}
+	function delivery_layer_view() {
+		var $target = $(event.target);
+		$target.closest('td').attr('class', 'hidden');
+		$target.closest('td').next('td').attr('class', 'show');
+	}
+	
+	function wrapCreateByMask() {
+		   // 화면의 높이와 너비를 구한다.
+		   var maskHeight = $(document).height();
+		   var maskWidth = $(window).width();
+
+		   // 마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+		   $('#mask_create').css({
+		      'width' : maskWidth,
+		      'height' : maskHeight
+		   });
+
+		   $('#mask_create').fadeTo("slow", 1);
+
+		   $('.create_modal').show();
+		};
+
+		$(function() {
+		   //검은 막 띄우기
+		   //기본 모달창
+		   $('.openMask_create').click(function(e) {
+		      //클릭 시 이벤트
+		      console.log("모달 켭니다.");
+		      e.preventDefault();
+		      wrapCreateByMask();
+		      $('body').css("overflow", "hidden");
+		   });
+
+		   //닫기 버튼을 눌렀을 때
+		   $('.create_modal .close').click(function(e) {
+		      //링크 기본동작은 작동하지 않도록 한다.
+		      e.preventDefault();
+		      $('#mask_create, .create_modal').hide();
+		      $('body').css("overflow", "scroll");
+		   });
+
+		   //검은 막을 눌렀을 때
+		   $('#mask_create').click(function() {
+		      $(this).hide();
+		      $('.create_modal').hide();
+		      $('body').css("overflow", "scroll");
+		   });
+
+		});
 </script>
 </head>
 <body>
+<!--  어두워지는 부분 -->
+<div id="mask_create"></div>
+<!--  모달 부분 -->
+<div class="create_modal">
+
+<div class="bottom">
+	<!-- 배송 팝업 -->
+	<div id="order_pop_wrap" class="order_pop_wrap" style="display: none;">
+		<div class="order_pop_bg">
+			<div class="order_pop_box2">
+				<div id="delivery_info_view" class="order_detail">
+					<table class="tbl" cellspacing="0" border="1" summary="정보">
+						<caption>정보</caption>
+						<colgroup>
+							<col width="120">
+							<col width="*">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>택배회사</th>
+								<td><strong id="com"></strong></td>
+							</tr>
+							<tr class="last">
+								<th>송장번호</th>
+								<td><em class="order_fcT2" id="tel"></em></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p class="center">
+					<a onclick="delivery_layer_view();" class="close"
+						style="cursor: pointer;">닫기</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
 	<div class="mem_right">
 		<div class="mem_top_wrap noto_sans">
 			<div class="mem_top_new">
@@ -120,12 +239,14 @@
 											<ul>
 												<li class="order_pay_info qq-9">${oddto.ostatus}</li>
 
-												<li class="mb5"><a
-													onclick="delivery_view('택배회사','송장번호');"
-													class="order_btn_delcheck" style="cursor: pointer;">배송조회</a></li>
+												<li class="mb5"><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
+															class="openMask_create" style="cursor: pointer;">배송조회</a></li>
 
 												<li class="mb5"><a class="confirm" class="order_btn_write"
 													style="cursor: pointer;" data-no="${oddto.odno}">구매확정</a></li>
+												
+												<li class="mb5"><a class="back" class="order_btn_write"
+													style="cursor: pointer;" data-no="${oddto.odno}" >반품</a></li>
 											</ul>
 										</c:if> 
 										<!-- 구매확정 --> 
@@ -133,9 +254,8 @@
 											<ul>
 												<li class="order_pay_info qq-9">${oddto.ostatus}</li>
 
-												<li class="mb5"><a
-													onclick="delivery_view('택배회사','송장번호');"
-													class="order_btn_delcheck" style="cursor: pointer;">배송조회</a></li>
+												<li class="mb5"><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
+															class="openMask_create" style="cursor: pointer;">배송조회</a></li>
 
 												<li class="mb5"><a class="review"
 													href="mem_goods_review_write.asp?orderno=202004052091881&amp;g=12189&amp;vtab=O"

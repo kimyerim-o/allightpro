@@ -7,32 +7,35 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	$(function(){//안되요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-		$('#li').click(function(){
-			$('#li').addClass("active");
+	$(function(){
+		$('#write').click(function(){
+			$('#wfrm').submit();
 		});
 	})
 </script>
 </head>
 <body>
-<form>
+${oddto}
+<form id="wfrm" action="./confirm.com" method="post">
+	<input type="hidden" name="odno" value="${oddto.odno}"/>
+	<input type="hidden" name="ostatus" value="${oddto.ostatus}"/>
 	<div class="container">
 		<table class="table">
 			<tr>
-				<th>NO</th>
-				<th width="70%">제목</th>
-				<th>작성일</th>
+				<th>받는사람</th>
+				<th width="70%">${MDTO.mname}</th>
 			</tr>
-			<c:forEach items="${LIST}" var="list">
-				<tr>
-					<td>${list.qno}</td>
-					<td><a href="${pageContext.request.contextPath}/question/detail/corp.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
-					<td>${list.qdate}</td>
-				</tr>
-			</c:forEach>
+			<tr>
+				<th>은행명</th>
+				<th width="70%"><input type="text" name="mbank" value="${MDTO.mbank}" /></th>
+			</tr>
+			<tr>
+				<th>계좌번호</th>
+				<th width="70%"><input type="text" name="mbankno" value="${MDTO.mbankno}" /></th>
+			</tr>
 		</table>
 		<div class="right">
-			<a class="btn" href="${pageContext.request.contextPath}/question/write/corp.com">글쓰기</a>
+			<input type="button" id="write" value="변경"/>
 		</div>
 	</div>
 </form>

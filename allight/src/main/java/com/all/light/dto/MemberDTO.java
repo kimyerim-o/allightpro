@@ -26,6 +26,10 @@ public class MemberDTO {
 	private Date mlogdate;
 	private String msex;
 	private int mtype;
+	private String mbank;//은행
+	private String mbankno;//계좌번호
+	
+	
 	public int getMno() {
 		return mno;
 	}
@@ -130,18 +134,24 @@ public class MemberDTO {
 	public void setMtel1(String mtel1) {
 		this.mtel1 = mtel1;
 	}
+	public String getMbank() {
+		return mbank;
+	}
+	public void setMbank(String mbank) {
+		this.mbank = mbank;
+	}
+	public String getMbankno() {
+		return mbankno;
+	}
+	public void setMbankno(String mbankno) {
+		this.mbankno = mbankno;
+	}
 	@Override
 	public String toString() {
 		return "MemberDTO [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", memail=" + memail + ", memail2=" + memail2
 				+ ", mname=" + mname + ", mnick=" + mnick + ", mbirth=" + mbirth + ", mtel=" + mtel + ", mtel1=" + mtel1
 				+ ", mtel2=" + mtel2 + ", mjoindate=" + mjoindate + ", mlogdate=" + mlogdate + ", msex=" + msex
-				+ ", mtype=" + mtype + ", getMno()=" + getMno() + ", getMid()=" + getMid() + ", getMpw()=" + getMpw()
-				+ ", getMemail()=" + getMemail() + ", getMname()=" + getMname() + ", getMnick()=" + getMnick()
-				+ ", getMbirth()=" + getMbirth() + ", getMtel()=" + getMtel() + ", getMtel2()=" + getMtel2()
-				+ ", getMjoindate()=" + getMjoindate() + ", getMlogdate()=" + getMlogdate() + ", getMsex()=" + getMsex()
-				+ ", getMtype()=" + getMtype() + ", getMemail2()=" + getMemail2() + ", getMtel1()=" + getMtel1()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
-				+ "]";
+				+ ", mtype=" + mtype + ", mbank=" + mbank + ", mbankno=" + mbankno + "]";
 	}
 	
 }

@@ -48,6 +48,13 @@
 	update orderdetail set ostatus=#{ostatus} where odno=#{odno}
 	</update>
 	
+	<select id="check" parameterType="memDTO" resultType="memDTO">
+	select * from member where mid='${mid}' and mno=${mno}
+	</select>
+	
+	<update id="confirm">
+	update member set mbank='${mbank}',mbankno='${mbankno}' where mid='${mid}' and mno=${mno}
+	</update>
 	
 <!-- 기업 -->
 	<!--  -->

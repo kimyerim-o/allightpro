@@ -73,6 +73,10 @@
 	<select id="listdeCorpType" resultType="orddeDTO" parameterType="PageUtil">
 	select * from (select row_number() over(order by orderdetail.odno ) as rno,orderdetail.* from orderdetail where OSTATUS=#{searchType}) where rno between ${startNo} and ${endNo} order by rno desc
 	</select>
+
+	<update id="changeStock" parameterType="orddeDTO">
+	update item set istock = istock-1 where ino=#{ino}
+	</update>
 	
 	<!-- 회사페이징후 -->
 	<select id="listCorp" resultType="ordDTO">

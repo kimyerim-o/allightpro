@@ -126,6 +126,9 @@
 									<a class="ucomm" style="color: #ff5656;">수정</a>
 									<a class="dcomm" style="color: #ff5656;">삭제</a>
 								</c:if>
+								<c:if test="${sessionScope.MTYPE == 1}">
+									<a class="dcomm" style="color: #ff5656;">삭제</a>
+								</c:if>
 							</td>
 						</tr>
 						</c:forEach>

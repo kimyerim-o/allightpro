@@ -27,12 +27,6 @@ public class MemberController {
 	@Autowired
 	private MemberService memSVC;
 
-	//메인화면
-	@RequestMapping("/main")
-	public String main() {
-		return "index";
-	}
-	
 	//회원가입폼
 	@RequestMapping("/joinFrm")
 	public String join() {

@@ -5,12 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content=width=device-width", initial-scale="1">
-<link rel="stylesheet" href="css/bootstrap.css">
-<title>Insert title here</title>
+
+<title>All Light</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
-<script src="js/bootstrap.js">
-</script>
+
 <script>
 function checks(){ 
 	if($("#sample4_roadAddress").val() == ""){ 
@@ -28,13 +26,7 @@ function checks(){
 }
 </script>
 <script>
-$(function(){
-	//삭제하기 버튼 클릭시
-	$("#dBtn").click(function(){
-		$("#imsiFrm").attr("action","../user/addressdelete.com");
-		$("#imsiFrm").submit(); 
-	});
-});
+
 </script>
 
 </head>
@@ -46,16 +38,16 @@ $(function(){
 			<th>
 				<div>	
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-					<input type="text" name="aname" placeholder="수령인">
-					<input type="text" name="aphone" placeholder="연락처"><br>
+					<input type="text" name="aname" placeholder="수령인" required="required">
+					<input type="text" name="aphone" placeholder="연락처" required="required"><br>
 				</div>
 			</th>
 		</tr>
 		<tr>
 			<th>			
-					<input type="text" name="aaddno" id="sample6_postcode" placeholder="우편번호">
-					<input type="text" name="aaddress1" id="sample6_address" placeholder="주소">
-					<input type="text" name="aaddress2" id="sample6_detailAddress" placeholder="상세주소">
+					<input type="text" name="aaddno" id="sample6_postcode" placeholder="우편번호" required="required">
+					<input type="text" name="aaddress1" id="sample6_address" placeholder="주소" required="required">
+					<input type="text" name="aaddress2" id="sample6_detailAddress" placeholder="상세주소" required="required">
 					<input type="text" name="aaddress3" id="sample6_extraAddress" placeholder="참고항목">
 			</th>
 		</tr>
@@ -79,17 +71,14 @@ $(function(){
 					<th>삭제</th>
 				</tr>
 				
-				<c:forEach items="${LIST}" var="list">
+				<c:forEach items="${LIST}" var="list"  varStatus="status" >
 				<tr class="dataRow">
 					<td>${list.aname}</td>
 					<td>${list.aphone}</td>
 					<td>${list.aaddno}</td>
 					<td>${list.aaddress1}${list.aaddress2}</td>
-		  			<td><input type="button" id="dBtn" value="삭제"></td>
-					<td class="no" hidden>
-						<form id="imsiFrm"	method="POST">
-							<input type="text" name="no" value="${list.ano}"/>
-						</form>
+		  			<td>
+						<input type="button" id="dBtn" value="삭제" onclick="location.href='../user/addressdelete.com?no=${list.ano}'">	
 					</td>
 				
 

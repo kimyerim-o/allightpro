@@ -6,33 +6,20 @@
 	<select id="getTotalCnt" resultType="Integer"
 		parameterType="PageUtil">
 		select count(*) from item
-			where ino in (select ino from orderdetail
-			where ono in (select ono from orders
-			where mid=#{rid}))
-			and item.iname like '%${searchWord}%'
+        where ino in(select ino from review
+        where rid=#{rid})
+        and iname like '%${searchWord}%'
 	</select>
 	
 	<select id="getList" resultType="java.util.HashMap"
 		parameterType="PageUtil">
-		select item.*, OD.*, r.*
-		    from item,
-		        (select OD.ino, num
-		        from(select row_number() over (order by od.odno desc) 
-		            num,
-		            od.*
-		            from orderdetail od
-		            where od.ono in (select o.ono 
-		                             from orders o
-		                             where mid=#{rid})
-		                             order by od.odno desc
-		            ) 
-		            OD
-		        where num between #{startNo} and #{endNo}) OD
-		    left outer join review r
-		    on OD.ino=r.ino
-		    where item.ino = OD.ino
-		    and item.iname like '%${searchWord}%'
-		    order by num
+            select * from(select R.*,I.iname, row_number() over (order by R.rno) num
+        from review R,item I
+        where R.rid=#{rid}
+        and R.ino=I.ino
+        and I.iname like '%${searchWord}%')
+        where num between ${startNo} and ${endNo}
+        order by num desc
 	</select>
 	
 	<insert id="reviewWrite" parameterType="reviewDTO">

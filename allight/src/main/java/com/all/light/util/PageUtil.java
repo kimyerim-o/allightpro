@@ -194,8 +194,10 @@ public class PageUtil {
 		return "PageUtil [nowPage=" + nowPage + ", totalCount=" + totalCount + ", lineCount=" + lineCount
 				+ ", pageGroup=" + pageGroup + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", searchWord=" + searchWord + ", searchType="
-				+ searchType;
+				+ searchType + ", rid=" + rid + ", qid=" + qid + "]";
 	}
+
+
 
 
 

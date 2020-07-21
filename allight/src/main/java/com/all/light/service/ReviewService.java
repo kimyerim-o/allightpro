@@ -18,10 +18,14 @@ public class ReviewService {
 		pInfo.setRid(id);
 		int totalCount = revDAO.getTotalCnt(pInfo); //게시물 수를 구함
 		pInfo = new PageUtil(nowPage, totalCount); //게시물 수에 따른 페이징정보를 구함
+		pInfo.setRid(id);
+		pInfo.setSearchWord(searchWord);
+		System.out.println("reviewService.getPageInfo. pInfo = "+pInfo);
 		return pInfo;
 	}
 	
 	public ArrayList<ReviewDTO> getList(PageUtil pInfo) {
+		System.out.println("reviewService.getList. pInfo = "+pInfo);
 		return revDAO.getList(pInfo);
 	}
 

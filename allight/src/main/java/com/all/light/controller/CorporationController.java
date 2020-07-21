@@ -26,8 +26,7 @@ public class CorporationController {
 	//로그인
 	@RequestMapping("/corlog")
 	public ModelAndView corlog(@RequestParam(value = "cnt", required = false, defaultValue = "0") int cnt,
-			@RequestParam(value = "auto", required = false) int auto,
-			CorporationDTO cordto,HttpSession session,ModelAndView mv,RedirectView rv) {
+			CorporationDTO cordto,HttpSession session,HttpServletRequest req,ModelAndView mv,RedirectView rv) {
 		System.out.println("CorporationController corlog");
 		if(cnt<4) {
 			HashMap result=corSVC.login(cordto,session,cnt);
@@ -38,7 +37,7 @@ public class CorporationController {
 			}
 		}else {
 			//자동입력방지값 동일한지 확인하기
-			System.out.println(auto);
+			System.out.println("auto");
 			
 			HashMap result=corSVC.login(cordto,session,cnt);
 			if(result==null || result.size()==0) {

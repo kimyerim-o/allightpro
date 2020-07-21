@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,9 +63,7 @@
 						<td class="board-info"><a class="board-info-nick">${DETAIL.qid}</a></td>
 						<input type="hidden" value="${DETAIL.qid}" name="qid">
 						<td class="board-info"><a class="board-info-others">수정일 </a></td>
-						<td class="board-info"><a class="board-info-others"><input
-								type="text" disabled="disabled" value="${sessionScope.DATE}"
-								name="qdate"></a></td>
+						<td class="board-info"><a class="board-info-others"><f:formatDate value="<%=new java.util.Date()%>" pattern="yyyy-MM-dd"/></a></td>
 					</tr>
 					<tr>
 						<td class="board-content" colspan="4">

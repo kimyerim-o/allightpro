@@ -165,7 +165,7 @@ public class MemberController {
 		HashMap re = memSVC.kakao(param, memdto, session);
 		System.out.println("kakao re" + re);
 		System.out.println(re.get("mpw"));
-		if (re.get("mpw") == null) {
+		if (re.get("mnick") == null) {
 			return "check";
 		}
 		return null;

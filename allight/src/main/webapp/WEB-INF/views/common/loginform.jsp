@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
@@ -52,7 +51,7 @@
 				  success:function(check){
 					  alert(check);
 					  if(check=="check"){
-					  	location.href = "http://localhost:9000/allight/join.com";
+					  	location.href = "http://localhost:9000/allight/main.com";
 					  }else{
 						  location.href = "http://localhost:9000/allight/main.com";
 					  }
@@ -74,38 +73,6 @@
   }
 </script>
 
-   
-
-<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
-<script type="text/javascript">
-  // input your appkey
-  function kakaoLogout() {
-    if (!Kakao.Auth.getAccessToken()) {
-      alert('Not logged in.')
-      return
-    }
-    Kakao.Auth.logout(function() {
-    	$.ajax({
-			  url:'./kakaout.com',
-			  dataType:'text',//받을때
-			  type:'post',
-			  success:function(check){
-				  alert(check);
-				  if(check=="out"){
-				  	location.href = "http://localhost:9000/allight/main.com";
-				  }else{
-					  alert("카카오 로그아웃 실패")
-					  location.href = "http://localhost:9000/allight/main.com";
-				  }
-			  },
-			  fail:function(error){
-				  console.log("error")
-			  }
-		  });
-      	alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
-    })
-  }
-</script>
 <form action="./corlog.com" method="post">
 <input type="hidden" name="cnt" value="${sessionScope.cnt}"/>
 ${sessionScope.cnt}

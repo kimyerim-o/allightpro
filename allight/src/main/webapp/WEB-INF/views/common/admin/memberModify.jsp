@@ -68,8 +68,20 @@
 			</tr>
 			<tr>
 				<td>구분 :</td>
-				<td><input type="text" id="mtype" name="mtype"
-					value="${MEMINFO.mtype}" /></td>
+				<td>
+				<c:if test="${MEMINFO.mtype==1}">
+				<select name="mtype" id="mtype" required="required">
+						<option value="0">회원</option>
+						<option value="1" selected>관리자</option>
+				</select>
+				</c:if>
+				<c:if test="${MEMINFO.mtype==0}">
+				<select name="mtype" id="mtype" required="required">
+						<option value="0" selected>회원</option>
+						<option value="1">관리자</option>
+				</select>
+				</c:if>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center"><input type="submit"

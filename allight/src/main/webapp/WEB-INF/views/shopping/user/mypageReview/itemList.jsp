@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,13 +37,14 @@ $(function(){
 			<select name="type" class="selectCss">
 				<option value="iname">상품명</option>
 			</select> <input type="text" id="search" name="search" placeholder="검색어를 입력하세요"/> <input type="submit"
-				value="검색" onclick="return checkForm();"/>
+				value="검색" onclick="return checkForm();"/>&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/mypage/review/list.com"><input type="button"
+				value="검색어 초기화"/></a>
 		</div>
 		</form>
 		<table class="table">
 			<tr>
 				<th>NO</th>
-				<th width="70%">상품명</th>
+				<th>상품명</th>
 				<th>리뷰작성일</th>
 				<th>별점</th>
 				<th>리뷰내용</th>
@@ -52,12 +54,12 @@ $(function(){
 				<tr>
 					<td>${list.NUM}</td>
 					<td>${list.INAME}</td>
-					<td>${list.RDATE}</td>
+					<td><fmt:formatDate value="${list.RDATE}" pattern="yyyy-MM-dd"/></td>
 					<td>${list.RGRADE}</td>
 					<td>${list.RCONTENT}</td>
-					<td><a href="${pageContext.request.contextPath}/mypage/review/write.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
+					<td><%-- <a href="${pageContext.request.contextPath}/mypage/review/write.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
 					<input type="button" id="wbtn" name="wbtn" value="리뷰 작성">
-					</a>
+					</a> --%>
 					<a href="${pageContext.request.contextPath}/mypage/review/update.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
 					<input type="button" id="wbtn" name="ubtn" value="리뷰 수정">
 					</a>

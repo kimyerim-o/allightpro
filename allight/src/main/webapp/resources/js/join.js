@@ -236,7 +236,6 @@ $(function() {
 			return false;
 		}
 		
-		
 	})
     
 });

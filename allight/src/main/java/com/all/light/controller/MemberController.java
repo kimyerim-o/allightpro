@@ -134,7 +134,7 @@ public class MemberController {
 	public ModelAndView findPw(MemberDTO memdto,ModelAndView mv) {
 		MemberDTO mem = memSVC.findId(memdto);
 		mv.addObject("MEM",mem);
-		mv.setViewName("common/user/findPwEmail");
+		mv.setViewName("common/user/findPwChange");
 		return mv;
 	}
 	

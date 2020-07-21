@@ -8,8 +8,17 @@ $(function(){
 		}
 		//이메일 입력여부 검사
 		if($("#memail").val().length==0){
-			alert("메일 인증을 완료해주세요")
+			alert("이메일을 정확히 입력해주세요")
 			$("#memail").focus();
+			return false;
+		}
+		if($("#memail2").val().length==0){
+			alert("이메일을 정확히 입력해주세요")
+			$("#memail2").focus();
+			return false;
+		}
+		if($("#checkCODE").css('display')=='none'){
+			alert("이메일 인증을 완료해 주세요1.")
 			return false;
 		}
 	});	
@@ -72,6 +81,6 @@ $(function(){
           alert("인증이 완료되었습니다");
           $("#check_pw_code").text("인증완료");
        }
-    });
+    });//end of 인증번호 확인
 });
 

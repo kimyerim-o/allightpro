@@ -21,7 +21,7 @@
 		insert into member
 		values ((select NVL(MAX(mno),1)+1 from member),#{mid}, #{mpw},
 		#{memail},#{mname}, #{mnick}, #{mbirth},#{mtel},#{mtel2},
-		#{mtype},sysdate,#{mlogdate},#{msex})
+		#{mtype},sysdate,#{mlogdate},#{msex},'a','a')
 	</insert>
 	
 	<!-- 아이디 중복 확인 -->

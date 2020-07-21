@@ -42,7 +42,7 @@ $(function() {
 				mnick : $("#mnick").val()
 			},
 			success : function(data) {
-				alert("들어옴11111");
+//				alert("들어옴11111");
 				if (data == "fail") {
 					alert("이미 등록된 닉네임입니다.");
 					$("#mnick").val("");

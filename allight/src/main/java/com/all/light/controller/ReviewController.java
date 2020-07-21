@@ -38,8 +38,6 @@ public class ReviewController {
 		
 		// 페이지 객체에 검색어와 현재 페이지를 넘기고 공지 리스트를 반환
 		PageUtil pInfo = revSVC.getPageInfo(id, nowPage, searchWord);
-		pInfo.setSearchWord(searchWord);
-		pInfo.setRid(id);
 		ArrayList<ReviewDTO> map = revSVC.getList(pInfo);
 
 		System.out.println("list = " + map.toString());

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	System.out.println("member.jsp");
 %>
@@ -56,10 +57,10 @@
 			<%-- 반복문을 이용하여 줄출력 예정 --%>
 			<c:forEach items="${LIST}" var="mem">
 				<tr>
-					<td>${mem.MID}</td>
+					<td>${mem.MID}<c:if test="${mem.MTYPE==1}"><h5 style="display: inline;"> (관리자)</h5></c:if></td>
 					<td>${mem.MNAME}</td>
 					<td>${mem.MADDRESS}</td>
-					<td>${mem.MJOINDATE}</td>
+					<td><fmt:formatDate value="${mem.MJOINDATE}" pattern="yyyy-MM-dd"/></td>
 					<td><a
 						href="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
 							<input type="button" id="modMem" value="수정">

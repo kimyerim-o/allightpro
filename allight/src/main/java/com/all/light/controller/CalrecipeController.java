@@ -29,8 +29,10 @@ public class CalrecipeController {
 	
 	@RequestMapping("/recipeCheck")
 	public ModelAndView recipeCheck(ModelAndView mv,HttpSession session,CalrecipeDTO cdto) {
+		System.out.println("cdto"+cdto);
 		CalrecipeDTO list=creSVC.recipeCheck(session,cdto);
-		
+		mv.addObject("LIST", list);
+		mv.setViewName("diary/user/calrecipe/after");
 		return mv;
 	}
 	

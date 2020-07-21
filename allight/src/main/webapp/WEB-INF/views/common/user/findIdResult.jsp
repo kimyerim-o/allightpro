@@ -29,8 +29,8 @@
 		</c:if>
 		<tr>
 			<td class="center">
-				<button id="pre" type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/login.com'">이전</button>&nbsp;
 				<button id="home" type="button" onclick="location.href='${pageContext.request.contextPath}/main.com'">&nbsp;홈 &nbsp;</button>
+				<button id="login" type="button" value="login" onclick="location.href='${pageContext.request.contextPath}/login.com'">로그인</button>&nbsp;
 			</td>
 		</tr>
 	</table>

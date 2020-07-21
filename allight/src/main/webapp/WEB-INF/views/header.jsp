@@ -70,7 +70,7 @@ function kakaoLogout() {
 					<a href="#" class="logined-panel">장바구니()</a>
 					<a href="${pageContext.request.contextPath}/order/list.com"
 						class="logined-panel">주문/배송조회</a>
-					<a href="#" class="logined-panel">마이페이지</a>
+					<a href="${pageContext.request.contextPath}/mypage/home.com" class="logined-panel">마이페이지</a>
 					<a href="#" class="logined-nick-panel">${sessionScope.MID} 님</a>
 				</c:if>
 				<c:if test="${empty sessionScope.MPW and !empty sessionScope.MID}">
@@ -78,7 +78,7 @@ function kakaoLogout() {
 					<a href="#" class="logined-panel">장바구니()</a>
 					<a href="${pageContext.request.contextPath}/order/list.com"
 						class="logined-panel">주문/배송조회</a>
-					<a href="#" class="logined-panel">마이페이지</a>
+					<a href="${pageContext.request.contextPath}/mypage/home.com" class="logined-panel">마이페이지</a>
 					<a href="#" class="logined-nick-panel">${sessionScope.MID} 님</a>
 				</c:if>
 				<c:if test="${!empty sessionScope.COID}">
@@ -135,7 +135,7 @@ function kakaoLogout() {
 						</ul></li>
 					<!-- 회원 로그인시  -->
 					<c:if test="${sessionScope.MTYPE eq 0 }"></c:if>
-					<li class="nav-item"><a href="#" class="nav-link">마이페이지</a>
+					<li class="nav-item"><a href="${pageContext.request.contextPath}/mypage/home.com" class="nav-link">마이페이지</a>
 						<ul class="dropdown">
 							<li><a
 								href="${pageContext.request.contextPath}/order/list.com">주문/배송조회</a></li>

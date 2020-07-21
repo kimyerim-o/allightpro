@@ -9,29 +9,31 @@
 	<title></title>
 	<!-- jQuery CDN -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/memberjs/findPwResult.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/findPwChange.js"></script>
+	<script type="text/javascript"></script>
 </head>
 <body>
 	<h2>비밀번호 찾기</h2>
 	<hr />
-	<form id="findPwResult" action="findPwResult.com" method="post">
+	<form action="./findPwChange.com" id="findPwChange" method="post">
+		<input type="hidden" id="mid" name=mid value="${param.mid}">
 		<table>
+			<h4>비밀번호를 변경해 주세요</h4>
+			<hr/>
 			<tr>
-				<td>새로운 비밀번호를 입력하세요</td>
-				<td><input type="hidden" name="mid" value="${mid}" /></td>
+				<td>비밀번호</td>
+				<td><input type="password" id="mpw" name="mpw" value="${param.mpw}"></td>
 			</tr>
 			<tr>
-				<td><input id="mpw1" type="password" name="mpw1" placeholder="새로운 비밀번호" /></td>
-			</tr>
-			<tr>
-				<td><input id="mpw2" type="password" name="mpw2" placeholder="비밀번호확인" /></td>
+				<td>비밀번호 확인</td>
+				<td><input type="password" id="mpw2" name="mpw2" value="${param.mpw2}"></td>
 			</tr>
 			<tr>
 				<td>${fail}</td>
 			</tr>
 			<tr>
 				<td class="center">
-					<button id="pre" type="button" value="${pageContext.request.contextPath}/login.com">이전</button>&nbsp;
+					<input type="reset" value="취소" onclick="location.href='${pageContext.request.contextPath}/login.com'"></button>&nbsp;
 					<input id="next" type="submit" value="다음" />
 				</td>
 			</tr>

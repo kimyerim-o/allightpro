@@ -40,6 +40,24 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		return result;
 	}
 
+	//이메일 인증
+	public int checkMail(String memail) {
+		System.out.println("dao-"+memail);
+		return session.selectOne("member.checkMail", memail);
+	}
+	
+	//비밀번호 찾기 - 비밀번호 변경
+	public void findPwChange(MemberDTO memdto) {
+		System.out.println("MemberDAO - findPwChange");
+		System.out.println(memdto);
+		session.update("member.findPwChange", memdto);
+	}
+
+	//닉네임 중복확인
+	public MemberDTO getMemberNICK(MemberDTO memdto) {
+		return session.selectOne("member.getMemberNICK", memdto);
+	}
+		
 	// 7.3 최근 접속일 갱신
 	public void logDate(HashMap result) {
 		System.out.println("map = "+result+"\nmap.get(MNO) = "+result.get("MNO").getClass());

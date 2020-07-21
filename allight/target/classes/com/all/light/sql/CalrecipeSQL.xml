@@ -6,5 +6,10 @@
 	<select id="memberCheck" resultType="memDTO">
 	select * from member where mno=#{mno}
 	</select>
+	
+	<!-- recipe insert -->
+	<insert id="recipeCheck">
+	insert into calrecipe values(CRNO_SEQ.nextval,#{crheight},#{crweight},#{crcal},#{crbmi},#{mid},#{crbmr},#{crterm},#{cractive},#{crgoalweight})
+	</insert>
 
 </mapper>

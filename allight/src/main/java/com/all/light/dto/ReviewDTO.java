@@ -1,6 +1,6 @@
 package com.all.light.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class ReviewDTO {
 	// REVIEW 테이블
@@ -8,7 +8,7 @@ public class ReviewDTO {
 	int ino;		//상품번호
 	String rid;		//작성자 아이디
 	String rnick;	//작성자 닉네임
-	Date rdate;		//작성일
+	LocalDate rdate;		//작성일
 	int rgrade;		//별점
 	String rcontent;//내용
 	
@@ -56,10 +56,10 @@ public class ReviewDTO {
 	public void setRnick(String rnick) {
 		this.rnick = rnick;
 	}
-	public Date getRdate() {
+	public LocalDate getRdate() {
 		return rdate;
 	}
-	public void setRdate(Date rdate) {
+	public void setRdate(LocalDate rdate) {
 		this.rdate = rdate;
 	}
 	public int getRgrade() {

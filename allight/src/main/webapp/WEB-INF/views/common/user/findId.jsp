@@ -9,7 +9,12 @@
 	<title></title>
 	<!-- jQuery CDN -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/memberjs/findId.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/findId.js"></script>
+	<script type="text/javascript">
+		function goBack(){
+			window.history.back();
+		}
+	</script>
 </head>
 <body>
 	<h2 class="center">아이디 찾기</h2>
@@ -30,7 +35,7 @@
 			
 			<tr>
 				<td class="center" colspan="2">
-					<button id="pre" type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/login.com'">이전</button>&nbsp;
+					<button id="pre" type="button" value="취소" onclick="goBack();">이전</button>&nbsp;
 					<input id="next" type="submit" value="다음" />
 				</td>
 			</tr>

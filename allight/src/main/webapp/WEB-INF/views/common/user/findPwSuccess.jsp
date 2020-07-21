@@ -9,21 +9,22 @@
 	<title></title>
 	<!-- jQuery CDN -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/memberjs/findPwSuccess.js"></script>
 </head>
 <body>
 	<h2>비밀번호 찾기</h2>
 	<hr />
+	<form id="./findPwSuccess.com" id="findPwSuccess" method="post">
 	<table>
 		<tr>
 			<td>비밀번호 변경이 완료되었습니다</td>
 		</tr>
 		<tr class="center">
 			<td>
-				<button id="login" type="button" value="${pageContext.request.contextPath}/login.com">로그인</button>&nbsp;
-				<button id="home" type="button" value="${pageContext.request.contextPath}/main.com">&nbsp;홈&nbsp;</button>
+				<button type="button" onclick="location.href='login.com'">&nbsp;로그인&nbsp;</button>&nbsp;
+				<button type="button" onclick="location.href='main.com'">&nbsp;홈&nbsp;</button>
 			</td>
 		</tr>
 	</table>
+	</form>
 </body>
 </html>

@@ -57,21 +57,6 @@ public class MemberController {
 		return data;
 	}
 	
-	//아이디 중복확인
-	@ResponseBody
-	@RequestMapping("/idChk")
-	public String idChk(MemberDTO memdto) {
-		String data=null;
-		MemberDTO mem = memSVC.getMemberID(memdto);
-		System.out.println(mem);
-		if (mem != null) {
-			data="fail";
-		} else if(mem == null) {
-			data="success";
-		}
-		return data;
-	}
-	
 	//닉네임 중복확인
 	@ResponseBody
 	@RequestMapping("/nickChk")

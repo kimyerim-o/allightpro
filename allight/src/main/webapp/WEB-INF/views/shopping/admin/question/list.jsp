@@ -72,7 +72,7 @@
 		<table class="table">
 			<tr>
 				<th>NO</th>
-				<th width="60%">제목</th>
+				<th width="60%">제ㅋ목</th>
 				<th>작성자</th>
 				<th>작성일</th>
 			</tr>

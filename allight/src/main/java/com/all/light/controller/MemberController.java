@@ -27,7 +27,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memSVC;
 
-	//회원가입폼
+	//메인화면에서 회원가입폼 이동
 	@RequestMapping("/joinFrm")
 	public String join() {
 		return "common/user/join";
@@ -43,20 +43,78 @@ public class MemberController {
 	}
 	
 	//아이디 중복확인
+	@ResponseBody
 	@RequestMapping("/idChk")
 	public String idChk(MemberDTO memdto) {
-		Map<String, Object> checkResult = new HashMap<String, Object>();
-
 		String data=null;
-		MemberDTO mem=memSVC.getMemberID(memdto);
+		MemberDTO mem = memSVC.getMemberID(memdto);
+		System.out.println(mem);
 		if (mem != null) {
 			data="fail";
-		} else {
+		} else if(mem == null) {
 			data="success";
 		}
-			return data;
+		return data;
 	}
 	
+	//아이디 중복확인
+	@ResponseBody
+	@RequestMapping("/idChk")
+	public String idChk(MemberDTO memdto) {
+		String data=null;
+		MemberDTO mem = memSVC.getMemberID(memdto);
+		System.out.println(mem);
+		if (mem != null) {
+			data="fail";
+		} else if(mem == null) {
+			data="success";
+		}
+		return data;
+	}
+	
+	//닉네임 중복확인
+	@ResponseBody
+	@RequestMapping("/nickChk")
+	public String nickChk(MemberDTO memdto) {
+		String data=null;
+		MemberDTO mem = memSVC.getMemberNICK(memdto);
+		System.out.println(mem);
+		if (mem != null) {
+			data="fail";
+		} else if(mem == null) {
+			data="success";
+		}
+		System.out.println(data);
+		return data;
+	}
+	
+	//회원가입용 이메일이 존재하는 이메일인지 확인하고 인증코드 발송
+    @RequestMapping("/checkMail")
+    @ResponseBody
+	public String checkMail(HttpServletRequest request) throws Exception {
+    	System.out.println("이메일 확인 들어옴!");
+    	String email=request.getParameter("email");
+    	
+		int isMail=memSVC.checkMail(email);
+		System.out.println(isMail);
+		
+		if(isMail==0) {//같은 이메일이 없으면 -> 코드번호 전송
+			
+			System.out.println("같은이메일 없어");
+			String scode=memSVC.getCode();//코드생성
+			System.out.println(scode);
+			memSVC.sendMail(scode,email);//메일전송
+			
+			String code=scode;
+			System.out.println("이메일 확인 완료!");
+			
+			return code;
+		}else {//같은 이메일이 있으면 -> 1 전송
+			System.out.println("같은이메일 있어");
+			return "1";
+		}
+    }
+	    
 	//회원가입완료
 	@RequestMapping("/joinSuccess")
 	public String joinSuccess() {
@@ -79,7 +137,7 @@ public class MemberController {
 		return mv;
 	}
 	
-	//비밀번호찾기 폼
+	//로그인 화면에서 비밀번호찾기 폼으로
 	@RequestMapping("/findPwFrm")	
 	public String findPwFrm(){
 		System.out.println("요청 함수 findPwFrm!"); 
@@ -95,17 +153,45 @@ public class MemberController {
 		return mv;
 	}
 	
-	//비밀번호 찾기 이메일인증 페이지
-	@RequestMapping("/findPwEmail")
+	//비밀번호 찾기용 이메일 인증 후 인증코드 발송
+	@RequestMapping("/checkPwMail")
+	@ResponseBody
+	public String checkPwMail(HttpServletRequest request) throws Exception {
+		System.out.println("비밀번호찾기 이메일인증들어옴");
+		String email=request.getParameter("email");
+		
+		int isMail=memSVC.checkMail(email);
+		System.out.println(isMail);
+		
+		if(isMail==1) {//같은 이메일이 있으면 -> 코드번호 전송
+			
+			System.out.println("같은이메일 있어");
+			String scode=memSVC.getCode();//코드생성
+			System.out.println(scode);
+			memSVC.sendMail(scode,email);//메일전송
+			
+			String code = scode;
+			System.out.println("이메일 확인 완료!");
+			
+			return code;
+		}else {//같은 이메일이 없으면 ->
+			System.out.println("같은이메일 없어");
+			return "1";
+		}
+	}
+	
+	//비밀번호 찾기 - 비밀번호 변경
+	@RequestMapping("/findPwChange")
 	public ModelAndView findPwEmail(MemberDTO memdto,ModelAndView mv) {
-		MemberDTO mem = memSVC.findId(memdto);
-		mv.addObject("MEM",mem);
-		mv.setViewName("common/user/findPwResult");
+		System.out.println("findPwChange");
+		memSVC.findPwChange(memdto);
+		RedirectView rv=new RedirectView("./findPwSuccess.com");
+		mv.setView(rv);
 		return mv;
 	}
 	
 	//비밀번호찾기 완료
-	@RequestMapping("/findPwResult")
+	@RequestMapping("/findPwSuccess")
 	public String findPwSuccess() {
 		return "common/user/findPwSuccess";
 	}

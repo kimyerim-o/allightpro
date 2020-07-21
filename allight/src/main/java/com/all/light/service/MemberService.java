@@ -3,9 +3,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.MemberDAO;
@@ -17,6 +19,73 @@ import com.all.light.util.PageUtil;
 public class MemberService {
 	@Autowired
 	private MemberDAO memDAO;
+	
+	//이메일 유무 확인하기
+	public int checkMail(String email) {
+		
+		int isMail=memDAO.checkMail(email);
+		
+		return isMail;
+	}
+
+	//인증코드생성
+	public String getCode() throws Exception {
+		
+		Random rand = new Random();
+		String code = "";
+		for (int i = 0; i < 6; i++) {
+			code += Integer.toString(rand.nextInt(10));
+		}
+		return code;
+	}
+	
+	// 이메일 발송
+	public void sendMail(String code,String memail) throws Exception {
+		System.out.println("여기들어옴");
+		System.out.println(memail);
+		// Mail Server 설정
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.gmail.com";
+		int hostPort = 465;
+		String hostSMTPid = "allight.adm@gmail.com";
+		String hostSMTPpwd = "goallight!";
+
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "allight.adm@gmail.com";
+		String fromName = "allight";
+		String subject = "";
+		String msg = "";
+
+		subject = "Allight 회원가입용 이메일 인증번호 입니다";
+		msg += "<div align='center' style='font-family:ariel'>";
+		msg += "<h1>안녕하세요. Allight입니다.</h1><hr><br/>";
+		msg += "<h3>인증번호를 알려드립니다.</h3>";
+		msg += "<h3>회원님의 회원가입을 진심으로 축하드리며</h3>";
+		msg += "<h3>이메일 인증을 위한 번호를 다음과 같이 알려드립니다.</h3>";
+		msg += "<h3 style='color: red;'>인증번호 6자리를 진행 중인 화면에 입력해주세요.</h3><br/>";
+		msg += "<h1 style='background:#f8f8f8;padding:10px;'>인증번호 : "+code+"</h1>";
+		msg += "</div>";
+
+		// 받는 사람 E-Mail 주소
+		try {
+			HtmlEmail email = new HtmlEmail();
+			email.setDebug(true);
+			email.setCharset(charSet);
+			email.setSSL(true);
+			email.setHostName(hostSMTP);
+			email.setSmtpPort(hostPort);
+
+			email.setAuthentication(hostSMTPid, hostSMTPpwd);
+			email.setTLS(true);
+			email.addTo(memail, charSet);
+			email.setFrom(fromEmail, fromName, charSet);
+			email.setSubject(subject);
+			email.setHtmlMsg(msg);
+			email.send();
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
+		}
+	}
 	
 	//일반로그인
 	public HashMap login(MemberDTO memdto, HttpSession session) {
@@ -102,6 +171,17 @@ public class MemberService {
 	//아이디 중복확인
 	public MemberDTO getMemberID(MemberDTO memdto) {
 		return memDAO.getMemberID(memdto);
+	}
+		
+	//비밀번호 찾기 - 비밀번호 변경
+	public void findPwChange(MemberDTO memdto) {
+		System.out.println("findPwChange");
+		memDAO.findPwChange(memdto);
+	}
+		
+	//닉네임 중복확인
+	public MemberDTO getMemberNICK(MemberDTO memdto) {
+		return memDAO.getMemberNICK(memdto);
 	}
 		
 	//검색 및 회원수 가져오기 메소드

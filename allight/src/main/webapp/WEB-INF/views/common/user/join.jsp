@@ -21,7 +21,8 @@
 			<tr>
 				<td>아이디</td>
 				<td><input type="text" id="mid" name="mid" value="${param.mid}">
-					<button id="idCheck" type="button">중복확인</button></td>
+					<button id="idCheck" type="button">중복확인</button>
+					<input type="hidden" id="idChecked" value="0" /></td>
 			</tr>
 			<tr>
 				<td>이름</td>
@@ -30,7 +31,8 @@
 			<tr>
 				<td>닉네임</td>
 				<td><input type="text" id="mnick" name="mnick" value="${param.mnick}">
-					<button id="nickCheck" type="button">중복확인</button></td>
+					<button id="nickCheck" type="button">중복확인</button>
+					<input type="hidden" id="nickChecked" value="0" /></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>

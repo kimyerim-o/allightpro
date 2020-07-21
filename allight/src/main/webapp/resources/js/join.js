@@ -22,7 +22,7 @@ $(function() {
 				} else {
 					//중복된 아이디가 없으면
 					alert("사용 가능한 아이디입니다.");
-				}
+					$('#idChecked').val("1");				}
 			},
 			error : function(request, status, error) {
 				alert("code:" + request.status+ "\n" + "message:"+ request.responseText+ "\n" + "error:" + error);
@@ -49,6 +49,7 @@ $(function() {
 					$("#mnick").focus();
 				} else {
 					alert("사용 가능한 닉네임입니다.");
+					$('#nickChecked').val("1");
 				}
 			},
 			error : function(request, status, error) {
@@ -101,26 +102,25 @@ $(function() {
        var usercode = document.getElementById("usercode").value;
     
        //이메일 입력 유효성 확인
-//       alert("realcode"+realcode);
-//       alert("usercode="+usercode)
        if(realcode!=usercode){   
           alert("인증코드가 다릅니다");
           usercode.focus();
           return false;
        }else{
           var mail=$("#email").val()+"@"+$("#email2").val();
-          //$("#memail").val(mail);
           $("#memail").attr("readonly",true);
           $("#memail").css('display','');
           $("#memail-input").css('display','none');
           
           alert("인증이 완료되었습니다");
-          $("#check_code").text("인증완료");	//인증하기 버튼 인증완료로 바꾸기 - 더 생각해봐야함
+          $("#check_code").text("인증완료");
        }
     });
     
 	//가입눌렀을때
 	$("#join").submit(function(){
+//		alert($('#checkCODE').css('display')=='none')
+		
 		var mtel=$("#mtel").val();
 		var mtel1=$("#mtel1").val();
 		var mtel2=$("#mtel2").val();
@@ -133,11 +133,15 @@ $(function() {
 			$("#mid").focus();
 			return false;
 		}
-		
 		//아이디 길이 체크
 		if($("#mid").val().length<6 || $("#mid").val().length>12){
-			alert("비밀번호는 6~12자리의 영문/숫자로 입력해주세요.")
+			alert("아이디는 6~12자리의 영문/숫자로 입력해주세요.")
 			$("#mid").focus();
+			return false;
+		}
+		//아이디 중복확인 여부 체크
+		if($("#idChecked").val()=="0"){
+			alert("아이디 중복확인을 해주세요.")
 			return false;
 		}
 		
@@ -145,6 +149,12 @@ $(function() {
 		if($("#mname").val().length==0){
 			alert("이름을 입력하지 않았습니다.")
 			$("#mname").focus();
+			return false;
+		}
+		
+		//닉네임 중복확인여부 체크
+		if($("#nickChecked").val()=="0"){
+			alert("닉네임 중복확인을 해주세요.")
 			return false;
 		}
 		
@@ -203,24 +213,29 @@ $(function() {
 			return false;
 		}
 		
+		//이메일인증여부
+		if($("#checkCODE").css('display')=='none'){
+			alert("이메일 인증을 완료해 주세요.")
+			return false;
+		}
+		
 		//전화번호 입력여부 
 		if($("#mtel").val().selectedIndex<1){
 			alert("전화번호를 입력하지 않았습니다.")
 			$("#mtel").focus();
 			return false;
 		}
-		
 		if($("#mtel1").val().length==0){
 			alert("전화번호를 입력하지 않았습니다.")
 			$("#mtel1").focus();
 			return false;
 		}
-		
 		if($("#mtel2").val().length==0){
 			alert("전화번호를 입력하지 않았습니다.")
 			$("#mtel2").focus();
 			return false;
 		}
+		
 		
 	})
     

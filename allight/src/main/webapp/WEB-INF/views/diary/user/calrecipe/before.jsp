@@ -14,64 +14,86 @@ $(function(){
 	}else if(msex=='남자'){
 		$('#m').attr('checked','checked');
 	}
+	
+	var mbirth='${LIST.mbirth}';
+	if(mbirth!=""){
+		$('#d').attr('value',mbirth);
+	}
+	
+	$('#check').click(function(){
+		if($('#he').val()==""){
+			alert('키를 입력하세요');
+			$('#he').focus();
+			return false;
+		}
+		if($('#we').val()==null){
+			alert('현재 체중을 입력하세요');
+			$('#we').focus();
+			return false;
+		}
+		if($('#gwe').val()==null){
+			alert('목표 체중을 입력하세요');
+			$('#gwe').focus();
+			return false;
+		}
+		if($('#bi').val()==null){
+			alert('생년월일을 입력하세요');
+			$('#bi').focus();
+			return false;
+		}
+		if($('#te').val()==null){
+			alert('제충 감량 기간을 입력하세요');
+			$('#te').focus();
+			return false;
+		}
+		$("#form").submit();
+	});
 })
 </script>
 </head>
 <body>
-${LIST}
-<form action="">
+<form id="form" action="./recipeCheck.com" method="post">
 	<div class="container">
 		<table class="table">
 			<tr>
 				<th>성별</th>
-				<td><input type="radio" id="w" name="nsex" value="여자"/>여자
-					<input type="radio" id="m" name="nsex" value="남자"/>남자</td>
+				<td><input type="radio" id="w" name="sex" value="F"/>여자
+					<input type="radio" id="m" name="sex" value="M"/>남자</td>
 			</tr>
 			<tr>
 				<th>키</th>
-				<td><input type="text" name="nheight" required="required">cm</td>
+				<td><input type="text" name="crheight" id="he" required="required">cm</td>
 			</tr>
 			<tr>
-				<th>몸무계</th>
-				<td><input type="text" name="nweight" required="required">kg</td>
+				<th>현재 체중</th>
+				<td><input type="text" name="crweight" id="we" required="required">kg</td>
 			</tr>
 			<tr>
 				<th>목표 체중</th>
-				<td><input type="text" name="aweight" required="required">kg</td>
+				<td><input type="text" name="crgoalweight" id="gwe" required="required">kg</td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
-				<td><input type="date" name="nbirth" required="required"></td>
+				<td><input type="date" id="d" name="birth" id="bi" required="required"></td>
 			</tr>
 			<tr>
 				<th>체중 감량 기간</th>
-				<td><select name="ndate" class="selectCss">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-						<option>6</option>
-						<option>7</option>
-						<option>8</option>
-						<option>9</option>
-						<option>10</option>
-						<option>11</option>
-						<option>12</option>
-					</select>주
-				</td>
+				<td><input type="text" name="crterm" id="te">
+					<input type="radio" name="type" value="개월" checked="checked"/>개월
+					<input type="radio" name="type" value="주"/>주
+					<input type="radio" name="type" value="일"/>일</td>
 			</tr>
 			<tr>
 				<th>평소 활동량</th>
-				<td><input type="radio" name="nsex" value="여자" checked="checked"/>
-					<input type="radio" name="nsex" value="남자"/>
-					<input type="radio" name="nsex" value="남자"/>
-					<input type="radio" name="nsex" value="남자"/>
-					<input type="radio" name="nsex" value="남자"/></td>
+				<td><input type="radio" name="cractive" value="1" checked="checked"/>활동안함 (운동을 전혀 안 해요.)<br/>
+					<input type="radio" name="cractive" value="2"/>가벼운 활동 (평소 가벼운 운동이나 스포츠를 즐겨요)<br/>
+					<input type="radio" name="cractive" value="3"/>보통 활동 (평소 적당한 운동이나 스포츠를 즐겨요.)<br/>
+					<input type="radio" name="cractive" value="4"/>많은 활동 (평소 강렬한 운동이나 스포츠를 즐겨요.)<br/>
+					<input type="radio" name="cractive" value="5"/>격심한 활동 (평소 매우 심한 운동을 하거나 육체를 쓰는 직업이예요.)</td>
 			</tr>
 		</table>
 		<div>
-			<a class="btn">칼로리 처방 받기</a>
+			<a class="btn" id="check">칼로리 처방 받기</a>
 		</div>
 	</div>
 </form>

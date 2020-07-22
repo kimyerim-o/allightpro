@@ -36,11 +36,6 @@ $(function(){
 			$('#gwe').focus();
 			return false;
 		}
-		if($('#bi').val().length==0){
-			alert('생년월일을 입력하세요');
-			$('#bi').focus();
-			return false;
-		} 
 		if($('#te').val()==null){
 			alert('제충 감량 기간을 입력하세요');
 			$('#te').focus();
@@ -74,7 +69,7 @@ $(function(){
 			</tr>
 			<tr>
 				<th>생년월일</th>
-				<td><input type="date" id="d" name="birth" id="bi" required="required"></td>
+				<td><input type="date" id="d" name="birth" value="2000-01-01" required="required"></td>
 			</tr>
 			<tr>
 				<th>체중 감량 기간</th>

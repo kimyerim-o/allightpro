@@ -9,7 +9,7 @@
 <script>
 $(function(){
 	$('#check').click(function(){
-		$("#check").attr('href','${pageContext.request.contextPath}/recipeRe.com');
+		$('#check').attr('href','${pageContext.request.contextPath}/recipeRe.com');
 	});
 })
 </script>

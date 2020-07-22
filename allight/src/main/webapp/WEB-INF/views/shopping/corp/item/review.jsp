@@ -46,6 +46,28 @@ function iqDelete(iqno) {
 	}
 };
 
+//상문 문의 삭제
+function iqaDelete(iqcno) {
+	if(confirm('정말 삭제하시겠습니까?')){
+		var iqcno = iqcno;
+		
+		$.ajax({
+	    	url: '${pageContext.request.contextPath}/item/answer/delete/corp.com',
+	        data: {iqcno:iqcno},
+	        method: 'post',
+	        success: function(data){
+	        	alert('삭제 완료했습니다.');
+	        	location.reload();
+	        },
+			error:function(request,status,error){
+            	alert('삭제 실패했습니다.\n잠시 후 다시 시도해주세요.')
+            	location.reload();
+				//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+	    })
+	}
+};
+
 
 $(function(){	
 	// 상품문의 제목 클릭시 내용 보이기
@@ -161,19 +183,14 @@ $(function(){
 											<div style="text-align:center;">
 												
 												
-												
-												
-												<!-- 관리자 답변 -->
-												<form action="${pageContext.request.contextPath}/shopping/iqWrite.com" method="post" id="iqWriteFrm" >						
-												
-				
-												<input type="hidden" name="iqno" value="${list.iqno}" />
-												<input type="hidden" name="iqcid" value="${sessionScope.COID}" />
-												<input type="text" name="iqccontent" style="width:300px; height:100px;">
-												<input type="hidden" name="iqcnick" value="${sessionScope.COID}" />
-												<input type="button" value="답변등록" id="writeSubmit"/>
+												<!-- 기업 답변 -->
+												<form action="${pageContext.request.contextPath}/item/answer/corp.com" method="post" id="answercorp" >						
+													<input type="hidden" name="iqno" value="${list.iqno}" />
+													<input type="hidden" name="iqcid" value="${sessionScope.COID}" />
+													<input type="text" name="iqccontent" style="width:300px; height:100px;">
+													<input type="hidden" name="iqcnick" value="${sessionScope.COID}" />
+													<input type="submit" value="답변등록"/>
 												</form>
-												
 												
 											</div>
 										</td>
@@ -215,6 +232,9 @@ $(function(){
 											<td colspan="2" style="padding:30px 20px">${list.iqcnick}</td>
 											<td colspan="2" style="padding:30px 20px;width:65%;">${list.iqccontent}</td>
 											<td class="center" style="padding:30px 20px">${list.iqcdate}</td>
+											<td><a onclick="iqaDelete(${list.iqcno});">삭제</a></td>
+											
+											
 										</tr>
 									</c:if>
 								</table>

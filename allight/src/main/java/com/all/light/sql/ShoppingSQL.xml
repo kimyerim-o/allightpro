@@ -250,7 +250,7 @@
 	
 	<!-- 상품 문의 댓글 내용 가져오기  -->
 	<select id="qComment" resultType="iqueDTO" parameterType="java.util.HashMap">
-		select iqcnick, iqccontent, iqcdate 
+		select iqcnick, iqccontent, iqcdate, iqcno
 		from itemquestioncomment
 		where iqno = #{iqno}
 	</select>

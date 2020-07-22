@@ -199,6 +199,19 @@
 		)
 		where num between #{startNo} and #{endNo}
 	</select>
+	
+	
+	<!-- 기업 문의 답장하기 -->
+	<insert id="insertiq" parameterType="queDTO">
+	insert into itemquestioncomment
+	values(QCNO_SEQ.nextval, #{iqno}, #{iqcid}, #{iqccontent}, sysdate, #{iqcnick})
+	</insert>
+	
+	<!-- 기업 문의 삭제하기 -->
+	<delete id="deleteiq" parameterType="queDTO">
+	delete from itemquestioncomment
+	where iqcno = #{iqcno}
+	</delete>
 
 </mapper>
 	

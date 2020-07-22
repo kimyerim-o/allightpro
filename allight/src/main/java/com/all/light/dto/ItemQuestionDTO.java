@@ -21,7 +21,6 @@ public class ItemQuestionDTO {
 	private String iqccontent;	//댓글내용
 	private Date iqcdate;		//댓글 작성일
 	
-	
 	public int getIqno() {
 		return iqno;
 	}

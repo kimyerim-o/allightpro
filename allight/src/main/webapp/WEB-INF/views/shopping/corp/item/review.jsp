@@ -47,14 +47,6 @@ function iqDelete(iqno) {
 };
 
 
-//비밀글일때 작성자 본인 체크
-function isWriter(iqid){
-	var iqid = iqid;
-	if(iqid != '${sessionScope.MID}'){
-		alert("작성자 본인만 확인 가능합니다.")
-	}
-};
-
 $(function(){	
 	// 상품문의 제목 클릭시 내용 보이기
 	$('.iqtitle').click(function(){
@@ -165,6 +157,25 @@ $(function(){
 												</div>
 											
 											<pre>${list.iqcontent}</pre>
+											
+											<div style="text-align:center;">
+												
+												
+												
+												
+												<!-- 관리자 답변 -->
+												<form action="${pageContext.request.contextPath}/shopping/iqWrite.com" method="post" id="iqWriteFrm" >						
+												
+				
+												<input type="hidden" name="iqno" value="${list.iqno}" />
+												<input type="hidden" name="iqcid" value="${sessionScope.COID}" />
+												<input type="text" name="iqccontent" style="width:300px; height:100px;">
+												<input type="hidden" name="iqcnick" value="${sessionScope.COID}" />
+												<input type="button" value="답변등록" id="writeSubmit"/>
+												</form>
+												
+												
+											</div>
 										</td>
 										<td colspan="5" style="padding:0;" class="hidden">
 											<form action="./iqModify.com" class="modifyFrm">

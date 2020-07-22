@@ -182,7 +182,7 @@ public class ShoppingService {
 	// 상품 문의 페이지 정보 - 류지혁
 	public PageUtil getQPageInfo2(int qNowPage, String mid) {
 		System.out.println("서비스 - getQPageInfo2() qNowPage, mid = " + qNowPage + "," + mid );
-		int totalCount = this.getQTotalCnt2(mid);
+		int totalCount = this.getQTotalCnt(mid);
 		
 		// PageUtil(보고싶은페이지, 전체게시물수, 보여줄 게시물수, 페이징);
 		PageUtil pInfo = new PageUtil(qNowPage, totalCount,5,5);
@@ -263,7 +263,7 @@ public class ShoppingService {
 			ItemQuestionDTO qDto;
 			// 1. 비밀여부 1일때 (비밀) 작성자가 내 아이디랑 같거나 
 			// 2. 비밀여부 0일때 (공개)
-			if((secret==1 && list.get(i).getIqid().equals(mid))
+			if((secret==1)
 					|| secret==0 ) {
 				// 내용 가져오기
 				int iqno = list.get(i).getIqno();

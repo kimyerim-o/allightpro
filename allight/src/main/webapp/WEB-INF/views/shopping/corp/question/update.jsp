@@ -13,6 +13,16 @@
 		$("#update")
 				.click(
 						function() {
+							if($('#title').val()==""){
+								alert('제목을 입력하세요');
+								$('#title').focus();
+								return false;
+							}
+							if($('#con').val()==""){
+								alert('내용을 입력하세요');
+								$('#con').focus();
+								return false;
+							}
 							$("#form")
 									.attr("action",
 											"${pageContext.request.contextPath}/question/up/corp.com");
@@ -56,7 +66,7 @@
 					<tr>
 						<td class="board-title">제목</td>
 						<td class="board-title" colspan="3"><input type="search"
-							value="${DETAIL.qtitle}" name="qtitle"></td>
+							value="${DETAIL.qtitle}" name="qtitle" id="title"></td>
 					</tr>
 					<tr>
 						<td class="board-info"><a class="board-info-nick">작성자</a></td>
@@ -71,7 +81,7 @@
 								내용 <br />
 								<br />
 								<textarea rows="12" cols="100" name="qcontent"
-									required="required" placeholder="내용을 입력하세요">${DETAIL.qcontent}</textarea>
+									required="required" placeholder="내용을 입력하세요" id="con">${DETAIL.qcontent}</textarea>
 							</div>
 						</td>
 					</tr>

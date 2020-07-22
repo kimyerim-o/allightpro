@@ -34,7 +34,7 @@
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">문의/리뷰관리</li>
 				<li><a href="#">상품 문의 관리</a></li>
-				<li><a href="#">상품 리뷰 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/review/list/corp.com">상품 리뷰 관리</a></li>
 			</ul>
 
 			<ul class="left_menu_box">

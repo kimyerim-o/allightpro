@@ -170,7 +170,7 @@ $(function(){
 							<td colspan="6" style="padding:0 0 5px;">
 								<table>
 									<tr>
-										<td colspan="5" style="padding:40px 20px">
+										<td colspan="6" style="padding:40px 20px">
 											
 												<div class="float-right-box">
 													
@@ -187,7 +187,7 @@ $(function(){
 												<form action="${pageContext.request.contextPath}/item/answer/corp.com" method="post" id="answercorp" >						
 													<input type="hidden" name="iqno" value="${list.iqno}" />
 													<input type="hidden" name="iqcid" value="${sessionScope.COID}" />
-													<input type="text" name="iqccontent" style="width:300px; height:100px;">
+													<input type="text" name="iqccontent" style="width:350px; height:50px;">
 													<input type="hidden" name="iqcnick" value="${sessionScope.COID}" />
 													<input type="submit" value="답변등록"/>
 												</form>
@@ -230,9 +230,9 @@ $(function(){
 									<c:if test="${!empty list.iqccontent}">
 										<tr>
 											<td colspan="2" style="padding:30px 20px">${list.iqcnick}</td>
-											<td colspan="2" style="padding:30px 20px;width:65%;">${list.iqccontent}</td>
+											<td colspan="2" style="padding:30px 20px;width:50%;">${list.iqccontent}</td>
 											<td class="center" style="padding:30px 20px">${list.iqcdate}</td>
-											<td><a onclick="iqaDelete(${list.iqcno});">삭제</a></td>
+											<td class="center" style="padding:30px 20px"><a onclick="iqaDelete(${list.iqcno});">삭제</a></td>
 											
 											
 										</tr>

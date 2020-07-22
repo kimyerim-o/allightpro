@@ -574,7 +574,7 @@ public class ItemController {
 		return mv;
 	}
 	
-	
+	// 기업 문의답변
 	@RequestMapping("/answer/corp")
 	public ModelAndView answer(ItemQuestionDTO iqDTO, ModelAndView mv){
 		System.out.println("컨트롤러 상품 목록보기 - answer() 요청");
@@ -586,7 +586,8 @@ public class ItemController {
 		mv.setView(rv);
 		return mv;
 	}
-	
+
+	// 기업 문의답변	삭제
 	@RequestMapping("/answer/delete/corp")
 	public ModelAndView answerdelete(int iqcno,
 			ModelAndView mv, RedirectView rv, HttpServletRequest request) 
@@ -595,7 +596,6 @@ public class ItemController {
 		System.out.println("컨트롤러 상품 목록보기 - answerdelete() 요청 iqcno = " +iqcno);
 		
 		iqSVC.deleteiq(iqcno);
-		
 		return null;
 	}
 	

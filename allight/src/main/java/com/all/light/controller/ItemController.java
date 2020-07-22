@@ -12,14 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.ItemDTO;
 import com.all.light.dto.ItemQuestionDTO;
-import com.all.light.dto.ShoppingDTO;
 import com.all.light.service.ItemService;
+import com.all.light.service.QuestionService;
 import com.all.light.service.ShoppingService;
 import com.all.light.util.FileUtil;
 import com.all.light.util.PageUtil;
@@ -33,6 +32,9 @@ public class ItemController {
 	
 	@Autowired
 	ShoppingService shopSVC;
+	
+	@Autowired
+	QuestionService iqSVC;
 	
 	// #관리자
 	
@@ -573,7 +575,30 @@ public class ItemController {
 	}
 	
 	
+	@RequestMapping("/answer/corp")
+	public ModelAndView answer(ItemQuestionDTO iqDTO, ModelAndView mv){
+		System.out.println("컨트롤러 상품 목록보기 - answer() 요청");
+		System.out.println("컨트롤러 상품 목록보기 - answer() iqDTO = " + iqDTO);
+		
+		iqSVC.insertiq(iqDTO);
 
+		RedirectView rv = new RedirectView("../review/list/corp.com");
+		mv.setView(rv);
+		return mv;
+	}
+	
+	@RequestMapping("/answer/delete/corp")
+	public ModelAndView answerdelete(int iqcno,
+			ModelAndView mv, RedirectView rv, HttpServletRequest request) 
+	{
+		System.out.println("컨트롤러 상품 목록보기 - answerdelete() 요청");
+		System.out.println("컨트롤러 상품 목록보기 - answerdelete() 요청 iqcno = " +iqcno);
+		
+		iqSVC.deleteiq(iqcno);
+		
+		return null;
+	}
+	
 	
 }
 			

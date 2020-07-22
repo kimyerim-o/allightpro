@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.QuestionDAO;
+import com.all.light.dto.ItemQuestionDTO;
 import com.all.light.dto.NoticeDTO;
 import com.all.light.dto.QuestionDTO;
 import com.all.light.util.PageUtil;
@@ -134,6 +135,16 @@ public class QuestionService {
 		pInfo.setSearchWord(searchWord);
 		pInfo.setQid(qid);
 		return qesDAO.searchListMyPageUser(pInfo);
+	}
+
+	
+	// 기업 답변 - 류지혁
+	public void insertiq(ItemQuestionDTO iqDTO) {
+		qesDAO.insertiq(iqDTO);
+	}
+	// 기업 답변 삭제 - 류지혁
+	public void deleteiq(int iqcno) {
+		qesDAO.deleteiq(iqcno);
 	}
 
 

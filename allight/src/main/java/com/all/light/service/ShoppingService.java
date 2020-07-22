@@ -219,6 +219,7 @@ public class ShoppingService {
 					list.get(i).setIqcnick(qDto.getIqcnick());
 					list.get(i).setIqccontent(qDto.getIqccontent());
 					list.get(i).setIqcdate(qDto.getIqcdate());
+					list.get(i).setIqcno(qDto.getIqcno());
 				}
 			} 
 		}
@@ -247,7 +248,7 @@ public class ShoppingService {
 					list.get(i).setIqcnick(qDto.getIqcnick());
 					list.get(i).setIqccontent(qDto.getIqccontent());
 					list.get(i).setIqcdate(qDto.getIqcdate());
-					
+					list.get(i).setIqcno(qDto.getIqcno());
 				}
 			} 
 		}
@@ -275,7 +276,7 @@ public class ShoppingService {
 					list.get(i).setIqcnick(qDto.getIqcnick());
 					list.get(i).setIqccontent(qDto.getIqccontent());
 					list.get(i).setIqcdate(qDto.getIqcdate());
-					
+					list.get(i).setIqcno(qDto.getIqcno());
 				}
 			} 
 		}

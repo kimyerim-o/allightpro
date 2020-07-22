@@ -12,11 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.ItemDTO;
+import com.all.light.dto.ItemQuestionDTO;
+import com.all.light.dto.ShoppingDTO;
 import com.all.light.service.ItemService;
+import com.all.light.service.ShoppingService;
 import com.all.light.util.FileUtil;
 import com.all.light.util.PageUtil;
 
@@ -26,6 +30,9 @@ public class ItemController {
 	
 	@Autowired
 	ItemService itemSVC;
+	
+	@Autowired
+	ShoppingService shopSVC;
 	
 	// #관리자
 	
@@ -500,7 +507,74 @@ public class ItemController {
 		mv.setView(rv);
 		return mv;
 	}
+	
+	
+	
+	// 내 상품 문의보기
+	@RequestMapping("review/list")
+	public ModelAndView reviewlist(
+			@RequestParam(value="qNowPage", required=false, defaultValue="1") int qNowPage,
+			@RequestParam(value = "searchWord", required = false, defaultValue="") String searchWord,
+			 ModelAndView mv, HttpSession session, HttpServletRequest request){
+			
+		System.out.println("컨트롤러 상품 목록보기 - reviewlist() 요청");
+		String mid = (String)request.getSession().getAttribute("MID");
+		System.out.println(mid);
 
+		// 3. 상품문의
+		ArrayList<ItemQuestionDTO> qList = null;
+		System.out.println("컨트롤러 상품 목록보기 - reviewlist() mid" + mid);
+		System.out.println("컨트롤러 상품 목록보기 - reviewlist() qNowPage" + qNowPage);
+		PageUtil qPInfo = shopSVC.getQPageInfo2(qNowPage, mid); //상품문의 페이지 정보
+		qList = shopSVC.getQuestion(qPInfo, mid);	   	  //상품문의 리스트
+		int qTotalCnt = shopSVC.getQTotalCnt(mid); 			  //상품문의 개수
+		
+		// Model
+		mv.addObject("QSIZE",qTotalCnt);	//상품문의 개수
+		mv.addObject("QLIST",qList);		//상품문의 개수
+		mv.addObject("QPINFO",qPInfo);		//상품문의 페이징 정보
+		System.out.println("컨트롤러 상품 목록보기 - qTotalCnt = " + qTotalCnt);
+		System.out.println("컨트롤러 상품 목록보기 - qList = " + qList);
+		System.out.println("컨트롤러 상품 목록보기 - qPInfo = " + qPInfo);
+		// View
+		mv.setViewName("shopping/user/item/review");
+		return mv;
+	}
+
+	// 기업 상품 문의보기
+	@RequestMapping("review/list/corp")
+	public ModelAndView reviewlistcorp(
+			@RequestParam(value="qNowPage", required=false, defaultValue="1") int qNowPage,
+			@RequestParam(value = "searchWord", required = false, defaultValue="") String searchWord,
+			 ModelAndView mv, HttpSession session, HttpServletRequest request){
+			
+		System.out.println("컨트롤러 상품 목록보기 - reviewlistcorp() 요청");
+		String mid = (String)request.getSession().getAttribute("CONAME");
+		System.out.println(mid);
+
+		// 3. 상품문의
+		ArrayList<ItemQuestionDTO> qList = null;
+		System.out.println("컨트롤러 상품 목록보기 - reviewlistcorp() mid" + mid);
+		System.out.println("컨트롤러 상품 목록보기 - reviewlistcorp() qNowPage" + qNowPage);
+		PageUtil qPInfo = shopSVC.getQPageInfo3(qNowPage, mid); //상품문의 페이지 정보
+		qList = shopSVC.getQuestion2(qPInfo, mid);	   	  //상품문의 리스트
+		int qTotalCnt = shopSVC.getQTotalCnt2(mid); 			  //상품문의 개수
+		
+		// Model
+		mv.addObject("QSIZE",qTotalCnt);	//상품문의 개수
+		mv.addObject("QLIST",qList);		//상품문의 개수
+		mv.addObject("QPINFO",qPInfo);		//상품문의 페이징 정보
+		System.out.println("컨트롤러 상품 목록보기 - qTotalCnt = " + qTotalCnt);
+		System.out.println("컨트롤러 상품 목록보기 - qList = " + qList);
+		System.out.println("컨트롤러 상품 목록보기 - qPInfo = " + qPInfo);
+		// View
+		mv.setViewName("shopping/corp/item/review");
+		return mv;
+	}
+	
+	
+
+	
 }
 			
 

@@ -90,6 +90,7 @@ public class ShoppingService {
 		return shopDTO;
 	}
 	
+	
 	// 상품 상세 이미지 가져오기
 	public ArrayList<String> getImgs(int ino) {
 		ArrayList<String> list = shopDAO.getImgs(ino);
@@ -152,10 +153,46 @@ public class ShoppingService {
 		int totalCount = shopDAO.getQTotalCnt(ino);
 		return totalCount;
 	}
+	
+	// 상품 문의 전체 개수 -류지혁
+	public int getQTotalCnt(String mid) {
+		System.out.println("서비스 - getQTotalCnt() mid =" + mid );
+		int totalCount = shopDAO.getQTotalCnt(mid);
+		return totalCount;
+	}
+	
+	// 상품 문의 전체 개수 기업 -류지혁
+	public int getQTotalCnt2(String mid) {
+		System.out.println("서비스 - getQTotalCnt2() mid =" + mid );
+		int totalCount = shopDAO.getQTotalCnt2(mid);
+		return totalCount;
+	}
 
 	// 상품 문의 페이지 정보
 	public PageUtil getQPageInfo(int ino, int qNowPage) {
 		int totalCount = this.getQTotalCnt(ino);
+		
+		// PageUtil(보고싶은페이지, 전체게시물수, 보여줄 게시물수, 페이징);
+		PageUtil pInfo = new PageUtil(qNowPage, totalCount,5,5);
+		return pInfo;
+	}
+	
+	
+	
+	// 상품 문의 페이지 정보 - 류지혁
+	public PageUtil getQPageInfo2(int qNowPage, String mid) {
+		System.out.println("서비스 - getQPageInfo2() qNowPage, mid = " + qNowPage + "," + mid );
+		int totalCount = this.getQTotalCnt(mid);
+		
+		// PageUtil(보고싶은페이지, 전체게시물수, 보여줄 게시물수, 페이징);
+		PageUtil pInfo = new PageUtil(qNowPage, totalCount,5,5);
+		return pInfo;
+	}
+	
+	// 상품 문의 페이지 정보 기업 - 류지혁 
+	public PageUtil getQPageInfo3(int qNowPage, String mid) {
+		System.out.println("서비스 - getQPageInfo3() qNowPage, mid = " + qNowPage + "," + mid );
+		int totalCount = this.getQTotalCnt2(mid);
 		
 		// PageUtil(보고싶은페이지, 전체게시물수, 보여줄 게시물수, 페이징);
 		PageUtil pInfo = new PageUtil(qNowPage, totalCount,5,5);
@@ -182,6 +219,63 @@ public class ShoppingService {
 					list.get(i).setIqcnick(qDto.getIqcnick());
 					list.get(i).setIqccontent(qDto.getIqccontent());
 					list.get(i).setIqcdate(qDto.getIqcdate());
+				}
+			} 
+		}
+		return list;
+	}
+	
+	
+	// 상품 문의 리스트 가져오기 - 류지혁
+	public ArrayList<ItemQuestionDTO> getQuestion(PageUtil qPInfo, String mid) {
+		// 전체 공개 내용 가져오기
+		ArrayList<ItemQuestionDTO> list = shopDAO.getQuestion(qPInfo, mid);
+		for(int i=0; i<list.size();i++) {
+			int secret = (int)list.get(i).getIqsecret();
+			ItemQuestionDTO qDto;
+			// 1. 비밀여부 1일때 (비밀) 작성자가 내 아이디랑 같거나 
+			// 2. 비밀여부 0일때 (공개)
+			if((secret==1 && list.get(i).getIqid().equals(mid))
+					|| secret==0 ) {
+				// 내용 가져오기
+				int iqno = list.get(i).getIqno();
+				list.get(i).setIqcontent(shopDAO.getQContent(iqno));
+				
+				// 답글 있으면 - 작성자 닉네임/내용/작성일 가져오기
+				if(shopDAO.hasQComment(iqno)==1) {
+					qDto = shopDAO.getQClist(list.get(i).getIqno());
+					list.get(i).setIqcnick(qDto.getIqcnick());
+					list.get(i).setIqccontent(qDto.getIqccontent());
+					list.get(i).setIqcdate(qDto.getIqcdate());
+					
+				}
+			} 
+		}
+		return list;
+	}
+	
+	// 상품 문의 리스트 가져오기 기업 - 류지혁
+	public ArrayList<ItemQuestionDTO> getQuestion2(PageUtil qPInfo, String mid) {
+		// 전체 공개 내용 가져오기
+		ArrayList<ItemQuestionDTO> list = shopDAO.getQuestion2(qPInfo, mid);
+		for(int i=0; i<list.size();i++) {
+			int secret = (int)list.get(i).getIqsecret();
+			ItemQuestionDTO qDto;
+			// 1. 비밀여부 1일때 (비밀) 작성자가 내 아이디랑 같거나 
+			// 2. 비밀여부 0일때 (공개)
+			if((secret==1)
+					|| secret==0 ) {
+				// 내용 가져오기
+				int iqno = list.get(i).getIqno();
+				list.get(i).setIqcontent(shopDAO.getQContent(iqno));
+				
+				// 답글 있으면 - 작성자 닉네임/내용/작성일 가져오기
+				if(shopDAO.hasQComment(iqno)==1) {
+					qDto = shopDAO.getQClist(list.get(i).getIqno());
+					list.get(i).setIqcnick(qDto.getIqcnick());
+					list.get(i).setIqccontent(qDto.getIqccontent());
+					list.get(i).setIqcdate(qDto.getIqcdate());
+					
 				}
 			} 
 		}

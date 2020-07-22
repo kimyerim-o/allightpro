@@ -60,10 +60,10 @@ $(function(){
 					<td><%-- <a href="${pageContext.request.contextPath}/mypage/review/write.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
 					<input type="button" id="wbtn" name="wbtn" value="리뷰 작성">
 					</a> --%>
-					<a href="${pageContext.request.contextPath}/mypage/review/update.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
+					<a href="${pageContext.request.contextPath}/mypage/review/update.com?nowPage=${param.nowPage}&no=${list.NUM}&type=${param.type}&search=${param.search}">
 					<input type="button" id="wbtn" name="ubtn" value="리뷰 수정">
 					</a>
-					<a href="${pageContext.request.contextPath}/mypage/review/delete.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
+					<a href="${pageContext.request.contextPath}/mypage/review/delete.com?nowPage=${param.nowPage}&no=${list.NUM}&type=${param.type}&search=${param.search}">
 					<input type="button" id="dbtn" name="dbtn" value="리뷰 삭제"></a></td>
 				</tr>
 			</c:forEach>

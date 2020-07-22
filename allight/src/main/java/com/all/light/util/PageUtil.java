@@ -27,6 +27,9 @@ public class PageUtil {
 	private String rid;
 	//QuestionSQL에서 사용(마이페이지 리스트출력하기용)
 	private String qid;
+	//기업단 리뷰모아보기에서 사용
+	private String coid;
+	
 	public PageUtil(int nowPage, int totalCount) {
 		this(nowPage, totalCount, 5, 5);
 	}
@@ -97,6 +100,14 @@ public class PageUtil {
 		}
 	}
 
+
+	public String getCoid() {
+		return coid;
+	}
+
+	public void setCoid(String coid) {
+		this.coid = coid;
+	}
 
 	public String getQid() {
 		return qid;
@@ -194,8 +205,10 @@ public class PageUtil {
 		return "PageUtil [nowPage=" + nowPage + ", totalCount=" + totalCount + ", lineCount=" + lineCount
 				+ ", pageGroup=" + pageGroup + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", searchWord=" + searchWord + ", searchType="
-				+ searchType + ", rid=" + rid + ", qid=" + qid + "]";
+				+ searchType + ", rid=" + rid + ", qid=" + qid + ", coid=" + coid + "]";
 	}
+
+
 
 
 

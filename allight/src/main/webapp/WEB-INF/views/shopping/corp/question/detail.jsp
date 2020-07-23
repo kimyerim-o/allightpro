@@ -27,11 +27,6 @@
 		    
 		//댓글쓰기 
 		$("#wcomm").click(function(){
-			if($('#qccontent').val()==""){
-				alert('내용을 입력하세요');
-				$('#qccontent').focus();
-				return false;
-			}
 			var qno = "${DETAIL.qno}";
 			var qcid =  "${sessionScope.COID}";
 			var qccontent = $("#qccontent").val();

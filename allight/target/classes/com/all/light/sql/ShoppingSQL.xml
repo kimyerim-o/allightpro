@@ -138,18 +138,6 @@
 		select * from item where ino = #{ino}
 	</select>
 	
-	<!-- 상세내용 가져오기(from ITEM) - 류지혁  -->
-	<select id="detailByIno2" resultType="shopDTO" parameterType="java.util.HashMap">
-		select * from item where ino = #{ino}
-	</select>
-	
-	<!-- 상세내용 가져오기(from ITEM) 이름가져오기 - 류지혁  -->
-	<select id="getItemName" resultType="itemDTO" parameterType="java.util.HashMap">
-		select iname, A.ino, iqno from item A, itemquestion B
-        where A.ino = B.ino and iqid = #{mid}
-        order by iqno desc
-	</select>
-	
 	<!-- 상세이미지 리스트 가져오기  -->
 	<select id="detailImgs" resultType="shopDTO" parameterType="java.util.HashMap">
 		select imgimage from image 
@@ -207,39 +195,11 @@
 		where ino = #{ino}
 	</select>
 	
-	<!-- 상품 문의 총 개수 가져오기 - 류지혁  -->
-	<select id="qTotalCnt2" resultType="int" parameterType="java.util.HashMap">
-		select count(*) from itemquestion 
-		where iqid = #{mid}
-	</select>
-	
-	<!-- 상품 문의 총 개수 가져오기 기업 - 류지혁  -->
-	<select id="qTotalCnt3" resultType="int" parameterType="java.util.HashMap">
-        select count(*) from itemquestion, item
-        where item.ino = itemquestion.ino and item.icorp = #{mid}
-	</select>
-	
 	<!-- 전체 공개 문의내용 가져오기  -->
 	<select id="qAllView" resultType="iqueDTO" parameterType="java.util.HashMap">
 		select * from (select ROW_NUMBER() OVER (order by iqno) as rnum,
 			iqno,iqid,iqnick,iqtitle,iqdate,iqsecret from itemquestion 
 			where ino = #{ino})
-		where <include refid="rnum"/>
-	</select>
-	
-	<!-- 전체 공개 문의내용 가져오기  - 류지혁 -->
-	<select id="qAllView2" resultType="iqueDTO" parameterType="java.util.HashMap">
-		select * from (select ROW_NUMBER() OVER (order by iqno) as rnum,
-			iqno,ino,iqid,iqnick,iqtitle,iqdate,iqsecret from itemquestion 
-			where iqid = #{mid})
-		where <include refid="rnum"/>
-	</select>
-	
-	<!-- 전체 공개 문의내용 가져오기 기업  - 류지혁 -->
-	<select id="qAllView3" resultType="iqueDTO" parameterType="java.util.HashMap">
-			select * from (select ROW_NUMBER() OVER (order by iqno) as rnum,
-			A.iqno, A.ino, A.iqid, A.iqnick,A.iqtitle,A.iqdate,A.iqsecret from itemquestion A, item
-           where item.ino = A.ino and item.icorp = #{mid})
 		where <include refid="rnum"/>
 	</select>
 	
@@ -257,7 +217,7 @@
 	
 	<!-- 상품 문의 댓글 내용 가져오기  -->
 	<select id="qComment" resultType="iqueDTO" parameterType="java.util.HashMap">
-		select iqcnick, iqccontent, iqcdate, iqcno
+		select iqcnick, iqccontent, iqcdate 
 		from itemquestioncomment
 		where iqno = #{iqno}
 	</select>

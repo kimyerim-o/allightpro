@@ -94,5 +94,11 @@
 		<property name="sqlSessionTemplate" ref="sqlSession"/>
 	</bean>
 	<bean id="creSVC" class="com.all.light.service.CalrecipeService"/>
+
+	<!-- Caldictionary -->
+	<bean id="calDAO" class="com.all.light.dao.CaldictionaryDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
+	<bean id="calSVC" class="com.all.light.service.CaldictionaryService"/>
 	
 </beans>

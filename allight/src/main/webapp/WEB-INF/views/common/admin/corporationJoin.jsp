@@ -27,7 +27,7 @@
 			// JSON.stringfy(자바스크립트오브젝트); 송신
 
 			$.ajax({
-				url : "./idChk.com",
+				url : "${pageContext.request.contextPath}/corpIdChk.com",
 				type : "POST",
 				//dataType: "json"인 경우 해당 컨트롤러(idChk)에 @ResponceBody 어노테이션을 추가해야한다
 				dataType : "text",

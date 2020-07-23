@@ -2,6 +2,11 @@ $(function() {
 	//아이디중복확인
 	$("#idCheck").click(function() {
 		var mid = $("#mid").val();
+		var languageCheck=/^[a-z0-9]$/;
+		if(!languageCheck.test(mid)){
+			alert("아이디는 영문 및 숫자로만 입력해주세요");
+			return false;
+		}
 		// JSON.parse(제이슨데이터); 수신
 		// JSON.stringfy(자바스크립트오브젝트); 송신
 		$.ajax({

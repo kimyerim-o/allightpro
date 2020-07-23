@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="calrecipe">
+<mapper namespace="cal">
+
+
+	<!-- 음식 수 조회, 검색 기능 포함 -->
+	<select id="totalCntWithSearch" resultType="Integer" parameterType="String">
+		select  count(*) from caldictionary where cdtype = '음식' and cdname like '%${value}%' 
+	</select>
+
+	<!-- 음식 검색 및 리스트 출력--> <!-- 상품 번호가 아닌 ROWNUM()순서로 정렬하여 출력한다 -->
+	<select id="searchList" resultType="calDTO" parameterType="calDTO">
+	select * from(
+                select row_number() over (order by cdno) num,
+			A.* from caldictionary A 
+				where cdtype = '음식' and cdname like '%${searchWord}%' 
+				order by cdno desc)
+				
+			where num between #{startNo} and #{endNo}
+	</select>
+
 
 
 </mapper>

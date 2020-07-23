@@ -49,7 +49,6 @@ public class ItemController {
 		System.out.println("컨트롤러 상품 목록보기 - pInfo = " + pInfo);
 		System.out.println("컨트롤러 상품 목록보기 - searchWord = " + searchWord);
 		System.out.println("컨트롤러 상품 목록보기 - mv = " + mv);
-		System.out.println("위치확인");
 		return mv;
 	}
 	

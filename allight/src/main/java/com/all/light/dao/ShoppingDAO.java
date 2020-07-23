@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.CorporationDTO;
+import com.all.light.dto.ItemDTO;
 import com.all.light.dto.ItemQuestionDTO;
 import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
@@ -314,6 +315,17 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		int isOk = session.insert("Shopping.iqModify", map);
 		if(isOk==1)System.out.println("상품문의 수정 성공");
 		if(isOk==0)System.out.println("상품문의 수정 실패");
+	}
+
+	
+	public ArrayList<ItemDTO> getItemName(String mid) {
+		HashMap map = new HashMap();
+		map.put("mid", mid);
+		ArrayList<ItemDTO> list = 
+				(ArrayList)session.selectList("Shopping.getItemName", map);
+		System.out.println("DAO list= " + list);
+		return list;
+
 	}
 	
 	

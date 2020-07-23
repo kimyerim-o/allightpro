@@ -126,7 +126,7 @@ $(function(){
 					<th style="border-bottom:1px solid gray; width:20%">닉네임</th>
 					<th style="border-bottom:1px solid gray; width:10%">상품이동</th>
 				</tr>
-				<c:forEach var="list" items="${QLIST}">
+				<c:forEach var="list" items="${QLIST}" varStatus="status">
 					<tr>
 						<td class="center">${list.iqno}</td>
 						<td colspan="2">
@@ -149,7 +149,9 @@ $(function(){
 						<td class="center">${list.iqdate}</td>
 						<td class="center">${list.iqnick}</td>
 						<td class="center">
-						<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}">${list.ino}번 상품</a></td>
+						
+							<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}"> ${ILIST[status.index].iname}</a></td>
+						
 					</tr>
 					<c:if test="${!empty list.iqcontent}">
 						<tr class="hidden">

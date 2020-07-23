@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.all.light.dao.ItemDAO;
 import com.all.light.dto.ItemDTO;
 import com.all.light.dto.ItemQuestionDTO;
 import com.all.light.service.ItemService;
@@ -530,14 +531,18 @@ public class ItemController {
 		PageUtil qPInfo = shopSVC.getQPageInfo2(qNowPage, mid); //상품문의 페이지 정보
 		qList = shopSVC.getQuestion(qPInfo, mid);	   	  //상품문의 리스트
 		int qTotalCnt = shopSVC.getQTotalCnt(mid); 			  //상품문의 개수
+		ArrayList<ItemDTO> ilist = shopSVC.getItemName(mid);
 		
 		// Model
 		mv.addObject("QSIZE",qTotalCnt);	//상품문의 개수
 		mv.addObject("QLIST",qList);		//상품문의 개수
 		mv.addObject("QPINFO",qPInfo);		//상품문의 페이징 정보
+		mv.addObject("ILIST",ilist);		//상품이름 정보
 		System.out.println("컨트롤러 상품 목록보기 - qTotalCnt = " + qTotalCnt);
 		System.out.println("컨트롤러 상품 목록보기 - qList = " + qList);
 		System.out.println("컨트롤러 상품 목록보기 - qPInfo = " + qPInfo);
+		System.out.println("컨트롤러 상품 목록보기 - ilist = " + ilist);
+		
 		// View
 		mv.setViewName("shopping/user/item/review");
 		return mv;

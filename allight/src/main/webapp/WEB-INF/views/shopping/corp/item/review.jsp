@@ -272,7 +272,7 @@ $(function(){
 			               </c:if>
 			            </li>
 			        </ul>
-				</div>
+				</div> 
 			</c:if>
 			</div>
 		</div>

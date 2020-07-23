@@ -5,7 +5,9 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.all.light.dao.ItemDAO;
 import com.all.light.dao.ShoppingDAO;
+import com.all.light.dto.ItemDTO;
 import com.all.light.dto.ItemQuestionDTO;
 import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
@@ -313,6 +315,11 @@ public class ShoppingService {
 		map.put("iqsecret", dto.getIqsecret());
 		
 		shopDAO.iqModify(map);
+	}
+
+	// 상품 문의 상품명
+	public ArrayList<ItemDTO> getItemName(String mid) {
+		return shopDAO.getItemName(mid); 
 	}
 
 	

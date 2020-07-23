@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.all.light.dao.ItemDAO;
 import com.all.light.dto.ItemDTO;
 import com.all.light.dto.ItemQuestionDTO;
 import com.all.light.service.ItemService;

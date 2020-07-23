@@ -11,7 +11,7 @@ $(function() {
 		//alert("닉네임 수정됨");
 		$('#nickChecked').val("0");
 	})
-	//닉네임중복확인
+	//닉네임중복확인.
 	$("#nickCheck").click(function() {
 		var mnick = $("#mnick").val();
 		$.ajax({

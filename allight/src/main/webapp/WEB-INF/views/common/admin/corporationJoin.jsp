@@ -25,7 +25,6 @@
 			//alert(mid);
 			// JSON.parse(제이슨데이터); 수신
 			// JSON.stringfy(자바스크립트오브젝트); 송신
-
 			$.ajax({
 				url : "${pageContext.request.contextPath}/corpIdChk.com",
 				type : "POST",
@@ -41,11 +40,47 @@
 						$("#coid").val("");
 						$("#coid").focus();
 					} else {
-
 						alert("사용 가능한 아이디입니다.");
+						$('#idChecked').val("1");	
 					}
 				}
 			});
+		});
+		$("#join").submit(function(){
+		if($("#coid").val().length==0){
+			alert("아이디를 입력해주세요")
+			$("#coid").focus();
+			return false;
+		}
+		if($("#idChecked").val()=="0"){
+			alert("아이디 중복확인을 해주세요.")
+			return false;
+		}
+		if($("#coname").val().length==0){
+			alert("기업이름을 입력해주세요")
+			$("#coname").focus();
+			return false;
+		}
+		if($("#copw").val().length==0){
+			alert("비밀번호를 입력해주세요")
+			$("#copw").focus();
+			return false;
+		}
+		if($("#copw2").val().length==0){
+			alert("비밀번호를 입력해주세요")
+			$("#copw2").focus();
+			return false;
+		}
+		if($("#coemail").val().length==0){
+			alert("이메일을 입력해주세요")
+			$("#coemail").focus();
+			return false;
+		}
+		if($("#cotel").val().length==0){
+			alert("전화번호를 입력해주세요")
+			$("#cotel").focus();
+			return false;
+		}
 		});
 	});
 
@@ -56,13 +91,16 @@
 		style="position: absolute; z-index: 1; visibility: hidden;"></iframe>
 	<h2>기업회원가입</h2>
 	<hr />
-	<form action="<%=request.getContextPath() %>/corporation/join/admin.com" id="join" method="post">
+	<form
+		action="<%=request.getContextPath()%>/corporation/join/admin.com"
+		id="join" method="post">
 		<input type="hidden" id="reqMethod" name=reqMethod value="">
 		<table>
 			<tr>
 				<td>아이디</td>
 				<td><input type="text" id="coid" name="coid">
-					<button id="idCheck" type="button">중복확인</button> <span></span></td>
+					<button id="idCheck" type="button">중복확인</button>
+					<input id="idChecked" type="hidden" value="0"/></td>
 			</tr>
 			<tr>
 				<td>기업이름</td>
@@ -79,26 +117,26 @@
 			<tr>
 				<td>이메일</td>
 				<td><input type="text" id="coemail" name="coemail"
-					style="width: 80">&nbsp;@ <select
-					id="memail2" name="memail2">
+					style="width: 80">&nbsp;@ <select id="memail2"
+					name="memail2">
 						<option value="">선택하세요</option>
 						<option value="naver.com">naver.com</option>
 						<option value="gmail.com">gmail.com</option>
 						<option value="hanmail.net">daum.net</option>
 						<option value="nate.com">nate.com</option>
 						<option value="yahoo.com">yahoo.com</option>
-				</select>	</td>
+				</select></td>
 			</tr>
 			<tr>
 				<td>핸드폰번호</td>
 				<td><input id="cotel" type="text" name="cotel"></td>
 			</tr>
 			<tr>
-				<td colspan="2" class="center">
-				<a href="#" onclick="frmChk('this.form');return false;"> 
-						<input	type="submit" value="가입" /></a>
-						<input type="reset" value="취소"onclick="location.href='${pageContext.request.contextPath}/admin.com'" />&nbsp;
-					</td>
+				<td colspan="2" class="center"><a href="#"
+					onclick="frmChk('this.form');return false;"> <input
+						type="submit" value="가입" /></a> <input type="reset" value="취소"
+					onclick="location.href='${pageContext.request.contextPath}/admin.com'" />&nbsp;
+				</td>
 			</tr>
 		</table>
 	</form>

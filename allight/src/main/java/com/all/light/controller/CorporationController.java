@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CorporationDTO;
+import com.all.light.dto.MemberDTO;
 import com.all.light.service.CorporationService;
 import com.all.light.util.PageUtil;
 
@@ -157,5 +159,19 @@ public class CorporationController {
 			rv.setUrl(request.getContextPath()+"/corporation/admin.com");
 			mv.setView(rv);
 			return mv;
+		}
+		
+		@ResponseBody
+		@RequestMapping("/corpIdChk")
+		public String corpIdChk(CorporationDTO corDTO) {
+			String data=null;
+			corDTO = corSVC.getCorpID(corDTO);
+			System.out.println(corDTO);
+			if (corDTO != null) {
+				data="fail";
+			} else if(corDTO == null) {
+				data="success";
+			}
+			return data;
 		}
 }

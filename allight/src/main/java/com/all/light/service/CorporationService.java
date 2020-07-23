@@ -75,4 +75,8 @@ public class CorporationService {
 		corDAO.corpInsert(corDTO);
 	}
 
+	public CorporationDTO getCorpID(CorporationDTO corDTO) {
+		return corDAO.getCorpID(corDTO);
+	}
+
 }

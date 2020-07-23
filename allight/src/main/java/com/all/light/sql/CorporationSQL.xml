@@ -51,5 +51,10 @@
 		from corporation 
 		order by cono
 	</select>
+	
+	<select id="getCorpId" resultType="corDTO" parameterType="corDTO">
+		select * from corporation where coid=#{coid}
+	</select>
+	
 </mapper>
 

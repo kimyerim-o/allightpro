@@ -49,4 +49,8 @@ public class CorporationDAO extends SqlSessionDaoSupport {
 		session.insert("corporation.corpInsert",corDTO);
 	}
 
+	public CorporationDTO getCorpID(CorporationDTO corDTO) {
+		return session.selectOne("corporation.getCorpId",corDTO);
+	}
+
 }

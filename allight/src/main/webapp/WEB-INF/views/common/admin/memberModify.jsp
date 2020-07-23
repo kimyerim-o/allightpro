@@ -131,6 +131,11 @@ $(function() {
 				<td>최근접속일 :</td>
 				<td>${MEMINFO.mlogdate}</td>
 			</tr>
+			<tr>
+				<td>이메일 :</td>
+				<td><input type="hidden" id="memail" name="memail"
+					value="${MEMINFO.memail}" /></td>
+			</tr>
 			<tr> 
 				<td>성별 :</td>
 				<td>${MEMINFO.msex}<input type="hidden" id="msex" name="msex"
@@ -154,19 +159,14 @@ $(function() {
 					value="${MEMINFO.mpw}" /></td>
 			</tr>
 			<tr>
-				<td>이메일 :</td>
-				<td><input type="text" id="memail" name="memail"
-					value="${MEMINFO.memail}" /></td>
+				<td>비밀번호 확인 :</td>
+				<td><input type="password" id="mpw2" name="mpw2"
+					value="${MEMINFO.mpw}" /></td>
 			</tr>
 			<tr>
-				<td>전화번호 :</td>
+				<td>핸드폰번호 :</td>
 				<td><input type="text" id="mtel" name="mtel"
 					value="${MEMINFO.mtel}" /></td>
-			</tr>
-			<tr>
-				<td>전화번호2 :</td>
-				<td><input type="text" id="mtel2" name="mtel2"
-					value="${MEMINFO.mtel2}" /></td>
 			</tr>
 			<tr>
 				<td>구분 :</td>

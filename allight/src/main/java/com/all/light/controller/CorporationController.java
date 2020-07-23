@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CorporationDTO;
-import com.all.light.dto.MemberDTO;
 import com.all.light.service.CorporationService;
 import com.all.light.util.PageUtil;
 

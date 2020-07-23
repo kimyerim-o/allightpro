@@ -21,7 +21,7 @@
 
 	$(function() {
 		$("#idCheck").click(function() {
-			var mid = $("#mid").val();
+			var coid = $("#coid").val();
 			//alert(mid);
 			// JSON.parse(제이슨데이터); 수신
 			// JSON.stringfy(자바스크립트오브젝트); 송신
@@ -33,13 +33,13 @@
 				dataType : "text",
 				async : false,
 				data : {
-					mid : $("#mid").val()
+					coid : $("#coid").val()
 				},
 				success : function(data) {
 					if (data == "fail") {
 						alert("이미 등록된 아이디입니다.");
-						$("#mid").val("");
-						$("#mid").focus();
+						$("#coid").val("");
+						$("#coid").focus();
 					} else {
 
 						alert("사용 가능한 아이디입니다.");

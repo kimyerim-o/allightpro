@@ -15,14 +15,23 @@ public class CaldictionaryController {
 	@Autowired
 	CaldictionaryService calSVC;
 	
+<<<<<<< HEAD
+=======
+	
+	// 사전 보기
+>>>>>>> 185dc686f85f2776ccd54bcb307c70a6ca492118
 	@RequestMapping("/dictionary")
 	public ModelAndView calview(
 			@RequestParam(value="nowPage", required=false, defaultValue="1") int nowPage,
 			@RequestParam(value = "searchWord", required = false, defaultValue="") String searchWord,
 			ModelAndView mv){
+<<<<<<< HEAD
 		
 		
 		
+=======
+		System.out.println("컨트롤러 상품 목록보기 - listView() 요청");
+>>>>>>> 185dc686f85f2776ccd54bcb307c70a6ca492118
 		
 		return null;
 	}

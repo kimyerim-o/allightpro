@@ -138,4 +138,12 @@ public class QuestionDAO extends SqlSessionDaoSupport {
 		session.delete("question.deleteiq", iqcno);
 		
 	}
+
+	public int getTotalCntOfComm(int qno) {
+			return session.selectOne("question.getTotalCntOfComm", qno);
+	}
+
+	public ArrayList<QuestionDTO> getCommDetail(PageUtil pInfo) {
+		return (ArrayList) session.selectList("question.getCommDetail",pInfo);
+	}
 }

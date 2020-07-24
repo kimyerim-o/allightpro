@@ -147,6 +147,18 @@ public class QuestionService {
 		qesDAO.deleteiq(iqcno);
 	}
 
+	//댓글 페이징 처리 - 유태우
+	public PageUtil getCommPageInfo(int qno, int commPage) {
+		int Cnt = qesDAO.getTotalCntOfComm(qno);
+		PageUtil pInfo = new PageUtil(commPage, Cnt);
+		pInfo.setQno(qno);
+		return pInfo;
+	}
+
+	public ArrayList<QuestionDTO> getCommDetail(PageUtil pInfo) {
+		return qesDAO.getCommDetail(pInfo);
+	}
+
 
 
 

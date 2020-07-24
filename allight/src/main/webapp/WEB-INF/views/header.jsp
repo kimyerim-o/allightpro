@@ -180,7 +180,7 @@ function kakaoLogout() {
 								href="${pageContext.request.contextPath}/question/list/admin.com">기업
 									문의 관리</a></li>
 							<li><a href="#">커뮤니티 관리</a></li>
-							<li><a href="#">칼로리 사전 관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/cal/dictionary/admin.com">칼로리 사전 관리</a></li>
 						</ul></li>
 				</ul>
 			</div>

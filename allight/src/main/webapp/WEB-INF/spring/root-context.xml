@@ -101,4 +101,10 @@
 	</bean>
 	<bean id="calSVC" class="com.all.light.service.CaldictionaryService"/>
 	
+	<!-- FreeBoard -->
+	<bean id="freDAO" class="com.all.light.dao.FreeBoardDAO">
+		<property name="sqlSessionTemplate" ref="sqlSession"/>
+	</bean>
+	<bean id="freSVC" class="com.all.light.service.FreeBoardService"/>
+	
 </beans>

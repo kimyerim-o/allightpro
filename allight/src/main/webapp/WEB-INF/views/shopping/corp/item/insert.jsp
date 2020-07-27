@@ -71,8 +71,9 @@
 			<th>
 			<select id="icategory" name="icategory">
     			<option value="">선택</option>
-	   			<option value="음식">음식</option>
+	   			<option value="식단">식단</option>
 	  			<option value="간식">간식</option>
+	  			<option value="운동복">운동복</option>
 				<option value="기타">기타</option>
 			</select>
 			</th>

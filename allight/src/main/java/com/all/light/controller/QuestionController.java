@@ -62,15 +62,23 @@ public class QuestionController {
 	@RequestMapping(value="/question/detail")
 	public ModelAndView detail(
 			@RequestParam("no") int qno,
+			@RequestParam(value="commPage", required = false, defaultValue= "1") int commPage,
 			QuestionDTO qdto, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("\nNoticeController.noticeDetail.QuestionDTO = "+qno);
 		qdto.setQno(qno);
-		System.out.println("\nNoticeController.noticeDetail.QuestionDTO = "+qdto);
+		
 		QuestionDTO de=queSVC.detail(qdto);//게시글
-		ArrayList<QuestionDTO> decomm=queSVC.detailcomm(qdto);//댓글
+		PageUtil pInfo = queSVC.getCommPageInfo(qno, commPage);
+		ArrayList<QuestionDTO> decomm=queSVC.getCommDetail(pInfo);//댓글
+		
 		mv.addObject("DETAIL",de);//게시글
+		mv.addObject("PINFO", pInfo); //페이징 정보
 		mv.addObject("COMM",decomm);//댓글
+		
 		System.out.println(de);
+		System.out.println(pInfo);
 		System.out.println(decomm);
+
 		mv.setViewName("diary/user/question/questionDetail");
 		return mv;
 	}

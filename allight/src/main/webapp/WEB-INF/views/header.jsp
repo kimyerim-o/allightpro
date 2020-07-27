@@ -109,7 +109,7 @@ function kakaoLogout() {
 					<li class="nav-item"><a
 						href="${pageContext.request.contextPath}/main.com"
 						class="nav-link">다이어리</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">칼로리 사전</a></li>
+					<li class="nav-item"><a href="${pageContext.request.contextPath}/cal/dictionary/food.com" class="nav-link">칼로리 사전</a></li>
 					<li class="nav-item"><a href="${pageContext.request.contextPath}/calorie_recipe.com" class="nav-link">칼로리 처방</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a>
 						<ul class="dropdown">
@@ -145,7 +145,7 @@ function kakaoLogout() {
 							<li><a
 								href="${pageContext.request.contextPath}/member/user/address.com">배송지
 									관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/item/review/list.com">상품 문의</a></li>
+							<li><a href="#">상품 문의</a></li>
 							<li><a href="#">내 정보</a></li>
 						</ul></li>
 
@@ -159,7 +159,7 @@ function kakaoLogout() {
 							<li><a
 								href="${pageContext.request.contextPath}/item/list/corp.com">상품
 									관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/item/review/list/corp.com">상품리뷰/문의</a></li>
+							<li><a href="#">상품리뷰/문의</a></li>
 							<li><a href="#">기업 정보 관리</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/question/list/corp.com">문의사항</a></li>
@@ -180,7 +180,7 @@ function kakaoLogout() {
 								href="${pageContext.request.contextPath}/question/list/admin.com">기업
 									문의 관리</a></li>
 							<li><a href="#">커뮤니티 관리</a></li>
-							<li><a href="#">칼로리 사전 관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/cal/dictionary/admin.com">칼로리 사전 관리</a></li>
 						</ul></li>
 				</ul>
 			</div>

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.all.light.dto.ItemQuestionDTO;
 import com.all.light.dto.NoticeDTO;
 import com.all.light.dto.QuestionDTO;
 import com.all.light.util.PageUtil;
@@ -125,5 +126,24 @@ public class QuestionDAO extends SqlSessionDaoSupport {
 
 	public ArrayList<QuestionDTO> searchListMyPageUser(PageUtil pInfo) {
 		return (ArrayList) session.selectList("question.searchListUserMyPage",pInfo);
+	}
+
+	
+	// 기업 답변 - 류지혁
+	public void insertiq(ItemQuestionDTO iqDTO) {
+		session.insert("question.insertiq", iqDTO);
+	}
+	// 기업 답변 삭제 - 류지혁
+	public void deleteiq(int iqcno) {
+		session.delete("question.deleteiq", iqcno);
+		
+	}
+
+	public int getTotalCntOfComm(int qno) {
+			return session.selectOne("question.getTotalCntOfComm", qno);
+	}
+
+	public ArrayList<QuestionDTO> getCommDetail(PageUtil pInfo) {
+		return (ArrayList) session.selectList("question.getCommDetail",pInfo);
 	}
 }

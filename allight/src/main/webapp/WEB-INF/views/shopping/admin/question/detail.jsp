@@ -22,16 +22,11 @@
 		
 		//댓글쓰기 
 		$("#wcomm").click(function(){
-			if($('#qccontent').val()==""){
-				alert('내용을 입력하세요');
-				$('#qccontent').focus();
-				return false;
-			}
 			var qno = "${DETAIL.qno}";
 			var qcid =  "${sessionScope.MID}";
 			var qccontent = $("#qccontent").val();
 			var param = {"qno" : qno, "qcid" : qcid , "qccontent" : qccontent};
-			//alert(JSON.stringify(param));
+			alert(JSON.stringify(param));
 		$.ajax({
 			type: "post", //데이터를 보낼 방식
 			url: "${pageContext.request.contextPath}/question/wcomment.com", //데이터를 보낼 url

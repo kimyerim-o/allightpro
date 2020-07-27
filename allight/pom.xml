@@ -47,6 +47,19 @@
 			<version>1.5.6</version> 
       	</dependency>
       	
+      	<!-- python실행 -->
+      	<dependency>
+		    <groupId>org.python</groupId>
+		    <artifactId>jython</artifactId>
+		    <version>2.7.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.python</groupId>
+		    <artifactId>jython-standalone</artifactId>
+		    <version>2.7.2</version>
+		</dependency>
+      	
 		<dependency>
 		    <groupId>commons-httpclient</groupId>
 		    <artifactId>commons-httpclient</artifactId>

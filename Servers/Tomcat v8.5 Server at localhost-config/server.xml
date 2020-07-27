@@ -154,9 +154,9 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
       <Context docBase="allight" path="/allight" reloadable="true" source="org.eclipse.jst.jee.server:allight"/>
-      <Context path="/item/img" reloadable="true" docBase="D:\upload"/>
+      <Context docBase="D:\upload" path="/item/img" reloadable="true"/>
       
-      </Host>
+      <Context docBase="allight" path="/light" reloadable="true" source="org.eclipse.jst.jee.server:allight"/></Host>
     </Engine>
   </Service>
 </Server>

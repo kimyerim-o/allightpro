@@ -1,14 +1,22 @@
 package com.all.light.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.servlet.http.HttpSession;
 
+import org.python.core.PyFunction;
+import org.python.core.PyInteger;
+import org.python.core.PyObject;
+import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.CorporationDAO;
 import com.all.light.dto.CorporationDTO;
+import com.all.light.util.Jython;
 import com.all.light.util.PageUtil;
 
 public class CorporationService {
@@ -26,8 +34,19 @@ public class CorporationService {
 			cnt=cnt+1;
 			session.setAttribute("cnt", cnt);
 			System.out.println("로그인실패");
+			if(cnt>=4) {
+				System.out.println("1");
+				Jython j=new Jython();
+				try {
+					Jython.main(null);
+				} catch (IOException e) {
+					System.out.println(e);
+				}
+				System.out.println("2");
+			}
 		}else{
 			//로그인성공
+			session.invalidate();
 			System.out.println("로그인성공");
 			session.setAttribute("CONO",result.get("CONO"));
 			session.setAttribute("COID",result.get("COID"));

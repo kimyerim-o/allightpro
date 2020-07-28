@@ -314,7 +314,7 @@ function deleteMy(cdno) {
          <c:forEach var="list" items="${LIST}">
          <tr class="point-on" onclick="detail(${list.cdno},'${list.cdname}',${list.cdgram},${list.cdcal},${list.cdtan},${list.cddan},${list.cdji},${list.cdsik},${list.cdna})">
             <td width="5%"><input type="hidden" name="cdno" value="${list.cdno}"></td>
-            <td width="60%" class="cdname">${list.cdname}&nbsp;&nbsp;(${list.cdamount}, ${list.cdgram}g)</td>
+            <td width="60%" class="cdname">${list.cdname}&nbsp;&nbsp;(${list.cdamount}회, ${list.cdgram}g)</td>
             <td width="25%" align="right">${list.cdcal}kcal</td>
             
          </tr>

@@ -1,20 +1,19 @@
 package com.all.light.dto;
 
 public class CaldictionaryDTO {
-	
-	private int		cdno;	// 칼로리번호
-	private String	cdtype;	// 구분
-	private int 	cdcal;	// 칼로리값
-	private String	cdname;	// 음식/운동이름
-	private String	mid;	// 아이디
-	private int 	mno;	// 회원번호
-	private int 	cdtan;	// 탄수화물
-	private int 	cddan;	// 단백질
-	private int 	cdji;	// 지방
-	private int 	cdsik;	// 식이섬유
-	private int 	cdna;	// 나트륨
-	private int 	cdgram;	// 그램/시간
-	private int 	cdamount;// 수량
+	private int cdno;			//칼로리번호
+	private String cdtype;		//구분(음식/운동)
+	private int cdcal;			//칼로리
+	private String cdname;		//음식/운동 이름
+	private String mid;			//아이디
+	private int mno;			//회원번호
+	private Double cdtan=0.0;	//탄수화물(g)
+	private Double cddan=0.0;	//단백질(g)
+	private Double cdji=0.0;	//지방(g)
+	private Double cdsik=0.0;	//식이섬유(g)
+	private Double cdna=0.0;	//나트륨(mg)
+	private int cdgram;			//그램(g)
+	private int cdamount;		//수량(기본1 DB에서 설정)
 	
 	
 	public int getCdno() {
@@ -53,34 +52,34 @@ public class CaldictionaryDTO {
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
-	public int getCdtan() {
+	public Double getCdtan() {
 		return cdtan;
 	}
-	public void setCdtan(int cdtan) {
+	public void setCdtan(Double cdtan) {
 		this.cdtan = cdtan;
 	}
-	public int getCddan() {
+	public Double getCddan() {
 		return cddan;
 	}
-	public void setCddan(int cddan) {
+	public void setCddan(Double cddan) {
 		this.cddan = cddan;
 	}
-	public int getCdji() {
+	public Double getCdji() {
 		return cdji;
 	}
-	public void setCdji(int cdji) {
+	public void setCdji(Double cdji) {
 		this.cdji = cdji;
 	}
-	public int getCdsik() {
+	public Double getCdsik() {
 		return cdsik;
 	}
-	public void setCdsik(int cdsik) {
+	public void setCdsik(Double cdsik) {
 		this.cdsik = cdsik;
 	}
-	public int getCdna() {
+	public Double getCdna() {
 		return cdna;
 	}
-	public void setCdna(int cdna) {
+	public void setCdna(Double cdna) {
 		this.cdna = cdna;
 	}
 	public int getCdgram() {
@@ -96,12 +95,12 @@ public class CaldictionaryDTO {
 		this.cdamount = cdamount;
 	}
 	
+	
 	@Override
 	public String toString() {
-		return "CaldictionaryDTO [cdno=" + cdno + ", cdtype=" + cdtype + ", cdcal=" + cdcal + ", cdname=" + cdname
+		return "CalDictionaryDTO [cdno=" + cdno + ", cdtype=" + cdtype + ", cdcal=" + cdcal + ", cdname=" + cdname
 				+ ", mid=" + mid + ", mno=" + mno + ", cdtan=" + cdtan + ", cddan=" + cddan + ", cdji=" + cdji
 				+ ", cdsik=" + cdsik + ", cdna=" + cdna + ", cdgram=" + cdgram + ", cdamount=" + cdamount + "]";
 	}
-
 	
 }

@@ -30,6 +30,7 @@ import com.all.light.util.FileUtil;
 
 @Controller
 public class DiaryController {
+	
 	@Autowired
 	private DiaryService diaSVC;
 	

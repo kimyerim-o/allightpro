@@ -26,14 +26,14 @@
 	</select>
 	
 	<!-- 음식 칼로리 사전 음식 검색  -->
-	<select id="searchFood" resultType="caldDTO" parameterType="java.lang.String">
+	<select id="searchFood" resultType="calDTO" parameterType="java.lang.String">
 		select * from caldictionary 
 		where cdtype='음식' and mid is null 
 			and cdname like '%' || #{searchWord} || '%'
 	</select>
 	
 	<!-- 마이 칼로리 (사전) 음식 전체 내용 가져오기 (검색없을시)  -->
-	<select id="AllMyFood" resultType="caldDTO" parameterType="java.lang.String">
+	<select id="AllMyFood" resultType="calDTO" parameterType="java.lang.String">
 		select * from caldictionary 
 		where cdtype='음식' and mid = #{mid}
 		order by cdno desc
@@ -53,7 +53,7 @@
 	</insert>
 	
 	<!-- 사전번호로 정보 가져오기  -->
-	<select id="getCdnameByCdno" resultType="caldDTO" parameterType="int">
+	<select id="getCdnameByCdno" resultType="calDTO" parameterType="int">
 		select * from caldictionary where cdno = #{cdno}
 	</select>
 	
@@ -115,14 +115,14 @@
 	</select>
 
 	<!-- 운동 칼로리 사전 검색  -->
-	<select id="searchExer" resultType="caldDTO" parameterType="java.lang.String">
+	<select id="searchExer" resultType="calDTO" parameterType="java.lang.String">
 		select * from caldictionary 
 		where cdtype='운동' and mid is null 
 			and cdname like '%' || #{searchWord} || '%'
 	</select>
 	
 	<!-- 마이 칼로리 (사전) 운동 전체 내용 가져오기 (검색없을시)  -->
-	<select id="AllMyExer" resultType="caldDTO" parameterType="java.lang.String">
+	<select id="AllMyExer" resultType="calDTO" parameterType="java.lang.String">
 		select * from caldictionary 
 		where cdtype='운동' and mid = #{mid}
 		order by cdno desc

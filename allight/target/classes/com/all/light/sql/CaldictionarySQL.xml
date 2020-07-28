@@ -9,7 +9,7 @@
 		select  count(*) from caldictionary where mid is null and cdtype = '음식' and cdname like '%${value}%' 
 	</select>
 
-	<!-- 음식 검색 및 리스트 출력--> <!-- 상품 번호가 아닌 ROWNUM()순서로 정렬하여 출력한다 -->
+	<!-- 음식 검색 및 리스트 출력-->  <!-- 상품 번호가 아닌 ROWNUM()순서로 정렬하여 출력한다 -->
 	<select id="searchList" resultType="calDTO" parameterType="calDTO">
 	select * from(
                 select row_number() over (order by cdno) num,

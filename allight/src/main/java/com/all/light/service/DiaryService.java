@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.all.light.dao.DiaryDAO;
 import com.all.light.dto.CaldictionaryDTO;
@@ -12,6 +13,7 @@ import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
 
+@Service
 public class DiaryService {
 	
 	@Autowired

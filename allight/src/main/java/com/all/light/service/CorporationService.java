@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.CorporationDAO;
 import com.all.light.dto.CorporationDTO;
-import com.all.light.util.Jython;
 import com.all.light.util.PageUtil;
 
 public class CorporationService {

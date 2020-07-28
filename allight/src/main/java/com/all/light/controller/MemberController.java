@@ -373,7 +373,7 @@ public class MemberController {
 	
 	// 장한별 작성
 	// 회원정보수정
-	@RequestMapping(value="/member/user/modify member/modifymember", method= RequestMethod.GET)
+	@RequestMapping(value="/mypage/member/modify", method= RequestMethod.GET)
 	public ModelAndView ModifyMemberGet(
 			// @RequestParam(value = "mno") int mno,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
@@ -390,6 +390,5 @@ public class MemberController {
 		//mv.setViewName("common/user/Modify member/Modifymember?search="+searchWord+"&nowPage="+nowPage+"&mno="+mno);
 		mv.setViewName("common/user/Modify member/Modifymember");
 		return mv;
-	
 	}
 }

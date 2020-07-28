@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.DiaryDAO;
-import com.all.light.dto.CalDictionaryDTO;
+import com.all.light.dto.CaldictionaryDTO;
 import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
@@ -63,14 +63,14 @@ public class DiaryService {
 	}
 
 	// 섭취 칼로리 추가할 때 음식 검색
-	public List<CalDictionaryDTO> searchFood(String searchWord) {
-		List<CalDictionaryDTO> list = diaDAO.searchFood(searchWord);
+	public List<CaldictionaryDTO> searchFood(String searchWord) {
+		List<CaldictionaryDTO> list = diaDAO.searchFood(searchWord);
 		return list;
 	}
 	
 	// 섭취 칼로리 추가할 때 마이칼로리 전체목록(검색된 내용 없을때)
-	public List<CalDictionaryDTO> AllMyFood(String mid) {
-		List<CalDictionaryDTO> list = diaDAO.AllMyFood(mid);
+	public List<CaldictionaryDTO> AllMyFood(String mid) {
+		List<CaldictionaryDTO> list = diaDAO.AllMyFood(mid);
 		return list;
 	}
 
@@ -80,7 +80,7 @@ public class DiaryService {
 		int caltotal = dto.getDfoodcal();//총음식칼로리
 		
 		for (int i=0;i<cdnos.length;i++) {
-			CalDictionaryDTO cdto = diaDAO.getCdInfo(cdnos[i]);
+			CaldictionaryDTO cdto = diaDAO.getCdInfo(cdnos[i]);
 			HashMap<String,Object> map = new HashMap<String,Object>();
 			map.put("dno", dno);
 			map.put("cdtype", cdtype);
@@ -142,7 +142,7 @@ public class DiaryService {
 	}
 
 	// 마이칼로리 등록(음식)
-	public void insertMyCal(String mid, int mno, CalDictionaryDTO dto) {
+	public void insertMyCal(String mid, int mno, CaldictionaryDTO dto) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("cdcal", dto.getCdcal());
 		map.put("cdname", dto.getCdname());
@@ -189,19 +189,19 @@ public class DiaryService {
 	}
 	
 	// 소비 칼로리 추가할 때 사전에서 운동 검색
-	public List<CalDictionaryDTO> searchExer(String searchWord) {
-		List<CalDictionaryDTO> list = diaDAO.searchExer(searchWord);
+	public List<CaldictionaryDTO> searchExer(String searchWord) {
+		List<CaldictionaryDTO> list = diaDAO.searchExer(searchWord);
 		return list;
 	}
 	
 	// 소비 칼로리 추가할 때 마이칼로리 전체목록(검색된 내용 없을때)
-	public List<CalDictionaryDTO> AllMyExer(String mid) {
-		List<CalDictionaryDTO> list = diaDAO.AllMyExer(mid);
+	public List<CaldictionaryDTO> AllMyExer(String mid) {
+		List<CaldictionaryDTO> list = diaDAO.AllMyExer(mid);
 		return list;
 	}
 	
 	// 마이칼로리 등록(운동)
-	public void insertMyCal2(String mid, int mno, CalDictionaryDTO dto) {
+	public void insertMyCal2(String mid, int mno, CaldictionaryDTO dto) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("cdcal", dto.getCdcal());
 		map.put("cdname", dto.getCdname());
@@ -218,7 +218,7 @@ public class DiaryService {
 		int caltotal = dto.getDexercal();//총운동칼로리
 		
 		for (int i=0;i<cdnos.length;i++) {
-			CalDictionaryDTO cdto = diaDAO.getCdInfo(cdnos[i]);
+			CaldictionaryDTO cdto = diaDAO.getCdInfo(cdnos[i]);
 			HashMap<String,Object> map = new HashMap<String,Object>();
 			map.put("dno", dno);
 			map.put("cdno", cdnos[i]);

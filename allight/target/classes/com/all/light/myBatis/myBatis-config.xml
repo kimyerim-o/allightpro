@@ -33,6 +33,10 @@
    		<typeAlias type="com.all.light.dto.AddressDTO" alias="addressDTO"/>
    		<typeAlias type="com.all.light.dto.CalrecipeDTO" alias="creDTO"/>
    		<typeAlias type="com.all.light.dto.CaldictionaryDTO" alias="calDTO"/>
+   		<typeAlias type="com.all.light.dto.MyFoodDTO" alias="myfoodDTO"/>
+   		<typeAlias type="com.all.light.dto.CalDictionaryDTO" alias="caldDTO"/>
+   		<typeAlias type="com.all.light.dto.MyExerciseDTO" alias="myExerDTO"/>
+
    </typeAliases>
    
    <mappers>

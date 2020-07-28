@@ -23,6 +23,8 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/shopping.css">
+<link rel="stylesheet" 
+   href="${pageContext.request.contextPath}/resources/css/calendar.css">
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 function kakaoLogout() {
@@ -50,6 +52,7 @@ function kakaoLogout() {
 		})
 	}
 </script>
+
 </head>
 
 <body>

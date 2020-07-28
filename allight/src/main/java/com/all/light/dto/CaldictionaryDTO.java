@@ -1,6 +1,6 @@
 package com.all.light.dto;
 
-public class CalDictionaryDTO {
+public class CaldictionaryDTO {
 	private int cdno;			//칼로리번호
 	private String cdtype;		//구분(음식/운동)
 	private int cdcal;			//칼로리

@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.all.light.dto.CalDictionaryDTO;
+import com.all.light.dto.CaldictionaryDTO;
 import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
@@ -162,8 +162,8 @@ public class DiaryController {
 			return mv;
 		}
 		
-		List<CalDictionaryDTO> list = null;
-		List<CalDictionaryDTO> myList = null;
+		List<CaldictionaryDTO> list = null;
+		List<CaldictionaryDTO> myList = null;
 		DiaryDTO dto = new DiaryDTO();
 		dto.setDno(num);
 		dto.setDdate(ddate);
@@ -253,7 +253,7 @@ public class DiaryController {
 	public void insertMyCal(
 			ModelAndView mv, 
 			HttpServletRequest request,
-			CalDictionaryDTO dto, 
+			CaldictionaryDTO dto, 
 			int dno) {
 		System.out.println("insertMyCal()dto="+dto.toString());
 		
@@ -355,8 +355,8 @@ public class DiaryController {
 		
 		System.out.println("insertMyExerFrm()-num:"+num+", ddate:"+ddate);
 		
-		List<CalDictionaryDTO> list = null;
-		List<CalDictionaryDTO> myList = null;
+		List<CaldictionaryDTO> list = null;
+		List<CaldictionaryDTO> myList = null;
 		DiaryDTO dto = new DiaryDTO();
 		dto.setDno(num);
 		dto.setDdate(ddate);
@@ -381,7 +381,7 @@ public class DiaryController {
 	public void insertMyCal2(
 			ModelAndView mv, 
 			HttpServletRequest request,
-			CalDictionaryDTO dto, 
+			CaldictionaryDTO dto, 
 			int dno) {
 		System.out.println("insertMyCal2()dto="+dto.toString());
 		

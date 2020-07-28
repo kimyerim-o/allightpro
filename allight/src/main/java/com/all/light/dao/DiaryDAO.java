@@ -8,7 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.all.light.dto.CalDictionaryDTO;
+import com.all.light.dto.CaldictionaryDTO;
 import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
@@ -47,14 +47,14 @@ public class DiaryDAO extends SqlSessionDaoSupport {
 	}
 
 	// 섭취 칼로리 추가할 때 음식 검색
-	public List<CalDictionaryDTO> searchFood(String searchWord) {
-		List<CalDictionaryDTO> list = session.selectList("diary.searchFood", searchWord);
+	public List<CaldictionaryDTO> searchFood(String searchWord) {
+		List<CaldictionaryDTO> list = session.selectList("diary.searchFood", searchWord);
 		return list;
 	}
 	
 	// 섭취 칼로리 추가할 때 마이칼로리 전체목록(검색된 내용 없을때)
-	public List<CalDictionaryDTO> AllMyFood(String mid) {
-		List<CalDictionaryDTO> list = session.selectList("diary.AllMyFood", mid);
+	public List<CaldictionaryDTO> AllMyFood(String mid) {
+		List<CaldictionaryDTO> list = session.selectList("diary.AllMyFood", mid);
 		return list;
 	}
 
@@ -67,8 +67,8 @@ public class DiaryDAO extends SqlSessionDaoSupport {
 	}
 
 	// 사전번호로 사전정보 가져오기
-	public CalDictionaryDTO getCdInfo(int cdno) {
-		CalDictionaryDTO dto = session.selectOne("diary.getCdnameByCdno", cdno);
+	public CaldictionaryDTO getCdInfo(int cdno) {
+		CaldictionaryDTO dto = session.selectOne("diary.getCdnameByCdno", cdno);
 		return dto;
 	}
 
@@ -177,14 +177,14 @@ public class DiaryDAO extends SqlSessionDaoSupport {
 	}
 
 	// 소비 칼로리 추가할 때 운동 검색
-	public List<CalDictionaryDTO> searchExer(String searchWord) {
-		List<CalDictionaryDTO> list = session.selectList("diary.searchExer", searchWord);
+	public List<CaldictionaryDTO> searchExer(String searchWord) {
+		List<CaldictionaryDTO> list = session.selectList("diary.searchExer", searchWord);
 		return list;
 	}
 	
 	// 소비 칼로리 추가할 때 마이칼로리 전체목록(검색된 내용 없을때)
-	public List<CalDictionaryDTO> AllMyExer(String mid) {
-		List<CalDictionaryDTO> list = session.selectList("diary.AllMyExer", mid);
+	public List<CaldictionaryDTO> AllMyExer(String mid) {
+		List<CaldictionaryDTO> list = session.selectList("diary.AllMyExer", mid);
 		return list;
 	}
 	

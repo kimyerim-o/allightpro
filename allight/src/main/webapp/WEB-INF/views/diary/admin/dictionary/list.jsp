@@ -313,7 +313,7 @@ function deleteMy(cdno) {
          <tr >
             <td width="5%"><input type="hidden" name="cdno" value="${list.cdno}"></td>
             <td width="10%" align="center">${list.cdtype}</td>
-            <td width="60%" class="cdname">${list.cdname}&nbsp;&nbsp;(${list.cdamount}, ${list.cdgram}g)</td>
+            <td width="60%" class="cdname">${list.cdname}&nbsp;&nbsp;(${list.cdamount}회, ${list.cdgram}g/m)</td>
             <td width="10%" align="right">${list.cdcal}kcal</td>
             <td class="point-on" width="10%" onclick="deleteMy(${list.cdno})" style="text-align: center;" >삭제</td>
          </tr>
@@ -500,7 +500,7 @@ function deleteMy(cdno) {
             <td><input type="number" min="0" value="0" name="cdtan"/></td>
          </tr>
          <tr>
-            <td>분량(g)/시간(h)</td>
+            <td>분량(g)/시간(m)</td>
             <td><input type="number"min="0" value="0" name="cdgram"/></td>
             <td>단백질</td>
             <td><input type="number" min="0" value="0" name="cddan"/></td>

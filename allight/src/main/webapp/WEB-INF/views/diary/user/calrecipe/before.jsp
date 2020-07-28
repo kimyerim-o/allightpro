@@ -36,11 +36,11 @@ $(function(){
 			$('#gwe').focus();
 			return false;
 		}
-		if($('#bi').val().length==0){
+		if($('#bi').val()==null){
 			alert('생년월일을 입력하세요');
 			$('#bi').focus();
 			return false;
-		} 
+		}
 		if($('#te').val()==null){
 			alert('제충 감량 기간을 입력하세요');
 			$('#te').focus();
@@ -57,20 +57,20 @@ $(function(){
 		<table class="table">
 			<tr>
 				<th>성별</th>
-				<td><label><input type="radio" id="w" name="sex" value="F"/>여자</label>
-					<label><input type="radio" id="m" name="sex" value="M"/>남자</label></td>
+				<td><input type="radio" id="w" name="sex" value="F"/>여자
+					<input type="radio" id="m" name="sex" value="M"/>남자</td>
 			</tr>
 			<tr>
 				<th>키</th>
-				<td><input type="text" name="crheight" id="he" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">cm</td>
+				<td><input type="text" name="crheight" id="he" required="required">cm</td>
 			</tr>
 			<tr>
 				<th>현재 체중</th>
-				<td><input type="text" name="crweight" id="we" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">kg</td>
+				<td><input type="text" name="crweight" id="we" required="required">kg</td>
 			</tr>
 			<tr>
 				<th>목표 체중</th>
-				<td><input type="text" name="crgoalweight" id="gwe" required="required" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">kg</td>
+				<td><input type="text" name="crgoalweight" id="gwe" required="required">kg</td>
 			</tr>
 			<tr>
 				<th>생년월일</th>
@@ -78,18 +78,18 @@ $(function(){
 			</tr>
 			<tr>
 				<th>체중 감량 기간</th>
-				<td><input type="text" name="crterm" id="te" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+				<td><input type="text" name="crterm" id="te">
 					<input type="radio" name="type" value="개월" checked="checked"/>개월
 					<input type="radio" name="type" value="주"/>주
 					<input type="radio" name="type" value="일"/>일</td>
 			</tr>
 			<tr>
 				<th>평소 활동량</th>
-				<td><label><input type="radio" name="cractive" value="1" checked="checked"/>활동안함 (운동을 전혀 안 해요.)</label><br/>
-					<label><input type="radio" name="cractive" value="2"/>가벼운 활동 (평소 가벼운 운동이나 스포츠를 즐겨요)</label><br/>
-					<label><input type="radio" name="cractive" value="3"/>보통 활동 (평소 적당한 운동이나 스포츠를 즐겨요.)</label><br/>
-					<label><input type="radio" name="cractive" value="4"/>많은 활동 (평소 강렬한 운동이나 스포츠를 즐겨요.)</label><br/>
-					<label><input type="radio" name="cractive" value="5"/>격심한 활동 (평소 매우 심한 운동을 하거나 육체를 쓰는 직업이예요.)</label></td>
+				<td><input type="radio" name="cractive" value="1" checked="checked"/>활동안함 (운동을 전혀 안 해요.)<br/>
+					<input type="radio" name="cractive" value="2"/>가벼운 활동 (평소 가벼운 운동이나 스포츠를 즐겨요)<br/>
+					<input type="radio" name="cractive" value="3"/>보통 활동 (평소 적당한 운동이나 스포츠를 즐겨요.)<br/>
+					<input type="radio" name="cractive" value="4"/>많은 활동 (평소 강렬한 운동이나 스포츠를 즐겨요.)<br/>
+					<input type="radio" name="cractive" value="5"/>격심한 활동 (평소 매우 심한 운동을 하거나 육체를 쓰는 직업이예요.)</td>
 			</tr>
 		</table>
 		<div>

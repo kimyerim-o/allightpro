@@ -35,6 +35,7 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
@@ -46,6 +47,26 @@
 			<artifactId>javax.mail</artifactId> 
 			<version>1.5.6</version> 
       	</dependency>
+      	
+      	<!-- python실행 -->
+      	<dependency>
+		    <groupId>org.python</groupId>
+		    <artifactId>jython</artifactId>
+		    <version>2.7.2</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.python</groupId>
+		    <artifactId>jython-standalone</artifactId>
+		    <version>2.7.2</version>
+		</dependency>
+		
+		<!-- tensorflow -->
+		<dependency>
+		  <groupId>org.tensorflow</groupId>
+		  <artifactId>tensorflow</artifactId>
+		  <version>1.15.0</version>
+		</dependency>
       	
 		<dependency>
 		    <groupId>commons-httpclient</groupId>

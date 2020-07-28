@@ -3,7 +3,6 @@
 "HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
 
-<!-- 유저단 -->
 	<select id="getTotalCnt" resultType="Integer"
 		parameterType="PageUtil">
 		select count(*) from item
@@ -28,60 +27,16 @@
 	</insert>
 		
 		<delete id="reviewDelete" parameterType="reviewDTO">
-		delete from review where rno=${rno} and rid=#{rid}
+		delete from review where ino=${ino} and rid=#{rid}
 		</delete>
 		
 		<select id="getReviewInfo" parameterType="reviewDTO" resultType="reviewDTO">
-			select * from(select r.*, row_number() over (order by r.rno) num
-   										 from review r where rid=#{rid} order by rno desc)
-    		where num=${num}
+			select * from review where ino=${ino} and rid=#{rid}		
 		</select>
 		
 		<update id="reviewUpdate" parameterType="reviewDTO"> 
 			update review set rdate=sysdate, rgrade=${rgrade}, rcontent=#{rcontent}
-			where rno=(select rno from(select r.rno, row_number() over (order by r.rno) num
-											                        from review r where rid=#{rid} order by rno desc)
-											                        where num=${num})
+			where ino=${ino} and rid=#{rid}
 		</update>
-		
-<!-- 기업단 -->
-		<select id="getTotalCntCorp" parameterType="PageUtil" resultType="Integer">
-		select count(*) from (select r.*, i.iname
-                from review r, item i
-                where r.ino in (select ino
-                                from item
-                                where cono = (select cono
-                                            from corporation
-                                             where coid=#{coid})
-                                and iname like '%${searchWord}%')
-                and r.ino=i.ino)
-		</select>
-		
-		<select id="getListCorp" parameterType="PageUtil" resultType="java.util.HashMap">
-		select * from (select r.*, i.iname, row_number() over (order by r.rno) num
-                from review r, item i
-                where r.ino in (select ino
-                                from item
-                                where cono = (select cono
-                                            from corporation
-                                            where coid=#{coid})
-                                and iname like '%${searchWord}%')
-                and r.ino=i.ino)
-where num between ${startNo} and ${endNo}
-order by num desc
-		</select>
-		
-		<delete id="reviewDeleteCorp" parameterType="reviewDTO">
-		delete from review
-		where rno = (select rno from (select * from (select r.rno, row_number() over (order by r.rno) num
-        	                    from review r, item i
-            	                where r.ino in (select ino
-                				                            from item
-                                				            where cono = (select cono
-                                                								          from corporation
-                                                          								where coid=#{coid}))
-                                 							and r.ino=i.ino))
-            					where num=${num})
-            </delete>
 </mapper>
 	

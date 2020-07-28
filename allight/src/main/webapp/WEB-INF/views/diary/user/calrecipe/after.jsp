@@ -9,7 +9,7 @@
 <script>
 $(function(){
 	$('#check').click(function(){
-		$("#check").attr('href','${pageContext.request.contextPath}/recipeRe.com');
+		$("#check").attr('href','${pageContext.request.contextPath}/calorie_recipe.com');
 	});
 })
 </script>
@@ -19,7 +19,7 @@ $(function(){
 		<table class="table">
 			<tr>
 				<th>총 감량기간</th>
-				<td>${LIST.crterm}<c:if test="${empty sessionScope.MID}">${LIST.type}</c:if></td>
+				<td>${LIST.crterm}${LIST.type}</td>
 			</tr>
 			<tr>
 				<th>현제 체중</th>
@@ -49,7 +49,7 @@ $(function(){
 			<tr>
 				<th>다이어트를 위한 하루 칼로리</th>
 				<td>${LIST.crcal}
-					<c:if test="${LIST.crcal <= 1000}"><br/>하루 1000kcal이하의 섭취량은 권장하지 않습니다.</c:if>
+					<c:if test="${LIST.crcal <= 1000}">하루 1000kcal이하의 섭취량은 권장하지 않습니다.</c:if>
 				</td>
 			</tr>
 		</table>

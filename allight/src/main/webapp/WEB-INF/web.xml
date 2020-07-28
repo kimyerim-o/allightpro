@@ -68,4 +68,20 @@
 		<url-pattern>*.com</url-pattern>
 	</filter-mapping>
 	
+	<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="3.1">
+	   <servlet> 
+	        <servlet-name>PyServlet</servlet-name> 
+	        <servlet-class>org.python.util.PyServlet</servlet-class> 
+	         <init-param> 
+	            <param-name>python.home</param-name> 
+	            <param-value>C:\\jython2.7.2</param-value> 
+	        </init-param> 
+	       <load-on-startup>1</load-on-startup> 
+	    </servlet> 
+	    <servlet-mapping> 
+	        <servlet-name>PyServlet</servlet-name> 
+	        <url-pattern>*.py</url-pattern> 
+	    </servlet-mapping> 
+	 </web-app>
+	
 </web-app>

@@ -19,30 +19,12 @@ public class ReviewDTO {
 	// DB에는 없음
 	int rlamount;	//리뷰에 대한 좋아요수
 	Boolean isLiked;//로그인한 아이디의 해당 리뷰 좋아요 여부
-	int num; //개인이 보는 자신의 리뷰 번호
-	String coid; //기업이 리뷰 삭제시 쓰임
-	
-	
 	
 	public ReviewDTO(){}
 	//ReviewService.getReviewInfo메소드에서 쓰이는 생성자
-	public ReviewDTO(int num, String id) {
-		this.num=num;
+	public ReviewDTO(int ino, String id) {
+		this.ino=ino;
 		this.rid=id;
-	}
-	
-	
-	public String getCoid() {
-		return coid;
-	}
-	public void setCoid(String coid) {
-		this.coid = coid;
-	}
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
 	}
 	public Boolean getIsLiked() {
 		return isLiked;
@@ -110,15 +92,13 @@ public class ReviewDTO {
 	public void setRlamount(int rlamount) {
 		this.rlamount = rlamount;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "ReviewDTO [rno=" + rno + ", ino=" + ino + ", rid=" + rid + ", rnick=" + rnick + ", rdate=" + rdate
 				+ ", rgrade=" + rgrade + ", rcontent=" + rcontent + ", rlno=" + rlno + ", rlid=" + rlid + ", rlamount="
-				+ rlamount + ", isLiked=" + isLiked + ", num=" + num + ", coid=" + coid + "]";
+				+ rlamount + ", isliked=" + isLiked + "]";
 	}
-
 	
-	
-	
-
 }

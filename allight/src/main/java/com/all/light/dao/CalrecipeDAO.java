@@ -20,8 +20,4 @@ public class CalrecipeDAO extends SqlSessionDaoSupport {
 		session.insert("calrecipe.recipeCheck", cdto);
 	}
 
-	public CalrecipeDTO getRecipe(String mid) {
-		return session.selectOne("calrecipe.getRecipe", mid);
-	}
-
 }

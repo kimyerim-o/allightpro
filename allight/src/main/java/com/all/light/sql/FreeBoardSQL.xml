@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="freeboard">
+	<!-- 유저 -->
+	<!-- 글쓰기 -->
+	<insert id="write" parameterType="freDTO">
+		insert into freeboard(fno,
+		ftype, ftitle, fid, fnick, fdate, fcontent,fhit)
+		values(FNO_SEQ.nextval,#{ftype},#{ftitle},#{fid},#{fnick},sysdate,#{fcontent},0)
+	</insert>
+	<!-- 페이징 -->
+	<select id="getPageInfo" parameterType="PageUtil"	resultType="Integer">
+		select count(*) from freeboard
+		<choose>
+		<!-- ftype=다이어리 -->
+			<when test="searchType=='fall'">
+				where (ftitle like '%${searchWord}%'
+				or fcontent like '%${searchWord}%')
+				and ftype like '%${ftype}%'
+			</when>
+			<otherwise>
+				where ${searchType} like '%${searchWord}%'
+				and ftype like '%${ftype}%'
+			</otherwise>
+		</choose>
+	</select>
+	<select id="searchList" parameterType="PageUtil"	resultType="freDTO">
+		select * from(
+						select row_number() over (order by fno) num,
+			        	f.* from freeboard f
+			        <choose>
+					<when test="searchType=='fall'">
+						where (ftitle like '%${searchWord}%'
+						or fcontent like	'%${searchWord}%')
+						and ftype like '%${ftype}%')
+					</when>
+					<otherwise>
+						where ${searchType} like '%${searchWord}%'
+						and ftype like '%${ftype}%')
+					</otherwise>
+				</choose>
+			where num between ${startNo} and ${endNo}
+			order by num desc
+	</select>
+	
+</mapper>

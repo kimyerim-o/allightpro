@@ -56,5 +56,6 @@
 		select * from corporation where coid=#{coid}
 	</select>
 	
+	
 </mapper>
 

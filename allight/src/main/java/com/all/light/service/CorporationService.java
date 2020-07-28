@@ -1,8 +1,12 @@
 package com.all.light.service;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,30 +30,6 @@ public class CorporationService {
 			cnt=cnt+1;
 			session.setAttribute("cnt", cnt);
 			System.out.println("로그인실패");
-			String[] arr=null;
-			if(cnt>=4) {
-				System.out.println("1");
-				/*try {
-					Runtime rt=Runtime.getRuntime();
-					String ex="d:\\study\\pj5ML\\dist\\test.exe";
-					Process pro=rt.exec(ex);
-					pro.waitFor();
-					File file = new File("d:\\study\\pj5ML\\logintest.txt");
-
-		            FileReader filereader = new FileReader(file);
-		            BufferedReader bufReader = new BufferedReader(filereader);
-		            String line = bufReader.readLine();
-		            arr=line.split(",");
-		            for(int i=1;i<arr.length;i++) {
-	            		System.out.println(arr[i]);	   
-	            	}
-		            
-		            bufReader.close();
-				}catch(Exception e) {
-					System.out.println(e);
-				}*/
-				System.out.println("2");
-			}
 		}else{
 			//로그인성공
 			System.out.println("로그인성공");
@@ -60,7 +40,7 @@ public class CorporationService {
 		return result;
 		
 	}
-
+	
 	public void logout(HttpSession session) {
 		if(session.getAttribute("COID")!=null) {
 			session.invalidate();

@@ -1,5 +1,8 @@
 package com.all.light.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -29,26 +32,46 @@ public class CorporationController {
 	public ModelAndView corlog(@RequestParam(value = "cnt", required = false, defaultValue = "0") int cnt,
 			CorporationDTO cordto,HttpSession session,HttpServletRequest req,ModelAndView mv,RedirectView rv) {
 		System.out.println("CorporationController corlog");
-		if(cnt<4) {
-			HashMap result=corSVC.login(cordto,session,cnt);
-			if(result==null || result.size()==0) {
-				rv.setUrl("./login.com");
-			}else {
-				rv.setUrl("./main.com");
+		
+		HashMap result=corSVC.login(cordto,session,cnt);
+		
+		String[] arr=null;
+		if(result==null || result.size()==0) {
+			if(cnt>=3) {
+				System.out.println("auto");
+				arr=auto();
+				for(int i=0;i<arr.length;i=i+2) {
+	        		System.out.println(arr[i]);
+	        	}
+				cordto.setArr(arr);
+				mv.addObject("cordto", cordto);
 			}
+			rv.setUrl("./login.com");
 		}else {
-			//자동입력방지값 동일한지 확인하기
-			System.out.println("auto");
-			
-			HashMap result=corSVC.login(cordto,session,cnt);
-			if(result==null || result.size()==0) {
-				rv.setUrl("./login.com");
-			}else {
-				rv.setUrl("./main.com");
-			}
+			rv.setUrl("./main.com");
 		}
 		mv.setView(rv);
 		return mv;
+	}
+	
+	public String[] auto() {
+		String[] arr=null;
+		try {
+			Runtime rt=Runtime.getRuntime();
+			String ex="d:\\study\\pj5ML\\dist\\test.exe";
+			Process pro=rt.exec(ex);
+			pro.waitFor();
+			File file = new File("d:\\study\\pj5ML\\logintest.txt");
+
+            FileReader filereader = new FileReader(file);
+            BufferedReader bufReader = new BufferedReader(filereader);
+            String line = bufReader.readLine();
+            arr=line.split(",");//예측,정답
+            bufReader.close();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return arr;
 	}
 	
 	//로그아웃

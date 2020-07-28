@@ -85,7 +85,10 @@
 		</tr>
 		<c:if test="${sessionScope.cnt > 3}">
 			<tr>
-				<td>자동방지</td>
+				<td>자동방지
+					${cordto}
+					<c:forEach items="${arr}" var="a">${a}</c:forEach>
+				</td>
 			</tr>
 			<tr>
 				<td><input type="text" id="auto" name="auto" placeholder="자동입력 방지문자"/></td>

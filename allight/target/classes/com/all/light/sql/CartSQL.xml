@@ -3,11 +3,6 @@
 "HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Cart">
 
-	<!-- 장바구니 테이블에 추가하기 전에 같은상품이 장바구니에 담겨있는지 확인 
-	<select id="selectCountInCart" resultType="String" parameterType="cartDTO">
-		  select decode(count(*),0,'false','true') from cart where caid=#{mid} and ino=#{ino}
-	</select>-->
-	
 	<!-- 장바구니에 상품추가 -->
 	<insert id="insertCart" parameterType="java.util.HashMap">
 		insert into cart values (cano_SEQ.nextval, #{mid}, #{ino}, #{caamount}, #{caprice})

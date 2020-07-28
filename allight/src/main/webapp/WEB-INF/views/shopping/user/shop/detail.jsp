@@ -154,14 +154,14 @@ $(function(){
 		
 		$.ajax({
 			  type : 'post',
-              url : '../insertCart.com',
+              url : '${pageContext.request.contextPath}/insertCart.com',
               data : {"ino":ino,
                     "caamount":caamount,
                     "caprice":caprice},
               success : function(result){
                   if( result =="success"){
                 	  if(confirm("장바구니에 담겼습니다.\n장바구니 페이지로 이동하시겠습니까?")){
-                	  	location.href="../cart.com";
+                	  	location.href="${pageContext.request.contextPath}/cart.com";
 					  }
                   }else if( result == "fail"){
                 	  if(confirm("회원만 이용 가능한 서비스입니다.\n로그인 하시겠습니까?")){
@@ -265,18 +265,6 @@ $(function(){
 			$td.prev('td').attr('class','show');
 			$td.attr('class','hidden');
 		}
-	})
-	
-	$('.in-cart-btn').click(function(){
-		var ino = Number(${param.ino});
-		var caamount = $('#number').val();
-		var caprice = Number($('.right-total-price').text().replace(',',''));
-		
-		$('#cart-ino').val(ino);
-		$('#cart-caamount').val(caamount);
-		$('#cart-caprice').val(caprice);
-		
-		$('#cartFrm').submit();
 	})
 	
 });
@@ -637,10 +625,5 @@ $(function(){
 		<input type="hidden" name="reUrl" value="${pageContext.request.contextPath}/shopping/detail.com?ino=${param.ino}">
 	</form>
 
-	<form action="./cart.com" id="cartFrm">
-		<input type="hidden" name="ino" id="cart-ino">
-		<input type="hidden" name="caamount" id="cart-caamount">
-		<input type="hidden" name="caprice" id="cart-caprice">
-	</form>
 </body>
 </html>

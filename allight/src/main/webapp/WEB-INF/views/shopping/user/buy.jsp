@@ -36,8 +36,12 @@
 				<tr>
 					<td>이름</td>
 					<td>${sessionScope.MNAME }</td>
+				</tr>
+				<tr>
 					<td>배송주소</td>
-					<td>${sessionScope.OADDRESS1 }
+					<td>${sessionScope.OADDRESS1 }</td>
+				</tr>
+				<tr>	
 					<td>연락처</td>
 					<td>${sessionScope.MTEL }</td>
 				</tr>

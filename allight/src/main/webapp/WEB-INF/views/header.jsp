@@ -23,6 +23,9 @@
 	href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/shopping.css">
+<link rel="stylesheet" 
+  	href="${pageContext.request.contextPath}/resources/css/calendar.css">
+  	
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 function kakaoLogout() {
@@ -67,7 +70,8 @@ function kakaoLogout() {
 				<c:if test="${!empty sessionScope.MID and !empty sessionScope.MPW}">
 					<a href="${pageContext.request.contextPath}/logout.com"
 						class="logined-panel">로그아웃</a>
-					<a href="#" class="logined-panel">장바구니()</a>
+					<a href="${pageContext.request.contextPath}/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>장바구니</a>
+					
 					<a href="${pageContext.request.contextPath}/order/list.com"
 						class="logined-panel">주문/배송조회</a>
 					<a href="${pageContext.request.contextPath}/mypage/home.com" class="logined-panel">마이페이지</a>

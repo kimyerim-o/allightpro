@@ -343,7 +343,7 @@ function deleteMy(cdno) {
 			<c:forEach var="list" items="${LIST}">
 			<tr>
 				<td width="5%"><input type="checkbox" name="checkbox"/><input type="hidden" name="cdno" value="${list.cdno}"></td>
-				<td width="65%" class="cdname">${list.cdname}&nbsp;&nbsp;(${list.cdamount}, ${list.cdgram}g)</td>
+				<td width="65%" class="cdname">${list.cdname}&nbsp;&nbsp;(${list.cdamount}회, ${list.cdgram}g)</td>
 				<td width="25%" class="right">${list.cdcal}kcal</td>
 				<td width="5%" onclick="detail(${list.cdno},${list.cdamount},'${list.cdname}',${list.cdgram},${list.cdcal},${list.cdtan},${list.cddan},${list.cdji},${list.cdsik},${list.cdna})">&gt;</td>
 			</tr>
@@ -359,7 +359,7 @@ function deleteMy(cdno) {
 			<c:forEach var="list" items="${MYLIST}">
 			<tr>
 				<td width="5%"><input type="checkbox" name="checkbox"/><input type="hidden" name="cdno" value="${list.cdno}"></td>
-				<td width="60%" class="cdname">${list.cdname}&nbsp;&nbsp;(${list.cdamount}, ${list.cdgram}g)</td>
+				<td width="60%" class="cdname">${list.cdname}&nbsp;&nbsp;(${list.cdamount}회, ${list.cdgram}g)</td>
 				<td width="25%" class="right">${list.cdcal}kcal</td>
 				<td width="5%" onclick="detail(${list.cdno},${list.cdamount},'${list.cdname}',${list.cdgram},${list.cdcal},${list.cdtan},${list.cddan},${list.cdji},${list.cdsik},${list.cdna})">&gt;</td>
 				<td width="5%" onclick="deleteMy(${list.cdno})">X</td>
@@ -404,7 +404,7 @@ function deleteMy(cdno) {
 	   		</td>
       	 </tr>
          <tr>
-            <td>수량</td>
+            <td>수량(회)</td>
             <td><input type="number" value="1" min="1" id="amount" name="mfamount"/></td>
          </tr>
          <tr>
@@ -482,7 +482,7 @@ function deleteMy(cdno) {
       <input type="hidden" name="dno" value="${DTO.dno}"/>
       <table id="detail-table">
       	 <tr>
-            <td>수량</td>
+            <td>수량(회)</td>
             <td><input type="number" value="1" name="cdamount"/></td>
             <td>탄수화물</td>
             <td><input type="number" min="0" name="cdtan"/></td>

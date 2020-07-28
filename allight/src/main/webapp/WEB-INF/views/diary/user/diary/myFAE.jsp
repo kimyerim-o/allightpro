@@ -233,7 +233,7 @@ function updateDimage(input){
 				<tr>
 					<td class="center">${list.mftype}</td>
 					<td class="center">${list.mfname}&nbsp;(${list.mfgram}g)</td>
-					<td class="center">${list.mfamount}</td>
+					<td class="center">${list.mfamount}회</td>
 					<td class="center">${list.mftotalcal}</td>
 					<td class="center" onclick="mfdel(${list.dno},${list.mfno});">X</td>
 				</tr>

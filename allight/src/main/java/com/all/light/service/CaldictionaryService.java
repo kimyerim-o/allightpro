@@ -28,7 +28,7 @@ public class CaldictionaryService {
 	}
 	// 검색 및 리스트 조회 - 음식
 	public ArrayList<CaldictionaryDTO> getListView(PageUtil pInfo, String searchWord) {
-		System.out.println("서비스 상품리스트 페이징 관련 - getListView() 진입");
+		System.out.println("서비스 상품리스트 페이징 관련 - getListView () 진입");
 		pInfo.setSearchWord(searchWord);
 		ArrayList<CaldictionaryDTO> list = calDAO.searchList(pInfo);
 		System.out.println("서비스 상품리스트 페이징 관련 - getListView() list " + list);

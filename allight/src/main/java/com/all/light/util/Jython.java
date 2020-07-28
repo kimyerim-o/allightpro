@@ -10,6 +10,10 @@ import org.python.core.PyObject;
 import org.python.core.PyString;
 import org.python.util.PythonInterpreter;
 import org.springframework.util.ResourceUtils;
+import org.tensorflow.SavedModelBundle;
+import org.tensorflow.Session;
+import org.tensorflow.Tensor;
+import org.tensorflow.TensorFlow;
 
 public class Jython {
 
@@ -22,29 +26,23 @@ public class Jython {
 	     Properties preprops = System.getProperties();
 	     PythonInterpreter.initialize(preprops, props, new String[0]);
 	 
-	     String path = ResourceUtils.getFile("d:\\study\\pj5ML\\login.py").getPath();
+	     /*String path = ResourceUtils.getFile("d:\\study\\pj5ML\\login.py").getPath();
 	     PythonInterpreter interpreter = new PythonInterpreter();
 	     interpreter.execfile(path);
 	     PyFunction function = interpreter.get("my_test",PyFunction.class);
 	     PyObject pyobject = function.__call__(new PyString("huzhiwei"),new PyString("25"));
-	     System.out.println("anwser = " + pyobject.toString());
+	     System.out.println("anwser = " + pyobject.toString());*/
+	     	     
+	     float[][] value=new float[784][10];
 	     
-	     PythonInterpreter interp = new PythonInterpreter();
+	     System.out.println(TensorFlow.version());  
+	     SavedModelBundle b=SavedModelBundle.load("d:\\study\\pj5ML\\logintf", "serve");
+	     Session sess=b.session();
+	     Tensor x=Tensor.create(value);
+	     float[][] y= sess.runner().feed("x", x).fetch("h").run().get(0).copyTo(new float[784][10]);
 	     
-	        System.out.println("3");
-	        
-	        // The exec() method executes strings of code
-	        interp.exec("print sys");
-
-	        // Set variable values within the PythonInterpreter instance
-	        interp.set("a", new PyInteger(42));
-	        interp.exec("print a");
-	        interp.exec("x = 2+2");
-
-	        // Obtain the value of an object from the PythonInterpreter and store it
-	        // into a PyObject.
-	        PyObject x = interp.get("x");
-	        System.out.println("x: " + x);
+	     for(int i=0;i<y.length;i++)
+	    	 System.out.println(y[i][0]);
 	}
 
 }

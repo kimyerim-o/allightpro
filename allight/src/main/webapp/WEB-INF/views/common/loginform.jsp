@@ -75,7 +75,7 @@
 
 <form action="./corlog.com" method="post">
 <input type="hidden" name="cnt" value="${sessionScope.cnt}"/>
-${sessionScope.cnt}
+<c:if test="${!empty sessionScope.cnt}">${sessionScope.cnt}<a style="color: red;">아이디 비밀번호를 확인해주세요.</a></c:if>
 	<table>
 		<tr>
 			<td><input type="text" id="coid" name="coid" placeholder="아이디" required="required"/></td>

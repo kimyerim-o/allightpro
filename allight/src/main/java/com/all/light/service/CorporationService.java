@@ -1,14 +1,25 @@
 package com.all.light.service;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.servlet.http.HttpSession;
 
+import org.python.core.PyFunction;
+import org.python.core.PyInteger;
+import org.python.core.PyObject;
+import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.CorporationDAO;
 import com.all.light.dto.CorporationDTO;
+import com.all.light.util.Jython;
 import com.all.light.util.PageUtil;
 
 public class CorporationService {
@@ -26,8 +37,33 @@ public class CorporationService {
 			cnt=cnt+1;
 			session.setAttribute("cnt", cnt);
 			System.out.println("로그인실패");
+			String[] arr=null;
+			if(cnt>=4) {
+				System.out.println("1");
+				/*try {
+					Runtime rt=Runtime.getRuntime();
+					String ex="d:\\study\\pj5ML\\dist\\test.exe";
+					Process pro=rt.exec(ex);
+					pro.waitFor();
+					File file = new File("d:\\study\\pj5ML\\logintest.txt");
+
+		            FileReader filereader = new FileReader(file);
+		            BufferedReader bufReader = new BufferedReader(filereader);
+		            String line = bufReader.readLine();
+		            arr=line.split(",");
+		            for(int i=1;i<arr.length;i++) {
+	            		System.out.println(arr[i]);	   
+	            	}
+		            
+		            bufReader.close();
+				}catch(Exception e) {
+					System.out.println(e);
+				}*/
+				System.out.println("2");
+			}
 		}else{
 			//로그인성공
+			session.invalidate();
 			System.out.println("로그인성공");
 			session.setAttribute("CONO",result.get("CONO"));
 			session.setAttribute("COID",result.get("COID"));

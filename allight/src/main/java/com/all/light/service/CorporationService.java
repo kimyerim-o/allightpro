@@ -52,7 +52,6 @@ public class CorporationService {
 			}
 		}else{
 			//로그인성공
-			session.invalidate();
 			System.out.println("로그인성공");
 			session.setAttribute("CONO",result.get("CONO"));
 			session.setAttribute("COID",result.get("COID"));

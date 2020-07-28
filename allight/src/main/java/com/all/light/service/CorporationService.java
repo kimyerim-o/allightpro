@@ -1,20 +1,10 @@
 package com.all.light.service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 import javax.servlet.http.HttpSession;
 
-import org.python.core.PyFunction;
-import org.python.core.PyInteger;
-import org.python.core.PyObject;
-import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.CorporationDAO;

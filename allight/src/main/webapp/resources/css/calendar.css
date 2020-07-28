@@ -773,6 +773,7 @@ table.fc-header {
 	display: inline-block;
 	top: -8px;
 	position: relative;
+	color:#212529;
 }
 
 .diary-div {
@@ -860,11 +861,11 @@ table.fc-header {
 	float: left;
 }
 
-.search-table {
+.search-table-on {
 	min-height: 100px;
 }
 
-.search-table td {
+.search-table-on td {
 	line-height: 35px;
 	padding: 8px 5px 0;
 }
@@ -904,6 +905,22 @@ table.fc-header {
 	margin: 20px 0;
 }
 
+.search-div-on {
+	width: 50%;
+	float: left;
+}
+
+.search-div-on a {
+	color:#ef5777;
+	font-weight:bold;
+	width: 100%;
+	display: block;
+	text-align: center;
+	padding: 20px;
+	border: 1px solid #ff7289;
+	margin: 20px 0;
+}
+
 #MFsearchFrm {
 	border: 1px solid #b8b8b8;
 	height: 50px;
@@ -912,7 +929,7 @@ table.fc-header {
 }
 
 .calTxt {
-	font-size: 20px;
+	font-size: 16px;
 	width: 90%;
 	height: 100%;
 	padding: 0 0 0 80px;

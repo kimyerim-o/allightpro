@@ -30,7 +30,7 @@
 		<url-pattern>*.com</url-pattern>
 	</servlet-mapping>
 
-		<!-- POST방식의 한글깨짐 방지 -->
+	<!-- POST방식의 한글깨짐 방지 -->
 	<filter>
         <filter-name>setCharacterEncodingFilter</filter-name>
         <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Cart">
+
+	<!-- 장바구니 테이블에 추가하기 전에 같은상품이 장바구니에 담겨있는지 확인 
+	<select id="selectCountInCart" resultType="String" parameterType="cartDTO">
+		  select decode(count(*),0,'false','true') from cart where caid=#{mid} and ino=#{ino}
+	</select>-->
+	
+	<!-- 장바구니에 상품추가 -->
+	<insert id="insertCart" parameterType="java.util.HashMap">
+		insert into cart values (cano_SEQ.nextval, #{mid}, #{ino}, #{caamount}, #{caprice})
+	</insert>
+
+	<!-- 장바구니 -->
+	<select id="cart" resultType="cartDTO" parameterType="String">
+		select * from cart where caid=#{mid}
+	</select>
+	
+	<!-- 아이템번호로 아이템이름 가져오기 -->
+	<select id="items" resultType="cartDTO" parameterType="Integer">
+		select iname,iprice from item where ino=#{ino}
+	</select>
+	
+	<!-- 아이템번호로 이미지 가져오기 -->
+	<select id="image" resultType="String" parameterType="Integer">
+		select imgimage from image where ino=#{ino} and imgrepresent=1
+	</select>
+	
+	<!--카트에서 해당 아이디의 아이템번호(ino) count -->
+	<select id="inoCount" resultType="Integer" parameterType="java.util.HashMap">
+		select count(*) from cart where ino=#{ino} and caid=#{mid}
+	</select>
+	
+	<!-- 같은상품 있을때 수량,합계 업데이트 -->
+	<update id="updateCart" parameterType="java.util.HashMap">
+		update cart set caamount=#{total},caprice=#{sum} where ino=#{ino} and caid=#{mid}
+	</update>
+	
+	<!-- 같은상품 있을때 기존 합계 가져오기  -->
+	<select id="sum" resultType="Integer" parameterType="java.util.HashMap">
+		select caprice from cart where ino=#{ino} and caid=#{mid}
+	</select>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="deleteCart">
+		delete from cart where cano=#{cano} and caid=#{caid}
+	</delete>
+</mapper>

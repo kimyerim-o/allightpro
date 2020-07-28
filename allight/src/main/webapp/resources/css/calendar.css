@@ -710,7 +710,7 @@ table.fc-header {
 	background-color: #FFFFFF;
 	border-radius: 6px;
 	border: 3px solid #ffc545;
-	font-family:"Lora", serif;
+	font-family: "Lora", serif;
 }
 
 .main-nav {
@@ -718,14 +718,15 @@ table.fc-header {
 	text-align: center;
 	color: white;
 	padding: 15px;
-	font-size: 30px;
+	font-size: 35px;
 	font-weight: bold;
+	font-family: auto;
 }
 
 .main-nav a {
 	color: white;
 	padding: 5px;
-	font-size: 30px;
+	font-size: 35px;
 	font-weight: bold;
 }
 
@@ -777,4 +778,193 @@ table.fc-header {
 .diary-div {
 	margin: 0 auto;
 	width: 900px;
+}
+
+/* 게시판 생성 모달  */
+#mask_create, #mask_create2 {
+	position: absolute;
+	z-index: 9000;
+	background-color: #444;
+	display: none;
+	left: 0;
+	top: 0;
+}
+
+.create_modal, .create_modal2 {
+	overflow-y: scroll;
+	z-index: 10000;
+	width: 1000px;
+	height: auto;
+	max-height: 600px;
+	background-color: white;
+	margin: 0 auto;
+	display: none;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.create_modal .top, .create_modal2 .top {
+	width: 100%;
+	height: 5%;
+	border-radius: 12px 12px 0px 0px;
+}
+
+.create_modal .top .close, .create_modal2 .top .close {
+	float: right;
+	cursor: pointer;
+	color: black;
+	font-size: 25px;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-right: 20px;
+}
+
+.create_modal .bottom, .create_modal2 .bottom {
+	width: 100%;
+	height: 15%;
+	vertical-align: middle;
+}
+
+.create_modal .bottom .center {
+	margin-left: 60px;
+}
+
+.title3 {
+	margin: 40px 0 10px;
+	display: block;
+	font-size: 25px;
+	color: #333333;
+	text-align: left;
+}
+
+.diary-content {
+	margin: 0 20px;
+}
+
+.center2 {
+	text-align: center;
+}
+
+.f-right {
+	float: right;
+}
+
+.f-left {
+	float: left;
+}
+
+.search-table {
+	min-height: 100px;
+}
+
+.search-table td {
+	line-height: 35px;
+	padding: 8px 5px 0;
+}
+
+.search-divs1 {
+	position: relative;
+	width: 100%;
+}
+
+.search-divs1::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+.search-divs2 {
+	position: relative;
+	width: 100%;
+}
+
+.search-divs2 ul {
+	margin: 0;
+	padding: 0;
+}
+
+.search-div {
+	width: 50%;
+	float: left;
+}
+
+.search-div a {
+	width: 100%;
+	display: block;
+	text-align: center;
+	padding: 20px;
+	border: 1px solid #b8b8b8;
+	margin: 20px 0;
+}
+
+#MFsearchFrm {
+	border: 1px solid #b8b8b8;
+	height: 50px;
+	line-height: 40px;
+	margin: 40px 0;
+}
+
+.calTxt {
+	font-size: 20px;
+	width: 90%;
+	height: 100%;
+	padding: 0 0 0 80px;
+	border: none;
+	text-align: center;
+}
+
+.calBtn {
+	width: 10%;
+	height: 100%;
+	border: 0px;
+	background: #fff;
+	color: white;
+	outline: none;
+	float: right;
+	padding: 3px;
+}
+
+.detail-name-div {
+	padding: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	border: 1px solid #b8b8b8;
+	text-align: center;
+	margin: 40px 0;
+}
+
+.detail-in-table td {
+	border: none;
+	line-height: 35px;
+}
+
+.mTotal, .fTotal {
+	font-size:30px;
+	padding:0 5px 0 10px;
+}
+
+.myCalText {
+	font-size: 20px; 
+	font-weight:bold;
+	width: 90%;
+	height: 100%;
+	padding: 10px;
+	border: none;
+	text-align: center;
+}
+
+.my-name-div {
+	padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid #b8b8b8;
+    text-align: center;
+    margin: 40px 0;
 }

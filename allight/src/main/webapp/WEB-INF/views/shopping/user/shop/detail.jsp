@@ -238,6 +238,18 @@ $(function(){
 		}
 	})
 	
+	$('.in-cart-btn').click(function(){
+		var ino = Number(${param.ino});
+		var caamount = $('#number').val();
+		var caprice = Number($('.right-total-price').text().replace(',',''));
+		
+		$('#cart-ino').val(ino);
+		$('#cart-caamount').val(caamount);
+		$('#cart-caprice').val(caprice);
+		
+		$('#cartFrm').submit();
+	})
+	
 });
 </script>
 </head>
@@ -556,11 +568,11 @@ $(function(){
 						</tr>	
 					</c:if>
 				</c:forEach>
-				<c:if test="${empty RLIST}">
+				<c:if test="${empty QLIST}">
 					<tr><td colspan="5" class="center">상품문의가 존재하지 않습니다.</td></tr>
 				</c:if>
 			</table>
-			<c:if test="${!empty RLIST}">
+			<c:if test="${!empty QLIST}">
 				<div class="center">
 					<ul class="pagination" id="qPage">
 			            <li>
@@ -596,5 +608,10 @@ $(function(){
 		<input type="hidden" name="reUrl" value="${pageContext.request.contextPath}/shopping/detail.com?ino=${param.ino}">
 	</form>
 
+	<form action="./cart.com" id="cartFrm">
+		<input type="hidden" name="ino" id="cart-ino">
+		<input type="hidden" name="caamount" id="cart-caamount">
+		<input type="hidden" name="caprice" id="cart-caprice">
+	</form>
 </body>
 </html>

@@ -3,20 +3,22 @@ package com.all.light.dto;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import oracle.sql.DATE;
+import java.sql.Date;
 
 public class DiaryDTO {
 	
-	private int dno;		//다이어리 번호
-	private String mid;		//아이디
-	private int dexercal;	//총운동칼로리
-	private int dfoodcal;	//총음식칼로리
-	private String dimage;	//사진
-	private int dweight;	//체중
-	private String ddiary;	//일기
-	private DATE ddate;		//날짜
+	private int dno;			//다이어리 번호
+	private String mid;			//아이디
+	private int dexercal=0;		//총운동칼로리
+	private int dfoodcal=0;		//총음식칼로리
+	private String dimage;		//사진
+	private String savedimage;	//저장된 사진
+	private Double dweight=0.0;	//체중
+	private String ddiary;		//일기
+	private Date ddate;			//날짜
 
 	//달력 표시 위해..
 	private String year="";
@@ -67,10 +69,10 @@ public class DiaryDTO {
 	public void setDexercal(int dexercal) {
 		this.dexercal = dexercal;
 	}
-	public DATE getDdate() {
+	public Date getDdate() {
 		return ddate;
 	}
-	public void setDdate(DATE ddate) {
+	public void setDdate(Date ddate) {
 		this.ddate = ddate;
 	}
 	public int getDfoodcal() {
@@ -85,10 +87,10 @@ public class DiaryDTO {
 	public void setDimage(String dimage) {
 		this.dimage = dimage;
 	}
-	public int getDweight() {
+	public Double getDweight() {
 		return dweight;
 	}
-	public void setDweight(int dweight) {
+	public void setDweight(Double dweight) {
 		this.dweight = dweight;
 	}
 	public String getDdiary() {
@@ -96,6 +98,12 @@ public class DiaryDTO {
 	}
 	public void setDdiary(String ddiary) {
 		this.ddiary = ddiary;
+	}
+	public String getSavedimage() {
+		return savedimage;
+	}
+	public void setSavedimage(String savedimage) {
+		this.savedimage = savedimage;
 	}
 	
 	
@@ -183,14 +191,15 @@ public class DiaryDTO {
 		}
 	}
 	
-	public DiaryDTO() {
-	}
+	public DiaryDTO() {}
+	
 	
 	@Override
 	public String toString() {
 		return "DiaryDTO [dno=" + dno + ", mid=" + mid + ", dexercal=" + dexercal + ", dfoodcal=" + dfoodcal
-				+ ", dimage=" + dimage + ", dweight=" + dweight + ", ddiary=" + ddiary + ", ddate=" + ddate + ", year="
-				+ year + ", month=" + month + ", day=" + day + ", value=" + value + "]";
+				+ ", dimage=" + dimage + ", savedimage=" + savedimage + ", dweight=" + dweight + ", ddiary=" + ddiary
+				+ ", ddate=" + ddate + ", year=" + year + ", month=" + month + ", day=" + day + ", value=" + value
+				+ "]";
 	}
 	
 }

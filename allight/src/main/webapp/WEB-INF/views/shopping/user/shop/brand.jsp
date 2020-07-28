@@ -63,7 +63,9 @@
 						<div class="product-image">
 							<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}"> <img class="pic"
 								src="${list.imgimage}">
-							</a> <span class="product-new-label">품절</span>
+							<c:if test="${list.istock == 0}">
+								<span class="product-new-label">품절</span>
+							</c:if>
 						</div>
 						<div class="product-content">
 							<div class="title">${list.iname}</div>

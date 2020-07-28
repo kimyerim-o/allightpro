@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html" 
+    pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -7,8 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
+
+function myFAE(day,dno){
+	$('#num').val(dno);
+	$('#year').val(${today_info.search_year});
+	$('#month').val(${today_info.search_month});
+	$('#day').val(day);
+	$('#myFAEFrm').submit();
+};
+
 </script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/calendar.css">
+
 </head>
 
 <body>
@@ -63,7 +72,7 @@
 					<c:forEach var="dateList" items="${dateList}" varStatus="date_status"> 
 						<c:choose>
 							<c:when test="${dateList.value=='today'}">
-								<td class="today">
+								<td class="today" onclick="myFAE(${dateList.day},${dateList.dno});">
 									<div class="date">
 										${dateList.day}
 									</div>
@@ -171,6 +180,12 @@
 		</div>
 	</form>
 </div>
-</body>
 
+<form action="./myFAE.com" method="post" id="myFAEFrm">
+	<input type="hidden" name="num" id="num"/>
+	<input type="hidden" name="year" id="year"/>
+	<input type="hidden" name="month" id="month"/>
+	<input type="hidden" name="day" id="day"/>
+</form>
+</body>
 </html>

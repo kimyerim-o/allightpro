@@ -23,7 +23,8 @@
    href="${pageContext.request.contextPath}/resources/css/style.css">
 <link rel="stylesheet"
    href="${pageContext.request.contextPath}/resources/css/shopping.css">
-
+<link rel="stylesheet" 
+   href="${pageContext.request.contextPath}/resources/css/calendar.css">
 </head>
 
 <body>

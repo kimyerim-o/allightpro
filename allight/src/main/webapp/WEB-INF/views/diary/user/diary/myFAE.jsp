@@ -22,7 +22,7 @@ $(function(){
 	})
 	
 	// 뒤로가기
-	$('#goBack').click(function(){
+	$('.goBack').click(function(){
 		document.location.href='./main.com';
 	})
 	
@@ -189,10 +189,9 @@ function updateDimage(input){
             alert(error);
         },
         success : function(data){
-        	data = decodeURI(data);
-			alert(data)
-        	$('#imgPreview').attr('src',data);
-        	//location.href="./myFAE.com?num="+data;
+        	//data = decodeURI(data);
+			//alert(data)
+        	location.href="./myFAE.com?num="+data;
        },
   	});
 	
@@ -202,7 +201,11 @@ function updateDimage(input){
 </head>
 <body>
 <div id="wrap2">
-	<div class="title2">다이어리</div>
+	<div class="title2">다이어리
+		<div class="f-right" style="margin:0 20px 0 0">
+			<input type="button" value="뒤로 가기" class="goBack">
+		</div>
+	</div>
 	<div class="diary-content">
 		<div class="title3">몸무게
 			<a>
@@ -225,7 +228,7 @@ function updateDimage(input){
 			<tr>
 				<th width="10%">구분</th>
 				<th width="45%">이름</th>
-				<th width="15%">수량</th>
+				<th width="15%">수량(회)</th>
 				<th width="25%">칼로리</th>
 				<th width="5%"></th>
 			</tr>
@@ -233,7 +236,7 @@ function updateDimage(input){
 				<tr>
 					<td class="center">${list.mftype}</td>
 					<td class="center">${list.mfname}&nbsp;(${list.mfgram}g)</td>
-					<td class="center">${list.mfamount}회</td>
+					<td class="center">${list.mfamount}</td>
 					<td class="center">${list.mftotalcal}</td>
 					<td class="center" onclick="mfdel(${list.dno},${list.mfno});">X</td>
 				</tr>
@@ -286,12 +289,12 @@ function updateDimage(input){
 			</div>
 		</div>
 		<div class="center">
-			<img src="${DIARY.dimage}" id="imgPreview" class=""  style="height:auto;width:400px;">
+			<img src="${DIARY.dimage}" id="imgPreview" class=""  style="height:auto;width:400px;margin:20px 0 0;">
 		</div>
-		<div class="center" style="margin:0">
+		<div class="center" style="margin:50px 0 0;">
 			<input type="button" value="게시판등록" id="toBoard"/>
 			<input type="button" value="모두 지우기" id="deleteAll"/>
-			<input type="button" value="뒤로가기" id="goBack"/>
+			<input type="button" value="뒤로가기" class="goBack"/>
 		</div>
 	</div>
 </div>

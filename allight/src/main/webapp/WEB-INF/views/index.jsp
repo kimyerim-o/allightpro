@@ -97,7 +97,7 @@ function myFAE(day,dno){
 								</td>
 							</c:when>
 							<c:when test="${date_status.index%7==6}">
-								<td class="sat_day">
+								<td class="sat_day" onclick="myFAE(${dateList.day},${dateList.dno});">
 									<div class="sat">
 										${dateList.day}
 									</div>
@@ -124,7 +124,7 @@ function myFAE(day,dno){
 							<c:when test="${date_status.index%7==0}">
 				</tr>
 				<tr>
-								<td class="sun_day">
+								<td class="sun_day" onclick="myFAE(${dateList.day},${dateList.dno});">
 									<div class="sun">
 										${dateList.day}
 									</div>
@@ -149,7 +149,7 @@ function myFAE(day,dno){
 								</td>
 							</c:when>
 							<c:otherwise>
-								<td class="normal_day">
+								<td class="normal_day" onclick="myFAE(${dateList.day},${dateList.dno});"F>
 									<div class="date">
 										${dateList.day}
 									</div>

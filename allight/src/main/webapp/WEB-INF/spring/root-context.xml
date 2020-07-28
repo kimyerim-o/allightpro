@@ -112,5 +112,11 @@
       <property name="sqlSessionTemplate" ref="sqlSession"/>
     </bean>
    <bean id="cartSVC" class="com.all.light.service.CartService"/>
+   
+   <!-- Buy -->
+	<bean id="buyDAO" class="com.all.light.dao.BuyDAO">
+      <property name="sqlSessionTemplate" ref="sqlSession"/>
+    </bean>
+   <bean id="buySVC" class="com.all.light.service.BuyService"/>
 	
 </beans>

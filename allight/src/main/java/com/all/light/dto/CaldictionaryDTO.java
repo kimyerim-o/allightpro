@@ -14,7 +14,7 @@ public class CaldictionaryDTO {
 	private int 	cdsik;	// 식이섬유
 	private int 	cdna;	// 나트륨
 	private int 	cdgram;	// 그램/시간
-	private int 	cdamount;// 수량
+	private int 	cdamount;  // 수량
 	
 	
 	public int getCdno() {

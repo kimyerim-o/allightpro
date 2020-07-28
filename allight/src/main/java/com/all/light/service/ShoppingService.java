@@ -321,6 +321,11 @@ public class ShoppingService {
 	public ArrayList<ItemDTO> getItemName(String mid) {
 		return shopDAO.getItemName(mid); 
 	}
+	
+	// 상품 문의 상품명
+	public ArrayList<ItemDTO> getItemName2(String mid) {
+		return shopDAO.getItemName2(mid); 
+	}
 
 	
 	

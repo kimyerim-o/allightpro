@@ -529,7 +529,7 @@ public class ItemController {
 		PageUtil qPInfo = shopSVC.getQPageInfo2(qNowPage, mid); //상품문의 페이지 정보
 		qList = shopSVC.getQuestion(qPInfo, mid);	   	  //상품문의 리스트
 		int qTotalCnt = shopSVC.getQTotalCnt(mid); 			  //상품문의 개수
-		ArrayList<ItemDTO> ilist = shopSVC.getItemName(mid);
+		ArrayList<ItemDTO> ilist = shopSVC.getItemName(mid); //상품이름 정보
 		
 		// Model
 		mv.addObject("QSIZE",qTotalCnt);	//상품문의 개수
@@ -564,14 +564,17 @@ public class ItemController {
 		PageUtil qPInfo = shopSVC.getQPageInfo3(qNowPage, mid); //상품문의 페이지 정보
 		qList = shopSVC.getQuestion2(qPInfo, mid);	   	  //상품문의 리스트
 		int qTotalCnt = shopSVC.getQTotalCnt2(mid); 			  //상품문의 개수
+		ArrayList<ItemDTO> ilist = shopSVC.getItemName2(mid); //상품이름 정보
 		
 		// Model
 		mv.addObject("QSIZE",qTotalCnt);	//상품문의 개수
 		mv.addObject("QLIST",qList);		//상품문의 개수
 		mv.addObject("QPINFO",qPInfo);		//상품문의 페이징 정보
+		mv.addObject("ILIST",ilist);		//상품이름 정보
 		System.out.println("컨트롤러 상품 목록보기 - qTotalCnt = " + qTotalCnt);
 		System.out.println("컨트롤러 상품 목록보기 - qList = " + qList);
 		System.out.println("컨트롤러 상품 목록보기 - qPInfo = " + qPInfo);
+		System.out.println("컨트롤러 상품 목록보기 - ilist = " + ilist);
 		// View
 		mv.setViewName("shopping/corp/item/review");
 		return mv;

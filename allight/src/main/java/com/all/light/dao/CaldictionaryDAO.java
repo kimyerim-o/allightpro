@@ -25,7 +25,7 @@ public class CaldictionaryDAO extends SqlSessionDaoSupport {
 
 	// 검색 및 리스트 조회 - 음식
 	public ArrayList<CaldictionaryDTO> searchList(PageUtil pInfo) {
-		System.out.println("DAO 상품 목록 조회 - searchList(pInfo) 진입 = " + pInfo);
+		System.out.println("DAO 상품 목록 조회 - searchList(pInfo) 진입  = " + pInfo);
 		return (ArrayList)session.selectList("cal.searchList", pInfo);
 	}
 

@@ -75,6 +75,7 @@
 
 <form action="./corlog.com" method="post">
 <input type="hidden" name="cnt" value="${sessionScope.cnt}"/>
+<input type="hidden" name="arr" value="${cordto.arr}"/>
 <c:if test="${!empty sessionScope.cnt}">${sessionScope.cnt}<a style="color: red;">아이디 비밀번호를 확인해주세요.</a></c:if>
 	<table>
 		<tr>
@@ -83,15 +84,15 @@
 		<tr>
 			<td><input type="password" id="copw" name="copw" placeholder="비밀번호" required="required"/></td>
 		</tr>
-		<c:if test="${sessionScope.cnt > 3}">
+		<c:if test="${sessionScope.cnt > 3 and !empty cordto.arr}">
 			<tr>
-				<td>자동방지
-					${cordto}
-					<c:forEach items="${arr}" var="a">${a}</c:forEach>
+				<td><c:forEach items="${cordto.arr}" var="a" begin="0" step="2">
+					<img width="20px" height="50px" src="${pageContext.request.contextPath}/resources/img/${a}.PNG">
+				</c:forEach>
 				</td>
 			</tr>
 			<tr>
-				<td><input type="text" id="auto" name="auto" placeholder="자동입력 방지문자"/></td>
+				<td><input type="text" id="auto" name="auto" placeholder="자동입력 방지문자" required="required"/></td>
 			</tr>
 		</c:if>
 		<tr>

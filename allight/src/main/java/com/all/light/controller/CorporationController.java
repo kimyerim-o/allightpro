@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CorporationDTO;
@@ -32,25 +34,24 @@ public class CorporationController {
 	public ModelAndView corlog(@RequestParam(value = "cnt", required = false, defaultValue = "0") int cnt,
 			CorporationDTO cordto,HttpSession session,HttpServletRequest req,ModelAndView mv,RedirectView rv) {
 		System.out.println("CorporationController corlog");
+
+		System.out.println(cordto);
 		
 		HashMap result=corSVC.login(cordto,session,cnt);
-		
 		String[] arr=null;
 		if(result==null || result.size()==0) {
 			if(cnt>=3) {
 				System.out.println("auto");
 				arr=auto();
-				for(int i=0;i<arr.length;i=i+2) {
-	        		System.out.println(arr[i]);
-	        	}
 				cordto.setArr(arr);
 				mv.addObject("cordto", cordto);
+				System.out.println(cordto);
 			}
-			rv.setUrl("./login.com");
+			mv.setViewName("common/loginform");
 		}else {
 			rv.setUrl("./main.com");
+			mv.setView(rv);
 		}
-		mv.setView(rv);
 		return mv;
 	}
 	

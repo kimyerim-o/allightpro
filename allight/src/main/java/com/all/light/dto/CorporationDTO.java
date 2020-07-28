@@ -10,6 +10,7 @@ public class CorporationDTO {
 	private String cotel;
 	private String coemail;
 	private String[] arr;
+	private String auto;
 
 	public int getCono() {
 		return cono;
@@ -71,6 +72,14 @@ public class CorporationDTO {
 	public String toString() {
 		return "CorporationDTO [cono=" + cono + ", coid=" + coid + ", copw=" + copw + ", coname=" + coname + ", cotel="
 				+ cotel + ", coemail=" + coemail + ", arr=" + Arrays.toString(arr) + "]";
+	}
+
+	public String getAuto() {
+		return auto;
+	}
+
+	public void setAuto(String auto) {
+		this.auto = auto;
 	}
 
 }

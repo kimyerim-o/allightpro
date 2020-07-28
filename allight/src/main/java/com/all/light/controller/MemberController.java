@@ -371,5 +371,25 @@ public class MemberController {
 		return mv;
 	}
 	
+	// 장한별 작성
+	// 회원정보수정
+	@RequestMapping(value="/member/user/modify member/modifymember", method= RequestMethod.GET)
+	public ModelAndView ModifyMemberGet(
+			// @RequestParam(value = "mno") int mno,
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value = "search", required = false) String searchWord,
+			MemberDTO memDTO,	ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("memberController.modify.Member,"+request.getMethod()+"method");
+		//파라미터 받기, 비즈니스로직
+		memDTO = memSVC.getMInfo(memDTO.getMno());
+		System.out.println("memInfo = "+memDTO.toString());
+		//모델지정
+		mv.addObject("MEMINFO", memDTO); //회원 상세 정보
+		//뷰지정
+		//get메소드의 Requestparam의 정보가 그대로 넘어감
+		//mv.setViewName("common/user/Modify member/Modifymember?search="+searchWord+"&nowPage="+nowPage+"&mno="+mno);
+		mv.setViewName("common/user/Modify member/Modifymember");
+		return mv;
 	
+	}
 }

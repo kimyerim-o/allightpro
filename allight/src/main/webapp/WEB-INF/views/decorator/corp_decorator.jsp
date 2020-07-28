@@ -44,7 +44,7 @@
 
 			<ul class="left_menu_box last">
 				<li class="left_menu_m1">기업정보관리</li>
-				<li><a href="#">기업정보 확인/수정</a></li>
+				<li><a href="${pageContext.request.contextPath}/corp.com">기업정보 확인/수정</a></li>
 			</ul>
 		</div>
 	</div>

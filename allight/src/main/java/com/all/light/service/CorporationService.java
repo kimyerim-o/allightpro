@@ -11,10 +11,6 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.servlet.http.HttpSession;
 
-import org.python.core.PyFunction;
-import org.python.core.PyInteger;
-import org.python.core.PyObject;
-import org.python.util.PythonInterpreter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.CorporationDAO;
@@ -27,7 +23,7 @@ public class CorporationService {
 	
 	public HashMap login(CorporationDTO cordto, HttpSession session, int cnt) {
 		System.out.println("CorporationService");
-		//일반로그인
+		//�씪諛섎줈洹몄씤
 		HashMap map=new HashMap();
 		map.put("coid",cordto.getCoid());
 		map.put("copw",cordto.getCopw());
@@ -35,7 +31,7 @@ public class CorporationService {
 		if(result==null || result.size()==0) {
 			cnt=cnt+1;
 			session.setAttribute("cnt", cnt);
-			System.out.println("로그인실패");
+			System.out.println("濡쒓렇�씤�떎�뙣");
 			String[] arr=null;
 			if(cnt>=4) {
 				System.out.println("1");
@@ -61,9 +57,9 @@ public class CorporationService {
 				System.out.println("2");
 			}
 		}else{
-			//로그인성공
+			//濡쒓렇�씤�꽦怨�
 			session.invalidate();
-			System.out.println("로그인성공");
+			System.out.println("濡쒓렇�씤�꽦怨�");
 			session.setAttribute("CONO",result.get("CONO"));
 			session.setAttribute("COID",result.get("COID"));
 			session.setAttribute("CONAME",result.get("CONAME"));	
@@ -80,11 +76,11 @@ public class CorporationService {
 		}
 	}
 
-	//페이징 처리 및 검색을 위한 메소드
+	//�럹�씠吏� 泥섎━ 諛� 寃��깋�쓣 �쐞�븳 硫붿냼�뱶
 	public PageUtil getPageInfo(int nowPage, String searchWord) {
 		int totalCount = corDAO.getTotalCnt(searchWord);	
 		
-		// PageUtil(보고싶은페이지, 전체게시물수);
+		// PageUtil(蹂닿퀬�떢���럹�씠吏�, �쟾泥닿쾶�떆臾쇱닔);
 		PageUtil pInfo = new PageUtil(nowPage, totalCount);
 		return pInfo;
 	}

@@ -35,6 +35,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/jython2.7.2/jython.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

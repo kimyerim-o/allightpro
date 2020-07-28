@@ -175,24 +175,4 @@ public class CorporationController {
 			return data;
 		}
 		
-		// �옣�븳蹂� �옉�꽦
-		// �쉶�썝�젙蹂댁닔�젙
-		@RequestMapping(value="/corporation/modifycorporation", method= RequestMethod.GET)
-		public ModelAndView ModifyMemberGet(
-				// @RequestParam(value = "mno") int mno,
-				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-				@RequestParam(value = "search", required = false) String searchWord,
-				MemberDTO memDTO,	ModelAndView mv, RedirectView rv, HttpServletRequest request) {
-			System.out.println("CorporationController.modify.corp,"+request.getMethod()+"method");
-			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
-			corDTO = corSVC.getMInfo(corDTO.getMno());
-			System.out.println("corInfo = "+corDTO);
-			//紐⑤뜽吏��젙
-			mv.addObject("MEMINFO", memDTO); //�쉶�썝 �긽�꽭 �젙蹂�
-			//酉곗��젙
-			//get硫붿냼�뱶�쓽 Requestparam�쓽 �젙蹂닿� 洹몃�濡� �꽆�뼱媛�
-			//mv.setViewName("common/corp/Modify corp/Modifycorporation?search="+searchWord+"&nowPage="+nowPage+"&mno="+mno);
-			mv.setViewName("common/corp/Modify corp/Modifycorporation");
-			return mv;
-		}
 }

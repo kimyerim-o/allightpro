@@ -146,6 +146,35 @@ $(function(){
     	}
   	});
 	
+	//장바구니로 넘어가기(로그인 안하면 에러나게 하고싶음!)
+	$('.in-cart-btn').click(function(){
+		var ino = Number(${param.ino});
+		var caamount = Number($('#number').val());
+		var caprice = Number($('.right-total-price').text().replace(',',''));
+		
+		$.ajax({
+			  type : 'post',
+              url : '../insertCart.com',
+              data : {"ino":ino,
+                    "caamount":caamount,
+                    "caprice":caprice},
+              success : function(result){
+                  if( result =="success"){
+                	  if(confirm("장바구니에 담겼습니다.\n장바구니 페이지로 이동하시겠습니까?")){
+                	  	location.href="../cart.com";
+					  }
+                  }else if( result == "fail"){
+                	  if(confirm("회원만 이용 가능한 서비스입니다.\n로그인 하시겠습니까?")){
+                	  	location.href="../login.com"
+                	  }
+                  }
+              },
+              error: function(xhr, status, error){
+                  alert("요청을 처리할 수 없습니다. 다시 시도해주세요.");
+              },
+		})
+	})
+	
 	// 수량 선택시 총 상품가격 변동
 	$('#number').change(function(){
 		$('.right-total-price').text(

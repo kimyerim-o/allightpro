@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CorporationDTO;
 import com.all.light.service.CorporationService;
+import com.all.light.util.Nologin;
 import com.all.light.util.PageUtil;
 
 @Controller
@@ -29,51 +32,42 @@ public class CorporationController {
 	
 	//로그인
 	@RequestMapping("/corlog")
-	public ModelAndView corlog(@RequestParam(value = "cnt", required = false, defaultValue = "0") int cnt,
+	public ModelAndView corlog(@RequestParam(value = "ccnt", required = false, defaultValue = "0") int cnt,
 			CorporationDTO cordto,HttpSession session,HttpServletRequest req,ModelAndView mv,RedirectView rv) {
 		System.out.println("CorporationController corlog");
+
+		System.out.println(cordto);
 		
-		HashMap result=corSVC.login(cordto,session,cnt);
+		HashMap result=null;
+		if(cordto.getArr()!=null) {
+			String[] a=cordto.getArr();
+			String str=a[0];
+			for(int i=1;i<a.length;i++) {
+				str=str+a[i];
+			}
+			if(str.equals(cordto.getAuto())){
+				result=corSVC.login(cordto,session,cnt);
+			}
+		}
 		
-		String[] arr=null;
+		result=corSVC.login(cordto,session,cnt);
+		String[] arr=null;		
 		if(result==null || result.size()==0) {
 			if(cnt>=3) {
 				System.out.println("auto");
-				arr=auto();
-				for(int i=0;i<arr.length;i=i+2) {
-	        		System.out.println(arr[i]);
-	        	}
+				arr=Nologin.auto();
 				cordto.setArr(arr);
 				mv.addObject("cordto", cordto);
+				System.out.println(cordto);
 			}
-			rv.setUrl("./login.com");
+			mv.setViewName("common/loginform");
 		}else {
 			rv.setUrl("./main.com");
+			mv.setView(rv);
 		}
-		mv.setView(rv);
 		return mv;
 	}
-	
-	public String[] auto() {
-		String[] arr=null;
-		try {
-			Runtime rt=Runtime.getRuntime();
-			String ex="d:\\study\\pj5ML\\dist\\test.exe";
-			Process pro=rt.exec(ex);
-			pro.waitFor();
-			File file = new File("d:\\study\\pj5ML\\logintest.txt");
-
-            FileReader filereader = new FileReader(file);
-            BufferedReader bufReader = new BufferedReader(filereader);
-            String line = bufReader.readLine();
-            arr=line.split(",");//예측,정답
-            bufReader.close();
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-		return arr;
-	}
-	
+		
 	//로그아웃
 	@RequestMapping("/corlogout")
 	public ModelAndView logout(HttpSession session,ModelAndView mv,RedirectView rv) {

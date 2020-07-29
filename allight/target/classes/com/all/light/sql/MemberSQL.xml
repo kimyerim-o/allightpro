@@ -8,12 +8,12 @@
 	</select>
 	
 	<!-- 카카오 아이디 확인 -->
-	<select id="kakao" resultType="java.util.HashMap" parameterType="memDTO">
+	<select id="kakao" resultType="memDTO" parameterType="memDTO">
 	select * from member where mid=#{mid}
 	</select>
 	
 	<insert id="kinsert" parameterType="memDTO">
-	insert into member(mno,mid) values(mno_seq.nextval,#{mid})
+	insert into member(mno,mid,memail,mname) values(mno_seq.nextval,#{mid},#{memail},#{mname})
 	</insert>
 	
 	<!-- 회원가입 -->

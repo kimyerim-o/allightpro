@@ -28,7 +28,7 @@ public class CorporationService {
 		HashMap result=corDAO.login(map);
 		if(result==null || result.size()==0) {
 			cnt=cnt+1;
-			session.setAttribute("cnt", cnt);
+			session.setAttribute("ccnt", cnt);
 			System.out.println("로그인실패");
 		}else{
 			//로그인성공

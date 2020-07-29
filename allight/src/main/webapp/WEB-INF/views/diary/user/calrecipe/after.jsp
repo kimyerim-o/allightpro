@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
 $(function(){
 	$('#check').click(function(){
@@ -55,7 +56,44 @@ $(function(){
 		</table>
 		<div>
 			<a class="btn" id="check">칼로리 처방 다시 받기</a>
+			<c:if test="${!empty sessionScope.MID}">
+				<a href="javascript:;" id="kakao-link-btn">
+				<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" width="10px" />
+				</a>
+			</c:if>
 		</div>
 	</div>
+
+<script type="text/javascript">
+    Kakao.init('52ee84c11b882c5898d68b339bf4f9d0');
+    alert(document.location.href);
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',
+      objectType: 'feed',
+      content: {
+        title: document.title,
+        description: '칼로리 처방',
+        imageUrl: "${pageContext.request.contextPath}/allight/resources/img/allight_logo.jpg",
+        link: {
+          webUrl: document.location.href
+        }
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845
+      },
+      buttons: [
+        {
+          title: 'Open!',
+          link: {
+            mobileWebUrl: document.location.href,
+            webUrl: document.location.href
+          }
+        }  
+      ]
+    });
+  //]]>
+</script>
 </body>
 </html>

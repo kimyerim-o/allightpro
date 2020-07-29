@@ -52,7 +52,7 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	public ArrayList<OrderDTO> backlist(OrderDTO odto) {
 		ArrayList<OrderDTO> list=null;
 		System.out.println(odto.getType());
-		if(odto.getType()==null) {
+		if(odto.getType()==null || odto.getType().isEmpty()) {
 			list=(ArrayList)session.selectList("order.backlist", odto);
 		}else if(odto.getType()!=null) {
 			list=(ArrayList)session.selectList("order.backlist2", odto);
@@ -63,7 +63,7 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	
 	public ArrayList<OrderdetailDTO> back(OrderdetailDTO oddto) {
 		ArrayList<OrderdetailDTO> listde=null;
-		if(oddto.getType()==null) {
+		if(oddto.getType()==null || oddto.getType().isEmpty()) {
 			listde=(ArrayList)session.selectList("order.back", oddto);
 		}else if(oddto.getType()!=null) {
 			listde=(ArrayList)session.selectList("order.back2", oddto);
@@ -100,7 +100,7 @@ public class OrderDAO extends SqlSessionDaoSupport {
 
 	public ArrayList<OrderdetailDTO> listdeCorp(PageUtil pinfo) {
 		ArrayList<OrderdetailDTO> listde=null;
-		if(pinfo.getSearchType()==null) {
+		if(pinfo.getSearchType()==null || pinfo.getSearchType().isEmpty()) {
 			listde=(ArrayList)session.selectList("order.listdeCorp", pinfo);
 		}else {
 			listde=(ArrayList)session.selectList("order.listdeCorpType", pinfo);

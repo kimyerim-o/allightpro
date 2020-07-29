@@ -16,6 +16,11 @@
 	insert into member(mno,mid,memail,mname) values(mno_seq.nextval,#{mid},#{memail},#{mname})
 	</insert>
 	
+	<!-- 카카오up -->
+	<update id="kakaoup" parameterType="memDTO">
+	update member set mname='${mname}',mnick='${mnick}',mbirth=${mbirth},mtel=${mtel},msex='${msex}' where mid='${mid}'
+	</update>
+	
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="memDTO">
 		insert into member

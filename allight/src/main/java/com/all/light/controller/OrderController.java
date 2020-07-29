@@ -1,5 +1,6 @@
 package com.all.light.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,6 +150,27 @@ public class OrderController {
 		return mv;
 	}
 	
+	//이메일 발송
+    @RequestMapping("/email/corp")
+    @ResponseBody
+	public String email(HttpServletRequest request) throws Exception {
+    	System.out.println("이메일 확인 들어옴!");
+    	String no=request.getParameter("no");
+    	String email=request.getParameter("email");
+    	String text=request.getParameter("text");
+    	
+    	String ok=null;
+    	if(text.equals("배송시작")) {
+    		ok=ordSVC.delemail(no,email);//메일전송
+        	System.out.println("배송시작 이메일 확인 완료!");
+        	return ok;
+    	}else if(text.equals("주문취소")) {
+    		ok=ordSVC.canemail(no,email);//메일전송
+        	System.out.println("주문취소 이메일 확인 완료!");
+        	return ok;
+    	}
+		return "x";
+    }
 
 
 	

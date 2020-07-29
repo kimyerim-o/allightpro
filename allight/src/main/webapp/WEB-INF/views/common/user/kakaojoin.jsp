@@ -15,7 +15,7 @@ $(function() {
 	$("#nickCheck").click(function() {
 		var mnick = $("#mnick").val();
 		$.ajax({
-			url : "../../nickChk.com",
+			url : "./nickChk.com",
 			type : "POST",
 			dataType : "text",
 			async : false,
@@ -30,17 +30,15 @@ $(function() {
 					alert("사용 가능한 닉네임입니다.");
 					$('#nickChecked').val("1");
 				}
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status+ "\n" + "message:"+ request.responseText+ "\n" + "error:" + error);
 			}
 		});
 	});
-	$("#modify").submit(function(){
+	
+	$("#com").click(function(){
 		//닉네임 중복확인여부 체크
 		//alert("중복체크들어간다");
 		//수정되었지만 수정한 닉네임이 기존과 같다면 바로넘김 
-		if($("#mnick").val()=="${MEMINFO.mnick}"){
+		if($("#mnick").val()=="${mdto.mnick}"){
 			$('#nickChecked').val("1");
 		}
 		if($("#nickChecked").val()=="0"){
@@ -59,36 +57,7 @@ $(function() {
 			$("#mnick").focus();
 			return false;
 		}
-		//비밀번호 입력여부
-		if($("#mpw").val().length==0){
-			alert("비밀번호를 입력하지 않았습니다.")
-			$("#mpw").focus();
-			return false;
-		}
-		if($("#mpw2").val().length==0){
-			alert("비밀번호를 입력하지 않았습니다.")
-			$("#mpw2").focus();
-			return false;
-		}
-		//비밀번호 길이 체크
-		if($("#mpw").val().length<8 || $("#mpw").val().length>16){
-			alert("비밀번호는 8~16자리로 입력해주세요.")
-			$("#mpw").focus();
-			return false;
-		}
-		//비밀번호 일치 여부
-		if($("#mpw").val()!=$("#mpw2").val()){
-		    alert('비밀번호가 일치 하지 않습니다')
-		    frm.mpw2.value='';
-		    frm.mpw2.focus();
-		    return false;
-		    }
 		//전화번호 입력여부 
-		if($("#mtel").val().selectedIndex<1){
-			alert("전화번호를 입력하지 않았습니다.")
-			$("#mtel").focus();
-			return false;
-		}
 		if($("#mtel1").val().length==0){
 			alert("전화번호를 입력하지 않았습니다.")
 			$("#mtel1").focus();
@@ -99,6 +68,18 @@ $(function() {
 			$("#mtel2").focus();
 			return false;
 		}
+		
+		if($("#mtel option:selected").val()=='선택'){
+			alert("전화번호를 입력하지 않았습니다.")
+			$("#mtel").focus();
+			return false;
+		}
+		if($("#msex option:selected").val()=='선택'){
+			alert("성별을 선택하지 않았습니다.")
+			$("#msex").focus();
+			return false;
+		}
+		$("#form").submit()
 	})
 });
 
@@ -108,28 +89,26 @@ $(function() {
 <title>Insert title here</title>
 </head>
 <body>
-	<form
-		action="<%=request.getContextPath()%>/member/modify/admin.com?mno=${param.mno}"
-		method="post" name="modify" id="modify">
+	<form id="form" action="<%=request.getContextPath()%>/kakaoj.com" method="post">
+	<input type="hidden" name="mid" value="${mdto.mid}"/>
 		<table>
 			<tr>
-				<td>이름 :</td>
+				<td>이름</td>
 				<td><input type="text" id="mname" name="mname" value="${mdto.mname}" /></td>
 			</tr>
 			<tr>
-				<td>닉네임 :</td>
-				<td><input type="text" id="mnick"
-					name="mnick" value="${MEMINFO.mnick}" />
+				<td>닉네임</td>
+				<td><input type="text" id="mnick" name="mnick"/>
 					<button id="nickCheck" type="button">중복확인</button>
-					<input type="hidden" id="nickChecked" value="1" /></td>
-			</tr>
-			<tr>
-				<td>이메일 :</td>
-				<td><input type="text" id="memail" name="memail" value="${mdto.memail}" /></td>
+					<input type="hidden" id="nickChecked" value="0"/></td>
 			</tr>
 			<tr>
 				<td>생일</td>
-				<td><input type="date" id="mbirth" name="mbirth" value="${param.mbirth}"></td>
+				<td><input type="date" id="mbirth" name="mbirth" value="2000-01-01"></td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td>${mdto.memail}</td>
 			</tr>
 			<tr>
 				<td>핸드폰번호</td>
@@ -140,62 +119,20 @@ $(function() {
 						<option value="016">016</option>
 						<option value="017">017</option>
 						<option value="019">019</option>
-				</select>&nbsp;- <input id="mtel1" type="text" name="mtel1" maxlength="4" size="5" value="${param.mtel1}">
-				&nbsp;- <input id="mtel2" type="text" name="mtel2" maxlength="4" size="5" value="${param.mtel2}"></td>
+				</select>&nbsp;- <input id="mtel1" type="text" name="mtel1" maxlength="4" size="5">
+				&nbsp;- <input id="mtel2" type="text" name="mtel2" maxlength="4" size="5"></td>
 			</tr>
 			<tr>
 				<td>성별</td>
 				<td><select name="msex" id="msex" required="required">
-						<option value="">선택</option>
+						<option>선택</option>
 						<option value="남자">남자</option>
 						<option value="여자">여자</option>
 				</select></td>
 			</tr>
 			<tr>
-				<td>생년월일 :</td>
-				<td>${MEMINFO.mbirth}<input type="hidden" id="mbirth"
-					name="mbirth" value="${MEMINFO.mbirth}" /></td>
-			</tr>
-			<tr>
-				<td>비밀번호 :</td>
-				<td><input type="password" id="mpw" name="mpw"
-					value="${MEMINFO.mpw}" /></td>
-			</tr>
-			<tr>
-				<td>비밀번호 확인 :</td>
-				<td><input type="password" id="mpw2" name="mpw2"
-					value="${MEMINFO.mpw}" /></td>
-			</tr>
-			<tr>
-				<td>핸드폰번호 :</td>
-				<td><input type="text" id="mtel" name="mtel"
-					value="${MEMINFO.mtel}" /></td>
-			</tr>
-			<tr>
-				<td>구분 :</td>
-				<td>
-				<c:if test="${MEMINFO.mtype==1}">
-				<select name="mtype" id="mtype" required="required">
-						<option value="0">회원</option>
-						<option value="1" selected>관리자</option>
-				</select>
-				</c:if>
-				<c:if test="${MEMINFO.mtype==0}">
-				<select name="mtype" id="mtype" required="required">
-						<option value="0" selected>회원</option>
-						<option value="1">관리자</option>
-				</select>
-				</c:if>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="text-align: center"><input type="submit"
-					value="수정"> <a
-					href="<%=request.getContextPath()%>/member/admin.com?search=${param.search}&nowPage=${param.nowPage}"><input
-						type="button" value="취소"></a></td>
-			</tr>
-			<tr>
-				<td></td>
+				<td colspan="2" style="text-align: center">
+				<input type="button" id="com" value="수정"></td>
 			</tr>
 		</table>
 	</form>

@@ -29,7 +29,7 @@
 <body>
 	<h3>장바구니</h3>
 	<hr/>
-	<form action="./cart.com" id="cart" method="post">
+	<form action="./buy.com" id="cart" method="post">
 		<div id="content">
 			<c:if test="${!empty sessionScope.MID}">
 				<div class="allCheck">
@@ -44,19 +44,19 @@
 					<thead>
 						<tr>
 							<th scope="col">
-								<div class="tb-center">선택</div>
+								<div class="center">선택</div>
 							</th>
 							<th scope="col" colspan="2">
-								<div class="tb-center">상품정보</div>
+								<div class="center">상품정보</div>
 							</th>
 							<th scope="col">
-								<div class="tb-center">판매가</div>
+								<div class="center">판매가</div>
 							</th>
 							<th scope="col">
-								<div class="tb-center">수량</div>
+								<div class="center">수량</div>
 							</th>
 							<th scope="col">
-								<div class="tb-center">합계</div>
+								<div class="center">합계</div>
 							</th>
 						</tr>
 					</thead>
@@ -80,7 +80,7 @@
 					<c:forEach var="list" items="${clist}">
 						<tr>
 							<td scope="col"><!-- 체크박스 -->
-								<div class="tb-center">
+								<div class="center">
 									<input type="checkbox" class="chkBox" checked="checked" data-cartNo="${list.cano }"/>
 								</div>
 							</td>
@@ -95,7 +95,7 @@
 							</td>
 							<!-- 판매가 -->
 							<td scope="col"><!-- 판매가 -->
-								<div class="tb-center">
+								<div class="center">
 									<p class="price" style="height:200px; line-height:200px;margin:0;">
 									<fmt:formatNumber pattern="#,###" value="${list.iprice }" />원
 									</p>
@@ -104,11 +104,11 @@
 							<!-- 수량 -->
 							<td class="iamount" scope="col">
 								<input type="hidden" id="origin_qty" value="${list.caamount }" maxlength="3"/>
-								<div class="tb-center" style="height:200px; line-height:200px;margin:0;">
+								<div class="center" style="height:200px; line-height:200px;margin:0;">
 									<button type="button" id="minus_btn" class="minus">-</button>
 									<input type="text" id="number" class="numBox" value="${list.caamount }" readonly="readonly" 
 										style="font-size:16px; width:50px; padding:5px; margin:0; border:1px solid #eee;"/>
-									<button type="button" id="plus_btn"class="plus">+</button>
+									<button type="button" id="plus_btn" class="plus">+</button>
 								</div>
 							</td>
 							<!-- 합계 -->

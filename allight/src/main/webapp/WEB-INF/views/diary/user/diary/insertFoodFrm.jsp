@@ -195,6 +195,25 @@ $(function(){
             },
         });
 	})
+	
+	// 마이칼로리 버튼 누르면 마이칼로리 리스트 보여주기
+	$('#mycal').click(function(){
+		$('#caldic-count').attr('class','hidden');
+		$(this).attr('class','search-div-on');
+		$('#caldic').attr('class','search-div');
+		$('#mycal-table').attr('class','search-table-on')
+		$('#caldic-table').attr('class','hidden');
+	})
+	
+	// 칼로리 사전 버튼 누르면 칼로리 사전 검색 리스트 보여주기
+	$('#caldic').click(function(){
+		$('#caldic-count').attr('class','f-left');
+		$(this).attr('class','search-div-on');
+		$('#mycal').attr('class','search-div');
+		$('#caldic-table').attr('class','search-table-on')
+		$('#mycal-table').attr('class','hidden');
+	})
+	
 })
 
 function wrapCreateByMask() {
@@ -317,7 +336,7 @@ function deleteMy(cdno) {
    	
 		
 	   	<div class="search-divs1">
-	   		<div class="f-left">
+	   		<div class="f-left" id="caldic-count">
 	   			검색결과 ${LIST.size()}<c:if test="${empty LIST}">0</c:if>개
 	   		</div>
 	   		<div class="f-right">
@@ -334,12 +353,12 @@ function deleteMy(cdno) {
 	   	
 	   	<div class="search-divs2">
 				<ul>
-					<li class="search-div"><a style="cursor:pointer;">칼로리 사전</a></li>
-					<li class="search-div"><a style="cursor:pointer;">마이칼로리</a></li>
+					<li class="search-div-on" id="caldic"><a style="cursor:pointer;">칼로리 사전</a></li>
+					<li class="search-div" id="mycal"><a style="cursor:pointer;">마이칼로리</a></li>
 				</ul>
 		</div>
 		
-		<table class="search-table" id="caldic-table">
+		<table class="search-table-on" id="caldic-table">
 			<c:forEach var="list" items="${LIST}">
 			<tr>
 				<td width="5%"><input type="checkbox" name="checkbox"/><input type="hidden" name="cdno" value="${list.cdno}"></td>
@@ -350,12 +369,12 @@ function deleteMy(cdno) {
 			</c:forEach>
 			<c:if test="${empty LIST}">
 				<tr>
-					<td class="center">검색된 내용이 없습니다.</td>
+					<td class="center" style="padding:20px 0 0 0;">검색된 내용이 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
 		
-		<table class="search-table" id="mycal-table">
+		<table class="hidden" id="mycal-table">
 			<c:forEach var="list" items="${MYLIST}">
 			<tr>
 				<td width="5%"><input type="checkbox" name="checkbox"/><input type="hidden" name="cdno" value="${list.cdno}"></td>
@@ -367,7 +386,7 @@ function deleteMy(cdno) {
 			</c:forEach>
 			<c:if test="${empty MYLIST}">
 				<tr>
-					<td class="center">검색된 내용이 없습니다.</td>
+					<td class="center" style="padding:20px 0 0 0;">마이칼로리 음식이 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>

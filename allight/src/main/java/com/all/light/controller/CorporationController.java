@@ -1,7 +1,11 @@
 package com.all.light.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CorporationDTO;
-import com.all.light.dto.MemberDTO;
 import com.all.light.service.CorporationService;
+import com.all.light.util.Nologin;
 import com.all.light.util.PageUtil;
 
 @Controller
@@ -25,34 +30,45 @@ public class CorporationController {
 	@Autowired
 	private CorporationService corSVC;
 	
-	//濡쒓렇�씤
+	//로그인
 	@RequestMapping("/corlog")
-	public ModelAndView corlog(@RequestParam(value = "cnt", required = false, defaultValue = "0") int cnt,
+	public ModelAndView corlog(@RequestParam(value = "ccnt", required = false, defaultValue = "0") int cnt,
 			CorporationDTO cordto,HttpSession session,HttpServletRequest req,ModelAndView mv,RedirectView rv) {
 		System.out.println("CorporationController corlog");
-		if(cnt<4) {
-			HashMap result=corSVC.login(cordto,session,cnt);
-			if(result==null || result.size()==0) {
-				rv.setUrl("./login.com");
-			}else {
-				rv.setUrl("./main.com");
+
+		System.out.println(cordto);
+		
+		HashMap result=null;
+		if(cordto.getArr()!=null) {
+			String[] a=cordto.getArr();
+			String str=a[0];
+			for(int i=1;i<a.length;i++) {
+				str=str+a[i];
 			}
-		}else {
-			//�옄�룞�엯�젰諛⑹�媛� �룞�씪�븳吏� �솗�씤�븯湲�
-			System.out.println("auto");
-			
-			HashMap result=corSVC.login(cordto,session,cnt);
-			if(result==null || result.size()==0) {
-				rv.setUrl("./login.com");
-			}else {
-				rv.setUrl("./main.com");
+			if(str.equals(cordto.getAuto())){
+				result=corSVC.login(cordto,session,cnt);
 			}
 		}
-		mv.setView(rv);
+		
+		result=corSVC.login(cordto,session,cnt);
+		String[] arr=null;		
+		if(result==null || result.size()==0) {
+			if(cnt>=3) {
+				System.out.println("auto");
+				arr=Nologin.auto();
+				cordto.setArr(arr);
+				mv.addObject("cordto", cordto);
+				System.out.println(cordto);
+			}
+			mv.setViewName("common/loginform");
+		}else {
+			rv.setUrl("./main.com");
+			mv.setView(rv);
+		}
 		return mv;
 	}
-	
-	//濡쒓렇�븘�썐
+		
+	//로그아웃
 	@RequestMapping("/corlogout")
 	public ModelAndView logout(HttpSession session,ModelAndView mv,RedirectView rv) {
 		if(session.getAttribute("COID")==null) {
@@ -67,7 +83,7 @@ public class CorporationController {
 	}
 	
 	// 7.7
-	//湲곗뾽 由ъ뒪�듃 諛� 寃��깋 硫붿냼�뱶
+	//기업 리스트 및 검색 메소드
 	@RequestMapping("/corporation/admin")
 	public ModelAndView adminCorporation(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
@@ -81,13 +97,13 @@ public class CorporationController {
 		
 		System.out.println("list = "+map.toString());
 		System.out.println("pinfo = "+pInfo.toString());
-		mv.addObject("LIST", map); //湲곗뾽 �긽�꽭 �젙蹂� 由ъ뒪�듃
-		mv.addObject("PINFO", pInfo); //�럹�씠吏� �젙蹂�
+		mv.addObject("LIST", map); //기업 상세 정보 리스트
+		mv.addObject("PINFO", pInfo); //페이징 정보
 		
 		mv.setViewName("common/admin/corporation");
 		return mv;
 	}
-	//湲곗뾽 �닔�젙 硫붿냼�뱶
+	//기업 수정 메소드
 		@RequestMapping(value="/corporation/modify/admin", method= RequestMethod.GET)
 		public ModelAndView adminModifyCorporationGet(
 				@RequestParam(value = "cono") int cono,
@@ -95,28 +111,28 @@ public class CorporationController {
 				@RequestParam(value = "search", required = false) String searchWord,
 				CorporationDTO corDTO,	ModelAndView mv, RedirectView rv) {
 			System.out.println("corporationController.modifyCorp, GET method");
-			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
+			//파라미터 받기, 비즈니스로직
 			corDTO = corSVC.getCorpInfo(cono);
 			System.out.println("corpInfo = "+corDTO.toString());
-			//紐⑤뜽吏��젙
-			mv.addObject("CORPINFO", corDTO); //湲곗뾽 �긽�꽭 �젙蹂�
-			//酉곗��젙
+			//모델지정
+			mv.addObject("CORPINFO", corDTO); //기업 상세 정보
+			//뷰지정
 			mv.setViewName("common/admin/corporationModify");
 			return mv;
 		}
 		
 		@RequestMapping(value="/corporation/modify/admin", method= RequestMethod.POST)
 		public ModelAndView adminModifyCorporationPost(
-				// PK(CONO)瑜� DTO�뿉�꽌 int濡� 諛쏆쓣 �떆 get諛⑹떇�쑝濡� �뙆�씪誘명꽣瑜� �꽆寃⑤컺�븘�룄 corDTO�븞�뿉�꽌 諛쏆쓣 �닔 �엳�쓬
-				// String�쑝濡� 諛쏆쓣 �떆 �븞�맖
+				// PK(CONO)를 DTO에서 int로 받을 시 get방식으로 파라미터를 넘겨받아도 corDTO안에서 받을 수 있음
+				// String으로 받을 시 안됨
 				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 				@RequestParam(value = "search", required = false) String searchWord,
 				CorporationDTO corDTO,	ModelAndView mv, RedirectView rv,HttpServletRequest request) {
 			System.out.println("corporationController.modifyCorp, Post method");
-			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
+			//파라미터 받기, 비즈니스로직
 			System.out.println("corpDTO = "+corDTO.toString());
 			corSVC.corpModify(corDTO);
-			//酉곗��젙
+			//뷰지정
 			rv.setUrl(request.getContextPath()+"/corporation/admin.com?search="+searchWord+"&nowPage="+nowPage);
 			mv.setView(rv);
 			return mv;
@@ -130,10 +146,10 @@ public class CorporationController {
 				@RequestParam(value = "search", required = false) String searchWord,
 				ModelAndView mv, RedirectView rv,HttpServletRequest request) {
 			System.out.println("CorpController.delete.Corp");
-			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
+			//파라미터 받기, 비즈니스로직
 			System.out.println("cono = "+cono);
 			corSVC.corpDelete(cono);
-			//酉곗��젙
+			//뷰지정
 			rv.setUrl(request.getContextPath()+"/corporation/admin.com?search="+searchWord+"&nowPage="+nowPage);
 			mv.setView(rv);
 			return mv;
@@ -143,7 +159,7 @@ public class CorporationController {
 		public ModelAndView adminJoinCorporationGet(
 				ModelAndView mv, RedirectView rv,HttpServletRequest request) {
 			System.out.println("CorpController.join.Corp "+request.getMethod()+"method");
-			//酉곗��젙
+			//뷰지정
 			mv.setViewName("common/admin/corporationJoin");
 			return mv;
 		}
@@ -152,10 +168,10 @@ public class CorporationController {
 		public ModelAndView adminJoinCorporationPost(
 				CorporationDTO corDTO, ModelAndView mv, RedirectView rv,HttpServletRequest request) {
 			System.out.println("CorpController.join.Corp "+request.getMethod()+"method");
-			System.out.println("�쟾�떖 �뙆�씪誘명꽣 = "+corDTO);
-			//鍮꾩쫰�땲�뒪 濡쒖쭅
+			System.out.println("전달 파라미터 = "+corDTO);
+			//비즈니스 로직
 			corSVC.corpInsert(corDTO);
-			//酉곗��젙
+			//뷰지정
 			rv.setUrl(request.getContextPath()+"/corporation/admin.com");
 			mv.setView(rv);
 			return mv;
@@ -174,5 +190,4 @@ public class CorporationController {
 			}
 			return data;
 		}
-		
 }

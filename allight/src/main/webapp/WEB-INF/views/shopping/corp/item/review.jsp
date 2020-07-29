@@ -134,13 +134,13 @@ $(function(){
 			<div id="qTable">
 			<table>
 				<tr>
-					<th style="border-bottom:1px solid gray; width:7%">번호</th>
-					<th style="border-bottom:1px solid gray; width:43%" colspan="2">제목</th>
-					<th style="border-bottom:1px solid gray; width:20%">작성일</th>
-					<th style="border-bottom:1px solid gray; width:20%">닉네임</th>
-					<th style="border-bottom:1px solid gray; width:10%">상품이동</th>
+					<th style="border-bottom:1px solid gray; width:5%">번호</th>
+					<th style="border-bottom:1px solid gray; width:40%" colspan="2">제목</th>
+					<th style="border-bottom:1px solid gray; width:15%">작성일</th>
+					<th style="border-bottom:1px solid gray; width:10%">닉네임</th>
+					<th style="border-bottom:1px solid gray; width:30%">상품이동</th>
 				</tr>
-				<c:forEach var="list" items="${QLIST}">
+				<c:forEach var="list" items="${QLIST}" varStatus="status">
 					<tr>
 						<td class="center">${list.iqno}</td>
 						<td colspan="2">
@@ -163,7 +163,7 @@ $(function(){
 						<td class="center">${list.iqdate}</td>
 						<td class="center">${list.iqnick}</td>
 						<td class="center">
-						<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}">${list.ino}번 상품</a></td>
+						<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}">${ILIST[status.index].iname}</a></td>
 					</tr>
 					<c:if test="${!empty list.iqcontent}">
 						<tr class="hidden">
@@ -184,14 +184,16 @@ $(function(){
 												
 												
 												<!-- 기업 답변 -->
-												<form action="${pageContext.request.contextPath}/item/answer/corp.com" method="post" id="answercorp" >						
-													<input type="hidden" name="iqno" value="${list.iqno}" />
-													<input type="hidden" name="iqcid" value="${sessionScope.COID}" />
-													<input type="text" name="iqccontent" style="width:350px; height:50px;">
-													<input type="hidden" name="iqcnick" value="${sessionScope.COID}" />
-													<input type="submit" value="답변등록"/>
-												</form>
-												
+														
+												<c:if test="${empty list.iqccontent}">
+													<form action="${pageContext.request.contextPath}/item/answer/corp.com" method="post" id="answercorp" >						
+														<input type="hidden" name="iqno" value="${list.iqno}" />
+														<input type="hidden" name="iqcid" value="${sessionScope.COID}" />
+														<input type="text" name="iqccontent" style="width:350px; height:50px;">
+														<input type="hidden" name="iqcnick" value="${sessionScope.COID}" />
+														<input type="submit" value="답변등록"/>
+													</form>
+												</c:if>
 											</div>
 										</td>
 										<td colspan="5" style="padding:0;" class="hidden">
@@ -232,7 +234,7 @@ $(function(){
 											<td colspan="2" style="padding:30px 20px">${list.iqcnick}</td>
 											<td colspan="2" style="padding:30px 20px;width:50%;">${list.iqccontent}</td>
 											<td class="center" style="padding:30px 20px">${list.iqcdate}</td>
-											<td class="center" style="padding:30px 20px"><a onclick="iqaDelete(${list.iqcno});">삭제</a></td>
+											<td class="center" style="padding:30px 20px"><a onclick="iqaDelete(${list.iqcno});">답변삭제</a></td>
 											
 											
 										</tr>

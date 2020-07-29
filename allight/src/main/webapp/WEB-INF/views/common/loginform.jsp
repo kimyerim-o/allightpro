@@ -10,6 +10,12 @@
 </head>
 <body>
 <form action="./log.com" method="post">
+<input type="hidden" name="reUrl" value="${reUrl}">
+<input type="hidden" name="mcnt" value="${sessionScope.mcnt}"/>
+<c:forEach items="${memdto.arr}" var="a" begin="1" step="2">
+	<input type="hidden" name="arr" value="${a}"/>
+</c:forEach>
+<c:if test="${!empty sessionScope.mcnt}">${sessionScope.mcnt}<a style="color: red;">아이디 비밀번호를 확인해주세요.</a></c:if>
 	<table>
 		<tr>
 			<td><input type="text" id="mid" name="mid" placeholder="아이디" required="required"/></td>
@@ -17,11 +23,26 @@
 		<tr>
 			<td><input type="password" id="mpw" name="mpw" placeholder="비밀번호" required="required"/></td>
 		</tr>
+		<c:if test="${sessionScope.mcnt > 3 and !empty memdto.arr}">
+			<tr>
+				<td><c:forEach items="${memdto.arr}" var="a" begin="0" step="2">
+					<img width="20px" height="50px" src="${pageContext.request.contextPath}/resources/img/${a}.PNG">
+				</c:forEach>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="text" id="auto" name="auto" placeholder="자동입력 방지문자" required="required"/></td>
+			</tr>
+		</c:if>
 		<tr>
 			<td><input type="submit" value="로그인"></td>
 		</tr>
-		<tr>
-			<td><input type="hidden" name="reUrl" value="${reUrl}"></td>
+		<tr class="center">
+			<td colspan="2">
+				<a href="${pageContext.request.contextPath}/findIdFrm.com">아이디 찾기 |</a>&nbsp;
+				<a href="${pageContext.request.contextPath}/findPwFrm.com">비밀번호 찾기 |</a>&nbsp;
+				<a href="${pageContext.request.contextPath}/joinFrm.com">회원가입</a>
+			</td>
 		</tr>
 	</table>
 </form>
@@ -38,20 +59,18 @@
  function loginWithKakao() {
     Kakao.Auth.login({
       success: function(authObj) {
-        //alert(JSON.stringify(authObj)),
    	 Kakao.API.request({
 	        url: '/v2/user/me',
 	        success: function(res) {
-	          console.log(res);
+	          //console.log(res);
  			  $.ajax({
 				  url:'./kakao.com',
 				  type:'post',
 				  dataType:'text',//받을때
 				  data:res,
 				  success:function(check){
-					  alert(check);
 					  if(check=="check"){
-					  	location.href = "http://localhost:9000/allight/main.com";
+					  	location.href = "http://localhost:9000/allight/kakaojoin.com";
 					  }else{
 						  location.href = "http://localhost:9000/allight/main.com";
 					  }
@@ -74,8 +93,11 @@
 </script>
 
 <form action="./corlog.com" method="post">
-<input type="hidden" name="cnt" value="${sessionScope.cnt}"/>
-<c:if test="${!empty sessionScope.cnt}">${sessionScope.cnt}<a style="color: red;">아이디 비밀번호를 확인해주세요.</a></c:if>
+<input type="hidden" name="ccnt" value="${sessionScope.ccnt}"/>
+<c:forEach items="${cordto.arr}" var="a" begin="1" step="2">
+	<input type="hidden" name="arr" value="${a}"/>
+</c:forEach>
+<c:if test="${!empty sessionScope.ccnt}">${sessionScope.ccnt}<a style="color: red;">아이디 비밀번호를 확인해주세요.</a></c:if>
 	<table>
 		<tr>
 			<td><input type="text" id="coid" name="coid" placeholder="아이디" required="required"/></td>
@@ -83,23 +105,19 @@
 		<tr>
 			<td><input type="password" id="copw" name="copw" placeholder="비밀번호" required="required"/></td>
 		</tr>
-		<c:if test="${sessionScope.cnt > 3}">
+		<c:if test="${sessionScope.ccnt > 3 and !empty cordto.arr}">
 			<tr>
-				<td>자동방지</td>
+				<td><c:forEach items="${cordto.arr}" var="a" begin="0" step="2">
+					<img width="20px" height="50px" src="${pageContext.request.contextPath}/resources/img/${a}.PNG">
+				</c:forEach>
+				</td>
 			</tr>
 			<tr>
-				<td><input type="text" id="auto" name="auto" placeholder="자동입력 방지문자"/></td>
+				<td><input type="text" id="auto" name="auto" placeholder="자동입력 방지문자" required="required"/></td>
 			</tr>
 		</c:if>
 		<tr>
 			<td><input type="submit" value="로그인"></td>
-		</tr>
-		<tr class="center">
-			<td colspan="2">
-				<a href="${pageContext.request.contextPath}/findIdFrm.com">아이디 찾기 |</a>&nbsp;
-				<a href="${pageContext.request.contextPath}/findPwFrm.com">비밀번호 찾기 |</a>&nbsp;
-				<a href="${pageContext.request.contextPath}/joinFrm.com">회원가입</a>
-			</td>
 		</tr>
 	</table>
 </form>

@@ -32,14 +32,22 @@ public class CartService {
 	//장바구니에 상품추가
 	public void insertCart(CartDTO cartdto, String mid) {
 		System.out.println("cart service 에 insert cart 들어옴");
-		//같은상품 있을때 기존 수량 가져오기
-		int count = cartDAO.inoCount(cartdto.getIno(),mid);
+		//같은 상품이 있을 때
+		int is = cartDAO.isIno(cartdto.getIno(),mid);
+		int count = 0;
+		
+		if(is != 0) {
+			//같은상품 있을때 기존 수량 가져오기
+			count = cartDAO.inoCount(cartdto.getIno(),mid);
+		}
 		
 		if(count >0){
 			System.out.println("서비스에서 상품추가1");
 			//같은상품 있을때 기존 합계 가져오기 
 			int sum = cartDAO.sum(cartdto.getIno(), mid)+cartdto.getCaprice();
 			int total = count + cartdto.getCaamount();
+			System.out.println("count="+count);
+			System.out.println("caamount="+cartdto.getCaamount());
 			cartDAO.updateCart(cartdto.getIno(),total,mid,sum);
 		}else {
 			System.out.println("서비스에서 상품추가2");

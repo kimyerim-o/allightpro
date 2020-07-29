@@ -317,7 +317,7 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		if(isOk==0)System.out.println("상품문의 수정 실패");
 	}
 
-	
+	//상품 문의 상품명
 	public ArrayList<ItemDTO> getItemName(String mid) {
 		HashMap map = new HashMap();
 		map.put("mid", mid);
@@ -326,6 +326,15 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		System.out.println("DAO list= " + list);
 		return list;
 
+	}
+	//상품 문의 상품명
+	public ArrayList<ItemDTO> getItemName2(String mid) {
+		HashMap map = new HashMap();
+		map.put("mid", mid);
+		ArrayList<ItemDTO> list = 
+				(ArrayList)session.selectList("Shopping.getItemName2", map);
+		System.out.println("DAO list= " + list);
+		return list;
 	}
 	
 	

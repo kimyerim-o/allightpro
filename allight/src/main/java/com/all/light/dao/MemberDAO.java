@@ -67,21 +67,16 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		session.update("member.logDate", result.get("MNO"));
 	}
 
-	public HashMap kakao(MemberDTO memdto) {
-		System.out.println("UserDAO");
-		System.out.println(memdto.getMid());
-		HashMap result = session.selectOne("member.kakao", memdto);
-		System.out.println("result" + result);
+	//id확인
+	public MemberDTO kakao(MemberDTO memdto) {
+		MemberDTO result = session.selectOne("member.kakao", memdto);
 		return result;
 	}
 
-	public HashMap kjoin(MemberDTO memdto) {
-		System.out.println("UserDAO kjoin");
-		System.out.println(memdto);
+	public MemberDTO kjoin(MemberDTO memdto) {
 		// 수정삭제가 만들어진후에 변경
 		int i = session.insert("member.kinsert", memdto);
-		System.out.println(i);
-		HashMap res = null;
+		MemberDTO res = null;
 		if (i == 1) {
 			res = session.selectOne("member.kakao", memdto);
 		}

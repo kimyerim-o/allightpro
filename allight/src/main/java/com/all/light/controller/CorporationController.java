@@ -30,7 +30,7 @@ public class CorporationController {
 			CorporationDTO cordto,HttpSession session,HttpServletRequest req,ModelAndView mv,RedirectView rv) {
 		System.out.println("CorporationController corlog");
 		if(cnt<4) {
-			HashMap result=corSVC.login(cordto,session,cnt);
+			HashMap result=corSVC.login(cordto,session,cnt); 
 			if(result==null || result.size()==0) {
 				rv.setUrl("./login.com");
 			}else {

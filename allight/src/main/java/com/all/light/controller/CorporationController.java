@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CorporationDTO;
+import com.all.light.dto.MemberDTO;
 import com.all.light.service.CorporationService;
 import com.all.light.util.Nologin;
 import com.all.light.util.PageUtil;
@@ -30,7 +31,7 @@ public class CorporationController {
 	@Autowired
 	private CorporationService corSVC;
 	
-	//로그인
+	//濡쒓렇�씤
 	@RequestMapping("/corlog")
 	public ModelAndView corlog(@RequestParam(value = "ccnt", required = false, defaultValue = "0") int cnt,
 			CorporationDTO cordto,HttpSession session,HttpServletRequest req,ModelAndView mv,RedirectView rv) {
@@ -83,7 +84,7 @@ public class CorporationController {
 	}
 	
 	// 7.7
-	//기업 리스트 및 검색 메소드
+	//湲곗뾽 由ъ뒪�듃 諛� 寃��깋 硫붿냼�뱶
 	@RequestMapping("/corporation/admin")
 	public ModelAndView adminCorporation(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
@@ -97,13 +98,13 @@ public class CorporationController {
 		
 		System.out.println("list = "+map.toString());
 		System.out.println("pinfo = "+pInfo.toString());
-		mv.addObject("LIST", map); //기업 상세 정보 리스트
-		mv.addObject("PINFO", pInfo); //페이징 정보
+		mv.addObject("LIST", map); //湲곗뾽 �긽�꽭 �젙蹂� 由ъ뒪�듃
+		mv.addObject("PINFO", pInfo); //�럹�씠吏� �젙蹂�
 		
 		mv.setViewName("common/admin/corporation");
 		return mv;
 	}
-	//기업 수정 메소드
+	//湲곗뾽 �닔�젙 硫붿냼�뱶
 		@RequestMapping(value="/corporation/modify/admin", method= RequestMethod.GET)
 		public ModelAndView adminModifyCorporationGet(
 				@RequestParam(value = "cono") int cono,
@@ -111,28 +112,28 @@ public class CorporationController {
 				@RequestParam(value = "search", required = false) String searchWord,
 				CorporationDTO corDTO,	ModelAndView mv, RedirectView rv) {
 			System.out.println("corporationController.modifyCorp, GET method");
-			//파라미터 받기, 비즈니스로직
+			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
 			corDTO = corSVC.getCorpInfo(cono);
 			System.out.println("corpInfo = "+corDTO.toString());
-			//모델지정
-			mv.addObject("CORPINFO", corDTO); //기업 상세 정보
-			//뷰지정
+			//紐⑤뜽吏��젙
+			mv.addObject("CORPINFO", corDTO); //湲곗뾽 �긽�꽭 �젙蹂�
+			//酉곗��젙
 			mv.setViewName("common/admin/corporationModify");
 			return mv;
 		}
 		
 		@RequestMapping(value="/corporation/modify/admin", method= RequestMethod.POST)
 		public ModelAndView adminModifyCorporationPost(
-				// PK(CONO)를 DTO에서 int로 받을 시 get방식으로 파라미터를 넘겨받아도 corDTO안에서 받을 수 있음
-				// String으로 받을 시 안됨
+				// PK(CONO)瑜� DTO�뿉�꽌 int濡� 諛쏆쓣 �떆 get諛⑹떇�쑝濡� �뙆�씪誘명꽣瑜� �꽆寃⑤컺�븘�룄 corDTO�븞�뿉�꽌 諛쏆쓣 �닔 �엳�쓬
+				// String�쑝濡� 諛쏆쓣 �떆 �븞�맖
 				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 				@RequestParam(value = "search", required = false) String searchWord,
 				CorporationDTO corDTO,	ModelAndView mv, RedirectView rv,HttpServletRequest request) {
 			System.out.println("corporationController.modifyCorp, Post method");
-			//파라미터 받기, 비즈니스로직
+			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
 			System.out.println("corpDTO = "+corDTO.toString());
 			corSVC.corpModify(corDTO);
-			//뷰지정
+			//酉곗��젙
 			rv.setUrl(request.getContextPath()+"/corporation/admin.com?search="+searchWord+"&nowPage="+nowPage);
 			mv.setView(rv);
 			return mv;
@@ -146,10 +147,10 @@ public class CorporationController {
 				@RequestParam(value = "search", required = false) String searchWord,
 				ModelAndView mv, RedirectView rv,HttpServletRequest request) {
 			System.out.println("CorpController.delete.Corp");
-			//파라미터 받기, 비즈니스로직
+			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
 			System.out.println("cono = "+cono);
 			corSVC.corpDelete(cono);
-			//뷰지정
+			//酉곗��젙
 			rv.setUrl(request.getContextPath()+"/corporation/admin.com?search="+searchWord+"&nowPage="+nowPage);
 			mv.setView(rv);
 			return mv;
@@ -159,7 +160,7 @@ public class CorporationController {
 		public ModelAndView adminJoinCorporationGet(
 				ModelAndView mv, RedirectView rv,HttpServletRequest request) {
 			System.out.println("CorpController.join.Corp "+request.getMethod()+"method");
-			//뷰지정
+			//酉곗��젙
 			mv.setViewName("common/admin/corporationJoin");
 			return mv;
 		}
@@ -168,10 +169,10 @@ public class CorporationController {
 		public ModelAndView adminJoinCorporationPost(
 				CorporationDTO corDTO, ModelAndView mv, RedirectView rv,HttpServletRequest request) {
 			System.out.println("CorpController.join.Corp "+request.getMethod()+"method");
-			System.out.println("전달 파라미터 = "+corDTO);
-			//비즈니스 로직
+			System.out.println("�쟾�떖 �뙆�씪誘명꽣 = "+corDTO);
+			//鍮꾩쫰�땲�뒪 濡쒖쭅
 			corSVC.corpInsert(corDTO);
-			//뷰지정
+			//酉곗��젙
 			rv.setUrl(request.getContextPath()+"/corporation/admin.com");
 			mv.setView(rv);
 			return mv;
@@ -189,5 +190,39 @@ public class CorporationController {
 				data="success";
 			}
 			return data;
+		}
+		
+		@RequestMapping(value="/corporation/modify/corp", method= RequestMethod.GET)
+		public ModelAndView corpModifyCorporationGet(
+				@RequestParam(value = "cono") int cono,
+				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+				@RequestParam(value = "search", required = false) String searchWord,
+				CorporationDTO corDTO,	ModelAndView mv, RedirectView rv) {
+			System.out.println("corporationController.modifyCorp, GET method");
+			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
+			corDTO = corSVC.getCorpInfo(cono);
+			System.out.println("corpInfo = "+corDTO.toString());
+			//紐⑤뜽吏��젙
+			mv.addObject("CORPINFO", corDTO); //湲곗뾽 �긽�꽭 �젙蹂�
+			//酉곗��젙
+			mv.setViewName("common/corp/Modify corp/Modifycorporation");
+			return mv;
+		}
+		
+		@RequestMapping(value="/corporation/modify/corp", method= RequestMethod.POST)
+		public ModelAndView corpModifyCorporationPost(
+				// PK(CONO)瑜� DTO�뿉�꽌 int濡� 諛쏆쓣 �떆 get諛⑹떇�쑝濡� �뙆�씪誘명꽣瑜� �꽆寃⑤컺�븘�룄 corDTO�븞�뿉�꽌 諛쏆쓣 �닔 �엳�쓬
+				// String�쑝濡� 諛쏆쓣 �떆 �븞�맖
+				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+				@RequestParam(value = "search", required = false) String searchWord,
+				CorporationDTO corDTO,	ModelAndView mv, RedirectView rv,HttpServletRequest request) {
+			System.out.println("corporationController.modifyCorp, Post method");
+			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
+			System.out.println("corpDTO = "+corDTO.toString());
+			corSVC.corpModify(corDTO);
+			//酉곗��젙
+			rv.setUrl(request.getContextPath()+"/corporation/modify/corp.com?search="+searchWord+"&nowPage="+nowPage);
+			mv.setView(rv);
+			return mv;
 		}
 }

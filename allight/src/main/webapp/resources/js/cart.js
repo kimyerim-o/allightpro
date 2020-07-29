@@ -42,18 +42,6 @@ $(function(){
 		$('.sum').children().text(numberWithCommas(chk)+"원");
 	})
 	
-	/*//체크된 item개수
-	$(".chkBox").change(function(){
-		var qt = 0;
-		$(".chkBox:checked").each(function(){
-			var qtemp = $(this).closest('td').next('td').next('td').next('td').next('td').next('td')
-			alert("qtemp"+qtemp)
-			qt += Number(qtemp.text());
-			alert("qt="+qt)
-		})
-		$('.sum').children().text(numberWithCommas(chk)+"원");
-	})*/
-	
 	//선택삭제
 	$(".selectDelete_btn").click(function(){
 		var confirm_val = confirm("정말 삭제하시겠습니까?");
@@ -138,6 +126,42 @@ $(function(){
 			//alert(chk)
 		})
 		$('.sum').children().text(numberWithCommas(chk)+"원");
+			
+		
 	})
 	
+	//+,- 후 수량 업데이트 
+	/*$('#iamount').change(function(){
+		if('${DATE}'!=''){
+			$.ajax({
+	            type : 'post',
+	            url : './updateIamount.com',
+	            data : {"iamount":$('#iamount').val()},
+	            success : function(data){
+	                $('#num').val(Number(data));
+	                if(${num}==0){
+	        			location.href="./cart.com?num="+data;
+	        		}
+	            },
+	            error : function(xhr, status, error){
+	                alert(error);
+	            }
+	        })
+		}else{
+			$.ajax({
+	            type : 'post',
+	            url : './updateIamount.com',
+	            data : {"iamount":$('#iamount').val()},
+	            error: function(xhr, status, error){
+	                alert(error);
+	            },
+	            success : function(data){
+	                $('#num').val(Number(data));
+	                if(${num}== 0){
+	        			location.href="./cart.com?num="+data;
+	        		}
+	            }
+	        })
+		}
+	})*/
 }); // end of function()

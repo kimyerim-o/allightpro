@@ -1,9 +1,5 @@
 package com.all.light.dto;
 
-import java.util.Arrays;
-
-import org.springframework.web.multipart.MultipartFile;
-
 public class CartDTO {
 	private int cano;		//장바구니번호
 	private String caid;	//아이디

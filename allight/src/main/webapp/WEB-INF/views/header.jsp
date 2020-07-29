@@ -150,12 +150,12 @@ function kakaoLogout() {
 								href="${pageContext.request.contextPath}/member/user/address.com">배송지
 									관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/item/review/list.com">상품 문의</a></li>
-							<li><a href="${pageContext.request.contextPath}/mypage/member/modify.com">내 정보</a></li>
+							<li><a href="#">내 정보</a></li>
 						</ul></li>
 
 					<!-- 기업 로그인시   -->
 					<c:if test="${sessionScope.MTYPE eq 1 }"></c:if>
-					<li class="nav-item"><a href="${pageContext.request.contextPath}/main.com" class="nav-link">기업</a>
+					<li class="nav-item"><a href="#" class="nav-link">기업</a>
 						<ul class="dropdown">
 							<li><a
 								href="${pageContext.request.contextPath}/order/list/corp.com">주문
@@ -164,7 +164,7 @@ function kakaoLogout() {
 								href="${pageContext.request.contextPath}/item/list/corp.com">상품
 									관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/item/review/list/corp.com">상품리뷰/문의</a></li>
-							<li><a href="${pageContext.request.contextPath}/corporation/modify/corp.com">기업 정보 관리</a></li>
+							<li><a href="#">.기업 정보 관리</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/question/list/corp.com">문의사항</a></li>
 						</ul></li>

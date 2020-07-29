@@ -154,6 +154,23 @@ public class MemberService {
 		return res;
 	}
 	
+	public void kakaoup(MemberDTO memdto) {
+		memdto.setMtel(memdto.getMtel()+"-"+memdto.getMtel1()+"-"+memdto.getMtel2());
+		memDAO.kakaoup(memdto);
+	}
+	
+	public void kakaose(MemberDTO memdto, HttpSession session) {
+		MemberDTO mem=memDAO.kakao(memdto);
+		session.setAttribute("MNO",mem.getMno());
+		session.setAttribute("MID",mem.getMid());
+		session.setAttribute("MEMAIL",mem.getMemail());
+		session.setAttribute("MNAME", mem.getMname());
+		session.setAttribute("MBIRTH", mem.getMbirth());
+		session.setAttribute("MTEL", mem.getMtel());
+		session.setAttribute("MTYPE", mem.getMtype());
+		session.setAttribute("MNICK", mem.getMnick());
+	}
+	
 	//로그아웃
 	public void logout(HttpSession session) {
 		if(session.getAttribute("MID")!=null) {
@@ -223,9 +240,6 @@ public class MemberService {
 	public void memDelete(int mno) {
 		memDAO.memDelete(mno);
 	}
-
-	
-	
 	
 	// 배송지 검색하기
 	public ArrayList<AddressDTO> address(HttpSession session) {

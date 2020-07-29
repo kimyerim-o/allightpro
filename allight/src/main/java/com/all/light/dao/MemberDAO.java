@@ -82,7 +82,11 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		}
 		return res;
 	}
-
+	
+	public void kakaoup(MemberDTO memdto) {
+		session.update("member.kakaoup", memdto);
+	}
+	
 	//7.7 검색 시, 검색 없을 시 회원 수 가져오기
 	public int getTotalCnt(String searchWord) {
 		int totalCnt = session.selectOne("member.totalCntWithSearch", searchWord);
@@ -129,5 +133,6 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		System.out.println("배송지 삭제하기");
 		session.delete("member.memaddressdelete", aDTO);
 	}
+
 
 }

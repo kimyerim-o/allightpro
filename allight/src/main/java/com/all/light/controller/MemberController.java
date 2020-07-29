@@ -262,10 +262,19 @@ public class MemberController {
 	
 	//카카오 회원가입 폼 kakaojoin
 	@RequestMapping(value = "/kakaojoin")
-	public ModelAndView kakaoj(HttpSession session, MemberDTO memdto,ModelAndView mv) {
+	public ModelAndView kakaojoin(HttpSession session, MemberDTO memdto,ModelAndView mv) {
 		MemberDTO mem = memSVC.kakaojoin(memdto, session);
 		mv.addObject("mdto", mem);
 		mv.setViewName("common/user/kakaojoin");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/kakaoj")
+	public ModelAndView kakaoj(HttpSession session,RedirectView rv, MemberDTO memdto,ModelAndView mv) {
+		memSVC.kakaoup(memdto);
+		memSVC.kakaose(memdto,session);
+		rv.setUrl("./main.com");
+		mv.setView(rv);;
 		return mv;
 	}
 	

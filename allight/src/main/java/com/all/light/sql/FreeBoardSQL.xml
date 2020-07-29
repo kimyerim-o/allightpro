@@ -43,5 +43,26 @@
 			where num between ${startNo} and ${endNo}
 			order by num desc
 	</select>
+	<insert id="writeFile" parameterType="freDTO">
+		insert into freeimage (fino, fno, fipath, fiimg, fioriname, filength)
+		values(fino_seq.nextval, 
+					(select * from(select fno from freeboard order by fno desc) <![CDATA[where rownum <= 1]]>),
+					#{fipath}, #{fiimg}, #{fioriname}, #{filength})
+	</insert>
 	
+	<!-- 글 조회 -->
+	<!-- 글 읽어오기 -->
+	<select id="getDetail" parameterType="Integer" resultType="freDTO">
+		select * from freeboard where fno=${value}
+	</select>
+	<!-- 파일 읽어오기 -->
+	<select id="getFile" parameterType="Integer" resultType="freDTO">
+		select * from freeimage where fno=${value}
+	</select>
+	<!-- 댓글-->
+	<select id="getTotalCntOfComm" parameterType="Integer" resultType="Integer">
+		
+	</select>
+	<select id="getCommList" parameterType="PageUtil" resultType="freDTO">
+	</select>
 </mapper>

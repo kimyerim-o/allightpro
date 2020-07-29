@@ -28,44 +28,11 @@ public class CorporationService {
 		HashMap result=corDAO.login(map);
 		if(result==null || result.size()==0) {
 			cnt=cnt+1;
-<<<<<<< HEAD
-			session.setAttribute("cnt", cnt);
-			System.out.println("濡쒓렇�씤�떎�뙣");
-			String[] arr=null;
-			if(cnt>=4) {
-				System.out.println("1");
-				/*try {
-					Runtime rt=Runtime.getRuntime();
-					String ex="d:\\study\\pj5ML\\dist\\test.exe";
-					Process pro=rt.exec(ex);
-					pro.waitFor();
-					File file = new File("d:\\study\\pj5ML\\logintest.txt");
-
-		            FileReader filereader = new FileReader(file);
-		            BufferedReader bufReader = new BufferedReader(filereader);
-		            String line = bufReader.readLine();
-		            arr=line.split(",");
-		            for(int i=1;i<arr.length;i++) {
-	            		System.out.println(arr[i]);	   
-	            	}
-		            
-		            bufReader.close();
-				}catch(Exception e) {
-					System.out.println(e);
-				}*/
-				System.out.println("2");
-			}
-		}else{
-			//濡쒓렇�씤�꽦怨�
-			session.invalidate();
-			System.out.println("濡쒓렇�씤�꽦怨�");
-=======
 			session.setAttribute("ccnt", cnt);
 			System.out.println("로그인실패");
 		}else{
 			//로그인성공
 			System.out.println("로그인성공");
->>>>>>> master
 			session.setAttribute("CONO",result.get("CONO"));
 			session.setAttribute("COID",result.get("COID"));
 			session.setAttribute("CONAME",result.get("CONAME"));	

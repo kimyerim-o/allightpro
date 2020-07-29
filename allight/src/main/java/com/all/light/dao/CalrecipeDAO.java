@@ -19,5 +19,8 @@ public class CalrecipeDAO extends SqlSessionDaoSupport {
 		cdto.setCrterm(cdto.getCrterm()+cdto.getType());
 		session.insert("calrecipe.recipeCheck", cdto);
 	}
-
+	
+	public CalrecipeDTO getRecipe(String mid) {
+		return session.selectOne("calrecipe.getRecipe", mid);
+	}
 }

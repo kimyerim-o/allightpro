@@ -1,5 +1,7 @@
 package com.all.light.dto;
 
+import java.util.Arrays;
+
 public class CorporationDTO {
 	private int cono;
 	private String coid;
@@ -7,6 +9,8 @@ public class CorporationDTO {
 	private String coname;
 	private String cotel;
 	private String coemail;
+	private String[] arr;
+	private String auto;
 
 	public int getCono() {
 		return cono;
@@ -55,11 +59,27 @@ public class CorporationDTO {
 	public void setCoemail(String coemail) {
 		this.coemail = coemail;
 	}
+	
+	public String[] getArr() {
+		return arr;
+	}
+
+	public void setArr(String[] arr) {
+		this.arr = arr;
+	}
 
 	@Override
 	public String toString() {
 		return "CorporationDTO [cono=" + cono + ", coid=" + coid + ", copw=" + copw + ", coname=" + coname + ", cotel="
-				+ cotel + ", coemail=" + coemail + "]";
+				+ cotel + ", coemail=" + coemail + ", arr=" + Arrays.toString(arr) + "]";
+	}
+
+	public String getAuto() {
+		return auto;
+	}
+
+	public void setAuto(String auto) {
+		this.auto = auto;
 	}
 
 }

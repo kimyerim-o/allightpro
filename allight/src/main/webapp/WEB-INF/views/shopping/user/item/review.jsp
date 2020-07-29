@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>쇼핑상세</title>
+<title>쇼핑상세유저</title>
 <script type="text/javascript">
 
 // 로그인 여부 확인/로그인창 보내기
@@ -120,11 +120,11 @@ $(function(){
 			<div id="qTable">
 			<table>
 				<tr>
-					<th style="border-bottom:1px solid gray; width:7%">번호</th>
-					<th style="border-bottom:1px solid gray; width:43%" colspan="2">제목</th>
-					<th style="border-bottom:1px solid gray; width:20%">작성일</th>
-					<th style="border-bottom:1px solid gray; width:20%">닉네임</th>
-					<th style="border-bottom:1px solid gray; width:10%">상품이동</th>
+					<th style="border-bottom:1px solid gray; width:5%">번호</th>
+					<th style="border-bottom:1px solid gray; width:40%" colspan="2">제목</th>
+					<th style="border-bottom:1px solid gray; width:15%">작성일</th>
+					<th style="border-bottom:1px solid gray; width:10%">닉네임</th>
+					<th style="border-bottom:1px solid gray; width:30%">상품이동</th>
 				</tr>
 				<c:forEach var="list" items="${QLIST}" varStatus="status">
 					<tr>

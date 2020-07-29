@@ -83,5 +83,8 @@ public class CalrecipeService {
 		return cdto;
 	}
 
-
+	public CalrecipeDTO getRecipe(HttpSession session) {
+		String mid=(String) session.getAttribute("MID");
+		return creDAO.getRecipe(mid);
+	}
 }

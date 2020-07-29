@@ -150,6 +150,13 @@
         order by iqno desc
 	</select>
 	
+	<!-- 상세내용 가져오기(from ITEM) 이름가져오기 - 류지혁  -->
+	<select id="getItemName2" resultType="itemDTO" parameterType="java.util.HashMap">
+		select iname, A.ino, iqno from item A, itemquestion B
+        where A.ino = B.ino and icorp = #{mid}
+        order by iqno desc
+	</select>
+	
 	<!-- 상세이미지 리스트 가져오기  -->
 	<select id="detailImgs" resultType="shopDTO" parameterType="java.util.HashMap">
 		select imgimage from image 

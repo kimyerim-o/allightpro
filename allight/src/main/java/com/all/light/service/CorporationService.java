@@ -1,8 +1,12 @@
 package com.all.light.service;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,7 @@ public class CorporationService {
 		HashMap result=corDAO.login(map);
 		if(result==null || result.size()==0) {
 			cnt=cnt+1;
+<<<<<<< HEAD
 			session.setAttribute("cnt", cnt);
 			System.out.println("濡쒓렇�씤�떎�뙣");
 			String[] arr=null;
@@ -54,6 +59,13 @@ public class CorporationService {
 			//濡쒓렇�씤�꽦怨�
 			session.invalidate();
 			System.out.println("濡쒓렇�씤�꽦怨�");
+=======
+			session.setAttribute("ccnt", cnt);
+			System.out.println("로그인실패");
+		}else{
+			//로그인성공
+			System.out.println("로그인성공");
+>>>>>>> master
 			session.setAttribute("CONO",result.get("CONO"));
 			session.setAttribute("COID",result.get("COID"));
 			session.setAttribute("CONAME",result.get("CONAME"));	
@@ -61,7 +73,7 @@ public class CorporationService {
 		return result;
 		
 	}
-
+	
 	public void logout(HttpSession session) {
 		if(session.getAttribute("COID")!=null) {
 			session.invalidate();

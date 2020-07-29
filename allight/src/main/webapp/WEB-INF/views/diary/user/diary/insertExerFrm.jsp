@@ -65,33 +65,11 @@ $(function(){
 		$('#myFAEFrm').submit();
 	})
     
-    // 상세 모달에서 수량 바뀌면 분량(g),칼로리,그래프 변화
+    // 상세 모달에서 수량 바뀌면 시간(분),칼로리 변화
     $('#amount').change(function(){
     	$('#gram').val(gram*$(this).val());
     	$('#kcal').val(Math.floor(kcal*$('#gram').val()/gram));
     	
-    	var ttan0 = Math.round(tan0*$(this).val()*100)/100;
-    	var ddan0 = Math.round(dan0*$(this).val()*100)/100;
-    	var jji0 = Math.round(ji0*$(this).val()*100)/100;
-    	var ssik0 = Math.round(sik0*$(this).val()*100)/100;
-    	var nna0 = Math.round(na0*$(this).val()*100)/100;
-    	var ttan = Math.round(tan*$(this).val()*100)/100;
-    	var ddan = Math.round(dan*$(this).val()*100)/100;
-    	var jji = Math.round(ji*$(this).val()*100)/100;
-    	var ssik = Math.round(sik*$(this).val()*100)/100;
-    	var nna = Math.round(na*$(this).val()*100)/100;
-    	
-    	$('#tan').text(ttan0+'('+ttan+'%)');
-    	$('#dan').text(ddan0+'('+ddan+'%)');
-    	$('#ji').text(jji0+'('+jji+'%)');
-    	$('#sik').text(ssik0+'('+ssik+'%)');
-    	$('#na').text(nna0+'('+nna+'%)');
-    	
-    	$('#t-bar > div > div').css('width',ttan+'%');
-    	$('#d-bar > div > div').css('width',ddan+'%');
-    	$('#j-bar > div > div').css('width',jji+'%');
-    	$('#s-bar > div > div').css('width',ssik+'%');
-    	$('#n-bar > div > div').css('width',nna+'%');
     })
     
     // 상세 모달에서 분량(g) 바뀌면 칼로리 변화
@@ -148,6 +126,24 @@ $(function(){
                 location.reload();
             },
         });
+	})
+	
+	// 마이칼로리 버튼 누르면 마이칼로리 리스트 보여주기
+	$('#mycal').click(function(){
+		$('#caldic-count').attr('class','hidden');
+		$(this).attr('class','search-div-on');
+		$('#caldic').attr('class','search-div');
+		$('#mycal-table').attr('class','search-table-on')
+		$('#caldic-table').attr('class','hidden');
+	})
+	
+	// 칼로리 사전 버튼 누르면 칼로리 사전 검색 리스트 보여주기
+	$('#caldic').click(function(){
+		$('#caldic-count').attr('class','f-left');
+		$(this).attr('class','search-div-on');
+		$('#mycal').attr('class','search-div');
+		$('#caldic-table').attr('class','search-table-on')
+		$('#mycal-table').attr('class','hidden');
 	})
 })
 
@@ -233,7 +229,7 @@ function deleteMy(cdno) {
    	
 		
 	   	<div class="search-divs1">
-	   		<div class="f-left">
+	   		<div class="f-left" id="caldic-count">
 	   			검색결과 ${LIST.size()}<c:if test="${empty LIST}">0</c:if>개
 	   		</div>
 	   		<div class="f-right">
@@ -244,12 +240,12 @@ function deleteMy(cdno) {
 	   	
 	   	<div class="search-divs2">
 				<ul>
-					<li class="search-div"><a style="cursor:pointer;">칼로리 사전</a></li>
-					<li class="search-div"><a style="cursor:pointer;">마이칼로리</a></li>
+					<li class="search-div-on" id="caldic"><a style="cursor:pointer;">칼로리 사전</a></li>
+					<li class="search-div" id="mycal"><a style="cursor:pointer;">마이칼로리</a></li>
 				</ul>
 		</div>
 		
-		<table class="search-table" id="caldic-table">
+		<table class="search-table-on" id="caldic-table">
 			<c:forEach var="list" items="${LIST}">
 			<tr>
 				<td width="5%"><input type="checkbox" name="checkbox"/><input type="hidden" name="cdno" value="${list.cdno}"></td>
@@ -260,12 +256,12 @@ function deleteMy(cdno) {
 			</c:forEach>
 			<c:if test="${empty LIST}">
 				<tr>
-					<td class="center">검색된 내용이 없습니다.</td>
+					<td class="center" style="padding:20px 0 0 0;">검색된 내용이 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>
 		
-		<table class="search-table" id="mycal-table">
+		<table class="hidden" id="mycal-table">
 			<c:forEach var="list" items="${MYLIST}">
 			<tr>
 				<td width="5%"><input type="checkbox" name="checkbox"/><input type="hidden" name="cdno" value="${list.cdno}"></td>
@@ -277,7 +273,7 @@ function deleteMy(cdno) {
 			</c:forEach>
 			<c:if test="${empty MYLIST}">
 				<tr>
-					<td class="center">검색된 내용이 없습니다.</td>
+					<td class="center" style="padding:20px 0 0 0;">마이칼로리 운동이 없습니다.</td>
 				</tr>
 			</c:if>
 		</table>

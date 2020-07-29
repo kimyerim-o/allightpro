@@ -1,7 +1,11 @@
 package com.all.light.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CorporationDTO;
 import com.all.light.dto.MemberDTO;
 import com.all.light.service.CorporationService;
+import com.all.light.util.Nologin;
 import com.all.light.util.PageUtil;
 
 @Controller
@@ -27,16 +33,20 @@ public class CorporationController {
 	
 	//濡쒓렇�씤
 	@RequestMapping("/corlog")
-	public ModelAndView corlog(@RequestParam(value = "cnt", required = false, defaultValue = "0") int cnt,
+	public ModelAndView corlog(@RequestParam(value = "ccnt", required = false, defaultValue = "0") int cnt,
 			CorporationDTO cordto,HttpSession session,HttpServletRequest req,ModelAndView mv,RedirectView rv) {
 		System.out.println("CorporationController corlog");
-		if(cnt<4) {
-			HashMap result=corSVC.login(cordto,session,cnt);
-			if(result==null || result.size()==0) {
-				rv.setUrl("./login.com");
-			}else {
-				rv.setUrl("./main.com");
+
+		System.out.println(cordto);
+		
+		HashMap result=null;
+		if(cordto.getArr()!=null) {
+			String[] a=cordto.getArr();
+			String str=a[0];
+			for(int i=1;i<a.length;i++) {
+				str=str+a[i];
 			}
+<<<<<<< HEAD
 		}else {
 			//�옄�룞�엯�젰諛⑹�媛� �룞�씪�븳吏� �솗�씤�븯湲�
 			System.out.println("auto");
@@ -46,13 +56,37 @@ public class CorporationController {
 				rv.setUrl("./login.com");
 			}else {
 				rv.setUrl("./main.com");
+=======
+			if(str.equals(cordto.getAuto())){
+				result=corSVC.login(cordto,session,cnt);
+>>>>>>> master
 			}
 		}
-		mv.setView(rv);
+		
+		result=corSVC.login(cordto,session,cnt);
+		String[] arr=null;		
+		if(result==null || result.size()==0) {
+			if(cnt>=3) {
+				System.out.println("auto");
+				arr=Nologin.auto();
+				cordto.setArr(arr);
+				mv.addObject("cordto", cordto);
+				System.out.println(cordto);
+			}
+			mv.setViewName("common/loginform");
+		}else {
+			rv.setUrl("./main.com");
+			mv.setView(rv);
+		}
 		return mv;
 	}
+<<<<<<< HEAD
 	
 	//濡쒓렇�븘�썐
+=======
+		
+	//로그아웃
+>>>>>>> master
 	@RequestMapping("/corlogout")
 	public ModelAndView logout(HttpSession session,ModelAndView mv,RedirectView rv) {
 		if(session.getAttribute("COID")==null) {

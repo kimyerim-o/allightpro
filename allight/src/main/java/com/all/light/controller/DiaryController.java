@@ -520,13 +520,13 @@ public class DiaryController {
 		
 		diaSVC.updateDimage(num,dimage);
 		
-		try {
-			dimage = URLEncoder.encode(dimage, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			dimage = URLEncoder.encode(dimage, "UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
 		
-		return dimage;
+		return Integer.toString(num);
 	}
 		
 		

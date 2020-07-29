@@ -123,13 +123,7 @@
 						<tr>
 							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
-								<c:if test="${c.qcid eq sessionScope.MID}">
-									<a class="ucomm" style="color: #ff5656;">수정</a>
-									<a class="dcomm" style="color: #ff5656;">삭제</a>
-								</c:if>
-								<c:if test="${sessionScope.MTYPE == 1}">
-									<a class="dcomm" style="color: #ff5656;">삭제</a>
-								</c:if>
+								<a class="dcomm" style="color: #ff5656;">삭제</a>
 							</td>
 						</tr>
 						</c:forEach>

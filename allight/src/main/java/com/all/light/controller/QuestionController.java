@@ -242,7 +242,7 @@ public class QuestionController {
 	public String deleteComm(QuestionDTO qdto) {
 		System.out.println("del"+qdto);
 		queSVC.deleteComm(qdto);
-		return "shopping/corp/question/check";
+		return "ok";
 	}
 	
 	//관리자(유저 단 7.13추가)

@@ -59,7 +59,7 @@ function kakaoLogout() {
 		<div class="container">
 			<div class="ht-right">
 				<!-- 로그인X -->
-				<c:if test="${(empty sessionScope.COID and empty sessionScope.MID) or empty sessionScope.MNICK}">
+				<c:if test="${empty sessionScope.COID and empty sessionScope.MNICK}">
 					<a href="${pageContext.request.contextPath}/login.com"
 						class="login-panel"><i class="fa fa-user"></i>Login</a>
 					<a href="${pageContext.request.contextPath}/joinFrm.com"

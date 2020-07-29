@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.OrderdetailDTO;
@@ -212,7 +213,7 @@ public class OrderService {
 		int totalCount=0;
 		if (star==null || star.isEmpty() || las==null || las.isEmpty() ) {
 			System.out.println(cono);
-			if(type==null) {
+			if(type==null || type.isEmpty()) {
 				totalCount = ordDAO.pageOrderCono(cono);
 			}else {
 				System.out.println("pageOrderCono"+type);
@@ -221,18 +222,20 @@ public class OrderService {
 		}else if(star!=null && las!=null) {
 			java.sql.Date start=java.sql.Date.valueOf(star);
 			java.sql.Date last=java.sql.Date.valueOf(las);
-			if(type==null) {
+			if(type==null || type.isEmpty()) {
 				totalCount = ordDAO.pageOrderConoTerm(cono,start,last);
 			}else {
 				totalCount = ordDAO.pageOrderConoTermType(cono,start,last,type);
 			}
 		}
-		PageUtil pinfo = new PageUtil(nowPage, totalCount,2,5);
+		System.out.println(star+"////"+las+"////"+type+"////"+totalCount);
+		PageUtil pinfo = new PageUtil(nowPage, totalCount,8,5);
 		return pinfo;
 	}
 	
 	public OrderData listCorp(HttpSession session, OrderData odata, OrderDTO odto, OrderdetailDTO oddto, PageUtil pinfo) {
 		ArrayList<OrderdetailDTO> listde=ordDAO.listdeCorp(pinfo);
+		System.out.println("llllll"+pinfo);
 		OrderDTO list=null;
 		ArrayList<ShoppingDTO> shop=null;
 		for(int i=0;i<listde.size();i++) {
@@ -278,6 +281,117 @@ public class OrderService {
 	
 	public void delivery(OrderdetailDTO oddto) {
 		ordDAO.delivery(oddto);
+	}
+	
+	public String delemail(String no,String email) {
+		System.out.println(no);
+		System.out.println(email);
+		OrderdetailDTO oddto=ordDAO.detailCorp(Integer.parseInt(no));
+		ShoppingDTO sdto=ordDAO.iteminfoCorp(oddto.getIno());
+		OrderDTO odto=ordDAO.listCorp(oddto.getOno());
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		odto.setOrdernum(format.format(odto.getOdate())+odto.getMno()+odto.getOno());
+		
+		//sdto 상품이름, 
+		// Mail Server 설정
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.gmail.com";
+		int hostPort = 465;
+		String hostSMTPid = "allight.adm@gmail.com";
+		String hostSMTPpwd = "goallight!";
+
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "allight.adm@gmail.com";
+		String fromName = "allight";
+		String subject = "";
+		String msg = "";
+
+		subject = "Allight 상품 배송이 시작되었습니다.";
+		msg += "<div align='center' style='font-family:ariel'>";
+		msg += "<h1>안녕하세요. Allight입니다.</h1><hr><br/>";
+		msg += "<h1 style='color: orange;'>고객님께서 주문하신 상품이 발송되었습니다.</h1><br/>";
+		msg += "<h1 style='background:#f8f8f8;padding:10px;'>주문번호 : "+odto.getOrdernum()+"</h1>";
+		msg += "<h1 style='background:#f8f8f8;padding:10px;'>상품명 : "+sdto.getIname()+"</h1>";
+		msg += "<h1 style='background:#f8f8f8;padding:10px;'>택배사 : "+oddto.getOcouriercompany()+"</h1>";
+		msg += "<h1 style='background:#f8f8f8;padding:10px;'>송장번호 : "+oddto.getOinvoicenumber()+"</h1>";
+		msg += "</div>";
+
+		// 받는 사람 E-Mail 주소
+		try {
+			HtmlEmail mail = new HtmlEmail();
+			mail.setDebug(true);
+			mail.setCharset(charSet);
+			mail.setSSL(true);
+			mail.setHostName(hostSMTP);
+			mail.setSmtpPort(hostPort);
+
+			mail.setAuthentication(hostSMTPid, hostSMTPpwd);
+			mail.setTLS(true);
+			mail.addTo(email, charSet);
+			mail.setFrom(fromEmail, fromName, charSet);
+			mail.setSubject(subject);
+			mail.setHtmlMsg(msg);
+			mail.send();
+			return "ok";
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
+			return null;
+		}
+	}
+	
+	public String canemail(String no,String email) {
+		System.out.println(no);
+		System.out.println(email);
+		OrderdetailDTO oddto=ordDAO.detailCorp(Integer.parseInt(no));
+		ShoppingDTO sdto=ordDAO.iteminfoCorp(oddto.getIno());
+		OrderDTO odto=ordDAO.listCorp(oddto.getOno());
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		odto.setOrdernum(format.format(odto.getOdate())+odto.getMno()+odto.getOno());
+		
+		// Mail Server 설정
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.gmail.com";
+		int hostPort = 465;
+		String hostSMTPid = "allight.adm@gmail.com";
+		String hostSMTPpwd = "goallight!";
+
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "allight.adm@gmail.com";
+		String fromName = "allight";
+		String subject = "";
+		String msg = "";
+
+		subject = "Allight 상품 주문이 취소되었습니다.";
+		msg += "<div align='center' style='font-family:ariel'>";
+		msg += "<h1>안녕하세요. Allight입니다.</h1><hr><br/>";
+		msg += "<h1 style='color: orange;'>고객님께서 주문하신 상품이 취소되었습니다.</h1><br/>";
+		msg += "<h1 style='background:#f8f8f8;padding:10px;'>주문번호 : "+odto.getOrdernum()+"</h1>";
+		msg += "<h1 style='background:#f8f8f8;padding:10px;'>상품명 : "+sdto.getIname()+"</h1><br/>";
+		msg += "<h1> ~~ 홈페이지에 방문하셔서 확인 부탁드립니다.</h1>";
+		msg += "<h1>문의 사항은 allight.adm@gmail.com 통해 연락 주시기 바랍니다.</h1>";
+		msg += "</div>";
+
+		// 받는 사람 E-Mail 주소
+		try {
+			HtmlEmail mail = new HtmlEmail();
+			mail.setDebug(true);
+			mail.setCharset(charSet);
+			mail.setSSL(true);
+			mail.setHostName(hostSMTP);
+			mail.setSmtpPort(hostPort);
+
+			mail.setAuthentication(hostSMTPid, hostSMTPpwd);
+			mail.setTLS(true);
+			mail.addTo(email, charSet);
+			mail.setFrom(fromEmail, fromName, charSet);
+			mail.setSubject(subject);
+			mail.setHtmlMsg(msg);
+			mail.send();
+			return "ok";
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
+			return null;
+		}
 	}
 	
 

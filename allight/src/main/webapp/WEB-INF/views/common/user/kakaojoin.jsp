@@ -68,6 +68,7 @@ $(function() {
 			$("#mtel2").focus();
 			return false;
 		}
+		
 		if($("#mtel option:selected").val()=='선택'){
 			alert("전화번호를 입력하지 않았습니다.")
 			$("#mtel").focus();

@@ -136,10 +136,7 @@
 							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
 								<c:if test="${c.qcid eq sessionScope.COID}">
-									<a class="ucomm" data-no="${c.qcno}" style="color: #ff5656;">수정</a>
-									<a class="dcomm" data-no="${c.qcno}" style="color: #ff5656;">삭제</a>
-								</c:if>
-								<c:if test="${sessionScope.MTYPE == 1 }">
+									<%-- <a class="ucomm" data-no="${c.qcno}" style="color: #ff5656;">수정</a --%>
 									<a class="dcomm" data-no="${c.qcno}" style="color: #ff5656;">삭제</a>
 								</c:if>
 							</td>

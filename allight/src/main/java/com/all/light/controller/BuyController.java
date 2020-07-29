@@ -27,7 +27,7 @@ public class BuyController {
 		//String mid = (String)request.getSession().getAttribute("MID");
 		//List<BuyDTO> list = buySVC.buy(mid);
 		mv.setViewName("shopping/user/buy");
-		mv.addObject("clist",list);
+		//mv.addObject("clist",list);
 		return mv;
 	}
 		

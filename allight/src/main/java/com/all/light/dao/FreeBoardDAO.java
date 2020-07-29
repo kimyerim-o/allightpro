@@ -47,7 +47,23 @@ public class FreeBoardDAO extends SqlSessionDaoSupport{
 	}
 
 	public ArrayList<FreeBoardDTO> getCommDetail(PageUtil pInfo) {
+		System.out.println(pInfo);
 		return (ArrayList)session.selectList("freeboard.getCommList",pInfo);
 	}
-	
+
+	public void update(FreeBoardDTO freDTO) {
+		session.update("freeboard.update",freDTO);
+	}
+
+	public void fileUpdate(FreeBoardDTO freDTO) {
+		session.update("freeboard.fileUpdate",freDTO);
+	}
+
+	public void insertComm(FreeBoardDTO freDTO) {
+		session.insert("freeboard.insertComm", freDTO);
+	}
+
+	public void deleteComm(int fcno) {
+		session.delete("freeboard.deleteComm", fcno);
+	}
 }

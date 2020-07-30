@@ -183,6 +183,16 @@
 		where dno = #{dno} 
 	</update>
 	
+	<!-- 해당 회원의 다이어리인지 확인 -->
+	<select id="IsMyDno" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from diary where dno=#{dno} and mid=#{mid}
+	</select>
 	
+	<!-- 다이어리 이미지 삭제 -->
+	<update id="myImgDelete" parameterType="int">
+		update diary set dimage = null 
+		where dno = #{dno}
+	</update>
+
 </mapper>
 	

@@ -98,10 +98,19 @@ public class DiaryController {
 			int num, 
 			DiaryDTO dto) {
 		String mid = (String)request.getSession().getAttribute("MID");
-		if(mid==null) {
+		if(mid==null) { //일반회원/관리자가 아니면 main으로 보내기
+			System.out.println("myFAE()-mid 널");
 			RedirectView rv = new RedirectView("./main.com");
 			mv.setView(rv);
 			return mv;
+		}else { //해당 회원의 다이어리인지 확인
+			int ok = diaSVC.IsMyDno(num,mid);
+			if(ok==0 && num!=0) {
+				System.out.println("myFAE()-이 회원의 다이어리가 아님!!!");
+				RedirectView rv = new RedirectView("./main.com");
+				mv.setView(rv);
+				return mv;
+			}
 		}
 		
 		System.out.println("myFoodAndExer()-dno:"+num);
@@ -459,23 +468,17 @@ public class DiaryController {
 	// 내 운동 칼로리 모두 삭제
 	@RequestMapping("/myExerDeleteAll")
 	@ResponseBody
-	public void myExerDeleteAll(
-			int dno) {
+	public void myExerDeleteAll(int dno) {
 		System.out.println("myExerDeleteAll()-dno="+dno);
-		
 		diaSVC.myExerDeleteAll(dno);
-		
 	}
 	
 	// 내 음식 칼로리 모두 삭제
 	@RequestMapping("/myFoodDeleteAll")
 	@ResponseBody
-	public void myFoodDeleteAll(
-			int dno) {
+	public void myFoodDeleteAll(int dno) {
 		System.out.println("myFoodDeleteAll()-dno="+dno);
-		
 		diaSVC.myFoodDeleteAll(dno);
-		
 	}
 	
 	// 다이어리 삭제
@@ -499,7 +502,7 @@ public class DiaryController {
 			  			  required = false) Date ddate,
 			int num, 
 			MultipartFile dimageFile) {
-		System.out.println("updateDimage()-dno="+num+",dimage:"+dimageFile.toString());
+		System.out.println("updateDimage()-dno="+num+",ddate:"+ddate);
 		
 		if(num==0) {
 			String mid = (String)request.getSession().getAttribute("MID");
@@ -520,16 +523,16 @@ public class DiaryController {
 		
 		diaSVC.updateDimage(num,dimage);
 		
-//		try {
-//			dimage = URLEncoder.encode(dimage, "UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
-		
 		return Integer.toString(num);
 	}
 		
-		
+	// 다이어리 이미지 삭제
+	@RequestMapping("/myImgDelete")
+	@ResponseBody
+	public void myImgDelete(int dno) {
+		System.out.println("myImgDelete()-dno="+dno);
+		diaSVC.myImgDelete(dno);
+	}
 }
 
 

@@ -9,11 +9,19 @@
 <script>
 
 function myFAE(day,dno){
-	$('#num').val(dno);
-	$('#year').val(${today_info.search_year});
-	$('#month').val(${today_info.search_month});
-	$('#day').val(day);
-	$('#myFAEFrm').submit();
+	if(${!empty sessionScope.MID}){
+		$('#num').val(dno);
+		$('#year').val(${today_info.search_year});
+		$('#month').val(${today_info.search_month});
+		$('#day').val(day);
+		$('#myFAEFrm').submit();
+	}else{
+		if(${!empty sessionScope.COID}){
+			alert('일반회원만 사용가능한 서비스입니다.')
+		}else if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
+			location.href = "./login.com";
+		}
+	}
 };
 
 </script>

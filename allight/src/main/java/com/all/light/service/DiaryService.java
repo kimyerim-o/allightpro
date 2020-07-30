@@ -295,6 +295,16 @@ public class DiaryService {
 		
 		diaDAO.updateDimage(map);
 	}
+
+	// 해당 회원의 다이어리인지 확인
+	public int IsMyDno(int dno, String mid) {
+		return diaDAO.IsMyDno(dno,mid);
+	}
+
+	// 다이어리 이미지 삭제
+	public void myImgDelete(int dno) {
+		diaDAO.myImgDelete(dno);
+	}
 	
 }
 

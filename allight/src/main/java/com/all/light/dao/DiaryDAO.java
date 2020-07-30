@@ -263,6 +263,23 @@ public class DiaryDAO extends SqlSessionDaoSupport {
 			System.out.println("dimage 추가 성공~");
 		}
 	}
+
+	// 해당 회원의 다이어리인지 확인
+	public int IsMyDno(int dno, String mid) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("dno", dno);
+		map.put("mid", mid);
+		int ok = session.selectOne("diary.IsMyDno", map);
+		return ok;
+	}
+
+	// 다이어리 이미지 삭제
+	public void myImgDelete(int dno) {
+		int isok = session.update("diary.myImgDelete", dno);
+		if(isok==1) {
+			System.out.println("diary 이미지 삭제 성공");
+		}
+	}
 	
 	
 	

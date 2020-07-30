@@ -1,6 +1,7 @@
 package com.all.light.dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -280,8 +281,12 @@ public class DiaryDAO extends SqlSessionDaoSupport {
 			System.out.println("diary 이미지 삭제 성공");
 		}
 	}
-	
-	
+
+
+	public ArrayList kgchart(String mid) {
+		System.out.println("DAO, mid = " + mid);
+		return (ArrayList)session.selectList("diary.kgchart", mid);
+	}
 	
 	
 	

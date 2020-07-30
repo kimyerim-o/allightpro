@@ -31,7 +31,7 @@ function myFAE(day,dno){
 <body>
 <div id="wrap">
 	<a class="title">다이어리 <%=session.getAttribute("MID") %> / <%=session.getAttribute("COID") %>
-		<input type="button" value="월별 다이어트 추이  &gt;" class="goto"/>
+		<input type="button" value="월별 다이어트 추이  &gt;" class="goto" onclick="location.href='./chart.com'" />
 	</a>
 	
 	<form name="calendarFrm" id="calendarFrm" action="" method="GET">

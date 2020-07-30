@@ -15,7 +15,6 @@
 </script>
 </head>
 <body>
-${oddto}
 <form id="wfrm" action="./confirm.com" method="post">
 	<input type="hidden" name="odno" value="${oddto.odno}"/>
 	<input type="hidden" name="ostatus" value="${oddto.ostatus}"/>

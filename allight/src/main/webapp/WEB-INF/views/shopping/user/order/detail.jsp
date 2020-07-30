@@ -20,8 +20,6 @@
 					url : "${pageContext.request.contextPath}/order/check.com",
 					type : 'post',
 					data : param,
-					success : function(data) {
-						alert(JSON.stringify(param));
 						location.href = "${pageContext.request.contextPath}/order/check.com?odno="+odno+"&ostatus="+ostatus;
 					},
 					error : function(request,status,error) {
@@ -42,7 +40,6 @@
 					type : 'post',
 					data : param,
 					success : function(data) {
-						alert(JSON.stringify(param));
 						location.href = "${pageContext.request.contextPath}/order/check.com?odno="+odno+"&ostatus="+ostatus;
 					},
 					error : function(request,status,error) {
@@ -57,7 +54,6 @@
 				var odno =  $(event.target).attr('data-no');
 				var ostatus = "구매확정";
 				var param = { "odno" : odno , "ostatus" : ostatus };
-				alert(JSON.stringify(param));
 				$.ajax({
 					url : "${pageContext.request.contextPath}/order/change.com",
 					type : 'post',

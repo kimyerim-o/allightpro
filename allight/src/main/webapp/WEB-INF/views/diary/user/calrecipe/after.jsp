@@ -73,7 +73,7 @@ $(function(){
       content: {
         title: document.title,
         description: '칼로리 처방',
-        imageUrl: "${pageContext.request.contextPath}/allight/resources/img/allight_logo.jpg",
+        imageUrl: "${pageContext.request.contextPath}/resources/img/allight_logo.jpg",
         link: {
           webUrl: document.location.href
         }

@@ -59,7 +59,6 @@ $(function(){
     	$("input[name=checkbox]:checked").each(function() { 
             fcdnos.push(Number($(this).next('input').val()));
         });
-    	
     	$('#cdtype').val($('#cdtypes').val());
     	$('#cdnos').val(fcdnos);
     	$('#insertFoodFrm').submit();

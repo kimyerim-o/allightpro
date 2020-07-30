@@ -491,7 +491,7 @@ li {
 	border-color: #ddd;
 }
 
-.btn {
+.btn, .goBack, #goback {
 	display: inline-block;
 	padding: 6px 18px;
 	margin-bottom: 0;
@@ -502,11 +502,17 @@ li {
 	background-image: none;
 	border: 1px solid #bdbdbd;
 	border-radius: 4px;
+	height:36px;
+	min-width:95px;
 }
 
-.btn:hover {
+.btn:hover, .goBack:hover, #goback:hover {
 	text-decoration: none;
 	border: 1px solid gray;
+}
+
+input[type="button"] {
+	background-color:white;
 }
 
 .selectCss {

@@ -16,18 +16,18 @@
 	$(function() {
 		//수정 버튼 클릭 시
 		$("#up").click(function() {
-							$(location).attr("href", "${pageContext.request.contextPath}/freeboard/update.com?no=${DETAIL.fno}");
+							$(location).attr("href", "${pageContext.request.contextPath}/mypage/freeboard/update.com?no=${DETAIL.fno}");
 						});
 		//삭제 버튼 클릭 시
 		$("#del").click(function() {
 							if (confirm("삭제 하시겠습니까?")) {
-								$(location).attr("href", "${pageContext.request.contextPath}/freeboard/delete.com?no=${DETAIL.fno}");
+								$(location).attr("href", "${pageContext.request.contextPath}/mypage/freeboard/delete.com?no=${DETAIL.fno}");
 							}
 						});
 		//목록 버튼 클릭 시
 		$("#list").click(
 						function() {
-							$(location).attr("href","${pageContext.request.contextPath}/freeboard/list.com")
+							$(location).attr("href","${pageContext.request.contextPath}/mypage/freeboard/list.com")
 						});
 
 		//댓글쓰기 
@@ -48,12 +48,12 @@
 							$
 									.ajax({
 										type : "post", //데이터를 보낼 방식
-										url : "${pageContext.request.contextPath}/freeboard/wcomment.com", //데이터를 보낼 url
+										url : "${pageContext.request.contextPath}/mypage/freeboard/wcomment.com", //데이터를 보낼 url
 										data : param, //보낼 데이터
 										dataType : 'text',//받는데이터타입
 										success : function(data) {
 											alert("댓글이 등록되었습니다.");
-											location.href = "${pageContext.request.contextPath}/freeboard/detail.com?no=${DETAIL.fno}";
+											location.href = "${pageContext.request.contextPath}/mypage/freeboard/detail.com?no=${DETAIL.fno}";
 										},
 										error : function(request, status, error) {
 											alert("code:" + request.status
@@ -73,12 +73,12 @@
 								 var param = {"fcno" : fcno}
 								$.ajax({
 											type : "post", //데이터를 보낼 방식
-											url : "${pageContext.request.contextPath}/freeboard/dcomment.com", //데이터를 보낼 url
+											url : "${pageContext.request.contextPath}/mypage/freeboard/dcomment.com", //데이터를 보낼 url
 											data : param, //보낼 데이터
 											dataType : 'text',
 											success : function(data) {
 												alert("댓글이 삭제되었습니다.");
-												location.href = "${pageContext.request.contextPath}/freeboard/detail.com?no=${DETAIL.fno}";
+												location.href = "${pageContext.request.contextPath}/mypage/freeboard/detail.com?no=${DETAIL.fno}";
 											},
 											error : function(request, status,
 													error) {
@@ -140,10 +140,9 @@
 			<div class="boardContent-Comment">
 				<div class="boardContent-Comment-input">
 					<form style="text-align: left">
-						<a colspan="100%" class="board-comment-info"><a
-							class="board-info-nick">작성자 ${sessionScope.MID}</a>&nbsp;&nbsp; <a
-							class="board-info-others">작성일 <%=sf.format(now)%></a></a> <input
-							type="textarea" class="input" id="fccontent"
+						<a class="board-info-nick">작성자 ${sessionScope.MID}</a>&nbsp;&nbsp; 
+						<a class="board-info-others">작성일 <%=sf.format(now)%></a>
+							<input type="textarea" class="input" id="fccontent"
 							placeholder="댓글을 입력하세요" /> <input type="button" class="button"
 							id="wcomm" value="등록" />
 					</form>
@@ -161,7 +160,6 @@
 								<td>등록된 댓글이 없습니다.</td>
 							</tr>
 						</c:if>
-						<form>
 						<c:forEach items="${COMM}" var="c">
 							<tr>
 								<td colspan="100%" class="board-comment-info"><a
@@ -179,32 +177,31 @@
 									</c:if></td>
 							</tr>
 						</c:forEach>
-						</form>
 					</table>
 
 					<div class="center">
 						<ul class="pagination">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
-										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }&commPage=${PINFO.nowPage-3}">«</a>
+										href="${pageContext.request.contextPath}/mypage/freeboard/detail.com?no=${param.no }&commPage=${PINFO.nowPage-3}">«</a>
 								</c:if> <c:if test="${PINFO.nowPage <= 3}">
 									<a
-										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }&commPage=1">«</a>
+										href="${pageContext.request.contextPath}/mypage/freeboard/detail.com?no=${param.no }&commPage=1">«</a>
 								</c:if></li>
 							<!-- 현재 페이지일때 active -->
 							<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}"
 								var="i">
 								<li id="li">
 									<!-- 스크립트 적용해야 할것같아요 --> <a
-									href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }&commPage=${i}">${i}</a>
+									href="${pageContext.request.contextPath}/mypage/freeboard/detail.com?no=${param.no }&commPage=${i}">${i}</a>
 								</li>
 							</c:forEach>
 							<li><c:if test="${PINFO.nowPage < PINFO.endPage-3}">
 									<a
-										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }&commPage=${PINFO.nowPage+3}">»</a>
+										href="${pageContext.request.contextPath}/mypage/freeboard/detail.com?no=${param.no }&commPage=${PINFO.nowPage+3}">»</a>
 								</c:if> <c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
 									<a
-										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }&commPage=${PINFO.endPage}">»</a>
+										href="${pageContext.request.contextPath}/mypage/freeboard/detail.com?no=${param.no }&commPage=${PINFO.endPage}">»</a>
 								</c:if></li>
 						</ul>
 					</div>

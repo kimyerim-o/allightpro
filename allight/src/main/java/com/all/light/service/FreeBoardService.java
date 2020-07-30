@@ -1,16 +1,15 @@
 package com.all.light.service;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.all.light.dao.FreeBoardDAO;
 import com.all.light.dto.FreeBoardDTO;
-import com.all.light.dto.QuestionDTO;
-import com.all.light.util.FileUtil;
 import com.all.light.util.PageUtil;
 
 @Service
@@ -46,6 +45,14 @@ public class FreeBoardService {
 		pInfo = new PageUtil(nowPage, Cnt);
 		return pInfo;
 	}
+	public PageUtil getPageInfoMyPage(int nowPage, String searchWord, String searchType, String ftype, String fid) {
+		PageUtil pInfo = new PageUtil(searchWord, searchType);
+		pInfo.setFtype(ftype);
+		pInfo.setFid(fid);
+		int Cnt = freDAO.getPageInfoMyPage(pInfo);
+		pInfo = new PageUtil(nowPage, Cnt);
+		return pInfo;
+	}
 
 	public ArrayList<FreeBoardDTO> searchList(PageUtil pInfo, String searchWord, String searchType, String ftype) {
 		pInfo.setSearchWord(searchWord);
@@ -53,7 +60,14 @@ public class FreeBoardService {
 		pInfo.setFtype(ftype);
 		return freDAO.searchList(pInfo);
 	}
-
+	
+	public ArrayList<FreeBoardDTO> searchListMyPage(PageUtil pInfo, String searchWord, String searchType, String ftype, String fid) {
+		pInfo.setSearchWord(searchWord);
+		pInfo.setSearchType(searchType);
+		pInfo.setFtype(ftype);
+		pInfo.setFid(fid);
+		return freDAO.searchListMyPage(pInfo);
+	}		
 	public FreeBoardDTO detail(int fno) {
 		return freDAO.getDetail(fno);
 	}
@@ -73,41 +87,7 @@ public class FreeBoardService {
 		return freDAO.getCommDetail(pInfo);
 	}
 
-	/*수정*/
-	public void update(FreeBoardDTO fdto) {
-		// - 첨부파일 처리
-		if(fdto.getFiles()!=null) {
-				String path="D:\\upload";
-				ArrayList list= new ArrayList();
-				for(int i=0; i< fdto.getFiles().length ;i++ ) { //파일이 여러 개이니 각각의 파일마다 반복
-					//한 개씩 파일의 실제이름을 알아낸다
-					String oriName = 
-					  fdto.getFiles()[i].getOriginalFilename();
-					//파일이 업로드 되지 않으면 다음 작업을 시도한다
-					if( oriName==null||oriName.length()==0 ) {
-						continue;
-					}
-					String saveName = FileUtil.renameTo(path, oriName);
-					File file= new File(path, saveName);
-					//파일복사 : transferTo()
-					try {
-						fdto.getFiles()[i].transferTo(file);
-					}catch(Exception e) {
-						System.out.println("파일복사관련에러="+e);
-					}
-					//------------ 하나의 파일이 업로드된 상태
-					//업로드된 파일의 정보를 Map으로 묶는다
-					HashMap map = new HashMap();
-					map.put("path",    path);
-					map.put("oriName", oriName);
-					map.put("saveName",saveName);
-					map.put("len", file.length());
-					list.add(map);
-				}//end for
-				freDAO.fileUpdate(fdto);
-		}
-		freDAO.update(fdto);
-	}
+
 
 	//댓글
 		public void insertComm(FreeBoardDTO freDTO) {
@@ -117,4 +97,55 @@ public class FreeBoardService {
 		public void deleteComm(int fcno) {
 			freDAO.deleteComm(fcno);
 		}
+		/*수정*/
+		//글만 수정
+		public void update(FreeBoardDTO fdto) {
+			freDAO.update(fdto,"fboard");
+		}
+		//파일까지 수정
+		public void update(FreeBoardDTO fdto, ArrayList list) {
+			freDAO.update(fdto,"fboard");
+			freDAO.deleteFile(fdto);
+			for(int i=0; i<list.size() ;i++) {
+				//하나의 첨부파일의 정보는 Map으로 저장되어 있다
+				HashMap map = (HashMap)list.get(i);
+				fdto.setFipath((String)map.get("path"));
+				fdto.setFioriname((String)map.get("oriName"));
+				fdto.setFiimg((String)map.get("saveName"));
+				fdto.setFilength((Long)map.get("len"));
+				freDAO.updateFile(fdto,"fInfo");
+				}
+		}
+
+		public void delete(FreeBoardDTO freDTO) {
+			freDAO.delete(freDTO);
+		}
+
+		public void increaseHit(int fno, HttpSession session) {
+			if (increaseHitKey(fno, session) == true) {
+				freDAO.increaseHit(fno);
+			}			
+		}
+
+		private boolean increaseHitKey(int fno, HttpSession session) {
+		// 세션 arrayList map => 글번호 조회 이력
+		ArrayList map = (ArrayList) session.getAttribute("FREEBOARDHITCHECK");
+		System.out.println("map = "+map);
+		// 기록이 없을 경우
+		if (map == null) {
+			map = new ArrayList();
+			map.add(fno);
+			session.setAttribute("FREEBOARDHITCHECK", map);
+			return true;
+		} // 기록이 있을 경우 -> 내 기록이 있는경우
+		else if (map.contains(fno)) {
+			return false;
+		} else {// 기록이 있는 경우 -> 내 기록이 없는경우
+			map.add(fno);
+			session.setAttribute("FREEBOARDHITCHECK", map);
+			return true;
+		}
+	}
+
+
 	}

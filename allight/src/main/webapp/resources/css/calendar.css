@@ -985,3 +985,7 @@ table.fc-header {
     text-align: center;
     margin: 40px 0;
 }
+
+input[type="button"] {
+	background-color:white;
+}

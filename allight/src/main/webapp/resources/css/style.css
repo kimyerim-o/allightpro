@@ -511,10 +511,6 @@ li {
 	border: 1px solid gray;
 }
 
-input[type="button"] {
-	background-color:white;
-}
-
 .selectCss {
 	vertical-align: bottom;
 	height: 32px;

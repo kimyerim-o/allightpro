@@ -11,7 +11,14 @@ public class ReviewDTO {
 	LocalDate rdate;		//작성일
 	int rgrade;		//별점
 	String rcontent;//내용
+	int odno;
 	
+	public int getOdno() {
+		return odno;
+	}
+	public void setOdno(int odno) {
+		this.odno = odno;
+	}
 	// REVIEWLIKE 테이블
 	int rlno;		//리뷰 좋아요 번호
 	String rlid;	//리뷰 좋아요한 아이디
@@ -92,13 +99,13 @@ public class ReviewDTO {
 	public void setRlamount(int rlamount) {
 		this.rlamount = rlamount;
 	}
-	
-	
 	@Override
 	public String toString() {
 		return "ReviewDTO [rno=" + rno + ", ino=" + ino + ", rid=" + rid + ", rnick=" + rnick + ", rdate=" + rdate
-				+ ", rgrade=" + rgrade + ", rcontent=" + rcontent + ", rlno=" + rlno + ", rlid=" + rlid + ", rlamount="
-				+ rlamount + ", isliked=" + isLiked + "]";
+				+ ", rgrade=" + rgrade + ", rcontent=" + rcontent + ", odno=" + odno + ", rlno=" + rlno + ", rlid="
+				+ rlid + ", rlamount=" + rlamount + ", isLiked=" + isLiked + "]";
 	}
+	
+	
 	
 }

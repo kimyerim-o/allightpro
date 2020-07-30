@@ -432,11 +432,11 @@ margin-left:60px;
 
 														<li class="mb5"><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
 															class="openMask_create" style="cursor: pointer;">배송조회</a></li>
-
+														<c:if test="${oddto.okreview ==0}">
 														<li class="mb5"><a
-															href="mem_goods_review_write.asp?orderno=202004052091881&amp;g=12189&amp;vtab=O"
-															class="order_btn_write" style="cursor: pointer;">상품
-																리뷰 쓰기</a></li>
+															href="review.com?no=${sdto.ino}&num=${oddto.odno}"
+															class="order_btn_write" style="cursor: pointer;">상품 리뷰 쓰기</a></li>
+														</c:if>
 													</ul>
 												</c:if></td>
 											<c:set var="done" value="true" />

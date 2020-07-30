@@ -28,6 +28,8 @@ public class MemberDTO {
 	private int mtype;
 	private String mbank;//은행
 	private String mbankno;//계좌번호
+	private String[] arr;
+	private String auto;
 	
 	
 	public int getMno() {
@@ -152,6 +154,18 @@ public class MemberDTO {
 				+ ", mname=" + mname + ", mnick=" + mnick + ", mbirth=" + mbirth + ", mtel=" + mtel + ", mtel1=" + mtel1
 				+ ", mtel2=" + mtel2 + ", mjoindate=" + mjoindate + ", mlogdate=" + mlogdate + ", msex=" + msex
 				+ ", mtype=" + mtype + ", mbank=" + mbank + ", mbankno=" + mbankno + "]";
+	}
+	public String[] getArr() {
+		return arr;
+	}
+	public void setArr(String[] arr) {
+		this.arr = arr;
+	}
+	public String getAuto() {
+		return auto;
+	}
+	public void setAuto(String auto) {
+		this.auto = auto;
 	}
 	
 }

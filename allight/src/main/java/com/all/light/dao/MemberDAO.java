@@ -67,27 +67,26 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		session.update("member.logDate", result.get("MNO"));
 	}
 
-	public HashMap kakao(MemberDTO memdto) {
-		System.out.println("UserDAO");
-		System.out.println(memdto.getMid());
-		HashMap result = session.selectOne("member.kakao", memdto);
-		System.out.println("result" + result);
+	//id확인
+	public MemberDTO kakao(MemberDTO memdto) {
+		MemberDTO result = session.selectOne("member.kakao", memdto);
 		return result;
 	}
 
-	public HashMap kjoin(MemberDTO memdto) {
-		System.out.println("UserDAO kjoin");
-		System.out.println(memdto);
+	public MemberDTO kjoin(MemberDTO memdto) {
 		// 수정삭제가 만들어진후에 변경
 		int i = session.insert("member.kinsert", memdto);
-		System.out.println(i);
-		HashMap res = null;
+		MemberDTO res = null;
 		if (i == 1) {
 			res = session.selectOne("member.kakao", memdto);
 		}
 		return res;
 	}
-
+	
+	public void kakaoup(MemberDTO memdto) {
+		session.update("member.kakaoup", memdto);
+	}
+	
 	//7.7 검색 시, 검색 없을 시 회원 수 가져오기
 	public int getTotalCnt(String searchWord) {
 		int totalCnt = session.selectOne("member.totalCntWithSearch", searchWord);
@@ -134,5 +133,6 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		System.out.println("배송지 삭제하기");
 		session.delete("member.memaddressdelete", aDTO);
 	}
+
 
 }

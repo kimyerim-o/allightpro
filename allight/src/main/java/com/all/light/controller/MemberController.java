@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.all.light.dto.AddressDTO;
 import com.all.light.dto.MemberDTO;
 import com.all.light.service.MemberService;
+import com.all.light.util.Nologin;
 import com.all.light.util.PageUtil;
 
 @Controller
@@ -207,12 +208,34 @@ public class MemberController {
 	//로그인
 	@RequestMapping("/log")
 	public ModelAndView login(MemberDTO memdto,HttpSession session,ModelAndView mv,RedirectView rv,
-			@RequestParam(value="reUrl", required=false)String reUrl) {
+			@RequestParam(value="reUrl", required=false)String reUrl,
+			@RequestParam(value = "mcnt", required = false, defaultValue = "0") int cnt) {
 		
-		HashMap result=memSVC.login(memdto,session);
+		HashMap result=null;
+		if(memdto.getArr()!=null) {
+			String[] a=memdto.getArr();
+			String str=a[0];
+			for(int i=1;i<a.length;i++) {
+				str=str+a[i];
+			}
+			if(str.equals(memdto.getAuto())){
+				result=memSVC.login(memdto,session,cnt);
+			}
+		}
+		
+		result=memSVC.login(memdto,session,cnt);
+		String[] arr=null;	
 		if(result==null || result.size()==0) {
-			rv.setUrl("./login.com");
-			mv.setView(rv);
+			if(cnt>=3) {
+				System.out.println("auto");
+				arr=Nologin.auto();
+				memdto.setArr(arr);
+				mv.addObject("memdto", memdto);
+				mv.setViewName("common/loginform");
+			}else {
+				rv.setUrl("./login.com");
+				mv.setView(rv);	
+			}
 			return mv;
 		}
 		
@@ -230,16 +253,29 @@ public class MemberController {
 	@RequestMapping(value = "/kakao", method = RequestMethod.POST)
 	@ResponseBody
 	public String kakao(@RequestParam Map<String, Object> param, HttpSession session, MemberDTO memdto) {
-		System.out.println("kakak");
-		System.out.println(param.get("id"));
-		System.out.println("udto" + memdto.getMid());
-		HashMap re = memSVC.kakao(param, memdto, session);
-		System.out.println("kakao re" + re);
-		System.out.println(re.get("mpw"));
-		if (re.get("mnick") == null) {
+		MemberDTO re = memSVC.kakao(param, memdto, session);
+		if (re.getMnick() == null) {
 			return "check";
 		}
 		return null;
+	}
+	
+	//카카오 회원가입 폼 kakaojoin
+	@RequestMapping(value = "/kakaojoin")
+	public ModelAndView kakaojoin(HttpSession session, MemberDTO memdto,ModelAndView mv) {
+		MemberDTO mem = memSVC.kakaojoin(memdto, session);
+		mv.addObject("mdto", mem);
+		mv.setViewName("common/user/kakaojoin");
+		return mv;
+	}
+	
+	@RequestMapping(value = "/kakaoj")
+	public ModelAndView kakaoj(HttpSession session,RedirectView rv, MemberDTO memdto,ModelAndView mv) {
+		memSVC.kakaoup(memdto);
+		memSVC.kakaose(memdto,session);
+		rv.setUrl("./main.com");
+		mv.setView(rv);;
+		return mv;
 	}
 	
 	
@@ -371,5 +407,24 @@ public class MemberController {
 		return mv;
 	}
 	
-	
+	// 장한별 작성
+	// 회원정보수정
+	@RequestMapping(value="/mypage/member/modify", method= RequestMethod.GET)
+	public ModelAndView ModifyMemberGet(
+			// @RequestParam(value = "mno") int mno,
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value = "search", required = false) String searchWord,
+			MemberDTO memDTO,	ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("memberController.modify.Member,"+request.getMethod()+"method");
+		//파라미터 받기, 비즈니스로직
+		memDTO = memSVC.getMInfo(memDTO.getMno());
+		System.out.println("memInfo = "+memDTO.toString());
+		//모델지정
+		mv.addObject("MEMINFO", memDTO); //회원 상세 정보
+		//뷰지정
+		//get메소드의 Requestparam의 정보가 그대로 넘어감
+		//mv.setViewName("common/user/Modify member/Modifymember?search="+searchWord+"&nowPage="+nowPage+"&mno="+mno);
+		mv.setViewName("common/user/Modify member/Modifymember");
+		return mv;
+	}
 }

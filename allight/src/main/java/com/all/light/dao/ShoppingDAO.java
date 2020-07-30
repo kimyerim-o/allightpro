@@ -128,6 +128,15 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		return shopDTO;
 	}
 	
+	// 상품 상세 정보 가져오기 - 류지혁
+	public ShoppingDTO getDetail(String mid) {
+		HashMap map = new HashMap();
+		map.put("mid", mid);
+		System.out.println(mid);
+		ShoppingDTO shopDTO = (ShoppingDTO)session.selectList("Shopping.detailByIno2",map);
+		return shopDTO;
+	}
+	
 	// 상품 상세 이미지 가져오기
 	public ArrayList<String> getImgs(int ino) {
 		ArrayList<ShoppingDTO> imgList = new ArrayList<ShoppingDTO>();
@@ -208,6 +217,22 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		int cnt = session.selectOne("Shopping.qTotalCnt", map);
 		return cnt;
 	}
+	
+	// 상품 문의 - 해당 상품의 상품 문의글 총개수 가져오기 - 류지혁
+	public int getQTotalCnt(String mid) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("mid", mid);
+		int cnt = session.selectOne("Shopping.qTotalCnt2", map);
+		return cnt;
+	}
+	
+	// 상품 문의 - 해당 상품의 상품 문의글 총개수 가져오기 기업 - 류지혁
+	public int getQTotalCnt2(String mid) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("mid", mid);
+		int cnt = session.selectOne("Shopping.qTotalCnt3", map);
+		return cnt;
+	}
 
 	// 상품 문의 - 전체 공개 문의내용 가져오기 
 	public ArrayList<ItemQuestionDTO> getQuestion(int ino, PageUtil qPInfo) {
@@ -217,6 +242,30 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		map.put("endNo", qPInfo.getEndNo());
 		ArrayList<ItemQuestionDTO> list = 
 				(ArrayList)session.selectList("Shopping.qAllView", map);
+		return list;
+	}
+	
+	// 상품 문의 - 전체 공개 문의내용 가져오기  - 류지혁
+	public ArrayList<ItemQuestionDTO> getQuestion(PageUtil qPInfo, String mid) {
+		HashMap map = new HashMap();
+		map.put("mid", mid);
+		map.put("startNo", qPInfo.getStartNo());
+		map.put("endNo", qPInfo.getEndNo());
+		ArrayList<ItemQuestionDTO> list = 
+				(ArrayList)session.selectList("Shopping.qAllView2", map);
+		System.out.println("DAO list= " + list);
+		return list;
+	}
+	
+	// 상품 문의 - 전체 공개 문의내용 가져오기 기업  - 류지혁
+	public ArrayList<ItemQuestionDTO> getQuestion2(PageUtil qPInfo, String mid) {
+		HashMap map = new HashMap();
+		map.put("mid", mid);
+		map.put("startNo", qPInfo.getStartNo());
+		map.put("endNo", qPInfo.getEndNo());
+		ArrayList<ItemQuestionDTO> list = 
+				(ArrayList)session.selectList("Shopping.qAllView3", map);
+		System.out.println("DAO list= " + list);
 		return list;
 	}
 
@@ -268,7 +317,7 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		if(isOk==0)System.out.println("상품문의 수정 실패");
 	}
 
-	
+	//상품 문의 상품명
 	public ArrayList<ItemDTO> getItemName(String mid) {
 		HashMap map = new HashMap();
 		map.put("mid", mid);
@@ -277,6 +326,15 @@ public class ShoppingDAO extends SqlSessionDaoSupport {
 		System.out.println("DAO list= " + list);
 		return list;
 
+	}
+	//상품 문의 상품명
+	public ArrayList<ItemDTO> getItemName2(String mid) {
+		HashMap map = new HashMap();
+		map.put("mid", mid);
+		ArrayList<ItemDTO> list = 
+				(ArrayList)session.selectList("Shopping.getItemName2", map);
+		System.out.println("DAO list= " + list);
+		return list;
 	}
 	
 	

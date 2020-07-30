@@ -351,6 +351,17 @@ li {
 	clear: both;
 }
 
+#wrap2 {
+	width: 900px;
+	margin: 60px auto;
+}
+
+#wrap2::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
 .wrap-left {
 	float: left;
 	width: 160px;

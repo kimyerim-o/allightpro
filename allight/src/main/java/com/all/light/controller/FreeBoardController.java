@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.FreeBoardDTO;
-import com.all.light.dto.NoticeDTO;
 import com.all.light.dto.QuestionDTO;
 import com.all.light.service.FreeBoardService;
 import com.all.light.util.FileUtil;
@@ -122,18 +123,73 @@ public class FreeBoardController {
 		//비즈니스로직
 		FreeBoardDTO fdto=freSVC.detail(fno);//게시글
 		ArrayList<FreeBoardDTO> files = freSVC.getFile(fno); //첨부파일목록조회
-		//PageUtil pInfo = freSVC.getCommPageInfo(fno, commPage);//댓글 페이징
-		//ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo);//댓글
-		
+		PageUtil pInfo = freSVC.getCommPageInfo(fno, commPage);//댓글 페이징
+		ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo);//댓글
+		fdto.setFccount(pInfo.getTotalCount());
 		System.out.println("fdto = "+fdto);
 		System.out.println("files= "+files);
+		System.out.println("decomm="+decomm);
 		mv.addObject("DETAIL",fdto);//게시글
 		mv.addObject("FILE",files);//이미지파일
-		//mv.addObject("PINFO", pInfo); //페이징 정보
-		//mv.addObject("COMM",decomm);//댓글
+		mv.addObject("PINFO", pInfo); //페이징 정보
+		mv.addObject("COMM",decomm);//댓글
 		
 		//뷰 지정
 		mv.setViewName("diary/user/freeboard/boardDetail");
+		return mv;
+	}
+	
+	//댓글쓰기
+	@RequestMapping("/freeboard/wcomment")
+	@ResponseBody
+	public String writeComm(FreeBoardDTO freDTO,HttpSession session) {
+		System.out.println("FreeBoardController.freeBoardCommentWrite");
+		System.out.println(freDTO);
+		freSVC.insertComm(freDTO);
+		return "ajax";
+	}
+	//댓글삭제
+	@RequestMapping("/freeboard/dcomment")
+	@ResponseBody
+	public String deleteComm(FreeBoardDTO freDTO) {
+		System.out.println("FreeBoardController.freeBoardCommentDelete");
+		System.out.println(freDTO);
+		freSVC.deleteComm(freDTO.getFcno());
+		return "ok";
+	}
+	
+	@RequestMapping(value="/freeboard/update", method= RequestMethod.GET)
+	public ModelAndView freeBoardUpdateGet(
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value = "search", required = false, defaultValue = "") String searchWord,
+			@RequestParam(value = "type", required = false, defaultValue = "fall") String searchType,
+			@RequestParam(value = "ftype", required = false, defaultValue = "") String ftype,
+			@RequestParam(value = "no") int fno,
+			HttpServletRequest request, ModelAndView mv){
+		System.out.println("FreeBoardController.freeBoardUpdate" + request.getMethod() + "method");
+		
+		FreeBoardDTO fdto=freSVC.detail(fno);//게시글
+		System.out.println("fdto = "+fdto);
+		mv.addObject("DETAIL",fdto);//게시글
+		//뷰 지정
+		mv.setViewName("diary/user/freeboard/boardUpdate");
+		return mv;
+	}
+	
+	@RequestMapping(value="/freeboard/update", method= RequestMethod.POST)
+	public ModelAndView freeBoardUpdatePost(
+			@RequestParam(value = "no") int fno,
+			HttpServletRequest request, ModelAndView mv, RedirectView rv, FreeBoardDTO fdto){
+		System.out.println("FreeBoardController.freeBoardUpdate" + request.getMethod() + "method");
+		System.out.println("fdto = "+fdto);
+		
+		freSVC.update(fdto);//게시글
+		ArrayList<FreeBoardDTO> files = freSVC.getFile(fno); //첨부파일목록조회
+		
+		
+		//뷰 지정
+		rv.setUrl(request.getContextPath()+"/freeboard/list.com");
+		mv.setView(rv);
 		return mv;
 	}
 }

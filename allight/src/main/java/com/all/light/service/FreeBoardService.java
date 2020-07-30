@@ -1,5 +1,6 @@
 package com.all.light.service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.all.light.dao.FreeBoardDAO;
 import com.all.light.dto.FreeBoardDTO;
 import com.all.light.dto.QuestionDTO;
+import com.all.light.util.FileUtil;
 import com.all.light.util.PageUtil;
 
 @Service
@@ -71,4 +73,48 @@ public class FreeBoardService {
 		return freDAO.getCommDetail(pInfo);
 	}
 
-}
+	/*수정*/
+	public void update(FreeBoardDTO fdto) {
+		// - 첨부파일 처리
+		if(fdto.getFiles()!=null) {
+				String path="D:\\upload";
+				ArrayList list= new ArrayList();
+				for(int i=0; i< fdto.getFiles().length ;i++ ) { //파일이 여러 개이니 각각의 파일마다 반복
+					//한 개씩 파일의 실제이름을 알아낸다
+					String oriName = 
+					  fdto.getFiles()[i].getOriginalFilename();
+					//파일이 업로드 되지 않으면 다음 작업을 시도한다
+					if( oriName==null||oriName.length()==0 ) {
+						continue;
+					}
+					String saveName = FileUtil.renameTo(path, oriName);
+					File file= new File(path, saveName);
+					//파일복사 : transferTo()
+					try {
+						fdto.getFiles()[i].transferTo(file);
+					}catch(Exception e) {
+						System.out.println("파일복사관련에러="+e);
+					}
+					//------------ 하나의 파일이 업로드된 상태
+					//업로드된 파일의 정보를 Map으로 묶는다
+					HashMap map = new HashMap();
+					map.put("path",    path);
+					map.put("oriName", oriName);
+					map.put("saveName",saveName);
+					map.put("len", file.length());
+					list.add(map);
+				}//end for
+				freDAO.fileUpdate(fdto);
+		}
+		freDAO.update(fdto);
+	}
+
+	//댓글
+		public void insertComm(FreeBoardDTO freDTO) {
+			freDAO.insertComm(freDTO);
+		}
+
+		public void deleteComm(int fcno) {
+			freDAO.deleteComm(fcno);
+		}
+	}

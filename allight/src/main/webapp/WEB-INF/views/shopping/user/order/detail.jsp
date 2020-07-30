@@ -146,7 +146,7 @@
 			<div class="order_pop_box2">
 				<div id="delivery_info_view" class="order_detail">
 					<table class="tbl" cellspacing="0" border="1" summary="정보">
-						<caption>정보</caption>
+						 
 						<colgroup>
 							<col width="120">
 							<col width="*">
@@ -280,7 +280,7 @@
 			<h2>정보</h2>
 			<h3 class="order_detail_tit">주문자 정보</h3>
 			<table class="tbl" cellspacing="0" border="1" summary="정보">
-				<caption>정보</caption>
+				 
 				<colgroup>
 					<col width="140">
 					<col width="*">
@@ -303,7 +303,7 @@
 			<h2>정보</h2>
 			<h3 class="order_detail_tit">배송지 정보</h3>
 			<table class="tbl" cellspacing="0" border="1" summary="정보">
-				<caption>정보</caption>
+				 
 				<colgroup>
 					<col width="140">
 					<col width="*">
@@ -336,7 +336,7 @@
 			<h2>정보</h2>
 			<h3 class="order_detail_tit">결제 정보</h3>
 			<table class="tbl" cellspacing="0" border="1" summary="정보">
-				<caption>정보</caption>
+				 
 				<colgroup>
 					<col width="140">
 					<col width="*">
@@ -357,12 +357,6 @@
 						<th>승인일시</th>
 						<td>2020-04-05 오후 10:17:32</td>
 					</tr>
-
-					<tr>
-						<th>적립금</th>
-						<td><strong class="fctah">130</strong>원</td>
-					</tr>
-
 				</tbody>
 			</table>
 		</div>

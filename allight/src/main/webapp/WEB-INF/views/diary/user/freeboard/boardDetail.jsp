@@ -47,10 +47,12 @@
 				.click(
 						function() {
 							var fno = "${DETAIL.fno}";
-							var fid = "${sessionScope.MID}";
-							var fccontent = $("#fcontent").val();
+							var fcid = "${sessionScope.MID}";
+							var fcnick = "${sessionScope.MNICK}";
+							var fccontent = $("#fccontent").val();
 							var param = {
 								"fno" : fno,
+								"fcnick" : fcnick,
 								"fcid" : fcid,
 								"fccontent" : fccontent
 							};
@@ -79,12 +81,9 @@
 				.click(
 						function() {
 							if (confirm("삭제 하시겠습니까?")) {
-								var qcno = $("#qcno").val();
-								var param = {
-									"qcno" : qcno
-								}
-								$
-										.ajax({
+								var fcno = $(event.target).attr('data-no');
+								 var param = {"fcno" : fcno}
+								$.ajax({
 											type : "post", //데이터를 보낼 방식
 											url : "${pageContext.request.contextPath}/freeboard/dcomment.com", //데이터를 보낼 url
 											data : param, //보낼 데이터
@@ -174,23 +173,25 @@
 								<td>등록된 댓글이 없습니다.</td>
 							</tr>
 						</c:if>
+						<form>
 						<c:forEach items="${COMM}" var="c">
-							<input type="hidden" id="qcno" value="${c.fcno}" />
 							<tr>
 								<td colspan="100%" class="board-comment-info"><a
 									class="board-info-nick">${c.fcid}</a>&nbsp;&nbsp; <a
-									class="board-info-others">작성일 ${c.fcdate}</a></td>
+									class="board-info-others">작성일 ${c.fcdate}</a>
+									</td>
 							</tr>
 							<tr>
 								<td width="80%">${c.fccontent}</td>
 								<td style="padding: 0; text-align: center;"><c:if
 										test="${c.fcid eq sessionScope.MID}">
-										<a class="dcomm" style="color: #ff5656;">삭제</a>
-									</c:if> <c:if test="${sessionScope.MTYPE == null }">
-										<a class="dcomm" style="color: #ff5656;">삭제</a>
+										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
+									</c:if> <c:if test="${sessionScope.MTYPE == 1}">
+										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
 									</c:if></td>
 							</tr>
 						</c:forEach>
+						</form>
 					</table>
 
 					<div class="center">

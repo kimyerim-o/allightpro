@@ -13,7 +13,6 @@
 	<select id="getPageInfo" parameterType="PageUtil"	resultType="Integer">
 		select count(*) from freeboard
 		<choose>
-		<!-- ftype=다이어리 -->
 			<when test="searchType=='fall'">
 				where (ftitle like '%${searchWord}%'
 				or fcontent like '%${searchWord}%')
@@ -59,10 +58,27 @@
 	<select id="getFile" parameterType="Integer" resultType="freDTO">
 		select * from freeimage where fno=${value}
 	</select>
+	
 	<!-- 댓글-->
+	<insert id="insertComm" parameterType="freDTO">
+		insert into freecomment values(fcno_seq.nextval, ${fno}, #{fcid},#{fcnick},#{fccontent},sysdate)
+	</insert>
+	<delete id="deleteComm" parameterType="Integer">
+		delete freecomment where fcno=#{value}
+	</delete>
 	<select id="getTotalCntOfComm" parameterType="Integer" resultType="Integer">
-		
+		select count(*) from freecomment where fno=${value}
 	</select>
 	<select id="getCommList" parameterType="PageUtil" resultType="freDTO">
+		select * from (
+		    select row_number() over (order by fcno) num, 
+		    f.*
+		    from freecomment f
+		    where fno=${fno})
+		where num between ${startNo} and ${endNo}
+		order by num desc
 	</select>
+	
+	<!-- 수정 -->
+	
 </mapper>

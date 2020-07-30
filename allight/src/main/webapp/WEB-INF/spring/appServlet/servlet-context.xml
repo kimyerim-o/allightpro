@@ -49,5 +49,5 @@
 		 	<!-- 로그인 인터셉터 http://localhost:9000/allight/shopping/reviewLike.com -->
 	  	</interceptor>
 	</interceptors>
-	 
+	
 </beans:beans>

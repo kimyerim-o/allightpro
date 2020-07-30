@@ -107,4 +107,16 @@
 	</bean>
 	<bean id="freSVC" class="com.all.light.service.FreeBoardService"/>
 	
+	<!-- Cart -->
+	<bean id="cartDAO" class="com.all.light.dao.CartDAO">
+      <property name="sqlSessionTemplate" ref="sqlSession"/>
+    </bean>
+   <bean id="cartSVC" class="com.all.light.service.CartService"/>
+   
+   <!-- Buy -->
+	<bean id="buyDAO" class="com.all.light.dao.BuyDAO">
+      <property name="sqlSessionTemplate" ref="sqlSession"/>
+    </bean>
+   <bean id="buySVC" class="com.all.light.service.BuyService"/>
+	
 </beans>

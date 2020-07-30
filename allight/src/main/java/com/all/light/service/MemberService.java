@@ -88,7 +88,7 @@ public class MemberService {
 	}
 	
 	//일반로그인
-	public HashMap login(MemberDTO memdto, HttpSession session) {
+	public HashMap login(MemberDTO memdto, HttpSession session, int cnt) {
 		System.out.println("MemberService");
 		HashMap map=new HashMap();
 			map.put("mid",memdto.getMid());
@@ -98,8 +98,9 @@ public class MemberService {
 //			java.sql.Date date = new java.sql.Date(new java.util.Date().getTime());
 			if(result==null || result.size()==0) {
 				//로그인실패
+				cnt=cnt+1;
+				session.setAttribute("mcnt", cnt);
 				System.out.println("로그인실패");
-				return result;
 			}else{
 				//로그인성공
 				System.out.println("로그인성공");
@@ -118,30 +119,59 @@ public class MemberService {
 	}
 	
 	//카카오로그인
-	public HashMap kakao(Map<String, Object> param, MemberDTO memdto, HttpSession session) {
+	public MemberDTO kakao(Map<String, Object> param, MemberDTO memdto, HttpSession session) {
+		
+		System.out.println(param.get("properties[nickname]"));//닉네임
+		System.out.println(param.get("kakao_account[email]"));//이메일
+		
 		memdto.setMid((String) param.get("id"));
-		System.out.println("UserService" + memdto.getMid());
-		HashMap result = memDAO.kakao(memdto);
-		if (result == null || result.size() == 0) {
+		memdto.setMname((String) param.get("properties[nickname]"));
+		memdto.setMemail((String) param.get("kakao_account[email]"));
+		
+		MemberDTO result = memDAO.kakao(memdto);
+		if (result == null) {
 			// 로그인실패
 			System.out.println("로그인실패");
-			HashMap res = memDAO.kjoin(memdto);
+			MemberDTO res = memDAO.kjoin(memdto);
 			if (res != null) {
-				System.out.println("res.get(\"MID\")" + res.get("MID"));
-				session.setAttribute("ID", res.get("MID"));
-				System.out.println("res" + res.get("MID"));
+				session.setAttribute("MID", res.getMid());
+				session.setAttribute("MEMAIL", res.getMemail());
+				session.setAttribute("MNAME", res.getMname());
 			}
 			return res;
 		} else {
 			// 로그인성공
 			System.out.println("로그인성공");
-			session.setAttribute("MID", result.get("MID"));
-			System.out.println("result" + result.get("MID"));
+			session.setAttribute("MID", result.getMid());
 		}
 		return result;
 	}
 	
-	//공통로그아웃
+	//카카오폼
+	public MemberDTO kakaojoin(MemberDTO memdto, HttpSession session) {
+		memdto.setMid((String) session.getAttribute("MID"));
+		MemberDTO res = memDAO.kakao(memdto);
+		return res;
+	}
+	
+	public void kakaoup(MemberDTO memdto) {
+		memdto.setMtel(memdto.getMtel()+"-"+memdto.getMtel1()+"-"+memdto.getMtel2());
+		memDAO.kakaoup(memdto);
+	}
+	
+	public void kakaose(MemberDTO memdto, HttpSession session) {
+		MemberDTO mem=memDAO.kakao(memdto);
+		session.setAttribute("MNO",mem.getMno());
+		session.setAttribute("MID",mem.getMid());
+		session.setAttribute("MEMAIL",mem.getMemail());
+		session.setAttribute("MNAME", mem.getMname());
+		session.setAttribute("MBIRTH", mem.getMbirth());
+		session.setAttribute("MTEL", mem.getMtel());
+		session.setAttribute("MTYPE", mem.getMtype());
+		session.setAttribute("MNICK", mem.getMnick());
+	}
+	
+	//로그아웃
 	public void logout(HttpSession session) {
 		if(session.getAttribute("MID")!=null) {
 			session.invalidate();
@@ -210,9 +240,6 @@ public class MemberService {
 	public void memDelete(int mno) {
 		memDAO.memDelete(mno);
 	}
-
-	
-	
 	
 	// 배송지 검색하기
 	public ArrayList<AddressDTO> address(HttpSession session) {

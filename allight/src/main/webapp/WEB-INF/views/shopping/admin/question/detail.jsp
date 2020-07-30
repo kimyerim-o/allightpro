@@ -44,8 +44,9 @@
 		
 		//댓글 삭제
 		$(".dcomm").click(function(){
+			alert($(event.target).attr('data-no'))
 			 if(confirm("삭제 하시겠습니까?")){
-				 var qcno = $("#qcno").val();
+				 var qcno = $(event.target).attr('data-no');
 				 var param = {"qcno" : qcno}
 			$.ajax({
 				type: "post", //데이터를 보낼 방식
@@ -115,7 +116,6 @@
 				<div class="boardContent-Comment-Table">
 					<table width="100%" style="border-top: 1px solid gray;">
 						<c:forEach items="${COMM}" var="c">
-						<input type="hidden" id="qcno" value="${c.qcno}"/>
 						<tr>
 							<td colspan="100%" class="board-comment-info"><a class="board-info-nick">${c.qcid}</a>&nbsp;&nbsp; 
 								<a class="board-info-others">작성일 ${c.qcdate}</a></td>
@@ -123,7 +123,7 @@
 						<tr>
 							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
-								<a class="dcomm" style="color: #ff5656;">삭제</a>
+								<a class="dcomm" data-no="${c.qcno}" style="color: #ff5656;">삭제</a>
 							</td>
 						</tr>
 						</c:forEach>

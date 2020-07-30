@@ -48,6 +48,7 @@
 		
 		//댓글 삭제
 		$(".dcomm").click(function(){
+			//alert($(event.target).attr('data-no'))
 			 if(confirm("삭제 하시겠습니까?")){
 				 var qcno = $(event.target).attr('data-no');
 				 var param = {"qcno" : qcno}

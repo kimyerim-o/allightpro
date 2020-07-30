@@ -15,11 +15,11 @@
 					function() {
 						var form = $("#searchF").serialize();
 						$.ajax({
-							url : "${pageContext.request.contextPath}/order/back.com?term=${param.term}",
+							url : "${pageContext.request.contextPath}/order/mypage/back.com?term=${param.term}",
 							type : 'get',
 							data : form,
 							success : function(data) {
-								location.href = "${pageContext.request.contextPath}/order/back.com?term=${param.term}&"
+								location.href = "${pageContext.request.contextPath}/order/mypage/back.com?term=${param.term}&"
 										+ form;
 							},
 							error : function(xhr, status) {

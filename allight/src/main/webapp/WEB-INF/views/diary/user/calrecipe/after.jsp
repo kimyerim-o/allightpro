@@ -10,7 +10,7 @@
 <script>
 $(function(){
 	$('#check').click(function(){
-		$("#check").attr('href','${pageContext.request.contextPath}/calorie_recipe.com');
+		$("#check").attr('href','${pageContext.request.contextPath}/recipeRe.com');
 	});
 })
 </script>
@@ -66,7 +66,7 @@ $(function(){
 
 <script type="text/javascript">
     Kakao.init('52ee84c11b882c5898d68b339bf4f9d0');
-    alert(document.location.href);
+    //alert(document.location.href);
     Kakao.Link.createDefaultButton({
       container: '#kakao-link-btn',
       objectType: 'feed',

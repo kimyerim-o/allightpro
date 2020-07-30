@@ -397,7 +397,8 @@ public class OrderService {
 	
 	public void reviewr(ReviewDTO rdto, HttpSession session) {
 		rdto.setRid((String)session.getAttribute("MID"));
-		rdto.setRnick((String)session.getAttribute("MMICK"));
+		rdto.setRnick((String)session.getAttribute("MNICK"));
+		
 		ordDAO.reviewr(rdto);
 	}
 	

@@ -17,11 +17,11 @@
 				var param = { "odno" : odno , "ostatus" : ostatus };
 				//alert(JSON.stringify(param));
 				$.ajax({
-					url : "${pageContext.request.contextPath}/order/check.com",
+					url : "${pageContext.request.contextPath}/order/mypage/check.com",
 					type : 'post',
 					data : param,
 					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/order/check.com?odno="+odno+"&ostatus="+ostatus
+						location.href = "${pageContext.request.contextPath}/order/mypage/check.com?odno="+odno+"&ostatus="+ostatus
 					},
 					error : function(request,status,error) {
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -37,11 +37,11 @@
 				var param = { "odno" : odno , "ostatus" : ostatus };
 				//alert(JSON.stringify(param));
 				$.ajax({
-					url : "${pageContext.request.contextPath}/order/check.com",
+					url : "${pageContext.request.contextPath}/order/mypage/check.com",
 					type : 'post',
 					data : param,
 					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/order/check.com?odno="+odno+"&ostatus="+ostatus
+						location.href = "${pageContext.request.contextPath}/order/mypage/check.com?odno="+odno+"&ostatus="+ostatus
 					},
 					error : function(request,status,error) {
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -51,7 +51,7 @@
 		});
 		//구매확정 버튼 클릭 시
 		$(".confirm").click(function() {
-			if (confirm("해당 상품을 구매확정 하시겠습니까? 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")) {
+			if (confirm("해당 상품을 구매확정 하시겠습니까? \n 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")) {
 				var odno =  $(event.target).attr('data-no');
 				var ostatus = "구매확정";
 				var param = { "odno" : odno , "ostatus" : ostatus };
@@ -60,7 +60,7 @@
 					type : 'post',
 					data : param,
 					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/order/detail.com?no=${ORDER.odto1.ono}"
+						location.href = "${pageContext.request.contextPath}/order/mypage/detail.com?no=${ORDER.odto1.ono}"
 					},
 					error : function(request,status,error) {
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

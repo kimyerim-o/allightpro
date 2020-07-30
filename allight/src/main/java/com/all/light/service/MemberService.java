@@ -142,7 +142,14 @@ public class MemberService {
 		} else {
 			// 로그인성공
 			System.out.println("로그인성공");
+			session.setAttribute("MNO",result.getMno());
 			session.setAttribute("MID", result.getMid());
+			session.setAttribute("MEMAIL", result.getMemail());
+			session.setAttribute("MNAME", result.getMname());
+			session.setAttribute("MBIRTH", result.getMbirth());
+			session.setAttribute("MTEL", result.getMtel());
+			session.setAttribute("MTYPE", result.getMtype());
+			session.setAttribute("MNICK", result.getMnick());
 		}
 		return result;
 	}

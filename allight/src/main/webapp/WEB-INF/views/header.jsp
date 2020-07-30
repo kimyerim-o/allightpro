@@ -82,7 +82,7 @@ function kakaoLogout() {
 				</c:if>
 				
 				<!-- 카카오 -->
-				<c:if test="${empty sessionScope.MPW and !empty sessionScope.MID}">
+				<c:if test="${empty sessionScope.MPW and !empty sessionScope.MID and !empty sessionScope.MNICK}">
 					<a class="logined-panel" onclick="kakaoLogout()">로그아웃</a>
 					<a href="#" class="logined-panel">장바구니()</a>
 					<a href="${pageContext.request.contextPath}/order/list.com"
@@ -146,9 +146,9 @@ function kakaoLogout() {
 					<li class="nav-item"><a href="${pageContext.request.contextPath}/mypage/home.com" class="nav-link">마이페이지</a>
 						<ul class="dropdown">
 							<li><a
-								href="${pageContext.request.contextPath}/order/list.com">주문/배송조회</a></li>
+								href="${pageContext.request.contextPath}/order/mypage/list.com">주문/배송조회</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/order/back.com">취소/반품조회</a></li>
+								href="${pageContext.request.contextPath}/order/mypage/back.com">취소/반품조회</a></li>
 							<li><a href="${pageContext.request.contextPath}/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>장바구니</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/member/user/address.com">배송지

@@ -20,7 +20,8 @@
 					url : "${pageContext.request.contextPath}/order/check.com",
 					type : 'post',
 					data : param,
-						location.href = "${pageContext.request.contextPath}/order/check.com?odno="+odno+"&ostatus="+ostatus;
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/order/check.com?odno="+odno+"&ostatus="+ostatus
 					},
 					error : function(request,status,error) {
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -40,7 +41,7 @@
 					type : 'post',
 					data : param,
 					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/order/check.com?odno="+odno+"&ostatus="+ostatus;
+						location.href = "${pageContext.request.contextPath}/order/check.com?odno="+odno+"&ostatus="+ostatus
 					},
 					error : function(request,status,error) {
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -59,7 +60,7 @@
 					type : 'post',
 					data : param,
 					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/order/detail.com?no=${ORDER.odto1.ono}";
+						location.href = "${pageContext.request.contextPath}/order/detail.com?no=${ORDER.odto1.ono}"
 					},
 					error : function(request,status,error) {
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -253,10 +254,11 @@
 												<li class="mb5"><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
 															class="openMask_create" style="cursor: pointer;">배송조회</a></li>
 
-												<li class="mb5"><a class="review"
-													href="mem_goods_review_write.asp?orderno=202004052091881&amp;g=12189&amp;vtab=O"
-													class="order_btn_write" style="cursor: pointer;">상품 리뷰
-														쓰기</a></li>
+												<c:if test="${oddto.okreview ==0}">
+													<li class="mb5"><a
+														href="review.com?no=${sdto.ino}&num=${oddto.odno}"
+														class="order_btn_write" style="cursor: pointer;">상품 리뷰 쓰기</a></li>
+												</c:if>
 											</ul>
 										</c:if> <c:if
 											test="${oddto.ostatus eq '주문취소' or oddto.ostatus eq '반품'}">

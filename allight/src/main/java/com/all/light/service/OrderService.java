@@ -11,6 +11,7 @@ import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.OrderdetailDTO;
+import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.util.PageUtil;
 import com.all.light.dao.OrderDAO;
@@ -392,6 +393,12 @@ public class OrderService {
 			System.out.println("메일발송 실패 : " + e);
 			return null;
 		}
+	}
+	
+	public void reviewr(ReviewDTO rdto, HttpSession session) {
+		rdto.setRid((String)session.getAttribute("MID"));
+		rdto.setRnick((String)session.getAttribute("MMICK"));
+		ordDAO.reviewr(rdto);
 	}
 	
 

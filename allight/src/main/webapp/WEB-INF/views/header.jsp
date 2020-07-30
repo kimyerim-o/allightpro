@@ -88,7 +88,7 @@ function kakaoLogout() {
 					<a href="${pageContext.request.contextPath}/order/list.com"
 						class="logined-panel">주문/배송조회</a>
 					<a href="${pageContext.request.contextPath}/mypage/home.com" class="logined-panel">마이페이지</a>
-					<a href="#" class="logined-nick-panel">${sessionScope.MID} 님</a>
+					<a href="#" class="logined-nick-panel">${sessionScope.MNICK} 님</a>
 				</c:if>
 				<c:if test="${!empty sessionScope.COID}">
 					<a href="${pageContext.request.contextPath}/corlogout.com"

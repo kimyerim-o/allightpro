@@ -28,50 +28,86 @@ $(function(){
 	
 	// 몸무게 업데이트
 	$('#dweight').change(function(){
-		var formData = new FormData();
-		formData.append("num", ${num});
-		formData.append("dweight", $('#dweight').val());
+		//var formData = new FormData();
+		//formData.append("num", ${num});
+		//formData.append("dweight", $('#dweight').val());
 		if('${DATE}'!=''){
-			formData.append("ddate", "${DATE}");
+			//formData.append("ddate", "${DATE}");
+			$.ajax({
+	            type : 'post',
+	            url : './updateDweight.com',
+	            data : {"num":${num},
+	            	"dweight":$('#dweight').val(),
+	            	"ddate":"${DATE}"},
+	            error: function(xhr, status, error){
+	                alert(error);
+	            },
+	            success : function(data){
+	                $('#num').val(Number(data));
+	                if(${num}==0){
+	        			location.href="./myFAE.com?num="+data;
+	        		}
+	            }
+	        });
+		}else{
+			$.ajax({
+	            type : 'post',
+	            url : './updateDweight.com',
+	            data : {"num":${num},
+	            	"dweight":$('#dweight').val()},
+	            error: function(xhr, status, error){
+	                alert(error);
+	            },
+	            success : function(data){
+	                $('#num').val(Number(data));
+	                if(${num}==0){
+	        			location.href="./myFAE.com?num="+data;
+	        		}
+	            }
+	        });
 		}
-		$.ajax({
-            type : 'post',
-            url : './updateDweight.com',
-            data : formData,
-            error: function(xhr, status, error){
-                alert(error);
-            },
-            success : function(data){
-                $('#num').val(Number(data));
-                if(${num}==0){
-        			location.href="./myFAE.com?num="+data;
-        		}
-            }
-        });
 	})
 	
 	// 일기 업데이트
 	$('#ddiary').change(function(){
-		var formData = new FormData();
-		formData.append("num", ${num});
-		formData.append("ddiary", $('#ddiary').val());
+		//var formData = new FormData();
+		//formData.append("num", ${num});
+		//formData.append("ddiary", $('#ddiary').val());
 		if('${DATE}'!=''){
-			formData.append("ddate", "${DATE}");
+			//formData.append("ddate", "${DATE}");
+			$.ajax({
+	            type : 'post',
+	            url : './updateDdiary.com',
+	            data : {"num":${num},
+	            	"ddiary":$('#ddiary').val(),
+	            	"ddate":"${DATE}"},
+	            error: function(xhr, status, error){
+	                alert(error);
+	            },
+	            success : function(data){
+	            	num = Number(data);
+	            	if(${num}==0){
+	        			location.href="./myFAE.com?num="+data;
+	        		}
+	            }
+	        });
+		}else {
+			$.ajax({
+	            type : 'post',
+	            url : './updateDdiary.com',
+	            data : {"num":${num},
+	            	"ddiary":$('#ddiary').val()},
+	            error: function(xhr, status, error){
+	                alert(error);
+	            },
+	            success : function(data){
+	            	num = Number(data);
+	            	if(${num}==0){
+	        			location.href="./myFAE.com?num="+data;
+	        		}
+	            }
+	        });
 		}
-		$.ajax({
-            type : 'post',
-            url : './updateDdiary.com',
-            data : formData,
-            error: function(xhr, status, error){
-                alert(error);
-            },
-            success : function(data){
-            	num = Number(data);
-            	if(${num}==0){
-        			location.href="./myFAE.com?num="+data;
-        		}
-            }
-        });
 	})
 	
 	// 섭취칼로리 모두 지우기
@@ -166,30 +202,23 @@ function medel(dno,meno){
 
 // 이미지 업데이트
 function updateDimage(input){
-	//var dimage = input.value.substring(input.value.lastIndexOf('\\')+1)
-	var formData = new FormData();
-	var inputFile = $("#uploadImgBtn");
-	var files = inputFile[0].files;
-	
-	formData.append("num",${num});
-	formData.append("dimageFile", files[0]);
-	if(${num}==0){
-		formData.append("ddate","${DATE}");
-	}
+	var form = $('#imgFrm')[0];
+    var formData = new FormData(form);
+    formData.append("dimageFile", $("#dimageFile")[0].files[0]);
 	$.ajax({
         type : 'post',
         url : './updateDimage.com',
-        processData : false,
-		contentType : false,
-		data : formData,
+        data : formData,
+        processData: false,
+        contentType: false,
         error: function(xhr, status, error){
             alert(error);
         },
         success : function(data){
         	//data = decodeURI(data);
 			//alert(data)
-			//location.href="./myFAE.com?num="+data+"#img";
-			location.reload(true);
+			location.href="./myFAE.com?num="+data+"#img";
+			//location.reload(true);
         }
   	});
 }
@@ -280,9 +309,15 @@ function updateDimage(input){
 		<div class="title3" id="img">변화사진
 			<a style="color:gray">사진 등록은 한 장만 가능합니다.</a>
 			<div class="f-right">
-				<label for="uploadImgBtn" class="btn">사진등록</label>
-				<input type="file" id="uploadImgBtn" onchange="updateDimage(this);" class="hidden"/>
-				<input type="button" value="삭제" id="deleteImgBtn" class="btn"/>
+				<form id="imgFrm">
+					<label for="dimageFile" class="btn">사진등록</label>
+					<input type="file" id="dimageFile" onchange="updateDimage(this);" class="hidden" name="dimageFile"/>
+					<input type="hidden" name="num" value="${num}"/>
+					<c:if test="${!empty DATE}">
+						<input type="hidden" name="ddate" value="${DATE}"/>
+					</c:if>
+					<input type="button" value="삭제" id="deleteImgBtn" class="btn"/>
+				</form>
 			</div>
 		</div>
 		<div class="center">

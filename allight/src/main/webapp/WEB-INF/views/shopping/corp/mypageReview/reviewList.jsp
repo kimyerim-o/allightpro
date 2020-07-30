@@ -7,11 +7,6 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	//작성 버튼 클릭 시
-	$("#up").click(function(){
-		$(location).attr("href","${pageContext.request.contextPath}/mypage/review/write/corp.com?no=${list.INO}");
-	});
 	//삭제 버튼 클릭 시
 	$("#del").click(function(){
 		if(confirm("삭제 하시겠습니까?")){
@@ -25,7 +20,7 @@ $(function(){
 <body>
 	<div class="container">
 		<form id="sFrm" method="get"
-		action="<%=request.getContextPath()%>/mypage/review/list.com">
+		action="<%=request.getContextPath()%>/review/list/corp.com">
 		<div class="searchDiv">
 		<input type="text" id="search" name="search" placeholder="검색할 상품명을 입력하세요"/> <input type="submit"
 				value="검색" onclick="return checkForm();"/>
@@ -48,7 +43,7 @@ $(function(){
 					<td>${list.RGRADE}</td>
 					<td>${list.RCONTENT}</td>
 					<td>
-					<a href="${pageContext.request.contextPath}/mypage/review/delete.com?nowPage=${param.nowPage}&no=${list.INO}">
+					<a href="${pageContext.request.contextPath}/review/delete/corp.com?nowPage=${param.nowPage}&no=${list.INO}">
 					<input type="button" id="dbtn" name="dbtn" value="리뷰 삭제"></a></td>
 				</tr>
 			</c:forEach>
@@ -57,24 +52,24 @@ $(function(){
 			<ul class="pagination">
 				<li>
 					<c:if test="${PINFO.nowPage > 3}">
-						<a href="${pageContext.request.contextPath}/mypage/review/list/corp.com?nowPage=${PINFO.nowPage-3}">«</a>
+						<a href="${pageContext.request.contextPath}/review/list/corp.com?nowPage=${PINFO.nowPage-3}&search=${param.search}">«</a>
 					</c:if>
 					<c:if test="${PINFO.nowPage <= 3}">
-						<a href="${pageContext.request.contextPath}/mypage/review/list/corp.com?nowPage=1">«</a>
+						<a href="${pageContext.request.contextPath}/review/list/corp.com?nowPage=1&search=${param.search}">«</a>
 					</c:if>
 				</li>
 				<!-- 현재 페이지일때 active --> 
 				<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
 					<li id="li"><!-- 스크립트 적용해야 할것같아요 -->
-						<a href="${pageContext.request.contextPath}/mypage/review/list/corp.com?nowPage=${i}">${i}</a>
+						<a href="${pageContext.request.contextPath}/review/list/corp.com?nowPage=${i}&search=${param.search}">${i}</a>
 					</li>
 				</c:forEach>				
 				<li>
 					<c:if test="${PINFO.nowPage < PINFO.endPage-3}">
-						<a href="${pageContext.request.contextPath}/mypage/review/list/corp.com?nowPage=${PINFO.nowPage+3}">»</a>
+						<a href="${pageContext.request.contextPath}/review/list/corp.com?nowPage=${PINFO.nowPage+3}&search=${param.search}">»</a>
 					</c:if>
 					<c:if test="${PINFO.nowPage >= PINFO.endPage-3}">
-						<a href="${pageContext.request.contextPath}/mypage/review/list/corp.com?nowPage=${PINFO.endPage}">»</a>
+						<a href="${pageContext.request.contextPath}/review/list/corp.com?nowPage=${PINFO.endPage}&search=${param.search}">»</a>
 					</c:if>
 				</li>
 			</ul>

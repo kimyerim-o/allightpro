@@ -93,6 +93,14 @@
 						});
 
 	})
+	
+	function loginCheck (){
+	if('${sessionScope.MID}'==''){
+		if(confirm('로그인 후 이용가능한 서비스입니다.\n로그인하시겠습니까?')){
+			$('#reUrlFrm').submit();
+		}
+	}
+
 </script>
 </head>
 <body>
@@ -171,12 +179,30 @@
 							</tr>
 							<tr>
 								<td width="80%">${c.fccontent}</td>
-								<td style="padding: 0; text-align: center;"><c:if
+								<td style="padding: 0; text-align: center;">
+								<c:if test="${empty sessionScope.MID}">
+									<a onclick="loginCheck();" style="cursor:pointer;"> 
+										<img class="like" src="${pageContext.request.contextPath}/resources/img/like.png" />
+									</a>
+								</c:if>
+								<c:if test="${!empty sessionScope.MID}">
+									<a href="./reviewLike.com?ino=${DETAIL.ino}&rno=${list.rno}&rNowPage=${RPINFO.nowPage}"> 
+										<c:if test="${list.isLiked}">
+											<img class="like" src="${pageContext.request.contextPath}/resources/img/liked.png" />
+										</c:if>
+										<c:if test="${!list.isLiked}">
+											<img class="like" src="${pageContext.request.contextPath}/resources/img/like.png" />
+										</c:if>
+									</a>
+								</c:if>
+								<c:if
 										test="${c.fcid eq sessionScope.MID}">
 										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
 									</c:if> <c:if test="${sessionScope.MTYPE == 1}">
 										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
-									</c:if></td>
+									</c:if>
+								<a class="aNone">${list.rlamount}</a>
+							</td>
 							</tr>
 						</c:forEach>
 						</form>
@@ -213,5 +239,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<form action="${pageContext.request.contextPath}/login.com" id="reUrlFrm">
+		<input type="hidden" name="reUrl" value="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }">
+	</form>
 </body>
 </html>

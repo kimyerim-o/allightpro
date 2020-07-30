@@ -46,7 +46,19 @@ public class ReviewService {
 		revDAO.reviewUpdate(revDTO);
 	}
 
-	
-	
+	public PageUtil getPageInfoCorp(String name, int nowPage, String searchWord) {
+		PageUtil pInfo = new PageUtil(searchWord);
+		pInfo.setConame(name);
+		int totalCount = revDAO.getTotalCntCorp(pInfo); //게시물 수를 구함
+		pInfo = new PageUtil(nowPage, totalCount); //게시물 수에 따른 페이징정보를 구함
+		pInfo.setConame(name);
+		pInfo.setSearchWord(searchWord);
+		System.out.println("reviewService.getPageInfo.pInfo = "+pInfo);
+		return pInfo;
+	}
 
+	public ArrayList<ReviewDTO> getListCorp(PageUtil pInfo) {
+		System.out.println("reviewService.getListCorp.pInfo = "+pInfo);
+		return revDAO.getListCorp(pInfo);
+	}
 }

@@ -6,9 +6,18 @@
 	<select id="getTotalCnt" resultType="Integer"
 		parameterType="PageUtil">
 		select count(*) from item
-        where ino in(select ino from review
-        where rid=#{rid})
+        where ino in(select ino 
+        						from review
+       							where rid=#{rid})
         and iname like '%${searchWord}%'
+	</select>
+	
+	<select id="getTotalCntCorp" resultType="Integer" parameterType="PageUtil">
+		select * from review 
+		where ino in(select ino 
+						            from item 
+						            where icorp=#{coname}
+						            and iname like '%${searchWord}%')
 	</select>
 	
 	<select id="getList" resultType="java.util.HashMap"
@@ -18,6 +27,20 @@
         where R.rid=#{rid}
         and R.ino=I.ino
         and I.iname like '%${searchWord}%')
+        where num between ${startNo} and ${endNo}
+        order by num desc
+	</select>
+	
+	<select id="getListCorp" resultType="java.util.HashMap"
+		parameterType="PageUtil">
+         select * from
+							        (select R.*,I.iname, row_number() over (order by R.rno) num
+							        from review R,item I
+							        where R.ino=I.ino
+							        and I.ino in (select ino 
+									                        from item 
+									                        where icorp=#{coname})
+							        and I.iname like '%${searchWord}%')
         where num between ${startNo} and ${endNo}
         order by num desc
 	</select>

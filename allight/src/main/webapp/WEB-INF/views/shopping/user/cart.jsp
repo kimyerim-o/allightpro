@@ -78,6 +78,7 @@
 					<c:set var="sum0" value="0" />
 					<%-- <c:set var="qty" value="0" /> --%>
 					<c:forEach var="list" items="${clist}">
+						<input type="hidden" name="arr" value="${list.cano}"/><!-- 주문페이지 연결시 cano보내주려고 -->
 						<tr>
 							<td scope="col"><!-- 체크박스 -->
 								<div class="center">
@@ -150,7 +151,7 @@
 				</table>
 			<div class="right">
 				<input type="button" value="계속 쇼핑" onclick="location.href='${pageContext.request.contextPath}/shopping/list.com'" />&nbsp;
-				<input type="button" value="결제하기" onclick="location.href='${pageContext.request.contextPath}/buy.com'"/>
+				<input type="submit" value="결제하기"/>
 			</div>
 			</c:if>
 		</div>

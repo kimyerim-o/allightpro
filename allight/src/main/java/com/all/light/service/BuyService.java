@@ -1,5 +1,6 @@
 package com.all.light.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.all.light.dao.BuyDAO;
 import com.all.light.dao.CartDAO;
 import com.all.light.dao.OrderDAO;
+import com.all.light.dto.AddressDTO;
 import com.all.light.dto.BuyDTO;
 import com.all.light.dto.CartDTO;
 
@@ -27,6 +29,25 @@ public class BuyService {
 			BuyDTO buydto = buyDAO.items(list.get(i).getMno());
 		}
 		return list;*/
+	}
+
+	public CartDTO cart(int cano) {
+		System.out.println(cano);
+		//2. 카트정보 안의 아이템번호로 아이템이름,가격
+		CartDTO cartdto = buyDAO.cart(cano);
+		CartDTO cdto = buyDAO.items(cartdto.getIno());
+		cdto.setIname(cdto.getIname());
+		cdto.setCaamount(cartdto.getCaamount());
+		cdto.setIprice(cdto.getIprice());
+		cdto.setImgimages(buyDAO.image(cartdto.getIno()));
+		return cdto;
+	}
+
+	//주소가져오기
+	public ArrayList<AddressDTO> address(String mid) {
+		ArrayList<AddressDTO> list = buyDAO.addresslist(mid);
+		System.out.println("서비스 리스트 확인 list =" + list);
+		return list;
 	}
 
 

@@ -2,8 +2,6 @@ package com.all.light.controller;
 
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CaldictionaryDTO;
 import com.all.light.dto.DiaryDTO;
+import com.all.light.dto.KgDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
 import com.all.light.service.DiaryService;
@@ -532,6 +532,38 @@ public class DiaryController {
 		System.out.println("myImgDelete()-dno="+dno);
 		diaSVC.myImgDelete(dno);
 	}
+	
+	
+	
+	
+	
+//	// 그래프
+//	@RequestMapping("/chart")
+//	public String chart() {
+//		
+//		return "/diary/user/graphy/chart2";
+//	}
+	
+	
+	// 그래프
+	@RequestMapping("/chart")
+	public ModelAndView chart2(
+		 ModelAndView mv, HttpSession session){
+
+		System.out.println("컨트롤러 상품 목록보기 - chart2() 요청");
+		System.out.println("컨트롤러 상품 목록보기 - chart2() 요청 session=" + session);
+		System.out.println(session.getAttribute("MID"));
+		String mid = (String)session.getAttribute("MID");
+		
+		ArrayList<KgDTO> list = diaSVC.getkgchart(mid);
+		mv.addObject("LIST", list);		// 실제 조회 목록
+		mv.setViewName("/diary/user/graphy/chart2");
+		
+		System.out.println("컨트롤러 상품 목록보기 - list = " + list);
+		System.out.println("컨트롤러 상품 목록보기 - mv = " + mv);
+		return mv;
+	}
+	
 }
 
 

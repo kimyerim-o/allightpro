@@ -1,6 +1,7 @@
 package com.all.light.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.all.light.dao.DiaryDAO;
 import com.all.light.dto.CaldictionaryDTO;
 import com.all.light.dto.DiaryDTO;
+import com.all.light.dto.KgDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
 
@@ -304,6 +306,15 @@ public class DiaryService {
 	// 다이어리 이미지 삭제
 	public void myImgDelete(int dno) {
 		diaDAO.myImgDelete(dno);
+	}
+
+	
+	
+	// kg 그래프
+	public ArrayList<KgDTO> getkgchart(String mid) {
+		System.out.println("서비스 getkgchart() mid = " + mid);
+		ArrayList<KgDTO> list = diaDAO.kgchart(mid);	
+		return list;
 	}
 	
 }

@@ -193,6 +193,14 @@
 		update diary set dimage = null 
 		where dno = #{dno}
 	</update>
+	
+	<!-- 차트정보 추출 -->
+	<select id="kgchart" resultType="kgDTO" parameterType="kgDTO">
+		select mid, to_char(ddate, 'DD') as ddate, dweight from diary
+		where mid = #{mid}
+		order by ddate
+	</select>
 
+	
 </mapper>
 	

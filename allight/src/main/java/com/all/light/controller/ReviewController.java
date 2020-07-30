@@ -126,7 +126,7 @@ public class ReviewController {
 	@RequestMapping("/review/list/corp")
 	public ModelAndView reviewListCorp(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			@RequestParam(value = "search", required = false) String searchWord, 
+			@RequestParam(value = "search", required = false, defaultValue="") String searchWord, 
 			ModelAndView mv, RedirectView rv,	HttpServletRequest request) {
 		// 파라미터 받기
 		String name = (String) request.getSession().getAttribute("CONAME");
@@ -150,22 +150,14 @@ public class ReviewController {
 	public ModelAndView reviewdeleteCorp(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			@RequestParam(value = "search", required = false) String searchWord, 
-			ModelAndView mv, RedirectView rv,	HttpServletRequest request) {
+			@RequestParam(value = "no", required = false) int rno,
+			ModelAndView mv, RedirectView rv,	HttpServletRequest request, ReviewDTO revDTO) {
 		// 파라미터 받기
-		String id = (String) request.getSession().getAttribute("MID");
-		System.out.println("\nReviewController.reviewdeleteCorp, 접속ID = " + id);
-
-		// 페이지 객체에 검색어와 현재 페이지를 넘기고 공지 리스트를 반환
-		PageUtil pInfo = revSVC.getPageInfo(id, nowPage, searchWord);
-		pInfo.setRid(id);
-		ArrayList<ReviewDTO> map = revSVC.getList(pInfo);
-
-		System.out.println("list = " + map.toString());
-		System.out.println("pinfo = " + pInfo.toString());
-		mv.addObject("LIST", map); // 리뷰 리스트
-		mv.addObject("PINFO", pInfo); // 페이징 정보
-
-		mv.setViewName("shopping/corp/mypageReview/reviewList");
+		System.out.println("\nReviewController.reviewdeleteCorp, 삭제번호 = " + rno);
+		revDTO.setRno(rno);
+		revSVC.reviewDeleteCorp(revDTO);
+		rv.setUrl(request.getContextPath()+"/review/list/corp.com?nowPage="+nowPage);
+		mv.setView(rv);
 		return mv;
 	}
 }

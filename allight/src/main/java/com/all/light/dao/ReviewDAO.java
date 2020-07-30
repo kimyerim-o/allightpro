@@ -39,11 +39,14 @@ public class ReviewDAO extends SqlSessionDaoSupport {
 	}
 
 	public int getTotalCntCorp(PageUtil pInfo) {
-		System.out.println(session);
 		return session.selectOne("review.getTotalCntCorp", pInfo);
 	}
 	
 	public ArrayList<ReviewDTO> getListCorp(PageUtil pInfo) {
 		return (ArrayList) session.selectList("review.getListCorp", pInfo); 
+	}
+
+	public void reviewDeleteCorp(ReviewDTO revDTO) {
+		session.delete("review.reviewDeleteCorp",revDTO);
 	}
 }

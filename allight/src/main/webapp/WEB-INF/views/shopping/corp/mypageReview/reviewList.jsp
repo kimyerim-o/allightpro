@@ -7,13 +7,14 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+$(function(){
 	//삭제 버튼 클릭 시
-	$("#del").click(function(){
+/* 	$("#del").click(function(){
 		if(confirm("삭제 하시겠습니까?")){
-			$("#form").attr("action","${pageContext.request.contextPath}/mypage/review/delete/corp.com?no=${list.INO}");
+			$("#form").attr("action","${pageContext.request.contextPath}/review/delete/corp.com?no=${list.INO}");
 			$("#form").submit();
 		}
-	});
+	}); */
 })
 </script>
 </head>
@@ -24,6 +25,7 @@
 		<div class="searchDiv">
 		<input type="text" id="search" name="search" placeholder="검색할 상품명을 입력하세요"/> <input type="submit"
 				value="검색" onclick="return checkForm();"/>
+				<a href="${pageContext.request.contextPath}/review/list/corp.com?"><input type="button" value="검색어 초기화"/></a>
 		</div>
 		</form>
 		<table class="table">
@@ -38,12 +40,12 @@
 			<c:forEach items="${LIST}" var="list">
 				<tr>
 					<td>${list.NUM}</td>
-					<td><a href="${pageContext.request.contextPath}/#">${list.INAME}</a></td>
+					<td><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.INO}">${list.INAME}</a></td>
 					<td>${list.RDATE}</td>
 					<td>${list.RGRADE}</td>
 					<td>${list.RCONTENT}</td>
 					<td>
-					<a href="${pageContext.request.contextPath}/review/delete/corp.com?nowPage=${param.nowPage}&no=${list.INO}">
+					<a href="${pageContext.request.contextPath}/review/delete/corp.com?nowPage=${param.nowPage}&no=${list.RNO}">
 					<input type="button" id="dbtn" name="dbtn" value="리뷰 삭제"></a></td>
 				</tr>
 			</c:forEach>

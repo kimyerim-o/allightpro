@@ -24,6 +24,24 @@
 			</otherwise>
 		</choose>
 	</select>
+	<!-- 마이페이지용 페이징 -->
+	<select id="getPageInfoMyPage" parameterType="PageUtil"	resultType="Integer">
+		select count(*) from freeboard
+		<choose>
+			<when test="searchType=='fall'">
+				where (ftitle like '%${searchWord}%'
+				or fcontent like '%${searchWord}%')
+				and ftype like '%${ftype}%'
+				and fid = #{fid}
+			</when>
+			<otherwise>
+				where ${searchType} like '%${searchWord}%'
+				and ftype like '%${ftype}%'
+				and fid = #{fid}
+			</otherwise>
+		</choose>
+	</select>
+	
 	<select id="searchList" parameterType="PageUtil"	resultType="freDTO">
 		select * from(
 						select row_number() over (order by fno) num,
@@ -42,6 +60,28 @@
 			where num between ${startNo} and ${endNo}
 			order by num desc
 	</select>
+	<!-- 마이페이지용 리스트 -->
+		<select id="searchListMyPage" parameterType="PageUtil"	resultType="freDTO">
+		select * from(
+						select row_number() over (order by fno) num,
+			        	f.* from freeboard f
+			        <choose>
+					<when test="searchType=='fall'">
+						where (ftitle like '%${searchWord}%'
+						or fcontent like	'%${searchWord}%')
+						and ftype like '%${ftype}%'
+						and fid=#{fid})
+					</when>
+					<otherwise>
+						where ${searchType} like '%${searchWord}%'
+						and ftype like '%${ftype}%'
+						and fid=#{fid})
+					</otherwise>
+				</choose>
+			where num between ${startNo} and ${endNo}
+			order by num desc
+	</select>
+	
 	<insert id="writeFile" parameterType="freDTO">
 		insert into freeimage (fino, fno, fipath, fiimg, fioriname, filength)
 		values(fino_seq.nextval, 
@@ -80,5 +120,22 @@
 	</select>
 	
 	<!-- 수정 -->
+	<update id="update" parameterType="freDTO">
+		update freeboard set ftype=#{ftype}, ftitle=#{ftitle}, fnick=#{fnick}, fcontent=#{fcontent} 
+		where fno=${fno}
+	</update>
+	<insert id="updateFile">
+		insert into freeimage (fino, fno, fipath, fiimg, fioriname, filength)
+		values(fino_seq.nextval, 
+					#{fno}, #{fipath}, #{fiimg}, #{fioriname}, #{filength})
+	</insert>
+	
+	<!-- 삭제 -->
+	<delete id="delete" parameterType="freDTO">
+		delete from freeboard where fno=${fno}
+	</delete>
+	<delete id="deleteFile" parameterType="freDTO">
+		delete from freeimage where fno=${fno}
+	</delete>
 	
 </mapper>

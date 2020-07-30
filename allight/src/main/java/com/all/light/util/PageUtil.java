@@ -28,9 +28,11 @@ public class PageUtil {
 	//QuestionSQL에서 사용(마이페이지 리스트출력하기용)
 	private String qid;
 	private int qno; //(문의사항 댓글 출력용)
-	//자유게시판 구분자
+	//자유게시판
 	private String ftype;
+	private String fid;
 	private int fno; //(자유게시판 댓글 출력용)
+	
 	public PageUtil(int nowPage, int totalCount) {
 		this(nowPage, totalCount, 5, 5);
 	}
@@ -103,6 +105,14 @@ public class PageUtil {
 
 
 	
+	public String getFid() {
+		return fid;
+	}
+
+	public void setFid(String fid) {
+		this.fid = fid;
+	}
+
 	public int getFno() {
 		return fno;
 	}

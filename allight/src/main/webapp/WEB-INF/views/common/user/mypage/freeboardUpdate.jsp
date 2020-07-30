@@ -14,7 +14,7 @@
 						function() {
 							$("#form")
 									.attr("action",
-											"${pageContext.request.contextPath}/freeboard/update.com?no=${DETAIL.fno}");
+											"${pageContext.request.contextPath}/mypage/freeboard/update.com?no=${DETAIL.fno}");
 							$("#form").submit();
 						});
 		//목록 버튼 클릭 시
@@ -23,7 +23,7 @@
 						function() {
 							$(location)
 									.attr("href",
-											"${pageContext.request.contextPath}/freeboard/list.com")
+											"${pageContext.request.contextPath}/mypage/freeboard/list.com")
 						});
 		//취소 버튼 클릭 시
 		$("#back")
@@ -31,7 +31,7 @@
 						function() {
 							$(location)
 									.attr("href",
-											"${pageContext.request.contextPath}/freeboard/detail.com?no=${DETAIL.fno}");
+											"${pageContext.request.contextPath}/mypage/freeboard/detail.com?no=${DETAIL.fno}");
 						});
 		
 		var cnt = 1; //첨부파일수를 저장하는 변수

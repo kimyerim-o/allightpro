@@ -122,10 +122,9 @@ function kakaoLogout() {
 					<li class="nav-item"><a href="${pageContext.request.contextPath}/calorie_recipe.com" class="nav-link">칼로리 처방</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">커뮤니티</a>
 						<ul class="dropdown">
-							<li><a href="#">자유게시판</a></li>
+							<li><a href="${pageContext.request.contextPath}/freeboard/list.com">자유게시판</a></li>
 							<li><a href="${pageContext.request.contextPath}/notice.com">공지사항</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/question/list.com">문의사항</a></li>
+							<li><a href="${pageContext.request.contextPath}/question/list.com">문의사항</a></li>
 						</ul></li>
 					<li class="nav-item"><a
 						href="${pageContext.request.contextPath}/shopping/list.com"

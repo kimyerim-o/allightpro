@@ -12,6 +12,7 @@ import com.all.light.dto.MemberDTO;
 import com.all.light.dto.OrderDTO;
 import com.all.light.dto.OrderData;
 import com.all.light.dto.OrderdetailDTO;
+import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.util.PageUtil;
 
@@ -37,6 +38,7 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		if(oddto.getOstatus().equals("배송시작")) {
 			session.update("order.change",oddto);
 			session.update("order.changeStock",oddto);
+			session.update("order.changeIsell",oddto);
 		}else {
 			session.update("order.change",oddto);
 		}
@@ -154,6 +156,11 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		int totalCnt = session.selectOne("order.pageOrderConoTermType",map);
 		System.out.println(totalCnt);
 		return totalCnt;
+	}
+
+	public void reviewr(ReviewDTO rdto) {
+		session.insert("review.reviewWrite",rdto);
+		session.update("order.review",rdto);
 	}
 
 

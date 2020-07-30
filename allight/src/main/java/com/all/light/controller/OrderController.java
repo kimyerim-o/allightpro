@@ -16,6 +16,7 @@ import com.all.light.dto.MemberDTO;
 import com.all.light.dto.OrderDTO;
 import com.all.light.dto.OrderData;
 import com.all.light.dto.OrderdetailDTO;
+import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.service.OrderService;
 import com.all.light.util.PageUtil;
@@ -172,6 +173,26 @@ public class OrderController {
 		return "x";
     }
 
+    //리뷰쓰기
+    @RequestMapping("/review")
+    public ModelAndView review(@RequestParam(value = "no", required = true) String ino,
+    		@RequestParam(value = "num", required = true) String odno,ModelAndView mv) {
+    	System.out.println(ino+"...."+odno);
+    	mv.addObject("ino", ino);
+    	mv.addObject("odno", odno);
+    	mv.setViewName("shopping/user/mypageReview/reviewWrite");
+		return mv;
+    }
+    
+    @RequestMapping("/reviewr")
+    public ModelAndView reviewr(ReviewDTO rdto,HttpSession session,ModelAndView mv) {
+    	System.out.println(rdto);
+    	ordSVC.reviewr(rdto,session);
+    	RedirectView rv=new RedirectView("./list.com");
+		mv.setView(rv);
+		return mv;
+    }
+    
 
 	
 	

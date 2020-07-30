@@ -32,6 +32,8 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	}
 
 	public void change(OrderdetailDTO oddto) {
+		System.out.println(oddto.getOstatus());
+		System.out.println(oddto.getOdamount());
 		if(oddto.getOstatus().equals("배송시작")) {
 			session.update("order.change",oddto);
 			session.update("order.changeStock",oddto);

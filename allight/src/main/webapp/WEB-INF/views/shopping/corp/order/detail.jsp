@@ -122,6 +122,7 @@
 							<li><form id="statfrm" action="${pageContext.request.contextPath}/order/change/corp.com">
 									<input type="hidden" name="odno" value="${ORDER.oddto1.odno}">
 									<input type="hidden" name="ino" value="${ORDER.oddto1.ino}">
+									<input type="hidden" name="odamount" value="${ORDER.oddto1.odamount}">
 									<select name="ostatus" class="selectCss" id="status">
 										<option selected="selected">상태변경</option>
 										<option value="배송준비중">배송준비중</option>

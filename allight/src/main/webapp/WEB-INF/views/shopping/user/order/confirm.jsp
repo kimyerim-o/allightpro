@@ -12,7 +12,6 @@
 			var odno =  "${oddto.odno}";
 			var ostatus = "${oddto.ostatus}";
 			var param = { "odno" : odno , "ostatus" : ostatus };
-			alert(JSON.stringify(param));
 			$.ajax({
 				url : "${pageContext.request.contextPath}/order/change.com",
 				type : 'post',
@@ -31,7 +30,6 @@
 </script>
 </head>
 <body>
-${oddto}
 	<div class="container">
 		<table class="table">
 			<tr>

@@ -154,7 +154,7 @@ function kakaoLogout() {
 								href="${pageContext.request.contextPath}/member/user/address.com">배송지
 									관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/item/review/list.com">상품 문의</a></li>
-							<li><a href="#">내 정보</a></li>
+							<li><a href="${pageContext.request.contextPath}/mypage/member/modify.com">내 정보</a></li>
 						</ul></li>
 
 					<!-- 기업 로그인시   -->
@@ -168,7 +168,7 @@ function kakaoLogout() {
 								href="${pageContext.request.contextPath}/item/list/corp.com">상품
 									관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/item/review/list/corp.com">상품리뷰/문의</a></li>
-							<li><a href="#">.기업 정보 관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/corporation/modify/corp.com?cono=${sessionScope.CONO}">기업 정보 관리</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/question/list/corp.com">문의사항</a></li>
 						</ul></li>

@@ -418,7 +418,7 @@ public class MemberController {
 		System.out.println("memberController.modify.Member,"+request.getMethod()+"method");
 		//파라미터 받기, 비즈니스로직
 		memDTO = memSVC.getMInfo(memDTO.getMno());
-		System.out.println("memInfo = "+memDTO.toString());
+		System.out.println("memInfo = "+memDTO);
 		//모델지정
 		mv.addObject("MEMINFO", memDTO); //회원 상세 정보
 		//뷰지정

@@ -46,20 +46,8 @@ public class CorporationController {
 			for(int i=1;i<a.length;i++) {
 				str=str+a[i];
 			}
-<<<<<<< HEAD
-		}else {
-			//�옄�룞�엯�젰諛⑹�媛� �룞�씪�븳吏� �솗�씤�븯湲�
-			System.out.println("auto");
-			
-			HashMap result=corSVC.login(cordto,session,cnt);
-			if(result==null || result.size()==0) {
-				rv.setUrl("./login.com");
-			}else {
-				rv.setUrl("./main.com");
-=======
 			if(str.equals(cordto.getAuto())){
 				result=corSVC.login(cordto,session,cnt);
->>>>>>> master
 			}
 		}
 		
@@ -80,13 +68,9 @@ public class CorporationController {
 		}
 		return mv;
 	}
-<<<<<<< HEAD
-	
-	//濡쒓렇�븘�썐
-=======
+
 		
 	//로그아웃
->>>>>>> master
 	@RequestMapping("/corlogout")
 	public ModelAndView logout(HttpSession session,ModelAndView mv,RedirectView rv) {
 		if(session.getAttribute("COID")==null) {

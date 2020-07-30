@@ -82,7 +82,7 @@ function kakaoLogout() {
 				</c:if>
 				
 				<!-- 카카오 -->
-				<c:if test="${empty sessionScope.MPW and !empty sessionScope.MID  and !empty sessionScope.MNICK}">
+				<c:if test="${empty sessionScope.MPW and !empty sessionScope.MID}">
 					<a class="logined-panel" onclick="kakaoLogout()">로그아웃</a>
 					<a href="#" class="logined-panel">장바구니()</a>
 					<a href="${pageContext.request.contextPath}/order/list.com"

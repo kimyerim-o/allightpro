@@ -298,11 +298,11 @@ public class OrderService {
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com";
 		int hostPort = 465;
-		String hostSMTPid = "all_light@gamil.com";
+		String hostSMTPid = "allight.adm@gmail.com";
 		String hostSMTPpwd = "goallight!";
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "all_light@gamil.com";
+		String fromEmail = "allight.adm@gmail.com";
 		String fromName = "allight";
 		String subject = "";
 		String msg = "";

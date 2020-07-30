@@ -3,6 +3,8 @@ package com.all.light.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -118,6 +120,32 @@ public class FreeBoardService {
 		public void delete(FreeBoardDTO freDTO) {
 			freDAO.delete(freDTO);
 		}
+
+		public void increaseHit(int fno, HttpSession session) {
+			if (increaseHitKey(fno, session) == true) {
+				freDAO.increaseHit(fno);
+			}			
+		}
+
+		private boolean increaseHitKey(int fno, HttpSession session) {
+		// 세션 arrayList map => 글번호 조회 이력
+		ArrayList map = (ArrayList) session.getAttribute("FREEBOARDHITCHECK");
+		System.out.println("map = "+map);
+		// 기록이 없을 경우
+		if (map == null) {
+			map = new ArrayList();
+			map.add(fno);
+			session.setAttribute("FREEBOARDHITCHECK", map);
+			return true;
+		} // 기록이 있을 경우 -> 내 기록이 있는경우
+		else if (map.contains(fno)) {
+			return false;
+		} else {// 기록이 있는 경우 -> 내 기록이 없는경우
+			map.add(fno);
+			session.setAttribute("FREEBOARDHITCHECK", map);
+			return true;
+		}
+	}
 
 
 	}

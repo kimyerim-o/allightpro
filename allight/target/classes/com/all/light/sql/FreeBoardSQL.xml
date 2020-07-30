@@ -138,4 +138,12 @@
 		delete from freeimage where fno=${fno}
 	</delete>
 	
+		<!-- 조회수 증가 -->
+	<update id="hitIncrease" parameterType="Integer">
+		UPDATE freeboard
+		SET
+		fhit=fhit+1
+		where fno=#{fno}
+	</update>
+	
 </mapper>

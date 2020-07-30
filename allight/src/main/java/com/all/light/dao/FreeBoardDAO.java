@@ -80,4 +80,8 @@ public class FreeBoardDAO extends SqlSessionDaoSupport {
 	public ArrayList<FreeBoardDTO> searchListMyPage(PageUtil pInfo) {
 		return (ArrayList) session.selectList("freeboard.searchListMyPage", pInfo);
 	}
+
+	public void increaseHit(int fno) {
+		session.update("freeboard.hitIncrease", fno);
+	}
 }

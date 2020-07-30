@@ -140,10 +140,9 @@
 			<div class="boardContent-Comment">
 				<div class="boardContent-Comment-input">
 					<form style="text-align: left">
-						<a colspan="100%" class="board-comment-info"><a
-							class="board-info-nick">작성자 ${sessionScope.MID}</a>&nbsp;&nbsp; <a
-							class="board-info-others">작성일 <%=sf.format(now)%></a></a> <input
-							type="textarea" class="input" id="fccontent"
+						<a class="board-info-nick">작성자 ${sessionScope.MID}</a>&nbsp;&nbsp; 
+						<a class="board-info-others">작성일 <%=sf.format(now)%></a>
+							<input type="textarea" class="input" id="fccontent"
 							placeholder="댓글을 입력하세요" /> <input type="button" class="button"
 							id="wcomm" value="등록" />
 					</form>
@@ -161,7 +160,6 @@
 								<td>등록된 댓글이 없습니다.</td>
 							</tr>
 						</c:if>
-						<form>
 						<c:forEach items="${COMM}" var="c">
 							<tr>
 								<td colspan="100%" class="board-comment-info"><a
@@ -179,7 +177,6 @@
 									</c:if></td>
 							</tr>
 						</c:forEach>
-						</form>
 					</table>
 
 					<div class="center">

@@ -78,7 +78,7 @@ public class FreeBoardController {
 		//비즈니스로직
 		freSVC.write(fdto,list);
 		//뷰지정
-		rv.setUrl(request.getContextPath() + "/freeboard/list.com"); 
+		rv.setUrl(request.getContextPath()+"/mypage/freeboard/list.com"); 
 		mv.setView(rv);
 		return mv;
 	}
@@ -124,7 +124,7 @@ public class FreeBoardController {
 		ArrayList<FreeBoardDTO> files = freSVC.getFile(fno); //첨부파일목록조회
 		PageUtil pInfo = freSVC.getCommPageInfo(fno, commPage);//댓글 페이징
 		ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo);//댓글
-		//freSVC.increaseHit(fno);
+		freSVC.increaseHit(fno, request.getSession());
 		
 		fdto.setFccount(pInfo.getTotalCount());
 		System.out.println("fdto = "+fdto);
@@ -184,8 +184,8 @@ public class FreeBoardController {
 		System.out.println("FreeBoardController.freeBoardUpdate" + request.getMethod() + "method");
 		fdto.setFno(fno);
 		System.out.println("fdto = "+fdto);
-		if(fdto.getFiles()!=null) {
-			System.out.println("파일 수정o");
+		if(!fdto.getFiles()[0].getOriginalFilename().equals("")) {
+			System.out.println("파일 수정o"+fdto.getFiles()[0].getOriginalFilename());
 			// - 첨부파일 처리
 			String path="D:\\upload";
 			ArrayList list= new ArrayList();
@@ -216,7 +216,7 @@ public class FreeBoardController {
 			}//end for
 			freSVC.update(fdto, list);
 		}else {
-			System.out.println("파일 수정x");
+			System.out.println("파일 수정x"+fdto.getFiles()[0].getOriginalFilename());
 			freSVC.update(fdto);
 		}
 		System.out.println("fdto = "+fdto);
@@ -242,7 +242,10 @@ public class FreeBoardController {
 	
 	
 	
-	/*마이페이지용 컨트롤러*/
+	/*----마이페이지용 컨트롤러----------------------------------------------------------------*/
+	/*----마이페이지용 컨트롤러----------------------------------------------------------------*/
+	/*----마이페이지용 컨트롤러----------------------------------------------------------------*/
+	
 	@RequestMapping(value="/mypage/freeboard/list")
 	public ModelAndView freeBoardListMyPage(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
@@ -283,7 +286,7 @@ public class FreeBoardController {
 		ArrayList<FreeBoardDTO> files = freSVC.getFile(fno); //첨부파일목록조회
 		PageUtil pInfo = freSVC.getCommPageInfo(fno, commPage);//댓글 페이징
 		ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo);//댓글
-		//freSVC.increaseHit(fno);
+		freSVC.increaseHit(fno, request.getSession());
 		
 		fdto.setFccount(pInfo.getTotalCount());
 		System.out.println("fdto = "+fdto);
@@ -295,7 +298,7 @@ public class FreeBoardController {
 		mv.addObject("COMM",decomm);//댓글
 		
 		//뷰 지정
-		mv.setViewName("common/user/mypage/freeboardDetail");
+		mv.setViewName("common/user/mypage/FBDetail");
 		return mv;
 	}
 	
@@ -350,7 +353,7 @@ public class FreeBoardController {
 			//비즈니스로직
 			freSVC.write(fdto,list);
 			//뷰지정
-			rv.setUrl(request.getContextPath() + "mypage/freeboard/list.com"); 
+			rv.setUrl(request.getContextPath() +"/mypage/freeboard/list.com"); 
 			mv.setView(rv);
 			return mv;
 		}
@@ -389,7 +392,7 @@ public class FreeBoardController {
 			System.out.println("fdto = "+fdto);
 			mv.addObject("DETAIL",fdto);//게시글
 			//뷰 지정
-			mv.setViewName("common/user/mypage/freeboardUpage");
+			mv.setViewName("common/user/mypage/freeboardUpdate");
 			return mv;
 		}
 		
@@ -400,8 +403,8 @@ public class FreeBoardController {
 			System.out.println("FreeBoardController.freeBoardUpdateMyPage" + request.getMethod() + "method");
 			fdto.setFno(fno);
 			System.out.println("fdto = "+fdto);
-			if(fdto.getFiles()!=null) {
-				System.out.println("파일 수정o");
+			if(!fdto.getFiles()[0].getOriginalFilename().equals("")) {
+				System.out.println("파일 수정o"+fdto.getFiles()[0].getOriginalFilename());
 				// - 첨부파일 처리
 				String path="D:\\upload";
 				ArrayList list= new ArrayList();

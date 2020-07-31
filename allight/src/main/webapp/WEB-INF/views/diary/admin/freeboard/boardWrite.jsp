@@ -21,7 +21,7 @@
 		});
 		//목록 버튼 클릭 시
 		$("#list").click(function() {
-			$(location).attr("href","${pageContext.request.contextPath}/freeboard/list.com")
+			$(location).attr("href","${pageContext.request.contextPath}/freeboard/list/admin.com")
 		});
 		
 		var cnt = 1; //첨부파일수를 저장하는 변수
@@ -57,7 +57,7 @@
 </head>
 <body>
 	<form id="form" method="post" enctype = "multipart/form-data"
-	action="${pageContext.request.contextPath}/freeboard/write.com" >
+	action="${pageContext.request.contextPath}/freeboard/write/admin.com" >
 	
 		<div class="container">
 			<div class="boardContent">

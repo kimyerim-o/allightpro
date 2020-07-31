@@ -184,10 +184,25 @@ public class MemberController {
 		
 	//로그인폼
 	@RequestMapping("/login")
-	public ModelAndView log(ModelAndView mv,
+	public ModelAndView log(ModelAndView mv,HttpSession session,RedirectView rv,
 			@RequestParam(value="reUrl", required=false)String reUrl) {
 		mv.addObject("reUrl", reUrl);
-		mv.setViewName("common/loginform");
+		if("fail".equals(session.getAttribute("LoginCheck"))) {
+			rv.setUrl("./LoginCheck.com"); //로그인 체크필터에 걸렸을 때 이동하는 페이지
+			mv.setView(rv);
+		}
+		else {
+			mv.setViewName("common/loginform");
+		}
+		return mv;
+	}
+	
+	@RequestMapping("/LoginCheck")
+	public ModelAndView LoginCheck(
+			ModelAndView mv, HttpSession session,RedirectView rv,
+			@RequestParam(value="reUrl", required=false)String reUrl) {
+		session.setAttribute("LoginCheck","init");
+		mv.setViewName("common/loginformCheck");
 		return mv;
 	}
 	

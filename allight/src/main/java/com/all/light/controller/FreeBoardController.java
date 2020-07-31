@@ -459,6 +459,67 @@ public class FreeBoardController {
 			return mv;
 		}
 		
+		
+		/*----관리자용 컨트롤러----------------------------------------------------------------*/
+		/*----관리자용 컨트롤러----------------------------------------------------------------*/
+		/*----관리자용 컨트롤러----------------------------------------------------------------*/
+		
+		@RequestMapping(value="/freeboard/write/admin", method= RequestMethod.GET)
+		public ModelAndView freeBoardWriteAdminGet(
+				HttpServletRequest request, ModelAndView mv){
+			System.out.println("FreeBoardController.freeBoardWriteAdmin" + request.getMethod() + "method");
+			mv.setViewName("diary/admin/freeboard/boardWrite");
+			return mv;
+		}
+		
+		@RequestMapping(value="/freeboard/write/admin", method= RequestMethod.POST)
+		public ModelAndView freeBoardWriteAdminPost(
+				HttpServletRequest request, ModelAndView mv, RedirectView rv, FreeBoardDTO fdto){
+			System.out.println("FreeBoardController.freeBoardWriteAdmin" + request.getMethod() + "method");
+			String id = (String)request.getSession().getAttribute("MID");
+			String nick = (String)request.getSession().getAttribute("MNICK");
+			//파라미터 전달
+			fdto.setFid(id);
+			fdto.setFnick(nick);
+			
+			// - 첨부파일 처리
+			String path="D:\\upload";
+			ArrayList list= new ArrayList();
+			for(int i=0; i< fdto.getFiles().length ;i++ ) { //파일이 여러 개이니 각각의 파일마다 반복
+				//한 개씩 파일의 실제이름을 알아낸다
+				String oriName = 
+				  fdto.getFiles()[i].getOriginalFilename();
+				//파일이 업로드 되지 않으면 다음 작업을 시도한다
+				if( oriName==null||oriName.length()==0 ) {
+					continue;
+				}
+				String saveName = FileUtil.renameTo(path, oriName);
+				File file= new File(path, saveName);
+				//파일복사 : transferTo()
+				try {
+					fdto.getFiles()[i].transferTo(file);
+				}catch(Exception e) {
+					System.out.println("파일복사관련에러="+e);
+				}
+				//------------ 하나의 파일이 업로드된 상태
+				//업로드된 파일의 정보를 Map으로 묶는다
+				HashMap map = new HashMap();
+				map.put("path",    path);
+				map.put("oriName", oriName);
+				map.put("saveName",saveName);
+				map.put("len", file.length());
+				list.add(map);
+			}//end for
+				
+			System.out.println("파라미터 = "+fdto);
+			//비즈니스로직
+			freSVC.write(fdto,list);
+			//뷰지정
+			rv.setUrl(request.getContextPath()+"/freeboard/list/admin.com"); 
+			mv.setView(rv);
+			return mv;
+		}
+		
 		@RequestMapping(value="/freeboard/list/admin")
 		public ModelAndView freeBoardListAdmin(
 				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
@@ -480,14 +541,139 @@ public class FreeBoardController {
 			mv.addObject("PINFO", pInfo); // 페이징 정보
 			
 			//뷰 지정
-			mv.setViewName("diary/user/freeboard/boardList");
+			mv.setViewName("diary/admin/freeboard/boardList");
 			return mv;
 		}
 		
-		/*----마이페이지용 컨트롤러----------------------------------------------------------------*/
-		/*----마이페이지용 컨트롤러----------------------------------------------------------------*/
-		/*----마이페이지용 컨트롤러----------------------------------------------------------------*/
+		@RequestMapping(value="/freeboard/detail/admin")
+		public ModelAndView freeBoardDetailAdmin(
+				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+				@RequestParam(value = "search", required = false, defaultValue = "") String searchWord,
+				@RequestParam(value = "type", required = false, defaultValue = "fall") String searchType,
+				@RequestParam(value = "ftype", required = false, defaultValue = "") String ftype,
+				@RequestParam(value = "no") int fno,
+				@RequestParam(value = "commPage", required = false, defaultValue = "1") int commPage,
+				HttpServletRequest request, ModelAndView mv){
+			System.out.println("FreeBoardController.freeBoardDetailAdmin" + request.getMethod() + "method");
+			
+			//비즈니스로직
+			FreeBoardDTO fdto=freSVC.detail(fno);//게시글
+			ArrayList<FreeBoardDTO> files = freSVC.getFile(fno); //첨부파일목록조회
+			PageUtil pInfo = freSVC.getCommPageInfo(fno, commPage);//댓글 페이징
+			ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo);//댓글
+			freSVC.increaseHit(fno, request.getSession());
+			
+			fdto.setFccount(pInfo.getTotalCount());
+			System.out.println("fdto = "+fdto);
+			System.out.println("files= "+files);
+			System.out.println("decomm="+decomm);
+			mv.addObject("DETAIL",fdto);//게시글
+			mv.addObject("FILE",files);//이미지파일
+			mv.addObject("PINFO", pInfo); //페이징 정보
+			mv.addObject("COMM",decomm);//댓글
+			
+			//뷰 지정
+			mv.setViewName("diary/admin/freeboard/boardDetail");
+			return mv;
+		}
 		
+		//댓글쓰기
+		@RequestMapping("/freeboard/wcomment/admin")
+		@ResponseBody
+		public String writeCommAdmin(FreeBoardDTO freDTO,HttpSession session) {
+			System.out.println("FreeBoardController.freeBoardCommentWriteAdmin");
+			System.out.println(freDTO);
+			freSVC.insertComm(freDTO);
+			return "ajax";
+		}
+		//댓글삭제
+		@RequestMapping("/freeboard/dcomment/admin")
+		@ResponseBody
+		public String deleteCommAdmin(FreeBoardDTO freDTO) {
+			System.out.println("FreeBoardController.freeBoardCommentDeleteAdmin");
+			System.out.println(freDTO);
+			freSVC.deleteComm(freDTO.getFcno());
+			return "ok";
+		}
 		
+		@RequestMapping(value="/freeboard/update/admin", method= RequestMethod.GET)
+		public ModelAndView freeBoardUpdateAdminGet(
+				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+				@RequestParam(value = "search", required = false, defaultValue = "") String searchWord,
+				@RequestParam(value = "type", required = false, defaultValue = "fall") String searchType,
+				@RequestParam(value = "ftype", required = false, defaultValue = "") String ftype,
+				@RequestParam(value = "no") int fno,
+				HttpServletRequest request, ModelAndView mv){
+			System.out.println("FreeBoardController.freeBoardUpdateAdmin" + request.getMethod() + "method");
+			
+			FreeBoardDTO fdto=freSVC.detail(fno);//게시글
+			System.out.println("fdto = "+fdto);
+			mv.addObject("DETAIL",fdto);//게시글
+			//뷰 지정
+			mv.setViewName("diary/admin/freeboard/boardUpdate");
+			return mv;
+		}
 		
+		@RequestMapping(value="/freeboard/update/admin", method= RequestMethod.POST)
+		public ModelAndView freeBoardUpdateAdminPost(
+				@RequestParam(value = "no") int fno,
+				HttpServletRequest request, ModelAndView mv, RedirectView rv, FreeBoardDTO fdto){
+			System.out.println("FreeBoardController.freeBoardUpdateAdmin" + request.getMethod() + "method");
+			fdto.setFno(fno);
+			System.out.println("fdto = "+fdto);
+			if(!fdto.getFiles()[0].getOriginalFilename().equals("")) {
+				System.out.println("파일 수정o"+fdto.getFiles()[0].getOriginalFilename());
+				// - 첨부파일 처리
+				String path="D:\\upload";
+				ArrayList list= new ArrayList();
+				for(int i=0; i< fdto.getFiles().length ;i++ ) { //파일이 여러 개이니 각각의 파일마다 반복
+					//한 개씩 파일의 실제이름을 알아낸다
+					String oriName = 
+					  fdto.getFiles()[i].getOriginalFilename();
+					//파일이 업로드 되지 않으면 다음 작업을 시도한다
+					if( oriName==null||oriName.length()==0 ) {
+						continue;
+					}
+					String saveName = FileUtil.renameTo(path, oriName);
+					File file= new File(path, saveName);
+					//파일복사 : transferTo()
+					try {
+						fdto.getFiles()[i].transferTo(file);
+					}catch(Exception e) {
+						System.out.println("파일복사관련에러="+e);
+					}
+					//------------ 하나의 파일이 업로드된 상태
+					//업로드된 파일의 정보를 Map으로 묶는다
+					HashMap map = new HashMap();
+					map.put("path",    path);
+					map.put("oriName", oriName);
+					map.put("saveName",saveName);
+					map.put("len", file.length());
+					list.add(map);
+				}//end for
+				freSVC.update(fdto, list);
+			}else {
+				System.out.println("파일 수정x"+fdto.getFiles()[0].getOriginalFilename());
+				freSVC.update(fdto);
+			}
+			System.out.println("fdto = "+fdto);
+			
+			//뷰 지정
+			rv.setUrl(request.getContextPath()+"/freeboard/list/admin.com");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		@RequestMapping(value="/freeboard/delete/admin")
+		public ModelAndView freeBoardDeleteAdmin(
+				@RequestParam(value = "no") int fno, HttpServletRequest request, ModelAndView mv, RedirectView rv,
+				FreeBoardDTO freDTO){
+			System.out.println("FreeBoardController.freeBoardDeleteAdmin " + request.getMethod() + "method");
+			freDTO.setFno(fno);
+			System.out.println(freDTO);
+			freSVC.delete(freDTO);
+			rv.setUrl(request.getContextPath()+"/freeboard/list.admin.com");
+			mv.setView(rv);
+			return mv;
+		}
 }

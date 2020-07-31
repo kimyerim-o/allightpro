@@ -9,30 +9,18 @@
 <script>
 	$(function() {
 		//확인 버튼 클릭 시
-		$("#update")
-				.click(
-						function() {
-							$("#form")
-									.attr("action",
-											"${pageContext.request.contextPath}/freeboard/update.com?no=${DETAIL.fno}");
-							$("#form").submit();
-						});
+		$("#update").click(function() {
+			$("#form").attr("action", "${pageContext.request.contextPath}/freeboard/update.com?no=${DETAIL.fno}");
+			$("#form").submit();
+		});
 		//목록 버튼 클릭 시
-		$("#list")
-				.click(
-						function() {
-							$(location)
-									.attr("href",
-											"${pageContext.request.contextPath}/freeboard/list.com")
-						});
+		$("#list").click(function() {
+			$(location).attr("href","${pageContext.request.contextPath}/freeboard/list.com")
+		});
 		//취소 버튼 클릭 시
-		$("#back")
-				.click(
-						function() {
-							$(location)
-									.attr("href",
-											"${pageContext.request.contextPath}/freeboard/detail.com?no=${DETAIL.fno}");
-						});
+		$("#back").click(function() {
+			$(location).attr("href","${pageContext.request.contextPath}/freeboard/detail.com?no=${DETAIL.fno}");
+		});
 		
 		var cnt = 1; //첨부파일수를 저장하는 변수
 		//추가버튼 클릭시  첨부파일 동적으로 (최대 5개)추가 

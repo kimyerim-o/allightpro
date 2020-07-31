@@ -20,7 +20,7 @@
 <body>
 	<div class="container">
 	<form id="sFrm" method="get"
-		action="<%=request.getContextPath()%>/freeboard/list.com">
+		action="<%=request.getContextPath()%>/freeboard/list/admin.com">
 		<div class="searchDiv">
 		<select name="ftype" class="selectCss">
 			<c:if test="${param.ftype=='' || param.ftype eq null}">
@@ -68,7 +68,7 @@
 			</select>
 			<input type="text" id="search" name="search" placeholder="검색어를 입력하세요" value="${param.search}"/> 
 			<input type="submit" value="검색" onclick="return checkForm();"/>
-			<a href="<%=request.getContextPath()%>/freeboard/list.com"><input type="button" value="초기화"/></a>
+			<a href="<%=request.getContextPath()%>/freeboard/list/admin.com"><input type="button" value="초기화"/></a>
 		</div>
 		</form>
 		<table class="table">
@@ -84,7 +84,7 @@
 					<td class="center">${list.fno}</td>
 					<td class="center">${list.fnick}</td>
 					<td class="center"><a
-						href="${pageContext.request.contextPath}/freeboard/detail.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage}&no=${list.fno}">
+						href="${pageContext.request.contextPath}/freeboard/detail/admin.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage}&no=${list.fno}">
 							[${list.ftype}] ${list.ftitle}</a></td>
 					<td class="center"><fmt:formatDate value="${list.fdate}" pattern="yyyy-MM-dd HH시 mm분"/></td>
 					<td class="center">${list.fhit}</td>
@@ -95,31 +95,31 @@
 			<tr ><td rowspan="5">게시물이 없습니다.</td></tr>
 		</c:if>
 		<div class="right">
-			<a href="<%=request.getContextPath() %>/freeboard/write.com" class="btn">글쓰기</a>
+			<a href="<%=request.getContextPath() %>/freeboard/write/admin.com" class="btn">글쓰기</a>
 		</div>
 
 		<div class="center">
 			<ul class="pagination">
 				<li><c:if test="${PINFO.nowPage > 3}">
 						<a
-							href="${pageContext.request.contextPath}/freeboard/list.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>
+							href="${pageContext.request.contextPath}/freeboard/list/admin.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>
 					</c:if> <c:if test="${PINFO.nowPage <= 3}">
 						<a
-							href="${pageContext.request.contextPath}/freeboard/list.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=1">«</a>
+							href="${pageContext.request.contextPath}/freeboard/list/admin.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=1">«</a>
 					</c:if></li>
 				<!-- 현재 페이지일때 active -->
 				<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
 					<li id="li">
 						<!-- 스크립트 적용해야 할것같아요 --> <a
-						href="${pageContext.request.contextPath}/freeboard/list.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${i}">${i}</a>
+						href="${pageContext.request.contextPath}/freeboard/list/admin.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${i}">${i}</a>
 					</li>
 				</c:forEach>
 				<li><c:if test="${PINFO.nowPage < PINFO.endPage-3}">
 						<a
-							href="${pageContext.request.contextPath}/freeboard/list.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage+3}">»</a>
+							href="${pageContext.request.contextPath}/freeboard/list/admin.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage+3}">»</a>
 					</c:if> <c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
 						<a
-							href="${pageContext.request.contextPath}/freeboard/list.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.endPage}">»</a>
+							href="${pageContext.request.contextPath}/freeboard/list/admin.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.endPage}">»</a>
 					</c:if></li>
 			</ul>
 		</div>

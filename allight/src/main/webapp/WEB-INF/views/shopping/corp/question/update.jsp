@@ -10,14 +10,19 @@
 <script>
 	$(function() {
 		//확인 버튼 클릭 시
-		$("#update")
-				.click(
-						function() {
-							$("#form")
-									.attr("action",
-											"${pageContext.request.contextPath}/question/up/corp.com");
-							$("#form").submit();
-						});
+		$("#update").click(function() {
+				if($('#qtitle').val()==null || $('#qtitle').val() == ""){
+					alert("제목을 작성해주세요.")
+					return false;
+				}
+				if($('#qcontent').val()==null || $('#qcontent').val() == ""){
+					alert("내용을 작성해주세요.")
+					return false;
+				}
+				$("#form").attr("action","${pageContext.request.contextPath}/question/up/corp.com");
+				$("#form").submit();
+			
+		});
 		//목록 버튼 클릭 시
 		$("#list")
 				.click(
@@ -55,8 +60,8 @@
 				<table>
 					<tr>
 						<td class="board-title">제목</td>
-						<td class="board-title" colspan="3"><input type="search"
-							value="${DETAIL.qtitle}" name="qtitle"></td>
+						<td class="board-title" colspan="3"><input type="search" id="qtitle"
+							value="${DETAIL.qtitle}" name="qtitle" required="required"></td>
 					</tr>
 					<tr>
 						<td class="board-info"><a class="board-info-nick">작성자</a></td>
@@ -70,7 +75,7 @@
 							<div class="board-content-div">
 								내용 <br />
 								<br />
-								<textarea rows="12" cols="100" name="qcontent"
+								<textarea rows="12" cols="100" name="qcontent" id="qcontent"
 									required="required" placeholder="내용을 입력하세요">${DETAIL.qcontent}</textarea>
 							</div>
 						</td>

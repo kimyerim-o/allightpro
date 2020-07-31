@@ -10,6 +10,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.CaldictionaryDTO;
+import com.all.light.dto.CalrecipeDTO;
 import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
@@ -285,6 +286,28 @@ public class DiaryDAO extends SqlSessionDaoSupport {
 
 	public ArrayList getchart(DiaryDTO ddto) {
 		return (ArrayList)session.selectList("diary.getchart", ddto);
+	}
+
+	//calrecipe
+	public CalrecipeDTO calrecipe(DiaryDTO diary) {
+		int dno=diary.getDno();
+		CalrecipeDTO cdto=session.selectOne("diary.calrecipe", diary);
+		System.out.println(cdto);
+		if(cdto!=null) {
+			cdto.setAge(dno);
+			session.update("diary.recipeup", cdto);
+		}
+		return cdto;
+	}
+
+
+	public void success(DiaryDTO diary) {
+		session.update("diary.success",diary);
+	}
+
+
+	public List<DiaryDTO> getrate(String mid) {
+		return session.selectList("diary.getrate", mid);
 	}
 	
 	

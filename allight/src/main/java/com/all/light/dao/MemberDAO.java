@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.AddressDTO;
+import com.all.light.dto.CalrecipeDTO;
 import com.all.light.dto.MemberDTO;
 import com.all.light.util.PageUtil;
 
@@ -132,6 +133,10 @@ public class MemberDAO extends SqlSessionDaoSupport {
 	public void addressdelete(AddressDTO aDTO) {
 		System.out.println("배송지 삭제하기");
 		session.delete("member.memaddressdelete", aDTO);
+	}
+
+	public CalrecipeDTO getRecipe(String mid) {
+		return session.selectOne("calrecipe.getRecipe", mid);
 	}
 
 

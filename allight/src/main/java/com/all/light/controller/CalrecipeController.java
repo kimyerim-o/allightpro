@@ -17,7 +17,7 @@ public class CalrecipeController {
 	@Autowired
 	private CalrecipeService creSVC;
 	
-	//칼로리처방1
+	//칼로리처방
 	@RequestMapping("/calorie_recipe")
 	public ModelAndView recipe(ModelAndView mv,HttpSession session,MemberDTO mdto) {
 		if (session.getAttribute("MNO")!=null) {

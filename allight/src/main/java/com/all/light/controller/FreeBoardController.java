@@ -78,7 +78,7 @@ public class FreeBoardController {
 		//비즈니스로직
 		freSVC.write(fdto,list);
 		//뷰지정
-		rv.setUrl(request.getContextPath()+"/mypage/freeboard/list.com"); 
+		rv.setUrl(request.getContextPath()+"/freeboard/list.com"); 
 		mv.setView(rv);
 		return mv;
 	}
@@ -459,4 +459,28 @@ public class FreeBoardController {
 			return mv;
 		}
 		
+		@RequestMapping(value="/freeboard/list/admin")
+		public ModelAndView freeBoardListAdmin(
+				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+				@RequestParam(value = "search", required = false, defaultValue = "") String searchWord,
+				@RequestParam(value = "type", required = false, defaultValue = "fall") String searchType,
+				@RequestParam(value = "ftype", required = false, defaultValue = "") String ftype,
+				HttpServletRequest request, ModelAndView mv){
+			System.out.println("FreeBoardController.freeBoardListAdmin" + request.getMethod() + "method");
+			
+			//비즈니스로직
+			PageUtil pInfo = freSVC.getPageInfo(nowPage, searchWord, searchType, ftype);
+			ArrayList<FreeBoardDTO> map = freSVC.searchList(pInfo, searchWord, searchType, ftype);
+
+			System.out.println("list = " + map.toString());
+			System.out.println("pinfo = " + pInfo.toString());
+			
+			//모델
+			mv.addObject("LIST", map); // 공지 리스트
+			mv.addObject("PINFO", pInfo); // 페이징 정보
+			
+			//뷰 지정
+			mv.setViewName("diary/user/freeboard/boardList");
+			return mv;
+		}
 }

@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	System.out.println("corporation.jsp");
-%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +57,7 @@
 					<td>${corp.COID}</td>
 					<td>${corp.CONAME}</td>
 					<td>${corp.COTEL}</td>
-					<td>${corp.COJOINDATE}</td>
+					<td><fmt:formatDate value="${corp.COJOINDATE}" pattern="yyyy-MM-dd"/></td>
 					<td><a
 						href="<%=request.getContextPath()%>/corporation/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.CONO}">
 							<input type="button" id="modMem" value="수정">

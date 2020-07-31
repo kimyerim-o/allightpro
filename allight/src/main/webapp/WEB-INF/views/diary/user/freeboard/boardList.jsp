@@ -65,7 +65,8 @@
 				<option value="fcontent">내용</option>
 				<option value="fnick" selected>작성자</option>
 			</c:if>
-			</select> <input type="text" id="search" name="search" placeholder="검색어를 입력하세요" value="${param.search}"/> 
+			</select>
+			<input type="text" id="search" name="search" placeholder="검색어를 입력하세요" value="${param.search}"/> 
 			<input type="submit" value="검색" onclick="return checkForm();"/>
 			<a href="<%=request.getContextPath()%>/freeboard/list.com"><input type="button" value="초기화"/></a>
 		</div>

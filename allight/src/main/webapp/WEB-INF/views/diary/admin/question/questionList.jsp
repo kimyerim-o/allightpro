@@ -7,67 +7,34 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-	$(function(){
-		//검색
-		$("#searb").click(function(){
-			var form = $("#searchF").serialize();
-			  $.ajax({
-		            url : "${pageContext.request.contextPath}/question/search/admin.com",
-		            type : 'get', 
-		            data : form, 
-		            success : function(data) {
-		            	alert(form);
-		            	location.href = "${pageContext.request.contextPath}/question/search/admin.com?"+form;
-		            },
-		            error : function(xhr, status) {
-		                alert(xhr + " : " + status);
-		            }
-		        }); 
-			});
-		});
+function checkForm() {
+	if (document.getElementById("search").value == "") {
+		alert("검색어를 입력해주세요")
+		return false;
+	}
+}
 </script>
 </head>
 <body>
 	<div class="container">
 		<div class="searchDiv">
-			<!-- 검색전 -->
-			<c:if test="${empty param.type}">
-			<form id="searchF">
+			<form id="searchForm" action="<%=request.getContextPath()%>/question/list/user/admin.com" method="GET">
+				<c:if test="${param.type eq 'qtitle' || param.type eq null}">
 				<select name="type" class="selectCss">
-					<option value="title">제목</option>
-					<option value="id">작성자</option>
-				</select>
-				<div class="shopSearchDiv">
-				    <input type="text" name="word" class="shopTxt" required="required"/>
-				    <button type="button" id="searb" class="shopBtn">
-				    	<img src="${pageContext.request.contextPath}/resources/img/search.png" class="shopSearchImg"/>
-			    	</button>
-		    	</div>
-	    	</form>
-	    	</c:if>
-	    	<!-- 검색후 -->
-	    	<c:if test="${!empty param.type}">
-			<form id="searchF">
-				<c:if test="${param.type eq 'title'}">
-				<select name="type" class="selectCss">
-					<option value="title" selected="selected">제목</option>
-					<option value="id">작성자</option>
+					<option value="qtitle" selected>제목</option>
+					<option value="qid">작성자</option>
 				</select>
 				</c:if>
-				<c:if test="${param.type eq 'id'}">
+				<c:if test="${param.type eq 'qid'}">
 				<select name="type" class="selectCss">
-					<option value="title">제목</option>
-					<option value="id" selected="selected">작성자</option>
+					<option value="qtitle">제목</option>
+					<option value="qid" selected>작성자</option>
 				</select>
 				</c:if>
-				<div class="shopSearchDiv">
-				    <input type="text" name="word" class="shopTxt" value="${param.word}" required="required"/>
-				    <button type="button" id="searb" class="shopBtn">
-				    	<img src="${pageContext.request.contextPath}/resources/img/search.png" class="shopSearchImg"/>
-			    	</button>
-		    	</div>
+			<input type="text" id="search" name="search" placeholder="검색어를 입력하세요" value="${param.search}"/> 
+			<input type="submit" value="검색" onclick="return checkForm();"/>
+			<a href="<%=request.getContextPath()%>/question/list/user/admin.com"><input type="button" value="초기화"/></a>
 	    	</form>
-	    	</c:if>
 		</div>
 		<table class="table">
 			<tr>

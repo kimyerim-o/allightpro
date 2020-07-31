@@ -16,8 +16,8 @@
 				<td><input type="text" id="ntitle" name="ntitle" value="${LIST.ntitle }"/></td>
 			</tr>
 			<tr>
-				<td>내용 :</td>
-				<td><textarea width="80%" height="50%" id="ncontent" name="ncontent" value="${LIST.ncontent }"></textarea></td>
+				<td>내용 : </td>
+				<td><textarea rows="12" cols="100" name="fcontent"	required="required" placeholder="내용을 입력하세요">${LIST.ncontent}</textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center"><input type="submit"

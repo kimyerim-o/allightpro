@@ -45,25 +45,16 @@
 				<option value="fall" selected>제목+내용</option>
 				<option value="ftitle">제목</option>
 				<option value="fcontent">내용</option>
-				<option value="fnick">작성자</option>
 			</c:if>
 			<c:if test="${param.type=='ftitle'}">
 				<option value="fall" >제목+내용</option>
 				<option value="ftitle"selected>제목</option>
 				<option value="fcontent">내용</option>
-				<option value="fnick">작성자</option>
 			</c:if>
 			<c:if test="${param.type=='fcontent'}">
 				<option value="fall" >제목+내용</option>
 				<option value="ftitle">제목</option>
 				<option value="fcontent" selected>내용</option>
-				<option value="fnick">작성자</option>
-			</c:if>
-			<c:if test="${param.type=='fnick'}">
-				<option value="fall" >제목+내용</option>
-				<option value="ftitle">제목</option>
-				<option value="fcontent">내용</option>
-				<option value="fnick" selected>작성자</option>
 			</c:if>
 			</select> <input type="text" id="search" name="search" placeholder="검색어를 입력하세요" value="${param.search}"/> 
 			<input type="submit" value="검색" onclick="return checkForm();"/>

@@ -1,5 +1,6 @@
 package com.all.light.dto;
 
+import java.sql.Date;
 import java.util.Arrays;
 
 public class CorporationDTO {
@@ -11,6 +12,17 @@ public class CorporationDTO {
 	private String coemail;
 	private String[] arr;
 	private String auto;
+	private Date cojoindate;
+	
+
+
+	public Date getCojoindate() {
+		return cojoindate;
+	}
+
+	public void setCojoindate(Date cojoindate) {
+		this.cojoindate = cojoindate;
+	}
 
 	public int getCono() {
 		return cono;
@@ -68,10 +80,13 @@ public class CorporationDTO {
 		this.arr = arr;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "CorporationDTO [cono=" + cono + ", coid=" + coid + ", copw=" + copw + ", coname=" + coname + ", cotel="
-				+ cotel + ", coemail=" + coemail + ", arr=" + Arrays.toString(arr) + "]";
+				+ cotel + ", coemail=" + coemail + ", arr=" + Arrays.toString(arr) + ", auto=" + auto + ", joindate="
+				+ cojoindate + "]";
 	}
 
 	public String getAuto() {

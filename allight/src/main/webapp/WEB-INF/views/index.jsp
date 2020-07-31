@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
 function myFAE(day,dno){
@@ -24,6 +25,18 @@ function myFAE(day,dno){
 	}
 };
 
+function chart(yy,mon){
+	if(${!empty sessionScope.MID}){
+		location.href='./chart.com?yy='+yy+'&mon='+mon;
+	}else{
+		if(${!empty sessionScope.COID}){
+			alert('일반회원만 사용가능한 서비스입니다.')
+		}else if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
+			location.href = "./login.com";
+		}
+	}
+};
+
 </script>
 
 </head>
@@ -31,7 +44,7 @@ function myFAE(day,dno){
 <body>
 <div id="wrap">
 	<a class="title">다이어리 <%=session.getAttribute("MID") %> / <%=session.getAttribute("COID") %>
-		<input type="button" value="월별 다이어트 추이  &gt;" class="goto" onclick="location.href='./chart.com'" />
+		<input type="button" value="월별 다이어트 추이  &gt;" class="goto" onclick="chart(${today_info.search_year},${today_info.search_month});" />
 	</a>
 	
 	<form name="calendarFrm" id="calendarFrm" action="" method="GET">

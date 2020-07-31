@@ -283,9 +283,8 @@ public class DiaryDAO extends SqlSessionDaoSupport {
 	}
 
 
-	public ArrayList kgchart(String mid) {
-		System.out.println("DAO, mid = " + mid);
-		return (ArrayList)session.selectList("diary.kgchart", mid);
+	public ArrayList getchart(DiaryDTO ddto) {
+		return (ArrayList)session.selectList("diary.getchart", ddto);
 	}
 	
 	

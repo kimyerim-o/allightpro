@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.all.light.dao.DiaryDAO;
 import com.all.light.dto.CaldictionaryDTO;
 import com.all.light.dto.DiaryDTO;
-import com.all.light.dto.KgDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
 
@@ -308,12 +307,9 @@ public class DiaryService {
 		diaDAO.myImgDelete(dno);
 	}
 
-	
-	
 	// kg 그래프
-	public ArrayList<KgDTO> getkgchart(String mid) {
-		System.out.println("서비스 getkgchart() mid = " + mid);
-		ArrayList<KgDTO> list = diaDAO.kgchart(mid);	
+	public ArrayList<DiaryDTO> getchart(DiaryDTO ddto) {
+		ArrayList<DiaryDTO> list = diaDAO.getchart(ddto);
 		return list;
 	}
 	

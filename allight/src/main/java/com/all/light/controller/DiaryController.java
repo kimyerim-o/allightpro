@@ -22,7 +22,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CaldictionaryDTO;
 import com.all.light.dto.DiaryDTO;
-import com.all.light.dto.KgDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
 import com.all.light.service.DiaryService;
@@ -547,20 +546,15 @@ public class DiaryController {
 	
 	// 그래프
 	@RequestMapping("/chart")
-	public ModelAndView chart2(
-		 ModelAndView mv, HttpSession session){
-
-		System.out.println("컨트롤러 상품 목록보기 - chart2() 요청");
-		System.out.println("컨트롤러 상품 목록보기 - chart2() 요청 session=" + session);
-		System.out.println(session.getAttribute("MID"));
-		String mid = (String)session.getAttribute("MID");
-		
-		ArrayList<KgDTO> list = diaSVC.getkgchart(mid);
+	public ModelAndView weightchart(@RequestParam(value="yy", required = false) String yy,
+			@RequestParam(value="mon", required = false) String mon,DiaryDTO ddto,ModelAndView mv, HttpSession session){
+		ddto.setYear(yy);
+		ddto.setMonth(mon);
+		ddto.setMid((String)session.getAttribute("MID"));
+		ArrayList<DiaryDTO> list = diaSVC.getchart(ddto);
+		System.out.println(list);
 		mv.addObject("LIST", list);		// 실제 조회 목록
-		mv.setViewName("/diary/user/graphy/chart2");
-		
-		System.out.println("컨트롤러 상품 목록보기 - list = " + list);
-		System.out.println("컨트롤러 상품 목록보기 - mv = " + mv);
+		mv.setViewName("/diary/user/graphy/weightchart");
 		return mv;
 	}
 	

@@ -100,6 +100,7 @@
 			$('#reUrlFrm').submit();
 		}
 	}
+	}
 
 </script>
 </head>

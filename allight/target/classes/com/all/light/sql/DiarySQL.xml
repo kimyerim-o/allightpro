@@ -194,11 +194,10 @@
 		where dno = #{dno}
 	</update>
 	
-	<!-- 차트정보 추출 -->
-	<select id="kgchart" resultType="kgDTO" parameterType="kgDTO">
-		select mid, to_char(ddate, 'DD') as ddate, dweight from diary
-		where mid = #{mid}
-		order by ddate
+	<!--차트정보 추출 -->
+	<select id="getchart" resultType="diaryDTO" parameterType="diaryDTO">
+	select mid, to_char(ddate, 'DD') as day, dweight,dexercal,dfoodcal from (select diary.*,EXTRACT(MONTH FROM ddate) as mm,EXTRACT(YEAR FROM ddate) as yy from diary) 
+	where mid = #{mid} and mm=#{month} and yy=#{year} order by day
 	</select>
 
 	

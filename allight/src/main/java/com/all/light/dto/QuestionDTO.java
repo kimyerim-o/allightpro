@@ -6,6 +6,7 @@ public class QuestionDTO {
 	private int qno;
 	private String qtitle;
 	private String qid;
+	private String qnick;
 	private Date qdate;
 	private String qcontent;
 	private int qtype;
@@ -17,6 +18,13 @@ public class QuestionDTO {
 	private int qcount;
 	
 	
+	
+	public String getQnick() {
+		return qnick;
+	}
+	public void setQnick(String qnick) {
+		this.qnick = qnick;
+	}
 	public String getQcnick() {
 		return qcnick;
 	}
@@ -91,8 +99,10 @@ public class QuestionDTO {
 	}
 	@Override
 	public String toString() {
-		return "QuestionDTO [qno=" + qno + ", qtitle=" + qtitle + ", qid=" + qid + ", qdate=" + qdate + ", qcontent="
-				+ qcontent + ", qtype=" + qtype + ", qcno=" + qcno + ", qcid=" + qcid + ", qcnick=" + qcnick
-				+ ", qccontent=" + qccontent + ", qcdate=" + qcdate + ", qcount=" + qcount + "]";
+		return "QuestionDTO [qno=" + qno + ", qtitle=" + qtitle + ", qid=" + qid + ", qnick=" + qnick + ", qdate="
+				+ qdate + ", qcontent=" + qcontent + ", qtype=" + qtype + ", qcno=" + qcno + ", qcid=" + qcid
+				+ ", qcnick=" + qcnick + ", qccontent=" + qccontent + ", qcdate=" + qcdate + ", qcount=" + qcount + "]";
 	}
+
+	
 }

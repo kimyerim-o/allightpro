@@ -97,6 +97,7 @@ public class QuestionService {
 	//유저
 	public void userInsertWrite(QuestionDTO qdto, HttpSession session) {
 		qdto.setQid((String)session.getAttribute("MID"));
+		qdto.setQnick((String)session.getAttribute("MNICK"));
 		qesDAO.userInsert(qdto);
 	}
 

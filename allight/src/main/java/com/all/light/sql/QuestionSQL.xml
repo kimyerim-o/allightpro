@@ -123,7 +123,7 @@
 	<!-- 글쓰기 -->
 	<insert id="userInsert" parameterType="queDTO">
 		insert into question
-		values(qno_seq.nextval,#{qtitle},#{qid},sysdate,#{qcontent},#{qtype})
+		values(qno_seq.nextval,#{qtitle},#{qid},sysdate,#{qcontent},#{qtype}, #{qnick})
 	</insert>
 
 	<!-- 게시물 수 찾기 -->

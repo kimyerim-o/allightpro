@@ -22,7 +22,7 @@ public class FreeBoardDTO {
 	private String fcid;
 	private String fcnick;
 	private String fccontent;
-	private String fcdate;
+	private Date fcdate;
 	private int fccount;
 	// 자유게시판 댓글 좋아요DB
 	private String flno;
@@ -181,11 +181,12 @@ public class FreeBoardDTO {
 		this.fccontent = fccontent;
 	}
 
-	public String getFcdate() {
+
+	public Date getFcdate() {
 		return fcdate;
 	}
 
-	public void setFcdate(String fcdate) {
+	public void setFcdate(Date fcdate) {
 		this.fcdate = fcdate;
 	}
 

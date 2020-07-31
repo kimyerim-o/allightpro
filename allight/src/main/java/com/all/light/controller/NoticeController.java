@@ -172,7 +172,7 @@ public class NoticeController {
 		// 비즈니스로직
 		notSVC.notModify(notDTO);
 
-		rv.setUrl(request.getContextPath() + "/noticedetail.com?nno=" + notDTO.getNno());
+		rv.setUrl(request.getContextPath() + "/notice/detail.com?nno=" + notDTO.getNno());
 		mv.setView(rv);
 		return mv;
 	}

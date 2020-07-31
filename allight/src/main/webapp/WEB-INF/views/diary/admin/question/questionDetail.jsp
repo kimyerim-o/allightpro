@@ -21,6 +21,14 @@
 			$(location).attr("href","${pageContext.request.contextPath}/question/list/user/admin.com")
 		});
 		
+		//댓글 창 엔터처리
+		$("#qccontent").keypress(function(e){
+			var code = e.keyCode ? e.keyCode : e.which; 
+			if (code == 13){ // EnterKey 
+				$('#wcomm').click();
+			}
+		});
+		
 		//댓글쓰기 
 		$("#wcomm").click(function(){
 			if($("#qccontent").val()==""){
@@ -104,8 +112,8 @@
 			<div class="boardContent-Comment">
 				<div class="boardContent-Comment-input">
 					<form style="text-align: left">
-						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자 : ${sessionScope.MNICK}</a>&nbsp;&nbsp; 
-								<a class="board-info-others">&nbsp;&nbsp; </a></a>
+						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자 </a>&nbsp;&nbsp; 
+								<a class="board-info-others">${sessionScope.MNICK}<br></a></a>
 						<input type="hidden" id="qcid" value="${sessionScope.MID}"/>
 						<input type="textarea" class="input" id="qccontent" placeholder="댓글을 입력하세요" /> 
 						<input type="button" class="button" id="wcomm" value="등록" />

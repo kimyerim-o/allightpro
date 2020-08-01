@@ -116,14 +116,14 @@ public class FreeBoardController {
 			@RequestParam(value = "ftype", required = false, defaultValue = "") String ftype,
 			@RequestParam(value = "no") int fno,
 			@RequestParam(value = "commPage", required = false, defaultValue = "1") int commPage,
-			HttpServletRequest request, ModelAndView mv){
+			HttpServletRequest request,HttpSession session, ModelAndView mv){
 		System.out.println("FreeBoardController.freeBoardDetail" + request.getMethod() + "method");
 		
 		//비즈니스로직
 		FreeBoardDTO fdto=freSVC.detail(fno);//게시글
 		ArrayList<FreeBoardDTO> files = freSVC.getFile(fno); //첨부파일목록조회
 		PageUtil pInfo = freSVC.getCommPageInfo(fno, commPage);//댓글 페이징
-		ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo);//댓글
+		ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo,session);//댓글
 		freSVC.increaseHit(fno, request.getSession());
 		
 		fdto.setFccount(pInfo.getTotalCount());
@@ -279,13 +279,13 @@ public class FreeBoardController {
 			@RequestParam(value = "ftype", required = false, defaultValue = "") String ftype,
 			@RequestParam(value = "no") int fno,
 			@RequestParam(value = "commPage", required = false, defaultValue = "1") int commPage,
-			HttpServletRequest request, ModelAndView mv){
+			HttpServletRequest request,HttpSession session, ModelAndView mv){
 		System.out.println("FreeBoardController.freeBoardDetailMyPage" + request.getMethod() + "method");
 		//비즈니스로직
 		FreeBoardDTO fdto=freSVC.detail(fno);//게시글
 		ArrayList<FreeBoardDTO> files = freSVC.getFile(fno); //첨부파일목록조회
 		PageUtil pInfo = freSVC.getCommPageInfo(fno, commPage);//댓글 페이징
-		ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo);//댓글
+		ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo,session);//댓글
 		freSVC.increaseHit(fno, request.getSession());
 		
 		fdto.setFccount(pInfo.getTotalCount());
@@ -553,14 +553,14 @@ public class FreeBoardController {
 				@RequestParam(value = "ftype", required = false, defaultValue = "") String ftype,
 				@RequestParam(value = "no") int fno,
 				@RequestParam(value = "commPage", required = false, defaultValue = "1") int commPage,
-				HttpServletRequest request, ModelAndView mv){
+				HttpServletRequest request,HttpSession session, ModelAndView mv){
 			System.out.println("FreeBoardController.freeBoardDetailAdmin" + request.getMethod() + "method");
 			
 			//비즈니스로직
 			FreeBoardDTO fdto=freSVC.detail(fno);//게시글
 			ArrayList<FreeBoardDTO> files = freSVC.getFile(fno); //첨부파일목록조회
 			PageUtil pInfo = freSVC.getCommPageInfo(fno, commPage);//댓글 페이징
-			ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo);//댓글
+			ArrayList<FreeBoardDTO> decomm=freSVC.getCommDetail(pInfo,session);//댓글
 			freSVC.increaseHit(fno, request.getSession());
 			
 			fdto.setFccount(pInfo.getTotalCount());
@@ -676,4 +676,115 @@ public class FreeBoardController {
 			mv.setView(rv);
 			return mv;
 		}
+		
+		// 좋아요 처리
+		@RequestMapping("/freeboard/like")
+		public ModelAndView Like(
+				ModelAndView mv,@RequestParam(value = "no") int fno,
+				@RequestParam(value = "commPage", required = false, defaultValue = "1") int commPage,
+				@RequestParam(value = "num", required = false) int fcno,
+				HttpSession session
+				) {
+			System.out.println("ShoppingController-reviewLike()");
+			
+			String mid = (String)session.getAttribute("MID");
+			
+			if(mid==null) {
+				System.out.println("mid널");
+				RedirectView rv = new RedirectView("./detail.com?no="+fno+"&commPage="+commPage+"&num="+fcno);
+				mv.setView(rv);
+				return mv;
+			}
+			
+			//번호가 없으면 리스트로 돌려보내기
+			if(fcno==0) {
+				System.out.println("fcno 0");
+				RedirectView rv = new RedirectView("./list.com");
+				mv.setView(rv);
+				return mv;
+			}
+			
+			//해당 리뷰넘버에 이 아이디의 좋아요가 있으면 좋아요 삭제
+			//해당 리뷰넘버에 이 아이디의 좋아요가 없으면 좋아요 생성
+			freSVC.like(fcno,mid);
+			
+			// View
+			RedirectView rv = new RedirectView("./detail.com?no="+fno+"&commPage="+commPage);
+			mv.setView(rv);
+			return mv;
+		} 
+		
+		//마이페이지 리뷰 좋아요 처리
+		@RequestMapping("/mypage/freeboard/like")
+		public ModelAndView MyLike(
+				ModelAndView mv,@RequestParam(value = "no") int fno,
+				@RequestParam(value = "commPage", required = false, defaultValue = "1") int commPage,
+				@RequestParam(value = "num", required = false) int fcno,
+				HttpSession session
+				) {
+			System.out.println("ShoppingController-reviewLike()");
+			
+			String mid = (String)session.getAttribute("MID");
+			
+			if(mid==null) {
+				System.out.println("mid널");
+				RedirectView rv = new RedirectView("./detail.com?no="+fno+"&commPage="+commPage+"&num="+fcno);
+				mv.setView(rv);
+				return mv;
+			}
+			
+			//번호가 없으면 리스트로 돌려보내기
+			if(fcno==0) {
+				System.out.println("fcno 0");
+				RedirectView rv = new RedirectView("./list.com");
+				mv.setView(rv);
+				return mv;
+			}
+			
+			//해당 리뷰넘버에 이 아이디의 좋아요가 있으면 좋아요 삭제
+			//해당 리뷰넘버에 이 아이디의 좋아요가 없으면 좋아요 생성
+			freSVC.like(fcno,mid);
+			
+			// View
+			RedirectView rv = new RedirectView("./detail.com?no="+fno+"&commPage="+commPage);
+			mv.setView(rv);
+			return mv;
+		} 
+		
+		//마이페이지 리뷰 좋아요 처리
+		@RequestMapping("/freeboard/like/admin")
+		public ModelAndView AdminLike(
+				ModelAndView mv,@RequestParam(value = "no") int fno,
+				@RequestParam(value = "commPage", required = false, defaultValue = "1") int commPage,
+				@RequestParam(value = "num", required = false) int fcno,
+				HttpSession session
+				) {
+			System.out.println("ShoppingController-reviewLike()");
+			
+			String mid = (String)session.getAttribute("MID");
+			
+			if(mid==null) {
+				System.out.println("mid널");
+				RedirectView rv = new RedirectView("../detail/admin.com?no="+fno+"&commPage="+commPage+"&num="+fcno);
+				mv.setView(rv);
+				return mv;
+			}
+			
+			//번호가 없으면 리스트로 돌려보내기
+			if(fcno==0) {
+				System.out.println("fcno 0");
+				RedirectView rv = new RedirectView("../list/admin.com");
+				mv.setView(rv);
+				return mv;
+			}
+			
+			//해당 리뷰넘버에 이 아이디의 좋아요가 있으면 좋아요 삭제
+			//해당 리뷰넘버에 이 아이디의 좋아요가 없으면 좋아요 생성
+			freSVC.like(fcno,mid);
+			
+			// View
+			RedirectView rv = new RedirectView("../detail/admin.com?no="+fno+"&commPage="+commPage);
+			mv.setView(rv);
+			return mv;
+		} 
 }

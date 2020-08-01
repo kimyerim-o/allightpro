@@ -283,6 +283,7 @@ Highcharts.chart('container4', {
 	  series: [{
 	    name: 'Success Rate',
 	    type: 'column',
+	    color:'#FF7289',
 	    yAxis: 0,
 	    data: [<c:forEach var="rate" items="${RATE}">${rate.value},</c:forEach>],
 	    tooltip: {

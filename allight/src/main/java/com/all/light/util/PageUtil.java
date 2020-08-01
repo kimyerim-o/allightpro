@@ -36,7 +36,7 @@ public class PageUtil {
 	private int fno; //(자유게시판 댓글 출력용)
 	
 	public PageUtil(int nowPage, int totalCount) {
-		this(nowPage, totalCount, 5, 5);
+		this(nowPage, totalCount, 2, 5);
 	}
 	
 	public PageUtil(int nowPage, int totalCount, int lineCount, int pageGroup) {

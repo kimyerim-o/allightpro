@@ -162,19 +162,35 @@
 						</c:if>
 						<c:forEach items="${COMM}" var="c">
 							<tr>
-								<td colspan="100%" class="board-comment-info"><a
-									class="board-info-nick">${c.fcid}</a>&nbsp;&nbsp; <a
-									class="board-info-others">작성일 ${c.fcdate}</a>
-									</td>
+								<td colspan="100%" class="board-comment-info">
+									<a class="board-info-nick">${c.fcnick}</a>&nbsp;&nbsp; 
+									<a class="board-info-others"><fmt:formatDate value="${c.fcdate}" type="both"/></a>
+								</td>
 							</tr>
 							<tr>
 								<td width="80%">${c.fccontent}</td>
-								<td style="padding: 0; text-align: center;"><c:if
-										test="${c.fcid eq sessionScope.MID}">
+								<td style="padding: 0; text-align: center;">
+									<c:if test="${empty sessionScope.MID}">
+										<a onclick="loginCheck();" style="cursor:pointer;"> 
+											<img class="like" src="${pageContext.request.contextPath}/resources/img/like.png" />
+										</a>
+									</c:if>
+									<c:if test="${!empty sessionScope.MID}">
+									<a href="${pageContext.request.contextPath}/mypage/freeboard/like.com?no=${param.no}&commPage=${PINFO.nowPage}&num=${c.fcno}"> 
+										<c:if test="${c.isLiked}">
+											<img class="like" src="${pageContext.request.contextPath}/resources/img/liked.png" />
+										</c:if>
+										<c:if test="${!c.isLiked}">
+											<img class="like" src="${pageContext.request.contextPath}/resources/img/like.png" />
+										</c:if>
+									</a>
+								</c:if>
+								<a class="aNone">${c.amount}</a>
+								
+								<c:if test="${c.fcid eq sessionScope.MID || sessionScope.MTYPE == 1}">
 										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
-									</c:if> <c:if test="${sessionScope.MTYPE == 1}">
-										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
-									</c:if></td>
+								</c:if> 
+							</td>
 							</tr>
 						</c:forEach>
 					</table>

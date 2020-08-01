@@ -1,12 +1,14 @@
 package com.all.light.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.FreeBoardDTO;
+import com.all.light.dto.ReviewDTO;
 import com.all.light.util.PageUtil;
 
 public class FreeBoardDAO extends SqlSessionDaoSupport {
@@ -47,7 +49,12 @@ public class FreeBoardDAO extends SqlSessionDaoSupport {
 
 	public ArrayList<FreeBoardDTO> getCommDetail(PageUtil pInfo) {
 		System.out.println(pInfo);
-		return (ArrayList) session.selectList("freeboard.getCommList", pInfo);
+		ArrayList<FreeBoardDTO> list=(ArrayList) session.selectList("freeboard.getCommList", pInfo);
+		for(int i=0;i<list.size();i++) {
+			int likeCnt = session.selectOne("freeboard.LikeCnt",list.get(i).getFcno());
+			list.get(i).setAmount(likeCnt);
+		}
+		return list;
 	}
 
 	public void insertComm(FreeBoardDTO freDTO) {
@@ -84,4 +91,37 @@ public class FreeBoardDAO extends SqlSessionDaoSupport {
 	public void increaseHit(int fno) {
 		session.update("freeboard.hitIncrease", fno);
 	}
+
+	
+	// 좋아요 정보 가져오기
+	public int getIsLike(int fcno, String mid) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("fcno", fcno);
+		map.put("mid", mid);
+		
+		return session.selectOne("freeboard.isLike",map);
+	}
+	
+	// 좋아요 insert
+	public void LikeIns(int fcno, String mid) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("fcno", fcno);
+		map.put("mid", mid);
+		
+		int isOk = session.insert("freeboard.LikeIns",map); //1이면 성공/0이면 실패
+		if(isOk==1)System.out.println(fcno+"리뷰에 "+mid+"의 좋아요 insert 성공");
+		if(isOk==0)System.out.println("리뷰 좋아요 insert 실패");
+	}
+	
+	// 좋아요 delete
+	public void LikeDel(int fcno, String mid) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("fcno", fcno);
+		map.put("mid", mid);
+		
+		int isOk = session.delete("freeboard.LikeDel",map); //1이면 성공/0이면 실패
+		if(isOk==1)System.out.println(fcno+"리뷰에 "+mid+"의 좋아요 delete 성공");
+		if(isOk==0)System.out.println("리뷰 좋아요 delete 실패");
+	}
+
 }

@@ -2,16 +2,20 @@ package com.all.light.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.all.light.dao.DiaryDAO;
 import com.all.light.dto.CaldictionaryDTO;
+import com.all.light.dto.CalrecipeDTO;
 import com.all.light.dto.DiaryDTO;
-import com.all.light.dto.KgDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
 
@@ -294,7 +298,6 @@ public class DiaryService {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("dno", dno);
 		map.put("dimage", dimage);
-		
 		diaDAO.updateDimage(map);
 	}
 
@@ -308,15 +311,55 @@ public class DiaryService {
 		diaDAO.myImgDelete(dno);
 	}
 
-	
-	
-	// kg 그래프
-	public ArrayList<KgDTO> getkgchart(String mid) {
-		System.out.println("서비스 getkgchart() mid = " + mid);
-		ArrayList<KgDTO> list = diaDAO.kgchart(mid);	
+	// 그래프
+	public ArrayList<DiaryDTO> getchart(DiaryDTO ddto) {
+		ArrayList<DiaryDTO> list = diaDAO.getchart(ddto);
 		return list;
 	}
 	
+	// 성공률 계산
+	public HashMap getrate(HttpSession session, DiaryDTO ddto) {
+		ArrayList<DiaryDTO> list = diaDAO.getchart(ddto);
+		Calendar cal = Calendar.getInstance();
+		//성공
+		List<DiaryDTO> rate=diaDAO.getrate(ddto);
+		for(int i=0;i<rate.size();i++) {
+			Double mon=(double) Integer.parseInt(rate.get(i).getMonth());
+			Double succ=(double) rate.get(i).getDsucc();
+			int endDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+			Double dsucc=(Math.round((succ/endDay)*100)/100.0)*100;
+			rate.get(i).setRate(dsucc);
+		}
+		
+		HashMap map=new HashMap();
+		for(int i=0;i<12;i++) {
+			map.put(i+1, 0.0);
+			for(int j=0;j<rate.size();j++) {
+				if(Integer.parseInt(rate.get(j).getMonth())==i+1) {
+					map.put(i+1, rate.get(j).getRate());
+				}
+			}
+		}
+		return map;
+	}
+
+	//calrecipe
+	public CalrecipeDTO calrecipe(DiaryDTO diary) {
+		return diaDAO.calrecipe(diary);
+	}
+
+	public void calculation(DiaryDTO diary) {
+		Double cal=diary.getCrcal();
+		int food=diary.getDfoodcal();
+		int exer=diary.getDexercal();
+		if(food-exer<=cal) {
+			diary.setDsucc(1);
+			diaDAO.success(diary);
+		}else {
+			diary.setDsucc(0);
+			diaDAO.success(diary);
+		}
+	}
 }
 
 

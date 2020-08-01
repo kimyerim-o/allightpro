@@ -11,6 +11,14 @@
 	$(function(){
 		//확인 버튼 클릭 시
 		$("#ok").click(function(){
+			if($('#qtitle').val()==null || $('#qtitle').val() == ""){
+				alert("제목을 작성해주세요.")
+				return false;
+			}
+			if($('#qcontent').val()==null || $('#qcontent').val() == ""){
+				alert("내용을 작성해주세요.")
+				return false;
+			}
 			$("#form").submit();
 		});
 		//목록 버튼 클릭 시
@@ -31,7 +39,7 @@
 			<table>
 				<tr>
 					<td class="board-title">제목</td>
-					<td class="board-title" colspan="3"><input type="search" name="qtitle" size="60%" required="required" placeholder="제목을 입력하세요"></td>
+					<td class="board-title" colspan="3"><input type="search" name="qtitle" id="qtitle" size="60%" required="required" placeholder="제목을 입력하세요"></td>
 				</tr>
 				<tr>
 					<td class="board-info"><a class="board-info-nick">작성자</a></td>
@@ -42,7 +50,7 @@
 				<tr>
 					<td class="board-content" colspan="4">
 						<div class="board-content-div">내용 <br/><br/>
-							<textarea rows="12" cols="100" name="qcontent" required="required" placeholder="내용을 입력하세요"></textarea></div></td>
+							<textarea rows="12" cols="100" name="qcontent" id="qcontent" required="required" placeholder="내용을 입력하세요"></textarea></div></td>
 				</tr>
 			</table>
 		</div>

@@ -60,5 +60,11 @@ public class CartService {
 		cartDAO.deleteCart(cartdto);
 		System.out.println("CartService.deleteCart(): "+cartdto);
 	}
+
+	//+,- 버튼 클릭하면 수량 업데이트 
+	public String updateAmt(CartDTO cartdto, String caid) {
+		String ok = cartDAO.updateAmt(cartdto,caid);
+		return ok;
+	}
 	
 }

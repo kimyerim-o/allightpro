@@ -43,6 +43,11 @@
 		select caprice from cart where ino=#{ino} and caid=#{mid}
 	</select>
 	
+	<!-- +,- 버튼 클릭하면 수량 업데이트  -->
+	<update id="updateAmt" parameterType="java.util.HashMap">
+		update cart set caamount=#{caamount},caprice=#{caprice} where cano=#{cano} and caid=#{caid}
+	</update>
+	
 	<!-- 장바구니 삭제 -->
 	<delete id="deleteCart">
 		delete from cart where cano=#{cano} and caid=#{caid}

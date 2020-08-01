@@ -9,11 +9,12 @@ public class CartDTO {
 	private String iname;		// 상품 이름
 	private int iprice;			// 상품 가격
 	private int istock;			// 상품 재고
+	private int[] canolist;
 	
 	//image -상품이미지-
 	private int imgno;  				// 이미지번호
 	private String imgimages;	// 상품이미지 
-	private int	fileCount;				//첨부파일수	
+	//private int	fileCount;				//첨부파일수	
 	
 	public int getIstock() {
 		return istock;
@@ -75,18 +76,25 @@ public class CartDTO {
 	public void setImgimages(String imgimages) {
 		this.imgimages = imgimages;
 	}
-	public int getFileCount() {
-		return fileCount;
+	
+	public int[] getCanolist() {
+		return canolist;
 	}
-	public void setFileCount(int fileCount) {
-		this.fileCount = fileCount;
+	public void setCanolist(int[] canolist) {
+		this.canolist = canolist;
 	}
 	
 	@Override
 	public String toString() {
 		return "CartDTO [cano=" + cano + ", caid=" + caid + ", ino=" + ino + ", caamount=" + caamount + ", caprice="
 				+ caprice + ", iname=" + iname + ", iprice=" + iprice + ", istock=" + istock + ", imgno=" + imgno
-				+ ", imgimages=" + imgimages + ", fileCount=" + fileCount + "]";
+				+ ", imgimages=" + imgimages + ", canolist"+canolist+ "]";
 	}
 	
-}
+/*	public int getFileCount() {
+		return fileCount;
+	}
+	public void setFileCount(int fileCount) {
+		this.fileCount = fileCount;
+	}
+*/}

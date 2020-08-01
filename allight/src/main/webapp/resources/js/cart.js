@@ -24,10 +24,10 @@ $(function(){
 		}
 	});//end 모두체크
 	
-	//전체선택 누르면 개별 체크박스 모두 선택되게
-	$(".chkBox").click(function(){
+	//개별 체크박스누르면 전체선택 해제되게
+	$(".chkBox").click(function(){//개별에서 class이름
 		//alert("ㄷㅇㅇㄴ");
-		$("#allCheck").prop("checked", false);
+		$("#allCheck").prop("checked", false);//전체선택에서 id
 		
 	});
 	
@@ -96,14 +96,32 @@ $(function(){
 		})
 		$('.sum').children().text(numberWithCommas(chk)+"원");
 		
-		/*var qt = 0;
-		$(".chkBox:checked").each(function(){
-			var qtemp = $(this).closest('td').next('td').next('td').next('td').next('td').next('td')
-			alert("qtemp"+qtemp)
-			qt += Number(qtemp.text());
-			alert("qt="+qt)
-		})
-		$('.qty').children().text();*/
+		//-버튼 클릭시 변경된 상품수량 db에 저장하기
+		var caamount = $(this).next('.numBox').val()
+		var caprice = $(this).closest('td').next('td').text()
+		caprice = Number(caprice.split("원")[0].replace(',',''));
+		var cano = $(this).closest('tr').prev('#cano').val()
+		$.ajax({
+			url : "updateAmt.com",
+			type : "get",
+			dataType: "text",
+			data : {
+				"caamount" : caamount,
+				"caprice" : caprice,
+				"cano" : cano
+			},
+			success : function(result){
+				if(result == "1"){
+					//alert("성공")
+					//location.href = "./cart.com";	
+				} else{
+					//alert("실패");
+				}
+			},
+			error: function(request,status,error){
+				alert("????"+"code = "+ request.status + " message = " + request.responseText + " error = " + error)
+			}
+		});
 	})
 	
 	// + 버튼 눌렀을때
@@ -126,42 +144,50 @@ $(function(){
 			//alert(chk)
 		})
 		$('.sum').children().text(numberWithCommas(chk)+"원");
-			
 		
+		//+버튼 클릭시 변경된 상품수량 db에 저장하기
+		var caamount = $(this).prev('.numBox').val()
+		var caprice = $(this).closest('td').next('td').text()
+		caprice = Number(caprice.split("원")[0].replace(',',''));
+		var cano = $(this).closest('tr').prev('#cano').val()
+		$.ajax({
+			url : "updateAmt.com",
+			type : "get",
+			dataType: "text",
+			data : {
+				"caamount" : caamount,
+				"caprice" : caprice,
+				"cano" : cano
+			},
+			success : function(result){
+				if(result == "1"){
+					//if(confirm("#caamount")==1){
+					//	alert("최소 수량은 1입니다.");
+					//}
+				} else{
+				}
+			},
+			error: function(request,status,error){
+				alert("????"+"code = "+ request.status + " message = " + request.responseText + " error = " + error)
+			}
+		});
 	})
 	
-	//+,- 후 수량 업데이트 
-	/*$('#iamount').change(function(){
-		if('${DATE}'!=''){
-			$.ajax({
-	            type : 'post',
-	            url : './updateIamount.com',
-	            data : {"iamount":$('#iamount').val()},
-	            success : function(data){
-	                $('#num').val(Number(data));
-	                if(${num}==0){
-	        			location.href="./cart.com?num="+data;
-	        		}
-	            },
-	            error : function(xhr, status, error){
-	                alert(error);
-	            }
-	        })
+	//결제하기 버튼 눌렀을때
+	$('#pay').click(function(){
+		//$target = $(event.target);
+		//alert("결제")
+		var canoList = [];
+		$(".chkBox:checked").each(function(){
+			var cano = $(this).closest('tr').prev('input').val()
+			//alert(temp)
+			canoList.push(cano);
+		})
+		if(canoList.length!=0){
+			$('#canoList').val(canoList);
+			$('#cart').submit();
 		}else{
-			$.ajax({
-	            type : 'post',
-	            url : './updateIamount.com',
-	            data : {"iamount":$('#iamount').val()},
-	            error: function(xhr, status, error){
-	                alert(error);
-	            },
-	            success : function(data){
-	                $('#num').val(Number(data));
-	                if(${num}== 0){
-	        			location.href="./cart.com?num="+data;
-	        		}
-	            }
-	        })
+			alert("결제할 상품을 선택해 주세요")
 		}
-	})*/
+	})
 }); // end of function()

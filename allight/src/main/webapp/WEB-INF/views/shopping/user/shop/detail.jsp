@@ -18,6 +18,41 @@ function goBottom(){
 	document.documentElement.scrollTop = document.body.scrollHeight;
 }
 
+//수량 선택시 값 변경
+var sell_price;
+var amount;
+
+function init () {
+	sell_price = document.form.sell_price.value;
+	amount = document.form.amount.value;
+	document.form.sum.value = sell_price;
+	change();
+}
+function add () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+	hm.value ++ ;
+
+	sum.value = parseInt(hm.value) * sell_price;
+}
+function del () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+		if (hm.value > 1) {
+			hm.value -- ;
+			sum.value = parseInt(hm.value) * sell_price;
+		}
+}
+function change () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+
+		if (hm.value < 0) {
+			hm.value = 0;
+		}
+	sum.value = parseInt(hm.value) * sell_price;
+}  
+
 // 로그인 여부 확인/로그인창 보내기
 function loginCheck (){
 	if('${sessionScope.MID}'==''){
@@ -138,6 +173,14 @@ $(function(){
                   alert("요청을 처리할 수 없습니다. 다시 시도해주세요.");
               },
 		})
+	})
+	
+	//바로구매하기로 넘어가기
+	$('.purchase-btn').click(function(){
+		$('#ino').val(Number(${param.ino}));
+		$('#caamount').val(Number($('#number').val()));
+		$('#caprice').val(Number($('.right-total-price').text().replace(',','')));
+		$('#buynow').submit();
 	})
 	
 	// 수량 선택시 총 상품가격 변동
@@ -297,7 +340,12 @@ $(function(){
 				<a class="right-total">총 상품금액</a>
 				
 				<input type="button" value="장바구니" class="in-cart-btn"/>
-				<input type="button" value="구매하기" class="purchase-btn" style="background:#ff7289"/>
+				<input type="button" value="구매하기" class="purchase-btn"/>
+				<form action="./buyNow.com" name="buynow" id="buynow">
+					<input type="hidden" value="${ino}" />
+					<input type="hidden" value="${caamount}" />
+					<input type="hidden" value="${caprice}" />
+				</form>
 			</div>
 			<div id="detail"></div>
 		</div>
@@ -526,7 +574,7 @@ $(function(){
 														<td colspan="2" style="text-align:center;">
 															<textarea name="iqcontent" class="iqModicontent" rows="5" cols="200"
 															>${list.iqcontent}</textarea>
-															<input type="button" value="수정" class="modifySubmit" style="background:#ff7289"/>
+															<input type="button" value="수정" class="modifySubmit"/>
 															<input type="button" value="취소" class="modifyCancel"/>
 														</td>
 														

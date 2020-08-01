@@ -3,7 +3,7 @@ package com.all.light.dto;
 public class CaldictionaryDTO {
 	private int cdno;			//칼로리번호
 	private String cdtype;		//구분(음식/운동)
-	private int cdcal;			//칼로리
+	private int cdcal=0;		//칼로리
 	private String cdname;		//음식/운동 이름
 	private String mid;			//아이디
 	private int mno;			//회원번호
@@ -12,8 +12,8 @@ public class CaldictionaryDTO {
 	private Double cdji=0.0;	//지방(g)
 	private Double cdsik=0.0;	//식이섬유(g)
 	private Double cdna=0.0;	//나트륨(mg)
-	private int cdgram;			//그램(g)
-	private int cdamount;		//수량(기본1 DB에서 설정)
+	private int cdgram=0;			//그램(g)
+	private int cdamount=0;		//수량(기본1 DB에서 설정)
 	
 	
 	public int getCdno() {

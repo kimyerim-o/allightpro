@@ -162,9 +162,9 @@ public class DiaryDAO extends SqlSessionDaoSupport {
 		
 		int isok = session.update("diary.updateDdiary", map);
 		if(isok==1) {
-			System.out.println("일기 업데이트 성공-ddiary:"+ddiary);
+			System.out.println("일기 업데이트 성공!!");
 		}else {
-			System.out.println("일기 업데이트 실패-ddiary:"+ddiary);
+			System.out.println("일기 업데이트 실패~~");
 		}
 	}
 

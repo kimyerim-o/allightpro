@@ -120,7 +120,7 @@ public class DiaryController {
 		List<MyExerciseDTO> eList = null;
 		Date date = null;
 		//기존 데이터가 없는데 myFAE에 처음 왔을때
-		if(num==0 && dto.getYear()!=null) { 
+		if(num==0 && dto.getYear()!=null&&dto.getYear()!="") { 
 			String y = dto.getYear();
 			String m = dto.getMonth();
 			String d = dto.getDay();
@@ -131,7 +131,15 @@ public class DiaryController {
 				d = "0"+d;
 			}
 			String dateStr = y+"-"+m+"-"+d;
-			date = Date.valueOf(dateStr);
+			System.out.println(dateStr);
+			try{
+				date = Date.valueOf(dateStr);
+			}catch(Exception e) {
+				System.out.println("myFAE()-잘못된 접근!!!");
+				RedirectView rv = new RedirectView("./main.com");
+				mv.setView(rv);
+				return mv;
+			}
 			
 		}else {
 			diary = diaSVC.diaryInfo(num);
@@ -330,7 +338,7 @@ public class DiaryController {
 			@RequestParam(value="ddate", 
 			  			  required = false) Date ddate,
 			String ddiary) {
-		System.out.println("updateDweight()-num:"+num+", ddate:"+ddate+",dweight:"+ddiary);
+		System.out.println("updateDdiary()-num:"+num+", ddate:"+ddate+",dweight:"+ddiary);
 		
 		if(num==0) {
 			String mid = (String)request.getSession().getAttribute("MID");

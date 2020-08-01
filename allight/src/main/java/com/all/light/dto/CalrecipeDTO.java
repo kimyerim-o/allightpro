@@ -18,6 +18,7 @@ public class CalrecipeDTO {
 	private String crterm;//총감량기간
 	private int cractive;//활동량
 	private int crgoalweight;//목표체중
+	private Date crdate;
 	
 
 	public String getSex() {
@@ -165,7 +166,17 @@ public class CalrecipeDTO {
 		return "CalrecipeDTO [sex=" + sex + ", birth=" + birth + ", age=" + age + ", type=" + type + ", crno=" + crno
 				+ ", crbmr=" + crbmr + ", crcal=" + crcal + ", crbmi=" + crbmi + ", crterm=" + crterm + ", cractive="
 				+ cractive + ", crheight=" + crheight + ", crweight=" + crweight + ", crgoalweight=" + crgoalweight
-				+ ", mid=" + mid + "]";
+				+ ", mid=" + mid + "crdate"+ crdate+"]";
+	}
+
+
+	public Date getCrdate() {
+		return crdate;
+	}
+
+
+	public void setCrdate(Date crdate) {
+		this.crdate = crdate;
 	}
 	
 	

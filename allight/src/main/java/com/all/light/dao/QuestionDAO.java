@@ -109,8 +109,8 @@ public class QuestionDAO extends SqlSessionDaoSupport {
 	}
 
 	// 관리자(유저)
-	public int getTotalCntUser() {
-		int totalCnt = session.selectOne("question.totalCntUser");
+	public int getTotalCntUser(PageUtil pInfo) {
+		int totalCnt = session.selectOne("question.totalCntUser",pInfo);
 		System.out.println(totalCnt);
 		return totalCnt;
 	}

@@ -3,12 +3,20 @@
 "HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
 
-	<select id="getTotalCnt" resultType="Integer"
-		parameterType="PageUtil">
+	<select id="getTotalCnt" resultType="Integer" parameterType="PageUtil">
 		select count(*) from item
-        where ino in(select ino from review
-        where rid=#{rid})
+        where ino in(select ino 
+        						from review
+       							where rid=#{rid})
         and iname like '%${searchWord}%'
+	</select>
+	
+	<select id="getTotalCntCorp" resultType="Integer" parameterType="PageUtil">
+		select count(*) from review 
+		where ino in(select ino 
+						            from item 
+						            where icorp=#{coname}
+						            and iname like '%${searchWord}%')
 	</select>
 	
 	<select id="getList" resultType="java.util.HashMap"
@@ -22,12 +30,30 @@
         order by num desc
 	</select>
 	
+	<select id="getListCorp" resultType="java.util.HashMap"
+		parameterType="PageUtil">
+         select * from
+							        (select R.*,I.iname, row_number() over (order by R.rno) num
+							        from review R,item I
+							        where R.ino=I.ino
+							        and I.ino in (select ino 
+									                        from item 
+									                        where icorp=#{coname})
+							        and I.iname like '%${searchWord}%')
+        where num between ${startNo} and ${endNo}
+        order by num desc
+	</select>
+	
 	<insert id="reviewWrite" parameterType="reviewDTO">
 		insert into review values(RNO_SEQ.nextval, #{ino}, #{rid},#{rnick},sysdate,#{rgrade},#{rcontent})
 	</insert>
 		
 		<delete id="reviewDelete" parameterType="reviewDTO">
 		delete from review where ino=${ino} and rid=#{rid}
+		</delete>
+		
+		<delete id="reviewDeleteCorp" parameterType="reviewDTO">
+		delete from review where rno=${rno}
 		</delete>
 		
 		<select id="getReviewInfo" parameterType="reviewDTO" resultType="reviewDTO">

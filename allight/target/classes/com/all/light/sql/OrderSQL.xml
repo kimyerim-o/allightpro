@@ -82,7 +82,11 @@
 	</select>
 
 	<update id="changeStock" parameterType="orddeDTO">
-	update item set istock = istock-1 where ino=#{ino}
+	update item set istock = istock-#{odamount} where ino=#{ino}
+	</update>
+	
+	<update id="changeIsell" parameterType="orddeDTO">
+	update item set ISELLAMOUNT = ISELLAMOUNT+#{odamount} where ino=#{ino}
 	</update>
 	
 	<!-- 회사페이징후 -->
@@ -114,5 +118,9 @@
 	<select id="pageOrderConoTermType" resultType="int" parameterType="java.util.HashMap">
 	select count(*) from orderdetail where ino in (select ino from item where cono=#{cono}) and ono in (select ono from orders where odate between #{start} and #{last}) and OSTATUS=#{type}
 	</select>
+	
+	<update id="review" parameterType="reviewDTO">
+	update orderdetail set okreview=1 where odno=#{odno} and ino=#{ino}
+	</update>
 </mapper>
 	

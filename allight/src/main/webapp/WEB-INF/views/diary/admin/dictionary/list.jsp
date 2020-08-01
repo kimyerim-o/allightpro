@@ -149,7 +149,18 @@ $(function(){
    })
    
    $('#insertMyBtn').click(function(){
-      var data = $("#insertMyCalFrm").serialize() ;
+      
+	   if($.trim($('#cdname').val()) == ''){
+		   alert("이름을 입력하십시오.");
+		   $('#cdname').focus();
+		   return false;
+		  }else if($.trim($('#cdgram').val()) == '' || $.trim($('#cdgram').val()) == 0){
+		   alert("분량(g)/시간(m)을 입력하십시오.");
+		   $('#cdgram').focus();
+		   return false;
+		  }
+
+	   var data = $("#insertMyCalFrm").serialize() ;
       
         $.ajax({
             type : 'post',
@@ -163,7 +174,7 @@ $(function(){
                 location.reload();
             },
         });
-
+	
    })
 })
 
@@ -489,25 +500,25 @@ function deleteMy(cdno) {
    <div class="title2">추가</div>
    <div class="diary-content">
       <div id="name" class="my-name-div">
-         <input type="text" name="cdname" placeholder="이름 입력해주세요." class="myCalText">
+         <input type="text" id= "cdname" name="cdname" placeholder="이름 입력해주세요." class="myCalText" required="required" >
       </div>
       <table id="detail-table">
                 
           <tr>
             <td>수량</td>
-            <td><input type="number" value="1" name="cdamount"/></td>
+            <td><input type="number" value="1" name="cdamount" required="required" /></td>
             <td>탄수화물</td>
             <td><input type="number" min="0" value="0" name="cdtan"/></td>
          </tr>
          <tr>
             <td>분량(g)/시간(m)</td>
-            <td><input type="number"min="0" value="0" name="cdgram"/></td>
+            <td><input type="number"min="0" value="0" id= "cdgram" name="cdgram" required="required" /></td>
             <td>단백질</td>
             <td><input type="number" min="0" value="0" name="cddan"/></td>
          </tr>
          <tr>
             <td>칼로리(kcal)</td>
-            <td><input type="number" min="0" value="0" name="cdcal"/></td>
+            <td><input type="number" min="0" value="0" id= "cdcal" name="cdcal"/></td>
             <td>지방</td>
             <td><input type="number" min="0" value="0" name="cdji"/></td>
          </tr>

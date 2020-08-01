@@ -29,36 +29,38 @@
 <body>
 	<h3>장바구니</h3>
 	<hr/>
-	<form action="./cart.com" id="cart" method="post">
+	<form action="./buy.com" id="cart" method="post">
 		<div id="content">
-			<div class="allCheck">
-				<input type="checkbox" name="allCheck" id="allCheck" checked="checked" onclick="checked1"/><label for="allCheck">전체선택 </label>
-			</div>
-			<div class="delBtn">
-				<button type="button" class="selectDelete_btn">선택삭제</button>
-			</div>
-			
+			<c:if test="${!empty sessionScope.MID}">
+				<div class="allCheck">
+					<input type="checkbox" name="allCheck" id="allCheck" checked="checked" onclick="checked1"/><label for="allCheck">전체선택 </label>
+				</div>
+				<div class="delBtn">
+					<button type="button" class="selectDelete_btn">선택삭제</button>
+				</div>
+			</c:if>
 			<table>
-				<thead>
-					<tr>
-						<th scope="col">
-							<div class="tb-center">선택</div>
-						</th>
-						<th scope="col" colspan="2">
-							<div class="tb-center">상품정보</div>
-						</th>
-						<th scope="col">
-							<div class="tb-center">판매가</div>
-						</th>
-						<th scope="col">
-							<div class="tb-center">수량</div>
-						</th>
-						<th scope="col">
-							<div class="tb-center">합계</div>
-						</th>
-						
-					</tr>
-				</thead>
+				<c:if test="${!empty sessionScope.MID}">
+					<thead>
+						<tr>
+							<th scope="col">
+								<div class="center">선택</div>
+							</th>
+							<th scope="col" colspan="2">
+								<div class="center">상품정보</div>
+							</th>
+							<th scope="col">
+								<div class="center">판매가</div>
+							</th>
+							<th scope="col">
+								<div class="center">수량</div>
+							</th>
+							<th scope="col">
+								<div class="center">합계</div>
+							</th>
+						</tr>
+					</thead>
+				</c:if>
 				<tbody>
 					<c:if test="${empty clist and empty sessionScope.MID}">
 						<tr>
@@ -76,9 +78,10 @@
 					<c:set var="sum0" value="0" />
 					<%-- <c:set var="qty" value="0" /> --%>
 					<c:forEach var="list" items="${clist}">
+						<input type="hidden" name="arr" value="${list.cano}"/><!-- 주문페이지 연결시 cano보내주려고 -->
 						<tr>
 							<td scope="col"><!-- 체크박스 -->
-								<div class="tb-center">
+								<div class="center">
 									<input type="checkbox" class="chkBox" checked="checked" data-cartNo="${list.cano }"/>
 								</div>
 							</td>
@@ -93,7 +96,7 @@
 							</td>
 							<!-- 판매가 -->
 							<td scope="col"><!-- 판매가 -->
-								<div class="tb-center">
+								<div class="center">
 									<p class="price" style="height:200px; line-height:200px;margin:0;">
 									<fmt:formatNumber pattern="#,###" value="${list.iprice }" />원
 									</p>
@@ -102,11 +105,11 @@
 							<!-- 수량 -->
 							<td class="iamount" scope="col">
 								<input type="hidden" id="origin_qty" value="${list.caamount }" maxlength="3"/>
-								<div class="tb-center" style="height:200px; line-height:200px;margin:0;">
+								<div class="center" style="height:200px; line-height:200px;margin:0;">
 									<button type="button" id="minus_btn" class="minus">-</button>
 									<input type="text" id="number" class="numBox" value="${list.caamount }" readonly="readonly" 
 										style="font-size:16px; width:50px; padding:5px; margin:0; border:1px solid #eee;"/>
-									<button type="button" id="plus_btn"class="plus">+</button>
+									<button type="button" id="plus_btn" class="plus">+</button>
 								</div>
 							</td>
 							<!-- 합계 -->
@@ -125,31 +128,32 @@
 				</tbody>
 			</table>
 			<hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/>
-			<table>
-					
-				<thead>
-					<tr>
-						<th colspan="2">상품금액</th>
-						<th colspan="1"></th>
-						<th colspan="1">배송비</th>
-						<th colspan="1"></th>
-						<th colspan="2">결제 예정금액</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr id="list" class="list">
-						<td class="sum" colspan="2" ><h3><fmt:formatNumber pattern="#,###" value="${sum0}" />원</h3></td>
-						<td colspan="1" ><h3>+</h3></td>
-						<td colspan="1" ><h3>무료</h3></td>
-						<td colspan="1" ><h3>=</h3></td>
-						<td class="sum" colspan="2" ><h3><fmt:formatNumber pattern="#,###" value="${sum0}" />원</h3></td>
-					</tr>
-				</tbody>
-			</table>
+			<c:if test="${!empty sessionScope.MID}">
+				<table>
+					<thead>
+						<tr>
+							<th colspan="2">상품금액</th>
+							<th colspan="1"></th>
+							<th colspan="1">배송비</th>
+							<th colspan="1"></th>
+							<th colspan="2">결제 예정금액</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id="list" class="list">
+							<td class="sum" colspan="2" ><h3><fmt:formatNumber pattern="#,###" value="${sum0}" />원</h3></td>
+							<td colspan="1" ><h3>+</h3></td>
+							<td colspan="1" ><h3>무료</h3></td>
+							<td colspan="1" ><h3>=</h3></td>
+							<td class="sum" colspan="2" ><h3><fmt:formatNumber pattern="#,###" value="${sum0}" />원</h3></td>
+						</tr>
+					</tbody>
+				</table>
 			<div class="right">
 				<input type="button" value="계속 쇼핑" onclick="location.href='${pageContext.request.contextPath}/shopping/list.com'" />&nbsp;
-				<input type="button" value="결제하기" onclick="location.href='${pageContext.request.contextPath}/buy.com'"/>
+				<input type="submit" value="결제하기"/>
 			</div>
+			</c:if>
 		</div>
 	</form>
 </body>

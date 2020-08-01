@@ -80,8 +80,12 @@ public class CalrecipeService {
 			creDAO.recipeCheck(cdto);	
 		}
 		System.out.println("CalrecipeService recipeCheck \n"+cdto);
+		session.setAttribute("CAL", cdto.getCrcal());
 		return cdto;
 	}
 
-
+	public CalrecipeDTO getRecipe(HttpSession session) {
+		String mid=(String) session.getAttribute("MID");
+		return creDAO.getRecipe(mid);
+	}
 }

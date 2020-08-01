@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="buy">
+<mapper namespace="Buy">
 
-	<select id="list" resultType="buyDTO" parameterType="buyDTO">
+	<select id="buy" resultType="buyDTO" parameterType="buyDTO">
 	select * from orders where mid=${mid}
+	</select>
+	
+	<!-- 장바구니 -->
+	<select id="cart" resultType="cartDTO" parameterType="Integer">
+		select * from cart where cano=#{cano}
+	</select>
+	
+	<!-- 아이템번호로 아이템이름 가져오기 -->
+	<select id="items" resultType="cartDTO" parameterType="Integer">
+		select iname,iprice from item where ino=#{ino}
+	</select>
+	
+	<!-- 아이템번호로 이미지 가져오기 -->
+	<select id="image" resultType="String" parameterType="Integer">
+		select imgimage from image where ino=#{ino} and imgrepresent=1
 	</select>
 	
 </mapper>

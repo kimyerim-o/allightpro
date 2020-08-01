@@ -17,6 +17,10 @@
 					name="coname" value="${CORPINFO.coname}" /></td>
 			</tr>
 			<tr>
+				<td>가입일 :</td>
+				<td>${CORPINFO.cojoindate}</td>
+			</tr>
+			<tr>
 				<td>전화번호 :</td>
 				<td><input type="text" id="cotel" name="cotel"
 					value="${CORPINFO.cotel}" /></td>

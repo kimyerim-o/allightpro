@@ -1,5 +1,6 @@
 package com.all.light.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.all.light.dto.MemberDTO;
 import com.all.light.dto.OrderDTO;
 import com.all.light.dto.OrderData;
 import com.all.light.dto.OrderdetailDTO;
+import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.service.OrderService;
 import com.all.light.util.PageUtil;
@@ -27,7 +29,7 @@ public class OrderController {
 	private OrderService ordSVC;
 	
 	//주문목록조회-기간
-	@RequestMapping("/list")
+	@RequestMapping("/mypage/list")
 	public ModelAndView list(@RequestParam(value = "term", required = false, defaultValue = "m1") String term,
 			OrderDTO odto,OrderdetailDTO oddto,ShoppingDTO sdto,OrderData odata,HttpSession session, ModelAndView mv) {
 		OrderData data=ordSVC.list(session,odata,odto,oddto,sdto,term);
@@ -39,7 +41,7 @@ public class OrderController {
 	}
 	
 	//주문상세조회
-	@RequestMapping("/detail")
+	@RequestMapping("/mypage/detail")
 	public ModelAndView detail(@RequestParam(value = "no", required = true) int ono,
 			OrderDTO odto,OrderdetailDTO oddto,OrderData odata,ModelAndView mv,HttpSession session) {
 		System.out.println("detail");
@@ -50,7 +52,7 @@ public class OrderController {
 	}
 	
 	//주문취소및반품조회 
-	@RequestMapping("/back") //type o,x
+	@RequestMapping("/mypage/back") //type o,x
 	public ModelAndView back(@RequestParam(value = "type", required = false) String type,
 			@RequestParam(value = "term", required = false, defaultValue = "m1") String term,
 			OrderDTO odto,OrderdetailDTO oddto,ShoppingDTO sdto,OrderData odata,HttpSession session, ModelAndView mv) {
@@ -71,7 +73,7 @@ public class OrderController {
 	}
 	
 	//취소 반품 페이지이동-주문관리 ajax 후?????
-	@RequestMapping("/check")
+	@RequestMapping("/mypage/check")
 	public ModelAndView check(OrderdetailDTO oddto,MemberDTO mdto,HttpSession session, ModelAndView mv) {
 		System.out.println("check"+oddto);
 		MemberDTO medto=ordSVC.check(session,mdto);
@@ -82,7 +84,7 @@ public class OrderController {
 		return mv;
 	}
 	
-	@RequestMapping("/confirm")
+	@RequestMapping("/mypage/confirm")
 	public ModelAndView confirm(OrderdetailDTO oddto,MemberDTO mdto,HttpSession session, ModelAndView mv) {
 		System.out.println("confirm"+oddto);
 		System.out.println("confirm"+mdto);
@@ -149,7 +151,48 @@ public class OrderController {
 		return mv;
 	}
 	
+	//이메일 발송
+    @RequestMapping("/email/corp")
+    @ResponseBody
+	public String email(HttpServletRequest request) throws Exception {
+    	System.out.println("이메일 확인 들어옴!");
+    	String no=request.getParameter("no");
+    	String email=request.getParameter("email");
+    	String text=request.getParameter("text");
+    	
+    	String ok=null;
+    	if(text.equals("배송시작")) {
+    		ok=ordSVC.delemail(no,email);//메일전송
+        	System.out.println("배송시작 이메일 확인 완료!");
+        	return ok;
+    	}else if(text.equals("주문취소")) {
+    		ok=ordSVC.canemail(no,email);//메일전송
+        	System.out.println("주문취소 이메일 확인 완료!");
+        	return ok;
+    	}
+		return "x";
+    }
 
+    //리뷰쓰기
+    @RequestMapping("/mypage/review")
+    public ModelAndView review(@RequestParam(value = "no", required = true) String ino,
+    		@RequestParam(value = "num", required = true) String odno,ModelAndView mv) {
+    	System.out.println(ino+"...."+odno);
+    	mv.addObject("ino", ino);
+    	mv.addObject("odno", odno);
+    	mv.setViewName("shopping/user/mypageReview/reviewWrite");
+		return mv;
+    }
+    
+    @RequestMapping("/reviewr")
+    public ModelAndView reviewr(ReviewDTO rdto,HttpSession session,ModelAndView mv) {
+    	System.out.println(rdto);
+    	ordSVC.reviewr(rdto,session);
+    	RedirectView rv=new RedirectView("./mypage/list.com");
+		mv.setView(rv);
+		return mv;
+    }
+    
 
 	
 	

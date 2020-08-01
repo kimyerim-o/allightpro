@@ -12,14 +12,13 @@
 			var odno =  "${oddto.odno}";
 			var ostatus = "${oddto.ostatus}";
 			var param = { "odno" : odno , "ostatus" : ostatus };
-			alert(JSON.stringify(param));
 			$.ajax({
 				url : "${pageContext.request.contextPath}/order/change.com",
 				type : 'post',
 				data : param,
 				success : function(data) {
 						if (confirm("해당 상품을 주문 내역이 변경되었습니다.")) {
-						location.href = "${pageContext.request.contextPath}/order/list.com";
+						location.href = "${pageContext.request.contextPath}/order/mypage/list.com";
 						}
 					},
 					error : function(request,status,error) {
@@ -31,7 +30,6 @@
 </script>
 </head>
 <body>
-${oddto}
 	<div class="container">
 		<table class="table">
 			<tr>
@@ -48,7 +46,7 @@ ${oddto}
 			</tr>
 		</table>
 		<div class="right">
-			<a class="btn" href="${pageContext.request.contextPath}/order/check.com?odno=${oddto.odno}&ostatus=${oddto.ostatus}">취소</a>
+			<a class="btn" href="${pageContext.request.contextPath}/order/mypage/check.com?odno=${oddto.odno}&ostatus=${oddto.ostatus}">취소</a>
 			<a class="btn" id="val">확인</a>
 		</div>
 	</div>

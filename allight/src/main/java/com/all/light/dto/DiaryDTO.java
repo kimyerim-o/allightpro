@@ -3,7 +3,6 @@ package com.all.light.dto;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import java.sql.Date;
@@ -19,6 +18,11 @@ public class DiaryDTO {
 	private Double dweight=0.0;	//체중
 	private String ddiary;		//일기
 	private Date ddate;			//날짜
+	private Double rate=0.0;
+	private int crno;
+	private Double crcal;
+	private int dsucc;
+	private int mm;
 
 	//달력 표시 위해..
 	private String year="";
@@ -193,13 +197,43 @@ public class DiaryDTO {
 	
 	public DiaryDTO() {}
 	
-	
+	public Double getRate() {
+		return rate;
+	}
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
+	public int getCrno() {
+		return crno;
+	}
+	public void setCrno(int crno) {
+		this.crno = crno;
+	}
+	public Double getCrcal() {
+		return crcal;
+	}
+	public void setCrcal(Double crcal) {
+		this.crcal = crcal;
+	}
 	@Override
 	public String toString() {
 		return "DiaryDTO [dno=" + dno + ", mid=" + mid + ", dexercal=" + dexercal + ", dfoodcal=" + dfoodcal
 				+ ", dimage=" + dimage + ", savedimage=" + savedimage + ", dweight=" + dweight + ", ddiary=" + ddiary
-				+ ", ddate=" + ddate + ", year=" + year + ", month=" + month + ", day=" + day + ", value=" + value
-				+ "]";
+				+ ", ddate=" + ddate + ", rate=" + rate + ", crno=" + crno + ", crcal=" + crcal + ", year=" + year
+				+ ", month=" + month + ", day=" + day + ", value=" + value + "]";
 	}
+	public int getDsucc() {
+		return dsucc;
+	}
+	public void setDsucc(int dsucc) {
+		this.dsucc = dsucc;
+	}
+	public int getMm() {
+		return mm;
+	}
+	public void setMm(int mm) {
+		this.mm = mm;
+	}
+	
 	
 }

@@ -28,9 +28,9 @@ $(function(){
 	
 	// 몸무게 업데이트
 	$('#dweight').change(function(){
-		var formData = new FormData();
-		formData.append("num", ${num});
-		formData.append("dweight", $('#dweight').val());
+		//var formData = new FormData();
+		//formData.append("num", ${num});
+		//formData.append("dweight", $('#dweight').val());
 		if('${DATE}'!=''){
 			formData.append("ddate", "${DATE}");
 			$.ajax({
@@ -66,12 +66,13 @@ $(function(){
 	            }
 	        });
 		}
+	})
 	
 	// 일기 업데이트
 	$('#ddiary').change(function(){
-		var formData = new FormData();
-		formData.append("num", ${num});
-		formData.append("ddiary", $('#ddiary').val());
+		//var formData = new FormData();
+		//formData.append("num", ${num});
+		//formData.append("ddiary", $('#ddiary').val());
 		if('${DATE}'!=''){
 			formData.append("ddate", "${DATE}");
 			$.ajax({
@@ -106,7 +107,8 @@ $(function(){
 	        		}
 	            }
 	        });
-
+		}
+	})
 	
 	// 섭취칼로리 모두 지우기
 	$('#deleteFoodAll').click(function(){
@@ -268,22 +270,15 @@ function medel(dno,meno){
 
 // 이미지 업데이트
 function updateDimage(input){
-	//var dimage = input.value.substring(input.value.lastIndexOf('\\')+1)
-	var formData = new FormData();
-	var inputFile = $("#uploadImgBtn");
-	var files = inputFile[0].files;
-	
-	formData.append("num",${num});
-	formData.append("dimageFile", files[0]);
-	if(${num}==0){
-		formData.append("ddate","${DATE}");
-	}
+	var form = $('#imgFrm')[0];
+    var formData = new FormData(form);
+    formData.append("dimageFile", $("#dimageFile")[0].files[0]);
 	$.ajax({
         type : 'post',
         url : './updateDimage.com',
-        processData : false,
-		contentType : false,
-		data : formData,
+        data : formData,
+        processData: false,
+        contentType: false,
         error: function(xhr, status, error){
             alert('사진등록을 실패했습니다.\n잠시후 다시 시도해주세요.');
         },

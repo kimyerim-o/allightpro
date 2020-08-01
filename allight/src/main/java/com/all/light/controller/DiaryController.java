@@ -2,15 +2,15 @@ package com.all.light.controller;
 
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.CaldictionaryDTO;
+import com.all.light.dto.CalrecipeDTO;
 import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
@@ -140,11 +141,19 @@ public class DiaryController {
 				mv.setView(rv);
 				return mv;
 			}
-			
 		}else {
 			diary = diaSVC.diaryInfo(num);
 			fList = diaSVC.getMyFood(num);
 			eList = diaSVC.getMyExer(num);
+			if( diary.getCrno()==0 || diary.getCrcal()==null) {
+				System.out.println("처음이야");
+				CalrecipeDTO cdto=diaSVC.calrecipe(diary);
+				if(cdto!=null)
+					diaSVC.calculation(diary);
+			}else {
+				System.out.println("이미했어");
+				diaSVC.calculation(diary);
+			}
 		}
 		
 		mv.addObject("num",num);	 //num(dno)-다이어리 번호
@@ -540,6 +549,23 @@ public class DiaryController {
 		System.out.println("myImgDelete()-dno="+dno);
 		diaSVC.myImgDelete(dno);
 	}
+		
+	// 그래프
+	@RequestMapping("/chart")
+	public ModelAndView weightchart(@RequestParam(value="yy", required = false) String yy,
+			@RequestParam(value="mon", required = false) String mon,DiaryDTO ddto,ModelAndView mv, HttpSession session){
+		ddto.setYear(yy);
+		ddto.setMonth(mon);
+		ddto.setMid((String)session.getAttribute("MID"));
+		ArrayList<DiaryDTO> list = diaSVC.getchart(ddto);
+		HashMap rate = diaSVC.getrate(session,ddto);
+		System.out.println(rate);
+		mv.addObject("RATE", rate);
+		mv.addObject("LIST", list);		// 실제 조회 목록
+		mv.setViewName("/diary/user/graphy/chart");
+		return mv;
+	}
+	
 }
 
 

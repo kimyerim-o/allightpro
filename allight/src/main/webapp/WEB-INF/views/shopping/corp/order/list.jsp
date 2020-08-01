@@ -35,8 +35,7 @@
 	<div class="container">
 		<div class="searchDiv">
 			<!-- 검색전 -->
-			<c:if
-				test="${empty param.start && empty param.last && empty param.type}">
+			<c:if test="${empty param.start && empty param.last && empty param.type}">
 				<form id="searchF">
 					<select name="type" class="selectCss">
 						<option selected="selected">주문현황</option>
@@ -55,9 +54,9 @@
 				</form>
 			</c:if>
 			<!-- 검색후 -->
-			<c:if test="${!empty param.start || !empty param.last}">
+			<c:if test="${!empty param.type || !empty param.start || !empty param.last}">
 				<form id="searchF">
-					<select name="type" class="selectCss">
+					<select name="type" id="type" class="selectCss">
 						<option selected="selected">주문현황</option>
 						<option value="결제완료">결제완료</option>
 						<option value="배송준비중">배송준비중</option>
@@ -111,7 +110,7 @@
 
 		<div class="center">
 			<ul class="pagination">
-				<li><c:if test="${PINFO.nowPage > 3}">param.start && empty param.last && empty param.type
+				<li><c:if test="${PINFO.nowPage > 3}">
 						<a
 							href="${pageContext.request.contextPath}/order/list/corp.com?nowPage=${PINFO.nowPage-3}&type=${param.type}&start=${param.start}&last=${param.last}">«</a>
 					</c:if> <c:if test="${PINFO.nowPage <= 3}">

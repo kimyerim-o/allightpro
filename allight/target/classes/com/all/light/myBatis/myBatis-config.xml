@@ -36,6 +36,8 @@
    		<typeAlias type="com.all.light.dto.CaldictionaryDTO" alias="calDTO"/>
    		<typeAlias type="com.all.light.dto.MyExerciseDTO" alias="myExerDTO"/>
    		<typeAlias type="com.all.light.dto.CartDTO" alias="cartDTO"/>
+   		<typeAlias type="com.all.light.dto.BuyDTO" alias="buyDTO"/>
+   		<typeAlias type="com.all.light.dto.FreeBoardDTO" alias="freDTO"/>
    </typeAliases>
    
    <mappers>
@@ -52,6 +54,8 @@
    		<mapper resource="/com/all/light/sql/CalrecipeSQL.xml"/>
    		<mapper resource="/com/all/light/sql/CaldictionarySQL.xml"/>
    		<mapper resource="/com/all/light/sql/CartSQL.xml"/>
+   		<mapper resource="/com/all/light/sql/BuySQL.xml"/>
+   		<mapper resource="/com/all/light/sql/FreeBoardSQL.xml"/>
    </mappers>
    
 </configuration>

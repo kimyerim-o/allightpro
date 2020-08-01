@@ -242,17 +242,20 @@ public class QuestionController {
 	public String deleteComm(QuestionDTO qdto) {
 		System.out.println("del"+qdto);
 		queSVC.deleteComm(qdto);
-		return "shopping/corp/question/check";
+		return "ok";
 	}
 	
 	//관리자(유저 단 7.13추가)
 	//목록보기(유저)
 	@RequestMapping("/question/list/user/admin")
-	public ModelAndView listUserAdmin(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+	public ModelAndView listUserAdmin(
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value = "search", required = false, defaultValue = "") String searchWord,
+			@RequestParam(value = "type", required = false, defaultValue = "qtitle") String searchType,
 			HttpSession session, ModelAndView mv) {	
-		PageUtil pinfo = queSVC.getPageInfoUser(nowPage);
-		ArrayList<QuestionDTO> list = queSVC.totalListUser(pinfo);
-		mv.addObject("PINFO", pinfo); //페이징 정보
+		PageUtil pInfo = queSVC.getPageInfoUser(nowPage,searchWord, searchType);
+		ArrayList<QuestionDTO> list = queSVC.totalListUser(pInfo);
+		mv.addObject("PINFO", pInfo); //페이징 정보
 		mv.addObject("LIST", list); //문의사항 상세 정보
 		System.out.println(list.toString());
 		mv.setViewName("diary/admin/question/questionList");

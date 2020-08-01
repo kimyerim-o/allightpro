@@ -1,6 +1,5 @@
 package com.all.light.dao;
 
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +12,12 @@ public class CartDAO extends SqlSessionDaoSupport {
 	@Autowired
 	SqlSessionTemplate session;
 
+	//장바구니 가져오기
+	public List<CartDTO> cart(String mid) {
+		List<CartDTO> list = session.selectList("Cart.cart", mid);
+		return list;
+	}
+	
 	//장바구니에 추가
 	public void insertCart(CartDTO cartdto, String mid) {
 		System.out.println("CartDAO - cart");
@@ -23,12 +28,6 @@ public class CartDAO extends SqlSessionDaoSupport {
 	    map.put("caprice", cartdto.getCaprice());
 		session.insert("Cart.insertCart", map);
 	}
-
-	//장바구니 가져오기
-	public List<CartDTO> cart(String mid) {
-		List<CartDTO> list = session.selectList("Cart.cart", mid);
-		return list;
-	}
 	
 	//아이템번호로 아이템이름 가져오기
 	public CartDTO items(int ino) {
@@ -36,13 +35,23 @@ public class CartDAO extends SqlSessionDaoSupport {
 		return cartdto;
 	}
 
-	//카트에서 해당 아이디의 ino count
+	//같은 상품이 장바구니에 존재하는지 확인
+	public int isIno(int ino, String mid) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("ino", ino);
+		map.put("mid", mid);
+		int isIno = session.selectOne("Cart.isIno",map);
+		return isIno;
+	}
+		
+	//카트에서 해당 아이디의 상품 수량 조회
 	public int inoCount(int ino, String mid) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("ino", ino);
 		map.put("mid", mid);
-		int count = session.selectOne("Cart.inoCount",map);
-		return count;
+		int thisIno = session.selectOne("Cart.inoCount",map);
+		System.out.println("카트디A오="+thisIno);
+		return thisIno;
 	}
 
 	//같은상품 있을때 수량 업데이트
@@ -75,5 +84,5 @@ public class CartDAO extends SqlSessionDaoSupport {
 		String image = session.selectOne("Cart.image",ino);
 		return image;
 	}
-	
+
 }

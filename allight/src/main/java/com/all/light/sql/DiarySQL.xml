@@ -193,6 +193,28 @@
 		update diary set dimage = null 
 		where dno = #{dno}
 	</update>
+	
+	<!--차트정보 추출 -->
+	<select id="getchart" resultType="diaryDTO" parameterType="diaryDTO">
+	select mid,to_char(ddate, 'MM') as month, to_char(ddate, 'DD') as day, dweight,dexercal,dfoodcal from (select diary.*,EXTRACT(MONTH FROM ddate) as mm,EXTRACT(YEAR FROM ddate) as yy from diary) 
+	where mid = #{mid} and mm=#{month} and yy=#{year} order by day
+	</select>
 
+	<select id="calrecipe" resultType="creDTO" parameterType="diaryDTO">
+	select * from calrecipe where crno=(select MAX(crno) from calrecipe where mid=#{mid} and TO_CHAR(crdate, 'YYYY-MM-DD') &lt;= #{ddate})
+	</select>
+	
+	<update id="recipeup" parameterType="creDTO">
+	update diary set crno=#{crno},crcal=#{crcal} where dno=#{age}
+	</update>
+	
+	<update id="success" parameterType="diaryDTO">
+	update diary set dsucc=#{dsucc} where dno=#{dno}
+	</update>
+	
+	<select id="getrate" parameterType="diaryDTO" resultType="diaryDTO">
+	select count(*) as dsucc,month from (SELECT EXTRACT(MONTH FROM ddate) as month,EXTRACT(YEAR FROM ddate) as year FROM diary where mid=#{mid} and dsucc=1) where year=#{year} GROUP by month order by month
+	</select>
+	
 </mapper>
 	

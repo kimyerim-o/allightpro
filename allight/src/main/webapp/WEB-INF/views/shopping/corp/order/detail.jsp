@@ -16,11 +16,53 @@
 				 });
 				//변경
 				$("#serb").click(function() {
+					/* alert($("#status").text());
+					alert($("#com").val());
+					alert($("#num").val()); */
+					if($("#status option:selected").val()=='배송시작'){
+						if($("#com").val()=="" ||$("#num").val()==""){
+							alert("택배회사와 송장번호를 입력하세요.")
+						}
+					}
 					$("#statfrm").submit();
 				});
 				//택배
 				$("#delib").click(function() {
+					if($("#com").val()==""){
+						alert("택배회사를 입력하세요.")
+						$("#com").focus();
+						return false;
+					}
+					if($("#num").val()==""){
+						alert("송장번호를 입력하세요.")
+						$("#num").focus();
+						return false;
+					}
+					if($("#ost").text()!="배송시작"){
+						alert("상태를 배송시작으로 변경하세요.")
+						$("#status").focus();
+						return false;
+					}
 					$("#delifrm").submit();
+				});
+				
+				$("#mail").click(function() {
+					//택배값 email
+					$.ajax({
+						url : "${pageContext.request.contextPath}/order/email/corp.com?no="+${param.no}+"&email=${ORDER.mdto1.memail}&text="+$("#ost").text(),
+						type : "POST",
+						success : function(data) {   
+							if (data == "ok") {
+								alert("이메일 발송이 완료되었습니다.")
+							}else if(data == "x"){
+								alert("이메일 발송을 할 수 없는 상태입니다.")
+							}else{
+								alert("이메일 발송을 실패했습니다.")
+							} 
+						}, error : function() {
+							console.log("실패");
+						}
+					});
 				});
 			})
 </script>
@@ -76,11 +118,12 @@
 						</ul></td>
 					<td class="order_amount">
 						<ul>
-							<li class="order_pay_info qq-9">${ORDER.oddto1.ostatus}</li>
+							<li class="order_pay_info qq-9" id="ost">${ORDER.oddto1.ostatus}</li>
 							<li><form id="statfrm" action="${pageContext.request.contextPath}/order/change/corp.com">
 									<input type="hidden" name="odno" value="${ORDER.oddto1.odno}">
 									<input type="hidden" name="ino" value="${ORDER.oddto1.ino}">
-									<select name="ostatus" class="selectCss">
+									<input type="hidden" name="odamount" value="${ORDER.oddto1.odamount}">
+									<select name="ostatus" class="selectCss" id="status">
 										<option selected="selected">상태변경</option>
 										<option value="배송준비중">배송준비중</option>
 										<option value="배송시작">배송시작</option>
@@ -98,7 +141,7 @@
 		<div class="order_detail mt60">
 			<h3 class="order_detail_tit">주문자 정보</h3>
 			<table class="tbl" cellspacing="0" border="1" summary="정보">
-				<caption>정보</caption>
+				 
 				<colgroup>
 					<col width="140">
 					<col width="*">
@@ -124,7 +167,7 @@
 		<div class="order_detail mt60">
 			<h3 class="order_detail_tit">배송지 정보</h3>
 			<table class="tbl" cellspacing="0" border="1" summary="정보">
-				<caption>정보</caption>
+				 
 				<colgroup>
 					<col width="140">
 					<col width="*">
@@ -148,17 +191,16 @@
 						<th><span>배송요청사항</span></th>
 						<td>${ORDER.odto1.orequirethings}</td>
 					</tr>
-					<form id="delifrm"
-						action="${pageContext.request.contextPath}/order/delivery/corp.com">
+					<form id="delifrm" action="${pageContext.request.contextPath}/order/delivery/corp.com">
 						<tr>
 							<input type="hidden" name="odno" value="${ORDER.oddto1.odno}">
-							<td><span>택배회사</span></td>
-							<td><input type="text" name="ocouriercompany" value="${ORDER.oddto1.ocouriercompany}"></td>
+							<th><span>택배회사</span></th>
+							<td><input type="text" name="ocouriercompany" id="com" value="${ORDER.oddto1.ocouriercompany}"></td>
 						</tr>
 						<tr>
-							<td><span>송장번호</span></td>
-							<td><input type="text" name="oinvoicenumber" value="${ORDER.oddto1.oinvoicenumber}"> <input
-								type="button" id="delib" value="확인"></td>
+							<th><span>송장번호</span></th>
+							<td><input type="text" name="oinvoicenumber" id="num" value="${ORDER.oddto1.oinvoicenumber}"> <input
+								type="button" id="delib" value="확인"><input	type="button" id="mail" value="이메일발송"></td>
 						</tr>
 					</form>
 				</tbody>
@@ -169,7 +211,7 @@
 		<div class="order_detail mt60" id="div_cost_info">
 			<h3 class="order_detail_tit">결제 정보</h3>
 			<table class="tbl" cellspacing="0" border="1" summary="정보">
-				<caption>정보</caption>
+				 
 				<colgroup>
 					<col width="140">
 					<col width="*">
@@ -190,12 +232,6 @@
 						<th>승인일시</th>
 						<td>2020-04-05 오후 10:17:32</td>
 					</tr>
-
-					<tr>
-						<th>적립금</th>
-						<td><strong class="fctah">130</strong>원</td>
-					</tr>
-
 				</tbody>
 			</table>
 		</div>

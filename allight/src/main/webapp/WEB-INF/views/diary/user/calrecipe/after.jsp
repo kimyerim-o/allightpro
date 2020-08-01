@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
 $(function(){
 	$('#check').click(function(){
-		$("#check").attr('href','${pageContext.request.contextPath}/calorie_recipe.com');
+		$("#check").attr('href','${pageContext.request.contextPath}/recipeRe.com');
 	});
 })
 </script>
@@ -19,7 +20,7 @@ $(function(){
 		<table class="table">
 			<tr>
 				<th>총 감량기간</th>
-				<td>${LIST.crterm}${LIST.type}</td>
+				<td>${LIST.crterm}<c:if test="${empty sessionScope.MID}">${LIST.type}</c:if></td>
 			</tr>
 			<tr>
 				<th>현제 체중</th>
@@ -35,11 +36,11 @@ $(function(){
 			</tr>
 			<tr>
 				<th>평소 활동량</th>
-				<td><c:if test="${LIST.cractive ==1}">111</c:if>
-					<c:if test="${LIST.cractive ==2}">211</c:if>
-					<c:if test="${LIST.cractive ==3}">311</c:if>
-					<c:if test="${LIST.cractive ==4}">411</c:if>
-					<c:if test="${LIST.cractive ==5}">511</c:if>
+				<td><c:if test="${LIST.cractive ==1}">활동안함 (운동을 전혀 안 해요.)</c:if>
+					<c:if test="${LIST.cractive ==2}">가벼운 활동 (평소 가벼운 운동이나 스포츠를 즐겨요)</c:if>
+					<c:if test="${LIST.cractive ==3}">보통 활동 (평소 적당한 운동이나 스포츠를 즐겨요.)</c:if>
+					<c:if test="${LIST.cractive ==4}">많은 활동 (평소 강렬한 운동이나 스포츠를 즐겨요.)</c:if>
+					<c:if test="${LIST.cractive ==5}">격심한 활동 (평소 매우 심한 운동을 하거나 육체를 쓰는 직업이예요.)</c:if>
 				</td>
 			</tr>
 			<tr>
@@ -55,7 +56,44 @@ $(function(){
 		</table>
 		<div>
 			<a class="btn" id="check">칼로리 처방 다시 받기</a>
+			<c:if test="${!empty sessionScope.MID}">
+				<a href="javascript:;" id="kakao-link-btn">
+				<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" width="10px" />
+				</a>
+			</c:if>
 		</div>
 	</div>
+
+<script type="text/javascript">
+    Kakao.init('52ee84c11b882c5898d68b339bf4f9d0');
+    //alert(document.location.href);
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',
+      objectType: 'feed',
+      content: {
+        title: document.title,
+        description: '칼로리 처방',
+        imageUrl: "${pageContext.request.contextPath}/resources/img/allight_logo.jpg",
+        link: {
+          webUrl: document.location.href
+        }
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845
+      },
+      buttons: [
+        {
+          title: 'Open!',
+          link: {
+            mobileWebUrl: document.location.href,
+            webUrl: document.location.href
+          }
+        }  
+      ]
+    });
+  //]]>
+</script>
 </body>
 </html>

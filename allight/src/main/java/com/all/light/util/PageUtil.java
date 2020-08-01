@@ -25,14 +25,18 @@ public class PageUtil {
 	
 	//리뷰컨트롤러에서 필요한 파라미터
 	private String rid;
+	//기업 리뷰모아보기에서 사용
+	private String coname;
 	//QuestionSQL에서 사용(마이페이지 리스트출력하기용)
 	private String qid;
 	private int qno; //(문의사항 댓글 출력용)
-	//자유게시판 구분자
+	//자유게시판
 	private String ftype;
+	private String fid;
+	private int fno; //(자유게시판 댓글 출력용)
 	
 	public PageUtil(int nowPage, int totalCount) {
-		this(nowPage, totalCount, 5, 5);
+		this(nowPage, totalCount, 2, 5);
 	}
 	
 	public PageUtil(int nowPage, int totalCount, int lineCount, int pageGroup) {
@@ -103,6 +107,30 @@ public class PageUtil {
 
 
 	
+	public String getConame() {
+		return coname;
+	}
+
+	public void setConame(String coname) {
+		this.coname = coname;
+	}
+
+	public String getFid() {
+		return fid;
+	}
+
+	public void setFid(String fid) {
+		this.fid = fid;
+	}
+
+	public int getFno() {
+		return fno;
+	}
+
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+
 	public String getFtype() {
 		return ftype;
 	}
@@ -215,7 +243,8 @@ public class PageUtil {
 		return "PageUtil [nowPage=" + nowPage + ", totalCount=" + totalCount + ", lineCount=" + lineCount
 				+ ", pageGroup=" + pageGroup + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", startNo=" + startNo + ", endNo=" + endNo + ", searchWord=" + searchWord + ", searchType="
-				+ searchType + ", rid=" + rid + ", qid=" + qid + ", qno=" + qno + ", ftype=" + ftype + "]";
+				+ searchType + ", rid=" + rid + ", coname=" + coname + ", qid=" + qid + ", qno=" + qno + ", ftype="
+				+ ftype + ", fid=" + fid + ", fno=" + fno + "]";
 	}
 }
 

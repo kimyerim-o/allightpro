@@ -48,7 +48,7 @@
 	<!-- 댓글작성 -->
 	<insert id="insertComm" parameterType="queDTO">
 		insert into questioncomment
-		values(qcno_seq.nextval,#{qno},#{qcid},#{qccontent},sysdate)
+		values(qcno_seq.nextval,#{qno},#{qcid},#{qccontent},sysdate,#{qcnick})
 	</insert>
 
 	<!-- 댓글삭제 -->
@@ -61,22 +61,32 @@
 	<select id="totalCnt" resultType="Integer">
 		select count(*) from question where qtype=1
 	</select>
-	<select id="totalCntUser" resultType="Integer">
-		select count(*) from question where qtype=0
+	<select id="totalCntUser" resultType="Integer" parameterType="PageUtil">
+		select count(*) 
+		from question 
+		where qtype=0
+		and (${searchType} like '%${searchWord}%')
 	</select>
 
 	<!-- 전체게시물 -->
 	<select id="totalList" resultType="queDTO"
 		parameterType="PageUtil">
-		select * from (select row_number() over( order by question.qno ) as
-		rno,question.* from question where qtype=1) where rno between
-		${startNo} and ${endNo} order by rno desc
+		select * from (select row_number() over( order by question.qno ) as	rno,
+									question.* 
+									from question 
+									where qtype=1)
+		where rno between	${startNo} and ${endNo} 
+		order by rno desc
 	</select>
 	<select id="totalListUser" resultType="queDTO"
 		parameterType="PageUtil">
-		select * from (select row_number() over( order by question.qno ) as
-		rno,question.* from question where qtype=0) where rno between
-		${startNo} and ${endNo} order by rno desc
+		select * from (select row_number() over( order by question.qno ) as rno,
+									question.* 
+									from question 
+									where qtype=0
+									and (${searchType} like '%${searchWord}%'))
+		where rno between	${startNo} and ${endNo} 
+		order by rno desc
 	</select>
 
 	<!-- 제목 수 찾기 -->
@@ -113,7 +123,7 @@
 	<!-- 글쓰기 -->
 	<insert id="userInsert" parameterType="queDTO">
 		insert into question
-		values(qno_seq.nextval,#{qtitle},#{qid},sysdate,#{qcontent},#{qtype})
+		values(qno_seq.nextval,#{qtitle},#{qid},sysdate,#{qcontent},#{qtype}, #{qnick})
 	</insert>
 
 	<!-- 게시물 수 찾기 -->

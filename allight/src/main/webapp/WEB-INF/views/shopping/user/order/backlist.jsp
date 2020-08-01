@@ -9,28 +9,25 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 	$(
-			function() {
-				//검색
-				$("#searb")
-						.click(
-								function() {
-									var form = $("#searchF").serialize();
-									$
-											.ajax({
-												url : "${pageContext.request.contextPath}/order/back.com?term=${param.term}",
-												type : 'get',
-												data : form,
-												success : function(data) {
-													alert(form);
-													location.href = "${pageContext.request.contextPath}/order/back.com?term=${param.term}&"
-															+ form;
-												},
-												error : function(xhr, status) {
-													alert(xhr + " : " + status);
-												}
-											});
-								});
-			})
+		function() {
+			//검색
+			$("#searb").click(
+					function() {
+						var form = $("#searchF").serialize();
+						$.ajax({
+							url : "${pageContext.request.contextPath}/order/mypage/back.com?term=${param.term}",
+							type : 'get',
+							data : form,
+							success : function(data) {
+								location.href = "${pageContext.request.contextPath}/order/mypage/back.com?term=${param.term}&"
+										+ form;
+							},
+							error : function(xhr, status) {
+								alert(xhr + " : " + status);
+							}
+					});
+			});
+		})
 </script>
 </head>
 <body>

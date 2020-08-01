@@ -26,7 +26,11 @@
 			var qcid =  "${sessionScope.MID}";
 			var qccontent = $("#qccontent").val();
 			var param = {"qno" : qno, "qcid" : qcid , "qccontent" : qccontent};
-			alert(JSON.stringify(param));
+			//alert(JSON.stringify(param));
+			if(qccontent==null || qccontent == ""){
+				alert("댓글을 작성해주세요.")
+				return false;
+			}
 		$.ajax({
 			type: "post", //데이터를 보낼 방식
 			url: "${pageContext.request.contextPath}/question/wcomment.com", //데이터를 보낼 url
@@ -44,8 +48,9 @@
 		
 		//댓글 삭제
 		$(".dcomm").click(function(){
+			alert($(event.target).attr('data-no'))
 			 if(confirm("삭제 하시겠습니까?")){
-				 var qcno = $("#qcno").val();
+				 var qcno = $(event.target).attr('data-no');
 				 var param = {"qcno" : qcno}
 			$.ajax({
 				type: "post", //데이터를 보낼 방식
@@ -115,7 +120,6 @@
 				<div class="boardContent-Comment-Table">
 					<table width="100%" style="border-top: 1px solid gray;">
 						<c:forEach items="${COMM}" var="c">
-						<input type="hidden" id="qcno" value="${c.qcno}"/>
 						<tr>
 							<td colspan="100%" class="board-comment-info"><a class="board-info-nick">${c.qcid}</a>&nbsp;&nbsp; 
 								<a class="board-info-others">작성일 ${c.qcdate}</a></td>
@@ -123,13 +127,7 @@
 						<tr>
 							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
-								<c:if test="${c.qcid eq sessionScope.MID}">
-									<a class="ucomm" style="color: #ff5656;">수정</a>
-									<a class="dcomm" style="color: #ff5656;">삭제</a>
-								</c:if>
-								<c:if test="${sessionScope.MTYPE == 1}">
-									<a class="dcomm" style="color: #ff5656;">삭제</a>
-								</c:if>
+								<a class="dcomm" data-no="${c.qcno}" style="color: #ff5656;">삭제</a>
 							</td>
 						</tr>
 						</c:forEach>

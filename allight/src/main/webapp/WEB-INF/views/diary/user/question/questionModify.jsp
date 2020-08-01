@@ -61,9 +61,9 @@
 						<td class="board-info"><a class="board-info-nick">작성자</a></td>
 						<td class="board-info"><a class="board-info-nick">${DETAIL.qid}</a></td>
 						<input type="hidden" value="${DETAIL.qid}" name="qid">
-						<td class="board-info"><a class="board-info-others">수정일 </a></td>
+						<td class="board-info"><a class="board-info-others">작성일 </a></td>
 						<td class="board-info"><a class="board-info-others"><input
-								type="text" disabled="disabled" value="${sessionScope.DATE}"
+								type="text" disabled="disabled" value="${DETAIL.qdate}"
 								name="qdate"></a></td>
 					</tr>
 					<tr>

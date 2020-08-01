@@ -12,6 +12,7 @@ import com.all.light.dto.MemberDTO;
 import com.all.light.dto.OrderDTO;
 import com.all.light.dto.OrderData;
 import com.all.light.dto.OrderdetailDTO;
+import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.util.PageUtil;
 
@@ -32,9 +33,12 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	}
 
 	public void change(OrderdetailDTO oddto) {
+		System.out.println(oddto.getOstatus());
+		System.out.println(oddto.getOdamount());
 		if(oddto.getOstatus().equals("배송시작")) {
 			session.update("order.change",oddto);
 			session.update("order.changeStock",oddto);
+			session.update("order.changeIsell",oddto);
 		}else {
 			session.update("order.change",oddto);
 		}
@@ -52,7 +56,7 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	public ArrayList<OrderDTO> backlist(OrderDTO odto) {
 		ArrayList<OrderDTO> list=null;
 		System.out.println(odto.getType());
-		if(odto.getType()==null) {
+		if(odto.getType()==null || odto.getType().isEmpty()) {
 			list=(ArrayList)session.selectList("order.backlist", odto);
 		}else if(odto.getType()!=null) {
 			list=(ArrayList)session.selectList("order.backlist2", odto);
@@ -63,7 +67,7 @@ public class OrderDAO extends SqlSessionDaoSupport {
 	
 	public ArrayList<OrderdetailDTO> back(OrderdetailDTO oddto) {
 		ArrayList<OrderdetailDTO> listde=null;
-		if(oddto.getType()==null) {
+		if(oddto.getType()==null || oddto.getType().isEmpty()) {
 			listde=(ArrayList)session.selectList("order.back", oddto);
 		}else if(oddto.getType()!=null) {
 			listde=(ArrayList)session.selectList("order.back2", oddto);
@@ -100,7 +104,7 @@ public class OrderDAO extends SqlSessionDaoSupport {
 
 	public ArrayList<OrderdetailDTO> listdeCorp(PageUtil pinfo) {
 		ArrayList<OrderdetailDTO> listde=null;
-		if(pinfo.getSearchType()==null) {
+		if(pinfo.getSearchType()==null || pinfo.getSearchType().isEmpty()) {
 			listde=(ArrayList)session.selectList("order.listdeCorp", pinfo);
 		}else {
 			listde=(ArrayList)session.selectList("order.listdeCorpType", pinfo);
@@ -152,6 +156,11 @@ public class OrderDAO extends SqlSessionDaoSupport {
 		int totalCnt = session.selectOne("order.pageOrderConoTermType",map);
 		System.out.println(totalCnt);
 		return totalCnt;
+	}
+
+	public void reviewr(ReviewDTO rdto) {
+		session.insert("review.reviewWrite",rdto);
+		session.update("order.review",rdto);
 	}
 
 

@@ -1,6 +1,7 @@
 package com.all.light.dao;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.CaldictionaryDTO;
+import com.all.light.dto.CalrecipeDTO;
 import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.MyExerciseDTO;
 import com.all.light.dto.MyFoodDTO;
@@ -280,8 +282,33 @@ public class DiaryDAO extends SqlSessionDaoSupport {
 			System.out.println("diary 이미지 삭제 성공");
 		}
 	}
-	
-	
+
+
+	public ArrayList getchart(DiaryDTO ddto) {
+		return (ArrayList)session.selectList("diary.getchart", ddto);
+	}
+
+	//calrecipe
+	public CalrecipeDTO calrecipe(DiaryDTO diary) {
+		int dno=diary.getDno();
+		CalrecipeDTO cdto=session.selectOne("diary.calrecipe", diary);
+		System.out.println(cdto);
+		if(cdto!=null) {
+			cdto.setAge(dno);
+			session.update("diary.recipeup", cdto);
+		}
+		return cdto;
+	}
+
+
+	public void success(DiaryDTO diary) {
+		session.update("diary.success",diary);
+	}
+
+
+	public List<DiaryDTO> getrate(DiaryDTO ddto) {
+		return session.selectList("diary.getrate", ddto);
+	}
 	
 	
 	

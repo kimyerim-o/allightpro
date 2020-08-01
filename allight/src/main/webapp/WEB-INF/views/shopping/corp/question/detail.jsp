@@ -32,6 +32,10 @@
 			var qccontent = $("#qccontent").val();
 			var param = {"qno" : qno, "qcid" : qcid , "qccontent" : qccontent};
 			//alert(JSON.stringify(param))
+			if(qccontent==null || qccontent == ""){
+				alert("댓글을 작성해주세요.")
+				return false;
+			}
 		$.ajax({
 			type: "post", //데이터를 보낼 방식
 			url: "${pageContext.request.contextPath}/question/wcomment.com", //데이터를 보낼 url
@@ -48,6 +52,7 @@
 		
 		//댓글 삭제
 		$(".dcomm").click(function(){
+			//alert($(event.target).attr('data-no'))
 			 if(confirm("삭제 하시겠습니까?")){
 				 var qcno = $(event.target).attr('data-no');
 				 var param = {"qcno" : qcno}
@@ -136,10 +141,7 @@
 							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
 								<c:if test="${c.qcid eq sessionScope.COID}">
-									<a class="ucomm" data-no="${c.qcno}" style="color: #ff5656;">수정</a>
-									<a class="dcomm" data-no="${c.qcno}" style="color: #ff5656;">삭제</a>
-								</c:if>
-								<c:if test="${sessionScope.MTYPE == 1 }">
+									<%-- <a class="ucomm" data-no="${c.qcno}" style="color: #ff5656;">수정</a --%>
 									<a class="dcomm" data-no="${c.qcno}" style="color: #ff5656;">삭제</a>
 								</c:if>
 							</td>

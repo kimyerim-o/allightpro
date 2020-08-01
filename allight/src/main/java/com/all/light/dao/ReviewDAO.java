@@ -14,7 +14,7 @@ public class ReviewDAO extends SqlSessionDaoSupport {
 	SqlSessionTemplate session;
 
 	public int getTotalCnt(PageUtil pInfo) {
-		return session.selectOne("review.getTotalCnt", pInfo); 
+		return session.selectOne("review.getTotalCnt", pInfo);
 	}
 	
 	public ArrayList getList(PageUtil pInfo) {
@@ -37,5 +37,16 @@ public class ReviewDAO extends SqlSessionDaoSupport {
 	public void reviewUpdate(ReviewDTO revDTO) {
 		session.update("review.reviewUpdate",revDTO);
 	}
+
+	public int getTotalCntCorp(PageUtil pInfo) {
+		return session.selectOne("review.getTotalCntCorp", pInfo);
+	}
 	
+	public ArrayList<ReviewDTO> getListCorp(PageUtil pInfo) {
+		return (ArrayList) session.selectList("review.getListCorp", pInfo); 
+	}
+
+	public void reviewDeleteCorp(ReviewDTO revDTO) {
+		session.delete("review.reviewDeleteCorp",revDTO);
+	}
 }

@@ -5,6 +5,7 @@ import java.io.File;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -549,7 +550,7 @@ public class DiaryController {
 		ddto.setMonth(mon);
 		ddto.setMid((String)session.getAttribute("MID"));
 		ArrayList<DiaryDTO> list = diaSVC.getchart(ddto);
-		List<DiaryDTO> rate = diaSVC.getrate(session,ddto);
+		HashMap rate = diaSVC.getrate(session,ddto);
 		System.out.println(rate);
 		mv.addObject("RATE", rate);
 		mv.addObject("LIST", list);		// 실제 조회 목록

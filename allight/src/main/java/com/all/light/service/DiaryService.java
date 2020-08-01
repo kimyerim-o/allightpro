@@ -318,11 +318,11 @@ public class DiaryService {
 	}
 	
 	// 성공률 계산
-	public List<DiaryDTO> getrate(HttpSession session, DiaryDTO ddto) {
+	public HashMap getrate(HttpSession session, DiaryDTO ddto) {
 		ArrayList<DiaryDTO> list = diaDAO.getchart(ddto);
 		Calendar cal = Calendar.getInstance();
 		//성공
-		List<DiaryDTO> rate=diaDAO.getrate((String) session.getAttribute("MID"));
+		List<DiaryDTO> rate=diaDAO.getrate(ddto);
 		for(int i=0;i<rate.size();i++) {
 			Double mon=(double) Integer.parseInt(rate.get(i).getMonth());
 			Double succ=(double) rate.get(i).getDsucc();
@@ -331,20 +331,16 @@ public class DiaryService {
 			rate.get(i).setRate(dsucc);
 		}
 		
-		/*List<DiaryDTO> nn=new ArrayList();
+		HashMap map=new HashMap();
 		for(int i=0;i<12;i++) {
-			DiaryDTO dto=new DiaryDTO();
-			dto.setMm(i+1);
-			dto.setRate(0.0);
-			nn.set(i, dto);
+			map.put(i+1, 0.0);
 			for(int j=0;j<rate.size();j++) {
 				if(Integer.parseInt(rate.get(j).getMonth())==i+1) {
-					nn.get(i).setRate(rate.get(j).getRate());
+					map.put(i+1, rate.get(j).getRate());
 				}
 			}
 		}
-		System.out.println(nn);*/
-		return rate;
+		return map;
 	}
 
 	//calrecipe

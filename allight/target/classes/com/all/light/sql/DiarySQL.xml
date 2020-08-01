@@ -212,8 +212,8 @@
 	update diary set dsucc=#{dsucc} where dno=#{dno}
 	</update>
 	
-	<select id="getrate" parameterType="String" resultType="diaryDTO">
-	select count(*) as dsucc,month from (SELECT EXTRACT(MONTH FROM ddate) as month FROM diary where mid=#{mid} and dsucc=1) GROUP by month order by month
+	<select id="getrate" parameterType="diaryDTO" resultType="diaryDTO">
+	select count(*) as dsucc,month from (SELECT EXTRACT(MONTH FROM ddate) as month,EXTRACT(YEAR FROM ddate) as year FROM diary where mid=#{mid} and dsucc=1) where year=#{year} GROUP by month order by month
 	</select>
 	
 </mapper>

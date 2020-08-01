@@ -306,8 +306,8 @@ public class DiaryDAO extends SqlSessionDaoSupport {
 	}
 
 
-	public List<DiaryDTO> getrate(String mid) {
-		return session.selectList("diary.getrate", mid);
+	public List<DiaryDTO> getrate(DiaryDTO ddto) {
+		return session.selectList("diary.getrate", ddto);
 	}
 	
 	

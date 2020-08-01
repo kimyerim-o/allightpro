@@ -163,7 +163,7 @@
     <div id="container1" class="show"></div>
     <div id="container2" class="hidden"></div>
     <div id="container3" class="hidden"></div>
-    <div id="container4"></div>
+    <div id="container4" class="hidden"></div>
 </figure>
 
 <script>
@@ -284,15 +284,13 @@ Highcharts.chart('container4', {
 	    name: 'Success Rate',
 	    type: 'column',
 	    yAxis: 0,
-	    data: [<c:forEach var="rate" items="${RATE}">${rate.rate},</c:forEach>],
+	    data: [<c:forEach var="rate" items="${RATE}">${rate.value},</c:forEach>],
 	    tooltip: {
 	      valueSuffix: ' %'
 	    }
 	  }]
 	});
 </script>
-<c:forEach var="rate" items="${RATE}">
-${rate.rate},</c:forEach>
 
 </body>
 </html>

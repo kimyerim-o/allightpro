@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.FreeBoardDTO;
 import com.all.light.service.FreeBoardService;
 import com.all.light.util.FileUtil;
@@ -787,4 +789,94 @@ public class FreeBoardController {
 			mv.setView(rv);
 			return mv;
 		} 
+		
+		// 다이어리에서 글쓰기(지영)
+		@RequestMapping(value="/freeboard/diaryWriteFrm")
+		public ModelAndView freeBoardDiaryWriteFrm(
+				HttpServletRequest request, 
+				ModelAndView mv, 
+				FreeBoardDTO fdto,
+				@RequestParam(value = "src", required = false, defaultValue = "_") String src,
+				int num){
+			System.out.println("FreeBoardController.freeBoardDiaryWriteFrm");
+			System.out.println("dno: " + num);
+			System.out.println(fdto);
+			
+			if(!src.equals("_")) {
+				System.out.println("src: " + src);
+				mv.addObject("src",src);
+			}
+			
+			mv.addObject("FDTO",fdto);
+			mv.addObject("num",num);
+			mv.setViewName("diary/user/freeboard/boardDiaryWrite");
+			return mv;
+		}
+		
+		@RequestMapping(value="/freeboard/diaryWrite")
+		public ModelAndView freeBoardDiaryWrite(
+				HttpServletRequest request, 
+				ModelAndView mv, 
+				RedirectView rv, 
+				FreeBoardDTO fdto,
+				int num,
+				int imgdel){
+			System.out.println("FreeBoardController.freeBoardDiaryWrite");
+			String id = (String)request.getSession().getAttribute("MID");
+			String nick = (String)request.getSession().getAttribute("MNICK");
+			//파라미터 전달
+			fdto.setFid(id);
+			fdto.setFnick(nick);
+			
+			// - 첨부파일 처리
+			String path="D:\\upload";
+			ArrayList list= new ArrayList();
+
+			//변화사진을 업로드하려 할때 
+			// imgdel  0:변화사진 첨부, 1:변화사진 있는데 없앴음, 2:변화사진 원래 없었음
+			if(imgdel==0) {
+				DiaryDTO dto = freSVC.getByDno(num); //해당 다이어리의 이미지,원래이름 가져오기
+				
+				HashMap map = new HashMap();
+				map.put("path", path);
+				map.put("oriName", dto.getDoriimage());
+				map.put("saveName",dto.getDimage().substring(10));
+				map.put("len", 0l);
+				list.add(map);
+			}
+			
+			for(int i=0; i< fdto.getFiles().length ;i++ ) { //파일이 여러 개이니 각각의 파일마다 반복
+				//한 개씩 파일의 실제이름을 알아낸다
+				String oriName = 
+				  fdto.getFiles()[i].getOriginalFilename();
+				//파일이 업로드 되지 않으면 다음 작업을 시도한다
+				if( oriName==null||oriName.length()==0 ) {
+					continue;
+				}
+				String saveName = FileUtil.renameTo(path, oriName);
+				File file= new File(path, saveName);
+				//파일복사 : transferTo()
+				try {
+					fdto.getFiles()[i].transferTo(file);
+				}catch(Exception e) {
+					System.out.println("파일복사관련에러="+e);
+				}
+				//------------ 하나의 파일이 업로드된 상태
+				//업로드된 파일의 정보를 Map으로 묶는다
+				HashMap map = new HashMap();
+				map.put("path",    path);
+				map.put("oriName", oriName);
+				map.put("saveName",saveName);
+				map.put("len", file.length());
+				list.add(map);
+			}//end for
+				
+			System.out.println("파라미터 = "+fdto);
+			//비즈니스로직
+			freSVC.write(fdto,list);
+			//뷰지정
+			rv.setUrl(request.getContextPath()+"/mypage/freeboard/list.com"); 
+			mv.setView(rv);
+			return mv;
+		}
 }

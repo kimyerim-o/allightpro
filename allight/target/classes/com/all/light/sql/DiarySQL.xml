@@ -179,7 +179,7 @@
 	
 	<!-- 이미지 업로드 -->
 	<update id="updateDimage">
-		update diary set dimage = #{dimage}
+		update diary set dimage = #{dimage},doriimage = #{doriimage}
 		where dno = #{dno} 
 	</update>
 	

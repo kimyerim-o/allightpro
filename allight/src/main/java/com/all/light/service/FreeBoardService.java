@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.all.light.dao.FreeBoardDAO;
+import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.FreeBoardDTO;
 import com.all.light.dto.ReviewDTO;
 import com.all.light.util.PageUtil;
@@ -174,5 +175,11 @@ public class FreeBoardService {
 		}
 	}
 
-
+	//해당 다이어리의 이미지,원래이름 가져오기
+	public DiaryDTO getByDno(int dno) {
+		DiaryDTO dto = freDAO.getByDno(dno);
+		return dto;
 	}
+
+
+}

@@ -28,11 +28,17 @@ $(function(){
 	
 	// 몸무게 업데이트
 	$('#dweight').change(function(){
-		//var formData = new FormData();
-		//formData.append("num", ${num});
-		//formData.append("dweight", $('#dweight').val());
+		// 숫자만 입력하도록
+		var regexp = /^[0-9]*$/
+		var v = $(this).val();
+		if( !regexp.test(v) ) {
+			alert("숫자만 입력하세요");
+			$(this).val(v.replace(regexp,''));
+			return false;
+		}
+		
 		if('${DATE}'!=''){
-			formData.append("ddate", "${DATE}");
+			//formData.append("ddate", "${DATE}");
 			$.ajax({
 	            type : 'post',
 	            url : './updateDweight.com',
@@ -74,7 +80,7 @@ $(function(){
 		//formData.append("num", ${num});
 		//formData.append("ddiary", $('#ddiary').val());
 		if('${DATE}'!=''){
-			formData.append("ddate", "${DATE}");
+			//formData.append("ddate", "${DATE}");
 			$.ajax({
 	            type : 'post',
 	            url : './updateDdiary.com',
@@ -187,70 +193,79 @@ $(function(){
 	
 	// 게시판 등록 버튼 눌렀을 때
 	$('#toBoard').click(function(){
-		var title = "${DIARY.ddate} 기록";
-		var content = "";
-		var weight = $('#dweight').val();
-		var breakfast = "";
-		var lunch = "";
-		var dinner = "";
-		var snack = "";
-		var exercise = "";
-		var total = ${DIARY.dfoodcal - DIARY.dexercal};
-		var diary = $('#ddiary').val();
-		
-		
-		<c:forEach var="list" items="${FLIST}">
-			<c:if test="${list.mftype == '아침'}">
-				breakfast += "${list.mfname}(${list.mfamount}회분,${list.mfgram}g,${list.mftotalcal}kcal), "
-			</c:if>
-			<c:if test="${list.mftype == '점심'}">
-				lunch += "${list.mfname}(${list.mfamount}회분,${list.mfgram}g,${list.mftotalcal}kcal), "
-			</c:if>
-			<c:if test="${list.mftype == '저녁'}">
-				dinner += "${list.mfname}(${list.mfamount}회분,${list.mfgram}g,${list.mftotalcal}kcal), "
-			</c:if>
-			<c:if test="${list.mftype == '간식'}">
-				snack += "${list.mfname}(${list.mfamount}회분,${list.mfgram}g,${list.mftotalcal}kcal), "
-			</c:if>
-		</c:forEach>
-		
-		<c:forEach var="list" items="${ELIST}">
-			exercise += "${list.mename}(${list.metime}분${list.metotalcal}kcal), "
-		</c:forEach>
-		
-		if(weight != ""){
-			content += " - 몸무게: " + weight + "kg";
+		if('${num}'!='0' || '${num}'!=''){
+			if($('#dweight').val()=="" && $('#ddiary').val()=="" && ${empty DIARY.dimage} && ${empty FLIST} && ${empty ELIST}){
+				alert('등록할 내용이 없습니다.');
+				return false;
+			}else {
+				if(confirm('게시글을 등록하시겠습니까?')){
+					var title = "${DIARY.ddate} 기록";
+					var content = "";
+					var weight = $('#dweight').val();
+					var breakfast = "";
+					var lunch = "";
+					var dinner = "";
+					var snack = "";
+					var exercise = "";
+					var total = ${DIARY.dfoodcal - DIARY.dexercal};
+					var diary = $('#ddiary').val();
+					
+					
+					<c:forEach var="list" items="${FLIST}">
+						<c:if test="${list.mftype == '아침'}">
+							breakfast += "${list.mfname}(${list.mfamount}회분,${list.mfgram}g,${list.mftotalcal}kcal), "
+						</c:if>
+						<c:if test="${list.mftype == '점심'}">
+							lunch += "${list.mfname}(${list.mfamount}회분,${list.mfgram}g,${list.mftotalcal}kcal), "
+						</c:if>
+						<c:if test="${list.mftype == '저녁'}">
+							dinner += "${list.mfname}(${list.mfamount}회분,${list.mfgram}g,${list.mftotalcal}kcal), "
+						</c:if>
+						<c:if test="${list.mftype == '간식'}">
+							snack += "${list.mfname}(${list.mfamount}회분,${list.mfgram}g,${list.mftotalcal}kcal), "
+						</c:if>
+					</c:forEach>
+					
+					<c:forEach var="list" items="${ELIST}">
+						exercise += "${list.mename}(${list.metime}분${list.metotalcal}kcal), "
+					</c:forEach>
+					
+					if(weight != ""){
+						content += " - 몸무게: " + weight + "kg";
+					}
+					if(breakfast != ""){
+						content += "\n\n - 아침: " + breakfast.slice(0,-2);
+					}
+					if(lunch != ""){
+						content += "\n - 점심: " + lunch.slice(0,-2);
+					}
+					if(dinner != ""){
+						content += "\n - 저녁: " + dinner.slice(0,-2);
+					}
+					if(snack != ""){
+						content += "\n - 간식: " + snack.slice(0,-2);
+					}
+					if(exercise != ""){
+						content += "\n\n - 운동: " + exercise.slice(0,-2);
+					}
+					if(total.length != 0 && total!="0"){
+						content += "\n\n - 오늘의 칼로리: " + numberWithCommas(total) + "kcal";
+					}
+					if(diary != ""){
+						content += "\n\n - 일기: " + diary;
+					}
+					
+					content = content.trim();
+					
+				    $('#fcontent').val(content);
+				    $('#ftitle').val(title);
+				    
+				    $('#boardWriteFrm').submit();
+				}
+			}
+		}else {
+			alert('등록할 내용이 없습니다.');
 		}
-		if(breakfast != ""){
-			content += "\n\n - 아침: " + breakfast.slice(0,-2);
-		}
-		if(lunch != ""){
-			content += "\n - 점심: " + lunch.slice(0,-2);
-		}
-		if(dinner != ""){
-			content += "\n - 저녁: " + dinner.slice(0,-2);
-		}
-		if(snack != ""){
-			content += "\n - 간식: " + snack.slice(0,-2);
-		}
-		if(exercise != ""){
-			content += "\n\n - 운동: " + exercise.slice(0,-2);
-		}
-		if(total.length != 0 && total!="0"){
-			content += "\n\n - 오늘의 칼로리: " + numberWithCommas(total) + "kcal";
-		}
-		if(diary != ""){
-			content += "\n\n - 일기: " + diary;
-		}
-		
-		content = content.trim();
-		
-		alert(title+"\n"+content);
-	    
-	    $('#files').val($("#dimageFile")[0].files[0]);
-	    $('#fcontent').val(content);
-	    $('#ftitle').val(title);
-	    $('#boardWriteFrm').submit();
 	})
 })
 	
@@ -285,7 +300,7 @@ function updateDimage(input){
         success : function(data){
         	alert('사진등록이 완료되었습니다.')
 			window.location.href="./myFAE.com?num="+data+"#img";
-			//window.location.reload(true);
+			window.location.reload(true);
         }
   	});
 }
@@ -413,9 +428,13 @@ function numberWithCommas(x) {
 </form>
 
 <form action="${pageContext.request.contextPath}/freeboard/diaryWriteFrm.com" method="post" id="boardWriteFrm">
-	<input type="hidden" name="dimageFile" id="files"/>
+	<!-- <input type="hidden" name="dimageFile" id="files"/> -->
 	<input type="hidden" name="fcontent" id="fcontent"/>
 	<input type="hidden" name="ftitle" id="ftitle"/>
+	<input type="hidden" name="num" value="${num}"/>
+	<c:if test="${!empty DIARY.dimage}">
+		<input type="hidden" name="src" value="${DIARY.dimage}"/>
+	</c:if>
 </form>
 </body>
 </html>

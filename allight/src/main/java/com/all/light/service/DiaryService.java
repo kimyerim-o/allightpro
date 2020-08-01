@@ -294,10 +294,12 @@ public class DiaryService {
 	}
 
 	// 다이어리 이미지 업로드
-	public void updateDimage(int dno, String dimage) {
+	public void updateDimage(int dno, String dimage, String doriimage) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("dno", dno);
 		map.put("dimage", dimage);
+		map.put("doriimage", doriimage);
+		
 		diaDAO.updateDimage(map);
 	}
 

@@ -130,13 +130,13 @@ function loginCheck (){
 				<tr>
 					<td class="board-content" colspan="4">
 						<div class="board-content-div">
-							내용 <br /><c:forEach items="${FILE}" var="file">
+							<br /><c:forEach items="${FILE}" var="file">
 							<c:set var="path" value="/item/img/" />
 							<c:set var="name" value="${file.fiimg}" />
 							<img src="<c:out value="${path}"/><c:out value="${name}"/>" />
 							</c:forEach>
 							<br />
-							${DETAIL.fcontent}
+							<pre>${DETAIL.fcontent}</pre>
 						</div>
 					</td>
 				</tr>

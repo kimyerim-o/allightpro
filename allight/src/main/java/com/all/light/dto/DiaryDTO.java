@@ -14,7 +14,7 @@ public class DiaryDTO {
 	private int dexercal=0;		//총운동칼로리
 	private int dfoodcal=0;		//총음식칼로리
 	private String dimage;		//사진
-	private String savedimage;	//저장된 사진
+	private String doriimage;	//저장된 사진
 	private Double dweight=0.0;	//체중
 	private String ddiary;		//일기
 	private Date ddate;			//날짜
@@ -103,12 +103,7 @@ public class DiaryDTO {
 	public void setDdiary(String ddiary) {
 		this.ddiary = ddiary;
 	}
-	public String getSavedimage() {
-		return savedimage;
-	}
-	public void setSavedimage(String savedimage) {
-		this.savedimage = savedimage;
-	}
+	
 	
 	
 	// 날짜에 관련된 달력정보를 가지는 메서드
@@ -218,7 +213,7 @@ public class DiaryDTO {
 	@Override
 	public String toString() {
 		return "DiaryDTO [dno=" + dno + ", mid=" + mid + ", dexercal=" + dexercal + ", dfoodcal=" + dfoodcal
-				+ ", dimage=" + dimage + ", savedimage=" + savedimage + ", dweight=" + dweight + ", ddiary=" + ddiary
+				+ ", dimage=" + dimage + ", doriimage=" + doriimage + ", dweight=" + dweight + ", ddiary=" + ddiary
 				+ ", ddate=" + ddate + ", rate=" + rate + ", crno=" + crno + ", crcal=" + crcal + ", year=" + year
 				+ ", month=" + month + ", day=" + day + ", value=" + value + "]";
 	}
@@ -233,6 +228,12 @@ public class DiaryDTO {
 	}
 	public void setMm(int mm) {
 		this.mm = mm;
+	}
+	public String getDoriimage() {
+		return doriimage;
+	}
+	public void setDoriimage(String doriimage) {
+		this.doriimage = doriimage;
 	}
 	
 	

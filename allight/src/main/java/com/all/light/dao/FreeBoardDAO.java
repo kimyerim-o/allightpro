@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.FreeBoardDTO;
 import com.all.light.dto.ReviewDTO;
 import com.all.light.util.PageUtil;
@@ -122,6 +123,12 @@ public class FreeBoardDAO extends SqlSessionDaoSupport {
 		int isOk = session.delete("freeboard.LikeDel",map); //1이면 성공/0이면 실패
 		if(isOk==1)System.out.println(fcno+"리뷰에 "+mid+"의 좋아요 delete 성공");
 		if(isOk==0)System.out.println("리뷰 좋아요 delete 실패");
+	}
+
+	//해당 다이어리의 이미지,원래이름 가져오기
+	public DiaryDTO getByDno(int dno) {
+		DiaryDTO dto = session.selectOne("diary.diaryInfo",dno);
+		return dto;
 	}
 
 }

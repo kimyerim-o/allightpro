@@ -16,6 +16,7 @@ public class FreeBoardDTO {
 	private String fcontent;
 	private int fhit;
 
+	private MultipartFile file;
 	private MultipartFile[] files;
 	// 자유게시판 댓글 DB
 	private int fcno;
@@ -232,6 +233,13 @@ public class FreeBoardDTO {
 	public void setIsLiked(Boolean isLiked) {
 		this.isLiked = isLiked;
 	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 
 	@Override
 	public String toString() {
@@ -242,6 +250,7 @@ public class FreeBoardDTO {
 				+ ", flnick=" + flnick + ", amount=" + amount + ", isLiked=" + isLiked + ", fioriname=" + fioriname
 				+ ", fiimg=" + fiimg + ", filength=" + filength + ", fipath=" + fipath + "]";
 	}
+
 
 	
 

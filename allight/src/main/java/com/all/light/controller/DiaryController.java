@@ -121,7 +121,7 @@ public class DiaryController {
 		List<MyExerciseDTO> eList = null;
 		Date date = null;
 		//기존 데이터가 없는데 myFAE에 처음 왔을때
-		if(num==0 && dto.getYear()!=null&&dto.getYear()!="") { 
+		if(num==0 && dto.getYear()!=null && dto.getYear()!="") { 
 			String y = dto.getYear();
 			String m = dto.getMonth();
 			String d = dto.getDay();
@@ -537,7 +537,7 @@ public class DiaryController {
 		
 		String dimage ="/item/img/"+savedimage;
 		
-		diaSVC.updateDimage(num,dimage);
+		diaSVC.updateDimage(num,dimage,dimageFile.getOriginalFilename());
 		
 		return Integer.toString(num);
 	}

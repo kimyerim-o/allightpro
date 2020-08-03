@@ -28,14 +28,15 @@
 	<h3>기업 상세 페이지</h3>
 
 	<hr />
-	<form id="sFrm" method="get"
-		action="<%=request.getContextPath()%>/corporation/admin.com">
+	<form id="sFrm" method="get" action="<%=request.getContextPath()%>/corporation/admin.com">
 		<table border="1" width="800" class="center">
 			<tbody>
 				<tr class="center">
-					<td style="text-align: right"><input type="text" id="search"
-						name="search" placeholder="기업 아이디 검색" /> <input type="submit"
-						value="검 색" onclick="return checkForm();" /></td>
+					<td style="text-align: right">
+					<input type="text" id="search"name="search" placeholder="기업 아이디 검색" /> 
+						<input type="submit" value="검 색" onclick="return checkForm();" />
+						<a href="<%=request.getContextPath()%>/corporation/admin.com"><input type="button" value="초기화"/></a>
+						</td>
 				</tr>
 			</tbody>
 		</table>
@@ -51,27 +52,26 @@
 				<th>가입일</th>
 				<th></th>
 			</tr>
-			<%-- 반복문을 이용하여 줄출력 예정 --%>
 			<c:forEach items="${LIST}" var="corp">
 				<tr>
 					<td>${corp.COID}</td>
 					<td>${corp.CONAME}</td>
 					<td>${corp.COTEL}</td>
 					<td><fmt:formatDate value="${corp.COJOINDATE}" pattern="yyyy-MM-dd"/></td>
-					<td><a
-						href="<%=request.getContextPath()%>/corporation/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.CONO}">
+					<td><a href="<%=request.getContextPath()%>/corporation/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.CONO}">
 							<input type="button" id="modMem" value="수정">
-					</a> <a
-						href="<%=request.getContextPath()%>/corporation/delete/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.CONO}">
+					</a> <a href="<%=request.getContextPath()%>/corporation/delete/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.CONO}">
 							<input type="button" value="삭제" id="delMem"
 							onclick="return checkDelete();">
 					</a></td>
 				</tr>
 			</c:forEach>
+			<c:if test="${empty LIST}">
+			<tr><td colspan="5" class="center">기업이 없습니다.</td></tr>
+		</c:if>
 		</tbody>
 	</table>
 
-	<%-- 페이징 처리 --%>
 	<table border="1" width="800" class="center">
 		<tbody>
 			<tr class="center">
@@ -95,7 +95,7 @@
 							<li><c:if test="${PINFO.nowPage < PAGEINFO.endPage-3}">
 									<a
 										href="${pageContext.request.contextPath}/corporation/admin.com?search=${param.search}&nowPage=${PINFO.nowPage+3}">»</a>
-								</c:if> <c:if test="${PINFO.nowPage >= PAGEINFO.endPage-2}">
+								</c:if> <c:if test="${PINFO.nowPage >= PAGEINFO.endPage-3}">
 									<a
 										href="${pageContext.request.contextPath}/corporation/admin.com?search=${param.search}&nowPage=${PINFO.endPage}">»</a>
 								</c:if></li>

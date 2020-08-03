@@ -53,7 +53,7 @@ function checkForm() {
 			</c:forEach>
 			<c:if test="${empty LIST}">
 			<tr>
-				<td colspan="4" style="text-align: center;">해당 내용이 없습니다.</td>
+				<td colspan="4" style="text-align: center;">문의사항이 없습니다.</td>
 			</tr>
 			</c:if>
 		</table>

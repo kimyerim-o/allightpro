@@ -27,15 +27,16 @@
 <body>
 	<h3>회원 페이지</h3>
 
-	<hr />
+	<hr/>
 	<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/member/admin.com">
 		<table border="1" width="800" class="center">
 			<tbody>
 				<tr class="center">
-					<td style="text-align: right"><input type="text" id="search"
-						name="search" placeholder="회원 아이디 검색" /> <input type="submit"
-						value="검 색" onclick="return checkForm();" /></td>
+					<td style="text-align: right"><input type="text" id="search" name="search" placeholder="회원 아이디 검색" /> 
+					<input type="submit" value="검 색" onclick="return checkForm();" />
+						<a href="<%=request.getContextPath()%>/member/admin.com"><input type="button" value="초기화"/></a>
+						</td>
 				</tr>
 			</tbody>
 		</table>
@@ -67,6 +68,9 @@
 							onclick="return checkDelete();">
 					</a></td>
 				</tr>
+		<c:if test="${empty LIST}">
+			<tr><td colspan="5" class="center">회원이 없습니다.</td></tr>
+		</c:if>
 			</c:forEach>
 		</tbody>
 	</table>

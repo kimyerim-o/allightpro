@@ -126,6 +126,6 @@
 	<delete id="memaddressdelete" parameterType="addressDTO">
 		DELETE address WHERE ano=#{ano}
 	</delete>
-            
+	        
 </mapper>
 	

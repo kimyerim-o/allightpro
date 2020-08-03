@@ -244,6 +244,11 @@ public class MemberService {
 	public void memModify(MemberDTO memDTO) {
 		memDAO.memModify(memDTO);
 	}
+	
+	public int memModify2(MemberDTO memDTO) {
+		int i=memDAO.memModify2(memDTO);
+		return i;
+	}
 
 	public void memDelete(int mno) {
 		memDAO.memDelete(mno);

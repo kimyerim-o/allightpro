@@ -191,7 +191,6 @@ public class CorporationController {
 			return data;
 		}
 		
-		//湲곗뾽 �닔�젙 硫붿냼�뱶
 		@RequestMapping(value="/corporation/modify/corp", method= RequestMethod.GET)
 		public ModelAndView corpModifyCorporationGet(
 				@RequestParam(value = "cono") int cono,

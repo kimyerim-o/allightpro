@@ -426,23 +426,45 @@ public class MemberController {
 	}
 	
 	// 장한별 작성
-	// 회원정보수정
-	@RequestMapping(value="/mypage/member/modify", method= RequestMethod.GET)
-	public ModelAndView ModifyMemberGet(
-			// @RequestParam(value = "mno") int mno,
-			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			@RequestParam(value = "search", required = false) String searchWord,
-			MemberDTO memDTO,	ModelAndView mv, RedirectView rv, HttpServletRequest request) {
-		System.out.println("memberController.modify.Member,"+request.getMethod()+"method");
-		//파라미터 받기, 비즈니스로직
-		memDTO = memSVC.getMInfo(memDTO.getMno());
-		System.out.println("memInfo = "+memDTO);
-		//모델지정
-		mv.addObject("MEMINFO", memDTO); //회원 상세 정보
-		//뷰지정
-		//get메소드의 Requestparam의 정보가 그대로 넘어감
-		//mv.setViewName("common/user/Modify member/Modifymember?search="+searchWord+"&nowPage="+nowPage+"&mno="+mno);
-		mv.setViewName("common/user/Modify member/Modifymember");
-		return mv;
+    // 회원정보수정
+		@RequestMapping(value="/mypage/member/modify", method= RequestMethod.GET)
+		public ModelAndView ModifyMemberGet(
+				MemberDTO memDTO,	ModelAndView mv, RedirectView rv, HttpSession session) {
+			memDTO = memSVC.getMInfo(Integer.parseInt(String.valueOf(session.getAttribute("MNO"))));
+			System.out.println("memInfo = "+memDTO);
+			mv.addObject("MEMINFO", memDTO);
+			mv.setViewName("common/user/Modify member/Modifymember");
+			return mv;
+		}
+		
+		@RequestMapping(value="/mypage/member/modify", method= RequestMethod.POST)
+		public ModelAndView ModifyMemberPost(
+				MemberDTO memDTO,	ModelAndView mv, RedirectView rv,HttpServletRequest request) {
+			System.out.println("memberController.modify.Member, Post method");
+			System.out.println("memDTO = "+memDTO.toString());
+			int i=memSVC.memModify2(memDTO);
+			if(i==1) {//성공
+				mv.setViewName("common/user/Modify member/Modifymemsuccess");
+			}else {//i==0 실패		
+				mv.setViewName("common/user/Modify member/Modifymemfail");
+			}
+			return mv;
+		}
+		
+		//회원탈퇴
+		@RequestMapping("/mypage/member/delete")
+		public ModelAndView memberDelete(
+				@RequestParam(value = "cono") int cono,
+				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+				@RequestParam(value = "search", required = false) String searchWord,
+				ModelAndView mv, RedirectView rv,HttpServletRequest request) {
+			System.out.println("MemberController.delete.member");
+			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
+			System.out.println("cono = "+cono);
+			memSVC.memDelete(cono);
+			//酉곗��젙
+			rv.setUrl(request.getContextPath()+"/mypage/member/delete.com?search="+searchWord+"&nowPage="+nowPage);
+			mv.setViewName("common/user/delete member/deletemember");
+			return mv;
+		}
 	}
-}

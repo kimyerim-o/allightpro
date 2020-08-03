@@ -39,7 +39,7 @@
 				<li class="left_menu_m1">정보관리</li>
 				<li><a href="${pageContext.request.contextPath}/mypage/member/modify.com">개인정보 확인/수정</a></li>
 				<li><a href="${pageContext.request.contextPath}/member/mypage/address.com">배송지 관리</a></li>
-				<li><a href="#">회원탈퇴</a></li>
+				<li><a href="${pageContext.request.contextPath}/mypage/member/delete.com">회원탈퇴</a></li>
 			</ul>
 		</div>
 	</div>

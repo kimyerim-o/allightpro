@@ -132,12 +132,15 @@ $(function() {
 			</tr>
 			<tr>
 				<td>성별 :</td>
-				<td>${MEMINFO.msex}<input type="hidden" id="msex" name="msex"
-					value="${MEMINFO.msex}" /></td>
+				<td><select name="msex" id="msex" required="required">
+						<option value="">선택</option>
+						<option value="남자">남자</option>
+						<option value="여자">여자</option>
+				</select></td>
 			</tr>
 			<tr>
 				<td>생년월일 :</td>
-				<td>${MEMINFO.mbirth}<input type="hidden" id="mbirth"
+				<td>${MEMINFO.mbirth}<input type="date" id="mbirth"
 					name="mbirth" value="${MEMINFO.mbirth}" /></td>
 			</tr>
 			<tr>

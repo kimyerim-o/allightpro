@@ -220,18 +220,11 @@
 				<tbody>
 					<tr>
 						<th>결제 수단</th>
-						<td>신용카드 () <span class="receipt"><a
-								onclick="$.viewReceipt();" href="javascript:">영수증보기</a></span></td>
+						<td>${ORDER.odto1.opayment}</td>
 					</tr>
-					<!--<tr>
-							<th>카드번호</th>
-							<td>
-							472**********141 (00개월)
-							</td>
-						</tr>-->
 					<tr>
 						<th>승인일시</th>
-						<td>2020-04-05 오후 10:17:32</td>
+						<td>${ORDER.odto1.odate}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -244,7 +237,7 @@
 					<strong>구매 금액</strong>
 				</div>
 				<div class="order_result_area">
-					<em>${ORDER.odto1.sum}</em> <span class="won">원</span>
+					<em>${ORDER.odto1.osum}</em> <span class="won">원</span>
 				</div>
 			</div>
 
@@ -277,7 +270,7 @@
 					<strong><span>총 결제 금액</span></strong>
 				</div>
 				<div class="order_result_area">
-					<em><span>${ORDER.odto1.sum}</span></em> <span class="won"><span>원</span></span>
+					<em><span>${ORDER.odto1.osum}</span></em> <span class="won"><span>원</span></span>
 				</div>
 			</div>
 		</div>

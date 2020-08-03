@@ -105,11 +105,11 @@
 			</thead>
 			<tbody>
 				<tr class="last">
-					<td class="order_thmb"><a href="#?"
+					<td class="order_thmb"><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${ORDER.sdto1.ino}"
 						onclick="hitRecentLog('12189');"> <img alt="temp_thmb"
 							src="${ORDER.sdto1.imgimage}" class="product-image"></a></td>
 					<td class="order_info" colspan="2"><a class="order_deal"
-						href="/goods/view.asp?g=12189" onclick="hitRecentLog('12189');">${ORDER.sdto1.iname}</a>
+						href="${pageContext.request.contextPath}/shopping/detail.com?ino=${ORDER.sdto1.ino}" onclick="hitRecentLog('12189');">${ORDER.sdto1.iname}</a>
 						<p class="order_deal_info">${ORDER.sdto1.idetail}</p> <!-- 옵션명 노출-->
 						<ul class="order_option_area">
 

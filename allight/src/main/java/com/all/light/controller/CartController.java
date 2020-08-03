@@ -81,14 +81,14 @@ public class CartController {
 		return result;
 	}
 	
-	//+,- 후 수량 업데이트 
-	/*@ResponseBody
-	@RequestMapping("/updateIamount")
-	public void updateIamount(HttpSession session, CartDTO cartdto) throws Exception {
+	//+,- 버튼 클릭하면 수량 업데이트 
+	@ResponseBody
+	@RequestMapping("/updateAmt")
+	public String updateAmt(HttpSession session, CartDTO cartdto) throws Exception {
 		System.out.println("수량 변경 저장하러~!~!~!");
-		
-	}*/
-	
-	
-	
+		String caid = (String)session.getAttribute("MID");
+		System.out.println(cartdto);
+		String ok = cartSVC.updateAmt(cartdto,caid);
+		return ok;
+	}
 }

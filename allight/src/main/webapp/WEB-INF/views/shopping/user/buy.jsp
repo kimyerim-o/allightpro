@@ -5,70 +5,402 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script type="text/javascript">
-		//취소버튼 누르면 뒤로가기
-		function goBack(){
-			window.history.back();
-		}
+
+	//취소버튼 누르면 뒤로가기
+	function goBack(){
+		window.history.back();
+	}
+	
+	//모달창 시작
+	$(function(){
+		//닫기 버튼을 눌렀을 때
+	    $('.create_modal .close').click(function(e) {
+	       //링크 기본동작은 작동하지 않도록 한다.
+	       e.preventDefault();
+	       $('#mask_create, .create_modal').hide();
+	       $('body').css("overflow", "scroll");
+	    });
+	 
+	    //검은 막을 눌렀을 때
+	    $('#mask_create').click(function() {
+	       $(this).hide();
+	       $('.create_modal').hide();
+	       $('body').css("overflow", "scroll");
+	    });
+	    
+	    //모달창 띄울 버튼
+	    $('#delivadd').click(function(){
+			wrapCreateByMask();
+		    $('body').css("overflow", "hidden");
+		})
 		
-		//모달창 시작
-		$(function(){
-			//닫기 버튼을 눌렀을 때
-		    $('.create_modal .close').click(function(e) {
-		       //링크 기본동작은 작동하지 않도록 한다.
-		       e.preventDefault();
-		       $('#mask_create, .create_modal').hide();
-		       $('body').css("overflow", "scroll");
-		    });
-		 
-		    //검은 막을 눌렀을 때
-		    $('#mask_create').click(function() {
-		       $(this).hide();
-		       $('.create_modal').hide();
-		       $('body').css("overflow", "scroll");
-		    });
-		    
-		    //모달창 띄울 버튼
-		    $('#delivradio2').click(function(){
-				wrapCreateByMask();
-			    $('body').css("overflow", "hidden");
+		//구매자 정보와 동일하게 입력 체크박스 누르면 이름,핸드폰번호 가져오기
+		$("#namecheck").on('click',function(){
+	    	if(document.getElementById("namecheck").checked==true){
+	    		//alert("체크박스클릭함")
+	    		$('#name').val('${sessionScope.MNAME}');
+	    		$('#tel').val('${sessionScope.MTEL}');
+	    		//alert("체크박스클릭함222")
+	    	}
+		})
+    	//구매자 정보와 동일하게 입력 체크박스 해제하면 이름,핸드폰번호 지우기
+		$("#namecheck").on('click',function(){
+	    	if(document.getElementById("namecheck").checked==false){
+	    		//alert("체크박스클릭함")
+	    		$('#name').val('');
+	    		$('#tel').val('');
+	    		//alert("체크박스클릭함222")
+	    	}
+		})
+		
+		//배송메세지
+		$('#delivreq1').change(function(){
+			$('#delivreq1 option:selected').each(function(){
+				if($(this).val()=='5'){
+					$('#req1').val('');
+					$('#req1').attr('disabled',false);
+				}else{
+					$('#req1').val($(this).text());
+					$('#req1').attr('disabled',true);
+				}
 			})
 		})
 		
-    	function wrapCreateByMask() {
-    	   // 화면의 높이와 너비를 구한다.
-    	   var maskHeight = $(document).height();
-    	   var maskWidth = $(window).width();
+		//결제버튼 누르면
+    	$("#paybtn").click(function(){
+    		//이름 입력 여부
+			if($("#name").val().length==0){
+				alert("이름을 입력하지 않았습니다.입력해주세요.")
+				$("#name").focus();
+				return false;
+			}
+		    
+		  	//연락처 입력 여부
+			if($("#tel").val().length==0){
+				alert("연락처를 입력하지 않았습니다.입력해주세요.")
+				$("#tel").focus();
+				return false;
+			}
+			//우편번호 입력 여부
+			if($("#sample6_postcode").val().length==0){
+				alert("우편번호를 입력하지 않았습니다.입력해주세요.")
+				$("#sample6_postcode").focus();
+				return false;
+			}
+			
+			//주소 입력 여부
+			if($("#sample6_address").val().length==0){
+				alert("주소를 입력하지 않았습니다.입력해주세요.")
+				$("#sample6_address").focus();
+				return false;
+			}
+			
+			//상세주소 입력 여부
+			if($("#sample6_detailAddress").val().length==0){
+				alert("상세주소를 입력하지 않았습니다.입력해주세요.")
+				$("#sample6_detailAddress").focus();
+				return false;
+			}
+			
+			//주문동의 체크박스 체크 안하면 못넘어가게
+	    	if(document.getElementById("aggchk").checked==false){
+	    		alert("주문 동의를 하셔야 주문하실 수 있습니다.")
+	    		return false;
+    		}
+			
+			//받는사람 이름 가져오기
+			$("#oreceiver").val($("#name").val())
+			//배송요청사항 가져오기
+			$("#orequirethings").val($("#req1").val())
+			//결제부분 시작
+			var name = "";
+			var cnt = 0;
+			<c:forEach var="list" items="${clist}" varStatus="status"> 
+				if (${status.first}){
+					name += '${list.iname}';
+				}else {
+					cnt++;
+				}
+			</c:forEach>
+			if(cnt!=0){
+				name += " 외 "+cnt+"종";
+			}
+			//alert(name)
+			var amount = $("#sum").text().split("원")[0].replace(",","");
+			var bemail = '${sessionScope.MEMAIL}';
+			var bname = $("#name").val();
+			var btel = $("#tel").val();
+			var baddr = $("#sample6_address").val()+' '+$("#sample6_detailAddress").val()+' '+$("#sample6_extraAddress").val();
+			var bpc = $("#sample6_postcode").val();
+			var payment = $("input[name=opayment]:checked").val();
 
-    	   // 마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
-    	   $('#mask_create').css({
-    	      'width' : maskWidth,
-    	      'height' : maskHeight
-    	   });
+			//결제방법 선택
+			//alert($("input[name=opayment]:checked").val())
+			if(payment=="신용카드"){
+				inicis(name,amount,bemail,bname,btel,baddr,bpc);
+			}else if(payment=="실시간 계좌이체"){
+				danal_trans(name,amount,bemail,bname,btel,baddr,bpc);
+			}else if(payment=="가상계좌"){
+				danal_vbank(name,amount,bemail,bname,btel,baddr,bpc);
+			}else if(payment=="휴대폰 소액결제"){
+				danal_phone(name,amount,bemail,bname,btel,baddr,bpc);
+			}else if(payment=="카카오페이"){
+				kakaopay(name,amount,bemail,bname,btel,baddr,bpc);
+			}else{
+				alert("결제방식을 선택해주세요");
+				return false;
+			}
+			
+			$('#buy').submit();
+    	});
+		
+	});
+	
+   	function wrapCreateByMask() {
+   	   // 화면의 높이와 너비를 구한다.
+   	   var maskHeight = $(document).height();
+   	   var maskWidth = $(window).width();
 
-    	   $('#mask_create').fadeTo("slow", 1);
-
-    	   $('.create_modal').show();
-    	};
-    	
-    	function goAddress(aname,aphone,aaddno,aaddress1,aaddress2){
-    		$('#name1').val(aname);
-    		$('#tel').val(aphone)
-    		$('#sample4_postcode').val(aaddno);
-    		$('#sample4_roadAddress').val(aaddress1);
-    		$('#sample4_detailAddress').val(aaddress2);
-    		$('#mask_create, .create_modal').hide();
-	       $('body').css("overflow", "scroll");
-    	}
-    	//모달창 끝
-    	
+   	   // 마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+   	   $('#mask_create').css({
+   	      'width' : maskWidth,
+   	      'height' : maskHeight
+   	   });
+   	   $('#mask_create').fadeTo("slow", 1);
+   	   $('.create_modal').show();
+   	};
+   	
+   	//주소 받아오기
+   	function goAddress(aname,aphone,aaddno,aaddress1,aaddress2){
+   		$('#name').val(aname);
+   		$('#tel').val(aphone)
+   		$('#sample6_postcode').val(aaddno);
+   		$('#sample6_address').val(aaddress1);
+   		$('#sample6_detailAddress').val(aaddress2);
+   		$('#mask_create, .create_modal').hide();
+       $('body').css("overflow", "scroll");
+   	}
+   	//모달창 끝
+   	</script>
+   	
+   	<!-- 여기서부터는 결제방식에 따른 각각의 코드 -->	
+	<!-- 아임포트 신용카드 간편결제 구동 코드 -->
+	<script>
+	function inicis(name,amount,bemail,bname,btel,baddr,bpc) {
+		var IMP = window.IMP;
+		
+		IMP.init('imp33827871'); 
+        IMP.request_pay({
+            pg: 'html5_inicis',
+            pay_method: 'card',
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            name: name,//상품이름
+            amount: amount, //가격
+            buyer_email: bemail,
+            buyer_name: bname,
+            buyer_tel: btel,
+            buyer_addr: baddr,
+            buyer_postcode: bpc,
+            m_redirect_url: '${pageContext.request.contextPath}/paySuccess.com'+$('#buy').serialize()
+            /*  
+		                모바일 결제시,
+		                결제가 끝나고 랜딩되는 URL을 지정 
+               (카카오페이, 페이코, 다날의 경우는 필요없음. PC와 마찬가지로 callback함수로 결과가 떨어짐) 
+            */
+        }, function (rsp) {
+            console.log(rsp);
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                msg += '\n결제 금액 : ' + rsp.paid_amount;
+                msg += '\n카드 승인번호 : ' + rsp.apply_num;
+                location.href="${pageContext.request.contextPath}/paySuccess.com?type=card&address=${maddress}&requests=${requests}";
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '\n에러내용 : ' + rsp.error_msg;
+            	alert(msg);
+                location.href="${pageContext.request.contextPath}/cart.com";
+            }
+        });
+	}
 	</script>
+	
+	<!-- 아임포트 다날 실시간 계좌이체 구현 코드 -->
+	<script>
+	function danal_trans (name,amount,bemail,bname,btel,baddr,bpc) {
+		var IMP = window.IMP;
+		
+		IMP.init('imp33827871'); 
+        IMP.request_pay({
+            pg: 'danal',
+            pay_method: 'trans',
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            name: name,
+            amount: amount, 
+            buyer_email: bemail,
+            buyer_name: bname,
+            buyer_tel: btel,
+            buyer_addr: baddr,
+            buyer_postcode: bpc,
+            //m_redirect_url: '${pageContext.request.contextPath}/paySuccess.com'
+        }, function (rsp) {
+            console.log(rsp);
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+                location.href="${pageContext.request.contextPath}/paySuccess.com?type=timeBankTransfer";
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '\n에러내용 : ' + rsp.error_msg;
+                alert(msg)
+                location.href="${pageContext.request.contextPath}/cart.com";
+            }
+        });
+    }
+	</script>
+	
+	<!-- 아임포트 다날 가상계좌 구현 코드 -->
+	<script>
+	function danal_vbank (name,amount,bemail,bname,btel,baddr,bpc) {
+		var IMP = window.IMP;
+        IMP.init('imp33827871'); 
+        IMP.request_pay({
+            pg: 'danal',
+            pay_method: 'vbank',
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            name: name,
+            amount: amount, 
+            buyer_email: bemail,
+            buyer_name: bname,
+            buyer_tel: btel,
+            buyer_addr: baddr,
+            buyer_postcode: bpc,
+            //m_redirect_url: '${pageContext.request.contextPath}/paySuccess.com'
+        }, function (rsp) {
+            console.log(rsp);
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+                location.href="${pageContext.request.contextPath}/paySuccess.com?type=vbank";
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '\n에러내용 : ' + rsp.error_msg;
+                alert(msg)
+                location.href="${pageContext.request.contextPath}/cart.com";
+            }
+        });
+    }
+	</script>
+	
+	<!-- 아임포트 다날 휴대폰 소액결제 구현 코드 -->
+	<script>
+	function danal_phone (name,amount,bemail,bname,btel,baddr,bpc) {
+		var IMP = window.IMP;
+        IMP.init('imp33827871'); 
+        IMP.request_pay({
+            pg: 'danal',
+            pay_method: 'phone',
+            merchant_uid: 'merchant_' + new Date().getTime(),
+            name: name,
+            amount: amount, 
+            buyer_email: bemail,
+            buyer_name: bname,
+            buyer_tel: btel,
+            buyer_addr: baddr,
+            buyer_postcode: bpc,
+            //m_redirect_url: '${pageContext.request.contextPath}/paySuccess.com'
+        }, function (rsp) {
+            console.log(rsp);
+            if (rsp.success) {
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+                location.href="${pageContext.request.contextPath}/paySuccess.com?type=phone";
+            } else {
+                var msg = '결제에 실패하였습니다.';
+                msg += '\n에러내용 : ' + rsp.error_msg;
+                alert(msg)
+                location.href="${pageContext.request.contextPath}/cart.com";
+            }
+        });
+    }
+	</script>
+	
+	<!-- 아임포트 카카오페이 카드 결제 구현 -->
+	<script>
+	function kakaopay (name,amount,bemail,bname,btel,baddr,bpc) {
+        var IMP = window.IMP; // 생략가능
+        IMP.init('imp33827871'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+        var msg;
+        
+        IMP.request_pay({
+            pg : 'kakaopay',
+            pay_method : 'card',
+            merchant_uid : 'merchant_' + new Date().getTime(),
+            name: name,
+            amount: amount, 
+            buyer_email: bemail,
+            buyer_name: bname,
+            buyer_tel: btel,
+            buyer_addr: baddr,
+            buyer_postcode: bpc,
+            //m_redirect_url : 'http://www.naver.com'
+        }, function(rsp) {
+            if ( rsp.success ) {
+                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                jQuery.ajax({
+                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        imp_uid : rsp.imp_uid
+                        //기타 필요한 데이터가 있으면 추가 전달
+                    }
+                }).done(function(data) {
+                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                    if ( everythings_fine ) {
+                        msg = '결제가 완료되었습니다.';
+                        msg += '\n고유ID : ' + rsp.imp_uid;
+                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                        msg += '\결제 금액 : ' + rsp.paid_amount;
+                        msg += '카드 승인번호 : ' + rsp.apply_num;
+                        alert(msg);
+                    } else {
+                        //[3] 아직 제대로 결제가 되지 않았습니다.
+                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                    }
+                });
+                //성공시 이동할 페이지
+               location.href="${pageContext.request.contextPath}/paySuccess.com?type=kakaopay&address=${maddress}&requests=${requests}";
+            } else {
+                msg = '결제에 실패하였습니다.';
+                msg += '\n에러내용 : ' + rsp.error_msg;
+                alert(msg);
+                location.href="${pageContext.request.contextPath}/cart.com";
+            }
+        });
+    }
+	</script> 
+	
 </head>
 <body>
 <h3>상품주문</h3>
 <hr/>
-<form action="#" id="buy" method="post">
-
+<form action="./paySuccess.com" id="buy" name="buy" method="post">
+<c:forEach items="${canoList}" var="C">
+	<input type="hidden" name="canolist" value="${C}"/>
+</c:forEach>
 	<!--  어두워지는 부분1  -->
 	<div id="mask_create"></div>
 	<!-- 모달 부분1 (칼로리 상세) -->
@@ -82,24 +414,31 @@
 				<!-- 목록출력 -->
 				<table class="table">
 					<tbody>
-						<tr>
-							<th>수령인</th>
-							<th>연락처</th>
-							<th>우편번호</th>
-							<th>주소</th>
-							<th>선택</th>
-						</tr>
-						<c:forEach items="${LIST}" var="list">
-							<tr class="dataRow">
-								<td>${list.aname}</td>
-								<td>${list.aphone}</td>
-								<td>${list.aaddno}</td>
-								<td>${list.aaddress1} , ${list.aaddress2}</td>
-					  			<td>
-									<input type="button" id="cBtn" value="선택" onclick="goAddress('${list.aname}','${list.aphone}','${list.aaddno}','${list.aaddress1}','${list.aaddress2}')">	<!-- 선택누르면 js이용해서 view단 배송지로 보내기 -->
-								</td>
+						<c:if test="${empty LIST}">
+							<tr>
+								<th>등록된 배송지가 없습니다. 새로 입력해주세요.</th>
 							</tr>
-						</c:forEach>
+						</c:if>
+						<c:if test="${!empty LIST}">
+								<tr>
+									<th>수령인</th>
+									<th>연락처</th>
+									<th>우편번호</th>
+									<th>주소</th>
+									<th>선택</th>
+								</tr>
+							<c:forEach items="${LIST}" var="list">
+								<tr class="dataRow">
+									<td>${list.aname}</td>
+									<td>${list.aphone}</td>
+									<td>${list.aaddno}</td>
+									<td>${list.aaddress1} , ${list.aaddress2}</td>
+						  			<td>
+										<input type="button" id="cBtn" value="선택" onclick="goAddress('${list.aname}','${list.aphone}','${list.aaddno}','${list.aaddress1}','${list.aaddress2}')">	<!-- 선택누르면 js이용해서 view단 배송지로 보내기 -->
+									</td>
+								</tr>
+							</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
 			</div>
@@ -107,7 +446,7 @@
 	</div>
 
 	<div class="contents">	
-		<!-- 주문페이지에서 장바구니 > 주문 > 결제 이 부분 
+		<!-- "주문페이지에서 장바구니 > 주문 > 결제 이 부분" 
 		<div class="order_top_wrap">
 			<div class="order_top">
 				<div class="order_title1">주문/결제</div>
@@ -131,7 +470,8 @@
 				<tr>
 					<th class="order_amount" colspan="3" scope="col">주문 상품 정보</th>
 					<th class="order_amount" colspan="1"scope="col">수량</th>
-					<th class="order_amount" colspan="2" scope="col">주문 금액</th>
+					<th class="order_amount" colspan="1" >판매가</th>
+					<th class="order_amount" colspan="1" scope="col">주문 금액</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -142,17 +482,24 @@
 							<a><img src="${list.imgimages}" style="height:200px; width:200px; overflow:hidden;" onerror="this.src='${pageContext.request.contextPath}/resources/img/no-img.png'" /></a>
 						</td>
 						<td colspan="2"><!-- 상품정보 -->
-							<div style="height:200px; line-height:200px;"><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}">${list.iname}</a></div>
+							<div style="height:200px; line-height:200px;"><a class="iname" id="iname" href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}">${list.iname}</a></div>
 						</td>
 						<td class="iamount" scope="col" colspan="1"> <!-- 장바구니 수량 -->
 							<input type="hidden" id="origin_qty" value="${list.caamount}" maxlength="3"/>
 							<input type="text" id="number" class="numBox" value="${list.caamount}" readonly="readonly" 
 								style="font-size:16px; width:50px; padding:5px; margin:0; border:1px solid #eee;"/>
 						</td>
-						<td scope="col" colspan="2"><!-- 판매가 -->
+						<td scope="col" colspan="1"><!-- 판매가 -->
 							<div class="tb-center">
 								<p class="price" style="height:200px; line-height:200px;margin:0;">
 									<fmt:formatNumber pattern="#,###" value="${list.iprice}" />원
+								</p>
+							</div>
+						</td>
+						<td scope="col" colspan="1"><!-- 주문금액 -->
+							<div class="tb-center">
+								<p class="total" style="height:200px; line-height:200px;margin:0;">
+									<fmt:formatNumber pattern="#,###" value="${list.caprice}" />원
 								</p>
 							</div>
 						</td>
@@ -162,14 +509,15 @@
 			</tbody>
 		</table>
 
-		<!-- 구매자 정보 영역 시작 -->
+		<!-- 주문자 정보 영역 시작 -->
 		<div class="order_detail mt80">
 			<h3 class="order_detail_tit">주문자 정보</h3>
 			<table>
 				<tbody>
 					<tr>
-						<th style="width:150px" class="center">이름</th>
+						<th style="width:150px" class="center" >이름</th>
 						<td>${sessionScope.MNAME}</td>
+						<%-- <input type="text" name="mname" value="${sessionScope.MNAME}" /> --%>
 					</tr>
 					<tr>
 						<th style="width:150px" class="center">휴대폰 번호</th>
@@ -192,17 +540,18 @@
 					<th>배송지선택</th>
 					<td>
 						<div id="addrradio">
-							<input id="delivradio1" class="order_rdo" type="radio" onclick="" checked="checked" value="" name="delivaddradio">
-							<label style="margin-right:15px">신규 배송지</label>
-							<input id="delivradio2" class="order_rdo" type="button" onclick="" value="기본 배송지" name="delivaddradio">
+							<!-- <input id="delivradio1" class="order_rdo" type="radio" onclick="" checked="checked" value="" name="delivaddradio">
+							<label style="margin-right:15px">신규 배송지</label> -->
+							<input type="button" id="delivadd" value="주소록에서 가져오기" name="delivadd">
 						</div>
 					</td>
 				</tr>
 
 				<tr>
 					<th>받으실분</th><!-- 자바스크립트로  체크박스 선택하면 이름,연락처 받아오게 처리-->
-					<td><input type="text" style="width:130px" name="name1" id="name1" value="" maxlength="20" placeholder="받으실 분 성함 입력">&nbsp;&nbsp;
-						<input type="checkbox" name="namecheck" id="namecheck"> 구매자 정보와 동일하게 입력
+					<td><input type="text" style="width:130px" name="name" id="name" maxlength="20" placeholder="받으실 분 성함 입력">&nbsp;&nbsp;
+						<input type="checkbox" id="namecheck" > 구매자 정보와 동일하게 입력
+						<input type="hidden" name="oreceiver" id="oreceiver"/>
 					</td>
 				</tr>
 				<tr>
@@ -210,72 +559,64 @@
 					<span>연락처</span>
 					</th>
 					<td>
-						<input class="order_txt order_dimmed" style="width:200px" type="tel" name="tel" id="tel" value="" maxlength="">
+						<input class="order_txt order_dimmed" style="width:200px" type="text" name="otel" id="tel" maxlength="13">
 					</td>
 				</tr>
 				<tr>
 					<th>주소</th>
 					<td>
-						<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
-						<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:100px"><br>
-						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" style="width:250px">
-						<span id="guide" style="color:#999;display:none"></span>
-						<input type="text" id="sample4_detailAddress" placeholder="상세주소" style="width:250px">
+						<input type="text" name="oaddno" id="sample6_postcode" placeholder="우편번호">
+						<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+						<input type="text" name="oaddress1" id="sample6_address" placeholder="주소" style="width:300px"><br>
+						<input type="text" name="oaddress2" id="sample6_detailAddress" placeholder="상세주소">
+						<input type="text" name="oaddress" id="sample6_extraAddress" placeholder="참고항목" style="width:100px">
 						
 						<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 						<script>
-						    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-						    function sample4_execDaumPostcode() {
+						    function sample6_execDaumPostcode() {
 						        new daum.Postcode({
 						            oncomplete: function(data) {
 						                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 						
-						                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+						                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
 						                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-						                var roadAddr = data.roadAddress; // 도로명 주소 변수
-						                var extraRoadAddr = ''; // 참고 항목 변수
+						                var addr = ''; // 주소 변수
+						                var extraAddr = ''; // 참고항목 변수
 						
-						                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-						                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-						                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-						                    extraRoadAddr += data.bname;
+						                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+						                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+						                    addr = data.roadAddress;
+						                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+						                    addr = data.jibunAddress;
 						                }
-						                // 건물명이 있고, 공동주택일 경우 추가한다.
-						                if(data.buildingName !== '' && data.apartment === 'Y'){
-						                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-						                }
-						                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-						                if(extraRoadAddr !== ''){
-						                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+						
+						                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+						                if(data.userSelectedType === 'R'){
+						                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+						                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+						                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+						                        extraAddr += data.bname;
+						                    }
+						                    // 건물명이 있고, 공동주택일 경우 추가한다.
+						                    if(data.buildingName !== '' && data.apartment === 'Y'){
+						                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+						                    }
+						                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+						                    if(extraAddr !== ''){
+						                        extraAddr = ' (' + extraAddr + ')';
+						                    }
+						                    // 조합된 참고항목을 해당 필드에 넣는다.
+						                    document.getElementById("sample6_extraAddress").value = extraAddr;
+						                
+						                } else {
+						                    document.getElementById("sample6_extraAddress").value = '';
 						                }
 						
 						                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-						                document.getElementById('sample4_postcode').value = data.zonecode;
-						                document.getElementById("sample4_roadAddress").value = roadAddr;
-						                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
-						                
-						                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-						                if(roadAddr !== ''){
-						                    document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-						                } else {
-						                    document.getElementById("sample4_extraAddress").value = '';
-						                }
-						
-						                var guideTextBox = document.getElementById("guide");
-						                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-						                if(data.autoRoadAddress) {
-						                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-						                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-						                    guideTextBox.style.display = 'block';
-						
-						                } else if(data.autoJibunAddress) {
-						                    var expJibunAddr = data.autoJibunAddress;
-						                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-						                    guideTextBox.style.display = 'block';
-						                } else {
-						                    guideTextBox.innerHTML = '';
-						                    guideTextBox.style.display = 'none';
-						                }
+						                document.getElementById('sample6_postcode').value = data.zonecode;
+						                document.getElementById("sample6_address").value = addr;
+						                // 커서를 상세주소 필드로 이동한다.
+						                document.getElementById("sample6_detailAddress").focus();
 						            }
 						        }).open();
 						    }
@@ -284,22 +625,24 @@
 				</tr>
 				<tr class="last">
 					<th>
-					<span>배송요청사항</span><!-- 자바스크립트로 select하면 textbox에 보이게 -->
+					<span>배송요청사항</span>
 					</th>
 					<td>
 						<div class="order_select_box" style="width:300px">
 							<select class="order_select" style="width:300px" name="delivreq1" id="delivreq1">
 								<option value="0" selected="selected">선택하세요</option>
-								<option value="4">부재시 핸드폰으로 연락바랍니다.</option>
-								<option value="5">부재시 경비실에 맡겨주세요.</option>
-								<option value="6">빠른 배송 부탁드립니다.</option>
-								<option value="7">배송전 핸드폰으로 연락바랍니다.</option>
-								<option value="8">직접 입력</option>
+								<option value="1">부재시 핸드폰으로 연락바랍니다.</option>
+								<option value="2">부재시 경비실에 맡겨주세요.</option>
+								<option value="3">빠른 배송 부탁드립니다.</option>
+								<option value="4">배송전 핸드폰으로 연락바랍니다.</option>
+								<option value="5">직접 입력</option>
 							</select>
 							<span class="order_select_arr"></span>
 						</div>
 						<p class="mt5">
-						<textarea class="tbl_addr_txt placeholder" style="width:392px" maxlength="50" cols="50" rows="5" placeholder="(직접입력)최대 50자까지 입력가능합니다." name="req1" id="req1"></textarea>
+						<textarea class="tbl_addr_txt" name="req1" id="req1" style="width:392px" maxlength="50" cols="50" rows="5" placeholder="(직접입력)최대 50자까지 입력가능합니다." >
+						</textarea>
+						<input type="hidden" name="orequirethings" id="orequirethings" />
 						<span class="s fc999 byteCnt">(최대 50자)</span>
 						</p><div class="order">
 							<p class="order_notice">※ "배송요청사항"은 택배기사님들이 확인하는 메시지로써, 배송 연기 요청 등<br> 판매자에게 전달할 요청사항은 꼭! 고객센터로 연락주세요.</p>
@@ -332,17 +675,28 @@
 					<td colspan="1" ><h3>+</h3></td>
 					<td colspan="1" ><h3>무료</h3></td>
 					<td colspan="1" ><h3>=</h3></td>
-					<td class="sum" colspan="2" ><h3><fmt:formatNumber pattern="#,###" value="${sum0}" />원</h3></td>
+					<td class="sum" id="sum" colspan="2" ><h3><fmt:formatNumber pattern="#,###" value="${sum0}"/>원</h3></td>
+					<input type="hidden" name="osum" value="${sum0}"/>
 				</tr>
 			</tbody>
 		</table>
 
+		<!-- 결제수단  -->
+		<div>
+			<h3>결제수단</h3>
+			<input type="radio" name="opayment" class="pmt" id="check_creditCard" value="신용카드">신용카드
+			<input type="radio" name="opayment" class="pmt" id="check_real-timeBankTransfer" type="button" value="실시간 계좌이체">실시간 계좌이체
+			<input type="radio" name="opayment" class="pmt" id="check_vbank" type="button" value="가상계좌">가상계좌
+			<input type="radio" name="opayment" class="pmt" id="check_phone" type="button" value="휴대폰 소액결제">휴대폰 소액결제	
+			<!-- <input type="radio" name="paym" id="check_payco" type="button" value="6">페이코 -->
+			<input type="radio" name="opayment" class="pmt" id="check_kakaopay" type="button" style="margin-top: 10px;" value="카카오페이"><img src="${pageContext.request.contextPath}/resources/img/payment_text_small.png">
+		</div>
 		<!--   주문동의 영역 시작 -->
 		<div>
 			<h3>주문동의 </h3>
 			<label>
-				<input type="checkbox" id="aggchk">
-				</label><em>주문할 상품의 상품, 가격, 배송정보 등을 최종 확인하였으며, 개인정보 제3자 제공 동의에 관한 내용을 모두 이해하였으며, 이에 동의합니다.</em>
+				<input type="checkbox" id="aggchk" value="Y">
+			</label><em>주문할 상품의 상품, 가격, 배송정보 등을 최종 확인하였으며, 개인정보 제3자 제공 동의에 관한 내용을 모두 이해하였으며, 이에 동의합니다.</em>
 				<div></div><div></div><hr/>
 		</div>
 		<div></div>
@@ -350,7 +704,7 @@
 		<!--  결제하기/ 취소 버튼 영역 시작 -->
 		<div class="center">
 			<input type="button" id="cacbtn" value="취소" onclick="goBack();" />
-			<input type="submit" id="paybtn" value="결제는 아직" />
+			<input type="button" id="paybtn" value="결제하기"/>
 		</div>
 </div>
 </form>

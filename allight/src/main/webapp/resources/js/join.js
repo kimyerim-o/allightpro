@@ -2,37 +2,42 @@ $(function() {
 	//아이디중복확인
 	$("#idCheck").click(function() {
 		var mid = $("#mid").val();
-		var languageCheck=/^[a-z0-9]$/;
-		if(!languageCheck.test(mid)){
+		var idreg=/^[a-z][a-zA-Z0-9]{6,12}$/;
+		if(!(idreg.test(mid))){
 			alert("아이디는 영문 및 숫자로만 입력해주세요");
+			$("#mid").val("");
+			$("#mid").focus();
 			return false;
-		}
+		}else{
 		// JSON.parse(제이슨데이터); 수신
 		// JSON.stringfy(자바스크립트오브젝트); 송신
-		$.ajax({
-			url : "idChk.com",
-			type : "POST",
-			dataType : "text",
-			async : false,
-			data :{ 
-				mid : $("#mid").val()
-			},
-			success : function(data) {
-				//alert("들어옴11111");
-				//중복된 아이디가 있으면
-				if (data == "fail") {
-					alert("이미 등록된 아이디입니다.");
-					$("#mid").val("");
-					$("#mid").focus();
-				} else {
-					//중복된 아이디가 없으면
-					alert("사용 가능한 아이디입니다.");
-					$('#idChecked').val("1");				}
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status+ "\n" + "message:"+ request.responseText+ "\n" + "error:" + error);
-			}
-		});
+			$.ajax({
+				url : "idChk.com",
+				type : "POST",
+				dataType : "text",
+				async : false,
+				data :{ 
+					mid : $("#mid").val()
+				},
+				success : function(data) {
+					//alert("들어옴11111");
+					//중복된 아이디가 있으면
+					if (data == "fail") {
+						alert("이미 등록된 아이디입니다.");
+						$("#mid").val("");
+						$("#mid").focus();
+					} else {
+						//중복된 아이디가 없으면
+						//alert("mid"+mid)
+						alert("사용 가능한 아이디입니다.");
+						$('#idChecked').val("1");
+					}
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status+ "\n" + "message:"+ request.responseText+ "\n" + "error:" + error);
+				}
+			});
+		}
 	});//아이디 중복확인 종료
 	
 	//닉네임중복확인
@@ -119,9 +124,40 @@ $(function() {
           
           alert("인증이 완료되었습니다");
           $("#check_code").text("인증완료");
+          $("#usercode").attr('disabled',true);
        }
     });
     
+	//전체선택 누르면 개별 체크박스 모두 선택되게
+	$("#every_agree").click(function(){
+		//alert("ㄷㅇㅇㄴ");
+		var chk = $('#every_agree').is(":checked");
+		if(chk){
+			//$(".cboxes").prop('checked',true)
+			$(".yaok2").prop("checked", true);
+			$(".privacy1").prop("checked", true);
+			$(".privacy2").prop("checked", true);
+		}else{
+			//$(".cboxes").prop('checked',false);
+			$(".yaok2").prop("checked", false);
+			$(".privacy1").prop("checked", false);
+			$(".privacy2").prop("checked", false);
+		}
+	});
+    
+	//개별 체크박스누르면 전체선택 해제되게
+	$(".yaok2").click(function(){//개별에서 class이름
+		//alert("ㄷㅇㅇㄴ");
+		$("#every_agree").prop("checked", false);//전체선택에서 id
+	});
+	$(".privacy1").click(function(){//개별에서 class이름
+		//alert("ㄷㅇㅇㄴ");
+		$("#every_agree").prop("checked", false);//전체선택에서 id
+	});
+	$(".privacy2").click(function(){//개별에서 class이름
+		//alert("ㄷㅇㅇㄴ");
+		$("#every_agree").prop("checked", false);//전체선택에서 id
+	});
 	//가입눌렀을때
 	$("#join").submit(function(){
 //		alert($('#checkCODE').css('display')=='none')
@@ -183,6 +219,7 @@ $(function() {
 			$("#mpw").focus();
 			return false;
 		}
+		
 		if($("#mpw2").val().length==0){
 			alert("비밀번호를 입력하지 않았습니다.")
 			$("#mpw2").focus();
@@ -235,12 +272,53 @@ $(function() {
 			$("#mtel1").focus();
 			return false;
 		}
+		
 		if($("#mtel2").val().length==0){
 			alert("전화번호를 입력하지 않았습니다.")
 			$("#mtel2").focus();
 			return false;
+		}//전화번호 입력 여부 끝
+		
+		//만 14세 이상 체크 안하면 못넘어가게
+    	if(document.getElementById("mem_age_chk").checked==false){
+    		alert("필수항목을 체크해 해주세요")
+    		return false;
+		}
+    	
+    	//이용약관 체크
+		if(document.getElementById("yaok2").checked==false){
+    		alert("이용약관에 동의해 해주세요")
+    		return false;
 		}
 		
+		//개인정보수집 체크
+		if(document.getElementById("privacy1").checked==false){
+			alert("개인정보수집에 동의해 해주세요.")
+			return false;
+		}
+		
+		//개인정보 제3자 체크
+		if(document.getElementById("privacy2").checked==false){
+			alert("개인정보 제3자에 동의해 해주세요.")
+			return false;
+		}
+		
+		/*
+		//숫자만 입력하게 하는 정규식
+		//나는 이거대신 input에 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 이거로 사용
+		var tel1reg = /^[0-9]+$/;
+		if(!(tel1reg.test(mtel1))){
+			alert("핸드폰번호는 숫자로만 입력해주세요");
+			$("#mtel1").val("");
+			$("#mtel1").focus();
+			return false;
+		}
+		var tel2reg = /^[0-9]+$/;
+		if(!(tel2reg.test(mtel2))){
+			alert("핸드폰번호는 숫자로만 입력해주세요");
+			$("#mtel2").val("");
+			$("#mtel2").focus();
+			return false;
+		}*/
 	})
-    
 });

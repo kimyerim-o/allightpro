@@ -47,7 +47,7 @@
 				});
 				
 				$("#mail").click(function() {
-					//택배값 email
+					//택배값,주문취소 email
 					$.ajax({
 						url : "${pageContext.request.contextPath}/order/email/corp.com?no="+${param.no}+"&email=${ORDER.mdto1.memail}&text="+$("#ost").text(),
 						type : "POST",
@@ -129,6 +129,7 @@
 										<option value="배송시작">배송시작</option>
 										<option value="배송완료">배송완료</option>
 										<option value="주문취소">주문취소</option>
+										<option value="반품완료">반품완료</option>
 									</select> <input type="button" id="serb" value="변경" />
 								</form></li>
 						</ul>

@@ -3,6 +3,7 @@
 "HTTP://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Buy">
 
+	<!-- 주문하기 --><!-- 상품상세페이지에서 바로구매 눌렀을때 주문 -->
 	<select id="buy" resultType="buyDTO" parameterType="buyDTO">
 	select * from orders where mid=${mid}
 	</select>
@@ -22,5 +23,27 @@
 		select imgimage from image where ino=#{ino} and imgrepresent=1
 	</select>
 	
+	<!-- 1. 결제 후 orderDTO에 저장 -->
+	<insert id="ordersin" parameterType="ordDTO">
+		insert into orders(ono, mid, odate, oaddno, oaddress1, oaddress2, oreceiver, otel, orequirethings, opayment, osum) 
+		values (ono_SEQ.nextval, #{mid}, sysdate, #{oaddno}, #{oaddress1}, #{oaddress2}, #{oreceiver}, #{otel}, #{orequirethings}, #{opayment}, #{osum})
+	</insert>
+	
+	<!-- 2. orderDTO에 저장하기 위해 ono가져올때 필요 -->
+	<select id="onosel" parameterType="String" resultType="Integer">
+		select ono from orders where ono=(select MAX(ono) from orders where mid=#{mid})
+	</select>
+	
+	<!-- 3. orderdetailDTO에 저장 -->
+	<!-- <insert id="orderdetailsin" parameterType="orddDTO">
+		insert into orderdetail(ono, odno, ino, ostatus, odamount, odprice) 
+		values (#{ono}, odno_seq.nextval, #{ino}, '결제완료', #{odamount}, #{odprice})
+	</insert> -->
+	
+	
+	<!-- 4. 결제 후 장바구니 지우기 -->
+	<delete id="emptyCart" parameterType="Integer">
+		delete cart where cano=#{cano}
+	</delete>
 </mapper>
 	

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.all.light.dao.FreeBoardDAO;
+import com.all.light.dto.DiaryDTO;
 import com.all.light.dto.FreeBoardDTO;
+import com.all.light.dto.ReviewDTO;
 import com.all.light.util.PageUtil;
 
 @Service
@@ -83,11 +85,37 @@ public class FreeBoardService {
 		return pInfo;
 	}
 
-	public ArrayList<FreeBoardDTO> getCommDetail(PageUtil pInfo) {
-		return freDAO.getCommDetail(pInfo);
+	public ArrayList<FreeBoardDTO> getCommDetail(PageUtil pInfo, HttpSession session) {
+		ArrayList<FreeBoardDTO> list = freDAO.getCommDetail(pInfo);
+		for(int i=0; i<list.size();i++) {
+			if(this.isLike(list.get(i).getFcno(), (String)session.getAttribute("MID"))==1){
+				list.get(i).setIsLiked(Boolean.TRUE);
+			}
+		}
+		return list;
 	}
-
-
+	
+	// 상품 후기 좋아요 여부 체크
+	public int isLike(int fcno, String mid) {
+		//isLike 이 아이디 사람이 이미 좋아요 했으면 1, 안했으면 0
+		int isLike = freDAO.getIsLike(fcno,mid);
+		
+		return isLike;
+	}
+		
+	// 상품 후기 추가/삭제
+	public void like(int fcno, String mid) {
+		//isLike 이 아이디 사람이 이미 좋아요 했으면 1, 안했으면 0
+		int isLike = this.isLike(fcno,mid);
+		
+		switch (isLike) {
+		case 0: //좋아요 추가
+			freDAO.LikeIns(fcno,mid);
+			break;
+		case 1: //좋아요 삭제
+			freDAO.LikeDel(fcno,mid);
+		}
+	}
 
 	//댓글
 		public void insertComm(FreeBoardDTO freDTO) {
@@ -147,5 +175,11 @@ public class FreeBoardService {
 		}
 	}
 
-
+	//해당 다이어리의 이미지,원래이름 가져오기
+	public DiaryDTO getByDno(int dno) {
+		DiaryDTO dto = freDAO.getByDno(dno);
+		return dto;
 	}
+
+
+}

@@ -182,19 +182,20 @@ function loginCheck (){
 										</a>
 									</c:if>
 									<c:if test="${!empty sessionScope.MID}">
-									<a href="#"> 
-										<c:if test="${list.isLiked}">
+									<a href="${pageContext.request.contextPath}/freeboard/like/admin.com?no=${param.no}&commPage=${PINFO.nowPage}&num=${c.fcno}"> 
+										<c:if test="${c.isLiked}">
 											<img class="like" src="${pageContext.request.contextPath}/resources/img/liked.png" />
 										</c:if>
-										<c:if test="${!list.isLiked}">
+										<c:if test="${!c.isLiked}">
 											<img class="like" src="${pageContext.request.contextPath}/resources/img/like.png" />
 										</c:if>
 									</a>
 								</c:if>
+								<a class="aNone">${c.amount}</a>
+								
 								<c:if test="${c.fcid eq sessionScope.MID || sessionScope.MTYPE == 1}">
 										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
 								</c:if> 
-								<a class="aNone">${list.rlamount}</a>
 							</td>
 							</tr>
 						</c:forEach>

@@ -29,7 +29,6 @@
 <body>
 	<h3>장바구니</h3>
 	<hr/>
-	<form action="./buy.com" id="cart" method="post">
 		<div id="content">
 			<c:if test="${!empty sessionScope.MID}">
 				<div class="allCheck">
@@ -78,7 +77,7 @@
 					<c:set var="sum0" value="0" />
 					<%-- <c:set var="qty" value="0" /> --%>
 					<c:forEach var="list" items="${clist}">
-						<input type="hidden" name="arr" value="${list.cano}"/><!-- 주문페이지 연결시 cano보내주려고 -->
+						<input type="hidden" name="arr" id="cano" value="${list.cano}"/><!-- 주문페이지 연결시 cano보내주려고 -->
 						<tr>
 							<td scope="col"><!-- 체크박스 -->
 								<div class="center">
@@ -124,7 +123,6 @@
 					<c:set var="sum0" value="${sum0 + (list.iprice*list.caamount)}" />
 					<%-- <c:set var="qty" value="${qty + list.caamount }" /> --%>
 					</c:forEach>
-					
 				</tbody>
 			</table>
 			<hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/><hr/>
@@ -149,12 +147,14 @@
 						</tr>
 					</tbody>
 				</table>
+	<form action="./buy.com" id="cart" method="post">
+		<input type="hidden" name="canoList" id="canoList"/>
 			<div class="right">
 				<input type="button" value="계속 쇼핑" onclick="location.href='${pageContext.request.contextPath}/shopping/list.com'" />&nbsp;
-				<input type="submit" value="결제하기"/>
+				<input type="button" id="pay" value="결제하기"/>
 			</div>
+	</form>
 			</c:if>
 		</div>
-	</form>
 </body>
 </html>

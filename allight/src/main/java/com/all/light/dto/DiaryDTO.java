@@ -3,7 +3,6 @@ package com.all.light.dto;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import java.sql.Date;
@@ -15,10 +14,15 @@ public class DiaryDTO {
 	private int dexercal=0;		//총운동칼로리
 	private int dfoodcal=0;		//총음식칼로리
 	private String dimage;		//사진
-	private String savedimage;	//저장된 사진
+	private String doriimage;	//저장된 사진
 	private Double dweight=0.0;	//체중
 	private String ddiary;		//일기
 	private Date ddate;			//날짜
+	private Double rate=0.0;
+	private int crno;
+	private Double crcal;
+	private int dsucc;
+	private int mm;
 
 	//달력 표시 위해..
 	private String year="";
@@ -99,12 +103,7 @@ public class DiaryDTO {
 	public void setDdiary(String ddiary) {
 		this.ddiary = ddiary;
 	}
-	public String getSavedimage() {
-		return savedimage;
-	}
-	public void setSavedimage(String savedimage) {
-		this.savedimage = savedimage;
-	}
+	
 	
 	
 	// 날짜에 관련된 달력정보를 가지는 메서드
@@ -193,13 +192,49 @@ public class DiaryDTO {
 	
 	public DiaryDTO() {}
 	
-	
+	public Double getRate() {
+		return rate;
+	}
+	public void setRate(Double rate) {
+		this.rate = rate;
+	}
+	public int getCrno() {
+		return crno;
+	}
+	public void setCrno(int crno) {
+		this.crno = crno;
+	}
+	public Double getCrcal() {
+		return crcal;
+	}
+	public void setCrcal(Double crcal) {
+		this.crcal = crcal;
+	}
 	@Override
 	public String toString() {
 		return "DiaryDTO [dno=" + dno + ", mid=" + mid + ", dexercal=" + dexercal + ", dfoodcal=" + dfoodcal
-				+ ", dimage=" + dimage + ", savedimage=" + savedimage + ", dweight=" + dweight + ", ddiary=" + ddiary
-				+ ", ddate=" + ddate + ", year=" + year + ", month=" + month + ", day=" + day + ", value=" + value
-				+ "]";
+				+ ", dimage=" + dimage + ", doriimage=" + doriimage + ", dweight=" + dweight + ", ddiary=" + ddiary
+				+ ", ddate=" + ddate + ", rate=" + rate + ", crno=" + crno + ", crcal=" + crcal + ", year=" + year
+				+ ", month=" + month + ", day=" + day + ", value=" + value + "]";
 	}
+	public int getDsucc() {
+		return dsucc;
+	}
+	public void setDsucc(int dsucc) {
+		this.dsucc = dsucc;
+	}
+	public int getMm() {
+		return mm;
+	}
+	public void setMm(int mm) {
+		this.mm = mm;
+	}
+	public String getDoriimage() {
+		return doriimage;
+	}
+	public void setDoriimage(String doriimage) {
+		this.doriimage = doriimage;
+	}
+	
 	
 }

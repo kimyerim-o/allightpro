@@ -130,13 +130,13 @@ function loginCheck (){
 				<tr>
 					<td class="board-content" colspan="4">
 						<div class="board-content-div">
-							내용 <br /><c:forEach items="${FILE}" var="file">
+							<br /><c:forEach items="${FILE}" var="file">
 							<c:set var="path" value="/item/img/" />
 							<c:set var="name" value="${file.fiimg}" />
 							<img src="<c:out value="${path}"/><c:out value="${name}"/>" />
 							</c:forEach>
 							<br />
-							${DETAIL.fcontent}
+							<pre>${DETAIL.fcontent}</pre>
 						</div>
 					</td>
 				</tr>
@@ -182,19 +182,20 @@ function loginCheck (){
 										</a>
 									</c:if>
 									<c:if test="${!empty sessionScope.MID}">
-									<a href="#"> 
-										<c:if test="${list.isLiked}">
+									<a href="${pageContext.request.contextPath}/freeboard/like.com?no=${param.no}&commPage=${PINFO.nowPage}&num=${c.fcno}"> 
+										<c:if test="${c.isLiked}">
 											<img class="like" src="${pageContext.request.contextPath}/resources/img/liked.png" />
 										</c:if>
-										<c:if test="${!list.isLiked}">
+										<c:if test="${!c.isLiked}">
 											<img class="like" src="${pageContext.request.contextPath}/resources/img/like.png" />
 										</c:if>
 									</a>
 								</c:if>
+								<a class="aNone">${c.amount}</a>
+								
 								<c:if test="${c.fcid eq sessionScope.MID || sessionScope.MTYPE == 1}">
 										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
 								</c:if> 
-								<a class="aNone">${list.rlamount}</a>
 							</td>
 							</tr>
 						</c:forEach>
@@ -205,7 +206,7 @@ function loginCheck (){
 						<ul class="pagination">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
-										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }&commPage=${PINFO.nowPage-3}">«</a>
+										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no}&commPage=${PINFO.nowPage-3}">«</a>
 								</c:if> <c:if test="${PINFO.nowPage <= 3}">
 									<a
 										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }&commPage=1">«</a>

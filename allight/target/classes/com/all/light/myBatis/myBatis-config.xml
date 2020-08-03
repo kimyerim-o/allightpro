@@ -38,7 +38,6 @@
    		<typeAlias type="com.all.light.dto.CartDTO" alias="cartDTO"/>
    		<typeAlias type="com.all.light.dto.BuyDTO" alias="buyDTO"/>
    		<typeAlias type="com.all.light.dto.FreeBoardDTO" alias="freDTO"/>
-   		<typeAlias type="com.all.light.dto.KgDTO" alias="kgDTO"/>
    </typeAliases>
    
    <mappers>

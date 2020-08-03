@@ -146,4 +146,32 @@
 		where fno=#{fno}
 	</update>
 	
+	<!-- 좋아요한 닉네임 가져오기  -->
+	<select id="LikeId" resultType="java.lang.String" parameterType="int">
+		select flnick from freeboardlike where fcno = #{fcno}
+	</select>
+	
+	<!-- 좋아요 총 카운트 가져오기  -->
+	<select id="LikeCnt" resultType="int" parameterType="int">
+		select count(*) from freeboardlike 
+		where fcno=#{fcno}
+	</select>
+	
+	<!-- 해당 아이디의 리뷰 좋아요 정보(1아니면0) 가져오기  -->
+	<select id="isLike" resultType="int" parameterType="java.util.HashMap">
+		select count(*) from freeboardlike 
+		where fcno=#{fcno} and flid = #{mid}
+	</select>
+	
+	<!-- 좋아요 삽입   -->
+	<insert id="LikeIns" parameterType="java.util.HashMap">
+		insert into freeboardlike(flno,fcno,flid)
+		values (RLNO_SEQ.nextval,#{fcno},#{mid})
+	</insert>
+	
+	<!-- 좋아요 삭제   -->
+	<delete id="LikeDel" parameterType="java.util.HashMap">
+		delete from freeboardlike where fcno=#{fcno} and flid=#{mid}
+	</delete>
+	
 </mapper>

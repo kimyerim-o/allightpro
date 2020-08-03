@@ -16,6 +16,7 @@ public class FreeBoardDTO {
 	private String fcontent;
 	private int fhit;
 
+	private MultipartFile file;
 	private MultipartFile[] files;
 	// 자유게시판 댓글 DB
 	private int fcno;
@@ -28,6 +29,9 @@ public class FreeBoardDTO {
 	private String flno;
 	private String flid;
 	private String flnick;
+	
+	private int amount;	// 좋아요수
+	private Boolean isLiked; //좋아요여부
 
 	// 파일 넣자
 	private String fioriname; // 원래이름
@@ -214,15 +218,41 @@ public class FreeBoardDTO {
 		this.flnick = flnick;
 	}
 
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public Boolean getIsLiked() {
+		return isLiked;
+	}
+
+	public void setIsLiked(Boolean isLiked) {
+		this.isLiked = isLiked;
+	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
 	@Override
 	public String toString() {
 		return "FreeBoardDTO [fno=" + fno + ", ftype=" + ftype + ", ftitle=" + ftitle + ", fid=" + fid + ", fnick="
 				+ fnick + ", fdate=" + fdate + ", fcontent=" + fcontent + ", fhit=" + fhit + ", files="
 				+ Arrays.toString(files) + ", fcno=" + fcno + ", fcid=" + fcid + ", fcnick=" + fcnick + ", fccontent="
 				+ fccontent + ", fcdate=" + fcdate + ", fccount=" + fccount + ", flno=" + flno + ", flid=" + flid
-				+ ", flnick=" + flnick + ", fioriname=" + fioriname + ", fiimg=" + fiimg + ", filength=" + filength
-				+ ", fipath=" + fipath + "]";
+				+ ", flnick=" + flnick + ", amount=" + amount + ", isLiked=" + isLiked + ", fioriname=" + fioriname
+				+ ", fiimg=" + fiimg + ", filength=" + filength + ", fipath=" + fipath + "]";
 	}
+
+
+	
 
 
 }

@@ -785,7 +785,7 @@ table.fc-header {
 #mask_create, #mask_create2 {
 	position: absolute;
 	z-index: 9000;
-	background-color: #444;
+	background-color: #00000085;
 	display: none;
 	left: 0;
 	top: 0;
@@ -825,6 +825,26 @@ table.fc-header {
 	font-weight: bold;
 	padding-top: 5px;
 	padding-right: 20px;
+}
+
+.center .close {
+	display: inline-block;
+	padding: 6px 18px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	text-align: center;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid #bdbdbd;
+	border-radius: 4px;
+	height:36px;
+	min-width:95px;background:white
+}
+
+.center .close:hover {
+	text-decoration: none;
+	border: 1px solid gray;
 }
 
 .create_modal .bottom, .create_modal2 .bottom {
@@ -986,6 +1006,4 @@ table.fc-header {
     margin: 40px 0;
 }
 
-input[type="button"] {
-	background-color:white;
-}
+

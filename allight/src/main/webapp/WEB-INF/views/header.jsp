@@ -73,7 +73,7 @@ function kakaoLogout() {
 				<c:if test="${!empty sessionScope.MID and !empty sessionScope.MPW}">
 					<a href="${pageContext.request.contextPath}/logout.com"
 						class="logined-panel">로그아웃</a>
-					<a href="${pageContext.request.contextPath}/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
+					<a href="${pageContext.request.contextPath}/mypage/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
 					
 					<a href="${pageContext.request.contextPath}/order/list.com"
 						class="logined-panel">주문/배송조회</a>

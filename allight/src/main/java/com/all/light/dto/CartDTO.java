@@ -10,6 +10,7 @@ public class CartDTO {
 	private int iprice;			// 상품 가격
 	private int istock;			// 상품 재고
 	private int[] canolist;
+	private int ono;
 	
 	//image -상품이미지-
 	private int imgno;  				// 이미지번호
@@ -88,7 +89,13 @@ public class CartDTO {
 	public String toString() {
 		return "CartDTO [cano=" + cano + ", caid=" + caid + ", ino=" + ino + ", caamount=" + caamount + ", caprice="
 				+ caprice + ", iname=" + iname + ", iprice=" + iprice + ", istock=" + istock + ", imgno=" + imgno
-				+ ", imgimages=" + imgimages + ", canolist"+canolist+ "]";
+				+ ", imgimages=" + imgimages + ", canolist"+canolist+ ",ono"+ono+"]";
+	}
+	public int getOno() {
+		return ono;
+	}
+	public void setOno(int ono) {
+		this.ono = ono;
 	}
 	
 /*	public int getFileCount() {

@@ -232,6 +232,7 @@ function wrapCreateByMask() {
 
    $('.create_modal').show();
 };
+
 function wrapCreateByMask2() {
    // 화면의 높이와 너비를 구한다.
    var maskHeight = $(document).height();

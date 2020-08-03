@@ -299,8 +299,8 @@ function updateDimage(input){
         },
         success : function(data){
         	alert('사진등록이 완료되었습니다.')
-			window.location.href="./myFAE.com?num="+data+"#img";
-			window.location.reload(true);
+			location.href="./myFAE.com?num="+data+"#img";
+			//location.reload(true);
         }
   	});
 }

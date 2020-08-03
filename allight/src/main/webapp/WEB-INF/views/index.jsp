@@ -38,10 +38,47 @@ function chart(yy,mon){
 };
 
 $(function(){
+	// 성공/실패 div 배경색 바꾸기
 	$('.success').closest('.main-imgs-div').closest('div').closest('td').css('background','#dff6ff');
 	$('.fail').closest('.main-imgs-div').closest('div').closest('td').css('background','#ffe8df');
+	
+	//닫기 버튼을 눌렀을 때
+    $('.create_modal .close').click(function(e) {
+       //링크 기본동작은 작동하지 않도록 한다.
+       e.preventDefault();
+       $('#mask_create, .create_modal').hide();
+       $('body').css("overflow", "scroll");
+    });
+ 
+    //검은 막을 눌렀을 때
+    $('#mask_create').click(function() {
+       $(this).hide();
+       $('.create_modal').hide();
+       $('body').css("overflow", "scroll");
+    });
+    
+ 	// help 버튼 눌렀을 때
+	$('.helpBtn').click(function(){
+		wrapCreateByMask();
+	    $('body').css("overflow", "hidden");
+	})
 })
 
+function wrapCreateByMask() {
+   // 화면의 높이와 너비를 구한다.
+   var maskHeight = $(document).height();
+   var maskWidth = $(window).width();
+
+   // 마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+   $('#mask_create').css({
+      'width' : maskWidth,
+      'height' : maskHeight
+   });
+
+   $('#mask_create').fadeTo("slow", 1);
+
+   $('.create_modal').show();
+};
 </script>
 
 </head>
@@ -51,6 +88,7 @@ $(function(){
 	<a class="title">다이어리 <%=session.getAttribute("MID") %> / <%=session.getAttribute("COID") %>
 		<input type="button" value="월별 다이어트 추이  &gt;" class="goto" onclick="chart(${today_info.search_year},${today_info.search_month});" style="background:white;"/>
 		<input type="button" value="Today" onclick="location.href='${pageContext.request.contextPath}/main.com'" class="goto" style="margin:0 15px;"/>
+		<input type="button" value="?" class="helpBtn"/>
 	</a>
 	
 	<form name="calendarFrm" id="calendarFrm" action="" method="GET">
@@ -231,6 +269,18 @@ $(function(){
 		</div>
 	</form>
 </div>
+
+<!--<!--  어두워지는 부분  -->
+<div id="mask_create"></div>
+<!-- 모달 부분 (도움말) -->
+<div class="create_modal">
+<div class="top" style="">
+   <div class="close">x</div>
+</div>
+<div class="bottom">
+도움말...이미지 캡쳐해서 띄우쟈~
+</div> 
+</div> 
 
 <form action="./myFAE.com" method="post" id="myFAEFrm">
 	<input type="hidden" name="num" id="num"/>

@@ -1006,4 +1006,15 @@ table.fc-header {
     margin: 40px 0;
 }
 
-
+.helpBtn {background-color:#f7f7f7;
+		border:1px solid #bdbdbd;
+		width:20px; height:20px;
+		border-radius:10px;
+		text-align:center;
+		margin:0 auto;
+		font-size:12px;
+		vertical-align:middle;
+		line-height:10px;
+		cursor:pointer;}
+		
+.helpBtn:hover{background-color:white;}

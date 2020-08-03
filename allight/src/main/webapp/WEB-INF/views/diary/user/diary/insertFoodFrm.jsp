@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+var amount; //상세 초기수량
 var gram; //상세 - 초기 gram
 var kcal; //상세 - 초기 kcal
 var tan0; //상세 - 초기 tan(g) 
@@ -76,8 +77,15 @@ $(function(){
     
     // 상세 모달에서 수량 바뀌면 분량(g),칼로리,그래프 변화
     $('#amount').change(function(){
-    	$('#gram').val(gram*$(this).val());
-    	$('#kcal').val(Math.floor(kcal*$('#gram').val()/gram));
+    	if(amount>1){
+    		var gram2 = (gram*100)/(amount*100);
+    		var kcal2 = (kcal*100)/(amount*100);
+	    	$('#gram').val(gram2*$(this).val());
+	    	$('#kcal').val(Math.floor(kcal2*$('#gram').val()/gram2));
+    	}else{
+    		$('#gram').val(gram*$(this).val());
+	    	$('#kcal').val(Math.floor(kcal*$('#gram').val()/gram));
+    	}
     	
     	var ttan0 = Math.round(tan0*$(this).val()*100)/100;
     	var ddan0 = Math.round(dan0*$(this).val()*100)/100;
@@ -214,7 +222,27 @@ $(function(){
 		$('#caldic-table').attr('class','search-table-on')
 		$('#mycal-table').attr('class','hidden');
 	})
+    
+ 	// help 버튼 눌렀을 때
+	$('.helpBtn').click(function(){
+		wrapCreateByMask3();
+	    $('body').css("overflow", "hidden");
+	})
 	
+	//닫기 버튼을 눌렀을 때
+    $('.create_modal3 .close').click(function(e) {
+       //링크 기본동작은 작동하지 않도록 한다.
+       e.preventDefault();
+       $('#mask_create3, .create_modal3').hide();
+       $('body').css("overflow", "scroll");
+    });
+ 
+    //검은 막을 눌렀을 때
+    $('#mask_create3').click(function() {
+       $(this).hide();
+       $('.create_modal3').hide();
+       $('body').css("overflow", "scroll");
+    });
 })
 
 function wrapCreateByMask() {
@@ -249,6 +277,7 @@ function wrapCreateByMask2() {
    $('.create_modal2').show();
 };
 	
+//상세보기
 function detail(cdno,cdamount,cdname,cdgram,cdcal,cdtan,cddan,cdji,cdsik,cdna){
 	tan0 = Number(cdtan);
 	dan0 = Number(cddan);
@@ -260,6 +289,8 @@ function detail(cdno,cdamount,cdname,cdgram,cdcal,cdtan,cddan,cdji,cdsik,cdna){
 	ji = Math.round(cdji*100/40);
 	sik = Math.round(cdsik*100/20);
 	na = Math.round(cdna*100/1500);
+	amount = cdamount;
+	kcal = cdcal;
 	
 	$('#amount').val(cdamount);
 	$('#detail-cdno').val(cdno);
@@ -302,6 +333,22 @@ function deleteMy(cdno) {
 	}
 }
 
+function wrapCreateByMask3() {
+	// 화면의 높이와 너비를 구한다.
+	var maskHeight = $(document).height();
+	var maskWidth = $(window).width();
+	
+	// 마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+	$('#mask_create3').css({
+	   'width' : maskWidth,
+	   'height' : maskHeight
+	});
+	
+	$('#mask_create3').fadeTo("slow", 1);
+	
+	$('.create_modal3').show();
+};
+	
 </script>
 <style type="text/css">
 .bar {
@@ -341,6 +388,7 @@ function deleteMy(cdno) {
 <body>
 <div id="wrap2">
 	<div class="title2">음식
+		<input type="button" value="?" class="helpBtn"/>
 		<div class="f-right" style="margin:0 20px 0 0">
 			<input type="button" value="뒤로 가기" id="goBack" class="btn" style="background:white">
 		</div>
@@ -403,7 +451,7 @@ function deleteMy(cdno) {
 				<td width="5%"><input type="checkbox" name="checkbox"/><input type="hidden" name="cdno" value="${list.cdno}"></td>
 				<td width="60%" class="cdname" onclick="detail(${list.cdno},${list.cdamount},'${list.cdname}',${list.cdgram},${list.cdcal},${list.cdtan},${list.cddan},${list.cdji},${list.cdsik},${list.cdna})">${list.cdname}&nbsp;&nbsp;(${list.cdamount}회, ${list.cdgram}g)</td>
 				<td width="25%" class="right">${list.cdcal}kcal</td>
-				<td width="10%" onclick="deleteMy(${list.cdno})" class="center" style="cursor:pointer;">X</td>
+				<td width="10%" onclick="deleteMy(${list.cdno})" class="center">X</td>
 			</tr>
 			</c:forEach>
 			<c:if test="${empty MYLIST}">
@@ -559,6 +607,23 @@ function deleteMy(cdno) {
 </form>
 </div>
 </div>
+
+<!--<!--  어두워지는 부분3  -->
+<div id="mask_create3"></div>
+<!-- 모달 부분3 (도움말) -->
+<div class="create_modal3">
+<div class="top" style="">
+   <div class="close">x</div>
+</div>
+<div class="bottom">
+	<img src="${pageContext.request.contextPath}/resources/img/help-img-food1.PNG" style="width:100%"/>
+	<img src="${pageContext.request.contextPath}/resources/img/help-img-food3.PNG" style="width:100%"/>
+	<img src="${pageContext.request.contextPath}/resources/img/help-img-food2.PNG" style="width:100%"/>
+	<div class="center" style="margin:30px 0;">
+         <input type="button" value="닫기" class="close"/>
+    </div>
+</div> 
+</div> 
 
 <form method="post" action="./insertMyFood.com" id="insertFoodFrm">
 	<input type="hidden" name="dno" value="${DTO.dno}"/>

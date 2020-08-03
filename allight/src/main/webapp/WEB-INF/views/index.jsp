@@ -39,7 +39,7 @@ function chart(yy,mon){
 
 $(function(){
 	// 성공/실패 div 배경색 바꾸기
-	$('.success').closest('.main-imgs-div').closest('div').closest('td').css('background','#dff6ff');
+	$('.success').closest('.main-imgs-div').closest('div').closest('td').css('background','#e0f7ff');
 	$('.fail').closest('.main-imgs-div').closest('div').closest('td').css('background','#ffe8df');
 	
 	//닫기 버튼을 눌렀을 때
@@ -85,7 +85,7 @@ function wrapCreateByMask() {
 
 <body>
 <div id="wrap">
-	<a class="title">다이어리 <%=session.getAttribute("MID") %> / <%=session.getAttribute("COID") %>
+	<a class="title">다이어리
 		<input type="button" value="월별 다이어트 추이  &gt;" class="goto" onclick="chart(${today_info.search_year},${today_info.search_month});" style="background:white;"/>
 		<input type="button" value="Today" onclick="location.href='${pageContext.request.contextPath}/main.com'" class="goto" style="margin:0 15px;"/>
 		<input type="button" value="?" class="helpBtn"/>
@@ -278,7 +278,7 @@ function wrapCreateByMask() {
    <div class="close">x</div>
 </div>
 <div class="bottom">
-도움말...이미지 캡쳐해서 띄우쟈~
+<img src="${pageContext.request.contextPath}/resources/img/help-img.png" style="width:100%"/>
 </div> 
 </div> 
 

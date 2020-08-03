@@ -782,7 +782,7 @@ table.fc-header {
 }
 
 /* 게시판 생성 모달  */
-#mask_create, #mask_create2 {
+#mask_create, #mask_create2, #mask_create3 {
 	position: absolute;
 	z-index: 9000;
 	background-color: #00000085;
@@ -791,7 +791,7 @@ table.fc-header {
 	top: 0;
 }
 
-.create_modal, .create_modal2 {
+.create_modal, .create_modal2, .create_modal3 {
 	overflow-y: scroll;
 	z-index: 10000;
 	width: 1000px;
@@ -811,13 +811,13 @@ table.fc-header {
 	transform: translateY(-50%);
 }
 
-.create_modal .top, .create_modal2 .top {
+.create_modal .top, .create_modal2 .top, .create_modal3 .top {
 	width: 100%;
 	height: 5%;
 	border-radius: 12px 12px 0px 0px;
 }
 
-.create_modal .top .close, .create_modal2 .top .close {
+.create_modal .top .close, .create_modal2 .top .close, .create_modal3 .top .close {
 	float: right;
 	cursor: pointer;
 	color: black;

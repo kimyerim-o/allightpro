@@ -208,11 +208,11 @@
 						<c:forEach items="${ORDER.sdto}" var="sdto">
 							<c:if test="${not done}">
 								<c:if test="${sdto.ino eq oddto.ino}">
-									<td class="order_thmb"><a href="#?"
+									<td class="order_thmb"><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${sdto.ino}"
 										onclick="hitRecentLog('12189');"> <img alt="temp_thmb"
 											src="${sdto.imgimage}" class="product-image"></a></td>
 									<td class="order_info" colspan="2"><a class="order_deal"
-										href="/goods/view.asp?g=12189"
+										href="${pageContext.request.contextPath}/shopping/detail.com?ino=${sdto.ino}"
 										onclick="hitRecentLog('12189');">${sdto.iname}</a>
 										<p class="order_deal_info">${sdto.idetail}</p> <!-- 옵션명 노출-->
 										<ul class="order_option_area">

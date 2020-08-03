@@ -375,7 +375,6 @@ li {
 	width: 900px;
 	overflow: hidden;
 	position: relative;
-	border: 1px solid #ccc;
 }
 
 .wrap-right::after {

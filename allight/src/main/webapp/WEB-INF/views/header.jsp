@@ -151,9 +151,9 @@ function kakaoLogout() {
 								href="${pageContext.request.contextPath}/order/mypage/back.com">취소/반품조회</a></li>
 							<li><a href="${pageContext.request.contextPath}/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/member/user/address.com">배송지
+								href="${pageContext.request.contextPath}/member/mypage/address.com">배송지
 									관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/item/review/list.com">상품 문의</a></li>
+							<li><a href="${pageContext.request.contextPath}/item/review/mypage/list.com">상품 문의</a></li>
 							<li><a href="${pageContext.request.contextPath}/mypage/member/modify.com">내 정보</a></li>
 						</ul>
 					</li>

@@ -28,7 +28,7 @@
 
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">칼로리 사전 관리</li>
-				<li><a href="#">칼로리 사전 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/cal/dictionary/admin.com">칼로리 사전 관리</a></li>
 			</ul>
 
 			<ul class="left_menu_box">

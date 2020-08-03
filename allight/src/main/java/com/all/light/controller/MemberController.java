@@ -387,7 +387,7 @@ public class MemberController {
 	
 	// 류지혁 작성
 	// 회원 배송지 리스트, 추가 폼
-	@GetMapping("/member/user/address")
+	@GetMapping("/member/mypage/address")
 	public ModelAndView address(HttpSession session, ModelAndView mv) {
 		System.out.println("컨트롤러 회원 배송지 목록보기 - address() 요청");
 		System.out.println(session.getAttribute("MID"));

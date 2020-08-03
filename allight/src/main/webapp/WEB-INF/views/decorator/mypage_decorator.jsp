@@ -24,7 +24,7 @@
 				<li class="left_menu_m1">주문관리</li>
 				<li class="on"><a href="#">주문/배송조회</a></li>
 				<li><a href="#">취소/반품조회</a></li>
-				<li><a href="#">장바구니</a></li>
+				<li><a href="${pageContext.request.contextPath}/mypage/cart.com">장바구니</a></li>
 			</ul>
 
 			<ul class="left_menu_box">

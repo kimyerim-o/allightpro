@@ -153,7 +153,7 @@
 				return false;
 			}
 			
-			$('#buy').submit();
+			$('#paybtn').submit();
     	});
 		
 	});
@@ -228,6 +228,7 @@
 	}
 	</script>
 	
+	<!-- 실시간계좌이체, 가상계좌는 테스트결제 지원되지 않음  -->
 	<!-- 아임포트 다날 실시간 계좌이체 구현 코드 -->
 	<script>
 	function danal_trans (name,amount,bemail,bname,btel,baddr,bpc) {

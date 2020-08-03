@@ -39,6 +39,9 @@ public class OrderDAO extends SqlSessionDaoSupport {
 			session.update("order.change",oddto);
 			session.update("order.changeStock",oddto);
 			session.update("order.changeIsell",oddto);
+		}else if(oddto.getOstatus().equals("반품완료")){
+			session.update("order.change",oddto);
+			session.update("order.Iselldown",oddto);
 		}else {
 			session.update("order.change",oddto);
 		}

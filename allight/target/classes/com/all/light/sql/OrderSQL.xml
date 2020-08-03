@@ -56,6 +56,10 @@
 	update member set mbank='${mbank}',mbankno='${mbankno}' where mid='${mid}' and mno=${mno}
 	</update>
 	
+	<update id="Iselldown" parameterType="orddeDTO">
+	update item set ISELLAMOUNT = ISELLAMOUNT-#{odamount} where ino=#{ino}
+	</update>
+	
 <!-- 기업 -->
 	<!--  -->
 	<select id="pageMemberId" resultType="int">

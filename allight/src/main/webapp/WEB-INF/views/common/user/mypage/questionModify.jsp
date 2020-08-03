@@ -19,16 +19,16 @@
 				return false;
 			}
 		$("#form").submit();
-			$("#form").attr("action","${pageContext.request.contextPath}/question/update.com?no=${DETAIL.qno}");
+			$("#form").attr("action","${pageContext.request.contextPath}/mypage/question/update.com?no=${DETAIL.qno}");
 			$("#form").submit();
 		});
 		//목록 버튼 클릭 시
 		$("#list").click(function() {
-							$(location).attr("href","${pageContext.request.contextPath}/question/list.com")
+							$(location).attr("href","${pageContext.request.contextPath}/mypage/question/list.com")
 						});
 		//취소 버튼 클릭 시
 		$("#back").click(function() {
-							$(location).attr("href","${pageContext.request.contextPath}/question/detail.com?no=${DETAIL.qno}");
+							$(location).attr("href","${pageContext.request.contextPath}/mypage/question/detail.com?no=${DETAIL.qno}");
 						});
 	})
 </script>

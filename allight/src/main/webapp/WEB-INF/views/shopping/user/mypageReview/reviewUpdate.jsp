@@ -10,6 +10,10 @@
 	$(function(){
 		//확인 버튼 클릭 시
 		$("#ok").click(function(){
+			if($("#rcontent").val() ==""){
+				alert("내용을 입력하세요");		
+				return false;
+			}
 			$("#form").submit();
 		});
 		//목록 버튼 클릭 시
@@ -31,8 +35,14 @@
 				<tr>
 					<td class="board-title" >별점</td>
 					<td class="board-title" colspan="3">
-					<input type="text" name="rgrade" size="60%" required="required" value="${LIST.rgrade}" placeholder="별점을 입력하세요">
-					</td>
+					<select name="rgrade">
+						<option value="5">★★★★★</option>
+						<option value="4">★★★★☆</option>
+						<option value="3">★★★☆☆</option>
+						<option value="2">★★☆☆☆</option>
+						<option value="1">★☆☆☆☆</option>
+					</select>
+				</td>
 				</tr>
 				<tr>
 					<td class="board-info"><a class="board-info-nick">작성자</a></td>
@@ -45,7 +55,7 @@
 				<tr>
 					<td class="board-content" colspan="4">
 						<div class="board-content-div">내용 <br/><br/>
-							<textarea rows="12" cols="100" name="rcontent" placeholder="내용을 입력하세요">${LIST.rcontent }</textarea></div></td>
+							<textarea rows="12" cols="100" id="rcontent" name="rcontent" placeholder="내용을 입력하세요">${LIST.rcontent }</textarea></div></td>
 				</tr>
 			</table>
 		</div>

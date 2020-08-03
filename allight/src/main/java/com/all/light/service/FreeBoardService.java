@@ -80,7 +80,7 @@ public class FreeBoardService {
 
 	public PageUtil getCommPageInfo(int fno, int commPage) {
 		int Cnt = freDAO.getTotalCntOfComm(fno);
-		PageUtil pInfo = new PageUtil(commPage, Cnt);
+		PageUtil pInfo = new PageUtil(commPage, Cnt, 5, 5);
 		pInfo.setFno(fno);
 		return pInfo;
 	}

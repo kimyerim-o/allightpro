@@ -49,7 +49,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="board-content"><div class="board-content-div"><textarea cols="100%" rows="30">${LIST.ncontent }</textarea></div></td>
+					<td class="board-content"><div class="board-content-div">${LIST.ncontent }</div></td>
 				</tr>
 			</table>
 		</div>

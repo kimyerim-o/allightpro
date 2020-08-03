@@ -97,7 +97,7 @@
 				</tr>
 				<tr>
 					<td class="board-info"><a class="board-info-nick">작성자</a></td>
-					<td class="board-info"><a class="board-info-nick">${DETAIL.qid}</a></td>
+					<td class="board-info"><a class="board-info-nick">${DETAIL.qnick}</a></td>
 					<td class="board-info"><a class="board-info-others">작성일 </a></td>
 					<td class="board-info"><a class="board-info-others">${DETAIL.qdate}</a></td>
 				</tr>

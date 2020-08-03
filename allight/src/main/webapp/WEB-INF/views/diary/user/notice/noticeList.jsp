@@ -91,7 +91,7 @@
 					<c:if test="${PINFO.nowPage < PINFO.endPage-3}">
 						<a href="${pageContext.request.contextPath}/notice.com?type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage+3}">»</a>
 					</c:if>
-					<c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
+					<c:if test="${PINFO.nowPage >= PINFO.endPage-3}">
 						<a href="${pageContext.request.contextPath}/notice.com?type=${param.type}&search=${param.search}&nowPage=${PINFO.endPage}">»</a>
 					</c:if>
 				</li>

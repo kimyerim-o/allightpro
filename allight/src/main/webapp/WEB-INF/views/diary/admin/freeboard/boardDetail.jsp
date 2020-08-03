@@ -108,10 +108,7 @@ function loginCheck (){
 				<form id="form">
 					<input type="button" value="목록" class="btn" id="list"> <input
 						type="hidden" value="${DETAIL.fno}" name="no">
-					<c:if test="${DETAIL.fid eq sessionScope.MID}">
-						<input type="button" value="수정" class="btn" id="up">
 						<input type="button" value="삭제" class="btn" id="del">
-					</c:if>
 				</form>
 			</div>
 
@@ -193,9 +190,7 @@ function loginCheck (){
 								</c:if>
 								<a class="aNone">${c.amount}</a>
 								
-								<c:if test="${c.fcid eq sessionScope.MID || sessionScope.MTYPE == 1}">
-										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
-								</c:if> 
+								<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
 							</td>
 							</tr>
 						</c:forEach>

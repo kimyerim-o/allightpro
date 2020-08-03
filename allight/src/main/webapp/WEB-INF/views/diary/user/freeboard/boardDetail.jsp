@@ -88,9 +88,7 @@
 										});
 							}
 						});
-
 	})
-	
 function loginCheck (){
 	if('${sessionScope.MID}'==''){
 		if(confirm('로그인 후 이용가능한 서비스입니다.\n로그인하시겠습니까?')){
@@ -147,9 +145,16 @@ function loginCheck (){
 				<div class="boardContent-Comment-input">
 					<form style="text-align: left">
 						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자 </a>&nbsp;&nbsp; 
-								<a class="board-info-others">${sessionScope.MNICK}<br></a></a>
-						<input type="textarea" class="input" id="fccontent" placeholder="댓글을 입력하세요" /> 
-						<input type="button" class="button" id="wcomm" value="등록" />
+								<a class="board-info-others">
+								${sessionScope.MNICK}<br></a></a>
+						<c:if test="${sessionScope.MID ne null}">
+						<input type="textarea" class="input" id="fccontent" placeholder="댓글을 입력하세요" />
+						<input type="button" class="button" id="wcomm" value="등록" onclick="loginCheck();"/>
+						</c:if>
+						<c:if test="${sessionScope.MID eq null}">
+						<input type="textarea" class="input" id="fccontent" placeholder="회원 로그인이 필요합니다" readonly/> 
+						<input type="button" class="button" id="wcomm" value="등록"  onclick="loginCheck();" disabled="true"/>
+						</c:if>
 					</form>
 				</div>
 

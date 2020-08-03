@@ -451,20 +451,29 @@ public class MemberController {
 			return mv;
 		}
 		
-		//회원탈퇴
-		@RequestMapping("/mypage/member/delete")
-		public ModelAndView memberDelete(
-				@RequestParam(value = "cono") int cono,
-				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-				@RequestParam(value = "search", required = false) String searchWord,
-				ModelAndView mv, RedirectView rv,HttpServletRequest request) {
-			System.out.println("MemberController.delete.member");
-			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
-			System.out.println("cono = "+cono);
-			memSVC.memDelete(cono);
-			//酉곗��젙
-			rv.setUrl(request.getContextPath()+"/mypage/member/delete.com?search="+searchWord+"&nowPage="+nowPage);
+		//회원 탈퇴
+		@RequestMapping(value="/mypage/member/delete", method= RequestMethod.GET)
+		public ModelAndView deleteMemberGet(
+				MemberDTO memDTO,	ModelAndView mv, RedirectView rv, HttpSession session) {
+			memDTO = memSVC.getMInfo(Integer.parseInt(String.valueOf(session.getAttribute("MNO"))));
+			System.out.println("memInfo = "+memDTO);
+			mv.addObject("MEMINFO", memDTO);
 			mv.setViewName("common/user/delete member/deletemember");
+			return mv;
+		}
+		
+		@RequestMapping(value="/mypage/member/delete", method= RequestMethod.POST)
+		public ModelAndView deleteMemberPost(
+				MemberDTO memDTO,	ModelAndView mv, RedirectView rv,HttpServletRequest request,HttpSession session) {
+			System.out.println("memberController.modify.Member, Post method");
+			System.out.println("memDTO = "+memDTO.toString());
+			int i=memSVC.delete2(memDTO);
+			if(i==1) {//성공
+				session.invalidate();
+				mv.setViewName("common/user/delete member/deletememsuccess");
+			}else {//i==0 실패		
+				mv.setViewName("common/user/delete member/deletememfail");
+			}
 			return mv;
 		}
 	}

@@ -279,4 +279,9 @@ public class MemberService {
 		memDAO.addressdelete(aDTO);
 	}
 
+	public int delete2(MemberDTO memDTO) {
+		int i=memDAO.memDelete2(memDTO);
+		return i;
+	}
+
 }

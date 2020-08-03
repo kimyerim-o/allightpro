@@ -127,5 +127,8 @@
 		DELETE address WHERE ano=#{ano}
 	</delete>
 	        
+	<delete id="memDelete2" parameterType="memDTO">
+	delete member where mid=#{mid} and mpw=#{mpw}
+	</delete>
 </mapper>
 	

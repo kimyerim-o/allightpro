@@ -14,7 +14,7 @@
 	<hr/>
 	<table>
 		<tr>
-			<td>탈퇴 완료!</td>
+			<td>"탈퇴 완료!"</td>
 		</tr>
 		<tr class="center">
 			<td>

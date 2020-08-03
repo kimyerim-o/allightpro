@@ -55,7 +55,7 @@ $(function(){
 					<td>${list.NUM}</td>
 					<td>${list.INAME}</td>
 					<td><fmt:formatDate value="${list.RDATE}" pattern="yyyy-MM-dd"/></td>
-					<td>${list.RGRADE}</td>
+					<td><c:forEach begin="1" end="${list.RGRADE}">★</c:forEach><c:forEach begin="1" end="${5-list.RGRADE}">☆</c:forEach></td>
 					<td>${list.RCONTENT}</td>
 					<td><%-- <a href="${pageContext.request.contextPath}/mypage/review/write.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
 					<input type="button" id="wbtn" name="wbtn" value="리뷰 작성">

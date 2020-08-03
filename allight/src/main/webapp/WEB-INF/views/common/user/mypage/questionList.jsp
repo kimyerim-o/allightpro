@@ -25,36 +25,36 @@
 			<c:forEach items="${LIST}" var="list">
 				<tr>
 					<td>${list.qno}</td>
-					<td><a href="${pageContext.request.contextPath}/question/detail.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
+					<td><a href="${pageContext.request.contextPath}/mypage/question/detail.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
 					<td>${list.qdate}</td>
 				</tr>
 			</c:forEach>
 		</table>
 		<div class="right">
-			<a class="btn" href="${pageContext.request.contextPath}/question/write.com">글쓰기</a>
+			<a class="btn" href="${pageContext.request.contextPath}/mypage/question/write.com">글쓰기</a>
 		</div>
 		<div class="center">
 			<ul class="pagination">
 				<li>
 					<c:if test="${PINFO.nowPage > 3}">
-						<a href="${pageContext.request.contextPath}/question/list.com?nowPage=${PINFO.nowPage-3}">«</a>
+						<a href="${pageContext.request.contextPath}/mypage/question/list.com?nowPage=${PINFO.nowPage-3}">«</a>
 					</c:if>
 					<c:if test="${PINFO.nowPage <= 3}">
-						<a href="${pageContext.request.contextPath}/question/list.com?nowPage=1">«</a>
+						<a href="${pageContext.request.contextPath}/mypage/question/list.com?nowPage=1">«</a>
 					</c:if>
 				</li>
 				<!-- 현재 페이지일때 active --> 
 				<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
 					<li id="li"><!-- 스크립트 적용해야 할것같아요 -->
-						<a href="${pageContext.request.contextPath}/question/list.com?nowPage=${i}">${i}</a>
+						<a href="${pageContext.request.contextPath}/mypage/question/list.com?nowPage=${i}">${i}</a>
 					</li>
 				</c:forEach>				
 				<li>
 					<c:if test="${PINFO.nowPage < PINFO.endPage-3}">
-						<a href="${pageContext.request.contextPath}/question/list.com?nowPage=${PINFO.nowPage+3}">»</a>
+						<a href="${pageContext.request.contextPath}/mypage/question/list.com?nowPage=${PINFO.nowPage+3}">»</a>
 					</c:if>
 					<c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
-						<a href="${pageContext.request.contextPath}/question/list.com?nowPage=${PINFO.endPage}">»</a>
+						<a href="${pageContext.request.contextPath}/mypage/question/list.com?nowPage=${PINFO.endPage}">»</a>
 					</c:if>
 				</li>
 			</ul>

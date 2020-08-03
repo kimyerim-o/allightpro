@@ -55,7 +55,7 @@
 		  	<mapping path="/**/delete.com" />
 		  	<mapping path="/**/wcomment.com" />
 		  	<mapping path="/**/dcomment.com" />
-		  	<mapping path="/mypage/**" />
+		  	<mapping path="/**/mypage/**" />
 		 	<beans:bean class="com.all.light.util.LoginCheck" />
 	  	</interceptor>
 	  	<interceptor>

@@ -147,7 +147,7 @@
 						</tr>
 					</tbody>
 				</table>
-	<form action="./buy.com" id="cart" method="post">
+	<form action="../buy.com" id="cart" method="post">
 		<input type="hidden" name="canoList" id="canoList"/>
 			<div class="right">
 				<input type="button" value="계속 쇼핑" onclick="location.href='${pageContext.request.contextPath}/shopping/list.com'" />&nbsp;

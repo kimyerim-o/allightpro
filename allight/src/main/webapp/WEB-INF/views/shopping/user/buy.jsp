@@ -153,7 +153,7 @@
 				return false;
 			}
 			
-			$('#paybtn').submit();
+			$('#buy').submit();
     	});
 		
 	});
@@ -222,7 +222,7 @@
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
             	alert(msg);
-                location.href="${pageContext.request.contextPath}/cart.com";
+                location.href="${pageContext.request.contextPath}/mypage/cart.com";
             }
         });
 	}
@@ -260,7 +260,7 @@
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
                 alert(msg)
-                location.href="${pageContext.request.contextPath}/cart.com";
+                location.href="${pageContext.request.contextPath}/mypage/cart.com";
             }
         });
     }
@@ -296,7 +296,7 @@
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
                 alert(msg)
-                location.href="${pageContext.request.contextPath}/cart.com";
+                location.href="${pageContext.request.contextPath}/mypage/cart.com";
             }
         });
     }
@@ -332,7 +332,7 @@
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
                 alert(msg)
-                location.href="${pageContext.request.contextPath}/cart.com";
+                location.href="${pageContext.request.contextPath}/mypage/cart.com";
             }
         });
     }
@@ -388,7 +388,7 @@
                 msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
                 alert(msg);
-                location.href="${pageContext.request.contextPath}/cart.com";
+                location.href="${pageContext.request.contextPath}/mypage/cart.com";
             }
         });
     }

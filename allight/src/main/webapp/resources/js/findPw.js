@@ -80,6 +80,7 @@ $(function(){
           
           alert("인증이 완료되었습니다");
           $("#check_pw_code").text("인증완료");
+          $('#usercode').attr('disabled',true);
        }
     });//end of 인증번호 확인
 });

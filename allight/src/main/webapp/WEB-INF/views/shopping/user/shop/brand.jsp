@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,15 +62,15 @@
 				<div class="col-md-3">
 					<div class="product-grid">
 						<div class="product-image">
-							<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}"> <img class="pic"
-								src="${list.imgimage}">
+							<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}"> 
+								<img class="pic" src="${list.imgimage}" onerror="this.src='${pageContext.request.contextPath}/resources/img/no-img.png'">
 							<c:if test="${list.istock == 0}">
 								<span class="product-new-label">품절</span>
 							</c:if>
 						</div>
 						<div class="product-content">
 							<div class="title">${list.iname}</div>
-							<div class="price">${list.iprice}</div>
+							<div class="price"><fmt:formatNumber value="${list.iprice}" pattern="#,###"/></div>
 							<div class="brand">${list.icorp}</div>
 						</div>
 					</div>

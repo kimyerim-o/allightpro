@@ -73,7 +73,7 @@ function kakaoLogout() {
 				<c:if test="${!empty sessionScope.MID and !empty sessionScope.MPW}">
 					<a href="${pageContext.request.contextPath}/logout.com"
 						class="logined-panel">로그아웃</a>
-					<a href="${pageContext.request.contextPath}/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>장바구니</a>
+					<a href="${pageContext.request.contextPath}/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
 					
 					<a href="${pageContext.request.contextPath}/order/list.com"
 						class="logined-panel">주문/배송조회</a>
@@ -102,7 +102,7 @@ function kakaoLogout() {
 	<!-- logo -->
 	<div class="container">
 		<a href="${pageContext.request.contextPath}/main.com"> <img
-			src="${pageContext.request.contextPath}/resources/img/allight_logo.jpg"
+			src="${pageContext.request.contextPath}/resources/img/allight_logo2.PNG"
 			class="logo" onclick="" />
 		</a>
 	</div>
@@ -126,39 +126,41 @@ function kakaoLogout() {
 							<li><a href="${pageContext.request.contextPath}/notice.com">공지사항</a></li>
 							<li><a href="${pageContext.request.contextPath}/question/list.com">문의사항</a></li>
 						</ul></li>
-					<li class="nav-item"><a
-						href="${pageContext.request.contextPath}/shopping/list.com"
-						class="nav-link">쇼핑</a>
+					<li class="nav-item">
+						<a href="${pageContext.request.contextPath}/shopping/list.com" class="nav-link">쇼핑</a>
 						<ul class="dropdown">
-							<li><a
-								href="${pageContext.request.contextPath}/shopping/list.com?icategory=식단">식단</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/shopping/list.com?icategory=간식">간식</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/shopping/list.com?icategory=운동복">운동복</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/shopping/list.com?icategory=기타">기타</a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/shopping/brand.com">브랜드관</a></li>
-						</ul></li>
+							<li>
+								<a href="${pageContext.request.contextPath}/shopping/list.com?icategory=식단">식단</a></li>
+							<li>
+								<a href="${pageContext.request.contextPath}/shopping/list.com?icategory=간식">간식</a></li>
+							<li>
+								<a href="${pageContext.request.contextPath}/shopping/list.com?icategory=운동복">운동복</a></li>
+							<li>
+								<a href="${pageContext.request.contextPath}/shopping/list.com?icategory=기타">기타</a></li>
+							<li>
+								<a href="${pageContext.request.contextPath}/shopping/brand.com">브랜드관</a></li>
+						</ul>
+					</li>
 					<!-- 회원 로그인시  -->
-					<c:if test="${sessionScope.MTYPE eq 0 }"></c:if>
+					<c:if test="${sessionScope.MTYPE eq 0 && (!empty sessionScope.MID and !empty sessionScope.MPW) || (empty sessionScope.MPW and !empty sessionScope.MID and !empty sessionScope.MNICK)}">
 					<li class="nav-item"><a href="${pageContext.request.contextPath}/mypage/home.com" class="nav-link">마이페이지</a>
 						<ul class="dropdown">
 							<li><a
 								href="${pageContext.request.contextPath}/order/mypage/list.com">주문/배송조회</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/order/mypage/back.com">취소/반품조회</a></li>
-							<li><a href="${pageContext.request.contextPath}/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>장바구니</a></li>
+							<li><a href="${pageContext.request.contextPath}/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/member/user/address.com">배송지
 									관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/item/review/list.com">상품 문의</a></li>
 							<li><a href="${pageContext.request.contextPath}/mypage/member/modify.com">내 정보</a></li>
-						</ul></li>
+						</ul>
+					</li>
+					</c:if>
 
 					<!-- 기업 로그인시   -->
-					<c:if test="${sessionScope.MTYPE eq 1 }"></c:if>
+					<c:if test="${!empty sessionScope.COID}">
 					<li class="nav-item"><a href="#" class="nav-link">기업</a>
 						<ul class="dropdown">
 							<li><a
@@ -171,10 +173,12 @@ function kakaoLogout() {
 							<li><a href="${pageContext.request.contextPath}/corporation/modify/corp.com?cono=${sessionScope.CONO}">기업 정보 관리</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/question/list/corp.com">문의사항</a></li>
-						</ul></li>
+						</ul>
+					</li>
+					</c:if>
 
 					<!-- 관리자 로그인시   -->
-					<c:if test="${sessionScope.MTYPE eq null}"></c:if>
+					<c:if test="${sessionScope.MTYPE eq 1 && !empty sessionScope.MID}">
 					<li class="nav-item"><a
 						href="${pageContext.request.contextPath}/admin.com"
 						class="nav-link">관리자</a>
@@ -189,7 +193,9 @@ function kakaoLogout() {
 									문의 관리</a></li>
 							<li><a href="#">커뮤니티 관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/cal/dictionary/admin.com">칼로리 사전 관리</a></li>
-						</ul></li>
+						</ul>
+					</li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

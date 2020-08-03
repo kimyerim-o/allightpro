@@ -403,7 +403,7 @@ function deleteMy(cdno) {
 				<td width="5%"><input type="checkbox" name="checkbox"/><input type="hidden" name="cdno" value="${list.cdno}"></td>
 				<td width="60%" class="cdname" onclick="detail(${list.cdno},${list.cdamount},'${list.cdname}',${list.cdgram},${list.cdcal},${list.cdtan},${list.cddan},${list.cdji},${list.cdsik},${list.cdna})">${list.cdname}&nbsp;&nbsp;(${list.cdamount}회, ${list.cdgram}g)</td>
 				<td width="25%" class="right">${list.cdcal}kcal</td>
-				<td width="10%" onclick="deleteMy(${list.cdno})" class="center">X</td>
+				<td width="10%" onclick="deleteMy(${list.cdno})" class="center" style="cursor:pointer;">X</td>
 			</tr>
 			</c:forEach>
 			<c:if test="${empty MYLIST}">

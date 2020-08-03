@@ -303,6 +303,8 @@ function updateDimage(input){
 			//location.reload(true);
         }
   	});
+	
+	$fdsf//va;er()
 }
 
 //천단위 콤마
@@ -351,7 +353,7 @@ function numberWithCommas(x) {
 					<td class="center">${list.mfname}&nbsp;(${list.mfgram}g)</td>
 					<td class="center">${list.mfamount}</td>
 					<td class="right" style="padding:8px 65px 8px 8px"><fmt:formatNumber value="${list.mftotalcal}" pattern="#,###"/></td>
-					<td class="center" onclick="mfdel(${list.dno},${list.mfno});">X</td>
+					<td class="center" onclick="mfdel(${list.dno},${list.mfno});" style="cursor:pointer;">X</td>
 				</tr>
 			</c:forEach>
 			<c:if test="${empty FLIST}">
@@ -360,7 +362,7 @@ function numberWithCommas(x) {
 				</tr>
 			</c:if>
 		</table>
-		<div class="right">총 섭취 칼로리: <a class="mTotal">${DIARY.dfoodcal}<c:if test="${empty DIARY.dfoodcal}">0</c:if></a>kcal</div>
+		<div class="right">총 섭취 칼로리: <a class="mTotal"><fmt:formatNumber value="${DIARY.dfoodcal}" pattern="#,###"/><c:if test="${empty DIARY.dfoodcal}">0</c:if></a>kcal</div>
 		
 		<div class="title3">운동
 			<div class="f-right">
@@ -380,7 +382,7 @@ function numberWithCommas(x) {
 					<td class="center">${list.mename}</td>
 					<td class="center">${list.metime}</td>
 					<td class="right" style="padding:8px 65px 8px 8px"><fmt:formatNumber value="${list.metotalcal}" pattern="#,###"/></td>
-					<td class="center" onclick="medel(${list.dno},${list.meno});">X</td>
+					<td class="center" onclick="medel(${list.dno},${list.meno});" style="cursor:pointer;">X</td>
 				</tr>
 			</c:forEach>
 			<c:if test="${empty ELIST}">
@@ -389,7 +391,7 @@ function numberWithCommas(x) {
 				</tr>
 			</c:if>
 		</table>
-		<div class="right">총 소비 칼로리: <a class="fTotal">${DIARY.dexercal}<c:if test="${empty DIARY.dexercal}">0</c:if></a>kcal</div>
+		<div class="right">총 소비 칼로리: <a class="fTotal"><fmt:formatNumber value="${DIARY.dexercal}" pattern="#,###"/><c:if test="${empty DIARY.dexercal}">0</c:if></a>kcal</div>
 		
 		<div class="title3">일기</div>
 		<textarea name="ddiary" id="ddiary" placeholder="내용을 입력해주세요" style="width:100%; min-height:100px;">${DIARY.ddiary}</textarea>

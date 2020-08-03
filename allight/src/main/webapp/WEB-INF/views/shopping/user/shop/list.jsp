@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -80,7 +81,7 @@ $(function(){
 						</div>
 						<div class="product-content">
 							<div class="title">${list.iname}</div>
-							<div class="price">${list.iprice}</div>
+							<div class="price" style="color:#ef5777"><fmt:formatNumber value="${list.iprice}" pattern="#,###"/></div>
 							<div class="brand">${list.icorp}</div>
 						</div>
 					</div>

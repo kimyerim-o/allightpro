@@ -169,7 +169,7 @@ function kakaoLogout() {
 							<li><a
 								href="${pageContext.request.contextPath}/item/list/corp.com">상품
 									관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/item/review/list/corp.com">상품리뷰/문의</a></li>
+							<li><a href="${pageContext.request.contextPath}/item/review/list/corp.com">상품문의</a></li>
 							<li><a href="${pageContext.request.contextPath}/corporation/modify/corp.com?cono=${sessionScope.CONO}">기업 정보 관리</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/question/list/corp.com">문의사항</a></li>

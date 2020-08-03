@@ -145,5 +145,10 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		return session.selectOne("calrecipe.getRecipe", mid);
 	}
 
+	public int memDelete2(MemberDTO memDTO) {
+		int i=session.delete("member.memDelete2", memDTO);
+		return i;
+	}
+
 
 }

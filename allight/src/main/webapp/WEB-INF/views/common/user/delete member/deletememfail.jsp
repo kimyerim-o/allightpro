@@ -14,11 +14,11 @@
 	<hr/>
 	<table>
 		<tr>
-			<td>탈퇴 실패!</td>
+			<td>"탈퇴 실패!"</td>
 		</tr>
 		<tr class="center">
 			<td>
-				<input type="button" value="이전" onclick="location.href='http://localhost:9000/mypage/member/delete'">
+				<input type="button" value="이전" onclick="location.href='http://localhost:9000/allight/mypage/member/delete.com'">
 			</td>
 			<a href="<%=request.getContextPath()%>/corporation/modify/corp.com?search=${param.search}&nowPage=${param.nowPage}&">
 		</tr>

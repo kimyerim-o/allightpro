@@ -75,7 +75,7 @@ function kakaoLogout() {
 						class="logined-panel">로그아웃</a>
 					<a href="${pageContext.request.contextPath}/mypage/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a>
 					
-					<a href="${pageContext.request.contextPath}/order/list.com"
+					<a href="${pageContext.request.contextPath}/order/mypage/list.com"
 						class="logined-panel">주문/배송조회</a>
 					<a href="${pageContext.request.contextPath}/mypage/home.com" class="logined-panel">마이페이지</a>
 					<a href="#" class="logined-nick-panel">${sessionScope.MID} 님</a>
@@ -85,7 +85,7 @@ function kakaoLogout() {
 				<c:if test="${empty sessionScope.MPW and !empty sessionScope.MID and !empty sessionScope.MNICK}">
 					<a class="logined-panel" onclick="kakaoLogout()">로그아웃</a>
 					<a href="#" class="logined-panel">장바구니()</a>
-					<a href="${pageContext.request.contextPath}/order/list.com"
+					<a href="${pageContext.request.contextPath}/order/mypage/list.com"
 						class="logined-panel">주문/배송조회</a>
 					<a href="${pageContext.request.contextPath}/mypage/home.com" class="logined-panel">마이페이지</a>
 					<a href="#" class="logined-nick-panel">${sessionScope.MNICK} 님</a>

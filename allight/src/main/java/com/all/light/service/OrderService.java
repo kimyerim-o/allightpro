@@ -333,7 +333,7 @@ public class OrderService {
 			mail.setSubject(subject);
 			mail.setHtmlMsg(msg);
 			mail.send();
-			return "ok";
+			return "delemail";
 		} catch (Exception e) {
 			System.out.println("메일발송 실패 : " + e);
 			return null;
@@ -388,12 +388,68 @@ public class OrderService {
 			mail.setSubject(subject);
 			mail.setHtmlMsg(msg);
 			mail.send();
-			return "ok";
+			return "canemail";
 		} catch (Exception e) {
 			System.out.println("메일발송 실패 : " + e);
 			return null;
 		}
 	}
+	
+	public String reemail(String no, String email) {
+		System.out.println(no);
+		System.out.println(email);
+		OrderdetailDTO oddto=ordDAO.detailCorp(Integer.parseInt(no));
+		ShoppingDTO sdto=ordDAO.iteminfoCorp(oddto.getIno());
+		OrderDTO odto=ordDAO.listCorp(oddto.getOno());
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+		odto.setOrdernum(format.format(odto.getOdate())+odto.getMno()+odto.getOno());
+		
+		// Mail Server 설정
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.gmail.com";
+		int hostPort = 465;
+		String hostSMTPid = "allight.adm@gmail.com";
+		String hostSMTPpwd = "goallight!";
+
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "allight.adm@gmail.com";
+		String fromName = "allight";
+		String subject = "";
+		String msg = "";
+
+		subject = "Allight 상품 반품이 완료되었습니다.";
+		msg += "<div align='center' style='font-family:ariel'>";
+		msg += "<h1>안녕하세요. Allight입니다.</h1><hr><br/>";
+		msg += "<h1 style='color: orange;'>고객님께서 주문하신 상품 반품이 완료되었습니다.</h1><br/>";
+		msg += "<h1 style='background:#f8f8f8;padding:10px;'>주문번호 : "+odto.getOrdernum()+"</h1>";
+		msg += "<h1 style='background:#f8f8f8;padding:10px;'>상품명 : "+sdto.getIname()+"</h1><br/>";
+		msg += "<h1> ~~ 홈페이지에 방문하셔서 확인 부탁드립니다.</h1>";
+		msg += "<h1>문의 사항은 allight.adm@gmail.com 통해 연락 주시기 바랍니다.</h1>";
+		msg += "</div>";
+
+		// 받는 사람 E-Mail 주소
+		try {
+			HtmlEmail mail = new HtmlEmail();
+			mail.setDebug(true);
+			mail.setCharset(charSet);
+			mail.setSSL(true);
+			mail.setHostName(hostSMTP);
+			mail.setSmtpPort(hostPort);
+
+			mail.setAuthentication(hostSMTPid, hostSMTPpwd);
+			mail.setTLS(true);
+			mail.addTo(email, charSet);
+			mail.setFrom(fromEmail, fromName, charSet);
+			mail.setSubject(subject);
+			mail.setHtmlMsg(msg);
+			mail.send();
+			return "reemail";
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
+			return null;
+		}
+	}
+
 	
 	public void reviewr(ReviewDTO rdto, HttpSession session) {
 		rdto.setRid((String)session.getAttribute("MID"));
@@ -401,6 +457,7 @@ public class OrderService {
 		
 		ordDAO.reviewr(rdto);
 	}
+	
 	
 
 }

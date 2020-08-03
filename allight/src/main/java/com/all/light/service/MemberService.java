@@ -57,7 +57,7 @@ public class MemberService {
 		String subject = "";
 		String msg = "";
 
-		subject = "Allight 회원가입용 이메일 인증번호 입니다";
+		subject = "Allight 본인 인증용 이메일 인증번호 입니다";
 		msg += "<div align='center' style='font-family:ariel'>";
 		msg += "<h1>안녕하세요. Allight입니다.</h1><hr><br/>";
 		msg += "<h3>인증번호를 알려드립니다.</h3>";

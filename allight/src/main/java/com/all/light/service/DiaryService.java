@@ -52,6 +52,7 @@ public class DiaryService {
 					dateList.get(i).setDimage(list.get(j).getDimage());
 					dateList.get(i).setDdiary(list.get(j).getDdiary());
 					dateList.get(i).setDdate(list.get(j).getDdate());
+					dateList.get(i).setDsucc(list.get(j).getDsucc());
 				}
 			} 
 		}

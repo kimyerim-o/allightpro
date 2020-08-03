@@ -8,7 +8,7 @@
 		select * from 
 			(select EXTRACT(YEAR FROM ddate) year
         		,EXTRACT(MONTH FROM ddate) month, EXTRACT(DAY FROM ddate) day, 
-        		dno , ddate, dexercal, dfoodcal, dweight, ddiary, dimage
+        		dno , ddate, dexercal, dfoodcal, dweight, ddiary, dimage, dsucc
        		 from diary where mid = #{mid}) 
 		where year = #{year} and month = #{month}
 	</select>

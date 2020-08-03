@@ -37,6 +37,11 @@ function chart(yy,mon){
 	}
 };
 
+$(function(){
+	$('.success').closest('.main-imgs-div').closest('div').closest('td').css('background','#dff6ff');
+	$('.fail').closest('.main-imgs-div').closest('div').closest('td').css('background','#ffe8df');
+})
+
 </script>
 
 </head>
@@ -100,6 +105,12 @@ function chart(yy,mon){
 									<c:if test="${dateList.day!=''}">
 										<div class="main-imgs-div">
 											<c:if test="${dateList.dfoodcal ne 0 or dateList.dexercal ne 0 or dateList.dweight ne 0 or !empty dateList.ddiary or !empty dateList.dimage}">
+												<c:if test="${dateList.dsucc eq 1 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="success"></div>
+												</c:if>
+												<c:if test="${dateList.dsucc eq 0 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="fail"></div>
+												</c:if>
 												<div>
 													<img src="${pageContext.request.contextPath}/resources/img/cutlery.png">
 													<div class="main-text-div">${dateList.dfoodcal}</div>
@@ -125,6 +136,12 @@ function chart(yy,mon){
 									<c:if test="${dateList.day!=''}">
 										<div class="main-imgs-div">
 											<c:if test="${dateList.dfoodcal ne 0 or dateList.dexercal ne 0 or dateList.dweight ne 0 or !empty dateList.ddiary or !empty dateList.dimage}">
+												<c:if test="${dateList.dsucc eq 1 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="success"></div>
+												</c:if>
+												<c:if test="${dateList.dsucc eq 0 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="fail"></div>
+												</c:if>
 												<div>
 													<img src="${pageContext.request.contextPath}/resources/img/cutlery.png">
 													<div class="main-text-div">${dateList.dfoodcal}</div>
@@ -152,6 +169,12 @@ function chart(yy,mon){
 									<c:if test="${dateList.day!=''}">
 										<div class="main-imgs-div">
 											<c:if test="${dateList.dfoodcal ne 0 or dateList.dexercal ne 0 or dateList.dweight ne 0 or !empty dateList.ddiary or !empty dateList.dimage}">
+												<c:if test="${dateList.dsucc eq 1 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="success"></div>
+												</c:if>
+												<c:if test="${dateList.dsucc eq 0 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="fail"></div>
+												</c:if>
 												<div>
 													<img src="${pageContext.request.contextPath}/resources/img/cutlery.png">
 													<div class="main-text-div">${dateList.dfoodcal}</div>
@@ -177,6 +200,12 @@ function chart(yy,mon){
 									<c:if test="${dateList.day!=''}">
 										<div class="main-imgs-div">
 											<c:if test="${dateList.dfoodcal ne 0 or dateList.dexercal ne 0 or dateList.dweight ne 0 or !empty dateList.ddiary or !empty dateList.dimage}">
+												<c:if test="${dateList.dsucc eq 1 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="success"></div>
+												</c:if>
+												<c:if test="${dateList.dsucc eq 0 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="fail"></div>
+												</c:if>
 												<div>
 													<img src="${pageContext.request.contextPath}/resources/img/cutlery.png">
 													<div class="main-text-div">${dateList.dfoodcal}</div>

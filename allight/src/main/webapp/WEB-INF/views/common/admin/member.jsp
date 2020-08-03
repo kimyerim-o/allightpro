@@ -47,8 +47,8 @@
 			<tr>
 				<th>아이디</th>
 				<th>이름</th>
-				<th>주소</th>
 				<th>가입일</th>
+				<th>최근접속일</th>
 				<th></th>
 			</tr>
 			<%-- 반복문을 이용하여 줄출력 예정 --%>
@@ -56,8 +56,8 @@
 				<tr>
 					<td>${mem.MID}<c:if test="${mem.MTYPE==1}"><h5 style="display: inline;"> (관리자)</h5></c:if></td>
 					<td>${mem.MNAME}</td>
-					<td>${mem.MADDRESS}</td>
 					<td><fmt:formatDate value="${mem.MJOINDATE}" pattern="yyyy-MM-dd"/></td>
+					<td><fmt:formatDate value="${mem.MLOGDATE}" pattern="yyyy-MM-dd"/></td>
 					<td><a
 						href="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
 							<input type="button" id="modMem" value="수정">

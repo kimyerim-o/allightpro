@@ -143,7 +143,7 @@ function kakaoLogout() {
 					</li>
 					<!-- 회원 로그인시  -->
 					<c:if test="${sessionScope.MTYPE eq 0 && (!empty sessionScope.MID and !empty sessionScope.MPW) || (empty sessionScope.MPW and !empty sessionScope.MID and !empty sessionScope.MNICK)}">
-					<li class="nav-item"><a href="${pageContext.request.contextPath}/mypage/home.com" class="nav-link">마이페이지</a>
+					<li class="nav-item"><a href="${pageContext.request.contextPath}/order/mypage/list.com" class="nav-link">마이페이지</a>
 						<ul class="dropdown">
 							<li><a
 								href="${pageContext.request.contextPath}/order/mypage/list.com">주문/배송조회</a></li>

@@ -52,8 +52,12 @@
 						url : "${pageContext.request.contextPath}/order/email/corp.com?no="+${param.no}+"&email=${ORDER.mdto1.memail}&text="+$("#ost").text(),
 						type : "POST",
 						success : function(data) {   
-							if (data == "ok") {
-								alert("이메일 발송이 완료되었습니다.")
+							if (data == "delemail") {
+								alert("배송 시작 이메일 발송이 완료되었습니다.")
+							}else if(data == "canemail"){
+								alert("주문 취소 이메일 발송이 완료되었습니다.")
+							}else if(data == "reemail"){
+								alert("반품 완료 이메일 발송이 완료되었습니다.")
 							}else if(data == "x"){
 								alert("이메일 발송을 할 수 없는 상태입니다.")
 							}else{
@@ -156,9 +160,17 @@
 						<th>연락처</th>
 						<td>${ORDER.mdto1.mtel}</td>
 					</tr>
-					<tr class="last">
+					<tr>
 						<th>Email</th>
 						<td>${ORDER.mdto1.memail}</td>
+					</tr>
+					<tr>
+						<th>은행</th>
+						<td>${ORDER.mdto1.mbank}</td>
+					</tr>
+					<tr>
+						<th>계좌번호</th>
+						<td>${ORDER.mdto1.mbankno}</td>
 					</tr>
 				</tbody>
 			</table>

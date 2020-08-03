@@ -165,6 +165,10 @@ public class OrderController {
     		ok=ordSVC.delemail(no,email);//메일전송
         	System.out.println("배송시작 이메일 확인 완료!");
         	return ok;
+    	}else if(text.equals("반품완료")) {
+    		ok=ordSVC.reemail(no,email);//메일전송
+        	System.out.println("반품완료 이메일 확인 완료!");
+        	return ok;
     	}else if(text.equals("주문취소")) {
     		ok=ordSVC.canemail(no,email);//메일전송
         	System.out.println("주문취소 이메일 확인 완료!");

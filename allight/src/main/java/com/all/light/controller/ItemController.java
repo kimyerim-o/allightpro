@@ -512,7 +512,7 @@ public class ItemController {
 	
 	
 	// 내 상품 문의보기
-	@RequestMapping("review/list")
+	@RequestMapping("review/mypage/list")
 	public ModelAndView reviewlist(
 			@RequestParam(value="qNowPage", required=false, defaultValue="1") int qNowPage,
 			@RequestParam(value = "searchWord", required = false, defaultValue="") String searchWord,

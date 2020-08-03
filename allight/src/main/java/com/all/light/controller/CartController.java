@@ -22,7 +22,7 @@ public class CartController {
 	private CartService cartSVC;
 	
 	//장바구니로 가기
-	@RequestMapping("/cart")
+	@RequestMapping("/mypage/cart")
 	public ModelAndView cart(ModelAndView mv, HttpServletRequest request) {
 		System.out.println("장바구니페이지 입장");
 		String mid = (String)request.getSession().getAttribute("MID");

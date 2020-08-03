@@ -52,8 +52,12 @@
 						url : "${pageContext.request.contextPath}/order/email/corp.com?no="+${param.no}+"&email=${ORDER.mdto1.memail}&text="+$("#ost").text(),
 						type : "POST",
 						success : function(data) {   
-							if (data == "ok") {
-								alert("이메일 발송이 완료되었습니다.")
+							if (data == "delemail") {
+								alert("배송 시작 이메일 발송이 완료되었습니다.")
+							}else if(data == "canemail"){
+								alert("주문 취소 이메일 발송이 완료되었습니다.")
+							}else if(data == "reemail"){
+								alert("반품 완료 이메일 발송이 완료되었습니다.")
 							}else if(data == "x"){
 								alert("이메일 발송을 할 수 없는 상태입니다.")
 							}else{
@@ -156,9 +160,17 @@
 						<th>연락처</th>
 						<td>${ORDER.mdto1.mtel}</td>
 					</tr>
-					<tr class="last">
+					<tr>
 						<th>Email</th>
 						<td>${ORDER.mdto1.memail}</td>
+					</tr>
+					<tr>
+						<th>은행</th>
+						<td>${ORDER.mdto1.mbank}</td>
+					</tr>
+					<tr>
+						<th>계좌번호</th>
+						<td>${ORDER.mdto1.mbankno}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -220,18 +232,11 @@
 				<tbody>
 					<tr>
 						<th>결제 수단</th>
-						<td>신용카드 () <span class="receipt"><a
-								onclick="$.viewReceipt();" href="javascript:">영수증보기</a></span></td>
+						<td>${ORDER.odto1.opayment}</td>
 					</tr>
-					<!--<tr>
-							<th>카드번호</th>
-							<td>
-							472**********141 (00개월)
-							</td>
-						</tr>-->
 					<tr>
 						<th>승인일시</th>
-						<td>2020-04-05 오후 10:17:32</td>
+						<td>${ORDER.odto1.odate}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -244,7 +249,7 @@
 					<strong>구매 금액</strong>
 				</div>
 				<div class="order_result_area">
-					<em>${ORDER.odto1.sum}</em> <span class="won">원</span>
+					<em>${ORDER.odto1.osum}</em> <span class="won">원</span>
 				</div>
 			</div>
 
@@ -277,7 +282,7 @@
 					<strong><span>총 결제 금액</span></strong>
 				</div>
 				<div class="order_result_area">
-					<em><span>${ORDER.odto1.sum}</span></em> <span class="won"><span>원</span></span>
+					<em><span>${ORDER.odto1.osum}</span></em> <span class="won"><span>원</span></span>
 				</div>
 			</div>
 		</div>

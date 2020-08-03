@@ -161,7 +161,7 @@ $(function(){
               success : function(result){
                   if( result =="success"){
                 	  if(confirm("장바구니에 담겼습니다.\n장바구니 페이지로 이동하시겠습니까?")){
-                	  	location.href="${pageContext.request.contextPath}/cart.com";
+                	  	location.href="${pageContext.request.contextPath}/mypage/cart.com";
 					  }
                   }else if( result == "fail"){
                 	  if(confirm("회원만 이용 가능한 서비스입니다.\n로그인 하시겠습니까?")){

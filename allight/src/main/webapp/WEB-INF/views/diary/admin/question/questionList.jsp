@@ -22,13 +22,13 @@ function checkForm() {
 				<c:if test="${param.type eq 'qtitle' || param.type eq null}">
 				<select name="type" class="selectCss">
 					<option value="qtitle" selected>제목</option>
-					<option value="qid">작성자</option>
+					<option value="qnick">작성자</option>
 				</select>
 				</c:if>
 				<c:if test="${param.type eq 'qid'}">
 				<select name="type" class="selectCss">
 					<option value="qtitle">제목</option>
-					<option value="qid" selected>작성자</option>
+					<option value="qnick" selected>작성자</option>
 				</select>
 				</c:if>
 			<input type="text" id="search" name="search" placeholder="검색어를 입력하세요" value="${param.search}"/> 
@@ -47,13 +47,13 @@ function checkForm() {
 				<tr>
 					<td>${list.qno}</td>
 					<td><a href="${pageContext.request.contextPath}/question/detail/user/admin.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
-					<td>${list.qid}</td>
+					<td>${list.qnick}</td>
 					<td>${list.qdate}</td>
 				</tr>
 			</c:forEach>
 			<c:if test="${empty LIST}">
 			<tr>
-				<td colspan="4" style="text-align: center;">해당 내용이 없습니다.</td>
+				<td colspan="4" style="text-align: center;">문의사항이 없습니다.</td>
 			</tr>
 			</c:if>
 		</table>

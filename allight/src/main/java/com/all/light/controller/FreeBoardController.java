@@ -674,7 +674,7 @@ public class FreeBoardController {
 			freDTO.setFno(fno);
 			System.out.println(freDTO);
 			freSVC.delete(freDTO);
-			rv.setUrl(request.getContextPath()+"/freeboard/list.admin.com");
+			rv.setUrl(request.getContextPath()+"/freeboard/list/admin.com");
 			mv.setView(rv);
 			return mv;
 		}

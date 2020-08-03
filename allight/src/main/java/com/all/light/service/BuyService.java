@@ -80,6 +80,12 @@ public class BuyService {
 		buyDAO.buyNow(mid);
 	}
 
+	//order detail
+	public void oderdetailin(CartDTO li) {
+		buyDAO.orderdetailin(li);
+		
+	}
+
 	//결제 후 orderDetailsDTO에 저장
 	/*public void orderdetailsin(OrderdetailDTO oddto) {
 		buyDAO.orderdetailsin(oddto);

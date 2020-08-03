@@ -191,38 +191,30 @@ public class CorporationController {
 			return data;
 		}
 		
-		//湲곗뾽 �닔�젙 硫붿냼�뱶
 		@RequestMapping(value="/corporation/modify/corp", method= RequestMethod.GET)
 		public ModelAndView corpModifyCorporationGet(
 				@RequestParam(value = "cono") int cono,
-				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-				@RequestParam(value = "search", required = false) String searchWord,
 				CorporationDTO corDTO,	ModelAndView mv, RedirectView rv) {
 			System.out.println("corporationController.modifyCorp, GET method");
-			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
 			corDTO = corSVC.getCorpInfo(cono);
 			System.out.println("corpInfo = "+corDTO.toString());
-			//紐⑤뜽吏��젙
-			mv.addObject("CORPINFO", corDTO); //湲곗뾽 �긽�꽭 �젙蹂�
-			//酉곗��젙
+			mv.addObject("CORPINFO", corDTO);
 			mv.setViewName("common/corp/Modify corp/Modifycorporation");
 			return mv;
 		}
 		
 		@RequestMapping(value="/corporation/modify/corp", method= RequestMethod.POST)
 		public ModelAndView corpModifyCorporationPost(
-				// PK(CONO)瑜� DTO�뿉�꽌 int濡� 諛쏆쓣 �떆 get諛⑹떇�쑝濡� �뙆�씪誘명꽣瑜� �꽆寃⑤컺�븘�룄 corDTO�븞�뿉�꽌 諛쏆쓣 �닔 �엳�쓬
-				// String�쑝濡� 諛쏆쓣 �떆 �븞�맖
-				@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-				@RequestParam(value = "search", required = false) String searchWord,
-				CorporationDTO corDTO,	ModelAndView mv, RedirectView rv,HttpServletRequest request) {
+				CorporationDTO corDTO,	ModelAndView mv,HttpServletRequest request) {
 			System.out.println("corporationController.modifyCorp, Post method");
-			//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
 			System.out.println("corpDTO = "+corDTO.toString());
-			corSVC.corpModify(corDTO);
-			//酉곗��젙
-			rv.setUrl(request.getContextPath()+"/corporation/modify/corp.com?search="+searchWord+"&nowPage="+nowPage);
-			mv.setView(rv);
+			int i=corSVC.corpModify2(corDTO);
+			System.out.println(i);
+			if(i==1) {//성공
+				mv.setViewName("common/corp/Modify corp/Modifycorpsuccess");
+			}else {//i==0 실패		
+				mv.setViewName("common/corp/Modify corp/Modifycorpfail");
+			}
 			return mv;
 		}
 }

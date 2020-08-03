@@ -29,13 +29,13 @@
 		});
 		//목록 버튼 클릭 시
 		$("#list").click(function(){
-			$(location).attr("href","${pageContext.request.contextPath}/question/list.com")
+			$(location).attr("href","${pageContext.request.contextPath}/mypage/question/list.com")
 		});
 	})
 </script>
 </head>
 <body>
-<form id="form" action="${pageContext.request.contextPath}/question/write.com" method="post">
+<form id="form" action="${pageContext.request.contextPath}/mypage/question/write.com" method="post">
 	<div class="container">
 		<div class="boardContent">
 			<div class="boardContent-buttons">

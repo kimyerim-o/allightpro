@@ -222,12 +222,13 @@
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
             	alert(msg);
-                location.href="${pageContext.request.contextPath}/cart.com";
+                location.href="${pageContext.request.contextPath}/mypage/cart.com";
             }
         });
 	}
 	</script>
 	
+	<!-- 실시간계좌이체, 가상계좌는 테스트결제 지원되지 않음  -->
 	<!-- 아임포트 다날 실시간 계좌이체 구현 코드 -->
 	<script>
 	function danal_trans (name,amount,bemail,bname,btel,baddr,bpc) {
@@ -259,7 +260,7 @@
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
                 alert(msg)
-                location.href="${pageContext.request.contextPath}/cart.com";
+                location.href="${pageContext.request.contextPath}/mypage/cart.com";
             }
         });
     }
@@ -295,7 +296,7 @@
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
                 alert(msg)
-                location.href="${pageContext.request.contextPath}/cart.com";
+                location.href="${pageContext.request.contextPath}/mypage/cart.com";
             }
         });
     }
@@ -331,7 +332,7 @@
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
                 alert(msg)
-                location.href="${pageContext.request.contextPath}/cart.com";
+                location.href="${pageContext.request.contextPath}/mypage/cart.com";
             }
         });
     }
@@ -387,7 +388,7 @@
                 msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
                 alert(msg);
-                location.href="${pageContext.request.contextPath}/cart.com";
+                location.href="${pageContext.request.contextPath}/mypage/cart.com";
             }
         });
     }

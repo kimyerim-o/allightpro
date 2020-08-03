@@ -22,14 +22,14 @@
 			</p>
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">주문관리</li>
-				<li class="on"><a href="#">주문/배송조회</a></li>
-				<li><a href="#">취소/반품조회</a></li>
+				<li class="on"><a href="${pageContext.request.contextPath}/order/mypage/list.com">주문/배송조회</a></li>
+				<li><a href="${pageContext.request.contextPath}/order/mypage/back.com">취소/반품조회</a></li>
 				<li><a href="#">장바구니</a></li>
 			</ul>
 
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">활동관리</li>
-				<li><a href="#">상품 문의</a></li>
+				<li><a href="${pageContext.request.contextPath}/item/review/mypage/list.com">상품 문의</a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage/review/list.com">상품 리뷰</a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage/freeboard/list.com">자유게시판</a></li>
 				<li><a href="${pageContext.request.contextPath}/mypage/question/list.com">문의사항</a></li>

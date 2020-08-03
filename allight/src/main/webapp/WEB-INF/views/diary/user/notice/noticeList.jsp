@@ -42,6 +42,7 @@
 			</select>
 			<input type="text" id="search" name="search" placeholder="검색어를 입력하세요"/> 
 			<input type="submit" value="검색" onclick="return checkForm();"/>
+			<a href="<%=request.getContextPath()%>/notice.com"><input type="button" value="초기화"/></a>
 		</div>
 		</form>
 		<table class="table">
@@ -64,6 +65,9 @@
 					<td class="center">${notice.NHIT}</td>
 				</tr>
 			</c:forEach>
+			<c:if test="${empty LIST}">
+			<tr><td colspan="5" class="center">공지사항이 없습니다.</td></tr>
+		</c:if>
 		</table>
 		
 		<c:if test = "${sessionScope.MID == 'admin'}">
@@ -91,7 +95,7 @@
 					<c:if test="${PINFO.nowPage < PINFO.endPage-3}">
 						<a href="${pageContext.request.contextPath}/notice.com?type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage+3}">»</a>
 					</c:if>
-					<c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
+					<c:if test="${PINFO.nowPage >= PINFO.endPage-3}">
 						<a href="${pageContext.request.contextPath}/notice.com?type=${param.type}&search=${param.search}&nowPage=${PINFO.endPage}">»</a>
 					</c:if>
 				</li>

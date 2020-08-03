@@ -17,23 +17,22 @@
 	<div class="wrap-left">
 		<div class="left_menu">
 			<p class="left_tit">
-				<a href="">기업</a>
+				<a href="#">기업</a>
 			</p>
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">주문관리</li>
 				<li class="on"><a href="${pageContext.request.contextPath}/order/list/corp.com">주문/배송관리</a></li>
-				<li><a href="#">취소/반품관리</a></li>
 			</ul>
 
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">상품관리</li>
-				<li><a href="#">상품 등록/수정/삭제</a></li>
+				<li><a href="${pageContext.request.contextPath}/item/list/corp.com">상품 등록/수정/삭제</a></li>
 				<li><a href="#">재고 관리</a></li>
 			</ul>
 
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">문의/리뷰관리</li>
-				<li><a href="#">상품 문의 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/item/review/list/corp.com">상품 문의 관리</a></li>
 				<li><a href="${pageContext.request.contextPath}/review/list/corp.com">상품 리뷰 관리</a></li>
 			</ul>
 

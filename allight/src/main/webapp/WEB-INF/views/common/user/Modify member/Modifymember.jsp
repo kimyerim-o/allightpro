@@ -109,9 +109,12 @@ $(function() {
 </head>
 <body>
 	<form
-		action="<%=request.getContextPath()%>/member/modify/admin.com?mno=${param.mno}"
+		action="<%=request.getContextPath()%>/mypage/member/modify.com"
 		method="post" name="modify" id="modify">
+		<input type="hidden" id="mno" name="mno"
+					value="${MEMINFO.mno}" />
 		<table>
+		<input type="hidden" id="mno" name="mno" value="${MEMINFO.mno}" />
 			<tr>
 				<td>아이디 :</td>
 				<td>${MEMINFO.mid}<input type="hidden" id="mid" name="mid"
@@ -124,17 +127,20 @@ $(function() {
 			</tr>
 			<tr>
 				<td>이메일 :</td>
-				<td><input type="hidden" id="memail" name="memail"
+				<td>${MEMINFO.memail}<input type="hidden" id="memail" name="memail"
 					value="${MEMINFO.memail}" /></td>
 			</tr>
 			<tr>
 				<td>성별 :</td>
-				<td>${MEMINFO.msex}<input type="hidden" id="msex" name="msex"
-					value="${MEMINFO.msex}" /></td>
+				<td><select name="msex" id="msex" required="required">
+						<option value="">선택</option>
+						<option value="남자">남자</option>
+						<option value="여자">여자</option>
+				</select></td>
 			</tr>
 			<tr>
 				<td>생년월일 :</td>
-				<td>${MEMINFO.mbirth}<input type="hidden" id="mbirth"
+				<td>${MEMINFO.mbirth}<input type="date" id="mbirth"
 					name="mbirth" value="${MEMINFO.mbirth}" /></td>
 			</tr>
 			<tr>
@@ -162,8 +168,8 @@ $(function() {
 			<tr>
 				<td colspan="2" style="text-align: center"><input type="submit"
 					value="수정"> <a
-					href="<%=request.getContextPath()%>/member/admin.com?search=${param.search}&nowPage=${param.nowPage}"><input
-						type="button" value="취소"></a></td>
+					href="<%=request.getContextPath()%>/mypage/member/modify.com?search=${param.search}&nowPage=${param.nowPage}">
+					<input type="button" value="취소" onclick="location.href='http://localhost:9000/allight/mypage/home.com'"></a></td>
 			</tr>
 			<tr>
 				<td></td>

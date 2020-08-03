@@ -74,28 +74,27 @@ public class BuyController {
 		System.out.println("buy컨트롤러 들어옴");
 		//System.out.println("CART"+cartdto);
 		System.out.println("ORDER"+odto);
-		for(int i=0;i<cartdto.getCanolist().length;i++) {
-			CartDTO li=buySVC.cart(cartdto.getCanolist()[i]);
-			System.out.println(li);
-		}
 		//order insert
 		String mid=(String) session.getAttribute("MID");
 		odto.setMid(mid);
+		int mno=Integer.parseInt(String.valueOf(session.getAttribute("MNO")));
+		odto.setMno(mno);
 		buySVC.ordersin(odto); //결제 후 orderDTO에 저장하기 위해서
 		int ono=buySVC.onosel(mid);
 		System.out.println("ono="+ono);
 		
+		//orderDetail insert
+		for(int i=0;i<cartdto.getCanolist().length;i++) {
+			CartDTO li=buySVC.cart(cartdto.getCanolist()[i]);
+			li.setOno(ono);
+			System.out.println("li="+li);
+			buySVC.oderdetailin(li);
+		}
+		
+		//장바구니비우기(delete cart)
 		buySVC.emptyCart(cartdto.getCanolist());//결제 후 장바구니 비우기
 		mv.setViewName("shopping/user/paySuccess");
 		return mv;
 	}
-	
-	/*//결제완료
-	@RequestMapping("/paySuccess")
-	public ModelAndView paySuccess(HttpSession session,ModelAndView mv, BuyDTO buydto, HttpServletRequest request) {
-		mv.setViewName("shopping/user/paySuccess");
-		return mv;
-	}*/
-	
 	
 }

@@ -27,15 +27,16 @@
 <body>
 	<h3>회원 페이지</h3>
 
-	<hr />
+	<hr/>
 	<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/member/admin.com">
 		<table border="1" width="800" class="center">
 			<tbody>
 				<tr class="center">
-					<td style="text-align: right"><input type="text" id="search"
-						name="search" placeholder="회원 아이디 검색" /> <input type="submit"
-						value="검 색" onclick="return checkForm();" /></td>
+					<td style="text-align: right"><input type="text" id="search" name="search" placeholder="회원 아이디 검색" /> 
+					<input type="submit" value="검 색" onclick="return checkForm();" />
+						<a href="<%=request.getContextPath()%>/member/admin.com"><input type="button" value="초기화"/></a>
+						</td>
 				</tr>
 			</tbody>
 		</table>
@@ -47,8 +48,8 @@
 			<tr>
 				<th>아이디</th>
 				<th>이름</th>
-				<th>주소</th>
 				<th>가입일</th>
+				<th>최근접속일</th>
 				<th></th>
 			</tr>
 			<%-- 반복문을 이용하여 줄출력 예정 --%>
@@ -56,8 +57,8 @@
 				<tr>
 					<td>${mem.MID}<c:if test="${mem.MTYPE==1}"><h5 style="display: inline;"> (관리자)</h5></c:if></td>
 					<td>${mem.MNAME}</td>
-					<td>${mem.MADDRESS}</td>
 					<td><fmt:formatDate value="${mem.MJOINDATE}" pattern="yyyy-MM-dd"/></td>
+					<td><fmt:formatDate value="${mem.MLOGDATE}" pattern="yyyy-MM-dd"/></td>
 					<td><a
 						href="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
 							<input type="button" id="modMem" value="수정">
@@ -67,6 +68,9 @@
 							onclick="return checkDelete();">
 					</a></td>
 				</tr>
+		<c:if test="${empty LIST}">
+			<tr><td colspan="5" class="center">회원이 없습니다.</td></tr>
+		</c:if>
 			</c:forEach>
 		</tbody>
 	</table>

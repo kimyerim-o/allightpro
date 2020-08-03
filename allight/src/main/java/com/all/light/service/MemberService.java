@@ -244,6 +244,11 @@ public class MemberService {
 	public void memModify(MemberDTO memDTO) {
 		memDAO.memModify(memDTO);
 	}
+	
+	public int memModify2(MemberDTO memDTO) {
+		int i=memDAO.memModify2(memDTO);
+		return i;
+	}
 
 	public void memDelete(int mno) {
 		memDAO.memDelete(mno);
@@ -272,6 +277,11 @@ public class MemberService {
 	public void addressdelete(AddressDTO aDTO) {
 		System.out.println("서비스 addressdelete() 진입");
 		memDAO.addressdelete(aDTO);
+	}
+
+	public int delete2(MemberDTO memDTO) {
+		int i=memDAO.memDelete2(memDTO);
+		return i;
 	}
 
 }

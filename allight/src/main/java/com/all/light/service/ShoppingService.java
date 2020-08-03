@@ -105,7 +105,7 @@ public class ShoppingService {
 		totalCount = shopDAO.getRTotalCnt(ino);
 		
 		// PageUtil(보고싶은페이지, 전체게시물수, 보여줄 게시물수, 페이징);
-		PageUtil pInfo = new PageUtil(rNowPage, totalCount,5,5);
+		PageUtil pInfo = new PageUtil(rNowPage, totalCount,10,5);
 		
 		return pInfo;
 	}
@@ -175,7 +175,7 @@ public class ShoppingService {
 		int totalCount = this.getQTotalCnt(ino);
 		
 		// PageUtil(보고싶은페이지, 전체게시물수, 보여줄 게시물수, 페이징);
-		PageUtil pInfo = new PageUtil(qNowPage, totalCount,5,5);
+		PageUtil pInfo = new PageUtil(qNowPage, totalCount,10,5);
 		return pInfo;
 	}
 	
@@ -187,7 +187,7 @@ public class ShoppingService {
 		int totalCount = this.getQTotalCnt(mid);
 		
 		// PageUtil(보고싶은페이지, 전체게시물수, 보여줄 게시물수, 페이징);
-		PageUtil pInfo = new PageUtil(qNowPage, totalCount,5,5);
+		PageUtil pInfo = new PageUtil(qNowPage, totalCount,10,5);
 		return pInfo;
 	}
 	
@@ -197,7 +197,7 @@ public class ShoppingService {
 		int totalCount = this.getQTotalCnt2(mid);
 		
 		// PageUtil(보고싶은페이지, 전체게시물수, 보여줄 게시물수, 페이징);
-		PageUtil pInfo = new PageUtil(qNowPage, totalCount,5,5);
+		PageUtil pInfo = new PageUtil(qNowPage, totalCount,10,5);
 		return pInfo;
 	}
 	

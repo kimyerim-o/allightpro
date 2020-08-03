@@ -83,4 +83,9 @@ public class CorporationService {
 		return corDAO.getCorpID(corDTO);
 	}
 
+	public int corpModify2(CorporationDTO corDTO) {
+		int i=corDAO.corpModify2(corDTO);
+		return i;
+	}
+
 }

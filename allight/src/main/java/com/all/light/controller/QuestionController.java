@@ -118,7 +118,24 @@ public class QuestionController {
 		return mv;
 	}
 	
+	
 	//유저 마이페이지 7.16추가
+	//글쓰기처리
+	@RequestMapping(value="/mypage/question/write", method= RequestMethod.GET)
+	public ModelAndView userWriteGetMypage(HttpServletRequest request, ModelAndView mv) {
+		System.out.println("USER/question/writeMypage, "+request.getMethod()+"method");
+		mv.setViewName("common/user/mypage/questionWrite");
+		return mv;
+	}
+	@RequestMapping(value="/mypage/question/write", method= RequestMethod.POST)
+	public ModelAndView userWritePostMypage(QuestionDTO qdto, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+		System.out.println("USER/question/writeMypage, "+request.getMethod()+"method");
+		System.out.println(qdto);
+		queSVC.userInsertWrite(qdto, request.getSession());
+		rv.setUrl(request.getContextPath()+"/mypage/question/list.com");
+		mv.setView(rv);
+		return mv;
+	}
 	@RequestMapping("/mypage/question/list")
 	public ModelAndView listMyPageUser(
 			@RequestParam(value = "nowPage", required = false, defaultValue="1") int nowPage,
@@ -140,6 +157,65 @@ public class QuestionController {
 		mv.setViewName("common/user/mypage/questionList");
 		return mv;
 	}
+	//글 상세보기
+		@RequestMapping(value="/mypage/question/detail")
+		public ModelAndView detailMypage(
+				@RequestParam("no") int qno,
+				@RequestParam(value="commPage", required = false, defaultValue= "1") int commPage,
+				QuestionDTO qdto, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+			System.out.println("\nNoticeController.noticeDetailMypage.QuestionDTO = "+qno);
+			qdto.setQno(qno);
+			
+			QuestionDTO de=queSVC.detail(qdto);//게시글
+			PageUtil pInfo = queSVC.getCommPageInfo(qno, commPage);
+			ArrayList<QuestionDTO> decomm=queSVC.getCommDetail(pInfo);//댓글
+			
+			mv.addObject("DETAIL",de);//게시글
+			mv.addObject("PINFO", pInfo); //페이징 정보
+			mv.addObject("COMM",decomm);//댓글
+			
+			System.out.println(de);
+			System.out.println(pInfo);
+			System.out.println(decomm);
+
+			mv.setViewName("common/user/mypage/questionDetail");
+			return mv;
+		}
+		//수정
+		@RequestMapping(value="/mypage/question/update", method= RequestMethod.GET)
+		public ModelAndView modifyGETMypage(
+				@RequestParam(value = "no", required = true) int qno,
+				QuestionDTO qdto,ModelAndView mv, HttpServletRequest request) {
+			System.out.println("USER/question/updateMypage, "+request.getMethod()+"method");
+			qdto.setQno(qno);
+			QuestionDTO de=queSVC.detail(qdto);//게시글
+			mv.addObject("DETAIL",de);//게시글
+			System.out.println(de);
+			mv.setViewName("common/user/mypage/questionModify");
+			return mv;
+		}
+		@RequestMapping(value="/mypage/question/update", method= RequestMethod.POST)
+		public ModelAndView modifyPOSTMypage(
+				@RequestParam(value = "no", required = true) int qno,
+				QuestionDTO qdto,ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+			System.out.println("USER/question/updateMypage, "+request.getMethod()+"method");
+			System.out.println(qno+" "+qdto);
+			queSVC.update(qdto);
+			rv.setUrl(request.getContextPath()+"/mypage/question/list.com");
+			mv.setView(rv);
+			return mv;
+		}
+		//삭제
+		@RequestMapping("/mypage/question/delete")
+		public ModelAndView deleteMypage(
+				@RequestParam(value = "no", required = true) int qno,
+				ModelAndView mv, RedirectView rv, HttpServletRequest request) {
+			System.out.println("USER/question/deleteMypage");
+			queSVC.delete(qno);
+			rv.setUrl(request.getContextPath()+"/mypage/question/list.com");
+			mv.setView(rv);
+			return mv;
+		}
 	
 	
 	//기업

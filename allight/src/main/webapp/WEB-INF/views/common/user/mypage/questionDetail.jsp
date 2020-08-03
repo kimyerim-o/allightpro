@@ -15,20 +15,19 @@
 <script>
 	$(function() {
 		//수정 버튼 클릭 시
-		$("#up").click(
-				function() {
-					$(location).attr("href", "${pageContext.request.contextPath}/question/update.com?no=${DETAIL.qno}");
+		$("#up").click(function() {
+					$(location).attr("href", "${pageContext.request.contextPath}/mypage/question/update.com?no=${DETAIL.qno}");
 				});
 		//삭제 버튼 클릭 시
 		$("#del").click(function() {
 							if (confirm("삭제 하시겠습니까?")) {
-								$("#form").attr("action","${pageContext.request.contextPath}/question/delete.com");
+								$("#form").attr("action","${pageContext.request.contextPath}/mypage/question/delete.com");
 								$("#form").submit();
 							}
 						});
 		//목록 버튼 클릭 시
 		$("#list").click(function() {
-							$(location).attr("href","${pageContext.request.contextPath}/question/list.com")
+							$(location).attr("href","${pageContext.request.contextPath}/mypage/question/list.com")
 						});
 
 		//댓글쓰기 
@@ -51,7 +50,7 @@
 										dataType : 'text',//받는데이터타입
 										success : function(data) {
 											alert("댓글이 등록되었습니다.");
-											location.href = "${pageContext.request.contextPath}/question/detail.com?no=${DETAIL.qno}";
+											location.href = "${pageContext.request.contextPath}/mypage/question/detail.com?no=${DETAIL.qno}";
 										},
 										error : function(request, status, error) {
 											alert("code:" + request.status
@@ -76,7 +75,7 @@
 											dataType : 'text',
 											success : function(data) {
 												alert("댓글이 삭제되었습니다.");
-												location.href = "${pageContext.request.contextPath}/question/detail.com?no=${DETAIL.qno}";
+												location.href = "${pageContext.request.contextPath}/mypage/question/detail.com?no=${DETAIL.qno}";
 											},
 											error : function(request, status,
 													error) {
@@ -172,25 +171,25 @@
 						<ul class="pagination">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
-										href="${pageContext.request.contextPath}/question/detail.com?no=${param.no }&commPage=${PINFO.nowPage-3}">«</a>
+										href="${pageContext.request.contextPath}/mypage/question/detail.com?no=${param.no }&commPage=${PINFO.nowPage-3}">«</a>
 								</c:if> <c:if test="${PINFO.nowPage <= 3}">
 									<a
-										href="${pageContext.request.contextPath}/question/detail.com?no=${param.no }&commPage=1">«</a>
+										href="${pageContext.request.contextPath}/mypage/question/detail.com?no=${param.no }&commPage=1">«</a>
 								</c:if></li>
 							<!-- 현재 페이지일때 active -->
 							<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}"
 								var="i">
 								<li id="li">
 									<!-- 스크립트 적용해야 할것같아요 --> <a
-									href="${pageContext.request.contextPath}/question/detail.com?no=${param.no }&commPage=${i}">${i}</a>
+									href="${pageContext.request.contextPath}/mypage/question/detail.com?no=${param.no }&commPage=${i}">${i}</a>
 								</li>
 							</c:forEach>
 							<li><c:if test="${PINFO.nowPage < PINFO.endPage-3}">
 									<a
-										href="${pageContext.request.contextPath}/question/detail.com?no=${param.no }&commPage=${PINFO.nowPage+3}">»</a>
+										href="${pageContext.request.contextPath}/mypage/question/detail.com?no=${param.no }&commPage=${PINFO.nowPage+3}">»</a>
 								</c:if> <c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
 									<a
-										href="${pageContext.request.contextPath}/question/detail.com?no=${param.no }&commPage=${PINFO.endPage}">»</a>
+										href="${pageContext.request.contextPath}/mypage/question/detail.com?no=${param.no }&commPage=${PINFO.endPage}">»</a>
 								</c:if></li>
 						</ul>
 					</div>

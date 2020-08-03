@@ -50,6 +50,7 @@ $(function(){
 <div id="wrap">
 	<a class="title">다이어리 <%=session.getAttribute("MID") %> / <%=session.getAttribute("COID") %>
 		<input type="button" value="월별 다이어트 추이  &gt;" class="goto" onclick="chart(${today_info.search_year},${today_info.search_month});" style="background:white;"/>
+		<input type="button" value="Today" onclick="location.href='${pageContext.request.contextPath}/main.com'" class="goto" style="margin:0 15px;"/>
 	</a>
 	
 	<form name="calendarFrm" id="calendarFrm" action="" method="GET">

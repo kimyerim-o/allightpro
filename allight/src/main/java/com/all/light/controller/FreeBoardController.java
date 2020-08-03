@@ -875,7 +875,7 @@ public class FreeBoardController {
 			//비즈니스로직
 			freSVC.write(fdto,list);
 			//뷰지정
-			rv.setUrl(request.getContextPath()+"/mypage/freeboard/list.com"); 
+			rv.setUrl(request.getContextPath()+"/freeboard/list.com"); 
 			mv.setView(rv);
 			return mv;
 		}

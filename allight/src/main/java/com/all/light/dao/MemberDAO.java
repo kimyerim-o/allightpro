@@ -104,6 +104,12 @@ public class MemberDAO extends SqlSessionDaoSupport {
 		session.update("member.memUpdate", memDTO);
 		System.out.println("수정 성공, ModifyInfo = "+memDTO);
 	}
+	
+	public int memModify2(MemberDTO memDTO) {
+		int i=session.update("member.memUpdate", memDTO);
+		System.out.println("수정 성공, ModifyInfo = "+memDTO);
+		return i;
+	}
 
 	public void memDelete(int mno) {
 		session.delete("member.memDelete", mno);

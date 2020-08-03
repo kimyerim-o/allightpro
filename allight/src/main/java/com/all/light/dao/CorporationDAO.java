@@ -53,4 +53,9 @@ public class CorporationDAO extends SqlSessionDaoSupport {
 		return session.selectOne("corporation.getCorpId",corDTO);
 	}
 
+	public int corpModify2(CorporationDTO corDTO) {
+		System.out.println("CorporationDAO.CorpModify.corDTO= "+corDTO);
+		int i=session.update("corporation.corpUpdate",corDTO);
+		return i;
+	}
 }

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.all.light.dto.AddressDTO;
+import com.all.light.dto.CorporationDTO;
 import com.all.light.dto.MemberDTO;
 import com.all.light.service.MemberService;
 import com.all.light.util.Nologin;
@@ -402,20 +403,25 @@ public class MemberController {
 	// �쉶�썝�젙蹂댁닔�젙
 	@RequestMapping(value="/mypage/member/modify", method= RequestMethod.GET)
 	public ModelAndView ModifyMemberGet(
-			// @RequestParam(value = "mno") int mno,
-			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			@RequestParam(value = "search", required = false) String searchWord,
-			MemberDTO memDTO,	ModelAndView mv, RedirectView rv, HttpServletRequest request) {
-		System.out.println("memberController.modify.Member,"+request.getMethod()+"method");
-		//�뙆�씪誘명꽣 諛쏄린, 鍮꾩쫰�땲�뒪濡쒖쭅
-		memDTO = memSVC.getMInfo(memDTO.getMno());
+			MemberDTO memDTO,	ModelAndView mv, RedirectView rv, HttpSession session) {
+		memDTO = memSVC.getMInfo(Integer.parseInt(String.valueOf(session.getAttribute("MNO"))));
 		System.out.println("memInfo = "+memDTO);
-		//紐⑤뜽吏��젙
-		mv.addObject("MEMINFO", memDTO); //�쉶�썝 �긽�꽭 �젙蹂�
-		//酉곗��젙
-		//get硫붿냼�뱶�쓽 Requestparam�쓽 �젙蹂닿� 洹몃�濡� �꽆�뼱媛�
-		//mv.setViewName("common/user/Modify member/Modifymember?search="+searchWord+"&nowPage="+nowPage+"&mno="+mno);
+		mv.addObject("MEMINFO", memDTO);
 		mv.setViewName("common/user/Modify member/Modifymember");
+		return mv;
+	}
+	
+	@RequestMapping(value="/mypage/member/modify", method= RequestMethod.POST)
+	public ModelAndView ModifyMemberPost(
+			MemberDTO memDTO,	ModelAndView mv, RedirectView rv,HttpServletRequest request) {
+		System.out.println("memberController.modify.Member, Post method");
+		System.out.println("memDTO = "+memDTO.toString());
+		int i=memSVC.memModify2(memDTO);
+		if(i==1) {//성공
+			mv.setViewName("common/user/Modify member/Modifymemsuccess");
+		}else {//i==0 실패		
+			mv.setViewName("common/user/Modify member/Modifymemfail");
+		}
 		return mv;
 	}
 	
@@ -432,7 +438,7 @@ public class MemberController {
 		memSVC.memDelete(cono);
 		//酉곗��젙
 		rv.setUrl(request.getContextPath()+"/mypage/member/delete.com?search="+searchWord+"&nowPage="+nowPage);
-		mv.setViewName("common/user/Modify member/deletemember");
+		mv.setViewName("common/user/delete member/deletemember");
 		return mv;
 	}
 }

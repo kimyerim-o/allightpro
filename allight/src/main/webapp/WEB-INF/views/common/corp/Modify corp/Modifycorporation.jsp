@@ -8,9 +8,10 @@
 </head>
 <body>
 	<form
-		action="<%=request.getContextPath()%>/corporation/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${param.cono}"
+		action="<%=request.getContextPath()%>/corporation/modify/corp.com"
 		method="POST">
 		<table>
+		<input type="hidden" id="cono" name="cono" value="${CORPINFO.cono}" />
 			<tr>
 				<td>기업명 :</td>
 				<td>${CORPINFO.coname}<input type="hidden" id="coname"
@@ -39,8 +40,8 @@
 			<tr>
 				<td colspan="2" style="text-align: center"><input type="submit"
 					value="수정"> <a
-					href="<%=request.getContextPath()%>/corporation/admin.com?search=${param.search}&nowPage=${param.nowPage}&"><input
-						type="button" value="취소"></a></td>
+					href="<%=request.getContextPath()%>/corporation/modify/corp.com?search=${param.search}&nowPage=${param.nowPage}&">
+					<input type="button" value="취소" onclick="location.href='http://localhost:9000/allight/main.com'"></a></td>
 			</tr>
 			<tr>
 				<td></td>

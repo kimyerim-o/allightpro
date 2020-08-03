@@ -17,7 +17,7 @@
 	<div class="wrap-left">
 		<div class="left_menu">
 			<p class="left_tit">
-				<a href="">기업</a>
+				<a href="#">기업</a>
 			</p>
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">주문관리</li>

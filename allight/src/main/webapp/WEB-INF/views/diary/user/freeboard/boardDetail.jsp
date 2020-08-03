@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.Date"%>
-<%@ page import="java.text.SimpleDateFormat"%>
-<%
-	Date now = new Date();
-	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss");
-%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,15 +20,24 @@
 							}
 						});
 		//목록 버튼 클릭 시
-		$("#list").click(
-						function() {
+		$("#list").click(function() {
 							$(location).attr("href","${pageContext.request.contextPath}/freeboard/list.com")
 						});
+		
+		//댓글 창 엔터처리
+		$("#fccontent").keypress(function(e){
+			var code = e.keyCode ? e.keyCode : e.which; 
+			if (code == 13){ // EnterKey 
+				$('#wcomm').click();
+			}
+		});
 
 		//댓글쓰기 
-		$("#wcomm")
-				.click(
-						function() {
+		$("#wcomm").click(function() {
+			if($("#fccontent").val()==""){
+				alert("댓글을 입력하세요");
+				return false;
+			}
 							var fno = "${DETAIL.fno}";
 							var fcid = "${sessionScope.MID}";
 							var fcnick = "${sessionScope.MNICK}";
@@ -44,15 +48,12 @@
 								"fcid" : fcid,
 								"fccontent" : fccontent
 							};
-							alert(JSON.stringify(param))
-							$
-									.ajax({
+							$.ajax({
 										type : "post", //데이터를 보낼 방식
 										url : "${pageContext.request.contextPath}/freeboard/wcomment.com", //데이터를 보낼 url
 										data : param, //보낼 데이터
 										dataType : 'text',//받는데이터타입
 										success : function(data) {
-											alert("댓글이 등록되었습니다.");
 											location.href = "${pageContext.request.contextPath}/freeboard/detail.com?no=${DETAIL.fno}";
 										},
 										error : function(request, status, error) {
@@ -65,9 +66,7 @@
 						});
 
 		//댓글 삭제
-		$(".dcomm")
-				.click(
-						function() {
+		$(".dcomm").click(function() {
 							if (confirm("삭제 하시겠습니까?")) {
 								var fcno = $(event.target).attr('data-no');
 								 var param = {"fcno" : fcno}
@@ -77,11 +76,9 @@
 											data : param, //보낼 데이터
 											dataType : 'text',
 											success : function(data) {
-												alert("댓글이 삭제되었습니다.");
 												location.href = "${pageContext.request.contextPath}/freeboard/detail.com?no=${DETAIL.fno}";
 											},
-											error : function(request, status,
-													error) {
+											error : function(request, status,error) {
 												alert("code:" + request.status
 														+ "\n" + "message:"
 														+ request.responseText
@@ -93,6 +90,15 @@
 						});
 
 	})
+	
+function loginCheck (){
+	if('${sessionScope.MID}'==''){
+		if(confirm('로그인 후 이용가능한 서비스입니다.\n로그인하시겠습니까?')){
+			$('#reUrlFrm').submit();
+		}
+	}
+}
+
 </script>
 </head>
 <body>
@@ -117,20 +123,20 @@
 				</tr>
 				<tr>
 					<td class="board-info"><a class="board-info-nick">작성자</a></td>
-					<td class="board-info"><a class="board-info-nick">${DETAIL.fid}</a></td>
+					<td class="board-info"><a class="board-info-nick">${DETAIL.fnick}</a></td>
 					<td class="board-info"><a class="board-info-others">작성일 </a></td>
 					<td class="board-info"><a class="board-info-others">${DETAIL.fdate}</a></td>
 				</tr>
 				<tr>
 					<td class="board-content" colspan="4">
 						<div class="board-content-div">
-							내용 <br /><c:forEach items="${FILE}" var="file">
+							<br /><c:forEach items="${FILE}" var="file">
 							<c:set var="path" value="/item/img/" />
 							<c:set var="name" value="${file.fiimg}" />
 							<img src="<c:out value="${path}"/><c:out value="${name}"/>" />
 							</c:forEach>
 							<br />
-							${DETAIL.fcontent}
+							<pre>${DETAIL.fcontent}</pre>
 						</div>
 					</td>
 				</tr>
@@ -140,12 +146,10 @@
 			<div class="boardContent-Comment">
 				<div class="boardContent-Comment-input">
 					<form style="text-align: left">
-						<a colspan="100%" class="board-comment-info"><a
-							class="board-info-nick">작성자 ${sessionScope.MID}</a>&nbsp;&nbsp; <a
-							class="board-info-others">작성일 <%=sf.format(now)%></a></a> <input
-							type="textarea" class="input" id="fccontent"
-							placeholder="댓글을 입력하세요" /> <input type="button" class="button"
-							id="wcomm" value="등록" />
+						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자 </a>&nbsp;&nbsp; 
+								<a class="board-info-others">${sessionScope.MNICK}<br></a></a>
+						<input type="textarea" class="input" id="fccontent" placeholder="댓글을 입력하세요" /> 
+						<input type="button" class="button" id="wcomm" value="등록" />
 					</form>
 				</div>
 
@@ -164,19 +168,35 @@
 						<form>
 						<c:forEach items="${COMM}" var="c">
 							<tr>
-								<td colspan="100%" class="board-comment-info"><a
-									class="board-info-nick">${c.fcid}</a>&nbsp;&nbsp; <a
-									class="board-info-others">작성일 ${c.fcdate}</a>
-									</td>
+								<td colspan="100%" class="board-comment-info">
+									<a class="board-info-nick">${c.fcnick}</a>&nbsp;&nbsp; 
+									<a class="board-info-others"><fmt:formatDate value="${c.fcdate}" type="both"/></a>
+								</td>
 							</tr>
 							<tr>
 								<td width="80%">${c.fccontent}</td>
-								<td style="padding: 0; text-align: center;"><c:if
-										test="${c.fcid eq sessionScope.MID}">
+								<td style="padding: 0; text-align: center;">
+									<c:if test="${empty sessionScope.MID}">
+										<a onclick="loginCheck();" style="cursor:pointer;"> 
+											<img class="like" src="${pageContext.request.contextPath}/resources/img/like.png" />
+										</a>
+									</c:if>
+									<c:if test="${!empty sessionScope.MID}">
+									<a href="${pageContext.request.contextPath}/freeboard/like.com?no=${param.no}&commPage=${PINFO.nowPage}&num=${c.fcno}"> 
+										<c:if test="${c.isLiked}">
+											<img class="like" src="${pageContext.request.contextPath}/resources/img/liked.png" />
+										</c:if>
+										<c:if test="${!c.isLiked}">
+											<img class="like" src="${pageContext.request.contextPath}/resources/img/like.png" />
+										</c:if>
+									</a>
+								</c:if>
+								<a class="aNone">${c.amount}</a>
+								
+								<c:if test="${c.fcid eq sessionScope.MID || sessionScope.MTYPE == 1}">
 										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
-									</c:if> <c:if test="${sessionScope.MTYPE == 1}">
-										<a class="dcomm" data-no="${c.fcno}" style="color: #ff5656;">삭제</a>
-									</c:if></td>
+								</c:if> 
+							</td>
 							</tr>
 						</c:forEach>
 						</form>
@@ -186,7 +206,7 @@
 						<ul class="pagination">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
-										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }&commPage=${PINFO.nowPage-3}">«</a>
+										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no}&commPage=${PINFO.nowPage-3}">«</a>
 								</c:if> <c:if test="${PINFO.nowPage <= 3}">
 									<a
 										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }&commPage=1">«</a>
@@ -213,5 +233,9 @@
 			</div>
 		</div>
 	</div>
+	
+	<form action="${pageContext.request.contextPath}/login.com" id="reUrlFrm">
+		<input type="hidden" name="reUrl" value="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no }">
+	</form>
 </body>
 </html>

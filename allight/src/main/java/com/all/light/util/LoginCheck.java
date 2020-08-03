@@ -23,6 +23,8 @@ public class LoginCheck extends HandlerInterceptorAdapter {
 		String id=(String) session.getAttribute("MID");
 		if(id==null||id.length()==0){//로그인X
 			System.out.println("LoginCheck 로그인폼으로 이동요청");
+			session.setAttribute("LoginCheck","fail");
+			System.out.println("권한 없음");
 			response.sendRedirect("http://localhost:9000/allight/login.com");
 			return false;
 		}else {//로그인O

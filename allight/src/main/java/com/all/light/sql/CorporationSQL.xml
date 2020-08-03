@@ -42,7 +42,7 @@
 	
 	<!-- 기업 추가 -->
 	<insert id="corpInsert" parameterType="corDTO">
-		insert into corporation values(CONO_SEQ.nextval,#{coname},#{cotel},#{coemail},#{coid},#{copw})
+		insert into corporation values(CONO_SEQ.nextval,#{coname},#{cotel},#{coemail},#{coid},#{copw}, sysdate)
 	</insert>
 	<!-- 지영  -->
 	<!-- 기업번호,이름,아이디 전부 가져오기  -->

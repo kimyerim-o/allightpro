@@ -135,7 +135,7 @@ public class NoticeController {
 	@RequestMapping(value = "/write/admin", method = RequestMethod.GET)
 	public ModelAndView noticeWriteGet(ModelAndView mv, RedirectView rv, HttpServletRequest request) {
 		System.out.println("\nNoticeController.noticeWrite," + request.getMethod() + "method");
-		mv.setViewName("diary/admin/noticeWrite");
+		mv.setViewName("diary/admin/notice/noticeWrite");
 		return mv;
 	}
 
@@ -159,7 +159,7 @@ public class NoticeController {
 		notDTO = notSVC.getNotInfo(notDTO.getNno());
 		mv.addObject("LIST", notDTO);
 
-		mv.setViewName("diary/admin/noticeModify");
+		mv.setViewName("diary/admin/notice/noticeModify");
 		return mv;
 	}
 
@@ -172,7 +172,7 @@ public class NoticeController {
 		// 비즈니스로직
 		notSVC.notModify(notDTO);
 
-		rv.setUrl(request.getContextPath() + "/noticedetail.com?nno=" + notDTO.getNno());
+		rv.setUrl(request.getContextPath() + "/notice/detail.com?nno=" + notDTO.getNno());
 		mv.setView(rv);
 		return mv;
 	}

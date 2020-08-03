@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dao.MemberDAO;
 import com.all.light.dto.AddressDTO;
+import com.all.light.dto.CalrecipeDTO;
 import com.all.light.dto.ItemDTO;
 import com.all.light.dto.MemberDTO;
 import com.all.light.util.PageUtil;
@@ -47,11 +48,11 @@ public class MemberService {
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com";
 		int hostPort = 465;
-		String hostSMTPid = "all_light@gamil.com";
+		String hostSMTPid = "allight.adm@gmail.com";
 		String hostSMTPpwd = "goallight!";
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "all_light@gamil.com";
+		String fromEmail = "allight.adm@gmail.com";
 		String fromName = "allight";
 		String subject = "";
 		String msg = "";
@@ -142,7 +143,14 @@ public class MemberService {
 		} else {
 			// 로그인성공
 			System.out.println("로그인성공");
+			session.setAttribute("MNO",result.getMno());
 			session.setAttribute("MID", result.getMid());
+			session.setAttribute("MEMAIL", result.getMemail());
+			session.setAttribute("MNAME", result.getMname());
+			session.setAttribute("MBIRTH", result.getMbirth());
+			session.setAttribute("MTEL", result.getMtel());
+			session.setAttribute("MTYPE", result.getMtype());
+			session.setAttribute("MNICK", result.getMnick());
 		}
 		return result;
 	}

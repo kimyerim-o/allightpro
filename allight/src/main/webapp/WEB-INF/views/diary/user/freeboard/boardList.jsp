@@ -24,17 +24,17 @@
 		<div class="searchDiv">
 		<select name="ftype" class="selectCss">
 			<c:if test="${param.ftype=='' || param.ftype eq null}">
-				<option value="" selected>선택</option>
+				<option value="" selected>말머리</option>
 				<option value="일반">일반</option>
 				<option value="다이어리">다이어리</option>
 			</c:if>
 			<c:if test="${param.ftype=='일반'}">
-				<option value="">선택</option>
+				<option value="">말머리</option>
 				<option value="일반" selected>일반</option>
 				<option value="다이어리">다이어리</option>
 			</c:if>
 			<c:if test="${param.ftype=='다이어리'}">
-				<option value="">선택</option>
+				<option value="">말머리</option>
 				<option value="일반">일반</option>
 				<option value="다이어리" selected>다이어리</option>
 			</c:if>
@@ -65,7 +65,8 @@
 				<option value="fcontent">내용</option>
 				<option value="fnick" selected>작성자</option>
 			</c:if>
-			</select> <input type="text" id="search" name="search" placeholder="검색어를 입력하세요" value="${param.search}"/> 
+			</select>
+			<input type="text" id="search" name="search" placeholder="검색어를 입력하세요" value="${param.search}"/> 
 			<input type="submit" value="검색" onclick="return checkForm();"/>
 			<a href="<%=request.getContextPath()%>/freeboard/list.com"><input type="button" value="초기화"/></a>
 		</div>

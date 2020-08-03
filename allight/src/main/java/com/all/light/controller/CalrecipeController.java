@@ -17,6 +17,7 @@ public class CalrecipeController {
 	@Autowired
 	private CalrecipeService creSVC;
 	
+	//칼로리처방
 	@RequestMapping("/calorie_recipe")
 	public ModelAndView recipe(ModelAndView mv,HttpSession session,MemberDTO mdto) {
 		if (session.getAttribute("MNO")!=null) {
@@ -38,6 +39,7 @@ public class CalrecipeController {
 		return mv;
 	}
 	
+	//계산
 	@RequestMapping("/recipeCheck")
 	public ModelAndView recipeCheck(ModelAndView mv,HttpSession session,CalrecipeDTO cdto) {
 		System.out.println("cdto"+cdto);
@@ -47,6 +49,7 @@ public class CalrecipeController {
 		return mv;
 	}
 	
+	//있으면 값가져오기
 	@RequestMapping("/recipe")
 	public ModelAndView recipe(ModelAndView mv,HttpSession session,CalrecipeDTO cdto) {
 		CalrecipeDTO list=creSVC.getRecipe(session);
@@ -55,6 +58,7 @@ public class CalrecipeController {
 		return mv;
 	}
 	
+	//다시받기
 	@RequestMapping("/recipeRe")
 	public ModelAndView recipeRe(ModelAndView mv,HttpSession session,CalrecipeDTO cdto) {
 		if (session.getAttribute("MNO")!=null) {

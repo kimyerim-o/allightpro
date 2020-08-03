@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 
 function myFAE(day,dno){
@@ -24,6 +25,23 @@ function myFAE(day,dno){
 	}
 };
 
+function chart(yy,mon){
+	if(${!empty sessionScope.MID}){
+		location.href='./chart.com?yy='+yy+'&mon='+mon;
+	}else{
+		if(${!empty sessionScope.COID}){
+			alert('일반회원만 사용가능한 서비스입니다.')
+		}else if(confirm('로그인이 필요한 서비스 입니다. 로그인 하시겠습니까?')){
+			location.href = "./login.com";
+		}
+	}
+};
+
+$(function(){
+	$('.success').closest('.main-imgs-div').closest('div').closest('td').css('background','#dff6ff');
+	$('.fail').closest('.main-imgs-div').closest('div').closest('td').css('background','#ffe8df');
+})
+
 </script>
 
 </head>
@@ -31,7 +49,7 @@ function myFAE(day,dno){
 <body>
 <div id="wrap">
 	<a class="title">다이어리 <%=session.getAttribute("MID") %> / <%=session.getAttribute("COID") %>
-		<input type="button" value="월별 다이어트 추이  &gt;" class="goto" onclick="location.href='./chart.com'" />
+		<input type="button" value="월별 다이어트 추이  &gt;" class="goto" onclick="chart(${today_info.search_year},${today_info.search_month});" style="background:white;"/>
 	</a>
 	
 	<form name="calendarFrm" id="calendarFrm" action="" method="GET">
@@ -87,6 +105,12 @@ function myFAE(day,dno){
 									<c:if test="${dateList.day!=''}">
 										<div class="main-imgs-div">
 											<c:if test="${dateList.dfoodcal ne 0 or dateList.dexercal ne 0 or dateList.dweight ne 0 or !empty dateList.ddiary or !empty dateList.dimage}">
+												<c:if test="${dateList.dsucc eq 1 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="success"></div>
+												</c:if>
+												<c:if test="${dateList.dsucc eq 0 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="fail"></div>
+												</c:if>
 												<div>
 													<img src="${pageContext.request.contextPath}/resources/img/cutlery.png">
 													<div class="main-text-div">${dateList.dfoodcal}</div>
@@ -112,6 +136,12 @@ function myFAE(day,dno){
 									<c:if test="${dateList.day!=''}">
 										<div class="main-imgs-div">
 											<c:if test="${dateList.dfoodcal ne 0 or dateList.dexercal ne 0 or dateList.dweight ne 0 or !empty dateList.ddiary or !empty dateList.dimage}">
+												<c:if test="${dateList.dsucc eq 1 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="success"></div>
+												</c:if>
+												<c:if test="${dateList.dsucc eq 0 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="fail"></div>
+												</c:if>
 												<div>
 													<img src="${pageContext.request.contextPath}/resources/img/cutlery.png">
 													<div class="main-text-div">${dateList.dfoodcal}</div>
@@ -139,6 +169,12 @@ function myFAE(day,dno){
 									<c:if test="${dateList.day!=''}">
 										<div class="main-imgs-div">
 											<c:if test="${dateList.dfoodcal ne 0 or dateList.dexercal ne 0 or dateList.dweight ne 0 or !empty dateList.ddiary or !empty dateList.dimage}">
+												<c:if test="${dateList.dsucc eq 1 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="success"></div>
+												</c:if>
+												<c:if test="${dateList.dsucc eq 0 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="fail"></div>
+												</c:if>
 												<div>
 													<img src="${pageContext.request.contextPath}/resources/img/cutlery.png">
 													<div class="main-text-div">${dateList.dfoodcal}</div>
@@ -164,6 +200,12 @@ function myFAE(day,dno){
 									<c:if test="${dateList.day!=''}">
 										<div class="main-imgs-div">
 											<c:if test="${dateList.dfoodcal ne 0 or dateList.dexercal ne 0 or dateList.dweight ne 0 or !empty dateList.ddiary or !empty dateList.dimage}">
+												<c:if test="${dateList.dsucc eq 1 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="success"></div>
+												</c:if>
+												<c:if test="${dateList.dsucc eq 0 and (dateList.dexercal ne 0 or dateList.dfoodcal ne 0)}">
+													<div class="fail"></div>
+												</c:if>
 												<div>
 													<img src="${pageContext.request.contextPath}/resources/img/cutlery.png">
 													<div class="main-text-div">${dateList.dfoodcal}</div>

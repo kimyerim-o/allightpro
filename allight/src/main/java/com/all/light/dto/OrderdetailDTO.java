@@ -10,6 +10,7 @@ public class OrderdetailDTO {
 	private int odamount;//수량
 	private int odprice;//가격
 	private String type;
+	private int okreview;//리뷰여부확인
 	
 	public int getOno() {
 		return ono;
@@ -59,17 +60,23 @@ public class OrderdetailDTO {
 	public void setOdprice(int odprice) {
 		this.odprice = odprice;
 	}
-	@Override
-	public String toString() {
-		return "OrderdetailDTO [ono=" + ono + ", odno=" + odno + ", ino=" + ino + ", ocouriercompany=" + ocouriercompany
-				+ ", oinvoicenumber=" + oinvoicenumber + ", ostatus=" + ostatus + ", odamount=" + odamount
-				+ ", odprice=" + odprice + ", type=" + type + "]";
-	}
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public int getOkreview() {
+		return okreview;
+	}
+	public void setOkreview(int okreview) {
+		this.okreview = okreview;
+	}
+	@Override
+	public String toString() {
+		return "OrderdetailDTO [ono=" + ono + ", odno=" + odno + ", ino=" + ino + ", ocouriercompany=" + ocouriercompany
+				+ ", oinvoicenumber=" + oinvoicenumber + ", ostatus=" + ostatus + ", odamount=" + odamount
+				+ ", odprice=" + odprice + ", type=" + type + ", okreview=" + okreview + "]";
 	}
 	
 	

@@ -175,6 +175,14 @@ $(function(){
 		})
 	})
 	
+	//바로구매하기로 넘어가기
+	$('.purchase-btn').click(function(){
+		$('#ino').val(Number(${param.ino}));
+		$('#caamount').val(Number($('#number').val()));
+		$('#caprice').val(Number($('.right-total-price').text().replace(',','')));
+		$('#buynow').submit();
+	})
+	
 	// 수량 선택시 총 상품가격 변동
 	$('#number').change(function(){
 		$('.right-total-price').text(
@@ -333,6 +341,11 @@ $(function(){
 				
 				<input type="button" value="장바구니" class="in-cart-btn"/>
 				<input type="button" value="구매하기" class="purchase-btn"/>
+				<form action="./buyNow.com" name="buynow" id="buynow">
+					<input type="hidden" value="${ino}" />
+					<input type="hidden" value="${caamount}" />
+					<input type="hidden" value="${caprice}" />
+				</form>
 			</div>
 			<div id="detail"></div>
 		</div>

@@ -49,16 +49,19 @@ $(function(){
     	$("input[name=checkbox]:checked").each(function() { 
             fcdnos.push(Number($(this).next('input').val()));
         });
-    	
-    	$('#cdnos').val(fcdnos);
-    	$('#insertExerFrm').submit();
+    	if(fcdnos.length!=0){
+	    	$('#cdnos').val(fcdnos);
+	    	$('#insertExerFrm').submit();
+    	}else{
+    		alert('선택된 항목이 없습니다.')
+    	}
     });
     
-	// 이름누르면 체크되게
+	/* 이름누르면 체크되게
     $('.cdname').click(function(){
     	var checkbox = $(this).closest('td').prev('td').children('input[name=checkbox]');
     	checkbox.attr('checked', !checkbox.is(':checked'));
-    })
+    })*/
 	
 	// 뒤로가기 버튼 눌렀을 때
 	$('#goBack').click(function(){
@@ -85,6 +88,10 @@ $(function(){
 	
 	// 마이칼로리 직접 입력 - 마이칼로리에 추가 버튼 눌렀을 떄
 	$('#insertMyBtn').click(function(){
+		if($('#mycalcdname').val().replace(' ','')=='' || $('#mycalcdname').val()==null){
+			alert('운동명을 입력해주세요.');
+			return false;
+		}
 		var data = $("#insertMyCalFrm").serialize() ;
 		
         $.ajax({
@@ -95,7 +102,7 @@ $(function(){
                 alert(error);
             },
             success : function(json){
-                location.reload();
+                location.reload(true);
             },
         });
 	})
@@ -123,7 +130,7 @@ $(function(){
             },
             success : function(json){
             	alert('성공')
-                location.reload();
+                location.reload(true);
             },
         });
 	})
@@ -193,17 +200,19 @@ function detail(cdno,cdname,cdgram,cdcal){
 }
 
 function deleteMy(cdno) {
-	$.ajax({
-        type : 'post',
-        url : './deleteMyCal.com',
-        data : {"cdno":cdno},
-        error: function(xhr, status, error){
-            alert(error);
-        },
-        success : function(json){
-            location.reload();
-        },
-    });
+	if(confirm('삭제하시겠습니까?\n삭제하면 다시 복구할 수 없습니다.')){
+		$.ajax({
+	        type : 'post',
+	        url : './deleteMyCal.com',
+	        data : {"cdno":cdno},
+	        error: function(xhr, status, error){
+	            alert(error);
+	        },
+	        success : function(json){
+	            location.reload(true);
+	        },
+	    });
+	}
 }
 
 </script>
@@ -212,7 +221,7 @@ function deleteMy(cdno) {
 <div id="wrap2">
 	<div class="title2">운동
 		<div class="f-right" style="margin:0 20px 0 0">
-			<input type="button" value="뒤로 가기" id="goBack">
+			<input type="button" value="뒤로 가기" id="goBack" class="btn" style="background:white">
 		</div>
 	</div>
 	<div class="diary-content">
@@ -233,8 +242,8 @@ function deleteMy(cdno) {
 	   			검색결과 ${LIST.size()}<c:if test="${empty LIST}">0</c:if>개
 	   		</div>
 	   		<div class="f-right">
-		   		<input type="button" value="칼로리 등록" class="btn" id="enrollBtn"/>
-		   		<input type="button" value="마이칼로리 직접입력" class="btn" id="makeMyBtn"/>
+		   		<input type="button" value="칼로리 등록" class="btn" id="enrollBtn" style="background:white"/>
+		   		<input type="button" value="마이칼로리 직접입력" class="btn" id="makeMyBtn" style="background:white"/>
 	   		</div>
 	   	</div>
 	   	
@@ -249,9 +258,8 @@ function deleteMy(cdno) {
 			<c:forEach var="list" items="${LIST}">
 			<tr>
 				<td width="5%"><input type="checkbox" name="checkbox"/><input type="hidden" name="cdno" value="${list.cdno}"></td>
-				<td width="65%" class="cdname">${list.cdname}&nbsp;&nbsp;(${list.cdgram}분)</td>
+				<td width="65%" class="cdname"  onclick="detail(${list.cdno},'${list.cdname}',${list.cdgram},${list.cdcal})">${list.cdname}&nbsp;&nbsp;(${list.cdgram}분)</td>
 				<td width="25%" class="right" >${list.cdcal}kcal</td>
-				<td width="5%" onclick="detail(${list.cdno},'${list.cdname}',${list.cdgram},${list.cdcal})">&gt;</td>
 			</tr>
 			</c:forEach>
 			<c:if test="${empty LIST}">
@@ -265,10 +273,9 @@ function deleteMy(cdno) {
 			<c:forEach var="list" items="${MYLIST}">
 			<tr>
 				<td width="5%"><input type="checkbox" name="checkbox"/><input type="hidden" name="cdno" value="${list.cdno}"></td>
-				<td width="60%" class="cdname">${list.cdname}&nbsp;&nbsp;(${list.cdgram}분)</td>
+				<td width="60%" class="cdname" onclick="detail(${list.cdno},'${list.cdname}',${list.cdgram},${list.cdcal})">${list.cdname}&nbsp;&nbsp;(${list.cdgram}분)</td>
 				<td width="25%" class="right">${list.cdcal}kcal</td>
-				<td width="5%" onclick="detail(${list.cdno},'${list.cdname}',${list.cdgram},${list.cdcal})">&gt;</td>
-				<td width="5%" onclick="deleteMy(${list.cdno})">X</td>
+				<td width="10%" class="center" onclick="deleteMy(${list.cdno})">X</td>
 			</tr>
 			</c:forEach>
 			<c:if test="${empty MYLIST}">
@@ -308,8 +315,8 @@ function deleteMy(cdno) {
          </tr>
       </table>
       <div class="center" style="margin:30px 0;">
-         <input type="button" value="칼로리 등록" id="detail-submit"/>
-         <input type="button" value="마이칼로리에 추가" id="insertItMyBtn"/>
+         <input type="button" value="칼로리 등록" id="detail-submit" class="btn" style="background:white"/>
+         <input type="button" value="마이칼로리에 추가" id="insertItMyBtn" class="btn" style="background:white"/>
          <input type="button" value="취소" class="close"/>
       </div>
    </div>
@@ -331,7 +338,7 @@ function deleteMy(cdno) {
    <div class="title2">음식</div>
    <div class="diary-content">
       <div id="name" class="my-name-div">
-      	<input type="text" name="cdname" placeholder="운동명을 입력해주세요." class="myCalText">
+      	<input type="text" name="cdname" id="mycalcdname" placeholder="운동명을 입력해주세요." class="myCalText">
       </div>
       <input type="hidden" name="dno" value="${DTO.dno}"/>
       <table id="detail-table">
@@ -345,7 +352,7 @@ function deleteMy(cdno) {
          </tr>
       </table>
       <div class="center" style="margin:30px 0;">
-         <input type="button" value="마이칼로리에 추가" id="insertMyBtn"/>
+         <input type="button" value="마이칼로리에 추가" id="insertMyBtn" class="btn" style="background:white"/>
          <input type="button" value="취소" class="close"/>
       </div>
    </div>

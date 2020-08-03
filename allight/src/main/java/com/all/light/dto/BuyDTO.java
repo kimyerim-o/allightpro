@@ -1,6 +1,7 @@
 package com.all.light.dto;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class BuyDTO {
 	private int ono;//주문번호seq
@@ -18,7 +19,14 @@ public class BuyDTO {
 	private String sodate;//주문날짜
 	private int sum;//총합
 	private String type;
+	private int[] arr;	//배열
 	
+	public int[] getArr() {
+		return arr;
+	}
+	public void setArr(int[] arr) {
+		this.arr = arr;
+	}
 	public int getOno() {
 		return ono;
 	}
@@ -114,9 +122,11 @@ public class BuyDTO {
 	
 	@Override
 	public String toString() {
-		return "OrderDTO [ono=" + ono + ", mid=" + mid + ", odate=" + odate + ", oaddno=" + oaddno + ", oaddress1="
-				+ oaddress1 + ", oaddress2=" + oaddress2 + ", otel=" + otel + ", oreceiver=" + oreceiver
-				+ ", orequirethings=" + orequirethings + ", searchdate=" + searchdate + ", ordernum=" + ordernum + "]";
+		return "BuyDTO [ono=" + ono + ", mid=" + mid + ", mno=" + mno + ", odate=" + odate + ", oaddno=" + oaddno
+				+ ", oaddress1=" + oaddress1 + ", oaddress2=" + oaddress2 + ", otel=" + otel + ", oreceiver="
+				+ oreceiver + ", orequirethings=" + orequirethings + ", searchdate=" + searchdate + ", ordernum="
+				+ ordernum + ", sodate=" + sodate + ", sum=" + sum + ", type=" + type + ", arr=" + Arrays.toString(arr)
+				+ "]";
 	}
 	
 }

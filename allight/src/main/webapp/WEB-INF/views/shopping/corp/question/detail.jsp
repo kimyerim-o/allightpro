@@ -32,6 +32,10 @@
 			var qccontent = $("#qccontent").val();
 			var param = {"qno" : qno, "qcid" : qcid , "qccontent" : qccontent};
 			//alert(JSON.stringify(param))
+			if(qccontent==null || qccontent == ""){
+				alert("댓글을 작성해주세요.")
+				return false;
+			}
 		$.ajax({
 			type: "post", //데이터를 보낼 방식
 			url: "${pageContext.request.contextPath}/question/wcomment.com", //데이터를 보낼 url
@@ -48,6 +52,7 @@
 		
 		//댓글 삭제
 		$(".dcomm").click(function(){
+			//alert($(event.target).attr('data-no'))
 			 if(confirm("삭제 하시겠습니까?")){
 				 var qcno = $(event.target).attr('data-no');
 				 var param = {"qcno" : qcno}

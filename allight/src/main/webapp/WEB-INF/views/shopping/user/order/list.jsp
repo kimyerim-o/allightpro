@@ -123,11 +123,11 @@ margin-left:60px;
 								//alert(JSON.stringify(param));
 								$
 										.ajax({
-											url : "${pageContext.request.contextPath}/order/check.com",
+											url : "${pageContext.request.contextPath}/order/mypage/check.com",
 											type : 'post',
 											data : param,
 											success : function(data) {
-												location.href = "${pageContext.request.contextPath}/order/check.com?odno="
+												location.href = "${pageContext.request.contextPath}/order/mypage/check.com?odno="
 														+ odno
 														+ "&ostatus="
 														+ ostatus;
@@ -157,12 +157,12 @@ margin-left:60px;
 								//alert(JSON.stringify(param));
 								$
 										.ajax({
-											url : "${pageContext.request.contextPath}/order/check.com",
+											url : "${pageContext.request.contextPath}/order/mypage/check.com",
 											type : 'post',
 											data : param,
 											success : function(data) {
 												alert(JSON.stringify(param));
-												location.href = "${pageContext.request.contextPath}/order/check.com?odno="
+												location.href = "${pageContext.request.contextPath}/order/mypage/check.com?odno="
 														+ odno
 														+ "&ostatus="
 														+ ostatus;
@@ -182,7 +182,7 @@ margin-left:60px;
 		$(".confirm")
 				.click(
 						function() {
-							if (confirm("해당 상품을 구매확정 하시겠습니까? 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")) {
+							if (confirm("해당 상품을 구매확정 하시겠습니까? \n 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")) {
 								var odno = $(event.target).attr('data-no');
 								var ostatus = "구매확정";
 								var param = {
@@ -195,7 +195,7 @@ margin-left:60px;
 											type : 'post',
 											data : param,
 											success : function(data) {
-												location.href = "${pageContext.request.contextPath}/order/list.com";
+												location.href = "${pageContext.request.contextPath}/order/mypage/list.com";
 											},
 											error : function(request, status,
 													error) {
@@ -432,11 +432,11 @@ margin-left:60px;
 
 														<li class="mb5"><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
 															class="openMask_create" style="cursor: pointer;">배송조회</a></li>
-
+														<c:if test="${oddto.okreview ==0}">
 														<li class="mb5"><a
-															href="mem_goods_review_write.asp?orderno=202004052091881&amp;g=12189&amp;vtab=O"
-															class="order_btn_write" style="cursor: pointer;">상품
-																리뷰 쓰기</a></li>
+															href="review.com?no=${sdto.ino}&num=${oddto.odno}"
+															class="order_btn_write" style="cursor: pointer;">상품 리뷰 쓰기</a></li>
+														</c:if>
 													</ul>
 												</c:if></td>
 											<c:set var="done" value="true" />

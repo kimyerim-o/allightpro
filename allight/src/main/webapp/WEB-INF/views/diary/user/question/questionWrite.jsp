@@ -37,11 +37,13 @@
 			<table>
 				<tr>
 					<td class="board-title">제목</td>
-					<td class="board-title" colspan="3"><input type="search" name="qtitle" size="60%" required="required" placeholder="제목을 입력하세요"></td>
+					<td class="board-title" colspan="3">
+						<input type="search" name="qtitle" size="60%" required="required" placeholder="제목을 입력하세요">
+						</td>
 				</tr>
 				<tr>
 					<td class="board-info"><a class="board-info-nick">작성자</a></td>
-					<td class="board-info"><a class="board-info-nick">${sessionScope.MID}</a></td>
+					<td class="board-info"><a class="board-info-nick">${sessionScope.MNICK}</a></td>
 					<td class="board-info"><a class="board-info-others">작성일 </a></td>
 					<td class="board-info"><a class="board-info-others"><%=sf.format(now) %></a></td>
 				</tr>

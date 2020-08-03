@@ -45,8 +45,22 @@
   	 		<!-- 인터셉터가 언제 처리될지 지정 --> 
 		  	<mapping path="/**/admin.com" /> 
 		 	<beans:bean class="com.all.light.util.AdminCheck" />
-		 	
 		 	<!-- 로그인 인터셉터 http://localhost:9000/allight/shopping/reviewLike.com -->
+	  	</interceptor>
+  	 	<interceptor>
+		  	<mapping path="/**/write.com" />
+		  	<mapping path="/**/insert.com" />
+		  	<mapping path="/**/update.com" />
+		  	<mapping path="/**/modify.com" />
+		  	<mapping path="/**/delete.com" />
+		  	<mapping path="/**/wcomment.com" />
+		  	<mapping path="/**/dcomment.com" />
+		  	<mapping path="/mypage/**" />
+		 	<beans:bean class="com.all.light.util.LoginCheck" />
+	  	</interceptor>
+	  	<interceptor>
+	  	<mapping path="/**/corp.com" />
+	  	<beans:bean class="com.all.light.util.CorpCheck" />
 	  	</interceptor>
 	</interceptors>
 	

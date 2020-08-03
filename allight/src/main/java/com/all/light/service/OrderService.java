@@ -11,6 +11,7 @@ import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.all.light.dto.OrderdetailDTO;
+import com.all.light.dto.ReviewDTO;
 import com.all.light.dto.ShoppingDTO;
 import com.all.light.util.PageUtil;
 import com.all.light.dao.OrderDAO;
@@ -297,11 +298,11 @@ public class OrderService {
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com";
 		int hostPort = 465;
-		String hostSMTPid = "all_light@gamil.com";
+		String hostSMTPid = "allight.adm@gmail.com";
 		String hostSMTPpwd = "goallight!";
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "all_light@gamil.com";
+		String fromEmail = "allight.adm@gmail.com";
 		String fromName = "allight";
 		String subject = "";
 		String msg = "";
@@ -392,6 +393,13 @@ public class OrderService {
 			System.out.println("메일발송 실패 : " + e);
 			return null;
 		}
+	}
+	
+	public void reviewr(ReviewDTO rdto, HttpSession session) {
+		rdto.setRid((String)session.getAttribute("MID"));
+		rdto.setRnick((String)session.getAttribute("MNICK"));
+		
+		ordDAO.reviewr(rdto);
 	}
 	
 

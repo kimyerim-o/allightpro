@@ -85,4 +85,16 @@ public class CartDAO extends SqlSessionDaoSupport {
 		return image;
 	}
 
+	//+,- 버튼 클릭하면 수량 업데이트 
+	public String updateAmt(CartDTO cartdto, String caid) {
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("caid", caid);
+		map.put("caamount", cartdto.getCaamount());
+		map.put("caprice", cartdto.getCaprice());
+		map.put("cano", cartdto.getCano());
+		int ok = session.update("Cart.updateAmt",map);
+		System.out.println("Cart.updateAmt():"+cartdto);
+		return Integer.toString(ok);
+	}
+
 }

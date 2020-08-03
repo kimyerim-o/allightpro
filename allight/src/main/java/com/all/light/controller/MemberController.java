@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -184,10 +187,25 @@ public class MemberController {
 		
 	//로그인폼
 	@RequestMapping("/login")
-	public ModelAndView log(ModelAndView mv,
+	public ModelAndView log(ModelAndView mv,HttpSession session,RedirectView rv,
 			@RequestParam(value="reUrl", required=false)String reUrl) {
 		mv.addObject("reUrl", reUrl);
-		mv.setViewName("common/loginform");
+		if("fail".equals(session.getAttribute("LoginCheck"))) {
+			rv.setUrl("./LoginCheck.com"); //로그인 체크필터에 걸렸을 때 이동하는 페이지
+			mv.setView(rv);
+		}
+		else {
+			mv.setViewName("common/loginform");
+		}
+		return mv;
+	}
+	
+	@RequestMapping("/LoginCheck")
+	public ModelAndView LoginCheck(
+			ModelAndView mv, HttpSession session,RedirectView rv,
+			@RequestParam(value="reUrl", required=false)String reUrl) {
+		session.setAttribute("LoginCheck","init");
+		mv.setViewName("common/loginformCheck");
 		return mv;
 	}
 	
@@ -418,7 +436,7 @@ public class MemberController {
 		System.out.println("memberController.modify.Member,"+request.getMethod()+"method");
 		//파라미터 받기, 비즈니스로직
 		memDTO = memSVC.getMInfo(memDTO.getMno());
-		System.out.println("memInfo = "+memDTO.toString());
+		System.out.println("memInfo = "+memDTO);
 		//모델지정
 		mv.addObject("MEMINFO", memDTO); //회원 상세 정보
 		//뷰지정

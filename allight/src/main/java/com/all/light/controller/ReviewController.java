@@ -17,18 +17,17 @@ import com.all.light.service.ReviewService;
 import com.all.light.util.PageUtil;
 
 @Controller
-@RequestMapping("/mypage")
 public class ReviewController {
 
 	@Autowired
 	private ReviewService revSVC;
 
-	@RequestMapping("/home")
+	@RequestMapping("/mypage/home")
 	public String home() {
 		return "common/user/mypage/home";
 	}
 	
-	@RequestMapping("/review/list")
+	@RequestMapping("/mypage/review/list")
 	public ModelAndView itemList(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			@RequestParam(value = "search", required = false) String searchWord, ModelAndView mv, RedirectView rv,
 			HttpServletRequest request) {
@@ -49,7 +48,7 @@ public class ReviewController {
 		return mv;
 	}
 
-	@RequestMapping(value="/review/write", method= RequestMethod.GET)
+	@RequestMapping(value="/mypage/review/write", method= RequestMethod.GET)
 	public ModelAndView reviewWriteGet(
 			@RequestParam(value = "no") int ino,
 			@RequestParam(value = "nowPage", required=false, defaultValue="1") int nowPage,
@@ -60,7 +59,7 @@ public class ReviewController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/review/write", method= RequestMethod.POST)
+	@RequestMapping(value="/mypage/review/write", method= RequestMethod.POST)
 	public ModelAndView reviewWritePost(
 			@RequestParam(value = "nowPage", required=false, defaultValue="1") int nowPage,
 			ReviewDTO revDTO, ModelAndView mv, RedirectView rv, HttpServletRequest request) {
@@ -74,7 +73,7 @@ public class ReviewController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/review/update", method= RequestMethod.GET)
+	@RequestMapping(value="/mypage/review/update", method= RequestMethod.GET)
 	public ModelAndView reviewUpdateGet(
 			@RequestParam(value = "no") int ino, 
 			@RequestParam(value = "nowPage", required=false, defaultValue="1") int nowPage,
@@ -91,7 +90,7 @@ public class ReviewController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/review/update", method= RequestMethod.POST)
+	@RequestMapping(value="/mypage/review/update", method= RequestMethod.POST)
 	public ModelAndView reviewUpdatePost(
 			@RequestParam(value = "no") int ino, 
 			@RequestParam(value = "nowPage", required=false, defaultValue="1") int nowPage,
@@ -107,7 +106,7 @@ public class ReviewController {
 		return mv;
 	}
 	
-	@RequestMapping("/review/delete")
+	@RequestMapping("/mypage/review/delete")
 	public ModelAndView reviewDelete(
 			@RequestParam(value = "no") int ino, 
 			@RequestParam(value = "nowPage", required=false, defaultValue="1") int nowPage,
@@ -125,25 +124,40 @@ public class ReviewController {
 	
 	//기업
 	@RequestMapping("/review/list/corp")
-	public ModelAndView itemListCorp(
+	public ModelAndView reviewListCorp(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			@RequestParam(value = "search", required = false) String searchWord, 
+			@RequestParam(value = "search", required = false, defaultValue="") String searchWord, 
 			ModelAndView mv, RedirectView rv,	HttpServletRequest request) {
 		// 파라미터 받기
-		String id = (String) request.getSession().getAttribute("MID");
-		System.out.println("\nReviewController.itemList, 접속ID = " + id);
+		String name = (String) request.getSession().getAttribute("CONAME");
+		System.out.println("\nReviewController.reviewListCorp, 접속ID = " + name);
 
 		// 페이지 객체에 검색어와 현재 페이지를 넘기고 공지 리스트를 반환
-		PageUtil pInfo = revSVC.getPageInfo(id, nowPage, searchWord);
-		pInfo.setRid(id);
-		ArrayList<ReviewDTO> map = revSVC.getList(pInfo);
+		PageUtil pInfo = revSVC.getPageInfoCorp(name, nowPage, searchWord);
+		pInfo.setConame(name);
+		ArrayList<ReviewDTO> map = revSVC.getListCorp(pInfo);
 
 		System.out.println("list = " + map.toString());
 		System.out.println("pinfo = " + pInfo.toString());
 		mv.addObject("LIST", map); // 리뷰 리스트
 		mv.addObject("PINFO", pInfo); // 페이징 정보
 
-		mv.setViewName("shopping/user/mypageReview/itemList");
+		mv.setViewName("shopping/corp/mypageReview/reviewList");
+		return mv;
+	}
+	
+	@RequestMapping("/review/delete/corp")
+	public ModelAndView reviewdeleteCorp(
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value = "search", required = false) String searchWord, 
+			@RequestParam(value = "no", required = false) int rno,
+			ModelAndView mv, RedirectView rv,	HttpServletRequest request, ReviewDTO revDTO) {
+		// 파라미터 받기
+		System.out.println("\nReviewController.reviewdeleteCorp, 삭제번호 = " + rno);
+		revDTO.setRno(rno);
+		revSVC.reviewDeleteCorp(revDTO);
+		rv.setUrl(request.getContextPath()+"/review/list/corp.com?nowPage="+nowPage);
+		mv.setView(rv);
 		return mv;
 	}
 }

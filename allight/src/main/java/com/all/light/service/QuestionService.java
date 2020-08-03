@@ -54,10 +54,13 @@ public class QuestionService {
 		return pinfo;
 	}
 	
-	public PageUtil getPageInfoUser(int nowPage) {
-		int totalCount = qesDAO.getTotalCntUser();
-		PageUtil pinfo = new PageUtil(nowPage, totalCount);
-		return pinfo;
+	public PageUtil getPageInfoUser(int nowPage, String searchWord, String searchType) {
+		PageUtil pInfo = new PageUtil(searchWord, searchType);
+		int totalCount = qesDAO.getTotalCntUser(pInfo);
+		PageUtil pInfo1 = new PageUtil(nowPage, totalCount);
+		pInfo1.setSearchWord(searchWord);
+		pInfo1.setSearchType(searchType);
+		return pInfo1;
 	}
 	
 	public ArrayList<QuestionDTO> totalList(PageUtil pinfo) {
@@ -94,6 +97,7 @@ public class QuestionService {
 	//유저
 	public void userInsertWrite(QuestionDTO qdto, HttpSession session) {
 		qdto.setQid((String)session.getAttribute("MID"));
+		qdto.setQnick((String)session.getAttribute("MNICK"));
 		qesDAO.userInsert(qdto);
 	}
 

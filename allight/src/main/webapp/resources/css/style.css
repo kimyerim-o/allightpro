@@ -491,7 +491,7 @@ li {
 	border-color: #ddd;
 }
 
-.btn, .goBack, #goback {
+.btn, .goBack, #goback, .goto {
 	display: inline-block;
 	padding: 6px 18px;
 	margin-bottom: 0;

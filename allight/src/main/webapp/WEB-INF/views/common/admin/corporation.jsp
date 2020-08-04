@@ -77,7 +77,7 @@
 			<tr class="center">
 				<td>
 					<div class="center">
-						<ul class="pagination">
+						<ul class="pagination" id="Page">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
 										href="${pageContext.request.contextPath}/corporation/admin.com?search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>

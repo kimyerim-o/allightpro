@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 	$(function() {
 		//수정 버튼 클릭 시
@@ -208,7 +207,7 @@ function loginCheck (){
 					</table>
 
 					<div class="center">
-						<ul class="pagination">
+						<ul class="pagination" id="Page">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
 										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no}&commPage=${PINFO.nowPage-3}">«</a>

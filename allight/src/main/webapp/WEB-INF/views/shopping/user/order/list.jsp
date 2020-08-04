@@ -161,7 +161,7 @@ margin-left:60px;
 											type : 'post',
 											data : param,
 											success : function(data) {
-												alert(JSON.stringify(param));
+												//alert(JSON.stringify(param));
 												location.href = "${pageContext.request.contextPath}/order/mypage/check.com?odno="
 														+ odno
 														+ "&ostatus="

@@ -498,16 +498,50 @@ li {
 	font-weight: normal;
 	text-align: center;
 	cursor: pointer;
-	background-image: none;
+	background: inherit;
 	border: 1px solid #bdbdbd;
 	border-radius: 4px;
 	height:36px;
 	min-width:95px;
 }
 
-.btn:hover, .goBack:hover, #goback:hover {
+.btn:hover, .goBack:hover, #goback:hover, .btn2:hover {
 	text-decoration: none;
 	border: 1px solid gray;
+}
+
+.btn2 {
+	display: inline-block;
+    padding: 6px 18px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    cursor: pointer;
+    background: inherit;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    height: 36px;
+}
+
+.btn3 {
+	display: inline-block;
+    padding: 6px 18px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color:white;
+    text-align: center;
+    cursor: pointer;
+    background: #ff7289;
+    border: 1px solid #ff7289;
+    border-radius: 4px;
+    height: 60px;
+    line-height:45px;
+}
+
+.btn3:hover {
+	color:#ffe3e3;
 }
 
 .selectCss {

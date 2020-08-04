@@ -29,7 +29,7 @@ $(function(){
 	// 몸무게 업데이트
 	$('#dweight').change(function(){
 		// 숫자만 입력하도록
-		var regexp = /^[0-9]*$/
+		var regexp = /^[0-9]*\.?[0-9]*$/;
 		var v = $(this).val();
 		if( !regexp.test(v) ) {
 			alert("숫자만 입력하세요");

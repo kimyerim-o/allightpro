@@ -129,7 +129,10 @@
 	</script>
 </head>
 <body>
-<div class="nav">
+<div id="wrap2">
+<div class="title">월별 다이어트 추이
+</div>
+<div class="nav" style="padding:0 0 0 200px">
 	<!-- 이전해 -->
 	<a class="before_after_year" href="./chart.com?yy=${param.yy-1}&mon=${param.mon}">
 		&lt;&lt;
@@ -151,13 +154,13 @@
 	<a class="before_after_year" id="nextyy" onclick="nextyear(${param.yy},${param.mon})">
 		&gt;&gt;
 	</a>
-	<select id="type">
+	<input type="button" value="선택" onclick="change()" class="btn2" style="float:right;margin:13px 10px 0;"/>
+	<select id="type" class="btn" style="width:100px;float:right;margin:13px 0 0;">
 		<option value="w">몸무게</option>
 		<option value="f">음식칼로리</option>
 		<option value="e">운동칼로리</option>
 		<option value="s">월별 성공률</option>
 	</select>
-	<input type="button" value="선택" onclick="change()"/>
 </div>
 <figure class="highcharts-figure">
     <div id="container1" class="show"></div>
@@ -165,6 +168,7 @@
     <div id="container3" class="hidden"></div>
     <div id="container4" class="hidden"></div>
 </figure>
+</div>
 
 <script>
 Highcharts.chart('container1', {

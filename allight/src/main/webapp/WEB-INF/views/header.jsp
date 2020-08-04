@@ -28,6 +28,15 @@
   	
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
+//현재 페이지일 경우 li에 active 클래스 적용
+$(function(){
+	$('#Page').children().each(function(){
+		if($(this).children('a').text()==${PINFO.nowPage}){
+			$(this).attr('class','active');
+		}
+	})
+})
+
 function kakaoLogout() {
 	Kakao.init('52ee84c11b882c5898d68b339bf4f9d0')
 	if (!Kakao.Auth.getAccessToken()) {
@@ -118,7 +127,15 @@ function kakaoLogout() {
 					<li class="nav-item"><a
 						href="${pageContext.request.contextPath}/main.com"
 						class="nav-link">다이어리</a></li>
-					<li class="nav-item"><a href="${pageContext.request.contextPath}/cal/dictionary/food.com" class="nav-link">칼로리 사전</a></li>
+					<li class="nav-item">
+						<a href="${pageContext.request.contextPath}/cal/dictionary/food.com" class="nav-link">칼로리 사전</a>
+						<ul class="dropdown">
+							<li>
+								<a href="${pageContext.request.contextPath}/cal/dictionary/food.com">음식 사전</a></li>
+							<li>
+								<a href="${pageContext.request.contextPath}/cal/dictionary/exercise.com">운동 사전</a></li>
+						</ul>
+					</li>
 					<li class="nav-item"><a href="${pageContext.request.contextPath}/calorie_recipe.com" class="nav-link">칼로리 처방</a></li>
 					<li class="nav-item"><a href="${pageContext.request.contextPath}/freeboard/list.com" class="nav-link">커뮤니티</a>
 						<ul class="dropdown">

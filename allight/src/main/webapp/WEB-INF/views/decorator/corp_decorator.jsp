@@ -8,6 +8,17 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// 해당하는 페이지일때 왼쪽 메뉴 글씨 볼드체
+		var href = location.href.substr(location.href.indexOf("allight")-1)
+		$('.left_menu_box li a').each(function(){
+			if(href.indexOf($(this).attr('href'))!=-1){
+				$(this).parent('li').attr('class','on')
+			}
+		}) 
+	})
+</script>
 <decorator:head />
 </head>
 <body>
@@ -21,13 +32,12 @@
 			</p>
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">주문관리</li>
-				<li class="on"><a href="${pageContext.request.contextPath}/order/list/corp.com">주문/배송관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/order/list/corp.com">주문/배송관리</a></li>
 			</ul>
 
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">상품관리</li>
 				<li><a href="${pageContext.request.contextPath}/item/list/corp.com">상품 등록/수정/삭제</a></li>
-				<li><a href="#">재고 관리</a></li>
 			</ul>
 
 			<ul class="left_menu_box">

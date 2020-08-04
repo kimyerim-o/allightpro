@@ -69,11 +69,17 @@ public class BuyController {
 			li.setOno(ono);
 			System.out.println("li2="+li);
 			buySVC.oderdetailin(li);
+			System.out.println("ok");
+			buySVC.emptyCart(cartdto.getCanolist()[i]);//결제 후 장바구니 비우기
+			System.out.println("okkkk");
 		}
 		
 		//장바구니비우기(delete cart)
-		buySVC.emptyCart(cartdto.getCanolist());//결제 후 장바구니 비우기
-		mv.setViewName("shopping/user/paySuccess");
+		System.out.println("cartdto"+cartdto);
+		mv.addObject("list",cartdto);	//결제페이지로 값 넘겨주기
+		mv.addObject("olist",odto);
+		System.out.println("odto"+odto);
+		mv.setViewName("shopping/user/goPay");
 		return mv;
 	}
 	
@@ -112,7 +118,7 @@ public class BuyController {
 		System.out.println(cartdto);
 		buySVC.oderdetailin(cartdto);
 		
-		mv.setViewName("shopping/user/paySuccess");
+		mv.setViewName("shopping/user/goPay");
 		return mv;
 	}
 	

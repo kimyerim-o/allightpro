@@ -63,7 +63,8 @@ public class BuyDAO extends SqlSessionDaoSupport {
 
 	//결제후 orderdetailDTO에 저장
 	public void orderdetailin(CartDTO li) {
-		session.insert("Buy.orderdetailin",li);
+		int i=session.insert("Buy.orderdetailin",li);
+		System.out.println("Buy.orderdetailin///"+i);
 	}
 	
 }

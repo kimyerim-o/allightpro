@@ -166,7 +166,7 @@ function kakaoLogout() {
 								href="${pageContext.request.contextPath}/order/mypage/list.com">주문/배송조회</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/order/mypage/back.com">취소/반품조회</a></li>
-							<li><a href="${pageContext.request.contextPath}/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a></li>
+							<li><a href="${pageContext.request.contextPath}/mypage/cart.com">&nbsp;장바구니</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/member/mypage/address.com">배송지
 									관리</a></li>
@@ -181,15 +181,13 @@ function kakaoLogout() {
 					<li class="nav-item"><a href="${pageContext.request.contextPath}/order/list/corp.com" class="nav-link">기업</a>
 						<ul class="dropdown">
 							<li><a
-								href="${pageContext.request.contextPath}/order/list/corp.com">주문
-									관리</a></li>
+								href="${pageContext.request.contextPath}/order/list/corp.com">주문관리</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/item/list/corp.com">상품
-									관리</a></li>
+								href="${pageContext.request.contextPath}/item/list/corp.com">상품관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/item/review/list/corp.com">상품문의</a></li>
-							<li><a href="${pageContext.request.contextPath}/corporation/modify/corp.com?cono=${sessionScope.CONO}">기업 정보 관리</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/question/list/corp.com">문의사항</a></li>
+							<li><a href="${pageContext.request.contextPath}/corporation/modify/corp.com?cono=${sessionScope.CONO}">기업 정보 관리</a></li>
 						</ul>
 					</li>
 					</c:if>
@@ -197,7 +195,7 @@ function kakaoLogout() {
 					<!-- 관리자 로그인시   -->
 					<c:if test="${sessionScope.MTYPE eq 1 && !empty sessionScope.MID}">
 					<li class="nav-item"><a
-						href="${pageContext.request.contextPath}/admin.com"
+						href="${pageContext.request.contextPath}/member/admin.com"
 						class="nav-link">관리자</a>
 						<ul class="dropdown">
 							<li><a href="${pageContext.request.contextPath}/admin.com">기업/회원

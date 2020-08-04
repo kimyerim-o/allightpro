@@ -128,7 +128,7 @@
 				</tr>
 			</table>
 
-			<c:if test="${sessionScope.MTYPE==1}">
+			<c:if test="${sessionScope.MTYPE==1 || DETAIL.qid eq sessionScope.MID}">
 			<!-- 댓글  -->
 			<div class="boardContent-Comment">
 				<div class="boardContent-Comment-input">

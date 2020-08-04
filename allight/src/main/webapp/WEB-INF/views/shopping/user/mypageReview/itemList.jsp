@@ -31,14 +31,15 @@ $(function(){
 </head>
 <body>
 	<div class="container">
-	<form id="sFrm" method="get"
-		action="<%=request.getContextPath()%>/mypage/review/list.com">
+	<form id="sFrm" method="get" action="<%=request.getContextPath()%>/mypage/review/list.com">
 		<div class="searchDiv">
 			<select name="type" class="selectCss">
 				<option value="iname">상품명</option>
-			</select> <input type="text" id="search" name="search" placeholder="검색어를 입력하세요"/> <input type="submit"
-				value="검색" onclick="return checkForm();"/>&nbsp;&nbsp;<a href="<%=request.getContextPath()%>/mypage/review/list.com"><input type="button"
-				value="검색어 초기화"/></a>
+			</select> 
+			<input type="text" id="search" name="search" placeholder="검색어를 입력하세요"/> 
+			<input type="submit" value="검색" onclick="return checkForm();"/>&nbsp;&nbsp;
+			<a href="<%=request.getContextPath()%>/mypage/review/list.com">
+				<input type="button" value="검색어 초기화"/></a>
 		</div>
 		</form>
 		<table class="table">
@@ -57,14 +58,12 @@ $(function(){
 					<td><fmt:formatDate value="${list.RDATE}" pattern="yyyy-MM-dd"/></td>
 					<td><c:forEach begin="1" end="${list.RGRADE}">★</c:forEach><c:forEach begin="1" end="${5-list.RGRADE}">☆</c:forEach></td>
 					<td>${list.RCONTENT}</td>
-					<td><%-- <a href="${pageContext.request.contextPath}/mypage/review/write.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
-					<input type="button" id="wbtn" name="wbtn" value="리뷰 작성">
-					</a> --%>
+					<td>
 					<a href="${pageContext.request.contextPath}/mypage/review/update.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
 					<input type="button" id="wbtn" name="ubtn" value="리뷰 수정">
 					</a>
 					<a href="${pageContext.request.contextPath}/mypage/review/delete.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
-					<input type="button" id="dbtn" name="dbtn" value="리뷰 삭제"></a></td>
+					<input type="button" id="del" name="dbtn" value="리뷰 삭제"></a></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -78,9 +77,8 @@ $(function(){
 						<a href="${pageContext.request.contextPath}/mypage/review/list.com?nowPage=1&type=${param.type}&search=${param.search}">«</a>
 					</c:if>
 				</li>
-				<!-- 현재 페이지일때 active --> 
 				<c:forEach begin="${PINFO.startPage}" end="${PINFO.endPage}" var="i">
-					<li id="li"><!-- 스크립트 적용해야 할것같아요 -->
+					<li id="li">
 						<a href="${pageContext.request.contextPath}/mypage/review/list.com?nowPage=${i}&type=${param.type}&search=${param.search}">${i}</a>
 					</li>
 				</c:forEach>				

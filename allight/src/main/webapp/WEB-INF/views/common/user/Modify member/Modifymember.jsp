@@ -133,15 +133,22 @@ $(function() {
 			<tr>
 				<td>성별 :</td>
 				<td><select name="msex" id="msex" required="required">
+				<c:if test="${MEMINFO.msex eq '남자'}">
+						<option value="">선택</option>
+						<option value="남자" selected>남자</option>
+						<option value="여자">여자</option>
+				</c:if>
+				<c:if test="${MEMINFO.msex eq '여자'}">
 						<option value="">선택</option>
 						<option value="남자">남자</option>
-						<option value="여자">여자</option>
+						<option value="여자" selected>여자</option>
+				</c:if>
 				</select></td>
 			</tr>
 			<tr>
 				<td>생년월일 :</td>
-				<td>${MEMINFO.mbirth}<input type="date" id="mbirth"
-					name="mbirth" value="${MEMINFO.mbirth}" /></td>
+				<td>
+				<input type="date" id="mbirth" name="mbirth" value="${MEMINFO.mbirth}" /></td>
 			</tr>
 			<tr>
 				<td>닉네임 :</td>

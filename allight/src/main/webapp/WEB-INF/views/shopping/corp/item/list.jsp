@@ -50,7 +50,7 @@ $(function(){
 		</div>
 		<div align="left">
 		
-			<input type="button" value="상품추가" onClick="location.href='../insert/corp.com'">
+			<input type="button" value="상품추가" class="btn" onClick="location.href='../insert/corp.com'">
 		</div>
 	
 

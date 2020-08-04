@@ -13,11 +13,7 @@
 <meta charset="UTF-8">
 <title></title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-
-	</script>
 </head>
-
 <body>
 	<div class="container">
 		<div class="boardContent">
@@ -42,14 +38,18 @@
 					<td class="board-title">제목 : ${LIST.ntitle}</td>
 				</tr>
 				<tr>
-					<td class="board-info"><a class="board-info-nick">닉네임 : ${LIST.nnick }</a>
+					<td class="board-info">
+					<a class="board-info-nick">닉네임 : 
+					<c:if test="${LIST.nid eq 'admin'}">
+									<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+					${LIST.nnick}</a>
 						| <a class="board-info-others">조회</a> 
 						<a style="color: #ff5656; font-size: 1.4rem;">${LIST.nhit }</a> 
 						<a class="board-info-others"> | ${LIST.ndate }</a>
 					</td>
 				</tr>
 				<tr>
-					<td class="board-content"><div class="board-content-div">${LIST.ncontent }</div></td>
+					<td class="board-content"><div class="board-content-div"><div style="white-space:pre-line;"><c:out value="${LIST.ncontent}" /></div></div></td>
 				</tr>
 			</table>
 		</div>

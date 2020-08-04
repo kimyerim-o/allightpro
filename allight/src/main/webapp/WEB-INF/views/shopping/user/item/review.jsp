@@ -46,7 +46,6 @@ function iqDelete(iqno) {
 	}
 };
 
-
 //비밀글일때 작성자 본인 체크
 function isWriter(iqid){
 	var iqid = iqid;
@@ -66,7 +65,15 @@ $(function(){
 			$(this).parent().parent().next('.show').attr('class','hidden');
 		}
 	});
+	
+	//페이징처리
+	$('#qPage').children().each(function(){
+		if($(this).children('a').text()==${QPINFO.nowPage}){
+			$(this).attr('class','active');
+		}
+	})
 });
+
 </script>
 </head>
 
@@ -76,52 +83,15 @@ $(function(){
 		<!-- 상품후기/상품문의  -->
 		<div class="review-qustion-div">
 		
-			<!-- 상품문의   -->
-			<div id="question" style="height:75px;"></div>
-			<div style="height:100px;"></div>
-
-			<div class="shop-mini-title">
-				상품문의(${QSIZE})
+			<div class="title3">
+				상품문의
 			</div>
-			
-			<form action="${pageContext.request.contextPath}/shopping/iqWrite.com" method="post" id="iqWriteFrm" class="hidden">
-				<div class="shop-mini-title">
-					상품문의 작성
-				</div>
-				<table>
-					<tbody>	
-						<tr>
-							<td width="15%">제목</td>
-							<td>
-								<input type="text" name="iqtitle" id="iqtitle"/>
-							</td>	
-						</tr>
-						<tr>
-							<td>비밀글 설정</td>
-							<td>
-								<input type="checkbox" name="iqsecret" value="1" />
-							</td>
-						</tr>
-						<tr>								
-							<td colspan="2">
-								<textarea name="iqcontent" id="iqcontent" rows="10" cols="200" 
-									style="margin:10px 0;padding:10px;width:100%;height:300px;"></textarea>
-							</td>
-						</tr>					
-					</tbody>
-				</table>
-				<input type="hidden" name="ino" value="${param.ino}"/>
-				<input type="hidden" name="iqid" value="${sessionScope.MID}"/>
-				<input type="hidden" name="iqnick" value="${sessionScope.MNICK}"/>
-				<input type="button" value="등록" id="writeSubmit"/>
-				<input type="button" value="취소" id="writeCancel"/>
-			</form>
 			
 			<div id="qTable">
 			<table>
 				<tr>
-					<th style="border-bottom:1px solid gray; width:5%">번호</th>
-					<th style="border-bottom:1px solid gray; width:40%" colspan="2">제목</th>
+					<th style="border-bottom:1px solid gray; width:10%">번호</th>
+					<th style="border-bottom:1px solid gray; width:35%" colspan="2">제목</th>
 					<th style="border-bottom:1px solid gray; width:15%">작성일</th>
 					<th style="border-bottom:1px solid gray; width:10%">닉네임</th>
 					<th style="border-bottom:1px solid gray; width:30%">상품이동</th>

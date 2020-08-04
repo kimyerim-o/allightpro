@@ -16,7 +16,11 @@
 	<input type="hidden" name="arr" value="${a}"/>
 </c:forEach>
 <c:if test="${!empty sessionScope.mcnt}">${sessionScope.mcnt}<a style="color: red;">아이디 비밀번호를 확인해주세요.</a></c:if>
+	<div class="log-Table">
 	<table>
+		<tr>
+			<td class="title3" style="text-align:center">일반 로그인</td>
+		</tr>
 		<tr>
 			<td><input type="text" id="mid" name="mid" placeholder="아이디" required="required"/></td>
 		</tr>
@@ -45,6 +49,7 @@
 			</td>
 		</tr>
 	</table>
+	</div>
 </form>
 
 <a id="custom-login-btn" href="javascript:loginWithKakao()">
@@ -98,7 +103,11 @@
 	<input type="hidden" name="arr" value="${a}"/>
 </c:forEach>
 <c:if test="${!empty sessionScope.ccnt}">${sessionScope.ccnt}<a style="color: red;">아이디 비밀번호를 확인해주세요.</a></c:if>
+	<div class="log-Table">
 	<table>
+		<tr>
+			<td class="title3" style="text-align:center">기업 로그인</td>
+		</tr>
 		<tr>
 			<td><input type="text" id="coid" name="coid" placeholder="아이디" required="required"/></td>
 		</tr>
@@ -120,6 +129,7 @@
 			<td><input type="submit" value="로그인"></td>
 		</tr>
 	</table>
+	</div>
 </form>
 </body>
 </html>

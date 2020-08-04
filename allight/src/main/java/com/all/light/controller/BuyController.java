@@ -63,22 +63,26 @@ public class BuyController {
 		int ono=buySVC.onosel(mid);
 		System.out.println("ono="+ono);
 		
+		String name="";
+		int cnt=0;
 		//orderDetail insert
 		for(int i=0;i<cartdto.getCanolist().length;i++) {
 			CartDTO li=buySVC.cart(cartdto.getCanolist()[i]);
+			if(i==0) {
+				name = li.getIname();
+			}else {
+				cnt++;
+			}
 			li.setOno(ono);
-			System.out.println("li2="+li);
 			buySVC.oderdetailin(li);
-			System.out.println("ok");
 			buySVC.emptyCart(cartdto.getCanolist()[i]);//결제 후 장바구니 비우기
-			System.out.println("okkkk");
 		}
+		if(cnt>0) 
+			name=name+" 외"+cnt+"종";
 		
 		//장바구니비우기(delete cart)
-		System.out.println("cartdto"+cartdto);
-		mv.addObject("list",cartdto);	//결제페이지로 값 넘겨주기
+		mv.addObject("name",name);	//결제페이지로 값 넘겨주기
 		mv.addObject("olist",odto);
-		System.out.println("odto"+odto);
 		mv.setViewName("shopping/user/goPay");
 		return mv;
 	}

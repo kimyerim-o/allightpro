@@ -19,19 +19,8 @@
 	    		return false;
     		}
 			//결제부분 시작
-			var name = "";
-			var cnt = 0;
-			<c:forEach var="list" items="${list}" varStatus="status"> 
-				if (${status.first}){
-					name += '${list.iname}';
-				}else {
-					cnt++;
-				}
-			</c:forEach>
-			if(cnt!=0){
-				name += " 외 "+cnt+"종";
-			}
 			//alert(name)
+			var name="${name}"
 			var amount = '${olist.osum}';
 			var bemail = '${sessionScope.MEMAIL}';
 			var bname ='${olist.oreceiver}';
@@ -39,11 +28,12 @@
 			var baddr = '${olist.oaddress1}';
 			var bpc = '${olist.oaddno}';
 			var payment = $("input[name=opayment]:checked").val();
-
+			
+			alert(name+"//"+amount+"//"+bemail+"//"+bname+"//"+btel+"//"+baddr+"//"+bpc+"//"+payment)
 			//결제방법 선택
 			//alert($("input[name=opayment]:checked").val())
 			if(payment=="신용카드"){
-				inicis(name,amount,bemail,bname,btel,baddr,bpc);
+				inicis();
 			}else if(payment=="실시간 계좌이체"){
 				danal_trans(name,amount,bemail,bname,btel,baddr,bpc);
 			}else if(payment=="가상계좌"){
@@ -63,7 +53,7 @@
 	<!-- 여기서부터는 결제방식에 따른 각각의 코드 -->	
 	<!-- 아임포트 신용카드 간편결제 구동 코드 -->
 	<script>
-	function inicis(name,amount,bemail,bname,btel,baddr,bpc) {
+	function inicis() {
 		var IMP = window.IMP;
 		
 		IMP.init('imp33827871'); 
@@ -271,6 +261,8 @@
 	
 </head>
 <body>
+${name}
+${olist}
 	<h3></h3>
 	<!-- 결제수단  -->
 	<div>
@@ -292,5 +284,6 @@
 	</div>
 	<div></div>
 	<div></div>
+	<input type="button" id="paybtn" value="결제하기">
 </body>
 </html>

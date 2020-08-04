@@ -108,7 +108,6 @@
 			$("#oreceiver").val($("#name").val())
 			//배송요청사항 가져오기
 			$("#orequirethings").val($("#req1").val())
-			alert("........!!!!")
 			$('#buy').submit();
     	});
 	    

@@ -74,7 +74,7 @@
 		var $target = $(event.target);
 		var com = com;
 		var tel = tel;
-		alert("com"+com+"tel"+tel);
+		//alert("com"+com+"tel"+tel);
 		$('#order_pop_wrap').css('display', 'block');
 		$('#com').text(com);
 		$('#tel').text(tel);

@@ -227,7 +227,7 @@ $(function(){
 					</c:forEach>
 					
 					<c:forEach var="list" items="${ELIST}">
-						exercise += "${list.mename}(${list.metime}분${list.metotalcal}kcal), "
+						exercise += "${list.mename}(${list.metime}분,${list.metotalcal}kcal), "
 					</c:forEach>
 					
 					if(weight != ""){
@@ -255,7 +255,7 @@ $(function(){
 						content += "\n\n - 일기: " + diary;
 					}
 					
-					content = content.trim();
+					content = " " + content.trim();
 					
 				    $('#fcontent').val(content);
 				    $('#ftitle').val(title);

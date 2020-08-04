@@ -9,9 +9,11 @@
 	<title></title>
 	<!-- jQuery CDN -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	
 	<script>
-	$(function(){		//결제버튼 누르면
+	$(function(){
+		//결제버튼 누르면
     	$("#paybtn").click(function(){
 			//주문동의 체크박스 체크 안하면 못넘어가게
 	    	if(document.getElementById("aggchk").checked==false){
@@ -29,11 +31,11 @@
 			var bpc = '${olist.oaddno}';
 			var payment = $("input[name=opayment]:checked").val();
 			
-			alert(name+"//"+amount+"//"+bemail+"//"+bname+"//"+btel+"//"+baddr+"//"+bpc+"//"+payment)
+			//alert(name+"//"+amount+"//"+bemail+"//"+bname+"//"+btel+"//"+baddr+"//"+bpc+"//"+payment)
 			//결제방법 선택
 			//alert($("input[name=opayment]:checked").val())
 			if(payment=="신용카드"){
-				inicis();
+				inicis(name,amount,bemail,bname,btel,baddr,bpc);
 			}else if(payment=="실시간 계좌이체"){
 				danal_trans(name,amount,bemail,bname,btel,baddr,bpc);
 			}else if(payment=="가상계좌"){
@@ -53,9 +55,8 @@
 	<!-- 여기서부터는 결제방식에 따른 각각의 코드 -->	
 	<!-- 아임포트 신용카드 간편결제 구동 코드 -->
 	<script>
-	function inicis() {
+	function inicis(name,amount,bemail,bname,btel,baddr,bpc) {
 		var IMP = window.IMP;
-		
 		IMP.init('imp33827871'); 
         IMP.request_pay({
             pg: 'html5_inicis',
@@ -68,7 +69,7 @@
             buyer_tel: btel,
             buyer_addr: baddr,
             buyer_postcode: bpc,
-            m_redirect_url: '${pageContext.request.contextPath}/paySuccess.com'+$('#buy').serialize()
+            m_redirect_url: '${pageContext.request.contextPath}/mypage/paySuccess.com'
             /*  
 		                모바일 결제시,
 		                결제가 끝나고 랜딩되는 URL을 지정 
@@ -82,7 +83,7 @@
                 msg += '\n상점 거래ID : ' + rsp.merchant_uid;
                 msg += '\n결제 금액 : ' + rsp.paid_amount;
                 msg += '\n카드 승인번호 : ' + rsp.apply_num;
-                location.href="${pageContext.request.contextPath}/paySuccess.com?type=card&address=${maddress}&requests=${requests}";
+                location.href="${pageContext.request.contextPath}/mypage/paySuccess.com";
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
@@ -261,8 +262,8 @@
 	
 </head>
 <body>
-${name}
-${olist}
+<%-- ${name}
+${olist} --%>
 	<h3></h3>
 	<!-- 결제수단  -->
 	<div>

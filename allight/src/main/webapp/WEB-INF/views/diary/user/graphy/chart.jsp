@@ -143,8 +143,8 @@
 	</a> 
 	<!-- 이번달 -->
 	<span class="this_month">
-		&nbsp;&nbsp;${param.yy}. 
-		<c:if test="${param.mon<10}">0</c:if>${param.mon}&nbsp;&nbsp;
+		&nbsp;${param.yy}. 
+		<c:if test="${param.mon<10}">0</c:if>${param.mon}&nbsp;
 	</span>
 	<!-- 다음달 -->
 	<a class="before_after_month" id="nextmon" onclick="nextmonth(${param.yy},${param.mon})">
@@ -155,10 +155,10 @@
 		&gt;&gt;
 	</a>
 	<input type="button" value="선택" onclick="change()" class="btn2" style="float:right;margin:13px 10px 0;"/>
-	<select id="type" class="btn" style="width:100px;float:right;margin:13px 0 0;">
+	<select id="type" class="btn" style="width:110px;float:right;margin:13px 0 0;padding:0">
 		<option value="w">몸무게</option>
-		<option value="f">음식칼로리</option>
-		<option value="e">운동칼로리</option>
+		<option value="f">음식 칼로리</option>
+		<option value="e">운동 칼로리</option>
 		<option value="s">월별 성공률</option>
 	</select>
 </div>

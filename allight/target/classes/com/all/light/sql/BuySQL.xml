@@ -36,8 +36,8 @@
 	
 	<!-- 3. orderdetailDTO에 저장 -->
 	<insert id="detail" parameterType="cartDTO">
-		insert into orderdetail(odno, ono, ino, ostatus, odamount, odprice) 
-		values (odno_seq.nextval,#{ono}, #{ino}, '결제완료', #{caamount}, #{caprice})
+		insert into orderdetail(odno, ono, ino, ostatus, odamount, odprice, okreview) 
+		values (odno_seq.nextval,#{ono}, #{ino}, '결제완료', #{caamount}, #{caprice}, 0)
 	</insert>
 	
 	<!-- 4. 결제 후 장바구니 지우기 -->

@@ -161,7 +161,7 @@ margin-left:60px;
 											type : 'post',
 											data : param,
 											success : function(data) {
-												alert(JSON.stringify(param));
+												//alert(JSON.stringify(param));
 												location.href = "${pageContext.request.contextPath}/order/mypage/check.com?odno="
 														+ odno
 														+ "&ostatus="
@@ -179,35 +179,32 @@ margin-left:60px;
 							}
 						});
 		//구매확정 버튼 클릭 시
-		$(".confirm")
-				.click(
-						function() {
-							if (confirm("해당 상품을 구매확정 하시겠습니까? \n 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")) {
-								var odno = $(event.target).attr('data-no');
-								var ostatus = "구매확정";
-								var param = {
-									"odno" : odno,
-									"ostatus" : ostatus
-								};
-								$
-										.ajax({
-											url : "${pageContext.request.contextPath}/order/change.com",
-											type : 'post',
-											data : param,
-											success : function(data) {
-												location.href = "${pageContext.request.contextPath}/order/mypage/list.com";
-											},
-											error : function(request, status,
-													error) {
-												alert("code:" + request.status
-														+ "\n" + "message:"
-														+ request.responseText
-														+ "\n" + "error:"
-														+ error);
-											}
-										});
-							}
-						});
+		$(".confirm").click(function() {
+			if (confirm("해당 상품을 구매확정 하시겠습니까? \n 구매확정 후에는 주문 취소 및 반품을 할 수 없습니다.")) {
+				var odno = $(event.target).attr('data-no');
+				var ostatus = "구매확정";
+				var param = {
+					"odno" : odno,
+					"ostatus" : ostatus
+				};
+				$.ajax({
+					url : "${pageContext.request.contextPath}/order/change.com",
+					type : 'post',
+					data : param,
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/order/mypage/list.com";
+					},
+					error : function(request, status,error) {
+						alert("code:" + request.status
+								+ "\n" + "message:"
+								+ request.responseText
+								+ "\n" + "error:"
+								+ error);
+					}
+				});
+			}
+		});
+		
 	})
 
 	function delivery_view(com,tel) {
@@ -241,36 +238,37 @@ margin-left:60px;
 		   $('.create_modal').show();
 		};
 
-		$(function() {
-		   //검은 막 띄우기
-		   //기본 모달창
-		   $('.openMask_create').click(function(e) {
-		      //클릭 시 이벤트
-		      console.log("모달 켭니다.");
-		      e.preventDefault();
-		      wrapCreateByMask();
-		      $('body').css("overflow", "hidden");
-		   });
+	$(function() {
+	   //검은 막 띄우기
+	   //기본 모달창
+	   $('.openMask_create').click(function(e) {
+	      //클릭 시 이벤트
+	      console.log("모달 켭니다.");
+	      e.preventDefault();
+	      wrapCreateByMask();
+	      $('body').css("overflow", "hidden");
+	   });
 
-		   //닫기 버튼을 눌렀을 때
-		   $('.create_modal .close').click(function(e) {
-		      //링크 기본동작은 작동하지 않도록 한다.
-		      e.preventDefault();
-		      $('#mask_create, .create_modal').hide();
-		      $('body').css("overflow", "scroll");
-		   });
+	   //닫기 버튼을 눌렀을 때
+	   $('.create_modal .close').click(function(e) {
+	      //링크 기본동작은 작동하지 않도록 한다.
+	      e.preventDefault();
+	      $('#mask_create, .create_modal').hide();
+	      $('body').css("overflow", "scroll");
+	   });
 
-		   //검은 막을 눌렀을 때
-		   $('#mask_create').click(function() {
-		      $(this).hide();
-		      $('.create_modal').hide();
-		      $('body').css("overflow", "scroll");
-		   });
+	   //검은 막을 눌렀을 때
+	   $('#mask_create').click(function() {
+	      $(this).hide();
+	      $('.create_modal').hide();
+	      $('body').css("overflow", "scroll");
+	   });
 
-		});
+	});
 </script>
 </head>
 <body>
+
 <!--  어두워지는 부분 -->
 <div id="mask_create"></div>
 <!--  모달 부분 -->

@@ -92,7 +92,7 @@
 								</div>
 							</td>
 							<td>
-								<div style="height:200px; line-height:200px; width:200px;"><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}" style="width:100px;">${list.iname }</a></div>
+								<div style="height:200px;  width:200px; padding:80px 0;"><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}" style="width:100px;">${list.iname }</a></div>
 							</td>
 							<!-- 판매가 -->
 							<td scope="col"><!-- 판매가 -->

@@ -121,9 +121,19 @@ public class BuyController {
 		cartdto.setOno(ono);
 		System.out.println(cartdto);
 		buySVC.oderdetailin(cartdto);
-		
+		String name=cartdto.getIname();
+		mv.addObject("name",name);	//결제페이지로 값 넘겨주기
+		mv.addObject("olist",odto);
 		mv.setViewName("shopping/user/goPay");
 		return mv;
 	}
+	
+	//주문완료
+	@RequestMapping("/mypage/paySuccess")
+	public ModelAndView paySuccess(HttpSession session, ModelAndView mv) {
+		mv.setViewName("shopping/user/paySuccess");
+		return mv;
+	}
+	
 	
 }

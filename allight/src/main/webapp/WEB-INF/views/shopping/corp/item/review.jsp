@@ -253,24 +253,24 @@ $(function(){
 					<ul class="pagination" id="qPage">
 			            <li>
 			               <c:if test="${QPINFO.nowPage > 3}">
-			                  <a href="${pageContext.request.contextPath}/item/review/list.com?ino=${param.ino}&qNowPage=${QPINFO.nowPage-3}#question">«</a>
+			                  <a href="${pageContext.request.contextPath}/item/review/list/corp.com?ino=${param.ino}&qNowPage=${QPINFO.nowPage-3}">«</a>
 			               </c:if>
 			               <c:if test="${QPINFO.nowPage <= 3}">
-			                  <a href="${pageContext.request.contextPath}/item/review/list.com?ino=${param.ino}&qNowPage=1#question">«</a>
+			                  <a href="${pageContext.request.contextPath}/item/review/list/corp.com?ino=${param.ino}&qNowPage=1">«</a>
 			               </c:if>
 			            </li>
 			            <!-- 현재 페이지일때 active --> 
 			            <c:forEach begin="${QPINFO.startPage}" end="${QPINFO.endPage}" var="i">
 			               <li><!-- 스크립트 적용해야 할것같아요 -->
-			                  <a href="${pageContext.request.contextPath}/item/review/list.com?ino=${param.ino}&qNowPage=${i}#question">${i}</a>
+			                  <a href="${pageContext.request.contextPath}/item/review/list/corp.com?ino=${param.ino}&qNowPage=${i}">${i}</a>
 			               </li>
 			            </c:forEach>            
 			            <li>
 			               <c:if test="${QPINFO.nowPage < QPINFO.endPage-3}">
-			                  <a href="${pageContext.request.contextPath}/item/review/list.com?ino=${param.ino}&qNowPage=${QPINFO.nowPage+3}#question">»</a>
+			                  <a href="${pageContext.request.contextPath}/item/review/list/corp.com?ino=${param.ino}&qNowPage=${QPINFO.nowPage+3}">»</a>
 			               </c:if>
 			               <c:if test="${QPINFO.nowPage >= QPINFO.endPage-3}">
-			                  <a href="${pageContext.request.contextPath}/item/review/list.com?ino=${param.ino}&qNowPage=${QPINFO.endPage}#question">»</a>
+			                  <a href="${pageContext.request.contextPath}/item/review/list/corp.com?ino=${param.ino}&qNowPage=${QPINFO.endPage}">»</a>
 			               </c:if>
 			            </li>
 			        </ul>

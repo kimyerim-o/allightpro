@@ -505,7 +505,7 @@ li {
 	min-width:95px;
 }
 
-.btn:hover, .goBack:hover, #goback:hover, .btn2:hover {
+.btn:hover, .goBack:hover, #goback:hover, .btn2:hover, .goto:hover {
 	text-decoration: none;
 	border: 1px solid gray;
 }
@@ -542,6 +542,26 @@ li {
 
 .btn3:hover {
 	color:#ffe3e3;
+}
+
+.btn4:hover {
+	border: 1px solid #ff9000;
+}
+
+.btn4 {
+	display: inline-block;
+    padding: 6px 18px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color:#ffffff;
+    text-align: center;
+    cursor: pointer;
+    background: #ffbc13;
+    border: 1px solid #ffc531;
+    border-radius: 4px;
+    height: 36px;
+    min-width:95px;
 }
 
 .selectCss {

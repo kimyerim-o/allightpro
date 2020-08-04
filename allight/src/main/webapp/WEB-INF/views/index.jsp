@@ -87,7 +87,7 @@ function wrapCreateByMask() {
 <div id="wrap">
 	<a class="title">다이어리
 		<input type="button" value="월별 다이어트 추이  &gt;" class="goto" onclick="chart(${today_info.search_year},${today_info.search_month});" style="background:white;"/>
-		<input type="button" value="Today" onclick="location.href='${pageContext.request.contextPath}/main.com'" class="goto" style="margin:0 15px;"/>
+		<input type="button" value="Today" onclick="location.href='${pageContext.request.contextPath}/main.com'" class="btn4" style="float:right;height:45px;margin:0 15px;"/>
 		<input type="button" value="?" class="helpBtn"/>
 	</a>
 	

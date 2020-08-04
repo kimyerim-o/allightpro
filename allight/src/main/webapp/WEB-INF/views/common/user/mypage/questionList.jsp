@@ -18,12 +18,14 @@
 		<table class="table">
 			<tr>
 				<th>NO</th>
+				<th>작성자</th>
 				<th width="70%">제목</th>
 				<th>작성일</th>
 			</tr>
 			<c:forEach items="${LIST}" var="list">
 				<tr>
 					<td>${list.qno}</td>
+					<td>${list.qnick}</td>
 					<td><a href="${pageContext.request.contextPath}/mypage/question/detail.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
 					<td>${list.qdate}</td>
 				</tr>

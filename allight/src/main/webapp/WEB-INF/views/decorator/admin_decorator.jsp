@@ -54,7 +54,8 @@
 
 			<ul class="left_menu_box last">
 				<li class="left_menu_m1">기업 문의 관리</li>
-				<li><a href="${pageContext.request.contextPath}/question/list/admin.com">기업 문의</a></li>
+				<li><a href="${pageContext.request.contextPath}/question/list/admin.com">기업 문의 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/item/list/admin.com">기업 상품 관리</a></li>
 			</ul>
 		</div>
 	</div>

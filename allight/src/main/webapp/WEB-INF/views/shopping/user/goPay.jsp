@@ -31,7 +31,7 @@
 			var bpc = '${olist.oaddno}';
 			var payment = $("input[name=opayment]:checked").val();
 			
-			alert(name+"//"+amount+"//"+bemail+"//"+bname+"//"+btel+"//"+baddr+"//"+bpc+"//"+payment)
+			//alert(name+"//"+amount+"//"+bemail+"//"+bname+"//"+btel+"//"+baddr+"//"+bpc+"//"+payment)
 			//결제방법 선택
 			//alert($("input[name=opayment]:checked").val())
 			if(payment=="신용카드"){

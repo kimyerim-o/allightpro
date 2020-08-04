@@ -40,7 +40,6 @@
 		values (#{ono}, odno_seq.nextval, #{ino}, '결제완료', #{caamount}, #{caprice})
 	</insert>
 	
-	
 	<!-- 4. 결제 후 장바구니 지우기 -->
 	<delete id="emptyCart" parameterType="Integer">
 		delete cart where cano=#{cano}

@@ -177,10 +177,18 @@ $(function(){
 	
 	//바로구매하기로 넘어가기
 	$('.purchase-btn').click(function(){
-		$('#ino').val(Number(${param.ino}));
-		$('#caamount').val(Number($('#number').val()));
-		$('#caprice').val(Number($('.right-total-price').text().replace(',','')));
-		$('#buynow').submit();
+		var mid = $("#mid").val();
+		if(mid === null || mid === ''){
+			if(confirm("회원만 이용 가능한 서비스입니다.\n로그인 하시겠습니까?")){
+				location.href="../login.com"
+			}
+		}else{
+			var caamount = Number($('#number').val());
+			var caprice = Number($('.right-total-price').text().replace(',',''));
+			$("#caamount").attr('value',caamount);
+			$("#caprice").attr('value',caprice);
+			$("#buynow").submit();
+		}
 	})
 	
 	// 수량 선택시 총 상품가격 변동
@@ -340,11 +348,15 @@ $(function(){
 				<a class="right-total">총 상품금액</a>
 				
 				<input type="button" value="장바구니" class="in-cart-btn"/>
-				<input type="button" value="구매하기" class="purchase-btn"/>
-				<form action="./buyNow.com" name="buynow" id="buynow">
-					<input type="hidden" value="${ino}" />
-					<input type="hidden" value="${caamount}" />
-					<input type="hidden" value="${caprice}" />
+				<input type="button" value="구매하기" class="purchase-btn" id="purchase-btn"/>
+				<form action="${pageContext.request.contextPath}/buyNow.com" method="post" id="buynow">
+				<input type="hidden" id="mid" value="${sessionScope.MID}" >
+				<input type="hidden" name="ino" value="${param.ino}">
+				<input type="hidden" name="caamount" id="caamount">
+				<input type="hidden" name="caprice" id="caprice">
+				<input type="hidden" name="imgimages" value="${REPREIMG}">
+				<input type="hidden" name="iname" value="${DETAIL.iname}">
+				<input type="hidden" name="iprice" value="${DETAIL.iprice}">
 				</form>
 			</div>
 			<div id="detail"></div>

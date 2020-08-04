@@ -7,7 +7,15 @@
 <meta charset="UTF-8">
 	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script type="text/javascript">
-
+	
+	var amount
+	var bemail
+	var bname
+	var btel
+	var baddr
+	var bpc
+	var payment 
+	
 	//취소버튼 누르면 뒤로가기
 	function goBack(){
 		window.history.back();
@@ -115,26 +123,14 @@
 			//배송요청사항 가져오기
 			$("#orequirethings").val($("#req1").val())
 			//결제부분 시작
-			var name = "";
-			var cnt = 0;
-			<c:forEach var="list" items="${clist}" varStatus="status"> 
-				if (${status.first}){
-					name += '${list.iname}';
-				}else {
-					cnt++;
-				}
-			</c:forEach>
-			if(cnt!=0){
-				name += " 외 "+cnt+"종";
-			}
 			//alert(name)
-			var amount = $("#sum").text().split("원")[0].replace(",","");
-			var bemail = '${sessionScope.MEMAIL}';
-			var bname = $("#name").val();
-			var btel = $("#tel").val();
-			var baddr = $("#sample6_address").val()+' '+$("#sample6_detailAddress").val()+' '+$("#sample6_extraAddress").val();
-			var bpc = $("#sample6_postcode").val();
-			var payment = $("input[name=opayment]:checked").val();
+			amount = $("#sum").text().split("원")[0].replace(",","");
+			bemail = '${sessionScope.MEMAIL}';
+			bname = $("#name").val();
+			btel = $("#tel").val();
+			baddr = $("#sample6_address").val()+' '+$("#sample6_detailAddress").val()+' '+$("#sample6_extraAddress").val();
+			bpc = $("#sample6_postcode").val();
+			payment = $("input[name=opayment]:checked").val();
 
 			//결제방법 선택
 			//alert($("input[name=opayment]:checked").val())
@@ -190,20 +186,22 @@
 	<script>
 	function inicis(name,amount,bemail,bname,btel,baddr,bpc) {
 		var IMP = window.IMP;
-		
+		alert($('#buy').serialize())
 		IMP.init('imp33827871'); 
         IMP.request_pay({
             pg: 'html5_inicis',
             pay_method: 'card',
             merchant_uid: 'merchant_' + new Date().getTime(),
-            name: name,//상품이름
+            name: "${list.iname}",//상품이름
             amount: amount, //가격
             buyer_email: bemail,
             buyer_name: bname,
             buyer_tel: btel,
             buyer_addr: baddr,
             buyer_postcode: bpc,
-            m_redirect_url: '${pageContext.request.contextPath}/paySuccess.com'+$('#buy').serialize()
+            m_redirect_url: '${pageContext.request.contextPath}/payNowSuccess.com?'+"caamount="+"${list.caamount}"+"&oaddno="+bpc
+            		+"&oaddress1="+$("#sample6_address").val()+"&oaddress2="+$("#sample6_detailAddress").val()+
+            		"&otel="+btel+"&oreceiver="+bname+"&orequirethings="+$("#req1").val()+"&ino="+"${list.ino}"+"&caprice="+amount
             /*  
 		                모바일 결제시,
 		                결제가 끝나고 랜딩되는 URL을 지정 
@@ -217,7 +215,7 @@
                 msg += '\n상점 거래ID : ' + rsp.merchant_uid;
                 msg += '\n결제 금액 : ' + rsp.paid_amount;
                 msg += '\n카드 승인번호 : ' + rsp.apply_num;
-                location.href="${pageContext.request.contextPath}/paySuccess.com?type=card&address=${maddress}&requests=${requests}";
+                location.href="${pageContext.request.contextPath}/payNowSuccess.com?type=card&address=${maddress}&requests=${requests}";
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
@@ -246,7 +244,7 @@
             buyer_tel: btel,
             buyer_addr: baddr,
             buyer_postcode: bpc,
-            //m_redirect_url: '${pageContext.request.contextPath}/paySuccess.com'
+            //m_redirect_url: '${pageContext.request.contextPath}/payNowSuccess.com'
         }, function (rsp) {
             console.log(rsp);
             if (rsp.success) {
@@ -255,7 +253,7 @@
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
-                location.href="${pageContext.request.contextPath}/paySuccess.com?type=timeBankTransfer";
+                location.href="${pageContext.request.contextPath}/payNowSuccess.com?type=timeBankTransfer";
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
@@ -275,14 +273,14 @@
             pg: 'danal',
             pay_method: 'vbank',
             merchant_uid: 'merchant_' + new Date().getTime(),
-            name: name,
+            name: $('#iname').val(),
             amount: amount, 
             buyer_email: bemail,
             buyer_name: bname,
             buyer_tel: btel,
             buyer_addr: baddr,
             buyer_postcode: bpc,
-            //m_redirect_url: '${pageContext.request.contextPath}/paySuccess.com'
+            //m_redirect_url: '${pageContext.request.contextPath}/payNowSuccess.com'
         }, function (rsp) {
             console.log(rsp);
             if (rsp.success) {
@@ -291,7 +289,7 @@
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
-                location.href="${pageContext.request.contextPath}/paySuccess.com?type=vbank";
+                location.href="${pageContext.request.contextPath}/payNowSuccess.com?type=vbank";
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
@@ -318,7 +316,7 @@
             buyer_tel: btel,
             buyer_addr: baddr,
             buyer_postcode: bpc,
-            //m_redirect_url: '${pageContext.request.contextPath}/paySuccess.com'
+            //m_redirect_url: '${pageContext.request.contextPath}/payNowSuccess.com'
         }, function (rsp) {
             console.log(rsp);
             if (rsp.success) {
@@ -327,7 +325,7 @@
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
-                location.href="${pageContext.request.contextPath}/paySuccess.com?type=phone";
+                location.href="${pageContext.request.contextPath}/payNowSuccess.com?type=phone";
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
@@ -383,7 +381,7 @@
                     }
                 });
                 //성공시 이동할 페이지
-               location.href="${pageContext.request.contextPath}/paySuccess.com?type=kakaopay&address=${maddress}&requests=${requests}";
+               location.href="${pageContext.request.contextPath}/payNowSuccess.com?type=kakaopay&address=${maddress}&requests=${requests}";
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '\n에러내용 : ' + rsp.error_msg;
@@ -398,10 +396,7 @@
 <body>
 <h3>상품주문</h3>
 <hr/>
-<form action="./paySuccess.com" id="buy" name="buy" method="post">
-<c:forEach items="${canoList}" var="C">
-	<input type="hidden" name="canolist" value="${C}"/>
-</c:forEach>
+<form action="./payNowSuccess.com" id="buy" name="buy" method="post">
 	<!--  어두워지는 부분1  -->
 	<div id="mask_create"></div>
 	<!-- 모달 부분1 (칼로리 상세) -->
@@ -415,12 +410,12 @@
 				<!-- 목록출력 -->
 				<table class="table">
 					<tbody>
-						<c:if test="${empty LIST}">
+						<c:if test="${empty alist}">
 							<tr>
 								<th>등록된 배송지가 없습니다. 새로 입력해주세요.</th>
 							</tr>
 						</c:if>
-						<c:if test="${!empty LIST}">
+						<c:if test="${!empty alist}">
 								<tr>
 									<th>수령인</th>
 									<th>연락처</th>
@@ -428,7 +423,7 @@
 									<th>주소</th>
 									<th>선택</th>
 								</tr>
-							<c:forEach items="${LIST}" var="list">
+							<c:forEach items="${alist}" var="list">
 								<tr class="dataRow">
 									<td>${list.aname}</td>
 									<td>${list.aphone}</td>
@@ -477,7 +472,6 @@
 			</thead>
 			<tbody>
 				<c:set var="sum0" value="0" /><!-- 수량 set -->
-				<c:forEach var="list" items="${clist}">
 					<tr>
 						<td class="order_thmb" colspan="1"><!-- 상품이미지 -->
 							<a><img src="${list.imgimages}" style="height:200px; width:200px; overflow:hidden;" onerror="this.src='${pageContext.request.contextPath}/resources/img/no-img.png'" /></a>
@@ -485,8 +479,9 @@
 						<td colspan="2"><!-- 상품정보 -->
 							<div style="height:200px; line-height:200px;"><a class="iname" id="iname" href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}">${list.iname}</a></div>
 						</td>
+						<input type="hidden" id="ino" name="ino" value="${list.ino}" />
 						<td class="iamount" scope="col" colspan="1"> <!-- 장바구니 수량 -->
-							<input type="hidden" id="origin_qty" value="${list.caamount}" maxlength="3"/>
+							<input type="hidden" id="origin_qty" name="caamount" value="${list.caamount}" maxlength="3"/>
 							<input type="text" id="number" class="numBox" value="${list.caamount}" readonly="readonly" 
 								style="font-size:16px; width:50px; padding:5px; margin:0; border:1px solid #eee;"/>
 						</td>
@@ -501,12 +496,12 @@
 							<div class="tb-center">
 								<p class="total" style="height:200px; line-height:200px;margin:0;">
 									<fmt:formatNumber pattern="#,###" value="${list.caprice}" />원
+									<input type="hidden" name="caprice" value="${list.caprice}"/>
 								</p>
 							</div>
 						</td>
 					</tr>
 				<c:set var="sum0" value="${sum0 + (list.iprice*list.caamount)}" />
-				</c:forEach>
 			</tbody>
 		</table>
 

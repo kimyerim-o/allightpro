@@ -178,7 +178,7 @@ function kakaoLogout() {
 
 					<!-- 기업 로그인시   -->
 					<c:if test="${!empty sessionScope.COID}">
-					<li class="nav-item"><a href="#" class="nav-link">기업</a>
+					<li class="nav-item"><a href="${pageContext.request.contextPath}/order/list/corp.com" class="nav-link">기업</a>
 						<ul class="dropdown">
 							<li><a
 								href="${pageContext.request.contextPath}/order/list/corp.com">주문

@@ -56,7 +56,7 @@ public class CartController {
 	//장바구니 선택삭제
 	@ResponseBody
 	@RequestMapping("/deleteCart")
-	public String deleteCart(HttpSession session, @RequestParam(value="chkBox[]") List<String> checkArr, CartDTO cartdto) throws Exception {
+	public String deleteCart(HttpSession session, @RequestParam(value="chkBox") List<String> checkArr, CartDTO cartdto) throws Exception {
 		//ajax에서 전송받는 chkBox를 리스트 checkArr로받기
 		System.out.println("장바구니 선택 삭제 들어옴????");
 		System.out.println("??"+session.getAttribute("MID"));
@@ -69,7 +69,6 @@ public class CartController {
 		
 		if(caid != null) {
 			cartdto.setCaid(caid);
-			
 			for (String i : checkArr) {
 				System.out.println("사용자의 장바구니 삭제="+caid);
 				cano = Integer.parseInt(i);

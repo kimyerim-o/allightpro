@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){//안되요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
 		$('#li').click(function(){
@@ -34,7 +33,7 @@
 			<a class="btn" href="${pageContext.request.contextPath}/mypage/question/write.com">글쓰기</a>
 		</div>
 		<div class="center">
-			<ul class="pagination">
+			<ul class="pagination" id="Page">
 				<li>
 					<c:if test="${PINFO.nowPage > 3}">
 						<a href="${pageContext.request.contextPath}/mypage/question/list.com?nowPage=${PINFO.nowPage-3}">«</a>

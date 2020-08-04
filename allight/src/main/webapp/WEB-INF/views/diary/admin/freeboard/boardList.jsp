@@ -99,7 +99,7 @@
 		</div>
 
 		<div class="center">
-			<ul class="pagination">
+			<ul class="pagination" id="Page">
 				<li><c:if test="${PINFO.nowPage > 3}">
 						<a
 							href="${pageContext.request.contextPath}/freeboard/list/admin.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>

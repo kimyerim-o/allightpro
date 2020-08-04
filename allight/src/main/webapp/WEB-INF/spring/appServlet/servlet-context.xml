@@ -43,10 +43,11 @@
  	<interceptors>
   	 	<interceptor>
   	 		<!-- 인터셉터가 언제 처리될지 지정 --> 
+  	 		<!-- 관리자 권한 체크 -->
 		  	<mapping path="/**/admin.com" /> 
 		 	<beans:bean class="com.all.light.util.AdminCheck" />
-		 	<!-- 로그인 인터셉터 http://localhost:9000/allight/shopping/reviewLike.com -->
 	  	</interceptor>
+	  	<!-- 사용자 권한 체크 -->
   	 	<interceptor>
 		  	<mapping path="/**/write.com" />
 		  	<mapping path="/**/insert.com" />
@@ -58,6 +59,7 @@
 		  	<mapping path="/**/mypage/**" />
 		 	<beans:bean class="com.all.light.util.LoginCheck" />
 	  	</interceptor>
+	  	<!-- 기업 권한 체크 -->
 	  	<interceptor>
 	  	<mapping path="/**/corp.com" />
 	  	<beans:bean class="com.all.light.util.CorpCheck" />

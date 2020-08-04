@@ -196,7 +196,7 @@
 					</table>
 
 					<div class="center">
-						<ul class="pagination">
+						<ul class="pagination" id="Page">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
 										href="${pageContext.request.contextPath}/mypage/freeboard/detail.com?no=${param.no }&commPage=${PINFO.nowPage-3}">«</a>

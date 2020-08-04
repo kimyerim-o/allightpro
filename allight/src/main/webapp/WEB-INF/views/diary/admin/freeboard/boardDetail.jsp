@@ -198,7 +198,7 @@ function loginCheck (){
 					</table>
 
 					<div class="center">
-						<ul class="pagination">
+						<ul class="pagination" id="Page">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
 										href="${pageContext.request.contextPath}/freeboard/detail/admin.com?no=${param.no }&commPage=${PINFO.nowPage-3}">«</a>
@@ -217,7 +217,7 @@ function loginCheck (){
 							<li><c:if test="${PINFO.nowPage < PINFO.endPage-3}">
 									<a
 										href="${pageContext.request.contextPath}/freeboard/detail/admin.com?no=${param.no }&commPage=${PINFO.nowPage+3}">»</a>
-								</c:if> <c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
+								</c:if> <c:if test="${PINFO.nowPage >= PINFO.endPage-3}">
 									<a
 										href="${pageContext.request.contextPath}/freeboard/detail/admin.com?no=${param.no }&commPage=${PINFO.endPage}">»</a>
 								</c:if></li>

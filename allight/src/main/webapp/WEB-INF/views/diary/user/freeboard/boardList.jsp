@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
 	function checkForm() {
 		if (document.getElementById("search").value == "") {
@@ -68,10 +67,10 @@
 			</select>
 			<input type="text" id="search" name="search" placeholder="검색어를 입력하세요" value="${param.search}"/> 
 			<input type="submit" value="검색" onclick="return checkForm();"/>
-			<a href="<%=request.getContextPath()%>/freeboard/list.com"><input type="button" value="초기화"/></a>
+			<a href="<%=request.getContextPath()%>/freeboard/list.com"><input type="button" value="검색어 초기화"/></a>
 		</div>
 		</form>
-		<table class="table">
+		<table class="table table-hover">
 			<tr>
 				<th>글번호</th>
 				<th>작성자</th>
@@ -95,11 +94,12 @@
 			<tr ><td rowspan="5">게시물이 없습니다.</td></tr>
 		</c:if>
 		<div class="right">
+		<hr>
 			<a href="<%=request.getContextPath() %>/freeboard/write.com" class="btn">글쓰기</a>
 		</div>
 
 		<div class="center">
-			<ul class="pagination">
+			<ul class="pagination" id="Page">
 				<li><c:if test="${PINFO.nowPage > 3}">
 						<a href="${pageContext.request.contextPath}/freeboard/list.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>
 					</c:if> <c:if test="${PINFO.nowPage <= 3}">

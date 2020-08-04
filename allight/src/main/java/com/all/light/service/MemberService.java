@@ -128,7 +128,6 @@ public class MemberService {
 		memdto.setMid((String) param.get("id"));
 		memdto.setMname((String) param.get("properties[nickname]"));
 		memdto.setMemail((String) param.get("kakao_account[email]"));
-		
 		MemberDTO result = memDAO.kakao(memdto);
 		if (result == null) {
 			// 로그인실패

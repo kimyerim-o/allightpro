@@ -22,10 +22,11 @@
 <input type="hidden" name="odno" value="${odno}">
 	<div class="container">
 		<div class="boardContent">
+			<input style="float: right;" type="button" value="확인" class="btn" id="ok">
 			<table>
 				<tr>
-					<td>별점</td>
-					<td> <select name="rgrade" class="selectCss">
+					<td width="50px">별점</td>
+					<td> <select name="rgrade" class="selectCss" style="width: 100px">
 						<option value="5">★★★★★</option>
 						<option value="4">★★★★☆</option>
 						<option value="3">★★★☆☆</option>
@@ -34,11 +35,8 @@
 					</select></td>
 				</tr>
 				<tr>
-					<td>
-					<textarea rows="12" cols="100" name="rcontent" required="required" placeholder="내용을 입력하세요"></textarea></div></td>
-				</tr>
-				<tr>
-					<td class="board-content" ><input type="button" value="확인" class="btn" id="ok"></td>
+					<td colspan="2">
+					<textarea rows="12" cols="122" name="rcontent" required="required" placeholder="내용을 입력하세요"></textarea></div></td>
 				</tr>
 			</table>
 		</div>

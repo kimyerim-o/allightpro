@@ -31,12 +31,12 @@
 </script>
 </head>
 <body>
-	<div class="mem_right">
+	<div>
 		<!--마이페이지 내용 영역-->
 		<!--타이틀-->
-		<div class="mem_top_wrap noto_sans">
-			<div class="mem_top_new">
-				<div class="mem_title">주문 취소/반품 조회</div>
+		<div>
+			<div>
+				<div>주문 취소/반품 조회</div>
 			</div>
 
 			<div class="searchDiv">
@@ -69,9 +69,9 @@
 				</c:if>
 			</div>
 
-			<div class="order_checkmn_wrap">
+			<div >
 				<!--기간설정-->
-				<ul class="order_checkmn">
+				<ul >
 					<li id="liw"><a href="?term=w" class="order_checkmn_a">1주일</a></li>
 					<li id="lim1"><a href="?term=m1" class="order_checkmn_a">1개월</a></li>
 					<li id="lim3"><a href="?term=m3" class="order_checkmn_a">3개월</a></li>

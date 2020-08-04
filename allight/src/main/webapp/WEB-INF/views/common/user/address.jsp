@@ -31,7 +31,7 @@ function checks(){
 
 </head>
 <body>
-<form id="addressinsert" action="../user/addressinsert.com" method="post">
+<form id="addressinsert" action="${pageContext.request.contextPath}/member/mypage/addressinsert.com" method="post">
 	<table class="table" border="1">
 		<tbody>
 		<tr>
@@ -78,7 +78,7 @@ function checks(){
 					<td>${list.aaddno}</td>
 					<td>${list.aaddress1}${list.aaddress2}</td>
 		  			<td>
-						<input type="button" id="dBtn" value="삭제" onclick="location.href='../user/addressdelete.com?no=${list.ano}'">	
+						<input type="button" id="dBtn" value="삭제" onclick="location.href='../mypage/addressdelete.com?no=${list.ano}'">	
 					</td>
 				
 

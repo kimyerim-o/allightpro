@@ -32,7 +32,8 @@
 		<div id="content">
 			<c:if test="${!empty sessionScope.MID}">
 				<div class="allCheck">
-					<input type="checkbox" name="allCheck" id="allCheck" checked="checked" onclick="checked1"/><label for="allCheck">전체선택 </label>
+					<label for="allCheck">전체선택 </label>
+					<input type="checkbox" name="allCheck" id="allCheck" checked="checked"/>
 				</div>
 				<div class="delBtn">
 					<button type="button" class="selectDelete_btn">선택삭제</button>
@@ -81,7 +82,7 @@
 						<tr>
 							<td scope="col"><!-- 체크박스 -->
 								<div class="center">
-									<input type="checkbox" class="chkBox" checked="checked" data-cartNo="${list.cano }"/>
+									<input type="checkbox" class="chkBox" checked="checked" data-cartNo="${list.cano}"/>
 								</div>
 							</td>
 							<!-- 상품정보 -->

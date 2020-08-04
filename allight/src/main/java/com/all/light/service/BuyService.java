@@ -57,11 +57,11 @@ public class BuyService {
 	}
 
 	//장바구니 비우기
-	public void emptyCart(int[] canoList) {
+	public void emptyCart(int cano) {
 		System.out.println("buyservice 장바구니비우기");
-		for(int cano:canoList) {
-			buyDAO.emptyCart(cano);
-		}
+		buyDAO.emptyCart(cano);
+//		for(int cano:i) {
+//		}
 	}
 
 	//orderDTO에 저장하기 위해 ono가져올때 필요

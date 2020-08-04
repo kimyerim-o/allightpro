@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -75,7 +76,7 @@ $(function(){
 					<td class="no">${list.ino}</td>
 					<td>${list.iname}</td>
 		  			<td>${list.icategory}</td>
-					<td>${list.iprice}</td>
+					<td><fmt:formatNumber pattern="#,###" value="${list.iprice}" />원</td>
 					<td>${list.icorp}</td>
 					<td>${list.istock}</td>
 					

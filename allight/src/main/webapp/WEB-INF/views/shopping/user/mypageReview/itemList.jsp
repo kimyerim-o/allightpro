@@ -64,7 +64,7 @@ $(function(){
 					<input type="button" id="wbtn" name="ubtn" value="리뷰 수정">
 					</a>
 					<a href="${pageContext.request.contextPath}/mypage/review/delete.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
-					<input type="button" id="dbtn" name="dbtn" value="리뷰 삭제"></a></td>
+					<input type="button" id="del" name="dbtn" value="리뷰 삭제"></a></td>
 				</tr>
 			</c:forEach>
 		</table>

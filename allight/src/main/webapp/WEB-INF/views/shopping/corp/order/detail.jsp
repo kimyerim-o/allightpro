@@ -72,57 +72,46 @@
 </script>
 </head>
 <body>
-	<div class="mem_right">
-		<div class="mem_top_wrap noto_sans">
-			<div class="mem_top_new">
-				<div class="mem_title">주문상세보기</div>
-				<input type="button" value="목록" class="btn" id="list">
+	<div>
+		<div>
+			<div>
+				<input type="button" value="목록" class="btn" id="list" style="float: right;margin: 0 10px;">
 			</div>
-			<div class="mem_order_checkmn_wrap_new">
-				<p class="order_num_view_2">
-					<em class="order_fcT2">주문번호 </em>${ORDER.odto1.ordernum}<em
-						class="order_view_line"> l </em><em class="order_fcT2">주문일</em>
-					${ORDER.odto1.odate}
+			<div>
+				<p >주문번호   ${ORDER.odto1.ordernum}<em> l </em>주문일  ${ORDER.odto1.odate}
 				</p>
 			</div>
 		</div>
 
-		<table class="order_tbl2 mt13 font_ng" cellspacing="0" border="1"
-			summary="주문 리스트" style="width: 99%;">
+		<table>
 			<colgroup>
 				<col width="120">
 				<col width="auto">
-				<col width="140">
-				<col width="200">
+				<col width="60">
+				<col width="100">
+				<col width="150">
 			</colgroup>
 			<thead>
 				<tr>
-					<th class="order_amount" scope="col">상품정보</th>
-					<th class="order_amount" scope="col">수량</th>
-					<th class="order_amount" scope="col">주문 금액</th>
-					<th class="order_amount" scope="col">진행 상태</th>
+					<th scope="col" colspan="2">상품정보</th>
+					<th scope="col">수량</th>
+					<th scope="col">주문 금액</th>
+					<th scope="col">진행 상태</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="last">
-					<td class="order_thmb"><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${ORDER.sdto1.ino}"
-						onclick="hitRecentLog('12189');"> <img alt="temp_thmb"
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${ORDER.sdto1.ino}"> <img alt="temp_thmb"
 							src="${ORDER.sdto1.imgimage}" class="product-image"></a></td>
-					<td class="order_info" colspan="2"><a class="order_deal"
-						href="${pageContext.request.contextPath}/shopping/detail.com?ino=${ORDER.sdto1.ino}" onclick="hitRecentLog('12189');">${ORDER.sdto1.iname}</a>
-						<p class="order_deal_info">${ORDER.sdto1.idetail}</p> <!-- 옵션명 노출-->
-						<ul class="order_option_area">
-
-							<li><span class="order_option">${ORDER.sdto1.iprice}
-									X </span> <span class="order_option_cnt"> <span
-									class="order_option_input">${ORDER.oddto1.odamount} = </span>
-							</span> <span class="order_option_amounts"> <em>${ORDER.oddto1.odprice}</em>원
-							</span></li>
-
-						</ul></td>
-					<td class="order_amount">
+					<td><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${ORDER.sdto1.ino}">${ORDER.sdto1.iname}</a>
 						<ul>
-							<li class="order_pay_info qq-9" id="ost">${ORDER.oddto1.ostatus}</li>
+													<li>${ORDER.sdto1.iprice}</li>
+												</ul>
+												<td><p style="margin: 40px 0">X ${ORDER.oddto1.odamount}</p></td>
+												<td><p style="margin: 40px 0">= ${ORDER.oddto1.odprice}원</p></td>
+					<td>
+						<ul>
+							<li style="font-weight:bold;margin: 0 0 10px 5px;">${ORDER.oddto1.ostatus}</li>
 							<li><form id="statfrm" action="${pageContext.request.contextPath}/order/change/corp.com">
 									<input type="hidden" name="odno" value="${ORDER.oddto1.odno}">
 									<input type="hidden" name="ino" value="${ORDER.oddto1.ino}">
@@ -143,9 +132,10 @@
 		</table>
 
 		<!-- 주문자정보 -->
-		<div class="order_detail mt60">
-			<h3 class="order_detail_tit">주문자 정보</h3>
-			<table class="tbl" cellspacing="0" border="1" summary="정보">
+		<div>
+			<h2>정보</h2>
+			<h3 >주문자 정보</h3>
+			<table>
 				 
 				<colgroup>
 					<col width="140">
@@ -177,9 +167,10 @@
 		</div>
 
 		<!-- 배송지정보 -->
-		<div class="order_detail mt60">
-			<h3 class="order_detail_tit">배송지 정보</h3>
-			<table class="tbl" cellspacing="0" border="1" summary="정보">
+		<div>
+			<h2>정보</h2>
+			<h3>배송지 정보</h3>
+			<table>
 				 
 				<colgroup>
 					<col width="140">
@@ -221,9 +212,10 @@
 		</div>
 
 		<!-- 결제정보 -->
-		<div class="order_detail mt60" id="div_cost_info">
-			<h3 class="order_detail_tit">결제 정보</h3>
-			<table class="tbl" cellspacing="0" border="1" summary="정보">
+		<div>
+			<h2>정보</h2>
+			<h3>결제 정보</h3>
+			<table>
 				 
 				<colgroup>
 					<col width="140">
@@ -232,7 +224,7 @@
 				<tbody>
 					<tr>
 						<th>결제 수단</th>
-						<td>${ORDER.odto1.opayment}</td>
+						<td>${ORDER.odto1.opayment}</span></td>
 					</tr>
 					<tr>
 						<th>승인일시</th>
@@ -241,51 +233,27 @@
 				</tbody>
 			</table>
 		</div>
-
+</div>
 		<!-- 결제금액 -->
-		<div class="order_calculate_area">
-			<div class="order_deal_price">
-				<div class="order_h_area">
-					<strong>구매 금액</strong>
-				</div>
-				<div class="order_result_area">
-					<em>${ORDER.odto1.osum}</em> <span class="won">원</span>
-				</div>
-			</div>
-
-			<span class="order_minus">-</span>
-
-			<div class="order_deal_dis">
-				<div class="order_h_area">
-					<strong><span>할인금액</span></strong>
-				</div>
-				<div class="order_result_area">
-					<em><span>- 2,500</span></em> <span class="won">원</span>
-				</div>
-			</div>
-
-			<span class="order_plus">+</span>
-
-			<div class="order_deal_delivery">
-				<div class="order_h_area">
-					<strong>총 배송비</strong>
-				</div>
-				<div class="order_result_area">
-					<em>+ 2,500</em> <span class="won">원</span>
-				</div>
-			</div>
-
-			<span class="order_equal">=</span>
-
-			<div class="order_deal_payment">
-				<div class="order_h_area">
-					<strong><span>총 결제 금액</span></strong>
-				</div>
-				<div class="order_result_area">
-					<em><span>${ORDER.odto1.osum}</span></em> <span class="won"><span>원</span></span>
-				</div>
-			</div>
-		</div>
-	</div>
+		<table style="margin: 40px 0 0 0;">
+			<thead>
+				<tr>
+					<th colspan="2">상품금액</th>
+					<th colspan="1"></th>
+					<th colspan="1">배송비</th>
+					<th colspan="1"></th>
+					<th colspan="2">결제 금액</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="list" class="list">
+					<td class="sum" colspan="2" ><h3>${ORDER.odto1.osum}원</h3></td>
+					<td colspan="1" ><h3>+</h3></td>
+					<td colspan="1" ><h3>무료</h3></td>
+					<td colspan="1" ><h3>=</h3></td>
+					<td class="sum" colspan="2" ><h3>${ORDER.odto1.osum}원</h3></td>
+				</tr>
+			</tbody>
+		</table>
 </body>
 </html>

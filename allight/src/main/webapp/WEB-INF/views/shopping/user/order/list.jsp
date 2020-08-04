@@ -279,10 +279,10 @@ margin-left:60px;
 <div class="bottom">
 	<!-- 배송 팝업 -->
 	<div id="order_pop_wrap" class="order_pop_wrap" style="display: none;">
-		<div class="order_pop_bg">
-			<div class="order_pop_box2">
-				<h3 class="order_pop_tit2">배송정보</h3>
-				<div id="delivery_info_view" class="order_detail">
+		<div >
+			<div >
+				<h3>배송정보</h3>
+				<div id="delivery_info_view">
 					<table class="tbl" cellspacing="0" border="1" summary="정보">
 						<colgroup>
 							<col width="120">
@@ -293,7 +293,7 @@ margin-left:60px;
 								<th>택배회사</th>
 								<td><strong id="com"></strong></td>
 							</tr>
-							<tr class="last">
+							<tr>
 								<th>송장번호</th>
 								<td><em class="order_fcT2" id="tel"></em></td>
 							</tr>
@@ -309,41 +309,40 @@ margin-left:60px;
 	</div>
 </div>
 </div>
-	<div class="mem_right">
+	<div>
 		<!--마이페이지 내용 영역-->
 		<!--타이틀-->
-		<div class="mem_top_wrap noto_sans">
-			<div class="mem_top_new">
-				<div class="mem_title">주문/배송 조회</div>
+		<div>
+			<div>
+				<div>주문/배송 조회</div>
 			</div>
 
-			<div class="order_checkmn_wrap">
+			<div>
 				<!--기간설정-->
-				<ul class="order_checkmn">
-					<li id="liw"><a href="?term=w" class="order_checkmn_a">1주일</a></li>
-					<li id="lim1"><a href="?term=m1" class="order_checkmn_a">1개월</a></li>
-					<li id="lim3"><a href="?term=m3" class="order_checkmn_a">3개월</a></li>
-					<li class="order_checkmn_on" id="lim6"><a href="?term=m6"
-						class="order_checkmn_a">6개월</a></li>
+				<ul>
+					<li style="margin: 0 10px;display: inline;" class="btn"><a href="?term=w">1주일</a></li>
+					<li style="margin: 0 10px;display: inline;" class="btn"><a href="?term=m1">1개월</a></li>
+					<li style="margin: 0 10px;display: inline;" class="btn"><a href="?term=m3">3개월</a></li>
+					<li style="margin: 0 10px;display: inline;" class="btn"><a href="?term=m6">6개월</a></li>
 				</ul>
 			</div>
 		</div>
 		<!--//타이틀-->
 
-		<table class="mem_tbl" cellspacing="0" border="1" summary="주문 리스트">
+		<table>
 			<colgroup>
 				<col width="120">
 				<col width="auto">
 				<col width="60">
-				<col width="140">
-				<col width="200">
+				<col width="100">
+				<col width="150">
 			</colgroup>
 			<thead>
 				<tr>
-					<th class="order_amount" colspan="2" scope="col">상품정보</th>
-					<th class="order_amount" scope="col">수량</th>
-					<th class="order_amount" scope="col">주문 금액</th>
-					<th class="order_amount" scope="col">진행 상태</th>
+					<th colspan="2" scope="col">상품정보</th>
+					<th scope="col">수량</th>
+					<th scope="col">주문 금액</th>
+					<th scope="col">진행 상태</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -351,12 +350,10 @@ margin-left:60px;
 		</table>
 
 
-		<table class="order_tbl2 mt13 font_ng" cellspacing="0" border="1"
-			summary="주문 리스트" style="width: 99%;">
+		<table>
 			<colgroup>
 				<col width="120">
 				<col width="auto">
-				<col width="60">
 				<col width="140">
 				<col width="200">
 			</colgroup>
@@ -368,11 +365,9 @@ margin-left:60px;
 					<tr>
 						<th colspan="5" scope="col">
 							<div>
-								<strong>주문번호&nbsp;<a href="./detail.com?no=${odto.ono}"
-									class="order_num"><em class="order_fcT1">${odto.ordernum}</em></a></strong><em
-									class="fc999 fs12 ml13">(${odto.sodate})</em> <span
-									class="order_r"><a href="./detail.com?no=${odto.ono}"
-									class="order_btn_view">주문상세보기 &gt;</a></span>
+								<strong>주문번호&nbsp;<a href="./detail.com?no=${odto.ono}"><em>${odto.ordernum}</em></a></strong><em
+									>(${odto.sodate})</em> <span><a href="./detail.com?no=${odto.ono}"
+									>주문상세보기 &gt;</a></span>
 							</div>
 						</th>
 					</tr>
@@ -385,57 +380,47 @@ margin-left:60px;
 								<c:forEach items="${ORDER.sdto}" var="sdto">
 									<c:if test="${not done}">
 										<c:if test="${sdto.ino eq oddto.ino}">
-											<td class="order_thmb"><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${sdto.ino}"
-												onclick="hitRecentLog('12189');"> <img alt="temp_thmb"
-													src="${sdto.imgimage}" class="product-image"></a></td>
-											<td class="order_info" colspan="3"><a class="order_deal"
-												href="${pageContext.request.contextPath}/shopping/detail.com?ino=${sdto.ino}"
-												onclick="hitRecentLog('12189');">${sdto.iname}</a>
-												<p class="order_deal_info">${sdto.idetail}</p> <!-- 옵션명 노출-->
-												<ul class="order_option_area">
-
-													<li><span class="order_option">${sdto.iprice} X
-													</span> <span class="order_option_cnt"> <span
-															class="order_option_input">${oddto.odamount} = </span>
-													</span> <span class="order_option_amounts"> <em>${oddto.odprice}</em>원
-													</span></li>
-
-												</ul></td>
-											<td class="order_amount"><c:if
+											<td><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${sdto.ino}"
+												> <img class="product-image"
+													src="${sdto.imgimage}" ></a></td>
+											<td><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${sdto.ino}">${sdto.iname}</a>
+												<ul>
+													<li>${sdto.iprice}</li>
+												</ul>
+												<td><p style="margin: 40px 0">X ${oddto.odamount}</p></td>
+												<td><p style="margin: 40px 0">= ${oddto.odprice}원</p></td>
+											<td ><c:if
 													test="${oddto.ostatus eq '주문취소' or oddto.ostatus eq '반품'}">
-													<li class="order_pay_info qq-9">${oddto.ostatus}</li>
+													<li style="font-weight:bold;margin: 0 0 10px 15px;">${oddto.ostatus}</li>
 												</c:if> <!-- 결제완료, 배송준비중 --> <c:if
 													test="${oddto.ostatus eq '배송준비중' or oddto.ostatus eq '결제완료'}">
 													<ul>
-														<li class="order_pay_info qq-9">${oddto.ostatus}</li>
-														<li class="mb5"><a class="cancel"
-															class="order_btn_write" style="cursor: pointer;"
+														<li style="font-weight:bold;margin: 0 0 10px 15px;">${oddto.ostatus}</li>
+														<li><a class="btn" style="cursor: pointer;"
 															data-no="${oddto.odno}">주문취소</a></li>
 													</ul>
 												</c:if> <!-- 배송시작, 배송완료 --> <c:if
 													test="${oddto.ostatus eq '배송시작' or oddto.ostatus eq '배송완료'}">
 													<ul>
-														<li class="order_pay_info qq-9">${oddto.ostatus}</li>
-														<li class="mb5"><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
-															class="openMask_create" style="cursor: pointer;">배송조회</a></li>
+														<li style="font-weight:bold;margin: 0 0 10px 15px;">${oddto.ostatus}</li>
+														<li ><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
+															class="btn" style="cursor: pointer;">배송조회</a></li>
 
-														<li class="mb5"><a class="confirm"
-															class="order_btn_write" style="cursor: pointer;"
+														<li ><a class="btn" style="cursor: pointer;"
 															data-no="${oddto.odno}">구매확정</a></li>
-														<li class="mb5"><a class="back"
-															class="order_btn_write" style="cursor: pointer;"
+														<li><a class="btn" style="cursor: pointer;"
 															data-no="${oddto.odno}">반품</a></li>
 													</ul>
 												</c:if> <!-- 구매확정 --> <c:if test="${oddto.ostatus eq '구매확정'}">
 													<ul>
-														<li class="order_pay_info qq-9">${oddto.ostatus}</li>
+														<li style="font-weight:bold;margin: 0 0 10px 15px;">${oddto.ostatus}</li>
 
-														<li class="mb5"><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
-															class="openMask_create" style="cursor: pointer;">배송조회</a></li>
+														<li ><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
+															class="btn" style="cursor: pointer;">배송조회</a></li>
 														<c:if test="${oddto.okreview ==0}">
-														<li class="mb5"><a
+														<li ><a
 															href="review.com?no=${sdto.ino}&num=${oddto.odno}"
-															class="order_btn_write" style="cursor: pointer;">상품 리뷰 쓰기</a></li>
+															class="btn" style="cursor: pointer;">상품 리뷰 쓰기</a></li>
 														</c:if>
 													</ul>
 												</c:if></td>

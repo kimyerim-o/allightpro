@@ -144,7 +144,10 @@ function loginCheck (){
 				<div class="boardContent-Comment-input">
 					<form style="text-align: left">
 						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자 </a>&nbsp;&nbsp; 
-								<a class="board-info-others">${sessionScope.MNICK}<br></a></a>
+								<a class="board-info-others">
+								<c:if test="${sessionScope.MTYPE == 1}">
+								<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+									${sessionScope.MNICK}<br></a></a>
 						<input type="textarea" class="input" id="fccontent" placeholder="댓글을 입력하세요" /> 
 						<input type="button" class="button" id="wcomm" value="등록" />
 					</form>
@@ -166,8 +169,12 @@ function loginCheck (){
 						<c:forEach items="${COMM}" var="c">
 							<tr>
 								<td colspan="100%" class="board-comment-info">
-									<a class="board-info-nick">${c.fcnick}</a>&nbsp;&nbsp; 
-									<a class="board-info-others"><fmt:formatDate value="${c.fcdate}" type="both"/></a>
+									<a class="board-info-nick">
+									<c:if test="${c.fcid eq 'admin'}">
+								<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+									${c.fcnick}</a>&nbsp;&nbsp; 
+									<a class="board-info-others">
+										<fmt:formatDate value="${c.fcdate}" type="both"/></a>
 								</td>
 							</tr>
 							<tr>

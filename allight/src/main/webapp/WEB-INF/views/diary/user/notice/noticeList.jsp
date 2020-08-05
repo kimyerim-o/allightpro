@@ -18,7 +18,7 @@
 	</script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 	<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/notice.com">
 		<div class="searchDiv">
@@ -56,9 +56,12 @@
 			<c:forEach items="${LIST}" var="notice">
 				<tr class="center">
 					<td class="center">${notice.NNO}</td>
-					<td class="center">${notice.NNICK}</td>
 					<td class="center">
-					<a	href="${pageContext.request.contextPath}/notice/detail.com?type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage}&nno=${notice.NNO}">
+					<c:if test="${notice.NID eq 'admin'}">
+						<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+					${notice.NNICK}</td>
+					<td class="center">
+					<a href="${pageContext.request.contextPath}/notice/detail.com?type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage}&nno=${notice.NNO}">
 							${notice.NTITLE}</a></td>
 					<td class="center">
 						<fmt:formatDate value="${notice.NDATE}" pattern="yyyy-MM-dd HH시 mm분"/></td>

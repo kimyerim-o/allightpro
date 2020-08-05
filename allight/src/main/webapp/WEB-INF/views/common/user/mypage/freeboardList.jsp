@@ -8,6 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <script>
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 	function checkForm() {
 		if (document.getElementById("search").value == "") {
 			alert("검색어를 입력해주세요")
@@ -17,7 +24,7 @@
 	</script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 	<div class="title3">상품리뷰</div>
 	<form id="sFrm" method="get" action="<%=request.getContextPath()%>/mypage/freeboard/list.com">
 		<div class="searchDiv">

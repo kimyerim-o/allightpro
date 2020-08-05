@@ -21,7 +21,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 		<div class="title3">문의사항</div>
 		<table class="table">
 			<tr>

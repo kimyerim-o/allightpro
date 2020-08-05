@@ -58,9 +58,7 @@ $(function(){
 					<td class="center"><fmt:formatDate value="${list.RDATE}" pattern="yyyy-MM-dd"/></td>
 					<td class="center"><c:forEach begin="1" end="${list.RGRADE}">★</c:forEach><c:forEach begin="1" end="${5-list.RGRADE}">☆</c:forEach></td>
 					<td class="center">${list.RCONTENT}</td>
-					<td class="center"><%-- <a href="${pageContext.request.contextPath}/mypage/review/write.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
-					<input type="button" id="wbtn" name="wbtn" value="리뷰 작성">
-					</a> --%>
+					<td class="center">
 					<a href="${pageContext.request.contextPath}/mypage/review/update.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
 					<input type="button" id="wbtn" name="ubtn" value="수정" class="btn2">
 					</a>

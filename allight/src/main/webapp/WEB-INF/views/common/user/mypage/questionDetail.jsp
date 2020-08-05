@@ -100,7 +100,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 		<div class="boardContent">
 			<div class="boardContent-buttons">
 				<form id="form">

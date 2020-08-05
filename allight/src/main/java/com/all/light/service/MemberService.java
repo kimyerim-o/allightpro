@@ -58,13 +58,17 @@ public class MemberService {
 		String msg = "";
 
 		subject = "Allight 본인 인증용 이메일 인증번호 입니다";
-		msg += "<div align='center' style='font-family:ariel'>";
-		msg += "<h1>안녕하세요. Allight입니다.</h1><hr><br/>";
-		msg += "<h3>인증번호를 알려드립니다.</h3>";
-		msg += "<h3>회원님의 회원가입을 진심으로 축하드리며</h3>";
-		msg += "<h3>이메일 인증을 위한 번호를 다음과 같이 알려드립니다.</h3>";
-		msg += "<h3 style='color: red;'>인증번호 6자리를 진행 중인 화면에 입력해주세요.</h3><br/>";
-		msg += "<h1 style='background:#f8f8f8;padding:10px;'>인증번호 : "+code+"</h1>";
+		msg += "<div style='text-align:center; margin:0 auto; width:350px; font-family:Helvetica Neue'>";
+		msg += "<h1>안녕하세요! Allight입니다.</h1><br/>";
+		msg += "<h3>아래의 이메일 인증번호를 입력하시면</h3>";
+		msg += "<h3>인증절차가 완료되어 가입을 진행하실 수 있습니다.</h3>";
+		msg += "<h3>앞으로도 많은 관심 부탁드립니다.</h3>";
+		msg += "<h1 style='color: white; background:#ffc545;padding:10px;'>인증번호 : "+code+"</h1>";
+		msg += "</div>";
+		msg += "<div align='center' style='font-family:Helvetica Neue'>";
+		msg += "<br/>";
+		msg += "<h4 style='color: red;'>본 메일은 이메일 인증을 위해 발송된 발신 전용 메일입니다.</h4>";
+		msg += "<h4 style='color: red;'>문의사항은 고객센터 또는 이메일 'allight.adm@gmail.com'로 문의주세요";
 		msg += "</div>";
 
 		// 받는 사람 E-Mail 주소

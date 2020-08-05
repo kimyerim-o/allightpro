@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <script>
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 	$(function() {
 		//수정 버튼 클릭 시
 		$("#up").click(function() {

@@ -17,7 +17,7 @@
 
 	<!-- 글쓰기 -->
 	<insert id="insert" parameterType="queDTO">
-		insert into question
+		insert into question(qno, qtitle,qid,qdate,qcontent,qtype)
 		values(qno_seq.nextval,#{qtitle},#{qid},sysdate,#{qcontent},1)
 	</insert>
 

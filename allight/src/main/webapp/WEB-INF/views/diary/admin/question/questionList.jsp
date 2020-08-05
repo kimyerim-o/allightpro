@@ -13,10 +13,17 @@ function checkForm() {
 		return false;
 	}
 }
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 </script>
 </head>
 <body>
-	<div style="width:100%">
+	<div  style="width:100%">
 		<div class="searchDiv">
 			<form id="searchForm" action="<%=request.getContextPath()%>/question/list/user/admin.com" method="GET">
 				<c:if test="${param.type eq 'qtitle' || param.type eq null}">
@@ -38,16 +45,16 @@ function checkForm() {
 		</div>
 		<table class="table">
 			<tr>
-				<th>글번호</th>
-				<th>작성자</th>
+				<th>NO</th>
 				<th width="60%">제목</th>
+				<th>작성자</th>
 				<th>작성일</th>
 			</tr>
 			<c:forEach items="${LIST}" var="list">
 				<tr>
 					<td>${list.qno}</td>
-					<td>${list.qnick}</td>
 					<td><a href="${pageContext.request.contextPath}/question/detail/user/admin.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
+					<td>${list.qnick}</td>
 					<td>${list.qdate}</td>
 				</tr>
 			</c:forEach>

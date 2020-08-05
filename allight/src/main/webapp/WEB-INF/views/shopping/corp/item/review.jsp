@@ -9,7 +9,13 @@
 <meta charset="UTF-8">
 <title>쇼핑상세</title>
 <script type="text/javascript">
-
+$(function(){
+	   $('#qPage').children().each(function(){
+	      if($(this).children('a').text()==${QPINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 // 로그인 여부 확인/로그인창 보내기
 function loginCheck (){
 	if('${sessionScope.MID}'==''){

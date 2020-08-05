@@ -52,11 +52,19 @@
 		});
 
  });
+ 
+ $(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
  </script>
 
 </head>
 <body>
-<div class="container">
+<div style="width:100%">
 <h1>상품 수정 페이지</h1>
 
 

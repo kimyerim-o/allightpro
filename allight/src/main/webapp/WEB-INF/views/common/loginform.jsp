@@ -113,9 +113,9 @@
 				  data:res,
 				  success:function(check){
 					  if(check=="check"){
-					  	location.href = "http://localhost:9000/allight/kakaojoin.com";
+					  	location.href = "${pageContext.request.contextPath}/kakaojoin.com";
 					  }else{
-						  location.href = "http://localhost:9000/allight/main.com";
+						  location.href = "${pageContext.request.contextPath}/main.com";
 					  }
 				  },
 				  fail:function(error){

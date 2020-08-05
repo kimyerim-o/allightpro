@@ -102,12 +102,15 @@ function loginCheck (){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 		<div class="boardContent">
 			<div class="boardContent-buttons">
 				<form id="form">
-					<input type="button" value="목록" class="btn" id="list"> <input
-						type="hidden" value="${DETAIL.fno}" name="no">
+					<input type="button" value="목록" class="btn" id="list"> 
+					<input type="hidden" value="${DETAIL.fno}" name="no">
+					<c:if test="${sessionScope.MID eq 'admin'}">
+					<input type="button" value="수정" class="btn" id="up">
+					</c:if>
 						<input type="button" value="삭제" class="btn" id="del">
 				</form>
 			</div>
@@ -120,7 +123,10 @@ function loginCheck (){
 				</tr>
 				<tr>
 					<td class="board-info"><a class="board-info-nick">작성자</a></td>
-					<td class="board-info"><a class="board-info-nick">${DETAIL.fnick}</a></td>
+					<td class="board-info"><a class="board-info-nick">
+					<c:if test="${DETAIL.fid eq 'admin'}">
+						<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+						${DETAIL.fnick}</a></td>
 					<td class="board-info"><a class="board-info-others">작성일 </a></td>
 					<td class="board-info"><a class="board-info-others">${DETAIL.fdate}</a></td>
 				</tr>

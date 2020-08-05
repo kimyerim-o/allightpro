@@ -7,13 +7,21 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 </script>
 </head>
 <body>
+
 	<div class="container">
 		<table class="table table-hover">
 			<tr>
-				<th>NO</th>
+				<th>글번호</th>
 				<th>작성자</th>
 				<th width="70%">제목</th>
 				<th>작성일</th>

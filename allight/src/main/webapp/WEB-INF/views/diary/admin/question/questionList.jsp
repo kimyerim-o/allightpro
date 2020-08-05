@@ -16,7 +16,7 @@ function checkForm() {
 </script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 		<div class="searchDiv">
 			<form id="searchForm" action="<%=request.getContextPath()%>/question/list/user/admin.com" method="GET">
 				<c:if test="${param.type eq 'qtitle' || param.type eq null}">

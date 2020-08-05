@@ -15,7 +15,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 		<div class="boardContent">
 			<div class="boardContent-buttons">
 			<a href="<%=request.getContextPath()%>/notice.com?type=${param.type}&search=${param.search}&nowPage=${param.nowPage}">

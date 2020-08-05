@@ -31,7 +31,7 @@ $(function(){
 </head>
 <body>
 	<div class="title3">상품리뷰</div>
-	<div class="container">
+	<div style="width:100%">
 	<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/mypage/review/list.com">
 		<div class="searchDiv">

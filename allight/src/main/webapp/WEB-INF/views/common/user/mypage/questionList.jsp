@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript">
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 	$(function(){//안되요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
 		$('#li').click(function(){
 			$('#li').addClass("active");

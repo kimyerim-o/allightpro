@@ -59,7 +59,7 @@
 	<form id="form" method="post" enctype = "multipart/form-data"
 	action="${pageContext.request.contextPath}/freeboard/write/admin.com" >
 	
-		<div class="container">
+		<div style="width:100%">
 			<div class="boardContent">
 				<div class="boardContent-buttons">
 					<input type="button" value="목록" class="btn" id="list">

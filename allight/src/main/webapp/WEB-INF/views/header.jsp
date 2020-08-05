@@ -28,15 +28,7 @@
   	
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
-//현재 페이지일 경우 li에 active 클래스 적용
-/* $(function(){
-	$('#Page').children().each(function(){
-		if($(this).children('a').text()==${PINFO.nowPage}){
-			$(this).attr('class','active');
-		}
-	})
-})
- */
+
 function kakaoLogout() {
 	Kakao.init('52ee84c11b882c5898d68b339bf4f9d0')
 	if (!Kakao.Auth.getAccessToken()) {

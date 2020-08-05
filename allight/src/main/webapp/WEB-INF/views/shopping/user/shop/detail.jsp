@@ -311,7 +311,7 @@ $(function(){
 	</div>
 	
 	<!-- 쇼핑 상세보기 본문  -->
-	<div class="container">
+	<div class="container2">
 		<div class="shop-head-title">${DETAIL.icategory} > </div>
 		<div class="card">
 			<div class="card-img">

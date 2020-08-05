@@ -150,9 +150,16 @@ td {
 	margin-right: auto;
 	margin-left: auto;
 	text-align: center;
-	min-width: 1170px;
 }
 
+.container2 {
+	min-width: 1170px;
+	width: 100%;
+	min-width: 800px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+}
 .logo {
 	height: 110px;
 	margin: 10px 0;

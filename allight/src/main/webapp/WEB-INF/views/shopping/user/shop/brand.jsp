@@ -64,6 +64,7 @@
 						<div class="product-image">
 							<a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}"> 
 								<img class="pic" src="${list.imgimage}" onerror="this.src='${pageContext.request.contextPath}/resources/img/no-img.png'">
+							</a>
 							<c:if test="${list.istock == 0}">
 								<span class="product-new-label">품절</span>
 							</c:if>

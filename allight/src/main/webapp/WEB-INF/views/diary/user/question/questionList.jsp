@@ -7,27 +7,22 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	$(function(){//안되요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-		$('#li').click(function(){
-			$('#li').addClass("active");
-		});
-	})
 </script>
 </head>
 <body>
 	<div class="container">
-		<table class="table">
+		<table class="table table-hover">
 			<tr>
 				<th>NO</th>
-				<th width="70%">제목</th>
 				<th>작성자</th>
+				<th width="70%">제목</th>
 				<th>작성일</th>
 			</tr>
 			<c:forEach items="${LIST}" var="list">
 				<tr>
 					<td>${list.qno}</td>
-					<td><a href="${pageContext.request.contextPath}/question/detail.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
 					<td>${list.qnick}</td>
+					<td><a href="${pageContext.request.contextPath}/question/detail.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
 					<td>${list.qdate}</td>
 				</tr>
 			</c:forEach>

@@ -173,7 +173,7 @@
 	<div >
 		<div >
 			<div >
-				<div style="font-weight: bold;">주문상세보기</div>
+				<div class="title3">주문상세보기</div>
 			</div>
 			<div >
 				<p >주문번호 ${ORDER.odto1.ordernum}<em> l </em>주문일 ${ORDER.odto1.sodate}

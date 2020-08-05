@@ -312,7 +312,7 @@ margin-left:60px;
 		<!--타이틀-->
 		<div>
 			<div>
-				<div>주문/배송 조회</div>
+				<div class="title3">주문/배송 조회</div>
 			</div>
 
 			<div>

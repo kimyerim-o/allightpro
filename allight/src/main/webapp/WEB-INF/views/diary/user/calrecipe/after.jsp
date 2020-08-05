@@ -59,7 +59,7 @@ $(function(){
 			<a class="btn" id="check" style="height:60px;line-height:45px;">칼로리 처방 다시 받기</a>
 			<c:if test="${!empty sessionScope.MID && empty sessionScope.MPW}">
 				<a href="javascript:;" id="kakao-link-btn">
-				<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" width="10px" />
+				<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
 				</a>
 			</c:if>
 		</div>

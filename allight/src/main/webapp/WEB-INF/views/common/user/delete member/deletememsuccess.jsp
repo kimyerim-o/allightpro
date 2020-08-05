@@ -15,7 +15,7 @@
 		<h3>회원탈퇴되었습니다.<br/>Allight를 이용해주셔서 감사합니다.</h3>
 	</div>	
 	<div class="center" style="margin:30px">
-		<input class="btn" type="button" value="홈으로" onclick="location.href='http://localhost:9000/allight/main.com'">
+		<input class="btn" type="button" value="홈으로" onclick="location.href='<%=request.getContextPath()%>/main.com'">
 	</div>
 </form>	
 </body>

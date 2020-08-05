@@ -14,8 +14,8 @@
 		<h3>개인정보 수정이 완료되었습니다.</h3>
 	</div>	
 	<div class="center" style="margin:30px">
-		<input type="button" class="btn5" value="확인" onclick="location.href='http://localhost:9000/allight/main.com'">
-		<input type="button" class="btn" value="이전" onclick="location.href='http://localhost:9000/allight/mypage/member/modify.com'">
+		<input type="button" class="btn5" value="확인" onclick="location.href='<%=request.getContextPath()%>/main.com'">
+		<input type="button" class="btn" value="이전" onclick="location.href='<%=request.getContextPath()%>/mypage/member/modify.com'">
 	</div>
 </form>		
 </body>

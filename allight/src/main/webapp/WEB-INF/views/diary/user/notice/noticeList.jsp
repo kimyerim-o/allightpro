@@ -15,9 +15,17 @@
 			return false;
 		}
 	}
+	$(function(){
+		   $('#Page').children().each(function(){
+		      if($(this).children('a').text()==${PINFO.nowPage}){
+		         $(this).attr('class','active');
+		      }
+		   })
+		})
 	</script>
 </head>
 <body>
+	<div class="title3">공지사항</div>
 	<div style="width:100%">
 	<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/notice.com">
@@ -80,7 +88,7 @@
 		</c:if>
 
 		<div class="center">
-			<ul class="pagination">
+			<ul class="pagination" id="Page">
 				<li>
 					<c:if test="${PINFO.nowPage > 3}">
 						<a href="${pageContext.request.contextPath}/notice.com?type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>

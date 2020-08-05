@@ -45,7 +45,7 @@ $(function(){
 
 
 <div style="width:100%" >
-<h1>상품 등록 리스트</h1>
+<div class="title3">상품 등록 리스트</div>
 		<div class="searchDiv">
 <!-- 			<select name="search" class="selectCss">
 				<option>제목</option>

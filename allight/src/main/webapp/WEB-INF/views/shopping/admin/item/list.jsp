@@ -31,12 +31,12 @@ $(function(){
 });
 
 $(function(){
-	   $('#Page').children().each(function(){
-	      if($(this).children('a').text()==${PINFO.nowPage}){
-	         $(this).attr('class','active');
-	      }
-	   })
-	})
+   $('#Page').children().each(function(){
+      if($(this).children('a').text()==${PINFO.nowPage}){
+         $(this).attr('class','active');
+      }
+   })
+})
 </script>
 </head>
 <body>
@@ -44,7 +44,7 @@ $(function(){
 
 
 <div style="width:100%">
-<h1>상품 등록 리스트</h1>
+<div class="title3">기업 상품 관리</div>
 		<div class="searchDiv">
 <!-- 			<select name="search" class="selectCss">
 				<option>제목</option>
@@ -99,7 +99,7 @@ $(function(){
 		
 		
 		<div class="center">
-         <ul class="pagination">
+         <ul class="pagination" id="Page">
             <li>
                <c:if test="${PINFO.nowPage > 3}">
                   <a href="${pageContext.request.contextPath}/item/list/admin.com?nowPage=${PINFO.nowPage-3}&searchWord=${searchWord}">«</a>

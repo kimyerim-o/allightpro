@@ -28,10 +28,17 @@
 				}
 			});
 		});
+		
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
 	});
 </script>
 </head>
 <body>
+	<div class="title3">주문/배송 관리</div>
 	<div class="container">
 		<div class="searchDiv">
 			<!-- 검색전 -->

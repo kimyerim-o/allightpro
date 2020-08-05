@@ -150,9 +150,9 @@
 				</table>
 	<form action="../buy.com" id="cart" method="post">
 		<input type="hidden" name="canoList" id="canoList"/>
-			<div class="right">
-				<input type="button" value="계속 쇼핑" onclick="location.href='${pageContext.request.contextPath}/shopping/list.com'" />&nbsp;
-				<input type="button" id="pay" value="결제하기"/>
+			<div class="center" style="margin:30px 20px">
+				<input type="button" class="btn" value="계속 쇼핑" onclick="location.href='${pageContext.request.contextPath}/shopping/list.com'" />&nbsp;
+				<input type="button" class="btn5" id="pay" value="결제하기"/>
 			</div>
 	</form>
 			</c:if>

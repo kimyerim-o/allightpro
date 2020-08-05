@@ -15,9 +15,17 @@
 			return false;
 		}
 	}
+	$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 	</script>
 </head>
 <body>
+	<div class="title3">자유게시판</div>
 	<div style="width:100%">
 	<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/freeboard/list/admin.com">

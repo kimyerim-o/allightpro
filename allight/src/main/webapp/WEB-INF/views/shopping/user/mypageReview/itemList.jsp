@@ -15,6 +15,11 @@ function checkForm() {
 	}
 }
 $(function(){
+	$('#Page').children().each(function(){
+      if($(this).children('a').text()==${PINFO.nowPage}){
+         $(this).attr('class','active');
+      }
+    })
 	//작성 버튼 클릭 시
 	$("#up").click(function(){
 		$(location).attr("href","${pageContext.request.contextPath}/mypage/review/write.com?no=${list.INO}");
@@ -30,7 +35,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="title3">상품리뷰</div>
+	<div class="title3">상품리뷰!</div>
 	<div style="width:100%">
 	<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/mypage/review/list.com">

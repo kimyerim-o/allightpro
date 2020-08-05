@@ -36,8 +36,8 @@
 			<ul class="left_menu_box">
 				<li class="left_menu_m1"><a href="#">회원/기업관리</a></li>
 				<li><a href="<%=request.getContextPath()%>/member/admin.com">회원관리</a></li>
-				<li><a href="<%=request.getContextPath()%>/corporation/admin.com">기업관리</a></li>
 				<li><a href="<%=request.getContextPath()%>/corporation/join/admin.com">기업추가</a></li>
+				<li><a href="<%=request.getContextPath()%>/corporation/admin.com">기업관리</a></li>
 			</ul>
 
 			<ul class="left_menu_box">

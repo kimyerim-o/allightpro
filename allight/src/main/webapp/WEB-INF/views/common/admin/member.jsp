@@ -32,7 +32,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<h3>회원 페이지</h3>
+	<div class="title3">회원 관리</div>
 
 	<hr/>
 	<form id="sFrm" method="get"
@@ -66,12 +66,12 @@ $(function(){
 					<td>${mem.MNAME}</td>
 					<td><fmt:formatDate value="${mem.MJOINDATE}" pattern="yyyy-MM-dd"/></td>
 					<td><fmt:formatDate value="${mem.MLOGDATE}" pattern="yyyy-MM-dd"/></td>
-					<td><a
+					<td width="18%"><a
 						href="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
-							<input type="button" id="modMem" value="수정">
+							<input type="button" id="modMem" value="수정" class="btn2">
 					</a> <a
 						href="<%=request.getContextPath()%>/member/delete/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
-							<input type="button" value="삭제" id="delMem"
+							<input type="button" value="삭제" id="delMem" class="btn2"
 							onclick="return checkDelete();">
 					</a></td>
 				</tr>

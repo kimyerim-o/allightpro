@@ -23,6 +23,7 @@ $(function(){
 </script>
 </head>
 <body>
+	<div class="title3">문의사항</div>
 	<div  style="width:100%">
 		<div class="searchDiv">
 			<form id="searchForm" action="<%=request.getContextPath()%>/question/list/user/admin.com" method="GET">
@@ -66,7 +67,7 @@ $(function(){
 		</table>
 
 		<div class="center">
-			<ul class="pagination">
+			<ul class="pagination" id="Page">
 			<!-- 검색전 -->
 			<c:if test="${empty param.type}">
 				<li>

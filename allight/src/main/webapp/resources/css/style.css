@@ -152,14 +152,10 @@ td {
 	text-align: center;
 }
 
-.container2 {
+.shopDiv {
 	min-width: 1170px;
-	width: 100%;
-	min-width: 800px;
-	margin-right: auto;
-	margin-left: auto;
-	text-align: center;
 }
+
 .logo {
 	height: 110px;
 	margin: 10px 0;
@@ -756,8 +752,4 @@ input {
 
 .log-Table a:hover {
 	color:#ef5777;
-}
-
-.log-Table img {
-	width:50%;
 }

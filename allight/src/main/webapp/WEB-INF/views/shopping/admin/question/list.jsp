@@ -24,10 +24,16 @@
 		            }
 		        }); 
 			});
-		});
+		$('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   });
+	});
 </script>
 </head>
 <body>
+	<div class="title3">기업 상품 관리</div>
 	<div class="container">
 		<div class="searchDiv">
 			<!-- 검색전 -->
@@ -92,7 +98,7 @@
 		</table>
 
 		<div class="center">
-			<ul class="pagination">
+			<ul class="pagination" id="Page">
 			<!-- 검색전 -->
 			<c:if test="${empty param.type}">
 				<li>

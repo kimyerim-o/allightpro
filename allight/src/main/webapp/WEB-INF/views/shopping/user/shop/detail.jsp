@@ -311,7 +311,8 @@ $(function(){
 	</div>
 	
 	<!-- 쇼핑 상세보기 본문  -->
-	<div class="container2">
+	<div class="shopDiv">
+	<div class="container">
 		<div class="shop-head-title">${DETAIL.icategory} > </div>
 		<div class="card">
 			<div class="card-img">
@@ -649,7 +650,7 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	
+	</div>
 	<form action="${pageContext.request.contextPath}/login.com" id="reUrlFrm">
 		<input type="hidden" name="reUrl" value="${pageContext.request.contextPath}/shopping/detail.com?ino=${param.ino}">
 	</form>

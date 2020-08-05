@@ -41,10 +41,10 @@ function kakaoLogout() {
 			type:'post',
 			success:function(check){
 				if(check=="out"){
-					location.href = "http://localhost:9000/allight/main.com";
+					location.href = "${pageContext.request.contextPath}/main.com";
 				}else{
 					alert("카카오 로그아웃 실패")
-					location.href = "http://localhost:9000/allight/main.com";
+					location.href = "${pageContext.request.contextPath}/main.com";
 				}
 				},
 				fail:function(error){

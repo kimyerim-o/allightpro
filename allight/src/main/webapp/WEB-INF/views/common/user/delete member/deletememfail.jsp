@@ -14,7 +14,7 @@
 		<h3>비밀번호 입력이 잘못되었습니다.<br/>다시 시도해주세요.</h3>
 	</div>	
 	<div class="center" style="margin:30px">
-		<input class="btn" type="button" value="이전" onclick="location.href='http://localhost:9000/allight/mypage/member/delete.com'">
+		<input class="btn" type="button" value="이전" onclick="location.href='<%=request.getContextPath()%>/mypage/member/delete.com'">
 	</div>
 </form>	
 </body>

@@ -9,23 +9,24 @@
 <meta charset="UTF-8">
 <script>
 $(function(){
-	   $('#Page').children().each(function(){
-	      if($(this).children('a').text()==${PINFO.nowPage}){
-	         $(this).attr('class','active');
-	      }
-	   })
-	})
-	function checkForm() {
-		if (document.getElementById("search").value == "") {
-			alert("검색어를 입력해주세요")
-			return false;
-		}
+   $('#Page').children().each(function(){
+      if($(this).children('a').text()==${PINFO.nowPage}){
+         $(this).attr('class','active');
+      }
+   })
+})
+
+function checkForm() {
+	if (document.getElementById("search").value == "") {
+		alert("검색어를 입력해주세요")
+		return false;
 	}
+}
 	</script>
 </head>
 <body>
 	<div style="width:100%">
-	<div class="title3">상품리뷰</div>
+	<div class="title3">자유게시판</div>
 	<form id="sFrm" method="get" action="<%=request.getContextPath()%>/mypage/freeboard/list.com">
 		<div class="searchDiv">
 		<select name="ftype" class="btn">

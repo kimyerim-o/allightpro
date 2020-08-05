@@ -15,10 +15,16 @@ $(function(){
 			$("#form").submit();
 		}
 	}); */
+   $('#Page').children().each(function(){
+      if($(this).children('a').text()==${PINFO.nowPage}){
+         $(this).attr('class','active');
+      }
+   })
 })
 </script>
 </head>
 <body>
+	<div class="title3">상품 리뷰 관리</div>
 	<div style="width:100%">
 		<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/review/list/corp.com">

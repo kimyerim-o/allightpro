@@ -153,9 +153,9 @@
 		<input type="password" id="copw" name="copw" placeholder="비밀번호" required="required"/>
 	</div>
 	<c:if test="${sessionScope.ccnt > 3 and !empty cordto.arr}">
-		<div class="center">
+		<div class="center" style="width:50%">
 			<c:forEach items="${cordto.arr}" var="a" begin="0" step="2">
-				<img width="20px" height="50px" src="${pageContext.request.contextPath}/resources/img/${a}.PNG">
+				<img width="30px" height="50px" src="${pageContext.request.contextPath}/resources/img/${a}.PNG">
 			</c:forEach>
 		</div>
 		<div class="center">

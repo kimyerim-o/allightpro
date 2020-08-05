@@ -47,7 +47,7 @@
 	<div class="center" style="margin:50px">
 		<input type="submit" value="회원 탈퇴" class="btn5" style="height:36px;line-hight:20px">
 		<input type="reset" value="초기화" class="btn">
-		<input type="button" value="홈으로" class="btn" onclick="location.href='http://localhost:9000/allight/main.com'">
+		<input type="button" value="홈으로" class="btn" onclick="location.href='<%=request.getContextPath()%>/main.com'">
 		<input type="hidden" name="mid" value="${MEMINFO.mid}">
 	</div>
 </form>

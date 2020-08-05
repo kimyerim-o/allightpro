@@ -7,14 +7,17 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-	$(function(){//안되요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-		$('#li').click(function(){
-			$('#li').addClass("active");
-		});
+	$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
 	})
 </script>
 </head>
 <body>
+	<div class="title3">문의사항</div>
 	<div class="container">
 		<table class="table">
 			<tr>
@@ -34,7 +37,7 @@
 			<a class="btn" href="${pageContext.request.contextPath}/question/write/corp.com">글쓰기</a>
 		</div>
 		<div class="center">
-			<ul class="pagination">
+			<ul class="pagination" id="Page">
 				<li>
 					<c:if test="${PINFO.nowPage > 3}">
 						<a href="${pageContext.request.contextPath}/question/list/corp.com?nowPage=${PINFO.nowPage-3}">«</a>

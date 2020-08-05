@@ -18,6 +18,7 @@
 </head>
 <body>
 	<div class="container">
+	<div class="title3">상품리뷰</div>
 	<form id="sFrm" method="get" action="<%=request.getContextPath()%>/mypage/freeboard/list.com">
 		<div class="searchDiv">
 		<select name="ftype" class="btn">
@@ -63,11 +64,11 @@
 		</form>
 		<table class="table">
 			<tr>
-				<th><h5>글번호</h5></th>
-				<th><h5>작성자</h5></th>
-				<th><h5>제목</h5></th>
-				<th><h5>작성일</h5></th>
-				<th><h5>조회수</h5></th>
+				<th>글번호</th>
+				<th>작성자</th>
+				<th>제목</th>
+				<th>작성일</th>
+				<th>조회수</th>
 			</tr>
 			<c:forEach items="${LIST}" var="list">
 				<tr class="center">
@@ -84,7 +85,7 @@
 		<c:if test="${empty LIST}">
 			<tr ><td rowspan="5">게시물이 없습니다.</td></tr>
 		</c:if>
-		<div class="right">
+		<div class="right" style="margin:20px 0 0;">
 			<a href="<%=request.getContextPath() %>/mypage/freeboard/write.com"><input type="button" class="btn" value="글쓰기"/></a>
 		</div>
 

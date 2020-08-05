@@ -31,14 +31,26 @@
 </head>
 <body>
 <form name="myForm" action="./delete.com" method="post" onsubmit="return checkIt()">
-	아이디${MEMINFO.mid}<input type="hidden" name="mid" value="${MEMINFO.mid}">
-	<br>
-	비밀번호<input type="password" name="mpw" size="15" maxlength="12">
-	<br>
-	<input type="submit" value="회원 탈퇴">
-	<input type="reset" value="초기화">
-	<input type="button" value="홈으로" onclick="location.href='http://localhost:9000/allight/main.com'">
-	</form>
+	<div class="center">
+		<div class="title3">회원탈퇴</div>
+		<table style="padding">
+			<tr>
+				<th width="30%" style="padding:25px;border-bottom:0;border-right:2px solid #bdbdbd;">아이디</th>
+				<td style="padding:25px;border-bottom:0;">${MEMINFO.mid}</td>
+			</tr>
+			<tr>
+				<th style="padding:25px;border-bottom:0;border-right:2px solid #bdbdbd;">비밀번호</th>
+				<td style="padding:25px;border-bottom:0;"><input type="password" name="mpw" size="15" maxlength="12"></td>
+			</tr>
+		</table>
+	</div>
+	<div class="center" style="margin:50px">
+		<input type="submit" value="회원 탈퇴" class="btn5" style="height:36px;line-hight:20px">
+		<input type="reset" value="초기화" class="btn">
+		<input type="button" value="홈으로" class="btn" onclick="location.href='http://localhost:9000/allight/main.com'">
+		<input type="hidden" name="mid" value="${MEMINFO.mid}">
+	</div>
+</form>
 
 </body>
 </html>

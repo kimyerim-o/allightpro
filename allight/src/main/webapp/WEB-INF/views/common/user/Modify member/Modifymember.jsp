@@ -108,80 +108,68 @@ $(function() {
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="title3" style="margin-bottom:30px">개인정보 확인/수정</div>
 	<form
 		action="<%=request.getContextPath()%>/mypage/member/modify.com"
 		method="post" name="modify" id="modify">
 		<input type="hidden" id="mno" name="mno"
 					value="${MEMINFO.mno}" />
-		<table>
 		<input type="hidden" id="mno" name="mno" value="${MEMINFO.mno}" />
+		<table>
 			<tr>
-				<td>아이디 :</td>
-				<td>${MEMINFO.mid}<input type="hidden" id="mid" name="mid"
+				<td width="30%" style="padding:15px;border-bottom:0;border-right:2px solid #bdbdbd;">아이디 :</td>
+				<td style="padding:15px;border-bottom:0;">${MEMINFO.mid}<input type="hidden" id="mid" name="mid"
 					value="${MEMINFO.mid}" /></td>
 			</tr>
 			<tr>
-				<td>이름 :</td>
-				<td>${MEMINFO.mname}<input type="hidden" id="mname" name="mname"
+				<td width="30%" style="padding:15px;border-bottom:0;border-right:2px solid #bdbdbd;">이름 :</td>
+				<td style="padding:15px;border-bottom:0;">${MEMINFO.mname}<input type="hidden" id="mname" name="mname"
 					value="${MEMINFO.mname}" /></td>
 			</tr>
 			<tr>
-				<td>이메일 :</td>
-				<td>${MEMINFO.memail}<input type="hidden" id="memail" name="memail"
+				<td width="30%" style="padding:15px;border-bottom:0;border-right:2px solid #bdbdbd;">이메일 :</td>
+				<td style="padding:15px;border-bottom:0;">${MEMINFO.memail}<input type="hidden" id="memail" name="memail"
 					value="${MEMINFO.memail}" /></td>
 			</tr>
 			<tr>
-				<td>성별 :</td>
-				<td><select name="msex" id="msex" required="required">
-				<c:if test="${MEMINFO.msex eq '남자'}">
-						<option value="">선택</option>
-						<option value="남자" selected>남자</option>
-						<option value="여자">여자</option>
-				</c:if>
-				<c:if test="${MEMINFO.msex eq '여자'}">
+				<td width="30%" style="padding:15px;border-bottom:0;border-right:2px solid #bdbdbd;">성별 :</td>
+				<td style="padding:15px;border-bottom:0;"><select name="msex" id="msex" required="required">
 						<option value="">선택</option>
 						<option value="남자">남자</option>
-						<option value="여자" selected>여자</option>
-				</c:if>
+						<option value="여자">여자</option>
 				</select></td>
 			</tr>
 			<tr>
-				<td>생년월일 :</td>
-				<td>
-				<input type="date" id="mbirth" name="mbirth" value="${MEMINFO.mbirth}" /></td>
+				<td width="30%" style="padding:15px;border-bottom:0;border-right:2px solid #bdbdbd;">생년월일 :</td>
+				<td style="padding:15px;border-bottom:0;"><input type="date" id="mbirth"
+					name="mbirth" value="${MEMINFO.mbirth}" /></td>
 			</tr>
 			<tr>
-				<td>닉네임 :</td>
-				<td><input type="text" id="mnick"
+				<td width="30%" style="padding:15px;border-bottom:0;border-right:2px solid #bdbdbd;">닉네임 :</td>
+				<td style="padding:15px;border-bottom:0;"><input type="text" id="mnick"
 					name="mnick" value="${MEMINFO.mnick}" />
-					<button id="nickCheck" type="button">중복확인</button>
+					<button id="nickCheck" type="button" class="btn">중복확인</button>
 					<input type="hidden" id="nickChecked" value="1" /></td>
 			</tr>
 			<tr>
-				<td>비밀번호 :</td>
-				<td><input type="password" id="mpw" name="mpw"
+				<td width="30%" style="padding:15px;border-bottom:0;border-right:2px solid #bdbdbd;">비밀번호 :</td>
+				<td style="padding:15px;border-bottom:0;"><input type="password" id="mpw" name="mpw"
 					value="${MEMINFO.mpw}" /></td>
 			</tr>
 			<tr>
-				<td>비밀번호 확인 :</td>
-				<td><input type="password" id="mpw2" name="mpw2"
+				<td width="30%" style="padding:15px;border-bottom:0;border-right:2px solid #bdbdbd;">비밀번호 확인 :</td>
+				<td style="padding:15px;border-bottom:0;"><input type="password" id="mpw2" name="mpw2"
 					value="${MEMINFO.mpw}" /></td>
 			</tr>
 			<tr>
-				<td>핸드폰번호 :</td>
-				<td><input type="text" id="mtel" name="mtel"
+				<td width="30%" style="padding:15px;border-bottom:0;border-right:2px solid #bdbdbd;">핸드폰번호 :</td>
+				<td style="padding:15px;border-bottom:0;"><input type="text" id="mtel" name="mtel"
 					value="${MEMINFO.mtel}" /></td>
 			</tr>
-			<tr>
-				<td colspan="2" style="text-align: center"><input type="submit"
-					value="수정"> <a
-					href="<%=request.getContextPath()%>/mypage/member/modify.com?search=${param.search}&nowPage=${param.nowPage}">
-					<input type="button" value="취소" onclick="location.href='http://localhost:9000/allight/mypage/home.com'"></a></td>
-			</tr>
-			<tr>
-				<td></td>
-			</tr>
 		</table>
+		<div class="center" style="margin:40px">
+			<input type="submit" value="수정" class="btn5"> 
+		</div>
 	</form>
 </body>
 </html>

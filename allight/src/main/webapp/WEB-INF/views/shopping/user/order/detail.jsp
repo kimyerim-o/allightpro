@@ -75,7 +75,7 @@
 		var com = com;
 		var tel = tel;
 		//alert("com"+com+"tel"+tel);
-		$('#order_pop_wrap').css('display', 'block');
+		wrapCreateByMask();
 		$('#com').text(com);
 		$('#tel').text(tel);
 	}
@@ -173,7 +173,7 @@
 	<div >
 		<div >
 			<div >
-				<div style="font-weight: bold;">주문상세보기</div>
+				<div class="title3">주문상세보기</div>
 			</div>
 			<div >
 				<p >주문번호 ${ORDER.odto1.ordernum}<em> l </em>주문일 ${ORDER.odto1.sodate}
@@ -216,12 +216,12 @@
 												<td><p style="margin: 40px 0">= ${oddto.odprice}원</p></td>
 									<td ><c:if
 													test="${oddto.ostatus eq '주문취소' or oddto.ostatus eq '반품'}">
-													<li style="font-weight:bold;margin: 0 0 10px 15px;">${oddto.ostatus}</li>
+													<li style="font-weight:bold;margin: 10px 0 10px 15px;">${oddto.ostatus}</li>
 												</c:if> <!-- 결제완료, 배송준비중 --> <c:if
 													test="${oddto.ostatus eq '배송준비중' or oddto.ostatus eq '결제완료'}">
 													<ul>
-														<li style="font-weight:bold;margin: 0 0 10px 15px;">${oddto.ostatus}</li>
-														<li><a class="btn" style="cursor: pointer;"
+														<li style="font-weight:bold;margin: 10px 0 10px 15px;">${oddto.ostatus}</li>
+														<li><a class="cancel" style="cursor: pointer;"
 															data-no="${oddto.odno}">주문취소</a></li>
 													</ul>
 												</c:if> <!-- 배송시작, 배송완료 --> <c:if
@@ -231,9 +231,9 @@
 														<li ><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
 															class="btn" style="cursor: pointer;">배송조회</a></li>
 
-														<li ><a class="btn" style="cursor: pointer;"
+														<li ><a class="confirm" style="cursor: pointer;"
 															data-no="${oddto.odno}">구매확정</a></li>
-														<li><a class="btn" style="cursor: pointer;"
+														<li><a class="back" style="cursor: pointer;"
 															data-no="${oddto.odno}">반품</a></li>
 													</ul>
 												</c:if> <!-- 구매확정 --> <c:if test="${oddto.ostatus eq '구매확정'}">
@@ -243,9 +243,9 @@
 														<li ><a onclick="delivery_view('${oddto.ocouriercompany}','${oddto.oinvoicenumber}');"
 															class="btn" style="cursor: pointer;">배송조회</a></li>
 														<c:if test="${oddto.okreview ==0}">
-														<li ><a
+														<li style="height: 50px;"><a
 															href="review.com?no=${sdto.ino}&num=${oddto.odno}"
-															class="btn" style="cursor: pointer;">상품 리뷰 쓰기</a></li>
+															class="btn" style="cursor: pointer;height: 50px;" >상품 </br>리뷰쓰기</a></li>
 														</c:if>
 													</ul>
 												</c:if></td>

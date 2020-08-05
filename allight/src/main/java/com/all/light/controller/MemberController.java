@@ -400,27 +400,27 @@ public class MemberController {
 	}
 	
 	// 회원 배송지 추가
-	@RequestMapping("/member/user/addressinsert")
+	@RequestMapping("/member/mypage/addressinsert")
 	public ModelAndView addressinsert(AddressDTO aDTO, HttpSession session, ModelAndView mv) {
 		System.out.println("컨트롤러 배송지 추가 - addressinsert() 요청");
 		ArrayList list = new ArrayList();
 		memSVC.addressinsert(aDTO, session, list);
 		System.out.println(aDTO);
 		System.out.println(list);
-		RedirectView rv = new RedirectView("../user/address.com");
+		RedirectView rv = new RedirectView("../mypage/address.com");
 		mv.setView(rv);	
 		return mv;
 	}
 	
 	// 회원 배송지 삭제
-	@RequestMapping("/member/user/addressdelete")
+	@RequestMapping("/member/mypage/addressdelete")
 	public ModelAndView addressdelete(
 			@RequestParam(value="no") int no,
 			AddressDTO aDTO, ModelAndView mv) {
 		System.out.println("컨트롤러 배송지 삭제 - addressdelete() 요청");
 		aDTO.setAno(no);
 		memSVC.addressdelete(aDTO);
-		RedirectView rv = new RedirectView("../user/address.com");
+		RedirectView rv = new RedirectView("../mypage/address.com");
 		mv.setView(rv);
 		return mv;
 	}

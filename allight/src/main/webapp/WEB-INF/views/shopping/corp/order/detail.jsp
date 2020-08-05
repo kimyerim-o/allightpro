@@ -111,7 +111,7 @@
 												<td><p style="margin: 40px 0">= ${ORDER.oddto1.odprice}원</p></td>
 					<td>
 						<ul>
-							<li style="font-weight:bold;margin: 0 0 10px 5px;">${ORDER.oddto1.ostatus}</li>
+							<li style="font-weight:bold;margin: 0 0 10px 5px;" id="ost">${ORDER.oddto1.ostatus}</li>
 							<li><form id="statfrm" action="${pageContext.request.contextPath}/order/change/corp.com">
 									<input type="hidden" name="odno" value="${ORDER.oddto1.odno}">
 									<input type="hidden" name="ino" value="${ORDER.oddto1.ino}">

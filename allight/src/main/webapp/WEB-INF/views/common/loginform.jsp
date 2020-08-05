@@ -62,7 +62,7 @@
    	 Kakao.API.request({
 	        url: '/v2/user/me',
 	        success: function(res) {
-	          //console.log(res);
+	          console.log(res);
  			  $.ajax({
 				  url:'./kakao.com',
 				  type:'post',
@@ -86,7 +86,7 @@
 	      })
       },
       fail: function(err) {
-    	  console.log("er")
+    	  console.log(err)
       },
     })
   }

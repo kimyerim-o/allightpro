@@ -373,7 +373,7 @@ public class OrderService {
 		msg += "<h1 style='color: orange;'>고객님께서 주문하신 상품이 취소되었습니다.</h1><br/>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>주문번호 : "+odto.getOrdernum()+"</h1>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>상품명 : "+sdto.getIname()+"</h1><br/>";
-		msg += "<h1>상세내용은 http://192.168.56.48:9000/allight/main.com 홈페이지에 방문하셔서 확인 부탁드립니다.</h1>";
+		msg += "<h1>상세내용은  <a href='http://192.168.56.48:9000/allight/main.com'> allight </a>홈페이지에 방문하셔서 확인 부탁드립니다.</h1>";
 		msg += "</div>";
 		msg += "<div align='center' style='font-family:Helvetica Neue'>";
 		msg += "<br/>";
@@ -432,7 +432,7 @@ public class OrderService {
 		msg += "<h1 style='color: orange;'>고객님께서 주문하신 상품의 반품이 완료되었습니다.</h1><br/>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>주문번호 : "+odto.getOrdernum()+"</h1>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>상품명 : "+sdto.getIname()+"</h1><br/>";
-		msg += "<h1>상세 내용은 http://192.168.56.48:9000/allight/main.com 홈페이지에 방문하셔서 확인 부탁드립니다.</h1>";
+		msg += "<h1>상세 내용은<a href='http://192.168.56.48:9000/allight/main.com'> allight </a>홈페이지에 방문하셔서 확인 부탁드립니다.</h1>";
 		msg += "</div>";
 		msg += "<div align='center' style='font-family:Helvetica Neue'>";
 		msg += "<br/>";

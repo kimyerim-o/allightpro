@@ -27,7 +27,7 @@
 	</style>
 </head>
 <body>
-	<h3>장바구니</h3>
+	<div class="title3">장바구니</div>
 	<hr/>
 		<div id="content">
 			<c:if test="${!empty sessionScope.MID}">

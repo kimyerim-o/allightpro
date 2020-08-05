@@ -30,7 +30,8 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="title3">상품리뷰</div>
+	<div style="width:100%">
 	<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/mypage/review/list.com">
 		<div class="searchDiv">
@@ -52,24 +53,22 @@ $(function(){
 			</tr>
 			<c:forEach items="${LIST}" var="list">
 				<tr>
-					<td>${list.NUM}</td>
-					<td>${list.INAME}</td>
-					<td><fmt:formatDate value="${list.RDATE}" pattern="yyyy-MM-dd"/></td>
-					<td><c:forEach begin="1" end="${list.RGRADE}">★</c:forEach><c:forEach begin="1" end="${5-list.RGRADE}">☆</c:forEach></td>
-					<td>${list.RCONTENT}</td>
-					<td><%-- <a href="${pageContext.request.contextPath}/mypage/review/write.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
-					<input type="button" id="wbtn" name="wbtn" value="리뷰 작성">
-					</a> --%>
+					<td class="center">${list.NUM}</td>
+					<td class="center">${list.INAME}</td>
+					<td class="center"><fmt:formatDate value="${list.RDATE}" pattern="yyyy-MM-dd"/></td>
+					<td class="center"><c:forEach begin="1" end="${list.RGRADE}">★</c:forEach><c:forEach begin="1" end="${5-list.RGRADE}">☆</c:forEach></td>
+					<td class="center">${list.RCONTENT}</td>
+					<td class="center">
 					<a href="${pageContext.request.contextPath}/mypage/review/update.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
-					<input type="button" id="wbtn" name="ubtn" value="리뷰 수정">
+					<input type="button" id="wbtn" name="ubtn" value="수정" class="btn2">
 					</a>
 					<a href="${pageContext.request.contextPath}/mypage/review/delete.com?nowPage=${param.nowPage}&no=${list.INO}&type=${param.type}&search=${param.search}">
-					<input type="button" id="dbtn" name="dbtn" value="리뷰 삭제"></a></td>
+					<input type="button" id="dbtn" name="dbtn" value="삭제" class="btn2"></a></td>
 				</tr>
 			</c:forEach>
 		</table>
 		<div class="center">
-			<ul class="pagination">
+			<ul class="pagination" id="Page">
 				<li>
 					<c:if test="${PINFO.nowPage > 3}">
 						<a href="${pageContext.request.contextPath}/mypage/review/list.com?nowPage=${PINFO.nowPage-3}&type=${param.type}&search=${param.search}">«</a>

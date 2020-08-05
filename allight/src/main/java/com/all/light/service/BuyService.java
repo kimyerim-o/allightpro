@@ -22,7 +22,7 @@ public class BuyService {
 	private BuyDAO buyDAO;
 	
 	//주문
-	public void buy(String mid) {
+	//public void buy(String mid) {
 		/*System.out.println("BuyService 들어옴");
 		List<BuyDTO> list = buyDAO.buy(mid);
 		
@@ -31,11 +31,11 @@ public class BuyService {
 			BuyDTO buydto = buyDAO.items(list.get(i).getMno());
 		}
 		return list;*/
-	}
+	//}
 
 	//장바구니번호로 장바구니 불러오기
 	public CartDTO cart(int cano) {
-		System.out.println(cano);
+		System.out.println("cano="+cano);
 		//2. 카트정보 안의 아이템번호로 아이템이름,가격
 		CartDTO cartdto = buyDAO.cart(cano);
 		CartDTO cdto = buyDAO.items(cartdto.getIno());
@@ -57,12 +57,11 @@ public class BuyService {
 	}
 
 	//장바구니 비우기
-	public void emptyCart(int[] canoList) {
+	public void emptyCart(int cano) {
 		System.out.println("buyservice 장바구니비우기");
-		for(int cano:canoList) {
-			buyDAO.emptyCart(cano);
-			
-		}
+		buyDAO.emptyCart(cano);
+//		for(int cano:i) {
+//		}
 	}
 
 	//orderDTO에 저장하기 위해 ono가져올때 필요
@@ -75,20 +74,9 @@ public class BuyService {
 		buyDAO.ordersin(odto);
 	}
 
-	//상품상세페이지에서 바로구매
-	public void buyNow(String mid) {
-		buyDAO.buyNow(mid);
-	}
-
 	//order detail
 	public void oderdetailin(CartDTO li) {
 		buyDAO.orderdetailin(li);
-		
 	}
 
-	//결제 후 orderDetailsDTO에 저장
-	/*public void orderdetailsin(OrderdetailDTO oddto) {
-		buyDAO.orderdetailsin(oddto);
-		
-	}*/
 }

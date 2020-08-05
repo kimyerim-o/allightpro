@@ -28,6 +28,7 @@
   	
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
+
 function kakaoLogout() {
 	Kakao.init('52ee84c11b882c5898d68b339bf4f9d0')
 	if (!Kakao.Auth.getAccessToken()) {
@@ -118,7 +119,15 @@ function kakaoLogout() {
 					<li class="nav-item"><a
 						href="${pageContext.request.contextPath}/main.com"
 						class="nav-link">다이어리</a></li>
-					<li class="nav-item"><a href="${pageContext.request.contextPath}/cal/dictionary/food.com" class="nav-link">칼로리 사전</a></li>
+					<li class="nav-item">
+						<a href="${pageContext.request.contextPath}/cal/dictionary/food.com" class="nav-link">칼로리 사전</a>
+						<ul class="dropdown">
+							<li>
+								<a href="${pageContext.request.contextPath}/cal/dictionary/food.com">음식 사전</a></li>
+							<li>
+								<a href="${pageContext.request.contextPath}/cal/dictionary/exercise.com">운동 사전</a></li>
+						</ul>
+					</li>
 					<li class="nav-item"><a href="${pageContext.request.contextPath}/calorie_recipe.com" class="nav-link">칼로리 처방</a></li>
 					<li class="nav-item"><a href="${pageContext.request.contextPath}/freeboard/list.com" class="nav-link">커뮤니티</a>
 						<ul class="dropdown">
@@ -149,7 +158,7 @@ function kakaoLogout() {
 								href="${pageContext.request.contextPath}/order/mypage/list.com">주문/배송조회</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/order/mypage/back.com">취소/반품조회</a></li>
-							<li><a href="${pageContext.request.contextPath}/cart.com" class="logined-panel"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;장바구니</a></li>
+							<li><a href="${pageContext.request.contextPath}/mypage/cart.com">&nbsp;장바구니</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/member/mypage/address.com">배송지
 									관리</a></li>
@@ -161,18 +170,16 @@ function kakaoLogout() {
 
 					<!-- 기업 로그인시   -->
 					<c:if test="${!empty sessionScope.COID}">
-					<li class="nav-item"><a href="#" class="nav-link">기업</a>
+					<li class="nav-item"><a href="${pageContext.request.contextPath}/order/list/corp.com" class="nav-link">기업</a>
 						<ul class="dropdown">
 							<li><a
-								href="${pageContext.request.contextPath}/order/list/corp.com">주문
-									관리</a></li>
+								href="${pageContext.request.contextPath}/order/list/corp.com">주문관리</a></li>
 							<li><a
-								href="${pageContext.request.contextPath}/item/list/corp.com">상품
-									관리</a></li>
+								href="${pageContext.request.contextPath}/item/list/corp.com">상품관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/item/review/list/corp.com">상품문의</a></li>
-							<li><a href="${pageContext.request.contextPath}/corporation/modify/corp.com?cono=${sessionScope.CONO}">기업 정보 관리</a></li>
 							<li><a
 								href="${pageContext.request.contextPath}/question/list/corp.com">문의사항</a></li>
+							<li><a href="${pageContext.request.contextPath}/corporation/modify/corp.com?cono=${sessionScope.CONO}">기업 정보 관리</a></li>
 						</ul>
 					</li>
 					</c:if>
@@ -180,7 +187,7 @@ function kakaoLogout() {
 					<!-- 관리자 로그인시   -->
 					<c:if test="${sessionScope.MTYPE eq 1 && !empty sessionScope.MID}">
 					<li class="nav-item"><a
-						href="${pageContext.request.contextPath}/admin.com"
+						href="${pageContext.request.contextPath}/member/admin.com"
 						class="nav-link">관리자</a>
 						<ul class="dropdown">
 							<li><a href="${pageContext.request.contextPath}/admin.com">기업/회원

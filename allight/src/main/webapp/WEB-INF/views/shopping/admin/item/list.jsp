@@ -29,13 +29,21 @@ $(function(){
 		location="../list/admin.com?searchWord=" + search;
 	})
 });
+
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 </script>
 </head>
 <body>
 
 
 
-<div class="container">
+<div style="width:100%">
 <h1>상품 등록 리스트</h1>
 		<div class="searchDiv">
 <!-- 			<select name="search" class="selectCss">

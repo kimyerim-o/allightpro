@@ -31,12 +31,12 @@
 </script>
 </head>
 <body>
-	<div class="mem_right">
+	<div>
 		<!--마이페이지 내용 영역-->
 		<!--타이틀-->
-		<div class="mem_top_wrap noto_sans">
-			<div class="mem_top_new">
-				<div class="mem_title">주문 취소/반품 조회</div>
+		<div>
+			<div>
+				<div class="title3">주문 취소/반품 조회</div>
 			</div>
 
 			<div class="searchDiv">
@@ -69,27 +69,19 @@
 				</c:if>
 			</div>
 
-			<div class="order_checkmn_wrap">
+			<div >
 				<!--기간설정-->
-				<ul class="order_checkmn">
-					<li id="liw"><a href="?term=w" class="order_checkmn_a">1주일</a></li>
-					<li id="lim1"><a href="?term=m1" class="order_checkmn_a">1개월</a></li>
-					<li id="lim3"><a href="?term=m3" class="order_checkmn_a">3개월</a></li>
-					<li class="order_checkmn_on" id="lim6"><a href="?term=m6"
-						class="order_checkmn_a">6개월</a></li>
+				<ul >
+					<li style="margin: 0 10px;display: inline;" class="btn"><a href="?term=w">1주일</a></li>
+					<li style="margin: 0 10px;display: inline;" class="btn"><a href="?term=m1">1개월</a></li>
+					<li style="margin: 0 10px;display: inline;" class="btn"><a href="?term=m3">3개월</a></li>
+					<li style="margin: 0 10px;display: inline;" class="btn"><a href="?term=m6">6개월</a></li>
 				</ul>
 			</div>
 		</div>
 		<!--//타이틀-->
 
-		<table class="mem_tbl" cellspacing="0" border="1" summary="주문 리스트">
-			<colgroup>
-				<col width="120">
-				<col width="auto">
-				<col width="60">
-				<col width="140">
-				<col width="200">
-			</colgroup>
+		<table>
 			<thead>
 				<tr>
 					<th class="order_amount" colspan="2" scope="col">상품정보</th>
@@ -109,25 +101,20 @@
 		</table>
 
 
-		<table class="order_tbl2 mt13 font_ng" cellspacing="0" border="1"
-			summary="주문 리스트" style="width: 99%;">
-			<colgroup>
-				<col width="120">
-				<col width="auto">
-				<col width="60">
-				<col width="140">
-				<col width="200">
-			</colgroup>
+		<table>
+			<c:if test="${empty ORDER}">
+				<div class="listno_tab noto_sans">주문내역이 없습니다.</div>
+			</c:if>
 			<c:forEach items="${ORDER.odto}" var="odto">
 				<thead>
 					<tr>
-						<th colspan="5" scope="col">
-							<div>
+						<th colspan="10" scope="col">
+							<div class="center">
 								<strong>주문번호&nbsp;<a href="./detail.com?no=${odto.ono}"
-									class="order_num"><em class="order_fcT1">${odto.ordernum}</em></a></strong><em
-									class="fc999 fs12 ml13">(${odto.sodate})</em> <span
-									class="order_r"><a href="./detail.com?no=${odto.ono}"
-									class="order_btn_view">주문상세보기 &gt;</a></span>
+									><em class="order_fcT1">${odto.ordernum}</em></a></strong><em
+									>(${odto.sodate})</em> <span
+									><a href="./detail.com?no=${odto.ono}"
+									>주문상세보기 &gt;</a></span>
 							</div>
 						</th>
 					</tr>
@@ -140,30 +127,23 @@
 								<c:forEach items="${ORDER.sdto}" var="sdto">
 									<c:if test="${not done}">
 										<c:if test="${sdto.ino eq oddto.ino}">
-											<td class="order_thmb"><a href="#?"
-												onclick="hitRecentLog('12189');"> <img alt="temp_thmb"
+											<td><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${sdto.ino}"
+												> <img alt="temp_thmb"
 													src="${sdto.imgimage}" class="product-image"></a></td>
-											<td class="order_info" colspan="3"><a class="order_deal"
-												href="/goods/view.asp?g=12189"
-												onclick="hitRecentLog('12189');">${sdto.iname}</a>
-												<p class="order_deal_info">${sdto.idetail}</p> <!-- 옵션명 노출-->
-												<ul class="order_option_area">
-
-													<li><span class="order_option">${sdto.iprice} X
-													</span> <span class="order_option_cnt"> <span
-															class="order_option_input">${oddto.odamount} = </span>
-													</span> <span class="order_option_amounts"> <em>${oddto.odprice}</em>원
-													</span></li>
-
-												</ul> <!-- //옵션명 노출--></td>
+											<td colspan="2"><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${sdto.ino}"
+											>${sdto.iname}</a>
+												<ul>
+													<li>${sdto.iprice}</li>
+												</ul></td>
+												<td><p style="margin: 40px 0;width:40px">X ${oddto.odamount}</p></td>
+												<td><p style="margin: 40px 0;width:80px">= ${oddto.odprice}원</p></td>
 											<form id="frm">
 												<input type="hidden" name="no" value="${oddto.odno}" /> <input
 													type="hidden" name="type" id="type" />
 											</form>
-											<!-- 결제완료, 배송준비중 -->
-											<td class="order_amount">
+											<td>
 												<ul>
-													<li class="order_pay_info qq-9">${oddto.ostatus}</li>
+													<li style="font-weight:bold;margin: 10px 0 10px 15px;width:100px">${oddto.ostatus}</li>
 												</ul>
 											</td>
 											<c:set var="done" value="true" />

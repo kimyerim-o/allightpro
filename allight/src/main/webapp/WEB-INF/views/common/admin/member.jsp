@@ -9,6 +9,13 @@
 <title>Title</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 	function checkForm() {
 		if (document.getElementById("search").value == "") {
 			alert("검색어를 입력해주세요")
@@ -81,7 +88,7 @@
 			<tr class="center">
 				<td>
 					<div class="center">
-						<ul class="pagination">
+						<ul class="pagination" id="Page">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
 										href="${pageContext.request.contextPath}/member/admin.com?search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>

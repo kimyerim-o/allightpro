@@ -13,6 +13,13 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 	$(function() {
 		//수정 버튼 클릭 시
 		$("#up").click(function() {
@@ -93,7 +100,7 @@
 </script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 		<div class="boardContent">
 			<div class="boardContent-buttons">
 				<form id="form">
@@ -128,7 +135,7 @@
 				</tr>
 			</table>
 
-			<c:if test="${sessionScope.MTYPE==1}">
+			<c:if test="${sessionScope.MTYPE==1 || DETAIL.qid eq sessionScope.MID}">
 			<!-- 댓글  -->
 			<div class="boardContent-Comment">
 				<div class="boardContent-Comment-input">

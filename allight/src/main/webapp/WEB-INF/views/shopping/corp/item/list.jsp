@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -29,13 +30,21 @@ $(function(){
 		location="../list/corp.com?searchWord=" + search;
 	})
 });
+
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 </script>
 </head>
 <body>
 
 
 
-<div class="container">
+<div style="width:100%" >
 <h1>상품 등록 리스트</h1>
 		<div class="searchDiv">
 <!-- 			<select name="search" class="selectCss">
@@ -49,7 +58,7 @@ $(function(){
 		</div>
 		<div align="left">
 		
-			<input type="button" value="상품추가" onClick="location.href='../insert/corp.com'">
+			<input type="button" value="상품추가" class="btn" onClick="location.href='../insert/corp.com'">
 		</div>
 	
 
@@ -75,7 +84,7 @@ $(function(){
 					<td class="no">${list.ino}</td>
 					<td>${list.iname}</td>
 		  			<td>${list.icategory}</td>
-					<td>${list.iprice}</td>
+					<td><fmt:formatNumber pattern="#,###" value="${list.iprice}" />원</td>
 					<td>${list.icorp}</td>
 					<td>${list.istock}</td>
 					

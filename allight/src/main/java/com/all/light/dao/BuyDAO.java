@@ -61,20 +61,11 @@ public class BuyDAO extends SqlSessionDaoSupport {
 		session.insert("Buy.ordersin",odto);
 	}
 
-	//상품상세페이지에서 바로구매
-	public List<BuyDTO> buyNow(String mid) {
-		List <BuyDTO> list = session.selectList("Buy.buy",mid);
-		return list;
-	}
-
+	//결제후 orderdetailDTO에 저장
 	public void orderdetailin(CartDTO li) {
-		session.insert("Buy.orderdetailin",li);
+		System.out.println("mm///"+li);
+		int i=session.insert("Buy.detail",li);
+		System.out.println("Buy.orderdetailin///"+i);
 	}
-
-	//결제 후 orderDetailsDTO에 저장
-	/*public void orderdetailsin(OrderdetailDTO oddto) {
-		session.insert("Buy.orderdetailsin",oddto);
-		
-	}*/
-
+	
 }

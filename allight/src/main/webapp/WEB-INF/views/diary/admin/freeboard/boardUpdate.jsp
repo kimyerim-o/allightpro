@@ -55,7 +55,7 @@
 </head>
 <body>
 	<form id="form" method="post" enctype = "multipart/form-data">
-		<div class="container">
+		<div style="width:100%">
 			<!-- 검색창  -->
 			<div class="boardContent">
 				<div class="boardContent-buttons">

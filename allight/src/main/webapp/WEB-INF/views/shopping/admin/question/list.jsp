@@ -16,7 +16,7 @@
 		            type : 'get', 
 		            data : form, 
 		            success : function(data) {
-		            	alert(form);
+		            	//alert(form);
 		            	location.href = "${pageContext.request.contextPath}/question/search/admin.com?"+form;
 		            },
 		            error : function(xhr, status) {

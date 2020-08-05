@@ -19,7 +19,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 		<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/review/list/corp.com">
 		<div class="searchDiv">

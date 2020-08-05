@@ -13,6 +13,13 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 	$(function() {
 		//수정 버튼 클릭 시
 		$("#up").click(
@@ -43,7 +50,6 @@
 								"qcnick" : qcnick,
 								"qccontent" : qccontent
 							};
-							alert(JSON.stringify(param))
 							$.ajax({
 										type : "post", //데이터를 보낼 방식
 										url : "${pageContext.request.contextPath}/question/wcomment.com", //데이터를 보낼 url
@@ -129,7 +135,7 @@
 				</tr>
 			</table>
 
-			<c:if test="${sessionScope.MTYPE==1}">
+			<c:if test="${sessionScope.MTYPE==1 || (DETAIL.qid eq sessionScope.MID)}">
 			<!-- 댓글  -->
 			<div class="boardContent-Comment">
 				<div class="boardContent-Comment-input">
@@ -153,23 +159,26 @@
 							<input type="hidden" id="qcno" value="${c.qcno}" />
 							<tr>
 								<td colspan="100%" class="board-comment-info"><a
-									class="board-info-nick">${c.qcnick}</a>&nbsp;&nbsp; <a
-									class="board-info-others">${c.qcdate}</a></td>
+									class="board-info-nick">
+									<c:if test="${c.qcid eq 'admin'}">
+								<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+									${c.qcnick}</a>&nbsp;&nbsp; 
+								<a class="board-info-others">
+									${c.qcdate}</a></td>
 							</tr>
 							<tr>
 								<td width="80%">${c.qccontent}</td>
-								<td style="padding: 0; text-align: center;"><c:if
-										test="${c.qcid eq sessionScope.MID}">
-										<a class="dcomm" style="color: #ff5656;">삭제</a>
-									</c:if> <c:if test="${sessionScope.MTYPE == null }">
-										<a class="dcomm" style="color: #ff5656;">삭제</a>
-									</c:if></td>
+								<td style="padding: 0; text-align: center;">
+								<c:if test="${c.qcid eq sessionScope.MID}">
+										<a class="dcomm" style="color: #ff5656;">삭제</a></c:if> 
+								<c:if test="${sessionScope.MTYPE == 1 }">
+										<a class="dcomm" style="color: #ff5656;">삭제(관리자)</a></c:if></td>
 							</tr>
 						</c:forEach>
 					</table>
 
 					<div class="center">
-						<ul class="pagination">
+						<ul class="pagination" id="Page">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
 										href="${pageContext.request.contextPath}/question/detail.com?no=${param.no }&commPage=${PINFO.nowPage-3}">«</a>
@@ -188,7 +197,7 @@
 							<li><c:if test="${PINFO.nowPage < PINFO.endPage-3}">
 									<a
 										href="${pageContext.request.contextPath}/question/detail.com?no=${param.no }&commPage=${PINFO.nowPage+3}">»</a>
-								</c:if> <c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
+								</c:if> <c:if test="${PINFO.nowPage >= PINFO.endPage-3}">
 									<a
 										href="${pageContext.request.contextPath}/question/detail.com?no=${param.no }&commPage=${PINFO.endPage}">»</a>
 								</c:if></li>

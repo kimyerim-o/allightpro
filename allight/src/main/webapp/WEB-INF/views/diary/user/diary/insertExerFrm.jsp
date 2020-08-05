@@ -152,6 +152,27 @@ $(function(){
 		$('#caldic-table').attr('class','search-table-on')
 		$('#mycal-table').attr('class','hidden');
 	})
+	
+ 	// help 버튼 눌렀을 때
+	$('.helpBtn').click(function(){
+		wrapCreateByMask3();
+	    $('body').css("overflow", "hidden");
+	})
+	
+	//닫기 버튼을 눌렀을 때
+    $('.create_modal3 .close').click(function(e) {
+       //링크 기본동작은 작동하지 않도록 한다.
+       e.preventDefault();
+       $('#mask_create3, .create_modal3').hide();
+       $('body').css("overflow", "scroll");
+    });
+ 
+    //검은 막을 눌렀을 때
+    $('#mask_create3').click(function() {
+       $(this).hide();
+       $('.create_modal3').hide();
+       $('body').css("overflow", "scroll");
+    });
 })
 
 function wrapCreateByMask() {
@@ -215,11 +236,28 @@ function deleteMy(cdno) {
 	}
 }
 
+function wrapCreateByMask3() {
+	// 화면의 높이와 너비를 구한다.
+	var maskHeight = $(document).height();
+	var maskWidth = $(window).width();
+	
+	// 마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+	$('#mask_create3').css({
+	   'width' : maskWidth,
+	   'height' : maskHeight
+	});
+	
+	$('#mask_create3').fadeTo("slow", 1);
+	
+	$('.create_modal3').show();
+};
+	
 </script>
 </head>
 <body>
 <div id="wrap2">
 	<div class="title2">운동
+		<input type="button" value="?" class="helpBtn"/>
 		<div class="f-right" style="margin:0 20px 0 0">
 			<input type="button" value="뒤로 가기" id="goBack" class="btn" style="background:white">
 		</div>
@@ -359,6 +397,23 @@ function deleteMy(cdno) {
 </form>
 </div>
 </div>
+
+<!--<!--  어두워지는 부분3  -->
+<div id="mask_create3"></div>
+<!-- 모달 부분3 (도움말) -->
+<div class="create_modal3">
+<div class="top" style="">
+   <div class="close">x</div>
+</div>
+<div class="bottom">
+	<img src="${pageContext.request.contextPath}/resources/img/help-img-exel1.PNG" style="width:100%"/>
+	<img src="${pageContext.request.contextPath}/resources/img/help-img-exel2.PNG" style="width:100%"/>
+	<img src="${pageContext.request.contextPath}/resources/img/help-img-exel3.PNG" style="width:100%"/>
+	<div class="center" style="margin:30px 0;">
+         <input type="button" value="닫기" class="close"/>
+    </div>
+</div> 
+</div> 
 
 <form method="post" action="./insertMyExer.com" id="insertExerFrm">
 	<input type="hidden" name="dno" value="${DTO.dno}"/>

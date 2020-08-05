@@ -5,8 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 	$(function(){//안되요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
 		$('#li').click(function(){
 			$('#li').addClass("active");
@@ -15,7 +21,8 @@
 </script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
+		<div class="title3">문의사항</div>
 		<table class="table">
 			<tr>
 				<th>NO</th>
@@ -24,17 +31,17 @@
 			</tr>
 			<c:forEach items="${LIST}" var="list">
 				<tr>
-					<td>${list.qno}</td>
-					<td><a href="${pageContext.request.contextPath}/mypage/question/detail.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
-					<td>${list.qdate}</td>
+					<td class="center">${list.qno}</td>
+					<td class="center"><a href="${pageContext.request.contextPath}/mypage/question/detail.com?no=${list.qno}&nowPage=${PINFO.nowPage}">${list.qtitle}</a></td>
+					<td class="center">${list.qdate}</td>
 				</tr>
 			</c:forEach>
 		</table>
-		<div class="right">
+		<div class="right" style="margin:20px 0 0;">
 			<a class="btn" href="${pageContext.request.contextPath}/mypage/question/write.com">글쓰기</a>
 		</div>
 		<div class="center">
-			<ul class="pagination">
+			<ul class="pagination" id="Page">
 				<li>
 					<c:if test="${PINFO.nowPage > 3}">
 						<a href="${pageContext.request.contextPath}/mypage/question/list.com?nowPage=${PINFO.nowPage-3}">«</a>

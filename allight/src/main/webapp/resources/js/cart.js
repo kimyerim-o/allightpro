@@ -44,14 +44,14 @@ $(function(){
 	
 	//선택삭제
 	$(".selectDelete_btn").click(function(){
-		var confirm_val = confirm("정말 삭제하시겠습니까?");
-		
-		if(confirm_val == true){
+//		var confirm_val = confirm("정말 삭제하시겠습니까?");
+//		alert(confirm_val)
+		if(confirm("정말 삭제하시겠습니까?")){
 			var checkArr = new Array();
 			$("input[class='chkBox']:checked").each(function(){
 				checkArr.push($(this).attr("data-cartNo"));
 			});//종료 input선택자
-			
+
 			$.ajax({
 				url : "deleteCart.com",
 				type : "get",
@@ -111,12 +111,6 @@ $(function(){
 				"cano" : cano
 			},
 			success : function(result){
-				if(result == "1"){
-					//alert("성공")
-					//location.href = "./cart.com";	
-				} else{
-					//alert("실패");
-				}
 			},
 			error: function(request,status,error){
 				alert("????"+"code = "+ request.status + " message = " + request.responseText + " error = " + error)

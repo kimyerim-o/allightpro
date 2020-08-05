@@ -25,7 +25,7 @@
 </head>
 <body>
 <form id="form" action="${pageContext.request.contextPath}/mypage/review/update.com?nowPage=${param.nowPage}&no=${param.no}" method="post">
-	<div class="container">
+	<div style="width:100%">
 		<div class="boardContent">
 			<div class="boardContent-buttons">
 				<input type="button" value="목록" class="btn" id="list">

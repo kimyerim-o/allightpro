@@ -18,7 +18,7 @@
 	</script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 	<form id="sFrm" method="get"
 		action="<%=request.getContextPath()%>/freeboard/list/admin.com">
 		<div class="searchDiv">
@@ -82,9 +82,12 @@
 			<c:forEach items="${LIST}" var="list">
 				<tr class="center">
 					<td class="center">${list.fno}</td>
-					<td class="center">${list.fnick}</td>
-					<td class="center"><a
-						href="${pageContext.request.contextPath}/freeboard/detail/admin.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage}&no=${list.fno}">
+					<td class="center">
+					<c:if test="${list.fid eq 'admin'}">
+						<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+						${list.fnick}</td>
+					<td class="center">
+					<a href="${pageContext.request.contextPath}/freeboard/detail/admin.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage}&no=${list.fno}">
 							[${list.ftype}] ${list.ftitle}</a></td>
 					<td class="center"><fmt:formatDate value="${list.fdate}" pattern="yyyy-MM-dd HH시 mm분"/></td>
 					<td class="center">${list.fhit}</td>
@@ -99,7 +102,7 @@
 		</div>
 
 		<div class="center">
-			<ul class="pagination">
+			<ul class="pagination" id="Page">
 				<li><c:if test="${PINFO.nowPage > 3}">
 						<a
 							href="${pageContext.request.contextPath}/freeboard/list/admin.com?ftype=${param.ftype }&type=${param.type}&search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>

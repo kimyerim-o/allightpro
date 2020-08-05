@@ -16,27 +16,28 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="container">
-		<table class="table">
+	<div id="wrap2">
+		<div class="title2">칼로리 처방</div>
+		<table class="table" style="margin-bottom:40px;">
 			<tr>
-				<th>총 감량기간</th>
-				<td>${LIST.crterm}<c:if test="${empty sessionScope.MID}">${LIST.type}</c:if></td>
+				<th width="30%" style="padding:25px;border-bottom:0;border-right:2px solid #bdbdbd;">총 감량기간</th>
+				<td style="padding:25px;border-bottom:0;">${LIST.crterm}<c:if test="${empty sessionScope.MID}">${LIST.type}</c:if></td>
 			</tr>
 			<tr>
-				<th>현제 체중</th>
-				<td>${LIST.crweight}kg</td>
+				<th style="padding:25px;border-bottom:0;border-right:2px solid #bdbdbd;">현제 체중</th>
+				<td style="padding:25px;border-bottom:0;">${LIST.crweight}kg</td>
 			</tr>
 			<tr>
-				<th>목표 체중</th>
-				<td>${LIST.crgoalweight}kg</td>
+				<th style="padding:25px;border-bottom:0;border-right:2px solid #bdbdbd;">목표 체중</th>
+				<td style="padding:25px;border-bottom:0;">${LIST.crgoalweight}kg</td>
 			</tr>
 			<tr>
-				<th>BMI</th>
-				<td>${LIST.crbmi}</td>
+				<th style="padding:25px;border-bottom:0;border-right:2px solid #bdbdbd;">BMI</th>
+				<td style="padding:25px;border-bottom:0;">${LIST.crbmi}</td>
 			</tr>
 			<tr>
-				<th>평소 활동량</th>
-				<td><c:if test="${LIST.cractive ==1}">활동안함 (운동을 전혀 안 해요.)</c:if>
+				<th style="padding:25px;border-bottom:0;border-right:2px solid #bdbdbd;">평소 활동량</th>
+				<td style="padding:25px;border-bottom:0;"><c:if test="${LIST.cractive ==1}">활동안함 (운동을 전혀 안 해요.)</c:if>
 					<c:if test="${LIST.cractive ==2}">가벼운 활동 (평소 가벼운 운동이나 스포츠를 즐겨요)</c:if>
 					<c:if test="${LIST.cractive ==3}">보통 활동 (평소 적당한 운동이나 스포츠를 즐겨요.)</c:if>
 					<c:if test="${LIST.cractive ==4}">많은 활동 (평소 강렬한 운동이나 스포츠를 즐겨요.)</c:if>
@@ -44,19 +45,19 @@ $(function(){
 				</td>
 			</tr>
 			<tr>
-				<th>기초대사량</th>
-				<td>${LIST.crbmr}</td>
+				<th style="padding:25px;border-bottom:0;border-right:2px solid #bdbdbd;">기초대사량</th>
+				<td style="padding:25px;border-bottom:0;">${LIST.crbmr}</td>
 			</tr>
 			<tr>
-				<th>다이어트를 위한 하루 칼로리</th>
-				<td>${LIST.crcal}
+				<th style="padding:25px;border-bottom:0;border-right:2px solid #bdbdbd;">다이어트를 위한 하루 칼로리</th>
+				<td style="padding:25px;border-bottom:0;">${LIST.crcal} kcal
 					<c:if test="${LIST.crcal <= 1000}">하루 1000kcal이하의 섭취량은 권장하지 않습니다.</c:if>
 				</td>
 			</tr>
 		</table>
-		<div>
-			<a class="btn" id="check">칼로리 처방 다시 받기</a>
-			<c:if test="${!empty sessionScope.MID}">
+		<div class="center">
+			<a class="btn" id="check" style="height:60px;line-height:45px;">칼로리 처방 다시 받기</a>
+			<c:if test="${!empty sessionScope.MID && empty sessionScope.MPW}">
 				<a href="javascript:;" id="kakao-link-btn">
 				<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" width="10px" />
 				</a>

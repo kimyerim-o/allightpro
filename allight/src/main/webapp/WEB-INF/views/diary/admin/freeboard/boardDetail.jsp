@@ -108,7 +108,7 @@ function loginCheck (){
 				<form id="form">
 					<input type="button" value="목록" class="btn" id="list"> 
 					<input type="hidden" value="${DETAIL.fno}" name="no">
-					<c:if test="${sessionScope.MID eq 'admin'}">
+					<c:if test="${DETAIL.fid eq 'admin'}">
 					<input type="button" value="수정" class="btn" id="up">
 					</c:if>
 						<input type="button" value="삭제" class="btn" id="del">

@@ -20,7 +20,7 @@
 <form id="form" action="${pageContext.request.contextPath}/order/reviewr.com" method="post">
 <input type="hidden" name="ino" value="${ino}">
 <input type="hidden" name="odno" value="${odno}">
-	<div class="container">
+	<div style="width:100%">
 		<div class="boardContent">
 			<input style="float: right;" type="button" value="확인" class="btn" id="ok">
 			<table>

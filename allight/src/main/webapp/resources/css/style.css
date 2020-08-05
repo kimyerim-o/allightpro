@@ -150,6 +150,7 @@ td {
 	margin-right: auto;
 	margin-left: auto;
 	text-align: center;
+	min-width: 1170px;
 }
 
 .logo {
@@ -704,4 +705,52 @@ input {
 
 .show2 {
 	display: "";
+}
+
+.log-Table {
+	float:left;
+	width:50%;
+}
+
+.log-Table div {
+    margin:20px;
+}
+
+.log-Table .title3 {
+	text-align:center;
+	font-size:35px;
+	font-weight:bold;
+	margin:30px;
+	color:#5d5d5d;
+}
+
+.log-Table input[type=text], .log-Table input[type=password] {
+	width:50%;
+	height:45px;
+}
+
+.log-Table input[type=text]:focus, .log-Table input[type=password]:focus {
+	outline:none;
+}
+
+.log-Table input[type=submit] {
+	width:50%;
+	height:45px;
+	background:#ff7289;
+	border:1px solid #ff7289;
+	font-size:18px;
+	color:white;
+	font-weight:bold;
+}
+
+.log-Table a {
+	color:gray;
+}
+
+.log-Table a:hover {
+	color:#ef5777;
+}
+
+.log-Table img {
+	width:50%;
 }

@@ -53,13 +53,7 @@
 
  });
  
- $(function(){
-	   $('#Page').children().each(function(){
-	      if($(this).children('a').text()==${PINFO.nowPage}){
-	         $(this).attr('class','active');
-	      }
-	   })
-	})
+
  </script>
 
 </head>

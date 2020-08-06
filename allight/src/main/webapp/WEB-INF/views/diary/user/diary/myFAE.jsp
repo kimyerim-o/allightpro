@@ -29,7 +29,7 @@ $(function(){
 	// 몸무게 업데이트
 	$('#dweight').change(function(){
 		// 숫자만 입력하도록
-		var regexp = /^[0-9]*$/
+		var regexp = /^[0-9]*\.?[0-9]*$/;
 		var v = $(this).val();
 		if( !regexp.test(v) ) {
 			alert("숫자만 입력하세요");
@@ -227,7 +227,7 @@ $(function(){
 					</c:forEach>
 					
 					<c:forEach var="list" items="${ELIST}">
-						exercise += "${list.mename}(${list.metime}분${list.metotalcal}kcal), "
+						exercise += "${list.mename}(${list.metime}분,${list.metotalcal}kcal), "
 					</c:forEach>
 					
 					if(weight != ""){
@@ -255,7 +255,7 @@ $(function(){
 						content += "\n\n - 일기: " + diary;
 					}
 					
-					content = content.trim();
+					content = " " + content.trim();
 					
 				    $('#fcontent').val(content);
 				    $('#ftitle').val(title);
@@ -336,7 +336,7 @@ function numberWithCommas(x) {
 		<div class="title3">음식
 			<div class="f-right">
 				<input type="button" value="모두 지우기" id="deleteFoodAll" class="btn" style="background:white"/>
-				<input type="button" value="추가" id="insertFoodBtn" class="btn" style="background:white"/>
+				<input type="button" value="추가" id="insertFoodBtn" class="btn4"/>
 			</div>
 		</div>
 		<table id="myFood">
@@ -367,7 +367,7 @@ function numberWithCommas(x) {
 		<div class="title3">운동
 			<div class="f-right">
 				<input type="button" value="모두 지우기" id="deleteExerAll" class="btn" style="background:white"/>
-				<input type="button" value="추가" id="insertExerBtn" class="btn" style="background:white"/>
+				<input type="button" value="추가" id="insertExerBtn" class="btn4"/>
 			</div>
 		</div>
 		<table id="myExer">
@@ -400,7 +400,7 @@ function numberWithCommas(x) {
 			<a style="color:gray">사진 등록은 한 장만 가능합니다.</a>
 			<div class="f-right">
 				<form id="imgFrm">
-					<label for="dimageFile" class="btn">사진등록</label>
+					<label for="dimageFile" class="btn4">사진등록</label>
 					<input type="file" id="dimageFile" onchange="updateDimage(this);" class="hidden" name="dimageFile"/>
 					<input type="hidden" name="num" value="${num}"/>
 					<c:if test="${!empty DATE}">
@@ -414,7 +414,7 @@ function numberWithCommas(x) {
 			<img src="${DIARY.dimage}" id="imgPreview" class=""  style="height:auto;width:400px;margin:20px 0 0;">
 		</div>
 		<div class="center" style="margin:50px 0 0;">
-			<input type="button" value="게시판등록" id="toBoard" class="btn" style="background:white"/>
+			<input type="button" value="게시판등록" id="toBoard" class="btn4"/>
 			<input type="button" value="모두 지우기" id="deleteAll" class="btn" style="background:white"/>
 			<input type="button" value="뒤로가기" class="goBack" style="background:white"/>
 		</div>

@@ -267,11 +267,7 @@ function deleteMy(cdno) {
 </head>
 <body>
 <div id="wrap2">
-   <div class="title2">칼로리사전
-   
-      <div class="f-right" style="margin:0 20px 0 0">
-      </div>
-   </div>
+   <div class="title2">칼로리 사전</div>
    <div class="diary-content">
       <form id="MFsearchFrm">
           <input type="text" name="searchWord" class="calTxt" placeholder="검색" value="${WORD}"/>
@@ -306,7 +302,7 @@ function deleteMy(cdno) {
          <div class="search-divs2">
             <ul>
                <li class="search-div"><a style="cursor:pointer;" onclick href="${pageContext.request.contextPath}/cal/dictionary/food.com">음식 사전</a></li>
-               <li class="search-div"><a style="cursor:pointer;" onclick href="${pageContext.request.contextPath}/cal/dictionary/exercise.com">운동 사전</a></li>
+               <li class="search-div-on"><a style="cursor:pointer;" onclick href="${pageContext.request.contextPath}/cal/dictionary/exercise.com">운동 사전</a></li>
             </ul>
       </div>
       
@@ -350,7 +346,7 @@ function deleteMy(cdno) {
       <c:if test="">
       </c:if>
       <div class="center">
-         <ul class="pagination">
+         <ul class="pagination" id="Page">
             <li>
                <c:if test="${PINFO.nowPage > 3}">
                   <a href="${pageContext.request.contextPath}/cal/dictionary/exercise.com?nowPage=${PINFO.nowPage-3}&searchWord=${searchWord}">«</a>

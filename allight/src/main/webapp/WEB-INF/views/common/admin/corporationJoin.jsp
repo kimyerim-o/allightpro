@@ -89,7 +89,7 @@
 <body>
 	<iframe id="joinFrm"
 		style="position: absolute; z-index: 1; visibility: hidden;"></iframe>
-	<h2>기업회원가입</h2>
+	<div class="title3">기업 회원가입</div>
 	<hr />
 	<form
 		action="<%=request.getContextPath()%>/corporation/join/admin.com"
@@ -134,7 +134,7 @@
 			<tr>
 				<td colspan="2" class="center"><a href="#"
 					onclick="frmChk('this.form');return false;"> <input
-						type="submit" value="가입" /></a> <input type="reset" value="취소"
+						type="submit" value="등록" class="btn5"/></a> <input type="reset" value="취소" class="btn"
 					onclick="location.href='${pageContext.request.contextPath}/admin.com'" />&nbsp;
 				</td>
 			</tr>

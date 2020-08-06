@@ -17,6 +17,15 @@
 	</script>
 </head>
 <body>
-	${sessionScope.MID }님, 결제가 완료되었습니다.	
+	${sessionScope.MID }님, 결제가 완료되었습니다.
+
+<table>	
+	<tr>
+		<td colspan="2" class="center">
+			<input type="button" value="홈" onclick="location.href='${pageContext.request.contextPath}/main.com'" />&nbsp;
+			<input type="button" value="주문/배송조회" onclick="location.href='${pageContext.request.contextPath}/order/mypage/list.com'"/>
+		</td>
+	</tr>
+</table>
 </body>
 </html>

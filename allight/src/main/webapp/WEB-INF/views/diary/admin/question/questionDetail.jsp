@@ -77,7 +77,7 @@
 </script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 		<div class="boardContent">
 			<div class="boardContent-buttons">
 				<form id="form">
@@ -128,14 +128,19 @@
 					<table width="100%" style="border-top: 1px solid gray;">
 						<c:forEach items="${COMM}" var="c">
 						<tr>
-							<td colspan="100%" class="board-comment-info"><a class="board-info-nick">${c.qcnick}</a>&nbsp;&nbsp; 
-								<a class="board-info-others">${c.qcdate}</a></td>
+							<td colspan="100%" class="board-comment-info"><a class="board-info-nick">
+							<c:if test="${c.qcid eq 'admin'}">
+								<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+								${c.qcnick}
+							</a>&nbsp;&nbsp;
+								<a class="board-info-others">
+									${c.qcdate}</a></td>
 						</tr>
 						<tr>
 							<td width="80%">${c.qccontent}</td>
 							<td style="padding: 0; text-align: center;">
-								<c:if test="${c.qcnick eq sessionScope.MNICK}">
-									<a class="dcomm" data-no="${c.qcno}" style="color: #ff5656;">삭제</a>
+								<c:if test="${1 eq sessionScope.MTYPE}">
+									<a class="dcomm" data-no="${c.qcno}" style="color: #ff5656;">삭제(관리자)</a>
 								</c:if>
 							</td>
 						</tr>

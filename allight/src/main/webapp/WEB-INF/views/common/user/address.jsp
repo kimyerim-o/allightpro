@@ -31,11 +31,12 @@ function checks(){
 
 </head>
 <body>
-<form id="addressinsert" action="../user/addressinsert.com" method="post">
-	<table class="table" border="1">
+<form id="addressinsert" action="${pageContext.request.contextPath}/member/mypage/addressinsert.com" method="post">
+	<div class="title3">배송지 관리</div>
+	<table class="table" style="margin:0 0 30px;">
 		<tbody>
 		<tr>
-			<th>
+			<th style="border:none">
 				<div>	
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 					<input type="text" name="aname" placeholder="수령인" required="required">
@@ -44,7 +45,7 @@ function checks(){
 			</th>
 		</tr>
 		<tr>
-			<th>			
+			<th style="border:none">			
 					<input type="text" name="aaddno" id="sample6_postcode" placeholder="우편번호" required="required">
 					<input type="text" name="aaddress1" id="sample6_address" placeholder="주소" required="required">
 					<input type="text" name="aaddress2" id="sample6_detailAddress" placeholder="상세주소" required="required">
@@ -52,8 +53,8 @@ function checks(){
 			</th>
 		</tr>
 		<tr>
-			<th>
-				<input type="submit" value="추가">
+			<th style="border:none">
+				<input type="submit" value="추가" class="btn5">
 			</th>
 		</tr>
 		</tbody>
@@ -73,12 +74,12 @@ function checks(){
 				
 				<c:forEach items="${LIST}" var="list"  varStatus="status" >
 				<tr class="dataRow">
-					<td>${list.aname}</td>
-					<td>${list.aphone}</td>
-					<td>${list.aaddno}</td>
+					<td class="center">${list.aname}</td>
+					<td class="center">${list.aphone}</td>
+					<td class="center">${list.aaddno}</td>
 					<td>${list.aaddress1}${list.aaddress2}</td>
-		  			<td>
-						<input type="button" id="dBtn" value="삭제" onclick="location.href='../user/addressdelete.com?no=${list.ano}'">	
+		  			<td class="center">
+						<input type="button" class="btn2" id="dBtn" value="삭제" onclick="location.href='${pageContext.request.contextPath}/member/mypage/addressdelete.com?no=${list.ano}'">	
 					</td>
 				
 

@@ -23,10 +23,12 @@
 			$("#imsiFrm").submit(); 
 		});
  });
+ 
+
  </script>
 </head>
 <body>
-<div class="container">
+<div style="width:100%">
 <h1>상품 상세보기</h1>
 
 	 

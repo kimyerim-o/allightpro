@@ -108,6 +108,7 @@ $(function() {
 <title>Insert title here</title>
 </head>
 <body>
+	
 	<form
 		action="<%=request.getContextPath()%>/member/modify/admin.com?mno=${param.mno}"
 		method="post" name="modify" id="modify">

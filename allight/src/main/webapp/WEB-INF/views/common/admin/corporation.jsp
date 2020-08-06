@@ -9,6 +9,13 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+$(function(){
+   $('#Page').children().each(function(){
+      if($(this).children('a').text()==${PINFO.nowPage}){
+         $(this).attr('class','active');
+      }
+   })
+})
 	function checkForm() {
 		if (document.getElementById("search").value == "") {
 			alert("검색어를 입력해주세요")
@@ -25,7 +32,7 @@
 </script>
 </head>
 <body>
-	<h3>기업 상세 페이지</h3>
+	<div class="title3">기업 관리</div>
 
 	<hr />
 	<form id="sFrm" method="get" action="<%=request.getContextPath()%>/corporation/admin.com">
@@ -58,10 +65,10 @@
 					<td>${corp.CONAME}</td>
 					<td>${corp.COTEL}</td>
 					<td><fmt:formatDate value="${corp.COJOINDATE}" pattern="yyyy-MM-dd"/></td>
-					<td><a href="<%=request.getContextPath()%>/corporation/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.CONO}">
-							<input type="button" id="modMem" value="수정">
+					<td width="18%"><a href="<%=request.getContextPath()%>/corporation/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.CONO}">
+							<input type="button" id="modMem" class="btn2" value="수정">
 					</a> <a href="<%=request.getContextPath()%>/corporation/delete/admin.com?search=${param.search}&nowPage=${param.nowPage}&cono=${corp.CONO}">
-							<input type="button" value="삭제" id="delMem"
+							<input type="button" value="삭제" class="btn2" id="delMem"
 							onclick="return checkDelete();">
 					</a></td>
 				</tr>
@@ -77,7 +84,7 @@
 			<tr class="center">
 				<td>
 					<div class="center">
-						<ul class="pagination">
+						<ul class="pagination" id="Page">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
 										href="${pageContext.request.contextPath}/corporation/admin.com?search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>

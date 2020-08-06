@@ -39,12 +39,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center"><input type="submit"
-					value="수정"> <a
-					href="<%=request.getContextPath()%>/corporation/modify/corp.com?search=${param.search}&nowPage=${param.nowPage}&">
-					<input type="button" value="취소" onclick="location.href='http://localhost:9000/allight/main.com'"></a></td>
-			</tr>
-			<tr>
-				<td></td>
+					value="수정" class="btn5">
+					<input type="button" class="btn" value="취소" onclick="location.href='<%=request.getContextPath()%>/main.com'"></td>
 			</tr>
 		</table>
 	</form>

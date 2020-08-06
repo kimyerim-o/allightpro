@@ -63,17 +63,27 @@ public class BuyController {
 		int ono=buySVC.onosel(mid);
 		System.out.println("ono="+ono);
 		
+		String name="";
+		int cnt=0;
 		//orderDetail insert
 		for(int i=0;i<cartdto.getCanolist().length;i++) {
 			CartDTO li=buySVC.cart(cartdto.getCanolist()[i]);
+			if(i==0) {
+				name = li.getIname();
+			}else {
+				cnt++;
+			}
 			li.setOno(ono);
-			System.out.println("li2="+li);
 			buySVC.oderdetailin(li);
+			buySVC.emptyCart(cartdto.getCanolist()[i]);//결제 후 장바구니 비우기
 		}
+		if(cnt>0) 
+			name=name+" 외"+cnt+"종";
 		
 		//장바구니비우기(delete cart)
-		buySVC.emptyCart(cartdto.getCanolist());//결제 후 장바구니 비우기
-		mv.setViewName("shopping/user/paySuccess");
+		mv.addObject("name",name);	//결제페이지로 값 넘겨주기
+		mv.addObject("olist",odto);
+		mv.setViewName("shopping/user/goPay");
 		return mv;
 	}
 	
@@ -111,9 +121,19 @@ public class BuyController {
 		cartdto.setOno(ono);
 		System.out.println(cartdto);
 		buySVC.oderdetailin(cartdto);
-		
+		String name=cartdto.getIname();
+		mv.addObject("name",name);	//결제페이지로 값 넘겨주기
+		mv.addObject("olist",odto);
+		mv.setViewName("shopping/user/goPay");
+		return mv;
+	}
+	
+	//주문완료
+	@RequestMapping("/mypage/paySuccess")
+	public ModelAndView paySuccess(HttpSession session, ModelAndView mv) {
 		mv.setViewName("shopping/user/paySuccess");
 		return mv;
 	}
+	
 	
 }

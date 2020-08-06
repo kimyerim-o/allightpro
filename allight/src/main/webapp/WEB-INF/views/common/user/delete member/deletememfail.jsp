@@ -6,22 +6,16 @@
 <head title="탈퇴 화면">
 </head>
 <body>
-<form
-		action="<%=request.getContextPath()%>/corporation/modify/corp.com"
+<form action="<%=request.getContextPath()%>/corporation/modify/corp.com"
 		method="POST">
 		
-	<h2>탈퇴</h2>
-	<hr/>
-	<table>
-		<tr>
-			<td>"탈퇴 실패!"</td>
-		</tr>
-		<tr class="center">
-			<td>
-				<input type="button" value="이전" onclick="location.href='http://localhost:9000/allight/mypage/member/delete.com'">
-			</td>
-			<a href="<%=request.getContextPath()%>/corporation/modify/corp.com?search=${param.search}&nowPage=${param.nowPage}&">
-		</tr>
-	</table>	
+	<div class="center">
+		<div class="title3">회원탈퇴</div>
+		<h3>비밀번호 입력이 잘못되었습니다.<br/>다시 시도해주세요.</h3>
+	</div>	
+	<div class="center" style="margin:30px">
+		<input class="btn" type="button" value="이전" onclick="location.href='<%=request.getContextPath()%>/mypage/member/delete.com'">
+	</div>
+</form>	
 </body>
 </html>

@@ -27,12 +27,13 @@
 	</style>
 </head>
 <body>
-	<h3>장바구니</h3>
+	<div class="title3">장바구니</div>
 	<hr/>
 		<div id="content">
 			<c:if test="${!empty sessionScope.MID}">
 				<div class="allCheck">
-					<input type="checkbox" name="allCheck" id="allCheck" checked="checked" onclick="checked1"/><label for="allCheck">전체선택 </label>
+					<label for="allCheck">전체선택 </label>
+					<input type="checkbox" name="allCheck" id="allCheck" checked="checked"/>
 				</div>
 				<div class="delBtn">
 					<button type="button" class="selectDelete_btn">선택삭제</button>
@@ -81,7 +82,7 @@
 						<tr>
 							<td scope="col"><!-- 체크박스 -->
 								<div class="center">
-									<input type="checkbox" class="chkBox" checked="checked" data-cartNo="${list.cano }"/>
+									<input type="checkbox" class="chkBox" checked="checked" data-cartNo="${list.cano}"/>
 								</div>
 							</td>
 							<!-- 상품정보 -->
@@ -91,7 +92,7 @@
 								</div>
 							</td>
 							<td>
-								<div style="height:200px; line-height:200px;"><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}">${list.iname }</a></div>
+								<div style="height:200px;  width:200px; padding:80px 0;"><a href="${pageContext.request.contextPath}/shopping/detail.com?ino=${list.ino}" style="width:100px;">${list.iname }</a></div>
 							</td>
 							<!-- 판매가 -->
 							<td scope="col"><!-- 판매가 -->
@@ -149,9 +150,9 @@
 				</table>
 	<form action="../buy.com" id="cart" method="post">
 		<input type="hidden" name="canoList" id="canoList"/>
-			<div class="right">
-				<input type="button" value="계속 쇼핑" onclick="location.href='${pageContext.request.contextPath}/shopping/list.com'" />&nbsp;
-				<input type="button" id="pay" value="결제하기"/>
+			<div class="center" style="margin:30px 20px">
+				<input type="button" class="btn" value="계속 쇼핑" onclick="location.href='${pageContext.request.contextPath}/shopping/list.com'" />&nbsp;
+				<input type="button" class="btn5" id="pay" value="결제하기"/>
 			</div>
 	</form>
 			</c:if>

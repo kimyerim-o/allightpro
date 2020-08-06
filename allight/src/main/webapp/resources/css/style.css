@@ -152,6 +152,10 @@ td {
 	text-align: center;
 }
 
+.shopDiv {
+	min-width: 1170px;
+}
+
 .logo {
 	height: 110px;
 	margin: 10px 0;
@@ -490,7 +494,7 @@ li {
 	border-color: #ddd;
 }
 
-.btn, .goBack, #goback, .goto {
+.btn, .goBack, #goback, .goto, .cancel, .back, .confirm {
 	display: inline-block;
 	padding: 6px 18px;
 	margin-bottom: 0;
@@ -498,16 +502,86 @@ li {
 	font-weight: normal;
 	text-align: center;
 	cursor: pointer;
-	background-image: none;
+	background: inherit;
 	border: 1px solid #bdbdbd;
 	border-radius: 4px;
 	height:36px;
 	min-width:95px;
 }
 
-.btn:hover, .goBack:hover, #goback:hover {
+.btn:hover, .goBack:hover, #goback:hover, .btn2:hover, .goto:hover, .cancel:hover, .back:hover, .confirm:hover {
 	text-decoration: none;
 	border: 1px solid gray;
+}
+
+.btn2 {
+	display: inline-block;
+    padding: 6px 18px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    cursor: pointer;
+    background: inherit;
+    border: 1px solid #bdbdbd;
+    border-radius: 4px;
+    height: 36px;
+}
+
+.btn3 {
+	display: inline-block;
+    padding: 6px 18px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color:white;
+    text-align: center;
+    cursor: pointer;
+    background: #ff7289;
+    border: 1px solid #ff7289;
+    border-radius: 4px;
+    height: 60px;
+    line-height:45px;
+}
+
+.btn3:hover, .btn5:hover {
+	color:#ffe3e3;
+}
+
+.btn4:hover {
+	border: 1px solid #ff9000;
+}
+
+.btn4 {
+	display: inline-block;
+    padding: 6px 18px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color:#ffffff;
+    text-align: center;
+    cursor: pointer;
+    background: #ffbc13;
+    border: 1px solid #ffc531;
+    border-radius: 4px;
+    height: 36px;
+    min-width:95px;
+}
+
+.btn5 {
+	display: inline-block;
+	padding: 6px 18px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+	color:white;
+	background: #ff7289;
+	border: 1px solid #ff7289;
+	border-radius: 4px;
+	height:36px;
+	min-width:95px;
 }
 
 .selectCss {
@@ -532,7 +606,7 @@ input {
 .board-title {
 	font-size: 1.2rem;
 	font-weight: 500;
-	border-top: 2px solid #486587;
+	border-top: 2px solid #b8b8b8;
 	border-bottom: none;
 	padding: 40px 40px 20px 40px;
 }
@@ -634,4 +708,48 @@ input {
 
 .show2 {
 	display: "";
+}
+
+.log-Table {
+	float:left;
+	width:50%;
+}
+
+.log-Table div {
+    margin:20px;
+}
+
+.log-Table .title3 {
+	text-align:center;
+	font-size:35px;
+	font-weight:bold;
+	margin:30px;
+	color:#5d5d5d;
+}
+
+.log-Table input[type=text], .log-Table input[type=password] {
+	width:50%;
+	height:45px;
+}
+
+.log-Table input[type=text]:focus, .log-Table input[type=password]:focus {
+	outline:none;
+}
+
+.log-Table input[type=submit] {
+	width:50%;
+	height:45px;
+	background:#ff7289;
+	border:1px solid #ff7289;
+	font-size:18px;
+	color:white;
+	font-weight:bold;
+}
+
+.log-Table a {
+	color:gray;
+}
+
+.log-Table a:hover {
+	color:#ef5777;
 }

@@ -52,12 +52,14 @@
 		});
 
  });
+ 
+
  </script>
 
 </head>
 <body>
 
-<div class="container">
+<div style="width:100%">
 <h1>상품추가 페이지</h1>
 <form id="iteminsert" action="../insert/corp.com" method="post" encType="multipart/form-data">
 	<table class="table" border="1">

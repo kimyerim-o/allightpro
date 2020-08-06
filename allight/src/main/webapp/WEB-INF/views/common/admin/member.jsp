@@ -9,6 +9,13 @@
 <title>Title</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 	function checkForm() {
 		if (document.getElementById("search").value == "") {
 			alert("검색어를 입력해주세요")
@@ -25,7 +32,7 @@
 </script>
 </head>
 <body>
-	<h3>회원 페이지</h3>
+	<div class="title3">회원 관리</div>
 
 	<hr/>
 	<form id="sFrm" method="get"
@@ -59,12 +66,12 @@
 					<td>${mem.MNAME}</td>
 					<td><fmt:formatDate value="${mem.MJOINDATE}" pattern="yyyy-MM-dd"/></td>
 					<td><fmt:formatDate value="${mem.MLOGDATE}" pattern="yyyy-MM-dd"/></td>
-					<td><a
+					<td width="18%"><a
 						href="<%=request.getContextPath()%>/member/modify/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
-							<input type="button" id="modMem" value="수정">
+							<input type="button" id="modMem" value="수정" class="btn2">
 					</a> <a
 						href="<%=request.getContextPath()%>/member/delete/admin.com?search=${param.search}&nowPage=${param.nowPage}&mno=${mem.MNO}">
-							<input type="button" value="삭제" id="delMem"
+							<input type="button" value="삭제" id="delMem" class="btn2"
 							onclick="return checkDelete();">
 					</a></td>
 				</tr>
@@ -81,7 +88,7 @@
 			<tr class="center">
 				<td>
 					<div class="center">
-						<ul class="pagination">
+						<ul class="pagination" id="Page">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
 										href="${pageContext.request.contextPath}/member/admin.com?search=${param.search}&nowPage=${PINFO.nowPage-3}">«</a>

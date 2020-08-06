@@ -308,13 +308,18 @@ public class OrderService {
 		String msg = "";
 
 		subject = "Allight 상품 배송이 시작되었습니다.";
-		msg += "<div align='center' style='font-family:ariel'>";
-		msg += "<h1>안녕하세요. Allight입니다.</h1><hr><br/>";
+		msg += "<div style='text-align:center; font-family:Helvetica Neue'>";
+		msg += "<h1>안녕하세요. Allight입니다.</h1>";
 		msg += "<h1 style='color: orange;'>고객님께서 주문하신 상품이 발송되었습니다.</h1><br/>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>주문번호 : "+odto.getOrdernum()+"</h1>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>상품명 : "+sdto.getIname()+"</h1>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>택배사 : "+oddto.getOcouriercompany()+"</h1>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>송장번호 : "+oddto.getOinvoicenumber()+"</h1>";
+		msg += "</div>";
+		msg += "<div align='center' style='font-family:Helvetica Neue'>";
+		msg += "<br/>";
+		msg += "<h4 style='color: red;'>본 메일은 상품 배송 안내를 위해 발송된 발신 전용 메일입니다.</h4>";
+		msg += "<h4 style='color: red;'>문의사항은 고객센터 또는 이메일 'allight.adm@gmail.com'로 문의주세요";
 		msg += "</div>";
 
 		// 받는 사람 E-Mail 주소
@@ -363,13 +368,17 @@ public class OrderService {
 		String msg = "";
 
 		subject = "Allight 상품 주문이 취소되었습니다.";
-		msg += "<div align='center' style='font-family:ariel'>";
-		msg += "<h1>안녕하세요. Allight입니다.</h1><hr><br/>";
+		msg += "<div style='text-align:center; font-family:Helvetica Neue'>";
+		msg += "<h1>안녕하세요. Allight입니다.</h1><br/>";
 		msg += "<h1 style='color: orange;'>고객님께서 주문하신 상품이 취소되었습니다.</h1><br/>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>주문번호 : "+odto.getOrdernum()+"</h1>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>상품명 : "+sdto.getIname()+"</h1><br/>";
-		msg += "<h1> ~~ 홈페이지에 방문하셔서 확인 부탁드립니다.</h1>";
-		msg += "<h1>문의 사항은 allight.adm@gmail.com 통해 연락 주시기 바랍니다.</h1>";
+		msg += "<h1>상세내용은  <a href='http://192.168.56.48:9000/allight/main.com'> allight </a>홈페이지에 방문하셔서 확인 부탁드립니다.</h1>";
+		msg += "</div>";
+		msg += "<div align='center' style='font-family:Helvetica Neue'>";
+		msg += "<br/>";
+		msg += "<h4 style='color: red;'>본 메일은 주문 취소 안내를 위해 발송된 발신 전용 메일입니다.</h4>";
+		msg += "<h4 style='color: red;'>문의사항은 고객센터 또는 이메일 'allight.adm@gmail.com'로 문의주세요";
 		msg += "</div>";
 
 		// 받는 사람 E-Mail 주소
@@ -418,13 +427,17 @@ public class OrderService {
 		String msg = "";
 
 		subject = "Allight 상품 반품이 완료되었습니다.";
-		msg += "<div align='center' style='font-family:ariel'>";
-		msg += "<h1>안녕하세요. Allight입니다.</h1><hr><br/>";
-		msg += "<h1 style='color: orange;'>고객님께서 주문하신 상품 반품이 완료되었습니다.</h1><br/>";
+		msg += "<div style='text-align:center; font-family:Helvetica Neue'>";
+		msg += "<h1>안녕하세요. Allight입니다.</h1><br/>";
+		msg += "<h1 style='color: orange;'>고객님께서 주문하신 상품의 반품이 완료되었습니다.</h1><br/>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>주문번호 : "+odto.getOrdernum()+"</h1>";
 		msg += "<h1 style='background:#f8f8f8;padding:10px;'>상품명 : "+sdto.getIname()+"</h1><br/>";
-		msg += "<h1> ~~ 홈페이지에 방문하셔서 확인 부탁드립니다.</h1>";
-		msg += "<h1>문의 사항은 allight.adm@gmail.com 통해 연락 주시기 바랍니다.</h1>";
+		msg += "<h1>상세 내용은<a href='http://192.168.56.48:9000/allight/main.com'> allight </a>홈페이지에 방문하셔서 확인 부탁드립니다.</h1>";
+		msg += "</div>";
+		msg += "<div align='center' style='font-family:Helvetica Neue'>";
+		msg += "<br/>";
+		msg += "<h4 style='color: red;'>본 메일은 반품 안내를 위해 발송된 발신 전용 메일입니다.</h4>";
+		msg += "<h4 style='color: red;'>문의사항은 고객센터 또는 이메일 'allight.adm@gmail.com'로 문의주세요";
 		msg += "</div>";
 
 		// 받는 사람 E-Mail 주소

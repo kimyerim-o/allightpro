@@ -102,12 +102,15 @@ function loginCheck (){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div style="width:100%">
 		<div class="boardContent">
 			<div class="boardContent-buttons">
 				<form id="form">
-					<input type="button" value="목록" class="btn" id="list"> <input
-						type="hidden" value="${DETAIL.fno}" name="no">
+					<input type="button" value="목록" class="btn" id="list"> 
+					<input type="hidden" value="${DETAIL.fno}" name="no">
+					<c:if test="${DETAIL.fid eq 'admin'}">
+					<input type="button" value="수정" class="btn" id="up">
+					</c:if>
 						<input type="button" value="삭제" class="btn" id="del">
 				</form>
 			</div>
@@ -120,7 +123,10 @@ function loginCheck (){
 				</tr>
 				<tr>
 					<td class="board-info"><a class="board-info-nick">작성자</a></td>
-					<td class="board-info"><a class="board-info-nick">${DETAIL.fnick}</a></td>
+					<td class="board-info"><a class="board-info-nick">
+					<c:if test="${DETAIL.fid eq 'admin'}">
+						<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+						${DETAIL.fnick}</a></td>
 					<td class="board-info"><a class="board-info-others">작성일 </a></td>
 					<td class="board-info"><a class="board-info-others">${DETAIL.fdate}</a></td>
 				</tr>
@@ -144,7 +150,10 @@ function loginCheck (){
 				<div class="boardContent-Comment-input">
 					<form style="text-align: left">
 						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자 </a>&nbsp;&nbsp; 
-								<a class="board-info-others">${sessionScope.MNICK}<br></a></a>
+								<a class="board-info-others">
+								<c:if test="${sessionScope.MTYPE == 1}">
+								<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+									${sessionScope.MNICK}<br></a></a>
 						<input type="textarea" class="input" id="fccontent" placeholder="댓글을 입력하세요" /> 
 						<input type="button" class="button" id="wcomm" value="등록" />
 					</form>
@@ -166,8 +175,12 @@ function loginCheck (){
 						<c:forEach items="${COMM}" var="c">
 							<tr>
 								<td colspan="100%" class="board-comment-info">
-									<a class="board-info-nick">${c.fcnick}</a>&nbsp;&nbsp; 
-									<a class="board-info-others"><fmt:formatDate value="${c.fcdate}" type="both"/></a>
+									<a class="board-info-nick">
+									<c:if test="${c.fcid eq 'admin'}">
+								<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+									${c.fcnick}</a>&nbsp;&nbsp; 
+									<a class="board-info-others">
+										<fmt:formatDate value="${c.fcdate}" type="both"/></a>
 								</td>
 							</tr>
 							<tr>
@@ -198,7 +211,7 @@ function loginCheck (){
 					</table>
 
 					<div class="center">
-						<ul class="pagination">
+						<ul class="pagination" id="Page">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
 										href="${pageContext.request.contextPath}/freeboard/detail/admin.com?no=${param.no }&commPage=${PINFO.nowPage-3}">«</a>
@@ -217,7 +230,7 @@ function loginCheck (){
 							<li><c:if test="${PINFO.nowPage < PINFO.endPage-3}">
 									<a
 										href="${pageContext.request.contextPath}/freeboard/detail/admin.com?no=${param.no }&commPage=${PINFO.nowPage+3}">»</a>
-								</c:if> <c:if test="${PINFO.nowPage >= PINFO.endPage-2}">
+								</c:if> <c:if test="${PINFO.nowPage >= PINFO.endPage-3}">
 									<a
 										href="${pageContext.request.contextPath}/freeboard/detail/admin.com?no=${param.no }&commPage=${PINFO.endPage}">»</a>
 								</c:if></li>

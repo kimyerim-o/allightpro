@@ -9,6 +9,17 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <decorator:head/>
+<script type="text/javascript">
+	$(function(){
+		// 해당하는 페이지일때 왼쪽 메뉴 글씨 볼드체
+		var href = location.href.substr(location.href.indexOf("allight")-1)
+		$('.left_menu_box li a').each(function(){
+			if(href.indexOf($(this).attr('href'))!=-1){
+				$(this).parent('li').attr('class','on')
+			}
+		}) 
+	})
+</script>
 </head>
 
 <body>
@@ -22,9 +33,9 @@
 			</p>
 			<ul class="left_menu_box">
 				<li class="left_menu_m1">주문관리</li>
-				<li class="on"><a href="${pageContext.request.contextPath}/order/mypage/list.com">주문/배송조회</a></li>
+				<li><a href="${pageContext.request.contextPath}/order/mypage/list.com">주문/배송조회</a></li>
 				<li><a href="${pageContext.request.contextPath}/order/mypage/back.com">취소/반품조회</a></li>
-				<li><a href="#">장바구니</a></li>
+				<li><a href="${pageContext.request.contextPath}/mypage/cart.com">장바구니</a></li>
 			</ul>
 
 			<ul class="left_menu_box">
@@ -38,8 +49,8 @@
 			<ul class="left_menu_box last">
 				<li class="left_menu_m1">정보관리</li>
 				<li><a href="${pageContext.request.contextPath}/mypage/member/modify.com">개인정보 확인/수정</a></li>
-				<li><a href="#">배송지 관리</a></li>
-				<li><a href="#">회원탈퇴</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/mypage/address.com">배송지 관리</a></li>
+				<li><a href="${pageContext.request.contextPath}/mypage/member/delete.com">회원탈퇴</a></li>
 			</ul>
 		</div>
 	</div>

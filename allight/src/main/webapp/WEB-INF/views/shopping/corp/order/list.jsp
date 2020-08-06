@@ -28,10 +28,17 @@
 				}
 			});
 		});
+		
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
 	});
 </script>
 </head>
 <body>
+	<div class="title3">주문/배송 관리</div>
 	<div class="container">
 		<div class="searchDiv">
 			<!-- 검색전 -->
@@ -98,10 +105,8 @@
 								href="${pageContext.request.contextPath}/order/detail/corp.com?no=${oddto.odno}&nowPage=${PINFO.nowPage}">${sdto.iname}</a>
 							</td>
 							<td>${oddto.ostatus}</td>
-							<c:if test="${oddto.ono eq ORDER.odto1.ono}">
 								<td>${ORDER.odto1.mid}</td>
 								<td>${ORDER.odto1.odate}</td>
-							</c:if>
 						</c:if>
 					</tr>
 				</c:forEach>

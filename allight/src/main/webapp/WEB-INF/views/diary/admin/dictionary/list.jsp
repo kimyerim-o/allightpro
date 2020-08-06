@@ -176,6 +176,12 @@ $(function(){
         });
 	
    })
+   
+   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
 })
 
 function wrapCreateByMask() {
@@ -279,11 +285,7 @@ function deleteMy(cdno) {
 </head>
 <body>
 <div id="wrap2">
-   <div class="title2">칼로리사전
-   
-      <div class="f-right" style="margin:0 20px 0 0">
-      </div>
-   </div>
+   <div class="title3">칼로리 사전 관리</div>
    <div class="diary-content">
       <form id="MFsearchFrm">
           <input type="text" name="searchWord" class="calTxt" placeholder="검색" value="${WORD}"/>
@@ -313,10 +315,10 @@ function deleteMy(cdno) {
             </div>
          </div>
          -->
-         
+       
          <div class="center">
             <ul>
-               <li class="search-div"><a style="cursor:pointer;" id="makeMyBtn">사전에 음식 또는 운동 추가</a></li>
+               <li class="search-div" style="width:100%"><a style="cursor:pointer;" id="makeMyBtn">사전에 음식 또는 운동 추가</a></li>
             </ul>
       </div>
       <table class="search-table" id="caldic-table">
@@ -360,7 +362,7 @@ function deleteMy(cdno) {
       <c:if test="">
       </c:if>
       <div class="center">
-         <ul class="pagination">
+         <ul class="pagination" id="Page">
             <li>
                <c:if test="${PINFO.nowPage > 3}">
                   <a href="${pageContext.request.contextPath}/cal/dictionary/admin.com?nowPage=${PINFO.nowPage-3}&searchWord=${searchWord}">«</a>

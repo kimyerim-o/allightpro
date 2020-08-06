@@ -6,8 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
+$(function(){
+	   $('#Page').children().each(function(){
+	      if($(this).children('a').text()==${PINFO.nowPage}){
+	         $(this).attr('class','active');
+	      }
+	   })
+	})
 	$(function() {
 		//수정 버튼 클릭 시
 		$("#up").click(function() {
@@ -146,6 +152,8 @@ function loginCheck (){
 					<form style="text-align: left">
 						<a colspan="100%" class="board-comment-info"><a class="board-info-nick">작성자 </a>&nbsp;&nbsp; 
 								<a class="board-info-others">
+								<c:if test="${DETAIL.fid eq 'admin'}">
+									<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
 								${sessionScope.MNICK}<br></a></a>
 						<c:if test="${sessionScope.MID ne null}">
 						<input type="textarea" class="input" id="fccontent" placeholder="댓글을 입력하세요" />
@@ -174,8 +182,12 @@ function loginCheck (){
 						<c:forEach items="${COMM}" var="c">
 							<tr>
 								<td colspan="100%" class="board-comment-info">
-									<a class="board-info-nick">${c.fcnick}</a>&nbsp;&nbsp; 
-									<a class="board-info-others"><fmt:formatDate value="${c.fcdate}" type="both"/></a>
+									<a class="board-info-nick">
+								<c:if test="${c.fcid eq 'admin'}">
+									<img src="${pageContext.request.contextPath}/resources/img/crown.png" style="width: 20px; height: 30px;"/></c:if>
+								${c.fcnick}</a>&nbsp;&nbsp; 
+									<a class="board-info-others">
+										<fmt:formatDate value="${c.fcdate}" type="both"/></a>
 								</td>
 							</tr>
 							<tr>
@@ -208,7 +220,7 @@ function loginCheck (){
 					</table>
 
 					<div class="center">
-						<ul class="pagination">
+						<ul class="pagination" id="Page">
 							<li><c:if test="${PINFO.nowPage > 3}">
 									<a
 										href="${pageContext.request.contextPath}/freeboard/detail.com?no=${param.no}&commPage=${PINFO.nowPage-3}">«</a>

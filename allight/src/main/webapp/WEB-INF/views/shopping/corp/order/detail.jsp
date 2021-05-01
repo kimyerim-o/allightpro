@@ -122,7 +122,7 @@
 										<option value="배송시작">배송시작</option>
 										<option value="배송완료">배송완료</option>
 										<option value="주문취소">주문취소</option>
-										<option value="반품">반품완료</option>
+										<option value="반품완료">반품완료</option>
 									</select> <input type="button" id="serb" value="변경" />
 								</form></li>
 						</ul>
@@ -133,7 +133,7 @@
 
 		<!-- 주문자정보 -->
 		<div>
-			 
+			<h2>정보</h2>
 			<h3 >주문자 정보</h3>
 			<table>
 				 
@@ -168,7 +168,7 @@
 
 		<!-- 배송지정보 -->
 		<div>
-			 
+			<h2>정보</h2>
 			<h3>배송지 정보</h3>
 			<table>
 				 
@@ -213,7 +213,7 @@
 
 		<!-- 결제정보 -->
 		<div>
-			 
+			<h2>정보</h2>
 			<h3>결제 정보</h3>
 			<table>
 				 

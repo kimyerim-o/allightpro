@@ -17,7 +17,7 @@ public class CorpCheck extends HandlerInterceptorAdapter {
 			System.out.println("CorpCheck 로그인폼으로 이동요청");
 			session.setAttribute("LoginCheck","fail");
 			System.out.println("권한 없음");
-			response.sendRedirect(request.getContextPath()+"/login.com");
+			response.sendRedirect("${pageContext.request.contextPath}/login.com");
 			return false;
 		}else {//로그인O
 			return true;

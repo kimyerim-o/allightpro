@@ -33,7 +33,7 @@
 </script>
 </head>
 <body>
-	<div class="title3">기업 문의 관리</div>
+	<div class="title3">기업 상품 관리</div>
 	<div class="container">
 		<div class="searchDiv">
 			<!-- 검색전 -->

@@ -26,7 +26,7 @@
 	<!-- 1. 결제 후 orderDTO에 저장 -->
 	<insert id="ordersin" parameterType="ordDTO">
 		insert into orders(ono, mid, odate, oaddno, oaddress1, oaddress2, oreceiver, otel, orequirethings, opayment, osum, mno) 
-		values (ono_SEQ.nextval, #{mid}, sysdate, #{oaddno}, #{oaddress1}, #{oaddress2}, #{oreceiver}, #{otel}, #{orequirethings}, '신용카드', #{osum}, #{mno})
+		values (ono_SEQ.nextval, #{mid}, sysdate, #{oaddno}, #{oaddress1}, #{oaddress2}, #{oreceiver}, #{otel}, #{orequirethings}, #{opayment}, #{osum}, #{mno})
 	</insert>
 	
 	<!-- 2. orderDTO에 저장하기 위해 ono가져올때 필요 -->
